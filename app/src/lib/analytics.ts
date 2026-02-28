@@ -38,7 +38,11 @@ export const initAnalytics = () => {
     enable_heatmaps: true,
 
     loaded: (ph) => {
-      if ((import.meta.env.DEV as boolean)) ph.opt_out_capturing()
+      if (import.meta.env.DEV as boolean) {
+        ph.opt_out_capturing()
+      } else {
+        ph.startSessionRecording()
+      }
     },
   })
 }
