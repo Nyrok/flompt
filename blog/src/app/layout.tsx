@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Caveat } from "next/font/google";
 import { Suspense } from "react";
+import Script from "next/script";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import "./globals.css";
 
@@ -63,6 +64,18 @@ export default async function RootLayout({
   return (
     <html lang={locale || "fr"} suppressHydrationWarning>
       <body className={`${inter.variable} ${caveat.variable} font-sans antialiased`}>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-YR5TEHJQB1"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YR5TEHJQB1');
+          `}
+        </Script>
         <Suspense>
           <PostHogProvider>{children}</PostHogProvider>
         </Suspense>
