@@ -3,7 +3,7 @@ import { ChevronRight, Check, Loader } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics } from '@/lib/analytics'
-import type { FlomptNode, FlomptEdge, CompiledPrompt } from '@/types/blocks'
+import type { FlomptNode, FlomptEdge } from '@/types/blocks'
 
 const TOUR_KEY = 'flompt-onboarded'
 const TW = 280 // tooltip width
@@ -112,31 +112,11 @@ const EXAMPLE_EDGES: FlomptEdge[] = [
   { id: 'e4-5', source: 'output_format-66edf4', target: 'language-4ac566',      animated: true },
 ]
 
-const EXAMPLE_COMPILED_EN: CompiledPrompt = {
-  tokenEstimate: 127,
-  raw: `<role>Senior Python developer expert in code review, debugging, performance optimization, security vulnerabilities, and best practices</role>
-<objective>Review Python code to identify bugs, performance issues, and style violations with actionable feedback prioritizing critical issues</objective>
-<constraints>Concise explanations, one sentence per finding, actionable feedback only</constraints>
-<output_format>Numbered list: 1) Issue type (Bug/Performance/Style) 2) Location/code element 3) One-sentence problem explanation and impact</output_format>
-<input>Python code for review</input>`,
-  blocks: EXAMPLE_NODES_EN.map(n => n.data),
-}
-
-const EXAMPLE_COMPILED_FR: CompiledPrompt = {
-  tokenEstimate: 134,
-  raw: `<role>Développeur Python senior expert en revue de code, débogage, optimisation des performances, failles de sécurité et bonnes pratiques</role>
-<objective>Faire une revue du code Python fourni pour identifier bugs, problèmes de performance et violations de style avec des retours actionnables en priorisant les problèmes critiques</objective>
-<constraints>Explications concises, une phrase par point, retours actionnables uniquement</constraints>
-<output_format>Liste numérotée : 1) Type de problème (Bug/Performance/Style) 2) Emplacement/élément de code 3) Explication en une phrase du problème et de son impact</output_format>
-<input>Code Python à revoir</input>`,
-  blocks: EXAMPLE_NODES_FR.map(n => n.data),
-}
-
 // ── Component ────────────────────────────────────────────────────────────────
 
 const GuidedTour = () => {
   const { t, locale } = useLocale()
-  const { setRawPrompt, setNodes, setEdges, setCompiledPrompt } = useFlowStore()
+  const { setRawPrompt, setNodes, setEdges } = useFlowStore()
 
   const [active, setActive] = useState(() =>
     typeof window !== 'undefined' &&
@@ -199,7 +179,6 @@ const GuidedTour = () => {
         const isFr  = locale === 'fr'
         setNodes(isFr ? EXAMPLE_NODES_FR : EXAMPLE_NODES_EN)
         setEdges(EXAMPLE_EDGES)
-        setCompiledPrompt(isFr ? EXAMPLE_COMPILED_FR : EXAMPLE_COMPILED_EN)
         setActing(false)
         setStep(s => s + 1) // advance to canvas step
       }, 900)
