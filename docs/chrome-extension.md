@@ -6,22 +6,42 @@ The flompt Chrome extension embeds the full prompt builder as a sidebar directly
 
 ## Installation
 
-### Chrome Web Store (recommended)
+### Download from Marketplace
 
-Install in one click. No developer mode, no zip file:
+The easiest way. One click, no setup required.
 
-→ **[Add to Chrome](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc)**
+| Browser | Link |
+|---|---|
+| **Chrome** | [Add to Chrome](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc) |
+| **Firefox** | [Add to Firefox](https://addons.mozilla.org/firefox/addon/flompt/) |
 
 Once installed, navigate to ChatGPT, Claude, or Gemini. The **✦ flompt** button appears in the input toolbar.
 
-### Developer installation (unpacked)
+### Manual installation (unpacked)
 
-For local development or testing unreleased builds:
+For local development, testing unreleased builds, or browsers without a store listing.
 
-1. Clone the repo or download the source from [GitHub](https://github.com/Nyrok/flompt)
-2. Run `make pack` inside the `/extension` folder to build the zip
-3. Open `chrome://extensions/` → enable **Developer mode** (top right toggle)
-4. Click **Load unpacked** → select the `/extension` folder
+**Download the latest zip:**
+→ [flompt-extension.zip](https://github.com/Nyrok/flompt/releases) (GitHub Releases)
+
+**Or build from source:**
+
+```bash
+git clone https://github.com/Nyrok/flompt
+cd flompt/extension
+make pack        # Chrome → dist/flompt-extension.zip
+make firefox     # Firefox → dist/flompt-firefox.zip
+```
+
+**Load in Chrome:**
+1. Open `chrome://extensions/`
+2. Enable **Developer mode** (top right toggle)
+3. Click **Load unpacked** and select the `/extension` folder
+
+**Load in Firefox:**
+1. Open `about:debugging#/runtime/this-firefox`
+2. Click **Load Temporary Add-on**
+3. Select the `manifest.json` inside the `/extension` folder
 
 ---
 
