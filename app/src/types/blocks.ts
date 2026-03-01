@@ -122,6 +122,11 @@ export const BLOCK_META: Record<BlockType, { label: string; description: string;
   },
 }
 
+// ─── Output Format ───────────────────────────────────────────────────────────
+
+/** Format de sortie du prompt assemblé selon la plateforme cible */
+export type OutputFormat = 'claude' | 'chatgpt' | 'gemini'
+
 // ─── Compiled Prompt ─────────────────────────────────────────────────────────
 
 export interface CompiledPrompt {

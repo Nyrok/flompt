@@ -41,6 +41,13 @@ import integrations from './integrations/index.js'
     i.hostnames.some(h => hostname.includes(h))
   ) || null
 
+  /** Mappe le nom de la plateforme vers le format de sortie attendu */
+  const PLATFORM_FORMAT = {
+    ChatGPT: 'chatgpt',
+    Claude:  'claude',
+    Gemini:  'gemini',
+  }
+
   // ── Helpers ────────────────────────────────────────────────────────────────
   function setContentEditable (el, text) {
     el.focus()
@@ -272,10 +279,12 @@ import integrations from './integrations/index.js'
       }
       // Envoie le nom de la plateforme dès le chargement — le bouton affiche
       // "Import from Claude" immédiatement sans attendre le premier clic
+      // Inclut aussi le format optimal pour cette plateforme
       if (platform?.name) {
         iframeEl.contentWindow.postMessage({
           type: 'FLOMPT_PLATFORM_INFO',
           platform: platform.name,
+          format: PLATFORM_FORMAT[platform.name] || 'claude',
         }, '*')
       }
     })

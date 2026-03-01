@@ -1,4 +1,4 @@
-import type { FlomptNode, FlomptEdge, CompiledPrompt, BlockType } from '@/types/blocks'
+import type { FlomptNode, FlomptEdge, CompiledPrompt, BlockType, OutputFormat } from '@/types/blocks'
 
 // ─── Claude-optimized block ordering ────────────────────────────────────────
 // Anthropic best practices: documents first (grounding), then persona → task →
@@ -191,22 +191,108 @@ function renderStandardBlock(type: BlockType, content: string): string {
   return `  <${tag}>\n${escaped}\n  </${tag}>`
 }
 
+// ─── Markdown helpers (ChatGPT / Gemini) ─────────────────────────────────────
+
+const MD_HEADING: Record<BlockType, string> = {
+  role:             'Role',
+  context:          'Context',
+  objective:        'Objective',
+  input:            'Input',
+  constraints:      'Constraints',
+  examples:         'Examples',
+  chain_of_thought: 'Step-by-Step Reasoning',
+  output_format:    'Output Format',
+  format_control:   'Style Guidelines',
+  language:         'Language',
+  document:         'Documents',
+}
+
+function renderMarkdownDocuments(docNodes: FlomptNode[]): string {
+  const docs = docNodes
+    .filter(n => n.data.content.trim())
+    .map((n, i) => {
+      const source = n.data.summary || `Document ${i + 1}`
+      return `**Document ${i + 1}** — ${source}\n\n${n.data.content.trim()}`
+    })
+    .join('\n\n---\n\n')
+  return `## Documents\n\n${docs}`
+}
+
+function renderMarkdownExamples(content: string): string {
+  const blocks = content.trim().split(/\n{2,}/)
+  const pairs: Array<{ input: string; output: string }> = []
+
+  for (const block of blocks) {
+    const inputMatch  = block.match(/^(?:Input|User|Question|Q)\s*:\s*([\s\S]*?)(?=\n(?:Output|Assistant|Answer|A)\s*:|$)/i)
+    const outputMatch = block.match(/(?:Output|Assistant|Answer|A)\s*:\s*([\s\S]*?)$/i)
+
+    if (inputMatch && outputMatch) {
+      pairs.push({ input: inputMatch[1].trim(), output: outputMatch[1].trim() })
+    }
+  }
+
+  if (pairs.length === 0) {
+    return `## Examples\n\n${content.trim()}`
+  }
+
+  const formatted = pairs
+    .map((p, i) => [`**Example ${i + 1}**`, `- Input: ${p.input}`, `- Output: ${p.output}`].join('\n'))
+    .join('\n\n')
+
+  return `## Examples\n\n${formatted}`
+}
+
+function renderMarkdownBlock(type: BlockType, content: string): string {
+  const heading = MD_HEADING[type] ?? type
+  return `## ${heading}\n\n${content.trim()}`
+}
+
+/** Assemblage Markdown — optimisé ChatGPT / Gemini */
+function assembleMarkdown(nodes: FlomptNode[], edges: FlomptEdge[]): CompiledPrompt {
+  const ordered     = sortNodes(nodes, edges)
+  const withContent = ordered.filter(n => n.data.content.trim())
+  const parts: string[] = []
+
+  const docNodes = withContent.filter(n => n.data.type === 'document')
+  if (docNodes.length > 0) {
+    parts.push(renderMarkdownDocuments(docNodes))
+  }
+
+  for (const node of withContent) {
+    if (node.data.type === 'document') continue
+    if (node.data.type === 'examples') {
+      parts.push(renderMarkdownExamples(node.data.content))
+    } else {
+      parts.push(renderMarkdownBlock(node.data.type, node.data.content))
+    }
+  }
+
+  const raw           = parts.join('\n\n')
+  const tokenEstimate = Math.max(1, Math.ceil(raw.length / 4))
+  return { raw, tokenEstimate, blocks: ordered.map(n => n.data) }
+}
+
 // ─── Main assembler ───────────────────────────────────────────────────────────
 
 /**
- * Assemble blocks into a Claude-optimized XML prompt — 100% local, no AI call.
+ * Assemble blocks into an optimized prompt — 100% local, no AI call.
  *
- * Claude best practices applied:
- * - Documents always first (XML grounding: <documents><document index="N">)
- * - TYPE_PRIORITY ordering within topological sort
- * - Structured <examples> with <user_input>/<ideal_response> pairs
- * - <thinking> for chain-of-thought instructions
- * - <format_instructions> for format_control directives
+ * - format = 'claude'  → XML Claude-optimized (default)
+ * - format = 'chatgpt' → Markdown with ## headings
+ * - format = 'gemini'  → Markdown with ## headings
  */
-export function assemblePrompt(nodes: FlomptNode[], edges: FlomptEdge[]): CompiledPrompt {
-  const ordered = sortNodes(nodes, edges)
-  const withContent = ordered.filter(n => n.data.content.trim())
+export function assemblePrompt(
+  nodes: FlomptNode[],
+  edges: FlomptEdge[],
+  format: OutputFormat = 'claude',
+): CompiledPrompt {
+  if (format === 'chatgpt' || format === 'gemini') {
+    return assembleMarkdown(nodes, edges)
+  }
 
+  // ── Claude XML ──────────────────────────────────────────────────────────
+  const ordered     = sortNodes(nodes, edges)
+  const withContent = ordered.filter(n => n.data.content.trim())
   const parts: string[] = []
 
   // ── Document blocks: grouped in <documents> ──────────────────────────────

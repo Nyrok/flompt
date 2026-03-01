@@ -1250,6 +1250,41 @@ body {
   font-weight: 500;
 }
 
+/* ── Format selector (Claude / ChatGPT / Gemini) ─────────────────────────── */
+.format-selector {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3px;
+}
+
+.format-btn {
+  flex: 1;
+  padding: 4px 6px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius) - 2px);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.format-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.format-btn-active {
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* ── Export actions ───────────────────────────────────────────────────────── */
 .export-actions {
   display: flex;

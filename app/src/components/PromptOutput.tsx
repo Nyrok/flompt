@@ -1,23 +1,45 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Clipboard, ClipboardCheck, FileText, Braces, Sparkles, Play, Share2, Send } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics } from '@/lib/analytics'
 import { assemblePrompt } from '@/lib/assemblePrompt'
 import { isExtension } from '@/lib/platform'
+import type { OutputFormat } from '@/types/blocks'
+
+// ─── Config des boutons de sélection ────────────────────────────────────────
+const FORMAT_OPTIONS: Array<{ format: OutputFormat; label: string; title: string }> = [
+  { format: 'claude',  label: 'Claude',  title: 'XML — Claude-optimized' },
+  { format: 'chatgpt', label: 'ChatGPT', title: 'Markdown — ChatGPT-optimized' },
+  { format: 'gemini',  label: 'Gemini',  title: 'Markdown — Gemini-optimized' },
+]
 
 // ─── Composant ────────────────────────────────────────────────────────────────
 
 const PromptOutput = () => {
-  const { nodes, edges, compiledPrompt, setCompiledPrompt } = useFlowStore()
+  const { nodes, edges, compiledPrompt, setCompiledPrompt, outputFormat, setOutputFormat } = useFlowStore()
   const { t } = useLocale()
   const [copied,   setCopied]   = useState(false)
   const [injected, setInjected] = useState(false)
 
+  // ── En mode extension : auto-sélectionner le format depuis la plateforme ──
+  useEffect(() => {
+    if (!isExtension) return
+    const onMessage = (event: MessageEvent) => {
+      if (event.data?.type !== 'FLOMPT_PLATFORM_INFO') return
+      const fmt = event.data.format as OutputFormat | undefined
+      if (fmt && (fmt === 'claude' || fmt === 'chatgpt' || fmt === 'gemini')) {
+        setOutputFormat(fmt)
+      }
+    }
+    window.addEventListener('message', onMessage)
+    return () => window.removeEventListener('message', onMessage)
+  }, [setOutputFormat])
+
   const handleCompile = () => {
     if (nodes.length === 0) return
     analytics.compileClicked()
-    const result = assemblePrompt(nodes, edges)
+    const result = assemblePrompt(nodes, edges, outputFormat)
     setCompiledPrompt(result)
     analytics.compileCompleted(result.tokenEstimate)
   }
@@ -84,6 +106,21 @@ const PromptOutput = () => {
         {compiledPrompt && (
           <span className="token-badge">~{compiledPrompt.tokenEstimate} tokens</span>
         )}
+      </div>
+
+      {/* Sélecteur de plateforme cible */}
+      <div className="format-selector" role="group" aria-label="Target AI platform">
+        {FORMAT_OPTIONS.map(({ format, label, title }) => (
+          <button
+            key={format}
+            className={`format-btn${outputFormat === format ? ' format-btn-active' : ''}`}
+            onClick={() => setOutputFormat(format)}
+            title={title}
+            aria-pressed={outputFormat === format}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       {compiledPrompt ? (
