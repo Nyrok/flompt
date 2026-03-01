@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>flompt — Your AI is only as good as your prompt | Visual Prompt Builder</title>
+  <title>flompt: Your AI is only as good as your prompt | Visual Prompt Builder</title>
   <meta name="description" content="Structure is the single biggest lever in AI output quality. flompt decomposes any prompt into 11 semantic blocks, lets you edit visually, and recompiles as Claude-optimized XML. Free & open-source." />
   <meta name="keywords" content="prompt builder, visual prompt editor, prompt engineering tool, AI prompt flow, flowchart prompt, prompt optimizer, Claude prompt, GPT prompt, LLM prompt builder, prompt decomposer, flompt" />
   <meta name="author" content="Nyrok" />
@@ -17,7 +17,7 @@
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://flompt.dev/" />
-  <meta property="og:title" content="flompt — Your AI is only as good as your prompt" />
+  <meta property="og:title" content="flompt: Your AI is only as good as your prompt" />
   <meta property="og:description" content="Structure is what separates frustrating AI from remarkable AI. Build prompts block by block, assemble as Claude-optimized XML. Free & open-source." />
   <meta property="og:site_name" content="flompt" />
   <meta property="og:image" content="https://flompt.dev/app/og-image.png?v=2" />
@@ -25,7 +25,7 @@
   <meta property="og:image:height" content="630" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="flompt — Your AI is only as good as your prompt" />
+  <meta name="twitter:title" content="flompt: Your AI is only as good as your prompt" />
   <meta name="twitter:description" content="Structure beats a better model. Build prompts block by block, assemble as Claude-optimized XML." />
   <meta name="twitter:image" content="https://flompt.dev/app/og-image.png?v=2" />
 
@@ -314,6 +314,13 @@
 
     /* ── MCP SECTION ───────────────────────────────────── */
     .mcp-section { padding: 80px 0; }
+    .mcp-section .section-title em {
+      font-family: 'Caveat', cursive;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1.22em;
+      color: var(--accent);
+    }
     .mcp-inner {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 56px; align-items: center;
@@ -497,7 +504,7 @@
     "name": "flompt",
     "alternateName": "flow + prompt",
     "url": "https://flompt.dev",
-    "description": "Visual AI Prompt Builder — Decompose any prompt into flowchart blocks, edit visually, then recompile into optimized instructions.",
+    "description": "Visual AI Prompt Builder: Decompose any prompt into flowchart blocks, edit visually, then recompile into optimized instructions.",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Web",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -542,7 +549,7 @@
   <!-- ── NAV ─────────────────────────────────────────── -->
   <nav aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="/" class="nav-brand" aria-label="flompt — home"><span aria-hidden="true">flompt</span></a>
+      <a href="/" class="nav-brand" aria-label="flompt home"><span aria-hidden="true">flompt</span></a>
       <div class="nav-links" role="list">
         <a href="#extension" role="listitem">Extension</a>
         <a href="/docs" role="listitem">Docs</a>
@@ -877,7 +884,7 @@
           <p class="section-label">Claude Code integration</p>
           <h2 class="section-title">Use flompt inside <em>your agent</em>.</h2>
           <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.7;margin-bottom:4px;">
-            flompt ships a native <strong style="color:var(--text)">MCP server</strong> (Model Context Protocol). Add it once to Claude Code — then <code style="font-family:var(--mono);font-size:0.78em;color:rgba(255,53,112,0.9);background:rgba(255,53,112,0.07);padding:1px 5px;border-radius:4px">decompose_prompt</code>, <code style="font-family:var(--mono);font-size:0.78em;color:rgba(255,53,112,0.9);background:rgba(255,53,112,0.07);padding:1px 5px;border-radius:4px">compile_prompt</code> and <code style="font-family:var(--mono);font-size:0.78em;color:rgba(255,53,112,0.9);background:rgba(255,53,112,0.07);padding:1px 5px;border-radius:4px">list_block_types</code> become tools your agent can call directly.
+            flompt ships a native <strong style="color:var(--text)">MCP server</strong> (Model Context Protocol). Add it once to Claude Code and <code style="font-family:var(--mono);font-size:0.78em;color:rgba(255,53,112,0.9);background:rgba(255,53,112,0.07);padding:1px 5px;border-radius:4px">decompose_prompt</code>, <code style="font-family:var(--mono);font-size:0.78em;color:rgba(255,53,112,0.9);background:rgba(255,53,112,0.07);padding:1px 5px;border-radius:4px">compile_prompt</code> and <code style="font-family:var(--mono);font-size:0.78em;color:rgba(255,53,112,0.9);background:rgba(255,53,112,0.07);padding:1px 5px;border-radius:4px">list_block_types</code> become tools your agent can call directly.
           </p>
           <ul class="mcp-tools">
             <li class="mcp-tool">
