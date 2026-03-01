@@ -28,7 +28,7 @@ export default function Header({ locale }: { locale: Locale }) {
         <Link
           href={`/${locale}`}
           className="flex items-center gap-1.5"
-          aria-label="flompt blog — home"
+          aria-label={t.accessibility.brandAriaLabel}
         >
           <span
             style={{
@@ -81,7 +81,7 @@ export default function Header({ locale }: { locale: Locale }) {
                 textShadow: "0 0 8px var(--accent-glow)",
               }}
             >
-              Home
+              {t.header.home}
             </a>
           </nav>
 
@@ -100,7 +100,7 @@ export default function Header({ locale }: { locale: Locale }) {
               color: "var(--text-muted)",
               letterSpacing: "0.08em",
             }}
-            aria-label={locale === "fr" ? "Switch to English" : "Passer en français"}
+            aria-label={t.accessibility.switchLocale}
             lang={otherLocale}
           >
             {locale}

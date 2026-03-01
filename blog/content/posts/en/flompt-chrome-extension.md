@@ -58,10 +58,11 @@ If the toolbar can't be found for any reason (interface update, DOM change), a f
 
 ## How to Install
 
-1. Download the `.zip` from [GitHub](https://github.com/Nyrok/flompt)
-2. Open `chrome://extensions/` → enable **Developer mode**
-3. Click **Load unpacked** → select the extracted folder
-4. Open ChatGPT, Claude, or Gemini — the Flompt button appears in the toolbar
+Install directly from the Chrome Web Store — one click, no developer mode required:
+
+→ [**Add to Chrome**](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc)
+
+Once installed, open ChatGPT, Claude, or Gemini — the **✦ flompt** button appears directly in the input toolbar.
 
 No account needed. No API key. Free and open-source under MIT license.
 
@@ -73,4 +74,4 @@ And since your flow is auto-saved between sessions, you pick up exactly where yo
 
 ---
 
-[**Install the extension →**](https://github.com/Nyrok/flompt) · [Try the web app](https://flompt.dev/app)
+[**Add to Chrome →**](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc) · [Try the web app](https://flompt.dev/app)

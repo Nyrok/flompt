@@ -1,0 +1,44 @@
+{
+  "header": {
+    "brand": "flompt blog",
+    "articles": "Articles",
+    "about": "About",
+    "accessApp": "Access App",
+    "home": "Home"
+  },
+  "accessibility": {
+    "brandAriaLabel": "flompt blog — home",
+    "switchLocale": "Passer en français"
+  },
+  "home": {
+    "subtitle": "Prompt engineering, visual prompt building, and AI tips.",
+    "latestArticles": "Latest articles",
+    "noArticles": "No articles yet."
+  },
+  "post": {
+    "backToArticles": "← Back to articles",
+    "readMore": "Read more"
+  },
+  "about": {
+    "pageTitle": "About | flompt blog",
+    "title": "About",
+    "paragraph1": "flompt is a visual prompt building tool. Instead of writing a prompt as raw text, you decompose it into visual blocks — role, context, objective, constraints, examples — and assemble them like a flowchart.",
+    "paragraph2": "This blog explores prompt engineering, shares optimization techniques, and shows how visual building transforms the way we interact with AI.",
+    "paragraph3": "Whether you're a beginner or an expert, you'll find practical guides here to get the most out of your prompts.",
+    "techTitle": "Technologies"
+  },
+  "extension": {
+    "bannerText": "flompt is now a Chrome extension — use it inside ChatGPT, Claude & Gemini.",
+    "bannerCta": "Install free →",
+    "bannerClose": "Close extension announcement",
+    "popupTitle": "flompt is now on Chrome!",
+    "popupDesc": "Use flompt directly inside ChatGPT, Claude & Gemini — no tab switching needed. Free forever.",
+    "popupCta": "Install the extension — free",
+    "popupSkip": "Maybe later"
+  },
+
+  "footer": {
+    "copyright": "© {year} flompt. All rights reserved.",
+    "builtWith": "Built with"
+  }
+}

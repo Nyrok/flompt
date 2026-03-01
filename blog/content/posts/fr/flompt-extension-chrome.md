@@ -58,10 +58,11 @@ Si pour une raison quelconque la barre d'outils est introuvable (mise à jour de
 
 ## Comment l'installer
 
-1. Télécharger le `.zip` sur [GitHub](https://github.com/Nyrok/flompt)
-2. Ouvrir `chrome://extensions/` → activer le **Mode développeur**
-3. **Charger l'extension non empaquetée** → sélectionner le dossier extrait
-4. Ouvrir ChatGPT, Claude ou Gemini — le bouton Flompt apparaît dans la toolbar
+Installe directement depuis le Chrome Web Store — un clic, aucun mode développeur requis :
+
+→ [**Ajouter à Chrome**](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc)
+
+Une fois installée, ouvre ChatGPT, Claude ou Gemini — le bouton **✦ flompt** apparaît directement dans la barre d'outils de saisie.
 
 Pas de compte requis. Pas de clé API. Gratuit et open-source sous licence MIT.
 
@@ -73,4 +74,4 @@ Et comme le flow est sauvegardé automatiquement entre les sessions, tu reprends
 
 ---
 
-[**Installer l'extension →**](https://github.com/Nyrok/flompt) · [Essayer l'app web](https://flompt.dev/app)
+[**Ajouter à Chrome →**](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc) · [Essayer l'app web](https://flompt.dev/app)

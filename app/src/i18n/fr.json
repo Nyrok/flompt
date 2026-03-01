@@ -1,0 +1,146 @@
+{
+  "nodeCount": "{n} bloc",
+  "nodeCountPlural": "{n} blocs",
+
+  "tabs": { "input": "Prompt", "canvas": "Canvas", "output": "Résultat" },
+
+  "header": {
+    "undo": "Annuler (Ctrl+Z)",
+    "redo": "Rétablir (Ctrl+Y)",
+    "reset": "Réinitialiser",
+    "resetConfirm": "Réinitialiser le canvas ?",
+    "autosaved": "Sauvegardé",
+    "github": "Voir flompt sur GitHub (s'ouvre dans un nouvel onglet)"
+  },
+
+  "accessibility": {
+    "skipToMain": "Aller au contenu principal",
+    "switchLocale": "Switch to English",
+    "inputPanel": "Panneau de saisie",
+    "outputPanel": "Panneau de résultat",
+    "mainTabs": "Onglets principaux"
+  },
+
+  "promptInput": {
+    "title": "Prompt brut",
+    "placeholder": "Colle ton prompt ici…",
+    "decompose": "Décomposer en blocs",
+    "decomposing": "Décomposition…",
+    "errorDecompose": "La décomposition a échoué. Réessayez.",
+    "paste": "Coller depuis le presse-papiers",
+    "importFromPlatform": "Importer le prompt depuis la page",
+    "queuePosition": "Position dans la file : {n}",
+    "queueProcessing": "Traitement en cours…",
+    "queueAnalyzing": "Analyse de sécurité…"
+  },
+
+  "promptOutput": {
+    "title": "Résultat",
+    "compile": "Assembler le prompt",
+    "compiling": "Assemblage…",
+    "copy": "Copier",
+    "copied": "Copié !",
+    "placeholder": "Construis ton flowchart\npuis assemble pour générer le prompt.",
+    "errorCompile": "L'assemblage a échoué. Réessayez.",
+    "exportTxt": ".txt",
+    "exportJson": ".json",
+    "exportTxtLabel": "Exporter en fichier .txt",
+    "exportJsonLabel": "Exporter en fichier .json",
+    "share": "Partager flompt",
+    "shareTitle": "flompt — Visual AI Prompt Builder",
+    "shareText": "Découvre flompt ! Transforme n'importe quel prompt IA en flow visuel. Gratuit & open-source.",
+    "sendToAI": "Envoyer à l'IA",
+    "injected": "Envoyé !",
+    "injectLabel": "Envoyer le prompt dans le chat IA",
+    "injectedLabel": "Prompt envoyé !"
+  },
+
+  "errors": {
+    "overloaded": "L'IA est surchargée. Patientez un instant et réessayez.",
+    "timeout": "Délai dépassé. L'IA a mis trop de temps — réessayez.",
+    "network": "Connexion perdue. Vérifiez votre internet et réessayez.",
+    "server": "Erreur serveur. Réessayez dans quelques secondes.",
+    "blocked": "Ton prompt a été bloqué par notre filtre de sécurité. Reformule-le.",
+    "unknown": "Une erreur est survenue. Réessayez."
+  },
+
+  "sidebar": {
+    "title": "Blocs",
+    "hint": "Clic pour ajouter · Glisser vers le canvas"
+  },
+
+  "block": {
+    "duplicate": "Dupliquer",
+    "expand": "Développer",
+    "collapse": "Réduire",
+    "delete": "Supprimer",
+    "chars": "car.",
+    "deleteConnection": "Supprimer la connexion"
+  },
+
+  "canvas": {
+    "empty": "Canvas vide",
+    "emptyHint": "Colle un prompt à gauche et clique sur ",
+    "emptyDecompose": "Décomposer, ou glisse un bloc depuis la sidebar."
+  },
+
+  "shortcuts": {
+    "title": "Raccourcis clavier",
+    "close": "Appuie sur Esc ou ? pour fermer",
+    "list": [
+      { "keys": ["Ctrl", "Z"],       "label": "Annuler" },
+      { "keys": ["Ctrl", "Y"],       "label": "Rétablir" },
+      { "keys": ["Ctrl", "⇧", "Z"], "label": "Rétablir (alt)" },
+      { "keys": ["Del"],             "label": "Supprimer le bloc sélectionné" },
+      { "keys": ["Ctrl", "A"],       "label": "Tout sélectionner" },
+      { "keys": ["Scroll"],          "label": "Zoom in/out" },
+      { "keys": ["Drag"],            "label": "Déplacer un bloc" },
+      { "keys": ["Bg drag"],         "label": "Déplacer le canvas" },
+      { "keys": ["?"],               "label": "Afficher les raccourcis" }
+    ]
+  },
+
+  "tour": {
+    "step1title": "Ton prompt brut",
+    "step1desc": "Tape ou colle n'importe quel texte ici — vague ou détaillé, peu importe. flompt se charge de le structurer.",
+    "stepBlocksTitle": "Les blocs disponibles",
+    "stepBlocksDesc": "Chaque type de bloc cible un aspect de ton prompt : Rôle, Objectif, Contraintes, Format de sortie… Clique pour en ajouter un, ou glisse-le sur le canvas.",
+    "step2title": "Décomposer en blocs",
+    "step2desc": "flompt envoie ton prompt à l'IA, qui le découpe en blocs typés : Rôle, Objectif, Contraintes…",
+    "step2action": "Décomposer pour moi",
+    "step3title": "Tes blocs sur le canvas",
+    "step3desc": "Chaque bloc représente un aspect de ton prompt. Édite le contenu, réorganise par glisser-déposer, ajoute des blocs depuis la sidebar.",
+    "step4title": "Compiler",
+    "step4desc": "Clique sur Compiler pour générer ton prompt final — structuré, optimisé, prêt à coller dans n'importe quel LLM.",
+    "stepOf": "{n} / {total}",
+    "next": "Suivant",
+    "finish": "Compris",
+    "skip": "Passer",
+    "acting": "Décomposition…",
+    "samplePrompt": "Tu es un développeur Python senior. Fais une revue du code suivant : identifie les bugs, les problèmes de performance et les violations de style. Sois concis, priorise les problèmes critiques, et explique chaque point en une phrase. Réponds avec une liste numérotée."
+  },
+
+  "extension": {
+    "bannerText": "flompt est maintenant une extension Chrome — utilisez-le dans ChatGPT, Claude & Gemini.",
+    "bannerCta": "Installer gratuitement →",
+    "bannerClose": "Fermer l'annonce de l'extension",
+    "popupTitle": "flompt est sur Chrome !",
+    "popupDesc": "Utilisez flompt directement dans ChatGPT, Claude & Gemini — sans changer d'onglet. Gratuit.",
+    "popupCta": "Installer l'extension — gratuit",
+    "popupSkip": "Plus tard"
+  },
+
+  "blocks": {
+    "document":         { "label": "Document",       "description": "Contenu externe injecté en XML <document>" },
+    "input":            { "label": "Entrée",         "description": "Données fournies à l'IA" },
+    "role":             { "label": "Rôle",           "description": "Définit la persona / le rôle de l'IA" },
+    "context":          { "label": "Contexte",       "description": "Fournit le contexte de la tâche" },
+    "objective":        { "label": "Objectif",       "description": "Ce qu'on veut accomplir" },
+    "constraints":      { "label": "Contraintes",    "description": "Règles et limites à respecter" },
+    "examples":         { "label": "Exemples",       "description": "Paires input/output few-shot" },
+    "chain_of_thought": { "label": "Raisonnement",   "description": "Instructions de raisonnement pas à pas" },
+    "output_format":    { "label": "Sortie",         "description": "Format attendu de la réponse" },
+    "format_control":   { "label": "Format Control", "description": "Directives Claude : ton, verbosité, markdown" },
+    "language":         { "label": "Langue",         "description": "Langue de réponse de l'IA" }
+  }
+}

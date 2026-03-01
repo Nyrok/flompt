@@ -62,8 +62,8 @@ const PromptOutput = () => {
 
   const handleShare = async () => {
     const shareData = {
-      title: 'flompt — Visual AI Prompt Builder',
-      text:  'Check out flompt! Turn any AI prompt into a visual flow. Free & open-source.',
+      title: t.promptOutput.shareTitle,
+      text:  t.promptOutput.shareText,
       url:   'https://flompt.dev',
     }
     try {
@@ -95,13 +95,13 @@ const PromptOutput = () => {
               <button
                 className={`btn btn-primary export-inject${injected ? ' injected' : ''}`}
                 onClick={handleInjectToAI}
-                title="Inject this prompt into the AI chat input"
-                aria-label={injected ? 'Prompt injected!' : 'Send prompt to AI chat input'}
+                title={t.promptOutput.injectLabel}
+                aria-label={injected ? t.promptOutput.injectedLabel : t.promptOutput.injectLabel}
                 aria-live="polite"
               >
                 {injected
-                  ? <><ClipboardCheck size={13} aria-hidden="true" /> Injected!</>
-                  : <><Send size={13} aria-hidden="true" /> Send to AI</>
+                  ? <><ClipboardCheck size={13} aria-hidden="true" /> {t.promptOutput.injected}</>
+                  : <><Send size={13} aria-hidden="true" /> {t.promptOutput.sendToAI}</>
                 }
               </button>
             )}
@@ -120,16 +120,16 @@ const PromptOutput = () => {
               <button
                 className="btn btn-secondary export-btn"
                 onClick={handleExportTxt}
-                title={`${t.promptOutput.exportTxt} — Export as text file`}
-                aria-label={`Export as .txt file`}
+                title={t.promptOutput.exportTxtLabel}
+                aria-label={t.promptOutput.exportTxtLabel}
               >
                 <FileText size={13} aria-hidden="true" /> {t.promptOutput.exportTxt}
               </button>
               <button
                 className="btn btn-secondary export-btn"
                 onClick={handleExportJSON}
-                title={`${t.promptOutput.exportJson} — Export as JSON file`}
-                aria-label={`Export as .json file`}
+                title={t.promptOutput.exportJsonLabel}
+                aria-label={t.promptOutput.exportJsonLabel}
               >
                 <Braces size={13} aria-hidden="true" /> {t.promptOutput.exportJson}
               </button>

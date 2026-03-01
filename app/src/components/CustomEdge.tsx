@@ -4,6 +4,7 @@ import type { EdgeProps } from 'reactflow'
 import { BLOCK_META } from '@/types/blocks'
 import type { BlockType } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
+import { useLocale } from '@/i18n/LocaleContext'
 
 const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0
 
@@ -23,6 +24,7 @@ const CustomEdge = ({
   const [hovered, setHovered] = useState(false)
   const { getNode } = useReactFlow()
   const removeEdge = useFlowStore((s) => s.onEdgesChange)
+  const { t } = useLocale()
 
   const sourceNode = getNode(source)
   const targetNode = getNode(target)
@@ -95,7 +97,7 @@ const CustomEdge = ({
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
-            <button onClick={handleDelete} title="Delete connection" aria-label="Delete connection">
+            <button onClick={handleDelete} title={t.block.deleteConnection} aria-label={t.block.deleteConnection}>
               <span aria-hidden="true">✕</span>
             </button>
           </div>

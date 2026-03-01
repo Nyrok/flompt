@@ -6,12 +6,22 @@ The flompt Chrome extension embeds the full prompt builder as a sidebar directly
 
 ## Installation
 
-1. Go to [GitHub Releases](https://github.com/Nyrok/flompt/releases) and download the latest `.zip`
-2. Extract the archive
-3. Open `chrome://extensions/` in Chrome
-4. Enable **Developer mode** (top right toggle)
-5. Click **Load unpacked** → select the extracted folder
-6. Navigate to ChatGPT, Claude, or Gemini — the **✦ flompt** button appears in the input toolbar
+### Chrome Web Store (recommended)
+
+Install in one click — no developer mode, no zip file:
+
+→ **[Add to Chrome](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc)**
+
+Once installed, navigate to ChatGPT, Claude, or Gemini — the **✦ flompt** button appears in the input toolbar.
+
+### Developer installation (unpacked)
+
+For local development or testing unreleased builds:
+
+1. Clone the repo or download the source from [GitHub](https://github.com/Nyrok/flompt)
+2. Run `make pack` inside the `/extension` folder to build the zip
+3. Open `chrome://extensions/` → enable **Developer mode** (top right toggle)
+4. Click **Load unpacked** → select the `/extension` folder
 
 ---
 

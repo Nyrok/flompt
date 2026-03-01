@@ -405,6 +405,89 @@
       .claude-grid { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; text-align: center; }
     }
+
+    /* ── Extension Banner ─────────────────────────────────────────── */
+    .ext-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
+      height: 44px;
+      background: linear-gradient(90deg, rgba(255,53,112,0.11), rgba(255,96,144,0.07), rgba(255,53,112,0.11));
+      border-bottom: 1px solid rgba(255,53,112,0.22);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
+    .ext-banner__inner {
+      max-width: 1080px; width: 100%; padding: 0 56px 0 24px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      position: relative;
+    }
+    .ext-banner__badge {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--accent); color: #fff; padding: 2px 7px; border-radius: 4px; flex-shrink: 0;
+    }
+    .ext-banner__text { font-size: 0.83rem; color: var(--text); }
+    .ext-banner__cta {
+      font-size: 0.8rem; font-weight: 600; color: var(--accent);
+      border: 1px solid rgba(255,53,112,0.4); border-radius: 6px; padding: 3px 11px;
+      white-space: nowrap; flex-shrink: 0; transition: background 150ms;
+    }
+    .ext-banner__cta:hover { background: rgba(255,53,112,0.12); }
+    .ext-banner__close {
+      position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: var(--text-muted); font-size: 1.2rem; line-height: 1;
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      border-radius: 6px; transition: color 150ms;
+    }
+    .ext-banner__close:hover { color: var(--text); }
+    body.has-banner nav           { top: 44px; }
+    body.has-banner .nav-mobile-menu { top: 104px; }
+    body.has-banner .hero         { padding-top: 174px; }
+    @media (max-width: 600px) {
+      .ext-banner__text { display: none; }
+      body.has-banner .hero { padding-top: 154px; }
+    }
+
+    /* ── Extension Popup ──────────────────────────────────────────── */
+    .ext-popup-overlay {
+      position: fixed; inset: 0; z-index: 9990;
+      background: rgba(0,0,0,0.65);
+      display: none; align-items: center; justify-content: center;
+    }
+    .ext-popup-overlay.visible { display: flex; animation: ext-fade 200ms ease; }
+    .ext-popup {
+      background: var(--bg-2); border: 1px solid var(--border-m);
+      border-radius: 18px; padding: 36px 28px 28px;
+      max-width: 400px; width: calc(100% - 48px);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.85);
+      position: relative; text-align: center;
+      animation: ext-scale 220ms ease;
+    }
+    .ext-popup__close {
+      position: absolute; top: 14px; right: 14px;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-muted); font-size: 1.3rem; line-height: 1;
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      border-radius: 6px; transition: color 150ms;
+    }
+    .ext-popup__close:hover { color: var(--text); }
+    .ext-popup__icon { font-size: 2.5rem; display: block; margin-bottom: 14px; }
+    .ext-popup__title { font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .ext-popup__desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px; }
+    .ext-popup__cta {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--accent); color: #fff; font-size: 0.9rem; font-weight: 600;
+      padding: 13px 24px; border-radius: 10px; text-decoration: none;
+      transition: filter 150ms; margin-bottom: 14px; width: 100%;
+    }
+    .ext-popup__cta:hover { filter: brightness(1.1); color: #fff; }
+    .ext-popup__skip {
+      background: none; border: none; cursor: pointer;
+      color: var(--text-dim); font-size: 0.82rem;
+      padding: 4px 8px; border-radius: 4px; transition: color 150ms;
+    }
+    .ext-popup__skip:hover { color: var(--text-muted); }
+    @keyframes ext-fade  { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes ext-scale { from { transform: scale(0.93); opacity: 0; } to { transform: scale(1); opacity: 1; } }
   </style>
 
   <script type="application/ld+json">
@@ -439,6 +522,22 @@
 
   <!-- Skip to main content (keyboard accessibility) -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ── Extension Banner ─────────────────────────────── -->
+  <div id="ext-banner" class="ext-banner" role="region" aria-label="Extension announcement">
+    <div class="ext-banner__inner">
+      <span class="ext-banner__badge" aria-hidden="true">NEW</span>
+      <span class="ext-banner__text">flompt is now a Chrome extension — use it inside ChatGPT, Claude &amp; Gemini.</span>
+      <a
+        href="https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="ext-banner__cta"
+        id="ext-banner-cta"
+      >Install free →</a>
+      <button class="ext-banner__close" aria-label="Close announcement" id="ext-banner-close">×</button>
+    </div>
+  </div>
 
   <!-- ── NAV ─────────────────────────────────────────── -->
   <nav aria-label="Main navigation">
@@ -658,9 +757,9 @@
             <span class="ext-platform">Gemini</span>
           </div>
 
-          <a href="https://github.com/Nyrok/flompt/releases/latest" target="_blank" rel="noopener" class="btn-cta">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg>
-            Install extension
+          <a href="https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc" target="_blank" rel="noopener noreferrer" class="btn-cta" id="ext-section-cta">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/></svg>
+            Add to Chrome
           </a>
         </div>
 
@@ -1125,6 +1224,107 @@ statistics. Write in English.</pre>
     });
   </script>
 
+  <!-- ── Extension Popup ─────────────────────────────── -->
+  <div
+    id="ext-popup-overlay"
+    class="ext-popup-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="ext-popup-title"
+    aria-hidden="true"
+  >
+    <div class="ext-popup">
+      <button class="ext-popup__close" aria-label="Close" id="ext-popup-close">×</button>
+      <svg class="ext-popup__icon" width="44" height="44" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="color:rgba(255,255,255,0.5);margin-bottom:14px;display:block;margin-left:auto;margin-right:auto"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/></svg>
+      <h2 id="ext-popup-title" class="ext-popup__title">flompt is now on Chrome!</h2>
+      <p class="ext-popup__desc">
+        Use flompt directly inside ChatGPT, Claude &amp; Gemini — no tab switching needed. Free forever.
+      </p>
+      <a
+        href="https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="ext-popup__cta"
+        id="ext-popup-cta"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/>
+        </svg>
+        Add to Chrome
+      </a>
+      <button class="ext-popup__skip" id="ext-popup-skip">Maybe later</button>
+    </div>
+  </div>
+
+  <!-- ── Extension Banner + Popup JS ─────────────────── -->
+  <script>
+    (function () {
+      var BANNER_KEY = 'flompt-ext-banner-v1';
+      var POPUP_KEY  = 'flompt-ext-popup-v1';
+
+      // ── Banner ────────────────────────────────────────
+      var banner = document.getElementById('ext-banner');
+      var bannerClose = document.getElementById('ext-banner-close');
+      var bannerCta   = document.getElementById('ext-banner-cta');
+
+      function dismissBanner() {
+        try { localStorage.setItem(BANNER_KEY, '1'); } catch(e) {}
+        banner.style.display = 'none';
+        document.body.classList.remove('has-banner');
+      }
+
+      if (localStorage.getItem(BANNER_KEY)) {
+        banner.style.display = 'none';
+      } else {
+        document.body.classList.add('has-banner');
+        bannerClose.addEventListener('click', dismissBanner);
+        bannerCta.addEventListener('click', function () {
+          if (typeof posthog !== 'undefined') posthog.capture('extension_install_clicked', { source: 'banner' });
+          if (typeof gtag    !== 'undefined') gtag('event', 'extension_install_click', { source: 'banner' });
+        });
+      }
+
+      // ── Popup ─────────────────────────────────────────
+      var overlay    = document.getElementById('ext-popup-overlay');
+      var popupClose = document.getElementById('ext-popup-close');
+      var popupSkip  = document.getElementById('ext-popup-skip');
+      var popupCta   = document.getElementById('ext-popup-cta');
+
+      function showPopup() {
+        if (localStorage.getItem(POPUP_KEY)) return;
+        overlay.classList.add('visible');
+        overlay.setAttribute('aria-hidden', 'false');
+        if (popupClose) popupClose.focus();
+      }
+
+      function dismissPopup() {
+        try { localStorage.setItem(POPUP_KEY, '1'); } catch(e) {}
+        overlay.classList.remove('visible');
+        overlay.setAttribute('aria-hidden', 'true');
+      }
+
+      if (!localStorage.getItem(POPUP_KEY)) {
+        setTimeout(showPopup, 10000);
+      }
+
+      if (popupClose) popupClose.addEventListener('click', dismissPopup);
+      if (popupSkip)  popupSkip.addEventListener('click', dismissPopup);
+      if (popupCta)   popupCta.addEventListener('click', function () {
+        if (typeof posthog !== 'undefined') posthog.capture('extension_install_clicked', { source: 'popup' });
+        if (typeof gtag    !== 'undefined') gtag('event', 'extension_install_click', { source: 'popup' });
+        dismissPopup();
+      });
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) dismissPopup();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('visible')) dismissPopup();
+      });
+    })();
+  </script>
+
   <!-- PostHog — CTA click tracking -->
   <script>
     document.addEventListener('click', function(e) {
@@ -1142,6 +1342,10 @@ statistics. Write in English.</pre>
       }
       if (href.includes('github.com')) {
         posthog.capture('github_clicked');
+      }
+      if (href.includes('chrome.google.com/webstore') && el.id !== 'ext-banner-cta' && el.id !== 'ext-popup-cta') {
+        posthog.capture('extension_install_clicked', { source: 'section' });
+        if (typeof gtag !== 'undefined') gtag('event', 'extension_install_click', { source: 'section' });
       }
     });
   </script>

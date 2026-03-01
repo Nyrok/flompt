@@ -7,6 +7,8 @@ import PromptInput from '@/components/PromptInput'
 import PromptOutput from '@/components/PromptOutput'
 import KeyboardShortcuts from '@/components/KeyboardShortcuts'
 import GuidedTour from '@/components/GuidedTour'
+import ExtensionBanner from '@/components/ExtensionBanner'
+import ExtensionPopup from '@/components/ExtensionPopup'
 import { useFlowStore } from '@/store/flowStore'
 import type { Tab } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -57,8 +59,10 @@ const App = () => {
     <div className="app">
       {/* Skip to main content — keyboard accessibility */}
       <a href="#main-content" className="skip-link">
-        {locale === 'fr' ? 'Aller au contenu principal' : 'Skip to main content'}
+        {t.accessibility.skipToMain}
       </a>
+
+      {!isExtension && <ExtensionBanner />}
 
       {!isExtension && (
         <header className="header">
@@ -98,8 +102,8 @@ const App = () => {
             <button
               className="btn-locale"
               onClick={toggleLocale}
-              title={locale === 'en' ? 'Passer en français' : 'Switch to English'}
-              aria-label={locale === 'en' ? 'Passer en français' : 'Switch to English'}
+              title={t.accessibility.switchLocale}
+              aria-label={t.accessibility.switchLocale}
             >
               {locale.toUpperCase()}
             </button>
@@ -108,8 +112,8 @@ const App = () => {
               href="https://github.com/Nyrok/flompt"
               target="_blank"
               rel="noopener noreferrer"
-              title="Star on GitHub"
-              aria-label="Star flompt on GitHub (opens in new tab)"
+              title={t.header.github}
+              aria-label={t.header.github}
             >
               <Github size={14} aria-hidden="true" />
             </a>
@@ -132,7 +136,7 @@ const App = () => {
       >
         <aside
           className={`left-panel${activeTab !== 'input' ? ' panel-hidden' : ''}`}
-          aria-label={locale === 'fr' ? 'Panneau de saisie' : 'Input panel'}
+          aria-label={t.accessibility.inputPanel}
           aria-hidden={activeTab !== 'input'}
         >
           <PromptInput />
@@ -149,7 +153,7 @@ const App = () => {
 
         <aside
           className={`right-panel${activeTab !== 'output' ? ' panel-hidden' : ''}`}
-          aria-label={locale === 'fr' ? 'Panneau de résultat' : 'Output panel'}
+          aria-label={t.accessibility.outputPanel}
           aria-hidden={activeTab !== 'output'}
         >
           <PromptOutput />
@@ -159,7 +163,10 @@ const App = () => {
       {/* Guided tour — desktop only, first visit only */}
       <GuidedTour />
 
-      <nav className="tab-bar" aria-label={locale === 'fr' ? 'Onglets principaux' : 'Main tabs'}>
+      {/* Extension popup — web only, once after 20s */}
+      {!isExtension && <ExtensionPopup />}
+
+      <nav className="tab-bar" aria-label={t.accessibility.mainTabs}>
         <div role="tablist" className="tab-list-inner">
           {TAB_IDS.map(({ id, Icon }) => (
             <button
