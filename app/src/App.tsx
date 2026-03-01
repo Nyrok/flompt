@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { Undo2, Redo2, Workflow, PenLine, Network, Sparkles, Trash2, Github } from 'lucide-react'
+import { Undo2, Redo2, PenLine, Network, Sparkles, Trash2, Github } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { initAnalytics, setSource, analytics } from '@/lib/analytics'
 import FlowCanvas from '@/components/FlowCanvas'
 import Sidebar from '@/components/Sidebar'
@@ -16,7 +17,7 @@ import type { Locale } from '@/i18n/translations'
 import { isExtension } from '@/lib/platform'
 import './styles.css'
 
-const TAB_IDS: { id: Tab; Icon: typeof Workflow }[] = [
+const TAB_IDS: { id: Tab; Icon: LucideIcon }[] = [
   { id: 'input',  Icon: PenLine },
   { id: 'canvas', Icon: Network },
   { id: 'output', Icon: Sparkles },

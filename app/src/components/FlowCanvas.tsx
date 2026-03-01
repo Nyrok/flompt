@@ -14,7 +14,7 @@ import { useFlowStore } from '@/store/flowStore'
 import { assemblePrompt } from '@/lib/assemblePrompt'
 import BlockNode from './BlockNode'
 import CustomEdge from './CustomEdge'
-import { BLOCK_META } from '@/types/blocks'
+import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType, FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
 
@@ -57,11 +57,17 @@ const CanvasInner = () => {
     if (!bounds) return
     const position = screenToFlowPosition({ x: e.clientX, y: e.clientY })
     const tr = t.blocks[type]
+    const extraData = type === 'response_style'
+      ? {
+          options: { ...DEFAULT_RESPONSE_STYLE } as Record<string, string | boolean>,
+          content: generateResponseStyleContent(DEFAULT_RESPONSE_STYLE),
+        }
+      : { content: '' }
     const newNode: FlomptNode = {
       id: `${type}-${Date.now()}`,
       type: 'block',
       position,
-      data: { type, label: tr.label, content: '', description: tr.description },
+      data: { type, label: tr.label, description: tr.description, ...extraData },
     }
     addNode(newNode)
   }, [screenToFlowPosition, addNode, t.blocks])

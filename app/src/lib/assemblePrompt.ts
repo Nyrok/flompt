@@ -91,6 +91,27 @@ function indent(str: string, spaces: number): string {
   return str.split('\n').map(l => pad + l).join('\n')
 }
 
+// ─── Shared example parser ────────────────────────────────────────────────────
+
+/**
+ * Parse "Input: [...]\nOutput: [...]" pairs from an examples block.
+ * Returns an empty array if no structured pairs are found.
+ */
+function parseExamplePairs(content: string): Array<{ input: string; output: string }> {
+  const blocks = content.trim().split(/\n{2,}/)
+  const pairs: Array<{ input: string; output: string }> = []
+
+  for (const block of blocks) {
+    const inputMatch  = block.match(/^(?:Input|User|Question|Q)\s*:\s*([\s\S]*?)(?=\n(?:Output|Assistant|Answer|A)\s*:|$)/i)
+    const outputMatch = block.match(/(?:Output|Assistant|Answer|A)\s*:\s*([\s\S]*?)$/i)
+    if (inputMatch && outputMatch) {
+      pairs.push({ input: inputMatch[1].trim(), output: outputMatch[1].trim() })
+    }
+  }
+
+  return pairs
+}
+
 // ─── Claude-specific block renderers ─────────────────────────────────────────
 
 /**
@@ -141,20 +162,7 @@ function renderDocuments(docNodes: FlomptNode[]): string {
  *   </examples>
  */
 function renderExamples(content: string): string {
-  const blocks = content.trim().split(/\n{2,}/)
-  const pairs: Array<{ input: string; output: string }> = []
-
-  for (const block of blocks) {
-    const inputMatch  = block.match(/^(?:Input|User|Question|Q)\s*:\s*([\s\S]*?)(?=\n(?:Output|Assistant|Answer|A)\s*:|$)/i)
-    const outputMatch = block.match(/(?:Output|Assistant|Answer|A)\s*:\s*([\s\S]*?)$/i)
-
-    if (inputMatch && outputMatch) {
-      pairs.push({
-        input:  inputMatch[1].trim(),
-        output: outputMatch[1].trim(),
-      })
-    }
-  }
+  const pairs = parseExamplePairs(content)
 
   if (pairs.length === 0) {
     // No parseable pairs — wrap raw content
@@ -223,17 +231,7 @@ function renderMarkdownDocuments(docNodes: FlomptNode[]): string {
 }
 
 function renderMarkdownExamples(content: string): string {
-  const blocks = content.trim().split(/\n{2,}/)
-  const pairs: Array<{ input: string; output: string }> = []
-
-  for (const block of blocks) {
-    const inputMatch  = block.match(/^(?:Input|User|Question|Q)\s*:\s*([\s\S]*?)(?=\n(?:Output|Assistant|Answer|A)\s*:|$)/i)
-    const outputMatch = block.match(/(?:Output|Assistant|Answer|A)\s*:\s*([\s\S]*?)$/i)
-
-    if (inputMatch && outputMatch) {
-      pairs.push({ input: inputMatch[1].trim(), output: outputMatch[1].trim() })
-    }
-  }
+  const pairs = parseExamplePairs(content)
 
   if (pairs.length === 0) {
     return `## Examples\n\n${content.trim()}`

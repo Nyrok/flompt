@@ -4,7 +4,7 @@ import { useFlowStore } from '@/store/flowStore'
 import { decomposePrompt, watchJobStatus, classifyError, classifyJobError } from '@/services/api'
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics, setSource } from '@/lib/analytics'
-import { isExtension as isExt } from '@/lib/platform'
+import { isExtension } from '@/lib/platform'
 
 // ─── Composant ────────────────────────────────────────────────────────────────
 
@@ -24,7 +24,7 @@ const PromptInput = () => {
 
   // ── Réception import depuis la plateforme (extension uniquement) ──────────
   useEffect(() => {
-    if (!isExt) return
+    if (!isExtension) return
 
     const handler = (event: MessageEvent) => {
       if (event.data?.type === 'FLOMPT_PLATFORM_INFO') {
@@ -130,7 +130,7 @@ const PromptInput = () => {
       <h2 className="panel-title">{t.promptInput.title}</h2>
 
       {/* Bouton import plateforme — visible uniquement dans l'extension */}
-      {isExt && (
+      {isExtension && (
         <button
           className="btn btn-secondary btn-import-platform"
           onClick={handleImportFromPlatform}

@@ -23,7 +23,7 @@ const CustomEdge = ({
   const [edgePath, labelX, labelY] = getBezierPath({ sourceX, sourceY, sourcePosition, targetX, targetY, targetPosition })
   const [hovered, setHovered] = useState(false)
   const { getNode } = useReactFlow()
-  const removeEdge = useFlowStore((s) => s.onEdgesChange)
+  const onEdgesChange = useFlowStore((s) => s.onEdgesChange)
   const { t } = useLocale()
 
   const sourceNode = getNode(source)
@@ -38,8 +38,8 @@ const CustomEdge = ({
 
   const handleDelete = useCallback((e: React.MouseEvent) => {
     e.stopPropagation()
-    removeEdge([{ id, type: 'remove' }])
-  }, [id, removeEdge])
+    onEdgesChange([{ id, type: 'remove' }])
+  }, [id, onEdgesChange])
 
   return (
     <>
