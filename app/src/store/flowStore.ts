@@ -152,7 +152,8 @@ export const useFlowStore = create<FlowState>()(
       setIsDecomposing: (v) => set({ isDecomposing: v }),
       setActiveTab: (tab) => set({ activeTab: tab }),
       setQueueStatus: (status) => set({ queueStatus: status }),
-      setOutputFormat: (format) => set({ outputFormat: format, compiledPrompt: null }),
+      // Ne pas reset compiledPrompt — tous les formats sont déjà générés en une passe
+      setOutputFormat: (format) => set({ outputFormat: format }),
 
       reset: () =>
         set({
