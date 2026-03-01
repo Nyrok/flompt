@@ -1,6 +1,6 @@
-;(function () {
-  'use strict'
+import integrations from './integrations/index.js'
 
+;(function () {
   // Guard against double injection
   if (window.__flomptInjected) return
   window.__flomptInjected = true
@@ -36,79 +36,10 @@
   // ── Platform detection ─────────────────────────────────────────────────────
   const hostname = location.hostname
 
-  /**
-   * Each platform defines:
-   *  - name          : display name
-   *  - test()        : hostname check
-   *  - getInput()    : returns the contenteditable element to inject into
-   *  - inject(el, t) : injects text into the element
-   *  - getSendBtn()  : (optional) platform-specific send button selector
-   */
-  const PLATFORMS = {
-    chatgpt: {
-      name: 'ChatGPT',
-      test: () => hostname.includes('chatgpt.com') || hostname.includes('openai.com'),
-      getInput () {
-        return (
-          document.querySelector('#prompt-textarea[contenteditable]') ||
-          document.querySelector('#prompt-textarea') ||
-          document.querySelector('div[contenteditable="true"][data-virtualized="false"]')
-        )
-      },
-      inject (el, text) { setContentEditable(el, text) },
-      getSendBtn () {
-        return (
-          document.querySelector('button[data-testid="send-button"]') ||
-          document.querySelector('button[aria-label="Send prompt"]') ||
-          document.querySelector('button[aria-label="Send message"]')
-        )
-      },
-    },
-    claude: {
-      name: 'Claude',
-      test: () => hostname.includes('claude.ai'),
-      getInput () {
-        return (
-          document.querySelector('[data-testid="composer-text-input"] div[contenteditable]') ||
-          document.querySelector('.ProseMirror[contenteditable]') ||
-          document.querySelector('div[contenteditable="true"].ProseMirror') ||
-          // Fallback : DERNIER contenteditable (l'input est en bas de page, pas les bulles)
-          [...document.querySelectorAll('[contenteditable="true"]')].at(-1) ||
-          [...document.querySelectorAll('[contenteditable]')].at(-1)
-        )
-      },
-      inject (el, text) { setContentEditable(el, text) },
-      getSendBtn () {
-        return (
-          document.querySelector('button[aria-label="Send Message"]') ||
-          document.querySelector('button[aria-label="Send message"]') ||
-          document.querySelector('[data-testid="send-button"]')
-        )
-      },
-    },
-    gemini: {
-      name: 'Gemini',
-      test: () => hostname.includes('gemini.google.com'),
-      getInput () {
-        return (
-          document.querySelector('rich-textarea div[contenteditable]') ||
-          document.querySelector('rich-textarea [contenteditable="true"]') ||
-          // Fallback : DERNIER contenteditable (même logique que Claude)
-          [...document.querySelectorAll('[contenteditable="true"]')].at(-1)
-        )
-      },
-      inject (el, text) { setContentEditable(el, text) },
-      getSendBtn () {
-        return (
-          document.querySelector('button.send-button') ||
-          document.querySelector('button[aria-label="Send message"]') ||
-          document.querySelector('button[mattooltip="Send message"]')
-        )
-      },
-    },
-  }
-
-  const platform = Object.values(PLATFORMS).find(p => p.test()) || null
+  /** Active integration for this page, or null if unsupported. */
+  const platform = integrations.find(i =>
+    i.hostnames.some(h => hostname.includes(h))
+  ) || null
 
   // ── Helpers ────────────────────────────────────────────────────────────────
   function setContentEditable (el, text) {
@@ -523,25 +454,19 @@
   function tryInsertInToolbar () {
     if (toggleBtn.isConnected) return true
 
-    // ── ChatGPT : injection en première position dans le premier enfant de composer-footer-actions ──
-    if (platform?.name === 'ChatGPT') {
-      const footerActions = document.querySelector('[data-testid="composer-footer-actions"]')
-      const firstChild    = footerActions?.firstElementChild
-      if (firstChild) {
-        firstChild.insertBefore(toggleBtn, firstChild.firstChild)
-        return true
+    // ── Integration-specific target (getToolbarTarget) ────────────────────
+    const target = platform?.getToolbarTarget?.()
+    if (target) {
+      const { el, position } = target
+      if (typeof position === 'number') {
+        el.insertBefore(toggleBtn, el.children[position] ?? null)
+      } else if (position === 'append') {
+        el.appendChild(toggleBtn)
+      } else { // 'prepend' (default)
+        el.insertBefore(toggleBtn, el.firstElementChild)
       }
-    }
-
-    // ── Gemini : injection en 2ème position dans .leading-actions-wrapper ──
-    if (platform?.name === 'Gemini') {
-      const leadingActions = document.querySelector('.leading-actions-wrapper')
-      if (leadingActions) {
-        leadingActions.insertBefore(toggleBtn, leadingActions.children[1] ?? null)
-        // Gemini : border-radius pill pour matcher le style natif
-        toggleBtn.style.setProperty('border-radius', '50px', 'important')
-        return true
-      }
+      platform?.onButtonMounted?.(toggleBtn)
+      return true
     }
 
     // ── Essai 1 : zone outils ─────────────────────────────────────────────
@@ -555,7 +480,7 @@
       if (container) {
         // Insérer juste après le premier bouton outil — intégré dans la zone outils
         container.insertBefore(toggleBtn, firstTool.nextSibling)
-        fixClaudeParentAlign()
+        platform?.onButtonMounted?.(toggleBtn)
         return true
       }
     }
@@ -571,18 +496,8 @@
     if (!container) return false
 
     container.insertBefore(toggleBtn, sendBtn)
-    fixClaudeParentAlign()
+    platform?.onButtonMounted?.(toggleBtn)
     return true
-  }
-
-  /** Sur Claude, le parent direct du bouton doit être inline-flex pour l'alignement vertical */
-  function fixClaudeParentAlign () {
-    if (platform?.name !== 'Claude') return
-    const parent = toggleBtn.parentElement
-    if (parent) parent.classList.add('inline-flex')
-    // Claude : taille réduite à 32x32 pour mieux s'intégrer à la toolbar native
-    toggleBtn.style.setProperty('width',  '32px', 'important')
-    toggleBtn.style.setProperty('height', '32px', 'important')
   }
 
   // Retry avec timer unique (pas de race condition)

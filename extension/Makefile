@@ -9,9 +9,14 @@ ZIP_CHROME  := flompt-extension.zip
 ZIP_FIREFOX := flompt-firefox.zip
 
 # Fichiers partagés (manifest ajouté séparément selon la cible)
+# To add a new integration: add its file to SHARED_FILES (and update manifests).
 SHARED_FILES := background.js \
                 content-script.js \
                 content-script.css \
+                integrations/index.js \
+                integrations/chatgpt.js \
+                integrations/claude.js \
+                integrations/gemini.js \
                 icons/icon16.png \
                 icons/icon32.png \
                 icons/icon48.png \
