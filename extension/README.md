@@ -65,10 +65,3 @@ window.parent.postMessage({ type: 'FLOMPT_INJECT', prompt: '...' }, '*')
 
 The content script catches this message and injects the text into the detected input field.
 
-## Publishing
-
-To publish on the Chrome Web Store:
-1. Zip the `/extension` folder contents
-2. Upload to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
-3. Fill in store listing details
-4. Submit for review (takes 1–7 days)
