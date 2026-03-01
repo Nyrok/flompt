@@ -247,16 +247,35 @@ function renderMarkdownBlock(type: BlockType, content: string): string {
   return `## ${heading}\n\n${content.trim()}`
 }
 
-/** Assemblage Markdown — optimisé ChatGPT / Gemini */
-function assembleMarkdown(nodes: FlomptNode[], edges: FlomptEdge[]): CompiledPrompt {
-  const ordered     = sortNodes(nodes, edges)
+// ─── Internal raw builders (retournent string) ───────────────────────────────
+
+/** Construit le XML Claude à partir de nœuds déjà ordonnés */
+function buildXmlRaw(ordered: FlomptNode[]): string {
   const withContent = ordered.filter(n => n.data.content.trim())
   const parts: string[] = []
 
   const docNodes = withContent.filter(n => n.data.type === 'document')
-  if (docNodes.length > 0) {
-    parts.push(renderMarkdownDocuments(docNodes))
+  if (docNodes.length > 0) parts.push(renderDocuments(docNodes))
+
+  for (const node of withContent) {
+    if (node.data.type === 'document') continue
+    if (node.data.type === 'examples') {
+      parts.push(renderExamples(node.data.content))
+    } else {
+      parts.push(renderStandardBlock(node.data.type, node.data.content))
+    }
   }
+
+  return `<prompt>\n${parts.join('\n')}\n</prompt>`
+}
+
+/** Construit le Markdown ChatGPT/Gemini à partir de nœuds déjà ordonnés */
+function buildMarkdownRaw(ordered: FlomptNode[]): string {
+  const withContent = ordered.filter(n => n.data.content.trim())
+  const parts: string[] = []
+
+  const docNodes = withContent.filter(n => n.data.type === 'document')
+  if (docNodes.length > 0) parts.push(renderMarkdownDocuments(docNodes))
 
   for (const node of withContent) {
     if (node.data.type === 'document') continue
@@ -267,55 +286,35 @@ function assembleMarkdown(nodes: FlomptNode[], edges: FlomptEdge[]): CompiledPro
     }
   }
 
-  const raw           = parts.join('\n\n')
-  const tokenEstimate = Math.max(1, Math.ceil(raw.length / 4))
-  return { raw, tokenEstimate, blocks: ordered.map(n => n.data) }
+  return parts.join('\n\n')
 }
 
 // ─── Main assembler ───────────────────────────────────────────────────────────
 
 /**
- * Assemble blocks into an optimized prompt — 100% local, no AI call.
+ * Assemble blocks into all platform formats in a single pass — 100% local, no AI call.
  *
- * - format = 'claude'  → XML Claude-optimized (default)
- * - format = 'chatgpt' → Markdown with ## headings
- * - format = 'gemini'  → Markdown with ## headings
+ * Returns formats for all 3 platforms simultaneously:
+ * - claude  → XML Claude-optimized
+ * - chatgpt → Markdown with ## headings
+ * - gemini  → Markdown with ## headings (same renderer as chatgpt)
+ *
+ * The UI selector switches which format is displayed/copied/injected.
  */
-export function assemblePrompt(
-  nodes: FlomptNode[],
-  edges: FlomptEdge[],
-  format: OutputFormat = 'claude',
-): CompiledPrompt {
-  if (format === 'chatgpt' || format === 'gemini') {
-    return assembleMarkdown(nodes, edges)
+export function assemblePrompt(nodes: FlomptNode[], edges: FlomptEdge[]): CompiledPrompt {
+  const ordered = sortNodes(nodes, edges)
+
+  const claudeRaw   = buildXmlRaw(ordered)
+  const markdownRaw = buildMarkdownRaw(ordered)
+
+  const formats: Record<OutputFormat, string> = {
+    claude:  claudeRaw,
+    chatgpt: markdownRaw,
+    gemini:  markdownRaw,
   }
 
-  // ── Claude XML ──────────────────────────────────────────────────────────
-  const ordered     = sortNodes(nodes, edges)
-  const withContent = ordered.filter(n => n.data.content.trim())
-  const parts: string[] = []
+  // tokenEstimate basé sur le XML Claude (le plus long en général)
+  const tokenEstimate = Math.max(1, Math.ceil(claudeRaw.length / 4))
 
-  // ── Document blocks: grouped in <documents> ──────────────────────────────
-  const docNodes = withContent.filter(n => n.data.type === 'document')
-  if (docNodes.length > 0) {
-    parts.push(renderDocuments(docNodes))
-  }
-
-  // ── All other blocks ──────────────────────────────────────────────────────
-  for (const node of withContent) {
-    if (node.data.type === 'document') continue  // already rendered
-
-    if (node.data.type === 'examples') {
-      parts.push(renderExamples(node.data.content))
-    } else {
-      parts.push(renderStandardBlock(node.data.type, node.data.content))
-    }
-  }
-
-  const inner = parts.join('\n')
-  const raw   = `<prompt>\n${inner}\n</prompt>`
-
-  const tokenEstimate = Math.max(1, Math.ceil(raw.length / 4))
-
-  return { raw, tokenEstimate, blocks: ordered.map(n => n.data) }
+  return { formats, tokenEstimate, blocks: ordered.map(n => n.data) }
 }

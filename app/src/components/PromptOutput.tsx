@@ -36,17 +36,22 @@ const PromptOutput = () => {
     return () => window.removeEventListener('message', onMessage)
   }, [setOutputFormat])
 
+  // ── Texte affiché pour la plateforme sélectionnée ─────────────────────────
+  // Guard pour les anciens compiledPrompt persistés (format pré-migration sans .formats)
+  const currentRaw: string | null = compiledPrompt?.formats?.[outputFormat] ?? null
+
   const handleCompile = () => {
     if (nodes.length === 0) return
     analytics.compileClicked()
-    const result = assemblePrompt(nodes, edges, outputFormat)
+    // Génère les 3 formats en une seule passe
+    const result = assemblePrompt(nodes, edges)
     setCompiledPrompt(result)
     analytics.compileCompleted(result.tokenEstimate)
   }
 
   const handleCopy = () => {
-    if (!compiledPrompt) return
-    navigator.clipboard.writeText(compiledPrompt.raw).then(() => {
+    if (!currentRaw) return
+    navigator.clipboard.writeText(currentRaw).then(() => {
       setCopied(true)
       analytics.promptCopied()
       setTimeout(() => setCopied(false), 2000)
@@ -54,8 +59,8 @@ const PromptOutput = () => {
   }
 
   const handleExportTxt = () => {
-    if (!compiledPrompt) return
-    const blob = new Blob([compiledPrompt.raw], { type: 'text/plain' })
+    if (!currentRaw) return
+    const blob = new Blob([currentRaw], { type: 'text/plain' })
     const url  = URL.createObjectURL(blob)
     const a    = document.createElement('a')
     a.href = url; a.download = 'flompt-prompt.txt'; a.click()
@@ -73,14 +78,14 @@ const PromptOutput = () => {
     analytics.promptExported('json')
   }
 
-  /** Envoie le prompt compilé vers le content script de l'extension */
+  /** Envoie le prompt compilé (format courant) vers le content script de l'extension */
   const handleInjectToAI = useCallback(() => {
-    if (!compiledPrompt) return
-    window.parent.postMessage({ type: 'FLOMPT_INJECT', prompt: compiledPrompt.raw }, '*')
+    if (!currentRaw) return
+    window.parent.postMessage({ type: 'FLOMPT_INJECT', prompt: currentRaw }, '*')
     setInjected(true)
     analytics.promptCopied()
     setTimeout(() => setInjected(false), 2500)
-  }, [compiledPrompt])
+  }, [currentRaw])
 
   const handleShare = async () => {
     const shareData = {
@@ -108,7 +113,7 @@ const PromptOutput = () => {
         )}
       </div>
 
-      {/* Sélecteur de plateforme cible */}
+      {/* Sélecteur de plateforme cible — switche l'affichage sans recompiler */}
       <div className="format-selector" role="group" aria-label="Target AI platform">
         {FORMAT_OPTIONS.map(({ format, label, title }) => (
           <button
@@ -123,9 +128,9 @@ const PromptOutput = () => {
         ))}
       </div>
 
-      {compiledPrompt ? (
+      {currentRaw ? (
         <>
-          <pre className="compiled-output">{compiledPrompt.raw}</pre>
+          <pre className="compiled-output">{currentRaw}</pre>
           <div className="export-actions">
             {/* Send to AI — uniquement dans la sidebar extension */}
             {isExtension && (

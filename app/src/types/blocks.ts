@@ -130,7 +130,8 @@ export type OutputFormat = 'claude' | 'chatgpt' | 'gemini'
 // ─── Compiled Prompt ─────────────────────────────────────────────────────────
 
 export interface CompiledPrompt {
-  raw: string
+  /** Prompt assemblé pour chaque plateforme — généré en une seule passe */
+  formats: Record<OutputFormat, string>
   tokenEstimate: number
   blocks: BlockData[]
 }
