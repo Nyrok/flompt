@@ -23,6 +23,7 @@ export default function Footer({ locale }: { locale: Locale }) {
             rel="noopener noreferrer"
             className="underline underline-offset-2 transition-colors"
             style={{ color: "var(--text-muted)" }}
+            aria-label="Next.js (opens in new tab)"
           >
             Next.js
           </a>{" "}
@@ -33,6 +34,7 @@ export default function Footer({ locale }: { locale: Locale }) {
             rel="noopener noreferrer"
             className="underline underline-offset-2 transition-colors"
             style={{ color: "var(--text-muted)" }}
+            aria-label="Tailwind CSS (opens in new tab)"
           >
             Tailwind CSS
           </a>

@@ -22,7 +22,7 @@
   /* Text */
   --text-primary: #f0f0f0;
   --text-muted: #9a9a9a;
-  --text-dim: #5a5a5a;
+  --text-dim: #7a7a7a; /* Upgraded from #5a5a5a for WCAG AA contrast */
 
   /* Borders */
   --border-subtle: rgba(255, 255, 255, 0.08);
@@ -40,6 +40,47 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-primary);
+}
+
+/* ── Accessibility ─────────────────────────────────────────────────────────── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: var(--radius-standard);
+  text-decoration: none;
+  transition: top 0.1s ease;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* Focus visible ring — keyboard nav only */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Custom scrollbar */

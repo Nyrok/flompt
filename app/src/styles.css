@@ -22,7 +22,7 @@
   /* Text */
   --text:       #f0f0f0;
   --text-muted: #9a9a9a;
-  --text-dim:   #5a5a5a;
+  --text-dim:   #7a7a7a; /* Upgraded from #5a5a5a for WCAG AA contrast on dark bg */
 
   /* Accent — Mermaid pink */
   --accent:       #FF3570;
@@ -53,6 +53,50 @@ body {
   color: var(--text);
   height: 100vh;
   overflow: hidden;
+}
+
+/* ── Accessibility ────────────────────────────────────────────────────────── */
+
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: top 0.1s ease;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* Global focus-visible ring — keyboard nav only */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* Remove default focus for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Scrollbar */
@@ -1310,6 +1354,10 @@ body {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
+  .tab-list-inner {
+    display: contents; /* Inherit flex layout from parent */
+  }
+
   .tab-btn {
     flex: 1;
     display: flex;
@@ -1423,9 +1471,6 @@ body {
   inset: 0;
   z-index: 999;
   background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   animation: fade-in 0.15s ease;
 }
 
@@ -1438,6 +1483,15 @@ body {
   max-width: 90vw;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
   animation: scale-in 0.15s ease;
+}
+
+/* Standalone dialog — positioned independently from backdrop */
+.shortcuts-modal--standalone {
+  position: fixed;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @keyframes scale-in {

@@ -22,8 +22,12 @@ export default async function LocaleLayout({
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Skip to main content — keyboard accessibility */}
+      <a href="#main-content" className="skip-link">
+        {locale === "fr" ? "Aller au contenu principal" : "Skip to main content"}
+      </a>
       <Header locale={locale as Locale} />
-      <main className="flex-1">{children}</main>
+      <main id="main-content" className="flex-1">{children}</main>
       <Footer locale={locale as Locale} />
     </div>
   );

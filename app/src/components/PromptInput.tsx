@@ -145,35 +145,47 @@ const PromptInput = () => {
       )}
 
       <div className="textarea-wrap">
+        <label htmlFor="raw-prompt-textarea" className="sr-only">
+          {t.promptInput.title}
+        </label>
         <textarea
+          id="raw-prompt-textarea"
           ref={textareaRef}
           className="prompt-textarea"
           value={rawPrompt}
           onChange={(e) => setRawPrompt(e.target.value)}
           placeholder={t.promptInput.placeholder}
           rows={5}
+          aria-describedby={error ? 'prompt-error-msg' : undefined}
         />
         {!rawPrompt && (
           <button
             className="btn-paste"
             onClick={handlePaste}
             title={t.promptInput.paste}
+            aria-label={t.promptInput.paste}
             type="button"
           >
-            <ClipboardPaste size={14} />
+            <ClipboardPaste size={14} aria-hidden="true" />
           </button>
         )}
       </div>
 
-      {error && <p className="error-msg">{error}</p>}
+      {error && (
+        <p id="prompt-error-msg" className="error-msg" role="alert" aria-live="assertive">
+          {error}
+        </p>
+      )}
 
       <button
         className="btn btn-primary"
         onClick={handleDecompose}
         disabled={isDecomposing || !rawPrompt.trim()}
         data-tour="decompose-btn"
+        aria-busy={isDecomposing}
       >
-        <Zap size={14} /> {t.promptInput.decompose}
+        <Zap size={14} aria-hidden="true" />
+        {isDecomposing ? t.promptInput.decomposing : t.promptInput.decompose}
       </button>
     </div>
   )

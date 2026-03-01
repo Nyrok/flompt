@@ -193,38 +193,54 @@ const GuidedTour = () => {
   const ttLeft = Math.max(8, Math.min(window.innerWidth - TW - 8, raw.left))
   const isLast = step === steps.length - 1
 
+  const titleId = 'tour-dialog-title'
+
   return (
     <>
-      <div className="tour-backdrop" />
-
+      {/* Backdrop + spotlight — purely visual, hidden from AT */}
+      <div className="tour-backdrop" aria-hidden="true" />
       <div
         className="tour-spotlight"
+        aria-hidden="true"
         style={{ top: rect.top - 6, left: rect.left - 6, width: rect.width + 12, height: rect.height + 12 }}
       />
 
-      <div className="tour-tooltip" style={{ top: ttTop, left: ttLeft }}>
+      <div
+        className="tour-tooltip"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        style={{ top: ttTop, left: ttLeft }}
+      >
 
-        <div className="tour-progress" role="progressbar" aria-valuenow={step + 1} aria-valuemax={steps.length}>
+        <div
+          className="tour-progress"
+          role="progressbar"
+          aria-valuenow={step + 1}
+          aria-valuemin={1}
+          aria-valuemax={steps.length}
+          aria-label={t.tour.stepOf.replace('{n}', String(step + 1)).replace('{total}', String(steps.length))}
+        >
           {steps.map((_, i) => (
-            <div key={i} className={`tour-dot${i === step ? ' active' : i < step ? ' done' : ''}`} />
+            <div key={i} className={`tour-dot${i === step ? ' active' : i < step ? ' done' : ''}`} aria-hidden="true" />
           ))}
         </div>
 
-        <p className="tour-step-num">
+        <p className="tour-step-num" aria-hidden="true">
           {t.tour.stepOf.replace('{n}', String(step + 1)).replace('{total}', String(steps.length))}
         </p>
 
-        <h3 className="tour-title">{cur.title}</h3>
+        <h3 id={titleId} className="tour-title">{cur.title}</h3>
         <p className="tour-desc">{cur.desc}</p>
 
         <div className="tour-actions">
           <button className="tour-skip" onClick={() => dismiss()}>{t.tour.skip}</button>
-          <button className="tour-next" onClick={handleNext} disabled={acting}>
+          <button className="tour-next" onClick={handleNext} disabled={acting} aria-busy={acting}>
             {acting
-              ? <><Loader size={13} className="icon-spin" />{t.tour.acting}</>
+              ? <><Loader size={13} className="icon-spin" aria-hidden="true" />{t.tour.acting}</>
               : isLast
-                ? <>{cur.nextLabel}<Check size={12} /></>
-                : <>{cur.nextLabel}<ChevronRight size={13} /></>
+                ? <>{cur.nextLabel}<Check size={12} aria-hidden="true" /></>
+                : <>{cur.nextLabel}<ChevronRight size={13} aria-hidden="true" /></>
             }
           </button>
         </div>

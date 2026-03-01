@@ -58,7 +58,7 @@
       --border-m:      rgba(255,255,255,0.11);
       --text:          #ececec;
       --text-muted:    #838383;
-      --text-dim:      #444;
+      --text-dim:      #707070; /* Upgraded from #444 for WCAG AA contrast */
       --accent:        #ff3570;
       --accent-h:      #ff6090;
       --accent-glow:   rgba(255,53,112,0.28);
@@ -74,6 +74,21 @@
     }
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    /* Accessibility */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: absolute; top: -100px; left: 16px; z-index: 9999;
+      padding: 8px 16px; background: var(--accent); color: #fff;
+      font-weight: 600; font-size: 0.85rem; border-radius: 8px;
+      text-decoration: none; transition: top 0.1s ease;
+    }
+    .skip-link:focus { top: 16px; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
 
     /* ── NAV ───────────────────────────────────────────── */
     nav {
@@ -422,30 +437,35 @@
 </head>
 <body>
 
+  <!-- Skip to main content (keyboard accessibility) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ── NAV ─────────────────────────────────────────── -->
-  <nav>
+  <nav aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="/" class="nav-brand"><span>flompt</span></a>
-      <div class="nav-links">
-        <a href="#extension">Extension</a>
-        <a href="/docs">Docs</a>
-        <a href="/blog/en">Blog</a>
-        <a href="https://github.com/Nyrok/flompt" target="_blank" rel="noopener">GitHub</a>
-        <a href="/app" class="btn-cta">Open App</a>
+      <a href="/" class="nav-brand" aria-label="flompt — home"><span aria-hidden="true">flompt</span></a>
+      <div class="nav-links" role="list">
+        <a href="#extension" role="listitem">Extension</a>
+        <a href="/docs" role="listitem">Docs</a>
+        <a href="/blog/en" role="listitem">Blog</a>
+        <a href="https://github.com/Nyrok/flompt" target="_blank" rel="noopener" role="listitem" aria-label="GitHub (opens in new tab)">GitHub</a>
+        <a href="/app" class="btn-cta" role="listitem">Open App</a>
       </div>
-      <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>
     </div>
   </nav>
 
-  <div class="nav-mobile-menu" id="mobile-menu">
+  <nav class="nav-mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
     <a href="#extension">Extension</a>
     <a href="/docs">Docs</a>
     <a href="/blog/en">Blog</a>
-    <a href="https://github.com/Nyrok/flompt" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://github.com/Nyrok/flompt" target="_blank" rel="noopener" aria-label="GitHub (opens in new tab)">GitHub</a>
     <a href="/app" class="btn-cta">Open App &rarr;</a>
-  </div>
+  </nav>
+
+  <main id="main-content">
 
   <!-- ── HERO ─────────────────────────────────────────── -->
   <section class="hero">
@@ -454,7 +474,7 @@
 
         <div class="hero-text">
           <div class="hero-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"/></svg>
             Free &amp; open source
           </div>
           <h1>Your AI is only as good<br/>as your <em>prompt.</em></h1>
@@ -463,8 +483,8 @@
           </p>
           <div class="hero-actions">
             <a href="/app" class="btn-cta">Start building &rarr;</a>
-            <a href="https://github.com/Nyrok/flompt" target="_blank" rel="noopener" class="btn-ghost">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            <a href="https://github.com/Nyrok/flompt" target="_blank" rel="noopener" class="btn-ghost" aria-label="View flompt on GitHub (opens in new tab)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
               GitHub
             </a>
           </div>
@@ -1058,6 +1078,8 @@ statistics. Write in English.</pre>
     </div>
   </section>
 
+  </main><!-- /#main-content -->
+
   <!-- ── FOOTER ─────────────────────────────────────── -->
   <footer>
     <div class="container">
@@ -1082,13 +1104,25 @@ statistics. Write in English.</pre>
     btn.addEventListener('click', () => {
       const open = menu.classList.toggle('open');
       btn.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', open);
+      btn.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-hidden', String(!open));
     });
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       menu.classList.remove('open');
       btn.classList.remove('open');
-      btn.setAttribute('aria-expanded', false);
+      btn.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
     }));
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && menu.classList.contains('open')) {
+        menu.classList.remove('open');
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+        btn.focus();
+      }
+    });
   </script>
 
   <!-- PostHog — CTA click tracking -->

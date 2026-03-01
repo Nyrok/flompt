@@ -96,25 +96,42 @@ const PromptOutput = () => {
                 className={`btn btn-primary export-inject${injected ? ' injected' : ''}`}
                 onClick={handleInjectToAI}
                 title="Inject this prompt into the AI chat input"
+                aria-label={injected ? 'Prompt injected!' : 'Send prompt to AI chat input'}
+                aria-live="polite"
               >
                 {injected
-                  ? <><ClipboardCheck size={13} /> Injected!</>
-                  : <><Send size={13} /> Send to AI</>
+                  ? <><ClipboardCheck size={13} aria-hidden="true" /> Injected!</>
+                  : <><Send size={13} aria-hidden="true" /> Send to AI</>
                 }
               </button>
             )}
-            <button className="btn btn-secondary export-copy" onClick={handleCopy}>
+            <button
+              className="btn btn-secondary export-copy"
+              onClick={handleCopy}
+              aria-live="polite"
+              aria-atomic="true"
+            >
               {copied
-                ? <><ClipboardCheck size={13} /> {t.promptOutput.copied}</>
-                : <><Clipboard size={13} /> {t.promptOutput.copy}</>
+                ? <><ClipboardCheck size={13} aria-hidden="true" /> {t.promptOutput.copied}</>
+                : <><Clipboard size={13} aria-hidden="true" /> {t.promptOutput.copy}</>
               }
             </button>
             <div className="export-row2">
-              <button className="btn btn-secondary export-btn" onClick={handleExportTxt} title="Export .txt">
-                <FileText size={13} /> {t.promptOutput.exportTxt}
+              <button
+                className="btn btn-secondary export-btn"
+                onClick={handleExportTxt}
+                title={`${t.promptOutput.exportTxt} — Export as text file`}
+                aria-label={`Export as .txt file`}
+              >
+                <FileText size={13} aria-hidden="true" /> {t.promptOutput.exportTxt}
               </button>
-              <button className="btn btn-secondary export-btn" onClick={handleExportJSON} title="Export .json">
-                <Braces size={13} /> {t.promptOutput.exportJson}
+              <button
+                className="btn btn-secondary export-btn"
+                onClick={handleExportJSON}
+                title={`${t.promptOutput.exportJson} — Export as JSON file`}
+                aria-label={`Export as .json file`}
+              >
+                <Braces size={13} aria-hidden="true" /> {t.promptOutput.exportJson}
               </button>
             </div>
           </div>
@@ -133,12 +150,13 @@ const PromptOutput = () => {
         onClick={handleCompile}
         disabled={nodes.length === 0}
         data-tour="compile-btn"
+        aria-disabled={nodes.length === 0}
       >
-        <Play size={14} /> {t.promptOutput.compile}
+        <Play size={14} aria-hidden="true" /> {t.promptOutput.compile}
       </button>
 
-      <button className="btn btn-secondary btn-share" onClick={handleShare}>
-        <Share2 size={13} /> {t.promptOutput.share}
+      <button className="btn btn-secondary btn-share" onClick={handleShare} aria-label={t.promptOutput.share}>
+        <Share2 size={13} aria-hidden="true" /> {t.promptOutput.share}
       </button>
     </div>
   )

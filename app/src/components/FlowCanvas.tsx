@@ -107,8 +107,17 @@ const CanvasInner = () => {
 
       {/* Loading overlay — canvas uniquement */}
       {isDecomposing && (
-        <div className="loading-overlay">
-          <div className="compile-loading-icon">
+        <div
+          className="loading-overlay"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          aria-label={queueStatus?.status === 'analyzing'
+            ? t.promptInput.queueAnalyzing
+            : t.promptInput.decomposing
+          }
+        >
+          <div className="compile-loading-icon" aria-hidden="true">
             {queueStatus?.status === 'analyzing'
               ? <ShieldCheck size={32} className="compile-sparkle" />
               : <Sparkles size={32} className="compile-sparkle" />
@@ -120,14 +129,14 @@ const CanvasInner = () => {
               : t.promptInput.decomposing
             }
           </p>
-          <div className="compile-loading-dots">
+          <div className="compile-loading-dots" aria-hidden="true">
             <span className="compile-dot" style={{ animationDelay: '0s' }} />
             <span className="compile-dot" style={{ animationDelay: '0.2s' }} />
             <span className="compile-dot" style={{ animationDelay: '0.4s' }} />
           </div>
           {queueStatus && queueStatus.status !== 'analyzing' && (
             <div className={`queue-status${queueStatus.status === 'processing' ? ' queue-status--processing' : ''}`}>
-              <span className="queue-status__dot" />
+              <span className="queue-status__dot" aria-hidden="true" />
               {queueStatus.status === 'processing'
                 ? t.promptInput.queueProcessing
                 : t.promptInput.queuePosition(queueStatus.position)
@@ -149,8 +158,9 @@ const CanvasInner = () => {
             switchTab('output')
           }}
           title={t.promptOutput.compile}
+          aria-label={t.promptOutput.compile}
         >
-          <Play size={22} />
+          <Play size={22} aria-hidden="true" />
         </button>
       )}
     </div>

@@ -95,7 +95,9 @@ const CustomEdge = ({
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
-            <button onClick={handleDelete} title="Delete connection">✕</button>
+            <button onClick={handleDelete} title="Delete connection" aria-label="Delete connection">
+              <span aria-hidden="true">✕</span>
+            </button>
           </div>
         </EdgeLabelRenderer>
       )}

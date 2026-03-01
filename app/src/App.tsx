@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Undo2, Redo2, Workflow, PenLine, Network, Sparkles, Trash2, Github } from 'lucide-react'
 import { initAnalytics, setSource, analytics } from '@/lib/analytics'
 import FlowCanvas from '@/components/FlowCanvas'
@@ -23,12 +23,18 @@ const TAB_IDS: { id: Tab; Icon: typeof Workflow }[] = [
 const App = () => {
   const { undo, redo, reset, past, future, nodes, activeTab, setActiveTab, isDecomposing } = useFlowStore()
   const { t, locale, setLocale } = useLocale()
+  const mainRef = useRef<HTMLElement>(null)
 
   // Init PostHog after first render — non-blocking
   useEffect(() => {
     initAnalytics()
     setSource(isExtension ? 'extension' : 'web')
   }, [])
+
+  // Sync html[lang] with locale
+  useEffect(() => {
+    document.documentElement.lang = locale
+  }, [locale])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -49,6 +55,11 @@ const App = () => {
 
   return (
     <div className="app">
+      {/* Skip to main content — keyboard accessibility */}
+      <a href="#main-content" className="skip-link">
+        {locale === 'fr' ? 'Aller au contenu principal' : 'Skip to main content'}
+      </a>
+
       {!isExtension && (
         <header className="header">
           <a href="/" className="header-brand" style={{ textDecoration: 'none' }}>
@@ -59,21 +70,36 @@ const App = () => {
 
           {/* Node count */}
           {nodes.length > 0 && (
-            <span className="node-count hide-mobile">{t.nodeCount(nodes.length)}</span>
+            <span className="node-count hide-mobile" aria-live="polite" aria-atomic="true">
+              {t.nodeCount(nodes.length)}
+            </span>
           )}
 
           <div className="header-actions">
-            <button className="btn-icon" onClick={undo} disabled={past.length === 0} title={t.header.undo}>
-              <Undo2 size={14} />
+            <button
+              className="btn-icon"
+              onClick={undo}
+              disabled={past.length === 0}
+              title={t.header.undo}
+              aria-label={t.header.undo}
+            >
+              <Undo2 size={14} aria-hidden="true" />
             </button>
-            <button className="btn-icon" onClick={redo} disabled={future.length === 0} title={t.header.redo}>
-              <Redo2 size={14} />
+            <button
+              className="btn-icon"
+              onClick={redo}
+              disabled={future.length === 0}
+              title={t.header.redo}
+              aria-label={t.header.redo}
+            >
+              <Redo2 size={14} aria-hidden="true" />
             </button>
             <KeyboardShortcuts />
             <button
               className="btn-locale"
               onClick={toggleLocale}
               title={locale === 'en' ? 'Passer en français' : 'Switch to English'}
+              aria-label={locale === 'en' ? 'Passer en français' : 'Switch to English'}
             >
               {locale.toUpperCase()}
             </button>
@@ -83,32 +109,49 @@ const App = () => {
               target="_blank"
               rel="noopener noreferrer"
               title="Star on GitHub"
+              aria-label="Star flompt on GitHub (opens in new tab)"
             >
-              <Github size={14} />
+              <Github size={14} aria-hidden="true" />
             </a>
             <button
               className="btn-icon btn-clear-desktop"
               onClick={() => { if (confirm(t.header.resetConfirm)) reset() }}
               title={t.header.reset}
+              aria-label={t.header.reset}
             >
-              <Trash2 size={14} />
+              <Trash2 size={14} aria-hidden="true" />
             </button>
           </div>
         </header>
       )}
 
-      <main className={`main${isDecomposing ? ' is-decomposing' : ''}`}>
-        <aside className={`left-panel${activeTab !== 'input' ? ' panel-hidden' : ''}`}>
+      <main
+        id="main-content"
+        ref={mainRef}
+        className={`main${isDecomposing ? ' is-decomposing' : ''}`}
+      >
+        <aside
+          className={`left-panel${activeTab !== 'input' ? ' panel-hidden' : ''}`}
+          aria-label={locale === 'fr' ? 'Panneau de saisie' : 'Input panel'}
+          aria-hidden={activeTab !== 'input'}
+        >
           <PromptInput />
-          <div className="panel-divider" />
+          <div className="panel-divider" role="separator" />
           <Sidebar />
         </aside>
 
-        <div className={`canvas-wrap${activeTab !== 'canvas' ? ' panel-hidden' : ''}`}>
+        <div
+          className={`canvas-wrap${activeTab !== 'canvas' ? ' panel-hidden' : ''}`}
+          aria-hidden={activeTab !== 'canvas'}
+        >
           <FlowCanvas />
         </div>
 
-        <aside className={`right-panel${activeTab !== 'output' ? ' panel-hidden' : ''}`}>
+        <aside
+          className={`right-panel${activeTab !== 'output' ? ' panel-hidden' : ''}`}
+          aria-label={locale === 'fr' ? 'Panneau de résultat' : 'Output panel'}
+          aria-hidden={activeTab !== 'output'}
+        >
           <PromptOutput />
         </aside>
       </main>
@@ -116,17 +159,22 @@ const App = () => {
       {/* Guided tour — desktop only, first visit only */}
       <GuidedTour />
 
-      <nav className="tab-bar">
-        {TAB_IDS.map(({ id, Icon }) => (
-          <button
-            key={id}
-            className={`tab-btn${activeTab === id ? ' tab-btn--active' : ''}`}
-            onClick={() => setActiveTab(id)}
-          >
-            <Icon size={18} className="tab-icon" />
-            <span className="tab-label">{t.tabs[id]}</span>
-          </button>
-        ))}
+      <nav className="tab-bar" aria-label={locale === 'fr' ? 'Onglets principaux' : 'Main tabs'}>
+        <div role="tablist" className="tab-list-inner">
+          {TAB_IDS.map(({ id, Icon }) => (
+            <button
+              key={id}
+              role="tab"
+              aria-selected={activeTab === id}
+              aria-controls={id === 'canvas' ? 'canvas-panel' : undefined}
+              className={`tab-btn${activeTab === id ? ' tab-btn--active' : ''}`}
+              onClick={() => setActiveTab(id)}
+            >
+              <Icon size={18} className="tab-icon" aria-hidden="true" />
+              <span className="tab-label">{t.tabs[id]}</span>
+            </button>
+          ))}
+        </div>
       </nav>
     </div>
   )

@@ -104,6 +104,7 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             onMouseDown={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
             onClick={(e) => e.stopPropagation()}
+            aria-label={tr.label}
           >
             <option value="" disabled>—</option>
             {LANGUAGES.map((l) => (
@@ -112,8 +113,13 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
               </option>
             ))}
           </select>
-          <button className="block-remove" onClick={(e) => { e.stopPropagation(); removeNode(id) }} title={t.block.delete}>
-            <X size={11} />
+          <button
+            className="block-remove"
+            onClick={(e) => { e.stopPropagation(); removeNode(id) }}
+            title={t.block.delete}
+            aria-label={t.block.delete}
+          >
+            <X size={11} aria-hidden="true" />
           </button>
         </div>
         <Handle type="source" position={Position.Bottom} />
@@ -130,9 +136,18 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
     >
       <Handle type="target" position={Position.Top} />
 
-      <div className="block-header" onClick={() => setCollapsed((c) => !c)} style={{ cursor: 'pointer' }}>
+      <div
+        className="block-header"
+        onClick={() => setCollapsed((c) => !c)}
+        style={{ cursor: 'pointer' }}
+        role="button"
+        tabIndex={0}
+        aria-expanded={!collapsed}
+        aria-label={`${displayLabel} — ${collapsed ? t.block.expand : t.block.collapse}`}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setCollapsed((c) => !c) } }}
+      >
         <div className="block-header-left">
-          <span className="block-icon">
+          <span className="block-icon" aria-hidden="true">
             <Icon size={13} />
           </span>
           {data.summary ? (
@@ -145,31 +160,51 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
           )}
         </div>
         <div className="block-actions">
-          <button className="block-collapse" onClick={(e) => { e.stopPropagation(); handleDuplicate() }} title={t.block.duplicate}>
-            <Copy size={11} />
+          <button
+            className="block-collapse"
+            onClick={(e) => { e.stopPropagation(); handleDuplicate() }}
+            title={t.block.duplicate}
+            aria-label={`${t.block.duplicate} ${displayLabel}`}
+          >
+            <Copy size={11} aria-hidden="true" />
           </button>
           <button
             className="block-collapse"
             onClick={(e) => { e.stopPropagation(); setCollapsed((c) => !c) }}
             title={collapsed ? t.block.expand : t.block.collapse}
+            aria-label={collapsed ? t.block.expand : t.block.collapse}
+            aria-expanded={!collapsed}
           >
-            {collapsed ? <ChevronRight size={12} /> : <ChevronDown size={12} />}
+            {collapsed
+              ? <ChevronRight size={12} aria-hidden="true" />
+              : <ChevronDown size={12} aria-hidden="true" />
+            }
           </button>
-          <button className="block-remove" onClick={(e) => { e.stopPropagation(); removeNode(id) }} title={t.block.delete}>
-            <X size={11} />
+          <button
+            className="block-remove"
+            onClick={(e) => { e.stopPropagation(); removeNode(id) }}
+            title={t.block.delete}
+            aria-label={`${t.block.delete} ${displayLabel}`}
+          >
+            <X size={11} aria-hidden="true" />
           </button>
         </div>
       </div>
 
       {!collapsed && (
         <div className="block-body">
+          <label htmlFor={`block-content-${id}`} className="sr-only">
+            {displayLabel}
+          </label>
           <textarea
+            id={`block-content-${id}`}
             ref={textareaRef}
             className="block-content"
             value={data.content}
             placeholder={tr.description}
             onChange={(e) => updateNodeContent(id, e.target.value)}
             style={{ minHeight: '64px', height: 'auto' }}
+            aria-label={displayLabel}
           />
           <div className="block-footer">
             <span className="block-char-count">{(data.content ?? '').length} {t.block.chars}</span>
