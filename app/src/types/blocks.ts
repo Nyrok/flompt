@@ -149,7 +149,7 @@ export const DEFAULT_RESPONSE_STYLE: ResponseStyleOptions = {
   prose:        'mixed',
   markdown:     'standard',
   math:         'auto',
-  skipPreamble: false,
+  skipPreamble: true,   // activé par défaut — quasi-universellement souhaité
 }
 
 /**

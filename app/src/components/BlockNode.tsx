@@ -207,8 +207,16 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
       >
         <Handle type="target" position={Position.Top} />
 
-        {/* Header */}
-        <div className="rsp-header">
+        {/* Header — cliquable pour collapse */}
+        <div
+          className="rsp-header"
+          onClick={() => setCollapsed(c => !c)}
+          style={{ cursor: 'pointer' }}
+          role="button"
+          tabIndex={0}
+          aria-expanded={!collapsed}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setCollapsed(c => !c) } }}
+        >
           <span className="block-icon" aria-hidden="true"><Icon size={13} /></span>
           <span className="block-label">{tr?.label ?? 'Response Style'}</span>
           <div className="block-actions">
@@ -221,6 +229,17 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
               <Copy size={11} aria-hidden="true" />
             </button>
             <button
+              className="block-collapse"
+              onClick={(e) => { e.stopPropagation(); setCollapsed(c => !c) }}
+              title={collapsed ? t.block.expand : t.block.collapse}
+              aria-label={collapsed ? t.block.expand : t.block.collapse}
+            >
+              {collapsed
+                ? <ChevronRight size={12} aria-hidden="true" />
+                : <ChevronDown size={12} aria-hidden="true" />
+              }
+            </button>
+            <button
               className="block-remove"
               onClick={(e) => { e.stopPropagation(); removeNode(id) }}
               title={t.block.delete}
@@ -231,8 +250,8 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
           </div>
         </div>
 
-        {/* Pill groups */}
-        <div className="rsp-body nodrag nopan">
+        {/* Pill groups — masqués si collapsed */}
+        {!collapsed && <div className="rsp-body nodrag nopan">
           {PILL_GROUPS.map(({ key, label, options }) => (
             <div key={key} className="rsp-row">
               <span className="rsp-row-label">{label}</span>
@@ -264,7 +283,7 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
               {rsTr.skipPreamble ?? 'Skip preamble ("Here is…")'}
             </span>
           </label>
-        </div>
+        </div>}
 
         <Handle type="source" position={Position.Bottom} />
       </div>

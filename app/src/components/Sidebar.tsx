@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { BLOCK_META } from '@/types/blocks'
+import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
@@ -39,11 +39,20 @@ const Sidebar = () => {
   const createNode = (type: BlockType, position?: { x: number; y: number }): FlomptNode => {
     const tr  = t.blocks[type]
     const idx = nodes.length
+
+    // response_style : initialiser options + content dès la création
+    const extraData = type === 'response_style'
+      ? {
+          options: { ...DEFAULT_RESPONSE_STYLE } as Record<string, string | boolean>,
+          content: generateResponseStyleContent(DEFAULT_RESPONSE_STYLE),
+        }
+      : { content: '' }
+
     return {
       id:       `${type}-${Date.now()}`,
       type:     'block',
       position: position ?? { x: 60, y: 60 + idx * ROW_HEIGHT },
-      data:     { type, label: tr.label, content: '', description: tr.description },
+      data:     { type, label: tr.label, description: tr.description, ...extraData },
     }
   }
 

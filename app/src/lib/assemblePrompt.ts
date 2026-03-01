@@ -1,4 +1,5 @@
-import type { FlomptNode, FlomptEdge, CompiledPrompt, BlockType, OutputFormat } from '@/types/blocks'
+import type { FlomptNode, FlomptEdge, CompiledPrompt, BlockType, OutputFormat, ResponseStyleOptions } from '@/types/blocks'
+import { generateResponseStyleContent } from '@/types/blocks'
 
 // ─── Claude-optimized block ordering ────────────────────────────────────────
 // Anthropic best practices: documents first (grounding), then persona → task →
@@ -250,11 +251,28 @@ function renderMarkdownBlock(type: BlockType, content: string): string {
   return `## ${heading}\n\n${content.trim()}`
 }
 
+// ─── Résolution du contenu d'un nœud ─────────────────────────────────────────
+
+/**
+ * Pour les blocs `response_style`, génère le contenu depuis `data.options` à la
+ * compilation (source de vérité), pas depuis `data.content` (qui peut être vide
+ * si le bloc vient d'être créé ou si toutes les options sont à leur valeur par défaut).
+ */
+function resolveContent(node: FlomptNode): string {
+  if (node.data.type === 'response_style' && node.data.options) {
+    return generateResponseStyleContent(node.data.options as unknown as ResponseStyleOptions)
+  }
+  return node.data.content
+}
+
 // ─── Internal raw builders (retournent string) ───────────────────────────────
 
 /** Construit le XML Claude à partir de nœuds déjà ordonnés */
 function buildXmlRaw(ordered: FlomptNode[]): string {
-  const withContent = ordered.filter(n => n.data.content.trim())
+  // response_style : inclus si options définies (même si content vide)
+  const withContent = ordered.filter(n =>
+    n.data.type === 'response_style' ? !!n.data.options : n.data.content.trim()
+  )
   const parts: string[] = []
 
   const docNodes = withContent.filter(n => n.data.type === 'document')
@@ -262,10 +280,12 @@ function buildXmlRaw(ordered: FlomptNode[]): string {
 
   for (const node of withContent) {
     if (node.data.type === 'document') continue
+    const content = resolveContent(node)
+    if (!content.trim()) continue   // options toutes à défaut → rien à émettre
     if (node.data.type === 'examples') {
-      parts.push(renderExamples(node.data.content))
+      parts.push(renderExamples(content))
     } else {
-      parts.push(renderStandardBlock(node.data.type, node.data.content))
+      parts.push(renderStandardBlock(node.data.type, content))
     }
   }
 
@@ -274,7 +294,9 @@ function buildXmlRaw(ordered: FlomptNode[]): string {
 
 /** Construit le Markdown ChatGPT/Gemini à partir de nœuds déjà ordonnés */
 function buildMarkdownRaw(ordered: FlomptNode[]): string {
-  const withContent = ordered.filter(n => n.data.content.trim())
+  const withContent = ordered.filter(n =>
+    n.data.type === 'response_style' ? !!n.data.options : n.data.content.trim()
+  )
   const parts: string[] = []
 
   const docNodes = withContent.filter(n => n.data.type === 'document')
@@ -282,10 +304,12 @@ function buildMarkdownRaw(ordered: FlomptNode[]): string {
 
   for (const node of withContent) {
     if (node.data.type === 'document') continue
+    const content = resolveContent(node)
+    if (!content.trim()) continue
     if (node.data.type === 'examples') {
-      parts.push(renderMarkdownExamples(node.data.content))
+      parts.push(renderMarkdownExamples(content))
     } else {
-      parts.push(renderMarkdownBlock(node.data.type, node.data.content))
+      parts.push(renderMarkdownBlock(node.data.type, content))
     }
   }
 
