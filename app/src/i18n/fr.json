@@ -47,7 +47,7 @@
     "exportTxtLabel": "Exporter en fichier .txt",
     "exportJsonLabel": "Exporter en fichier .json",
     "share": "Partager flompt",
-    "shareTitle": "flompt — Visual AI Prompt Builder",
+    "shareTitle": "flompt : Visual AI Prompt Builder",
     "shareText": "Découvre flompt ! Transforme n'importe quel prompt IA en flow visuel. Gratuit & open-source.",
     "sendToAI": "Envoyer à l'IA",
     "injected": "Envoyé !",
@@ -57,7 +57,7 @@
 
   "errors": {
     "overloaded": "L'IA est surchargée. Patientez un instant et réessayez.",
-    "timeout": "Délai dépassé. L'IA a mis trop de temps — réessayez.",
+    "timeout": "Délai dépassé. L'IA a mis trop de temps. Réessayez.",
     "network": "Connexion perdue. Vérifiez votre internet et réessayez.",
     "server": "Erreur serveur. Réessayez dans quelques secondes.",
     "blocked": "Ton prompt a été bloqué par notre filtre de sécurité. Reformule-le.",
@@ -102,7 +102,7 @@
 
   "tour": {
     "step1title": "Ton prompt brut",
-    "step1desc": "Tape ou colle n'importe quel texte ici — vague ou détaillé, peu importe. flompt se charge de le structurer.",
+    "step1desc": "Tape ou colle n'importe quel texte ici. Vague ou détaillé, peu importe. flompt se charge de le structurer.",
     "stepBlocksTitle": "Les blocs disponibles",
     "stepBlocksDesc": "Chaque type de bloc cible un aspect de ton prompt : Rôle, Objectif, Contraintes, Format de sortie… Clique pour en ajouter un, ou glisse-le sur le canvas.",
     "step2title": "Décomposer en blocs",
@@ -111,7 +111,7 @@
     "step3title": "Tes blocs sur le canvas",
     "step3desc": "Chaque bloc représente un aspect de ton prompt. Édite le contenu, réorganise par glisser-déposer, ajoute des blocs depuis la sidebar.",
     "step4title": "Compiler",
-    "step4desc": "Clique sur Compiler pour générer ton prompt final — structuré, optimisé, prêt à coller dans n'importe quel LLM.",
+    "step4desc": "Clique sur Compiler pour générer ton prompt final : structuré, optimisé, prêt à coller dans n'importe quel LLM.",
     "stepOf": "{n} / {total}",
     "next": "Suivant",
     "finish": "Compris",
@@ -121,12 +121,12 @@
   },
 
   "extension": {
-    "bannerText": "flompt est maintenant une extension Chrome — utilisez-le dans ChatGPT, Claude & Gemini.",
-    "bannerCta": "Installer gratuitement →",
+    "bannerText": "flompt est maintenant une extension Chrome. Utilisez-le dans ChatGPT, Claude & Gemini.",
+    "bannerCta": "Installer →",
     "bannerClose": "Fermer l'annonce de l'extension",
     "popupTitle": "flompt est sur Chrome !",
-    "popupDesc": "Utilisez flompt directement dans ChatGPT, Claude & Gemini — sans changer d'onglet. Gratuit.",
-    "popupCta": "Installer l'extension — gratuit",
+    "popupDesc": "Utilisez flompt directement dans ChatGPT, Claude & Gemini. Sans changer d'onglet.",
+    "popupCta": "Installer l'extension",
     "popupSkip": "Plus tard"
   },
 

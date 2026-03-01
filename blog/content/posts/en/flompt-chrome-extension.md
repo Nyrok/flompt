@@ -1,7 +1,7 @@
 ---
 title: "The Flompt Chrome Extension: Build Prompts Without Leaving ChatGPT"
 date: "2026-02-25"
-excerpt: "Flompt is now available as a Chrome extension. Build structured XML prompts directly from ChatGPT, Claude, or Gemini's sidebar — no copy-pasting required."
+excerpt: "Flompt is now available as a Chrome extension. Build structured XML prompts directly from ChatGPT, Claude, or Gemini's sidebar. No copy-pasting required."
 tags: ["chrome extension", "flompt", "prompt engineering", "productivity"]
 ---
 
@@ -9,13 +9,13 @@ tags: ["chrome extension", "flompt", "prompt engineering", "productivity"]
 
 When you work with AI, you have two tabs open. Your prompting tool. ChatGPT or Claude. You write, copy, paste, switch back, adjust, copy again.
 
-This back-and-forth is invisible in tutorials but constant in practice. It's wasted time, added friction, and a source of errors — wrong version pasted, forgotten context, lost edits.
+This back-and-forth is invisible in tutorials but constant in practice. It's wasted time, added friction, and a source of errors: wrong version pasted, forgotten context, lost edits.
 
 The Flompt Chrome extension removes this problem entirely.
 
 ## What the Extension Does
 
-A sidebar opens directly inside ChatGPT, Claude, or Gemini — on the right side of the page, no new tab needed. You build your prompt visually in the sidebar, and with one click it's injected into the AI's input field.
+A sidebar opens directly inside ChatGPT, Claude, or Gemini. On the right side of the page, no new tab needed. You build your prompt visually in the sidebar, and with one click it's injected into the AI's input field.
 
 No copy-pasting. No context switching. Your visual flow and your AI conversation in the same window.
 
@@ -40,7 +40,7 @@ When you assemble your blocks, Flompt generates a structured XML prompt:
 </prompt>
 ```
 
-This format isn't arbitrary. Modern LLMs — GPT-4, Claude, Gemini — are trained on massive amounts of XML. Tags act as **explicit semantic delimiters**: the model knows exactly where the role starts, where the objective ends, what constitutes a constraint.
+This format isn't arbitrary. Modern LLMs (GPT-4, Claude, Gemini) are trained on massive amounts of XML. Tags act as **explicit semantic delimiters**: the model knows exactly where the role starts, where the objective ends, what constitutes a constraint.
 
 The practical result: less ambiguity, fewer structural hallucinations, better section isolation. Anthropic explicitly recommends XML tags in their prompt engineering guidelines.
 
@@ -48,7 +48,7 @@ The practical result: less ambiguity, fewer structural hallucinations, better se
 
 No API call at compile time. The XML prompt is generated directly in your browser from your blocks. Instant, offline-capable, and your data never leaves your machine.
 
-Block order in the final prompt follows your canvas topology: if you've connected blocks together, Flompt respects that order (topological sort). Otherwise it sorts by vertical position — blocks at the top of the canvas come first.
+Block order in the final prompt follows your canvas topology: if you've connected blocks together, Flompt respects that order (topological sort). Otherwise it sorts by vertical position: blocks at the top of the canvas come first.
 
 ## Works with ChatGPT, Claude, and Gemini
 
@@ -58,11 +58,11 @@ If the toolbar can't be found for any reason (interface update, DOM change), a f
 
 ## How to Install
 
-Install directly from the Chrome Web Store — one click, no developer mode required:
+Install directly from the Chrome Web Store. One click, no developer mode required:
 
 → [**Add to Chrome**](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc)
 
-Once installed, open ChatGPT, Claude, or Gemini — the **✦ flompt** button appears directly in the input toolbar.
+Once installed, open ChatGPT, Claude, or Gemini. The **✦ flompt** button appears directly in the input toolbar.
 
 No account needed. No API key. Free and open-source under MIT license.
 

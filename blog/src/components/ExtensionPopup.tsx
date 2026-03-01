@@ -21,6 +21,7 @@ export default function ExtensionPopup({ locale }: { locale: Locale }) {
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia('(max-width: 768px)').matches) return;
     try {
       if (localStorage.getItem(POPUP_KEY)) return;
     } catch { return; }

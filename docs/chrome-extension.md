@@ -8,11 +8,11 @@ The flompt Chrome extension embeds the full prompt builder as a sidebar directly
 
 ### Chrome Web Store (recommended)
 
-Install in one click — no developer mode, no zip file:
+Install in one click. No developer mode, no zip file:
 
 → **[Add to Chrome](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc)**
 
-Once installed, navigate to ChatGPT, Claude, or Gemini — the **✦ flompt** button appears in the input toolbar.
+Once installed, navigate to ChatGPT, Claude, or Gemini. The **✦ flompt** button appears in the input toolbar.
 
 ### Developer installation (unpacked)
 
@@ -50,7 +50,7 @@ The sidebar loads `flompt.dev/app/?extension=1` in a sandboxed `<iframe>`. In ex
 | **Chat → flompt** | Click **Import** to pull the current input content into the decomposer |
 | **flompt → Chat** | Click **Send to AI** to inject the assembled XML prompt into the input |
 
-When you click **Send to AI**, the assembled prompt is sent via `postMessage` to the content script, which injects it into the platform's `contenteditable` input — ready to send.
+When you click **Send to AI**, the assembled prompt is sent via `postMessage` to the content script, which injects it into the platform's `contenteditable` input, ready to send.
 
 ---
 
@@ -83,7 +83,7 @@ The extension **does not** collect any data. All prompt content stays local or g
 
 ## Resizing the sidebar
 
-The sidebar is resizable — drag the left edge to adjust the width between 320px and 700px. The last size is remembered.
+The sidebar is resizable. Drag the left edge to adjust the width between 320px and 700px. The last size is remembered.
 
 ---
 
@@ -95,7 +95,7 @@ The sidebar is resizable — drag the left edge to adjust the width between 320p
 - If the platform recently updated its UI, [open an issue](https://github.com/Nyrok/flompt/issues)
 
 **"This content is blocked"**
-- This should not happen on current releases — the CSP is configured to allow `chrome-extension:` in `frame-ancestors`
+- This should not happen on current releases. The CSP is configured to allow `chrome-extension:` in `frame-ancestors`
 - If it persists, update to the latest extension release
 
 **The Send to AI button doesn't inject the prompt**

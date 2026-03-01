@@ -32,11 +32,11 @@
 
 Instead of writing one long block of text, flompt lets you:
 
-1. **Decompose** — Paste any prompt and let AI break it into structured blocks
-2. **Edit visually** — Drag, connect, and reorder blocks in a flowchart editor
-3. **Recompile** — Generate a Claude-optimized, machine-ready prompt from your flow
+1. **Decompose**: Paste any prompt and let AI break it into structured blocks
+2. **Edit visually**: Drag, connect, and reorder blocks in a flowchart editor
+3. **Recompile**: Generate a Claude-optimized, machine-ready prompt from your flow
 
-> Think of it as **Figma for prompts** — visual, structured, and built for Claude.
+> Think of it as **Figma for prompts**: visual, structured, and built for Claude.
 
 ---
 
@@ -64,13 +64,13 @@ Blocks are automatically ordered following Anthropic's recommended prompt struct
 
 ## 🚀 Try It Now
 
-**[→ flompt.dev](https://flompt.dev)** — No account needed. Free & open-source.
+**[→ flompt.dev](https://flompt.dev)** — No account needed. Free and open-source.
 
 ---
 
 ## 🧩 Chrome Extension
 
-Use flompt directly inside ChatGPT, Claude, and Gemini — without leaving your tab.
+Use flompt directly inside ChatGPT, Claude, and Gemini. Without leaving your tab.
 
 - **✦ Enhance** button injected into the AI chat input
 - Bidirectional sync between the sidebar and the chat
@@ -539,19 +539,19 @@ cd /projects/flompt && ./deploy.sh
 
 ## 🌍 Features
 
-- 🎨 **Visual flowchart editor** — Drag-and-drop blocks with React Flow
-- 🤖 **AI-powered decomposition** — Paste a prompt, get structured blocks
-- ⚡ **Async job queue** — Non-blocking decomposition with live progress tracking
-- 🦾 **Claude-optimized output** — XML structured following Anthropic best practices
-- 🧩 **Chrome extension** — Enhance button inside ChatGPT, Claude & Gemini
-- 🤖 **Claude Code MCP** — Native tool integration via Model Context Protocol
-- 📱 **Responsive** — Full touch support, tap-to-connect
-- 🌙 **Dark theme** — Mermaid-inspired warm dark UI
-- 🌐 **Bilingual** — English & French interface
-- 💾 **Auto-save** — Local persistence with Zustand
-- ⌨️ **Keyboard shortcuts** — Power-user friendly
-- 📋 **Export** — Copy, download as TXT or JSON
-- 🔓 **Open-source** — MIT licensed, self-hostable
+- 🎨 **Visual flowchart editor**: Drag-and-drop blocks with React Flow
+- 🤖 **AI-powered decomposition**: Paste a prompt, get structured blocks
+- ⚡ **Async job queue**: Non-blocking decomposition with live progress tracking
+- 🦾 **Claude-optimized output**: XML structured following Anthropic best practices
+- 🧩 **Chrome extension**: Enhance button inside ChatGPT, Claude & Gemini
+- 🤖 **Claude Code MCP**: Native tool integration via Model Context Protocol
+- 📱 **Responsive**: Full touch support, tap-to-connect
+- 🌙 **Dark theme**: Mermaid-inspired warm dark UI
+- 🌐 **Bilingual**: English & French interface
+- 💾 **Auto-save**: Local persistence with Zustand
+- ⌨️ **Keyboard shortcuts**: Power-user friendly
+- 📋 **Export**: Copy, download as TXT or JSON
+- 🔓 **Open-source**: MIT licensed, self-hostable
 
 ---
 

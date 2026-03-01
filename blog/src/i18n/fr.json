@@ -7,7 +7,7 @@
     "home": "Accueil"
   },
   "accessibility": {
-    "brandAriaLabel": "flompt blog — accueil",
+    "brandAriaLabel": "flompt blog accueil",
     "switchLocale": "Switch to English"
   },
   "home": {
@@ -22,18 +22,18 @@
   "about": {
     "pageTitle": "À propos | flompt blog",
     "title": "À propos",
-    "paragraph1": "flompt est un outil de construction visuelle de prompts. Au lieu d'écrire un prompt en texte brut, vous le décomposez en blocs visuels — rôle, contexte, objectif, contraintes, exemples — que vous assemblez comme un flowchart.",
+    "paragraph1": "flompt est un outil de construction visuelle de prompts. Au lieu d'écrire un prompt en texte brut, vous le décomposez en blocs visuels (rôle, contexte, objectif, contraintes, exemples) que vous assemblez comme un flowchart.",
     "paragraph2": "Ce blog explore le prompt engineering, partage des techniques d'optimisation et montre comment la construction visuelle transforme la façon dont on interagit avec l'IA.",
     "paragraph3": "Que vous soyez débutant ou expert, vous trouverez ici des guides pratiques pour tirer le meilleur de vos prompts.",
     "techTitle": "Technologies"
   },
   "extension": {
-    "bannerText": "flompt est maintenant une extension Chrome — utilisez-le dans ChatGPT, Claude & Gemini.",
-    "bannerCta": "Installer gratuitement →",
+    "bannerText": "flompt est maintenant une extension Chrome. Utilisez-le dans ChatGPT, Claude & Gemini.",
+    "bannerCta": "Installer →",
     "bannerClose": "Fermer l'annonce de l'extension",
     "popupTitle": "flompt est sur Chrome !",
-    "popupDesc": "Utilisez flompt directement dans ChatGPT, Claude & Gemini — sans changer d'onglet. Gratuit.",
-    "popupCta": "Installer l'extension — gratuit",
+    "popupDesc": "Utilisez flompt directement dans ChatGPT, Claude & Gemini. Sans changer d'onglet.",
+    "popupCta": "Installer l'extension",
     "popupSkip": "Plus tard"
   },
 

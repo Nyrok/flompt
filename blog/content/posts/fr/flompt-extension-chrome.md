@@ -1,7 +1,7 @@
 ---
 title: "L'extension Chrome Flompt : construis tes prompts sans quitter ChatGPT"
 date: "2026-02-25"
-excerpt: "Flompt est maintenant disponible en extension Chrome. Construis des prompts structurés en XML directement depuis la sidebar de ChatGPT, Claude ou Gemini — sans copier-coller."
+excerpt: "Flompt est maintenant disponible en extension Chrome. Construis des prompts structurés en XML directement depuis la sidebar de ChatGPT, Claude ou Gemini. Sans copier-coller."
 tags: ["extension chrome", "flompt", "prompt engineering", "productivité"]
 ---
 
@@ -9,7 +9,7 @@ tags: ["extension chrome", "flompt", "prompt engineering", "productivité"]
 
 Quand tu travailles avec une IA, tu as deux onglets ouverts. Celui de ton outil de prompting. Celui de ChatGPT ou Claude. Tu écris, tu copies, tu colles, tu reviens, tu ajustes, tu recopies.
 
-Ce va-et-vient est invisible dans les tutoriels mais constant dans la pratique. C'est du temps perdu, de la friction ajoutée, et une source d'erreurs — mauvaise version collée, contexte oublié, modification perdue.
+Ce va-et-vient est invisible dans les tutoriels mais constant dans la pratique. C'est du temps perdu, de la friction ajoutée, et une source d'erreurs : mauvaise version collée, contexte oublié, modification perdue.
 
 L'extension Chrome Flompt supprime ce problème.
 
@@ -40,7 +40,7 @@ Quand tu assembles tes blocs, Flompt génère un prompt en XML structuré :
 </prompt>
 ```
 
-Ce format n'est pas arbitraire. Les LLMs modernes — GPT-4, Claude, Gemini — sont entraînés sur des quantités massives de XML. Les balises agissent comme des **délimiteurs sémantiques explicites** : le modèle sait exactement où commence le rôle, où finit l'objectif, ce qui constitue une contrainte.
+Ce format n'est pas arbitraire. Les LLMs modernes (GPT-4, Claude, Gemini) sont entraînés sur des quantités massives de XML. Les balises agissent comme des **délimiteurs sémantiques explicites** : le modèle sait exactement où commence le rôle, où finit l'objectif, ce qui constitue une contrainte.
 
 Résultat concret : moins d'ambiguïté, moins d'hallucinations sur la structure, meilleure isolation des sections. Anthropic recommande d'ailleurs l'usage de balises XML dans ses guidelines de prompt engineering.
 
@@ -48,7 +48,7 @@ Résultat concret : moins d'ambiguïté, moins d'hallucinations sur la structure
 
 Aucun appel API à la compilation. Le prompt XML est généré directement dans ton navigateur, à partir de tes blocs. Instantané, hors-ligne capable, et tes données ne quittent jamais ta machine.
 
-L'ordre des blocs dans le prompt final suit la topologie du canvas : si tu as connecté tes blocs entre eux, Flompt respecte cet ordre (tri topologique). Sinon, il trie par position verticale — les blocs en haut du canvas arrivent en premier.
+L'ordre des blocs dans le prompt final suit la topologie du canvas : si tu as connecté tes blocs entre eux, Flompt respecte cet ordre (tri topologique). Sinon, il trie par position verticale : les blocs en haut du canvas arrivent en premier.
 
 ## Compatible ChatGPT, Claude, Gemini
 
@@ -58,11 +58,11 @@ Si pour une raison quelconque la barre d'outils est introuvable (mise à jour de
 
 ## Comment l'installer
 
-Installe directement depuis le Chrome Web Store — un clic, aucun mode développeur requis :
+Installe directement depuis le Chrome Web Store. Un clic, aucun mode développeur requis :
 
 → [**Ajouter à Chrome**](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc)
 
-Une fois installée, ouvre ChatGPT, Claude ou Gemini — le bouton **✦ flompt** apparaît directement dans la barre d'outils de saisie.
+Une fois installée, ouvre ChatGPT, Claude ou Gemini. Le bouton **✦ flompt** apparaît directement dans la barre d'outils de saisie.
 
 Pas de compte requis. Pas de clé API. Gratuit et open-source sous licence MIT.
 

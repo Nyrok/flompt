@@ -12,6 +12,7 @@ const ExtensionBanner = () => {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
+    if (window.matchMedia('(max-width: 768px)').matches) return
     try {
       if (!localStorage.getItem(BANNER_KEY)) setVisible(true)
     } catch { /* localStorage unavailable */ }
