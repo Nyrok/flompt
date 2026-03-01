@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import { X } from 'lucide-react'
 import { useLocale } from '@/i18n/LocaleContext'
 import { track } from '@/lib/analytics'
-import ChromeIcon from '@/components/ChromeIcon'
 
 const POPUP_KEY = 'flompt-ext-popup-v1'
 const POPUP_DELAY = 20_000 // 20s — after guided tour
@@ -71,7 +70,6 @@ const ExtensionPopup = () => {
           <X size={16} aria-hidden="true" />
         </button>
 
-        <ChromeIcon size={40} className="ext-popup__icon" />
         <h2 id="ext-popup-title" className="ext-popup__title">
           {t.extension.popupTitle}
         </h2>
@@ -87,7 +85,6 @@ const ExtensionPopup = () => {
             dismiss()
           }}
         >
-          <ChromeIcon size={16} />
           {t.extension.popupCta}
         </a>
 
