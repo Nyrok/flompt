@@ -309,14 +309,21 @@
     // Splash screen — visible pendant le chargement
     const splash = document.createElement('div')
     splash.id = 'flompt-splash'
-    splash.innerHTML = `
-      <div id="flompt-splash-inner">
-        <img id="flompt-splash-icon"
-          src="${chrome.runtime.getURL('icons/icon.svg')}"
-          width="72" height="72" alt="" aria-hidden="true">
-        <span id="flompt-splash-title">flompt</span>
-      </div>
-    `
+    const splashInner = document.createElement('div')
+    splashInner.id = 'flompt-splash-inner'
+    const splashImg = document.createElement('img')
+    splashImg.id = 'flompt-splash-icon'
+    splashImg.src = chrome.runtime.getURL('icons/icon.svg')
+    splashImg.width = 72
+    splashImg.height = 72
+    splashImg.alt = ''
+    splashImg.setAttribute('aria-hidden', 'true')
+    const splashTitle = document.createElement('span')
+    splashTitle.id = 'flompt-splash-title'
+    splashTitle.textContent = 'flompt'
+    splashInner.appendChild(splashImg)
+    splashInner.appendChild(splashTitle)
+    splash.appendChild(splashInner)
 
     // Iframe
     const iframe = document.createElement('iframe')
