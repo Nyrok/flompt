@@ -92,10 +92,9 @@ The extension requests the following permissions:
 
 | Permission | Reason |
 |---|---|
-| `activeTab` | Access the current tab to inject the sidebar |
-| `scripting` | Inject the content script into supported pages |
-| `storage` | Persist sidebar open/close state |
-| Host access for `chatgpt.com`, `claude.ai`, `gemini.google.com` | Inject the button on supported platforms |
+| Host access for `chatgpt.com`, `chat.openai.com`, `claude.ai`, `gemini.google.com` | Inject the content script and sidebar button on supported platforms |
+
+No `activeTab`, `scripting`, or `storage` API permissions are requested. The content script is declared statically in the manifest and injected automatically by the browser on matched pages.
 
 The extension **does not** collect any data. All prompt content stays local or goes directly to `flompt.dev`.
 
