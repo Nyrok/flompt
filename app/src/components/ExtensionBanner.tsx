@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 import { useLocale } from '@/i18n/LocaleContext'
 import { track } from '@/lib/analytics'
-import ChromeIcon from '@/components/ChromeIcon'
 
 const BANNER_KEY = 'flompt-ext-banner-v1'
 const EXT_URL = 'https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc'
@@ -41,7 +40,6 @@ const ExtensionBanner = () => {
           className="ext-banner__cta"
           onClick={() => track('extension_install_clicked', { source: 'app_banner' })}
         >
-          <ChromeIcon size={12} />
           {t.extension.bannerCta}
         </a>
         <button
