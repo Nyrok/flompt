@@ -11,9 +11,12 @@
 
 <p align="center">
   <a href="https://flompt.dev"><img src="https://img.shields.io/badge/🌐_Live-flompt.dev-FF3570?style=for-the-badge" alt="Live Demo" /></a>
-  <a href="https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc"><img src="https://img.shields.io/badge/Chrome_Web_Store-Add_to_Chrome-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Chrome Web Store" /></a>
   <a href="https://github.com/Nyrok/flompt/stargazers"><img src="https://img.shields.io/github/stars/Nyrok/flompt?style=for-the-badge&color=FFFF00" alt="Stars" /></a>
   <a href="https://github.com/Nyrok/flompt/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Nyrok/flompt?style=for-the-badge" alt="License" /></a>
+</p>
+
+<p align="center">
+  <a href="https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc"><img src="https://img.shields.io/badge/Chrome_Web_Store-Add_to_Chrome-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Chrome Web Store" /></a>
 </p>
 
 <p align="center">
