@@ -2,8 +2,8 @@ import { memo, useState, useRef, useLayoutEffect } from 'react'
 import { Handle, Position } from 'reactflow'
 import type { NodeProps } from 'reactflow'
 import { Copy, ChevronDown, ChevronRight, X } from 'lucide-react'
-import { BLOCK_META } from '@/types/blocks'
-import type { BlockData } from '@/types/blocks'
+import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
+import type { BlockData, ResponseStyleOptions } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 
@@ -34,6 +34,7 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
   const { t, locale } = useLocale()
   const tr = t.blocks[data.type]
   const updateNodeContent = useFlowStore((s) => s.updateNodeContent)
+  const updateNodeData    = useFlowStore((s) => s.updateNodeData)
   const removeNode = useFlowStore((s) => s.removeNode)
   const addNode = useFlowStore((s) => s.addNode)
   const onNodesChange = useFlowStore((s) => s.onNodesChange)
@@ -122,6 +123,149 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             <X size={11} aria-hidden="true" />
           </button>
         </div>
+        <Handle type="source" position={Position.Bottom} />
+      </div>
+    )
+  }
+
+  // ── Response Style block : UI structurée ────────────────────────────────────
+  if (data.type === 'response_style') {
+    const opts: ResponseStyleOptions = {
+      ...DEFAULT_RESPONSE_STYLE,
+      ...(data.options as Partial<ResponseStyleOptions> | undefined),
+    }
+
+    // Cast local pour accéder aux clés étendues du bloc (BlockTranslation ne couvre que label/description)
+    const rsTr = t.blocks.response_style as unknown as Record<string, string>
+
+    const setOpt = <K extends keyof ResponseStyleOptions>(key: K, val: ResponseStyleOptions[K]) => {
+      const next = { ...opts, [key]: val }
+      const content = generateResponseStyleContent(next)
+      updateNodeData(id, { options: next as Record<string, string | boolean>, content })
+    }
+
+    type PillGroup<K extends keyof ResponseStyleOptions> = {
+      key: K
+      label: string
+      options: Array<{ value: ResponseStyleOptions[K]; label: string }>
+    }
+
+    const PILL_GROUPS: PillGroup<'verbosity' | 'tone' | 'prose' | 'markdown' | 'math'>[] = [
+      {
+        key: 'verbosity',
+        label: rsTr.verbosity ?? 'Verbosity',
+        options: [
+          { value: 'concise',  label: rsTr.concise  ?? 'Concise' },
+          { value: 'balanced', label: rsTr.balanced  ?? 'Balanced' },
+          { value: 'detailed', label: rsTr.detailed  ?? 'Detailed' },
+        ],
+      },
+      {
+        key: 'tone',
+        label: rsTr.tone ?? 'Tone',
+        options: [
+          { value: 'conversational', label: rsTr.conversational ?? 'Conversational' },
+          { value: 'neutral',        label: rsTr.neutral         ?? 'Neutral' },
+          { value: 'formal',         label: rsTr.formal          ?? 'Formal' },
+        ],
+      },
+      {
+        key: 'prose',
+        label: rsTr.prose ?? 'Prose',
+        options: [
+          { value: 'flowing',    label: rsTr.flowing    ?? 'Prose' },
+          { value: 'mixed',      label: rsTr.mixed      ?? 'Mixed' },
+          { value: 'structured', label: rsTr.structured ?? 'Lists' },
+        ],
+      },
+      {
+        key: 'markdown',
+        label: 'Markdown',
+        options: [
+          { value: 'none',     label: rsTr.mdNone     ?? 'None' },
+          { value: 'minimal',  label: rsTr.mdMinimal  ?? 'Minimal' },
+          { value: 'standard', label: rsTr.mdStandard ?? 'Standard' },
+          { value: 'rich',     label: rsTr.mdRich     ?? 'Rich' },
+        ],
+      },
+      {
+        key: 'math',
+        label: rsTr.math ?? 'Math',
+        options: [
+          { value: 'auto',  label: rsTr.mathAuto  ?? 'Auto' },
+          { value: 'latex', label: 'LaTeX' },
+          { value: 'plain', label: rsTr.mathPlain ?? 'Plain text' },
+        ],
+      },
+    ]
+
+    return (
+      <div
+        data-block-type="response_style"
+        style={{ '--block-color': meta.color } as React.CSSProperties}
+        className={`block-node block-node--response-style ${selected ? 'selected' : ''}`}
+      >
+        <Handle type="target" position={Position.Top} />
+
+        {/* Header */}
+        <div className="rsp-header">
+          <span className="block-icon" aria-hidden="true"><Icon size={13} /></span>
+          <span className="block-label">{tr?.label ?? 'Response Style'}</span>
+          <div className="block-actions">
+            <button
+              className="block-collapse"
+              onClick={(e) => { e.stopPropagation(); handleDuplicate() }}
+              title={t.block.duplicate}
+              aria-label={t.block.duplicate}
+            >
+              <Copy size={11} aria-hidden="true" />
+            </button>
+            <button
+              className="block-remove"
+              onClick={(e) => { e.stopPropagation(); removeNode(id) }}
+              title={t.block.delete}
+              aria-label={t.block.delete}
+            >
+              <X size={11} aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+
+        {/* Pill groups */}
+        <div className="rsp-body nodrag nopan">
+          {PILL_GROUPS.map(({ key, label, options }) => (
+            <div key={key} className="rsp-row">
+              <span className="rsp-row-label">{label}</span>
+              <div className="rsp-pills">
+                {options.map(({ value, label: pLabel }) => (
+                  <button
+                    key={String(value)}
+                    className={`rsp-pill${opts[key] === value ? ' rsp-pill--active' : ''}`}
+                    onClick={(e) => { e.stopPropagation(); setOpt(key, value) }}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    aria-pressed={opts[key] === value}
+                  >
+                    {pLabel}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          {/* Skip preamble checkbox */}
+          <label className="rsp-checkbox nodrag nopan" onMouseDown={(e) => e.stopPropagation()}>
+            <input
+              type="checkbox"
+              checked={opts.skipPreamble}
+              onChange={(e) => { e.stopPropagation(); setOpt('skipPreamble', e.target.checked) }}
+              onClick={(e) => e.stopPropagation()}
+            />
+            <span className="rsp-checkbox-label">
+              {rsTr.skipPreamble ?? 'Skip preamble ("Here is…")'}
+            </span>
+          </label>
+        </div>
+
         <Handle type="source" position={Position.Bottom} />
       </div>
     )

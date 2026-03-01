@@ -14,7 +14,8 @@ const TYPE_PRIORITY: Record<BlockType, number> = {
   examples:        6,   // few-shot
   chain_of_thought: 7,  // reasoning instructions
   output_format:   8,   // response format
-  format_control:  9,   // style directives
+  format_control:  9,   // free-text style directives
+  response_style:  9,   // structured style directives (same priority as format_control)
   language:        10,  // language instruction — always last
 }
 
@@ -184,6 +185,7 @@ function renderStandardBlock(type: BlockType, content: string): string {
   const tagMap: Partial<Record<BlockType, string>> = {
     chain_of_thought: 'thinking',
     format_control:   'format_instructions',
+    response_style:   'format_instructions',
     output_format:    'output_format',
   }
   const tag = tagMap[type] ?? type
@@ -203,6 +205,7 @@ const MD_HEADING: Record<BlockType, string> = {
   chain_of_thought: 'Step-by-Step Reasoning',
   output_format:    'Output Format',
   format_control:   'Style Guidelines',
+  response_style:   'Style Guidelines',
   language:         'Language',
   document:         'Documents',
 }

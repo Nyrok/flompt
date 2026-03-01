@@ -10,6 +10,7 @@ import {
   Globe,
   FileText,
   SlidersHorizontal,
+  Wand2,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -24,6 +25,7 @@ export type BlockType =
   | 'constraints'
   | 'output_format'
   | 'format_control'
+  | 'response_style'
   | 'examples'
   | 'chain_of_thought'
   | 'language'
@@ -34,6 +36,8 @@ export interface BlockData {
   content: string
   description: string
   summary?: string
+  /** Options structurées pour les blocs avec UI riche (ex: response_style) */
+  options?: Record<string, string | boolean>
 }
 
 export interface FlomptNode {
@@ -110,9 +114,15 @@ export const BLOCK_META: Record<BlockType, { label: string; description: string;
   },
   format_control: {
     label: 'Format Control',
-    description: 'Directives Claude : ton, verbosité, markdown',
+    description: 'Directives Claude libres : ton, verbosité, markdown',
     color: '#fdba74',   // orange-300 — style, mise en forme
     icon: SlidersHorizontal,
+  },
+  response_style: {
+    label: 'Response Style',
+    description: 'Verbosité, ton, prose, markdown, LaTeX',
+    color: '#2dd4bf',   // teal-400 — style & UX
+    icon: Wand2,
   },
   language: {
     label: 'Langue',
@@ -120,6 +130,87 @@ export const BLOCK_META: Record<BlockType, { label: string; description: string;
     color: '#38bdf8',   // sky-400 — international, communication
     icon: Globe,
   },
+}
+
+// ─── Response Style ───────────────────────────────────────────────────────────
+
+export interface ResponseStyleOptions {
+  verbosity:    'concise' | 'balanced' | 'detailed'
+  tone:         'conversational' | 'neutral' | 'formal'
+  prose:        'flowing' | 'mixed' | 'structured'
+  markdown:     'none' | 'minimal' | 'standard' | 'rich'
+  math:         'auto' | 'latex' | 'plain'
+  skipPreamble: boolean
+}
+
+export const DEFAULT_RESPONSE_STYLE: ResponseStyleOptions = {
+  verbosity:    'balanced',
+  tone:         'neutral',
+  prose:        'mixed',
+  markdown:     'standard',
+  math:         'auto',
+  skipPreamble: false,
+}
+
+/**
+ * Génère les directives Claude à partir des options structurées.
+ * Seules les valeurs non-default produisent du texte.
+ */
+export function generateResponseStyleContent(opts: ResponseStyleOptions): string {
+  const parts: string[] = []
+
+  // Verbosity
+  if (opts.verbosity === 'concise') {
+    parts.push('Be concise and direct. Skip preamble, verbose qualifications, and unnecessary elaboration.')
+  } else if (opts.verbosity === 'detailed') {
+    parts.push('Be thorough and detailed. Provide comprehensive explanations and cover edge cases.')
+  }
+
+  // Tone
+  if (opts.tone === 'conversational') {
+    parts.push('Use a conversational, natural tone — fluent and human-like rather than machine-like.')
+  } else if (opts.tone === 'formal') {
+    parts.push('Use a formal, professional tone. Avoid colloquialisms and contractions.')
+  }
+
+  // Prose style
+  if (opts.prose === 'flowing') {
+    parts.push(
+      'Write in flowing prose paragraphs. Reserve bullet points and numbered lists only for truly discrete items. ' +
+      'Incorporate information naturally into sentences rather than fragmenting it into isolated points.'
+    )
+  } else if (opts.prose === 'structured') {
+    parts.push('Structure your response with bullet points and numbered lists for maximum clarity and scannability.')
+  }
+
+  // Markdown
+  if (opts.markdown === 'none') {
+    parts.push('Do not use any markdown formatting. Plain text only — no bold, italics, headers, or code blocks.')
+  } else if (opts.markdown === 'minimal') {
+    parts.push('Use minimal markdown. Limit to `inline code` and code blocks (```). Avoid bold, italics, and headers.')
+  } else if (opts.markdown === 'rich') {
+    parts.push('Use rich markdown: headers (##, ###), **bold**, *italics*, tables, and lists where they add clarity.')
+  }
+
+  // Math / LaTeX
+  if (opts.math === 'latex') {
+    parts.push('Use LaTeX notation for all mathematical expressions, equations, and technical formulas.')
+  } else if (opts.math === 'plain') {
+    parts.push(
+      'Format all math in plain text only. No LaTeX, MathJax, or markup notation (no \\(...\\), $, \\frac{}{}). ' +
+      'Use "/" for division, "*" for multiplication, "^" for exponents.'
+    )
+  }
+
+  // Skip preamble
+  if (opts.skipPreamble) {
+    parts.push(
+      'Respond directly without preamble. Do not start with phrases like ' +
+      '"Here is...", "Based on...", "Certainly!", "Of course!", "Sure!", etc.'
+    )
+  }
+
+  return parts.join('\n')
 }
 
 // ─── Output Format ───────────────────────────────────────────────────────────

@@ -141,6 +141,15 @@
     "chain_of_thought": { "label": "Raisonnement",   "description": "Instructions de raisonnement pas à pas" },
     "output_format":    { "label": "Sortie",         "description": "Format attendu de la réponse" },
     "format_control":   { "label": "Format Control", "description": "Directives Claude : ton, verbosité, markdown" },
+    "response_style":   {
+      "label": "Style de réponse", "description": "Verbosité, ton, prose, markdown, LaTeX",
+      "verbosity": "Verbosité", "concise": "Concis", "balanced": "Équilibré", "detailed": "Détaillé",
+      "tone": "Ton", "conversational": "Naturel", "neutral": "Neutre", "formal": "Formel",
+      "prose": "Format", "flowing": "Prose", "mixed": "Mixte", "structured": "Listes",
+      "mdNone": "Aucun", "mdMinimal": "Minimal", "mdStandard": "Standard", "mdRich": "Riche",
+      "math": "Math", "mathAuto": "Auto", "mathPlain": "Texte",
+      "skipPreamble": "Pas de préambule (\"Voici…\")"
+    },
     "language":         { "label": "Langue",         "description": "Langue de réponse de l'IA" }
   }
 }

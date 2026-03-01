@@ -876,6 +876,102 @@ body {
   flex-shrink: 0;
 }
 
+/* ── Response Style block ─────────────────────────────────────────────────── */
+.block-node--response-style {
+  min-width: 260px;
+  max-width: 320px;
+}
+
+.rsp-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 8px 7px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.rsp-header .block-label {
+  flex: 1;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.rsp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 10px 10px;
+}
+
+.rsp-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rsp-row-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  min-width: 52px;
+  flex-shrink: 0;
+}
+
+.rsp-pills {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.rsp-pill {
+  padding: 2px 7px;
+  font-size: 0.63rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  white-space: nowrap;
+  line-height: 1.5;
+}
+.rsp-pill:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+.rsp-pill--active {
+  background: color-mix(in srgb, var(--block-color) 18%, transparent);
+  border-color: color-mix(in srgb, var(--block-color) 55%, transparent);
+  color: var(--block-color);
+  font-weight: 600;
+}
+
+.rsp-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  cursor: pointer;
+}
+.rsp-checkbox input[type="checkbox"] {
+  accent-color: var(--block-color);
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.rsp-checkbox-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  user-select: none;
+  line-height: 1.4;
+}
+
 /* ── Output ───────────────────────────────────────────────────────────────── */
 .prompt-output-panel { display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .output-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }

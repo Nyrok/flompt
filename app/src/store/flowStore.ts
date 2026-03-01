@@ -39,6 +39,7 @@ interface FlowState {
   onEdgesChange: (changes: EdgeChange[]) => void
   onConnect: (connection: Connection) => void
   updateNodeContent: (id: string, content: string) => void
+  updateNodeData: (id: string, patch: Partial<import('@/types/blocks').BlockData>) => void
   addNode: (node: FlomptNode) => void
   removeNode: (id: string) => void
   setCompiledPrompt: (prompt: CompiledPrompt | null) => void
@@ -118,6 +119,14 @@ export const useFlowStore = create<FlowState>()(
         set((state) => ({
           nodes: state.nodes.map((n) =>
             n.id === id ? { ...n, data: { ...n.data, content } } : n
+          ),
+          compiledPrompt: null,
+        })),
+
+      updateNodeData: (id, patch) =>
+        set((state) => ({
+          nodes: state.nodes.map((n) =>
+            n.id === id ? { ...n, data: { ...n.data, ...patch } } : n
           ),
           compiledPrompt: null,
         })),

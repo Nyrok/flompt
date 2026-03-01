@@ -141,6 +141,15 @@
     "chain_of_thought": { "label": "Chain of Thought", "description": "Step-by-step reasoning instructions" },
     "output_format":    { "label": "Output",           "description": "Expected format of the response" },
     "format_control":   { "label": "Format Control",   "description": "Claude directives: tone, verbosity, markdown" },
+    "response_style":   {
+      "label": "Response Style", "description": "Verbosity, tone, prose, markdown, LaTeX",
+      "verbosity": "Verbosity", "concise": "Concise", "balanced": "Balanced", "detailed": "Detailed",
+      "tone": "Tone", "conversational": "Casual", "neutral": "Neutral", "formal": "Formal",
+      "prose": "Format", "flowing": "Prose", "mixed": "Mixed", "structured": "Lists",
+      "mdNone": "None", "mdMinimal": "Minimal", "mdStandard": "Standard", "mdRich": "Rich",
+      "math": "Math", "mathAuto": "Auto", "mathPlain": "Plain",
+      "skipPreamble": "Skip preamble (\"Here is…\")"
+    },
     "language":         { "label": "Language",         "description": "Language the AI should respond in" }
   }
 }
