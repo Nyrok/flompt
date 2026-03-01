@@ -5,6 +5,7 @@ import { decomposePrompt, watchJobStatus, classifyError, classifyJobError } from
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics, setSource } from '@/lib/analytics'
 import { isExtension } from '@/lib/platform'
+import { STAR_EVENT } from '@/components/StarPopup'
 
 // ─── Composant ────────────────────────────────────────────────────────────────
 
@@ -84,6 +85,7 @@ const PromptInput = () => {
       setNodes(result.nodes)
       setEdges(result.edges)
       analytics.decomposeCompleted(result.nodes.length)
+      window.dispatchEvent(new CustomEvent(STAR_EVENT))
 
     } catch (e) {
       setActiveTab('input')

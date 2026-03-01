@@ -119,6 +119,12 @@ export interface Translations {
     popupCta: string
     popupSkip: string
   }
+  starPopup: {
+    title: string
+    desc: string
+    cta: string
+    skip: string
+  }
   blocks: Record<BlockType, BlockTranslation>
 }
 
@@ -149,6 +155,7 @@ function build(raw: RawLocale): Translations {
     shortcuts: raw.shortcuts,
     tour: raw.tour,
     extension: raw.extension,
+    starPopup: raw.starPopup,
     blocks: raw.blocks as Record<BlockType, BlockTranslation>,
   }
 }

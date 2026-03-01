@@ -10,6 +10,7 @@ import KeyboardShortcuts from '@/components/KeyboardShortcuts'
 import GuidedTour from '@/components/GuidedTour'
 import ExtensionBanner from '@/components/ExtensionBanner'
 import ExtensionPopup from '@/components/ExtensionPopup'
+import StarPopup from '@/components/StarPopup'
 import { useFlowStore } from '@/store/flowStore'
 import type { Tab } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -166,6 +167,9 @@ const App = () => {
 
       {/* Extension popup — web only, once after 20s */}
       {!isExtension && <ExtensionPopup />}
+
+      {/* Star popup — web only, after first decompose or compile */}
+      {!isExtension && <StarPopup />}
 
       <nav className="tab-bar" aria-label={t.accessibility.mainTabs}>
         <div role="tablist" className="tab-list-inner">

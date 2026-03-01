@@ -130,6 +130,13 @@
     "popupSkip": "Plus tard"
   },
 
+  "starPopup": {
+    "title": "flompt te plaît ?",
+    "desc": "flompt est gratuit & open-source. Si il t'est utile, une ⭐ sur GitHub nous aide à grandir et à le faire vivre.",
+    "cta": "Étoiler sur GitHub",
+    "skip": "Plus tard"
+  },
+
   "blocks": {
     "document":         { "label": "Document",       "description": "Contenu externe injecté en XML <document>" },
     "input":            { "label": "Entrée",         "description": "Données fournies à l'IA" },

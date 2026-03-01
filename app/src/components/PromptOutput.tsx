@@ -5,6 +5,7 @@ import { useLocale } from '@/i18n/LocaleContext'
 import { analytics } from '@/lib/analytics'
 import { assemblePrompt } from '@/lib/assemblePrompt'
 import { isExtension } from '@/lib/platform'
+import { STAR_EVENT } from '@/components/StarPopup'
 import type { OutputFormat } from '@/types/blocks'
 
 // ─── Config des boutons de sélection ────────────────────────────────────────
@@ -47,6 +48,7 @@ const PromptOutput = () => {
     const result = assemblePrompt(nodes, edges)
     setCompiledPrompt(result)
     analytics.compileCompleted(result.tokenEstimate)
+    window.dispatchEvent(new CustomEvent(STAR_EVENT))
   }
 
   const handleCopy = () => {
