@@ -36,7 +36,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital@1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FVR0T5J8F4"></script>
@@ -51,18 +51,20 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:            #111111;
-      --bg-2:          #191919;
-      --bg-3:          #212121;
+      --bg:            #141413;
+      --bg-2:          #1a1918;
+      --bg-3:          #211f1d;
       --border:        rgba(255,255,255,0.07);
-      --border-m:      rgba(255,255,255,0.11);
-      --text:          #ececec;
-      --text-muted:    #838383;
-      --text-dim:      #707070; /* Upgraded from #444 for WCAG AA contrast */
+      --border-m:      rgba(255,255,255,0.10);
+      --border-warm:   rgba(135,134,127,0.14);
+      --text:          #faf9f5;
+      --text-muted:    #8a897f;
+      --text-dim:      #6b6963;
       --accent:        #ff3570;
       --accent-h:      #ff6090;
-      --accent-glow:   rgba(255,53,112,0.28);
-      --mono:          'Menlo','Fira Code','Courier New',monospace;
+      --accent-glow:   rgba(255,53,112,0.25);
+      --card-bg:       rgba(135,134,127,0.06);
+      --mono:          'JetBrains Mono','Menlo','Fira Code','Courier New',monospace;
     }
 
     html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -94,9 +96,9 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: 60px;
-      background: rgba(17,17,17,0.88);
-      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(20,20,19,0.88);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-warm);
     }
     .nav-inner {
       max-width: 1080px; margin: 0 auto; padding: 0 24px;
@@ -124,7 +126,7 @@
 
     .nav-mobile-menu {
       display: none; position: fixed; top: 60px; left: 0; right: 0;
-      background: rgba(17,17,17,0.97); backdrop-filter: blur(18px);
+      background: rgba(20,20,19,0.97); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       padding: 16px 24px 20px; flex-direction: column; gap: 4px; z-index: 99;
     }
@@ -173,7 +175,12 @@
       font-weight: 800; letter-spacing: -0.04em;
       line-height: 1.08; margin-bottom: 20px;
     }
-    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero h1 em {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic; font-weight: 400;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
     .hero-desc {
       font-size: 1rem; color: var(--text-muted);
       line-height: 1.8; margin-bottom: 32px; max-width: 440px;
@@ -188,7 +195,7 @@
     .hero-mockup svg { display: block; width: 100%; height: auto; }
 
     /* ── TRANSFORM ─────────────────────────────────────── */
-    .transform { padding: 80px 0 100px; }
+    .transform { padding: 100px 0 120px; }
     .section-label {
       font-size: 0.71rem; font-weight: 600; text-transform: uppercase;
       letter-spacing: 0.1em; color: var(--accent); margin-bottom: 10px;
@@ -210,8 +217,9 @@
       padding-top: 52px; color: var(--text-dim);
     }
     .demo-card {
-      border-radius: 10px; background: var(--bg-2);
-      border: 1px solid var(--border); overflow: hidden;
+      border-radius: 12px; background: var(--card-bg);
+      border: 1px solid var(--border-warm); overflow: hidden;
+      backdrop-filter: blur(8px);
     }
     .demo-card-hdr {
       padding: 10px 16px; border-bottom: 1px solid var(--border);
@@ -231,7 +239,7 @@
     .mb {
       display: flex; align-items: flex-start; gap: 10px;
       padding: 9px 12px; border-radius: 7px;
-      background: var(--bg-3); border: 1px solid var(--border);
+      background: rgba(135,134,127,0.05); border: 1px solid var(--border-warm);
       position: relative; overflow: hidden;
     }
     .mb::before {
@@ -246,15 +254,15 @@
     .mb-v { font-size: 0.77rem; color: var(--text-muted); line-height: 1.5; }
 
     /* ── BLOCKS ────────────────────────────────────────── */
-    .blocks { padding: 80px 0; }
+    .blocks { padding: 100px 0; }
     .blocks-intro { margin-bottom: 36px; }
     .blocks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .block-card {
-      padding: 14px 16px; border-radius: 8px;
-      background: var(--bg-2); border: 1px solid var(--border);
+      padding: 14px 16px; border-radius: 10px;
+      background: var(--card-bg); border: 1px solid var(--border-warm);
       position: relative; overflow: hidden; transition: border-color 200ms, background 200ms;
     }
-    .block-card:hover { border-color: var(--border-m); background: #1d1d1d; }
+    .block-card:hover { border-color: rgba(255,53,112,0.2); background: rgba(135,134,127,0.1); }
     .block-card::before {
       content: ''; position: absolute; left: 0; top: 0; bottom: 0;
       width: 3px; background: var(--bc, #888);
@@ -263,7 +271,7 @@
     .bc-eg { font-size: 0.71rem; color: var(--text-dim); font-family: var(--mono); line-height: 1.5; }
 
     /* ── EXTENSION ─────────────────────────────────────── */
-    .ext-section { padding: 80px 0; }
+    .ext-section { padding: 100px 0; }
     .ext-inner {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 56px; align-items: center;
@@ -290,7 +298,7 @@
     .ext-mockup svg { display: block; width: 100%; height: auto; }
 
     /* ── CLAUDE SECTION ────────────────────────────────── */
-    .claude-section { padding: 80px 0; background: var(--bg-2); }
+    .claude-section { padding: 116px 0; background: var(--bg-2); }
     .claude-section em { font-style: normal; color: var(--accent); }
     .claude-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
@@ -298,11 +306,11 @@
     }
     .claude-card {
       padding: 28px; border-radius: 14px;
-      background: var(--bg-3);
-      border: 1px solid var(--border-m);
-      transition: border-color 200ms;
+      background: var(--card-bg);
+      border: 1px solid var(--border-warm);
+      transition: border-color 200ms, background 200ms;
     }
-    .claude-card:hover { border-color: rgba(255,53,112,0.22); }
+    .claude-card:hover { border-color: rgba(255,53,112,0.22); background: rgba(135,134,127,0.09); }
     .claude-card-icon {
       width: 40px; height: 40px; border-radius: 10px; margin-bottom: 16px;
       background: rgba(255,53,112,0.08); border: 1px solid rgba(255,53,112,0.15);
@@ -313,7 +321,7 @@
     .claude-card code { font-size: 0.72em; font-family: var(--mono); color: rgba(255,53,112,0.9); background: rgba(255,53,112,0.07); padding: 1px 5px; border-radius: 4px; }
 
     /* ── MCP SECTION ───────────────────────────────────── */
-    .mcp-section { padding: 80px 0; }
+    .mcp-section { padding: 100px 0; }
     .mcp-section .section-title em {
       font-family: 'Caveat', cursive;
       font-style: normal;
@@ -326,11 +334,25 @@
       gap: 56px; align-items: center;
     }
     .mcp-code-block {
-      background: var(--bg-3); border: 1px solid var(--border-m);
-      border-radius: 14px; padding: 28px;
-      font-family: var(--mono); font-size: 0.8rem; line-height: 1.7;
+      background: #0e0e0d; border: 1px solid var(--border-warm);
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 0 80px rgba(255,53,112,0.04), 0 24px 60px rgba(0,0,0,0.5);
+    }
+    .mcp-code-block-chrome {
+      display: flex; align-items: center; gap: 6px;
+      padding: 11px 16px; border-bottom: 1px solid var(--border-warm);
+      background: rgba(255,255,255,0.03);
+    }
+    .term-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .term-dot-r { background: #ff5f57; }
+    .term-dot-y { background: #febc2e; }
+    .term-dot-g { background: #28c840; }
+    .mcp-code-block-body {
+      padding: 22px 24px;
+      font-family: var(--mono); font-size: 0.79rem; line-height: 1.75;
       color: var(--text-muted); overflow: auto;
-      box-shadow: 0 0 80px rgba(255,53,112,0.04), 0 32px 80px rgba(0,0,0,0.4);
     }
     .mcp-code-block .c-key   { color: #94a3b8; }
     .mcp-code-block .c-str   { color: #86efac; }
@@ -345,6 +367,44 @@
     .mcp-tool-body strong { display: block; font-size: 0.87rem; color: var(--text); font-weight: 600; margin-bottom: 2px; font-family: var(--mono); }
     .mcp-tool-body span { font-size: 0.79rem; color: var(--text-muted); line-height: 1.5; }
     @media (max-width: 900px) { .mcp-inner { grid-template-columns: 1fr; } }
+
+    /* ── STATS ─────────────────────────────────────────── */
+    .stats-section {
+      padding: 100px 0;
+      border-top: 1px solid var(--border-warm);
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .stat-card {
+      padding: 28px 24px; border-radius: 14px;
+      background: var(--card-bg); border: 1px solid var(--border-warm);
+      display: flex; flex-direction: column; gap: 6px;
+      transition: border-color 200ms, background 200ms;
+    }
+    .stat-card:hover { border-color: rgba(255,53,112,0.2); background: rgba(135,134,127,0.09); }
+    .stat-label {
+      font-size: 0.68rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--accent);
+    }
+    .stat-value {
+      font-size: 2.4rem; font-weight: 800; color: var(--text);
+      letter-spacing: -0.04em; line-height: 1;
+    }
+    .stat-before { color: var(--text-dim); font-size: 1.8rem; text-decoration: line-through; text-decoration-color: rgba(255,53,112,0.4); }
+    .stat-after  { color: var(--accent); font-size: 1.8rem; }
+    .stat-arrow  { font-size: 1.2rem; color: var(--text-dim); margin: -2px 0; }
+    .stat-sub    { font-size: 0.75rem; color: var(--text-dim); line-height: 1.55; margin-top: 4px; }
+    @media (max-width: 900px) { .stats-grid { grid-template-columns: 1fr; } }
+
+    /* ── Section accent divider ─────────────────────────── */
+    .section-accent-line {
+      width: 60px; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 28px;
+      opacity: 0.7;
+    }
 
     /* ── SPECS ─────────────────────────────────────────── */
     .specs {
@@ -722,6 +782,7 @@
 
         <!-- Text side -->
         <div class="ext-text">
+          <div class="section-accent-line"></div>
           <p class="section-label">Chrome Extension</p>
           <h2 class="section-title">Build prompts without<br/>leaving the chat.</h2>
           <p class="section-sub">
@@ -881,6 +942,7 @@
     <div class="container">
       <div class="mcp-inner">
         <div class="mcp-text">
+          <div class="section-accent-line"></div>
           <p class="section-label">Claude Code integration</p>
           <h2 class="section-title">Use flompt inside <em>your agent</em>.</h2>
           <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.7;margin-bottom:4px;">
@@ -920,11 +982,17 @@
           </a>
         </div>
         <div class="mcp-code-block">
-          <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;">CLI</div>
+          <div class="mcp-code-block-chrome">
+            <span class="term-dot term-dot-r"></span>
+            <span class="term-dot term-dot-y"></span>
+            <span class="term-dot term-dot-g"></span>
+          </div>
+          <div class="mcp-code-block-body">
+            <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">CLI</div>
 <pre><span class="c-key">claude mcp add</span> <span class="c-str">--transport http</span> <span class="c-str">--scope user</span> \
   <span class="c-str">flompt</span> <span class="c-str">https://flompt.dev/mcp/</span></pre>
-          <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
-            <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;">or ~/.claude.json</div>
+            <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border-warm);">
+              <div style="font-size:0.68rem;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">or ~/.claude.json</div>
 <pre><span class="c-punct">{</span>
   <span class="c-key">"mcpServers"</span><span class="c-punct">: {</span>
     <span class="c-key">"flompt"</span><span class="c-punct">: {</span>
@@ -933,9 +1001,10 @@
     <span class="c-punct">}</span>
   <span class="c-punct">}</span>
 <span class="c-punct">}</span></pre>
-          </div>
-          <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:0.72rem;color:var(--text-dim);">
-            No install, no account. Hosted on flompt.dev.
+            </div>
+            <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border-warm);font-size:0.72rem;color:var(--text-dim);">
+              No install, no account. Hosted on flompt.dev.
+            </div>
           </div>
         </div>
       </div>
@@ -946,6 +1015,7 @@
   <section class="transform" id="how-it-works">
     <div class="container">
       <div class="transform-header">
+        <div class="section-accent-line"></div>
         <p class="section-label">How it works</p>
         <h2 class="section-title">From raw input to structured prompt.</h2>
         <p class="section-sub">The same prompt, before and after flompt. No hand-crafting needed.</p>
@@ -1044,6 +1114,7 @@ statistics. Write in English.</pre>
   <section class="blocks">
     <div class="container">
       <div class="blocks-intro">
+        <div class="section-accent-line"></div>
         <p class="section-label">Prompt anatomy</p>
         <h2 class="section-title">11 blocks for any prompt.</h2>
         <p class="section-sub">Every prompt is built from the same ingredients. flompt makes each one explicit, editable, and Claude-optimized.</p>
@@ -1101,6 +1172,7 @@ statistics. Write in English.</pre>
   <section class="claude-section" id="claude">
     <div class="container">
       <div class="blocks-intro">
+        <div class="section-accent-line"></div>
         <p class="section-label">Claude best practices, built-in</p>
         <h2 class="section-title">Not just decompose. <em>Optimize.</em></h2>
         <p class="section-sub">flompt applies Anthropic's official prompting guidelines automatically when you assemble. Every block knows its place.</p>
@@ -1139,6 +1211,32 @@ statistics. Write in English.</pre>
           <p>A dedicated block for Claude-specific style directives: <em>be concise, use markdown, no preamble, respond in bullet points</em>. Assembled as <code>&lt;format_instructions&gt;</code> so Claude picks it up reliably.</p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS ──────────────────────────────────────── -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Block types</div>
+          <div class="stat-value">11</div>
+          <div class="stat-sub">role · context · objective · input · constraints · examples · chain of thought · output format · format control · document · language</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Before</div>
+          <div class="stat-value stat-before">1 blob</div>
+          <div class="stat-arrow">→</div>
+          <div class="stat-label" style="margin-top:0">After</div>
+          <div class="stat-value stat-after">structured</div>
+          <div class="stat-sub">Semantically decomposed, editable, recompilable</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Platforms</div>
+          <div class="stat-value">3</div>
+          <div class="stat-sub">ChatGPT · Claude · Gemini — inject optimized prompts directly</div>
+        </div>
       </div>
     </div>
   </section>
