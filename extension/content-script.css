@@ -117,7 +117,7 @@ body.flompt-resizing {
 }
 
 #flompt-header-title {
-  font-family: 'Caveat', cursive !important;
+  font-family: 'Caveat', sans-serif !important;
   font-size: 1.4rem !important;
   font-weight: 700 !important;
   color: #FF3570 !important;
@@ -211,7 +211,7 @@ body.flompt-resizing {
 }
 
 #flompt-splash-title {
-  font-family: 'Caveat', cursive !important;
+  font-family: 'Caveat', sans-serif !important;
   font-weight: 700 !important;
   font-size: 2.2rem !important;
   color: #FF3570 !important;
