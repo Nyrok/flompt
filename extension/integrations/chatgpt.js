@@ -33,8 +33,11 @@ export default {
   },
 
   getToolbarTarget () {
-    // Insert as the very first element inside the first child of composer-footer-actions
-    const el = document.querySelector('[data-testid="composer-footer-actions"]')?.firstElementChild
-    return el ? { el, position: 'prepend' } : null
+    // Target: span inside the [grid-area:leading] div in the composer form
+    // CSS: #thread-bottom form > div:nth-child(2) > div > div.[grid-area:leading] > span
+    const el = document.querySelector(
+      '#thread-bottom form div[class*="[grid-area:leading]"] > span'
+    )
+    return el ? { el, position: 'append' } : null
   },
 }
