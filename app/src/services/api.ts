@@ -34,8 +34,8 @@ export function classifyJobError(errorMsg: string): ApiErrorType {
 }
 
 // ─── Decompose (async / fire-and-forget) ─────────────────────────────────────
-// POST /api/decompose → retourne immédiatement { job_id, status, position }
-// GET  /api/queue/job/{job_id} → poll jusqu'à status="done" pour récupérer le résultat
+// POST /api/decompose → retourne immédiatement { job_id, status, token }
+// WS   /api/ws/job/{job_id}?token=... → statut temps réel jusqu'à done/error
 
 export interface DecomposeResponse {
   nodes: FlomptNode[]
@@ -47,9 +47,10 @@ export interface DecomposeJobStarted {
   job_id: string
   status: 'analyzing' | 'queued'
   position?: number
+  token: string
 }
 
-/** Réponse du GET /api/queue/job/{job_id} au fil du polling. */
+/** Réponse du WS /api/ws/job/{job_id} au fil du streaming. */
 export interface JobPollResponse {
   job_id: string
   status: 'analyzing' | 'queued' | 'processing' | 'done' | 'error' | 'blocked' | 'unknown'
@@ -59,24 +60,25 @@ export interface JobPollResponse {
   violations?: string[]        // noms lisibles des catégories violées (status === 'blocked')
 }
 
-/** Soumet le job — retourne immédiatement avec job_id et position estimée. */
+/** Soumet le job — retourne immédiatement avec job_id, token et position estimée. */
 export const decomposePrompt = async (rawPrompt: string, jobId: string): Promise<DecomposeJobStarted> => {
   const { data } = await client.post<DecomposeJobStarted>('/decompose', { prompt: rawPrompt, job_id: jobId })
   return data
 }
 
 /**
- * Ouvre une connexion WebSocket vers /api/ws/job/{jobId} et résout
+ * Ouvre une connexion WebSocket vers /api/ws/job/{jobId}?token=... et résout
  * la promesse dès que le job est terminé (done/error/blocked).
  * Pousse les updates de statut via le callback `onStatus`.
  */
 export function watchJobStatus(
   jobId: string,
+  token: string,
   onStatus: (pos: number, status: 'analyzing' | 'queued' | 'processing') => void,
 ): Promise<DecomposeResponse> {
   return new Promise((resolve, reject) => {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-    const wsUrl = `${protocol}//${window.location.host}/api/ws/job/${jobId}`
+    const wsUrl = `${protocol}//${window.location.host}/api/ws/job/${jobId}?token=${encodeURIComponent(token)}`
     const ws = new WebSocket(wsUrl)
 
     ws.onmessage = (event) => {

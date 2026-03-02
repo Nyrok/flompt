@@ -70,14 +70,14 @@ const PromptInput = () => {
 
     try {
       // ── 1. Soumettre le job — retour immédiat (statut initial : "analyzing") ──
-      const { status: initStatus, position } = await decomposePrompt(prompt, jobId)
+      const { status: initStatus, position, token } = await decomposePrompt(prompt, jobId)
       setQueueStatus({
         position: position ?? 0,
         status: initStatus === 'analyzing' ? 'analyzing' : 'queued',
       })
 
       // ── 2. Attendre le résultat via WebSocket ─────────────────────────────
-      const result = await watchJobStatus(jobId, (pos, status) => {
+      const result = await watchJobStatus(jobId, token, (pos, status) => {
         setQueueStatus({ position: pos, status })
       })
 

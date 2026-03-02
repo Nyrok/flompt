@@ -87,6 +87,11 @@ class JobStore:
         """Retourne les données du job, ou None si inconnu/expiré."""
         return self._jobs.get(job_id)
 
+    def delete(self, job_id: str) -> None:
+        """Supprime immédiatement un job de la mémoire (appelé après état terminal)."""
+        self._jobs.pop(job_id, None)
+        self._timestamps.pop(job_id, None)
+
     def _cleanup(self) -> None:
         """Purge les jobs expirés (appelé à chaque store_*)."""
         now = time.monotonic()

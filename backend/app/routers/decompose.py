@@ -1,12 +1,13 @@
 import asyncio
 import uuid
 
-from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect, Query
 from app.models.blocks import DecomposeRequest
 from app.services.decomposer import decompose
 from app.services.job_store import job_store
 from app.services.ai_service import llm_queue
 from app.services import prompt_guard_service
+from app.auth import create_job_token, verify_job_token
 
 router = APIRouter()
 
@@ -49,14 +50,14 @@ async def decompose_prompt(body: DecomposeRequest) -> dict:
     """
     Soumet un job de décomposition de façon asynchrone (fire-and-forget).
 
-    Retourne immédiatement { job_id, status: "analyzing" }.
-    Le client se connecte via WS /api/ws/job/{job_id} pour suivre la progression :
-      analyzing → queued → processing → done | blocked | error
+    Retourne immédiatement { job_id, status: "analyzing", token }.
+    Le token JWT est requis pour accéder au statut/résultat du job.
     """
     if not body.prompt.strip():
         raise HTTPException(status_code=422, detail="Le prompt ne peut pas être vide.")
 
     job_id = body.job_id or str(uuid.uuid4())
+    token = create_job_token(job_id)
 
     # Enregistrer immédiatement comme "analyzing" (guard pas encore lancé)
     job_store.set_analyzing(job_id)
@@ -64,13 +65,18 @@ async def decompose_prompt(body: DecomposeRequest) -> dict:
     # Soumettre en arrière-plan — ne pas attendre
     asyncio.create_task(_decompose_task(job_id, body.prompt))
 
-    return {"job_id": job_id, "status": "analyzing"}
+    return {"job_id": job_id, "status": "analyzing", "token": token}
 
 
 @router.websocket("/ws/job/{job_id}")
-async def ws_job_status(websocket: WebSocket, job_id: str) -> None:
+async def ws_job_status(
+    websocket: WebSocket,
+    job_id: str,
+    token: str | None = Query(default=None),
+) -> None:
     """
     WebSocket — pousse les mises à jour de statut d'un job en temps réel.
+    Requiert le token JWT retourné par POST /api/decompose (?token=...).
 
     Messages envoyés :
       { job_id, status: "queued",      position: N }
@@ -79,9 +85,16 @@ async def ws_job_status(websocket: WebSocket, job_id: str) -> None:
       { job_id, status: "error",       error: "..." }
 
     La connexion se ferme automatiquement dès que le job est terminal (done/error).
+    Le job est supprimé de la mémoire après envoi de l'état terminal.
     """
+    # ── Auth : vérifier le token avant d'accepter la connexion ───────────────
+    if not token or not verify_job_token(token, job_id):
+        await websocket.close(code=4001, reason="Token invalide ou manquant")
+        return
+
     await websocket.accept()
     last_payload: dict | None = None
+    terminal_reached = False
 
     try:
         while True:
@@ -100,6 +113,7 @@ async def ws_job_status(websocket: WebSocket, job_id: str) -> None:
 
             # Fermer sur état terminal
             if current.get("status") in ("done", "error", "blocked"):
+                terminal_reached = True
                 break
 
             await asyncio.sleep(0.3)
@@ -111,3 +125,6 @@ async def ws_job_status(websocket: WebSocket, job_id: str) -> None:
             await websocket.close()
         except Exception:
             pass
+        # Nettoyer le job de la mémoire après envoi de l'état terminal
+        if terminal_reached:
+            job_store.delete(job_id)
