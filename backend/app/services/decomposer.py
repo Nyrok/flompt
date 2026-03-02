@@ -7,6 +7,7 @@ Utilise l'AI service si disponible, sinon fallback sur la décomposition heurist
 
 import re
 import uuid
+import json
 from app.models.blocks import (
     BlockData, BlockType, FlomptNode, FlomptEdge,
     DecomposeResponse, Position
@@ -56,7 +57,17 @@ def _build_nodes_and_edges(raw_blocks: list[dict]) -> DecomposeResponse:
         node_id = f"{block_type.value}-{uuid.uuid4().hex[:6]}"
 
         content = block.get("content") or ""   # handles None and missing key
+        # Guard: LLM may return a dict/list instead of a string
+        if isinstance(content, (dict, list)):
+            content = json.dumps(content, ensure_ascii=False)
+        elif not isinstance(content, str):
+            content = str(content)
+
         summary = block.get("summary") or ""   # handles None and missing key
+        if isinstance(summary, (dict, list)):
+            summary = json.dumps(summary, ensure_ascii=False)
+        elif not isinstance(summary, str):
+            summary = str(summary)
         # Fallback: truncate content as summary if AI didn't provide one
         if not summary and content:
             summary = content[:40].strip()

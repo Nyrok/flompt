@@ -37,6 +37,9 @@ export const initAnalytics = () => {
     // Heatmaps
     enable_heatmaps: true,
 
+    // Exception autocapture — track JS errors in PostHog
+    exception_autocapture: true,
+
     loaded: (ph) => {
       if (import.meta.env.DEV as boolean) {
         ph.opt_out_capturing()
