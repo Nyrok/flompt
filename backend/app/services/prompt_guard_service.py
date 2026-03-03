@@ -1,15 +1,15 @@
 """
-Prompt Guard Service — Filtre de sécurité via Groq (llama-guard-3-8b).
+Prompt Guard Service — Filtre de sécurité via Groq (meta-llama/llama-guard-4-12b).
 
-Llama Guard 3 est le modèle de modération disponible sur Groq. Il utilise le même
-format de sortie que Guard 4 ("safe" / "unsafe\nS{N}") et la même taxonomie MLCommons.
+Llama Guard 4 12B est le modèle de modération disponible sur Groq. Il utilise le même
+format de sortie ("safe" / "unsafe\nS{N}") et la même taxonomie MLCommons.
 
 Avantages vs HF Inference API :
   - Utilise le GROQ_API_KEY déjà configuré (aucune nouvelle clé requise)
   - Latence très faible (~100-300ms sur Groq)
   - Pas de cold start
 
-Taxonomie MLCommons Hazard S1–S13 (Llama Guard 3) :
+Taxonomie MLCommons Hazard S1–S13 (Llama Guard 4) :
   S1  Violent Crimes            S8  Intellectual Property
   S2  Non-Violent Crimes        S9  Indiscriminate Weapons
   S3  Sex-Related Crimes        S10 Hate
@@ -36,7 +36,7 @@ import httpx
 
 logger = logging.getLogger(__name__)
 
-GUARD_MODEL = "llama-guard-3-8b"
+GUARD_MODEL = "meta-llama/llama-guard-4-12b"
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 TIMEOUT = 20.0
 

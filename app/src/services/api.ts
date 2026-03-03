@@ -81,23 +81,38 @@ export function watchJobStatus(
     const wsUrl = `${protocol}//${window.location.host}/api/ws/job/${jobId}?token=${encodeURIComponent(token)}`
     const ws = new WebSocket(wsUrl)
 
+    // Flag pour éviter de resolve/reject plusieurs fois
+    let settled = false
+
+    const settle = (fn: () => void) => {
+      if (settled) return
+      settled = true
+      fn()
+    }
+
     ws.onmessage = (event) => {
       const data: JobPollResponse = JSON.parse(event.data as string)
 
       if (data.status === 'done' && data.result) {
-        ws.close()
-        resolve(data.result)
+        settle(() => {
+          ws.close()
+          resolve(data.result!)
+        })
       } else if (data.status === 'error') {
-        ws.close()
-        const err = new Error(data.error ?? 'Job failed')
-        ;(err as Error & { jobError?: string }).jobError = data.error ?? ''
-        reject(err)
+        settle(() => {
+          ws.close()
+          const err = new Error(data.error ?? 'Job failed')
+          ;(err as Error & { jobError?: string }).jobError = data.error ?? ''
+          reject(err)
+        })
       } else if (data.status === 'blocked') {
-        ws.close()
-        const err = new Error('PROMPT_BLOCKED')
-        ;(err as Error & { jobError?: string; violations?: string[] }).jobError = 'PROMPT_BLOCKED'
-        ;(err as Error & { jobError?: string; violations?: string[] }).violations = data.violations ?? []
-        reject(err)
+        settle(() => {
+          ws.close()
+          const err = new Error('PROMPT_BLOCKED')
+          ;(err as Error & { jobError?: string; violations?: string[] }).jobError = 'PROMPT_BLOCKED'
+          ;(err as Error & { jobError?: string; violations?: string[] }).violations = data.violations ?? []
+          reject(err)
+        })
       } else if (data.status === 'analyzing') {
         onStatus(0, 'analyzing')
       } else if (data.status === 'queued') {
@@ -108,9 +123,19 @@ export function watchJobStatus(
     }
 
     ws.onerror = () => {
-      ws.close()
-      const err = new Error('WebSocket connection failed')
-      reject(err)
+      settle(() => {
+        ws.close()
+        const err = new Error('WebSocket connection failed')
+        reject(err)
+      })
+    }
+
+    ws.onclose = () => {
+      // Connexion fermée sans état terminal (drop réseau, timeout proxy, redémarrage serveur…)
+      settle(() => {
+        const err = new Error('WebSocket closed before job completion')
+        reject(err)
+      })
     }
   })
 }

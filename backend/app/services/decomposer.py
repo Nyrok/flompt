@@ -13,7 +13,7 @@ from app.models.blocks import (
     DecomposeResponse, Position
 )
 from typing import Optional
-from app.services.ai_service import decompose_with_ai, _get_anthropic_key, _get_openai_key
+from app.services.ai_service import decompose_with_ai, _get_anthropic_key, _get_openai_key, _get_groq_key
 
 BLOCK_META = {
     BlockType.role: {"label": "Role", "description": "Définit la persona / le rôle de l'IA"},
@@ -51,6 +51,16 @@ def _build_nodes_and_edges(raw_blocks: list[dict]) -> DecomposeResponse:
     edges: list[FlomptEdge] = []
 
     x, y = 100.0, 50.0
+    valid_blocks: list[dict] = []
+    for block in raw_blocks:
+        try:
+            BlockType(block.get("type", ""))
+            valid_blocks.append(block)
+        except ValueError:
+            # Bloc avec type inconnu retourné par le LLM → on ignore
+            continue
+    raw_blocks = valid_blocks
+
     for i, block in enumerate(raw_blocks):
         block_type = BlockType(block["type"])
         meta = BLOCK_META[block_type]
@@ -127,7 +137,7 @@ def _heuristic_decompose(raw_prompt: str) -> list[dict]:
 
 async def decompose(raw_prompt: str, job_id: Optional[str] = None) -> DecomposeResponse:
     """Main entry point — AI if available, else heuristic."""
-    ai_available = bool(_get_anthropic_key() or _get_openai_key())
+    ai_available = bool(_get_anthropic_key() or _get_openai_key() or _get_groq_key())
 
     if ai_available:
         raw_blocks = await decompose_with_ai(raw_prompt, job_id=job_id)
