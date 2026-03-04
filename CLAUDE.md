@@ -4,7 +4,6 @@
 - **flompt** = flow + prompt — Visual AI Prompt Builder
 - **URL** : https://flompt.dev
 - **Repo** : https://github.com/Nyrok/flompt (monorepo)
-- **Organisation** : https://github.com/flompt (to be created — 5 separate repos planned)
 - **Git email** : nyrokgaming1@gmail.com
 
 ## Stack
