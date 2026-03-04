@@ -20,10 +20,10 @@ Think of it as **Figma for Prompts** — visual, structured, and modular.
 
 > No sign-up required. Free forever. Self-hostable under MIT license.
 
-## Chrome Extension
+## Browser Extension
 
-flompt is also available as a **Chrome extension** — a sidebar that opens directly inside ChatGPT, Claude, or Gemini. Build your prompt visually, click "Send to AI", and it's injected into the chat input. No tab switching, no copy-pasting.
+flompt is available as a **browser extension** for Chrome and Firefox — a sidebar that opens directly inside ChatGPT, Claude, or Gemini. Build your prompt visually, click "Send to AI", and it's injected into the chat input. No tab switching, no copy-pasting.
 
 Supported platforms: ChatGPT · Claude · Gemini
 
-→ [Install instructions](./how-it-works.md#chrome-extension)
+→ [Chrome](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc) · [Firefox](https://addons.mozilla.org/addon/flompt-visual-prompt-builder/) · [Install instructions](./chrome-extension.md)
