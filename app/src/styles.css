@@ -1434,8 +1434,9 @@ body {
 .canvas-block-bar {
   position: absolute;
   left: 10px;
-  top: 52px;
-  max-height: calc(100% - 62px);
+  top: 50%;
+  transform: translateY(-50%);
+  max-height: calc(100% - 60px);
   overflow-y: auto;
   z-index: 5;
   display: flex;
