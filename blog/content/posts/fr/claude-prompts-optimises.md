@@ -71,15 +71,16 @@ Les recherches d'Anthropic montrent que l'ordre des sections de ton prompt affec
 
 1. **Documents** (grounding en premier — toujours)
 2. **Rôle** (persona)
-3. **Contexte** (background)
-4. **Objectif** (tâche principale)
-5. **Entrée** (données à traiter)
-6. **Contraintes** (règles)
-7. **Exemples** (few-shot)
-8. **Raisonnement** (instructions de raisonnement)
-9. **Sortie** (structure de la réponse)
-10. **Format Control** (directives de style)
-11. **Langue** (en dernier)
+3. **Audience** (à qui s'adresse le résultat)
+4. **Contexte** (background)
+5. **Objectif** (tâche principale — ce qu'il faut faire)
+6. **Objectif final** (but final et critères de succès)
+7. **Entrée** (données à traiter)
+8. **Contraintes** (règles)
+9. **Exemples** (few-shot)
+10. **Chaîne de raisonnement** (instructions de raisonnement)
+11. **Sortie** (structure de la réponse)
+12. **Langue** (en dernier)
 
 La logique : Claude lit les prompts de haut en bas. Placer les documents en premier donne à Claude le contexte dont il a besoin pour interpréter correctement tout ce qui suit. Les instructions à la fin sont plus difficiles à ignorer et donc plus fiables.
 
@@ -87,38 +88,9 @@ La logique : Claude lit les prompts de haut en bas. Placer les documents en prem
 
 ---
 
-## 4. Sépare le format du style avec Format Control
+## 4. Utilise le Style de réponse pour les directives de formatage
 
-La plupart des prompts mélangent "quoi retourner" et "comment l'écrire". Ça rend l'itération plus difficile — changer le ton t'oblige à réécrire la définition du format aussi.
-
-Le bloc **Format Control** est dédié aux directives de style spécifiques à Claude :
-
-```xml
-<format_instructions>
-  Sois concis. Pas de préambule. Utilise des en-têtes markdown.
-  Maximum 3 paragraphes par section.
-</format_instructions>
-```
-
-Garde le format de sortie (schéma JSON, liste numérotée, colonnes de tableau) dans **Sortie**. Garde le style (verbosité, ton, markdown oui/non) dans **Format Control**. Itère-les indépendamment.
-
----
-
-## 5. Chaîne de raisonnement — explicite, pas implicite
-
-Dire "réfléchis étape par étape" fonctionne. Mais être explicite sur *ce qu'il faut* réfléchir fonctionne mieux :
-
-```xml
-<thinking>
-  Avant de répondre :
-  1. Identifie la cause racine
-  2. Liste au moins 2 approches alternatives
-  3. Évalue les compromis
-  Puis fournis ta recommandation.
-</thinking>
-```
-
-Des instructions de raisonnement explicites produisent des réponses plus structurées et auditables — surtout sur des tâches techniques ou analytiques complexes.
+Le bloc **Style de réponse** gère toutes les directives de style spécifiques à Claude — verbosité, ton, format de prose, markdown, LaTeX — via une interface structurée. Plus besoin d'écrire manuellement des instructions de formatage.
 
 ---
 
@@ -139,9 +111,15 @@ Voici à quoi ressemble un prompt bien structuré quand toutes les bonnes pratiq
   <role>
     Développeur Python senior spécialisé en revue de code
   </role>
+  <audience>
+    Ingénieurs mid-level qui vont trier et corriger les problèmes
+  </audience>
   <objective>
     Revoir le code fourni pour les bugs, les problèmes de performance et les violations de style
   </objective>
+  <goal>
+    Aider l'équipe à prioriser ce qu'il faut corriger en premier. Faire ressortir les problèmes critiques clairement pour que le reviewer puisse agir en moins de 5 minutes.
+  </goal>
   <constraints>
     Concentre-toi sur les problèmes critiques. Ignore le formatage cosmétique.
   </constraints>
@@ -152,14 +130,11 @@ Voici à quoi ressemble un prompt bien structuré quand toutes les bonnes pratiq
     </example>
   </examples>
   <thinking>
-    Vérifie : erreurs off-by-one, déréférencements nuls, boucles inefficaces, gestion d'erreurs manquante.
+    Réfléchis étape par étape. D'abord identifie le type de problème, puis évalue la sévérité, puis suggère un correctif.
   </thinking>
   <output_format>
     Liste numérotée. Un problème par ligne. Sévérité : [critique/avertissement/info].
   </output_format>
-  <format_instructions>
-    Sois concis. Pas de préambule. Utilise des références de code (numéros de ligne).
-  </format_instructions>
   <language>Français</language>
 </prompt>
 ```

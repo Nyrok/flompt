@@ -157,7 +157,7 @@
       "prose": "Format", "flowing": "Prose", "mixed": "Mixte", "structured": "Listes",
       "mdNone": "Aucun", "mdMinimal": "Minimal", "mdStandard": "Standard", "mdRich": "Riche",
       "math": "Math", "mathAuto": "Auto", "mathPlain": "Texte",
-      "skipPreamble": "Pas de préambule (\"Voici…\")"
+      "skipPreamble": "Pas de préambule"
     },
     "language":         { "label": "Langue",          "description": "Langue de réponse de l'IA" }
   }

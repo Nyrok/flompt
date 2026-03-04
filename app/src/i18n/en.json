@@ -157,7 +157,7 @@
       "prose": "Format", "flowing": "Prose", "mixed": "Mixed", "structured": "Lists",
       "mdNone": "None", "mdMinimal": "Minimal", "mdStandard": "Standard", "mdRich": "Rich",
       "math": "Math", "mathAuto": "Auto", "mathPlain": "Plain",
-      "skipPreamble": "Skip preamble (\"Here is…\")"
+      "skipPreamble": "Skip preamble"
     },
     "language":         { "label": "Language",         "description": "Language the AI should respond in" }
   }

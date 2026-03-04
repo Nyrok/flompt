@@ -101,14 +101,16 @@ Mis bout à bout, un prompt bien conçu a une structure claire :
 
 1. **Documents** — matériel de référence, ancré dans des balises `<document>`
 2. **Rôle** — qui est l'IA dans ce contexte
-3. **Contexte** — background et motivation
-4. **Objectif** — la tâche spécifique
-5. **Entrée** — les données traitées
-6. **Contraintes** — règles et limites
-7. **Exemples** — démonstrations few-shot dans des balises `<examples>`
-8. **Chaîne de pensée** — instruction de raisonnement étape par étape
-9. **Format de sortie** — la structure de réponse attendue
-10. **Contrôle de format** — ton, verbosité, markdown activé/désactivé
+3. **Audience** — à qui s'adresse le résultat
+4. **Contexte** — background et motivation
+5. **Objectif** — la tâche spécifique (ce qu'il faut faire)
+6. **Objectif final** — le but final et les critères de succès
+7. **Entrée** — les données traitées
+8. **Contraintes** — règles et limites
+9. **Exemples** — démonstrations few-shot dans des balises `<examples>`
+10. **Chaîne de raisonnement** — instructions de raisonnement étape par étape
+11. **Format de sortie** — la structure de réponse attendue
+12. **Style de réponse** — verbosité, ton, prose, markdown (interface structurée)
 
 C'est exactement l'ordonnancement que flompt applique automatiquement. Pas parce que c'est une convention arbitraire — parce que cela suit les recommandations d'Anthropic sur la façon dont Claude traite l'information le plus efficacement.
 
