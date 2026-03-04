@@ -1,10 +1,10 @@
 """
-JWT Auth — tokens liés à un job_id spécifique.
+JWT Auth — tokens tied to a specific job_id.
 
-- Chaque job reçoit un token signé à sa création (POST /api/decompose).
-- Le token est requis pour accéder au statut/résultat du job (WS + GET).
-- JWT_SECRET dans .env ; si absent, secret éphémère généré au démarrage
-  (tokens valides uniquement pour la session serveur courante).
+- Each job receives a signed token at creation time (POST /api/decompose).
+- The token is required to access the job's status/result (WS + GET).
+- JWT_SECRET in .env; if absent, an ephemeral secret is generated at startup
+  (tokens valid only for the current server session).
 """
 
 import os
@@ -18,7 +18,7 @@ _TOKEN_TTL_MINUTES = 60
 
 
 def create_job_token(job_id: str) -> str:
-    """Génère un JWT signé autorisant l'accès au job spécifié."""
+    """Generates a signed JWT authorizing access to the specified job."""
     payload = {
         "job_id": job_id,
         "exp": datetime.now(timezone.utc) + timedelta(minutes=_TOKEN_TTL_MINUTES),
@@ -27,7 +27,7 @@ def create_job_token(job_id: str) -> str:
 
 
 def verify_job_token(token: str, job_id: str) -> bool:
-    """Vérifie le JWT et s'assure qu'il correspond au job_id attendu."""
+    """Verifies the JWT and ensures it matches the expected job_id."""
     try:
         payload = jwt.decode(token, _JWT_SECRET, algorithms=[_ALGORITHM])
         return payload.get("job_id") == job_id

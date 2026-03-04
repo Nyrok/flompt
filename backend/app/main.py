@@ -10,13 +10,13 @@ from app.services.job_store import job_store
 from app.auth import verify_job_token
 from app.mcp_server import mcp
 
-# Créer l'app streamable HTTP et son session manager avant le lifespan
+# Create the streamable HTTP app and its session manager before lifespan
 _mcp_http_app = mcp.streamable_http_app()
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Démarre le session manager MCP au boot et le stoppe proprement."""
+    """Starts the MCP session manager at boot and stops it cleanly."""
     async with mcp.session_manager.run():
         yield
 
@@ -51,7 +51,7 @@ async def _require_job_token(
     job_id: str,
     authorization: str | None = Header(default=None),
 ) -> None:
-    """Vérifie le JWT Bearer correspondant au job_id demandé."""
+    """Verifies the Bearer JWT corresponding to the requested job_id."""
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Token manquant")
     token = authorization.removeprefix("Bearer ")
@@ -72,20 +72,20 @@ async def queue_job_status(
     _: None = Depends(_require_job_token),
 ) -> dict:
     """
-    Statut et résultat d'un job par son ID. Requiert le JWT du job.
+    Status and result of a job by its ID. Requires the job JWT.
 
-    - status=queued     → en attente, position=N (live depuis la queue)
-    - status=processing → en cours de traitement (live depuis la queue)
-    - status=done       → terminé, result={nodes, edges} disponible
-    - status=error      → erreur, error="..." disponible
-    - status=unknown    → job inconnu (jamais soumis ou expiré)
+    - status=queued     -> waiting, position=N (live from the queue)
+    - status=processing -> currently being processed (live from the queue)
+    - status=done       -> finished, result={nodes, edges} available
+    - status=error      -> error, error="..." available
+    - status=unknown    -> unknown job (never submitted or expired)
     """
-    # Statut live de la LLMQueue (position exacte, processing en cours)
+    # Live status from LLMQueue (exact position, currently processing)
     live = llm_queue.get_job_status(job_id)
     if live:
         return live
 
-    # Résultat/erreur stocké dans le job store (done/error/queued pré-enregistré)
+    # Result/error stored in the job store (done/error/queued pre-registered)
     stored = job_store.get(job_id)
     if stored:
         return {"job_id": job_id, **stored}

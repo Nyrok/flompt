@@ -249,12 +249,12 @@ function renderMarkdownBlock(type: BlockType, content: string): string {
   return `## ${heading}\n\n${content.trim()}`
 }
 
-// ─── Résolution du contenu d'un nœud ─────────────────────────────────────────
+// ─── Node content resolution ──────────────────────────────────────────────────
 
 /**
- * Pour les blocs `response_style`, génère le contenu depuis `data.options` à la
- * compilation (source de vérité), pas depuis `data.content` (qui peut être vide
- * si le bloc vient d'être créé ou si toutes les options sont à leur valeur par défaut).
+ * For `response_style` blocks, generates content from `data.options` at compile
+ * time (source of truth), not from `data.content` (which may be empty if the
+ * block was just created or if all options are at their default values).
  */
 function resolveContent(node: FlomptNode): string {
   if (node.data.type === 'response_style' && node.data.options) {
@@ -263,11 +263,11 @@ function resolveContent(node: FlomptNode): string {
   return node.data.content
 }
 
-// ─── Internal raw builders (retournent string) ───────────────────────────────
+// ─── Internal raw builders (return string) ───────────────────────────────────
 
-/** Construit le XML Claude à partir de nœuds déjà ordonnés */
+/** Builds the Claude XML from already-sorted nodes */
 function buildXmlRaw(ordered: FlomptNode[]): string {
-  // response_style : inclus si options définies (même si content vide)
+  // response_style: included if options are defined (even if content is empty)
   const withContent = ordered.filter(n =>
     n.data.type === 'response_style' ? !!n.data.options : n.data.content.trim()
   )
@@ -279,7 +279,7 @@ function buildXmlRaw(ordered: FlomptNode[]): string {
   for (const node of withContent) {
     if (node.data.type === 'document') continue
     const content = resolveContent(node)
-    if (!content.trim()) continue   // options toutes à défaut → rien à émettre
+    if (!content.trim()) continue   // all options at default → nothing to emit
     if (node.data.type === 'examples') {
       parts.push(renderExamples(content))
     } else {
@@ -290,7 +290,7 @@ function buildXmlRaw(ordered: FlomptNode[]): string {
   return `<prompt>\n${parts.join('\n')}\n</prompt>`
 }
 
-/** Construit le Markdown ChatGPT/Gemini à partir de nœuds déjà ordonnés */
+/** Builds the ChatGPT/Gemini Markdown from already-sorted nodes */
 function buildMarkdownRaw(ordered: FlomptNode[]): string {
   const withContent = ordered.filter(n =>
     n.data.type === 'response_style' ? !!n.data.options : n.data.content.trim()
@@ -338,7 +338,7 @@ export function assemblePrompt(nodes: FlomptNode[], edges: FlomptEdge[]): Compil
     gemini:  markdownRaw,
   }
 
-  // tokenEstimate basé sur le XML Claude (le plus long en général)
+  // tokenEstimate based on the Claude XML (the longest in general)
   const tokenEstimate = Math.max(1, Math.ceil(claudeRaw.length / 4))
 
   return { formats, tokenEstimate, blocks: ordered.map(n => n.data) }

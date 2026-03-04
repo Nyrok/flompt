@@ -4,7 +4,7 @@ import { addEdge, applyNodeChanges, applyEdgeChanges } from 'reactflow'
 import type { Connection, NodeChange, EdgeChange } from 'reactflow'
 import type { FlomptNode, FlomptEdge, CompiledPrompt, OutputFormat } from '@/types/blocks'
 
-// ── Snapshot type pour undo/redo ─────────────────────────────────────────────
+// ── Snapshot type for undo/redo ──────────────────────────────────────────────
 interface Snapshot {
   nodes: FlomptNode[]
   edges: FlomptEdge[]
@@ -13,7 +13,7 @@ interface Snapshot {
 export type Tab = 'input' | 'canvas' | 'output'
 
 export interface QueueStatus {
-  position: number  // 1 = prochain en file, 0 = en cours de traitement / analyzing
+  position: number  // 1 = next in queue, 0 = currently processing / analyzing
   status: 'analyzing' | 'queued' | 'processing'
 }
 
@@ -28,7 +28,7 @@ interface FlowState {
   queueStatus: QueueStatus | null
   outputFormat: OutputFormat
 
-  // Historique undo/redo
+  // Undo/redo history
   past: Snapshot[]
   future: Snapshot[]
 
@@ -156,7 +156,7 @@ export const useFlowStore = create<FlowState>()(
       setIsDecomposing: (v) => set({ isDecomposing: v }),
       setActiveTab: (tab) => set({ activeTab: tab }),
       setQueueStatus: (status) => set({ queueStatus: status }),
-      // Ne pas reset compiledPrompt — tous les formats sont déjà générés en une passe
+      // Do not reset compiledPrompt — all formats are already generated in a single pass
       setOutputFormat: (format) => set({ outputFormat: format }),
 
       reset: () =>
@@ -201,7 +201,7 @@ export const useFlowStore = create<FlowState>()(
         rawPrompt: state.rawPrompt,
         compiledPrompt: state.compiledPrompt,
         outputFormat: state.outputFormat,
-        // isDecomposing / past / future : états transitoires, non persistés
+        // isDecomposing / past / future: transient state, not persisted
       }),
     }
   )

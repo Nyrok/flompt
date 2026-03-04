@@ -21,14 +21,14 @@ flompt.dev {
 	# ── MCP Server → FastAPI backend (streamable HTTP) ────────────
 	# Endpoint : POST https://flompt.dev/mcp/
 	# Config Claude Code : { "mcpServers": { "flompt": { "type": "http", "url": "https://flompt.dev/mcp/" } } }
-	# flush_interval -1 = streaming sans buffering (requis pour SSE/streamable HTTP)
+	# flush_interval -1 = streaming without buffering (required for SSE/streamable HTTP)
 	handle /mcp/* {
 		reverse_proxy 127.0.0.1:8000 {
 			flush_interval -1
 		}
 	}
 
-	# Redirect /mcp → /mcp/ pour éviter les 307 upstream
+	# Redirect /mcp → /mcp/ to avoid upstream 307s
 	handle /mcp {
 		redir /mcp/ 308
 	}
@@ -58,8 +58,8 @@ flompt.dev {
 		file_server
 	}
 
-	# ── Security headers (toutes routes sauf /docs* et /app*) ───────
-	# /app* est géré séparément pour autoriser le framing par l'extension
+	# ── Security headers (all routes except /docs* and /app*) ───────
+	# /app* is handled separately to allow framing by the extension
 	@notdocs not path /docs* /app*
 	header @notdocs {
 		X-Content-Type-Options nosniff
@@ -69,7 +69,7 @@ flompt.dev {
 		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://eu-assets.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://www.google-analytics.com https://stats.g.doubleclick.net; connect-src 'self' https://flompt.dev https://eu.i.posthog.com https://eu-assets.i.posthog.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com;"
 	}
 
-	# ── Security headers pour /app* — framing autorisé depuis les extensions ──
+	# ── Security headers for /app* — framing allowed from extensions ──
 	@app path /app*
 	header @app {
 		X-Content-Type-Options nosniff
@@ -78,7 +78,7 @@ flompt.dev {
 		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://eu-assets.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://www.google-analytics.com https://stats.g.doubleclick.net; connect-src 'self' https://flompt.dev https://eu.i.posthog.com https://eu-assets.i.posthog.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-ancestors https://chatgpt.com https://chat.openai.com https://claude.ai https://gemini.google.com chrome-extension:;"
 	}
 
-	# ── HSTS global (toutes routes) ───────────────────────────────
+	# ── HSTS global (all routes) ───────────────────────────────
 	header {
 		Referrer-Policy strict-origin-when-cross-origin
 		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"

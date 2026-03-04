@@ -5,9 +5,9 @@ import { track } from '@/lib/analytics'
 
 const POPUP_KEY  = 'flompt-star-popup-v1'
 const GITHUB_URL = 'https://github.com/Nyrok/flompt'
-const SHOW_DELAY = 1500 // 1.5s après l'action — laisse le temps de voir le résultat
+const SHOW_DELAY = 1500 // 1.5s after the action — gives time to see the result
 
-/** Nom de l'event dispatché après une décomposition ou un assemblage réussi */
+/** Name of the event dispatched after a successful decomposition or assembly */
 export const STAR_EVENT = 'flompt:action-completed'
 
 const StarPopup = () => {
@@ -15,7 +15,7 @@ const StarPopup = () => {
   const [visible, setVisible] = useState(false)
   const closeRef = useRef<HTMLButtonElement>(null)
 
-  // Écoute l'event — s'affiche une seule fois (localStorage)
+  // Listen for the event — shown only once (localStorage)
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | null = null
 
@@ -24,7 +24,7 @@ const StarPopup = () => {
         if (localStorage.getItem(POPUP_KEY)) return
       } catch { return }
 
-      // Délai pour ne pas couper l'action en cours
+      // Delay to avoid interrupting the ongoing action
       timer = setTimeout(() => setVisible(true), SHOW_DELAY)
     }
 
@@ -35,7 +35,7 @@ const StarPopup = () => {
     }
   }, [])
 
-  // Focus sur le bouton Fermer à l'ouverture
+  // Focus the Close button on open
   useEffect(() => {
     if (visible) closeRef.current?.focus()
   }, [visible])
@@ -45,7 +45,7 @@ const StarPopup = () => {
     setVisible(false)
   }
 
-  // Fermer sur Escape
+  // Close on Escape
   useEffect(() => {
     if (!visible) return
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') dismiss() }

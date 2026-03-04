@@ -5,7 +5,7 @@ import integrations from './integrations/index.js'
   if (window.__flomptInjected) return
   window.__flomptInjected = true
 
-  // ── Caveat font — bundlée localement (les CSP des plateformes bloquent Google Fonts)
+  // ── Caveat font — bundled locally (platform CSPs block Google Fonts)
   if (!document.getElementById('flompt-caveat-font')) {
     const style = document.createElement('style')
     style.id = 'flompt-caveat-font'
@@ -41,7 +41,7 @@ import integrations from './integrations/index.js'
     i.hostnames.some(h => hostname.includes(h))
   ) || null
 
-  /** Mappe le nom de la plateforme vers le format de sortie attendu */
+  /** Maps the platform name to the expected output format */
   const PLATFORM_FORMAT = {
     ChatGPT: 'chatgpt',
     Claude:  'claude',
@@ -79,11 +79,11 @@ import integrations from './integrations/index.js'
     setTimeout(() => el.dispatchEvent(new Event('change', { bubbles: true })), 50)
   }
 
-  /** Lit le texte courant de l'input de la plateforme */
+  /** Reads the current text from the platform input */
   function getInputText () {
     const el = platform?.getInput()
     if (!el) return ''
-    // innerText > textContent : gère mieux les sauts de ligne et le texte visible
+    // innerText > textContent : handles line breaks and visible text better
     const text = el.value ?? el.innerText ?? el.textContent ?? ''
     if (DEV_MODE) console.log('[flompt] getInputText el:', el.tagName, el.className?.slice(0, 40), '→', JSON.stringify(text?.slice(0, 60)))
     return text
@@ -97,10 +97,10 @@ import integrations from './integrations/index.js'
   let currentSidebarWidth = SIDEBAR_W_DEFAULT
   let pageShiftStyle      = null
 
-  // ── Import manuel: plateforme → iframe (déclenché par bouton dans l'app) ───
+  // ── Manual import: platform → iframe (triggered by button in the app) ───
   /**
-   * Lit le texte de l'input plateforme et l'envoie une fois à l'iframe.
-   * Appelé uniquement sur demande explicite (FLOMPT_SYNC_REQUEST).
+   * Reads the platform input text and sends it once to the iframe.
+   * Called only on explicit request (FLOMPT_SYNC_REQUEST).
    */
   function sendPlatformInputToIframe () {
     if (!iframeEl?.contentWindow || !iframeReady) return
@@ -112,13 +112,13 @@ import integrations from './integrations/index.js'
     }, '*')
   }
 
-  // ── Push layout : rétrécit le contenu de la page pour faire place à la sidebar ──
+  // ── Push layout: shrinks page content to make room for the sidebar ──
   //
-  // Stratégie :
+  // Strategy:
   //  1. `body > :not(flompt-*)` → max-width: calc(100vw - sidebarWidth)
-  //     Cible le container root de la plateforme (ex: #__next de ChatGPT)
-  //  2. `html, body` → overflow-x: hidden (évite le scroll horizontal)
-  //  3. Transition synchronisée avec l'animation de la sidebar (0.3s)
+  //     Targets the platform's root container (e.g. ChatGPT's #__next)
+  //  2. `html, body` → overflow-x: hidden (prevents horizontal scroll)
+  //  3. Transition synchronized with the sidebar animation (0.3s)
   //
   const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)'
   const EXCL = ':not(#flompt-sidebar):not(#flompt-toast):not(#flompt-toggle-tooltip):not(#flompt-toggle)'
@@ -141,7 +141,7 @@ import integrations from './integrations/index.js'
 
   function removePageShift () {
     if (pageShiftStyle) {
-      // Animer le retour avant de supprimer le style
+      // Animate the return before removing the style
       pageShiftStyle.textContent = `
         body { margin-right: 0px !important; transition: margin-right 0.3s ${EASE} !important; }
         body > ${EXCL} {
@@ -172,12 +172,12 @@ import integrations from './integrations/index.js'
       document.body.style.userSelect = 'none'
       sidebarEl.classList.add('flompt-resizing')
       document.body.classList.add('flompt-resizing')
-      // Désactiver les pointer-events sur l'iframe : sans ça, quand la souris
-      // passe dessus pendant le drag, l'iframe capture les events et le resize se bloque
+      // Disable pointer-events on the iframe: without this, when the mouse
+      // passes over it during drag, the iframe captures events and resize gets stuck
       if (iframeEl) iframeEl.style.pointerEvents = 'none'
 
       const onMouseMove = (e) => {
-        // Drag vers la gauche = augmenter la largeur
+        // Drag left = increase width
         const dx       = startX - e.clientX
         const newWidth = Math.max(
           SIDEBAR_W_MIN,
@@ -190,7 +190,7 @@ import integrations from './integrations/index.js'
           applyPageShift(newWidth)
         }
 
-        // Mettre à jour le bouton flottant actif
+        // Update the active floating button
         if (toggleBtn.classList.contains('flompt-floating') && toggleBtn.classList.contains('flompt-active')) {
           toggleBtn.style.setProperty('right', (newWidth + 20) + 'px', 'important')
         }
@@ -200,7 +200,7 @@ import integrations from './integrations/index.js'
         document.body.style.userSelect = ''
         sidebarEl.classList.remove('flompt-resizing')
         document.body.classList.remove('flompt-resizing')
-        // Restaurer les pointer-events de l'iframe
+        // Restore pointer-events on the iframe
         if (iframeEl) iframeEl.style.pointerEvents = ''
         document.removeEventListener('mousemove', onMouseMove)
         document.removeEventListener('mouseup', onMouseUp)
@@ -213,17 +213,17 @@ import integrations from './integrations/index.js'
     return handle
   }
 
-  // ── DOM: Header interne — style nav flompt.dev (Caveat + accent) ─────────────
+  // ── DOM: Internal header — flompt.dev nav style (Caveat + accent) ─────────────
   function buildSidebarHeader () {
     const header = document.createElement('div')
     header.id = 'flompt-header'
 
-    // Brand "flompt" en Caveat — identique au nav du vrai site
+    // Brand "flompt" in Caveat — identical to the real site's nav
     const title = document.createElement('span')
     title.id          = 'flompt-header-title'
     title.textContent = 'flompt'
 
-    // Bouton close — clairement à l'intérieur de l'extension
+    // Close button — clearly inside the extension
     const closeBtn = document.createElement('button')
     closeBtn.id = 'flompt-header-close'
     closeBtn.setAttribute('aria-label', 'Close')
@@ -239,12 +239,12 @@ import integrations from './integrations/index.js'
     return header
   }
 
-  // ── DOM: Sidebar — header interne + iframe + resize handle ────────────────
+  // ── DOM: Sidebar — internal header + iframe + resize handle ────────────────
   function buildSidebar () {
     const sidebar = document.createElement('div')
     sidebar.id = 'flompt-sidebar'
 
-    // Splash screen — visible pendant le chargement
+    // Splash screen — visible while loading
     const splash = document.createElement('div')
     splash.id = 'flompt-splash'
     const splashInner = document.createElement('div')
@@ -277,9 +277,9 @@ import integrations from './integrations/index.js'
         s.classList.add('flompt-splash-hidden')
         setTimeout(() => s.remove(), 450)
       }
-      // Envoie le nom de la plateforme dès le chargement — le bouton affiche
-      // "Import from Claude" immédiatement sans attendre le premier clic
-      // Inclut aussi le format optimal pour cette plateforme
+      // Send the platform name immediately on load — the button shows
+      // "Import from Claude" right away without waiting for the first click
+      // Also includes the optimal format for this platform
       if (platform?.name) {
         iframeEl.contentWindow.postMessage({
           type: 'FLOMPT_PLATFORM_INFO',
@@ -289,9 +289,9 @@ import integrations from './integrations/index.js'
       }
     })
 
-    // Header interne (close button visible à l'intérieur)
+    // Internal header (close button visible inside)
     const header      = buildSidebarHeader()
-    // Resize handle (bord gauche)
+    // Resize handle (left edge)
     const resizeHandle = buildResizeHandle()
 
     sidebar.appendChild(resizeHandle)
@@ -312,12 +312,12 @@ import integrations from './integrations/index.js'
     applyPageShift(currentSidebarWidth)
     toggleBtn.classList.add('flompt-active')
 
-    // Bouton flottant : déplacer à gauche de la sidebar
+    // Floating button: move to the left of the sidebar
     if (toggleBtn.classList.contains('flompt-floating')) {
       toggleBtn.style.setProperty('right', (currentSidebarWidth + 20) + 'px', 'important')
     }
 
-    // Pas de sync automatique — l'user déclenche l'import manuellement
+    // No automatic sync — the user triggers import manually
   }
 
   function closeSidebar () {
@@ -326,7 +326,7 @@ import integrations from './integrations/index.js'
     removePageShift()
     toggleBtn?.classList.remove('flompt-active')
 
-    // Restaurer la position du bouton flottant
+    // Restore the floating button position
     if (toggleBtn?.classList.contains('flompt-floating')) {
       toggleBtn.style.removeProperty('right')
     }
@@ -341,7 +341,7 @@ import integrations from './integrations/index.js'
   const toggleBtn = document.createElement('button')
   toggleBtn.id    = 'flompt-toggle'
   toggleBtn.setAttribute('aria-label', 'Enhance with flompt')
-  // Icône Sparkles (Lucide) inline — pas d'img pour éviter les conflits de style
+  // Sparkles icon (Lucide) inline — no img to avoid style conflicts
   toggleBtn.innerHTML = `
     <svg id="flompt-toggle-icon" xmlns="http://www.w3.org/2000/svg"
       width="16" height="16" viewBox="0 0 24 24"
@@ -353,15 +353,15 @@ import integrations from './integrations/index.js'
       <path d="M4 17v2"/><path d="M5 18H3"/>
     </svg>
   `
-  // stopPropagation critique : évite de déclencher les handlers parents
-  // (ex: file upload label sur ChatGPT, overlay Gemini, etc.)
+  // stopPropagation is critical: avoids triggering parent handlers
+  // (e.g. file upload label on ChatGPT, Gemini overlay, etc.)
   toggleBtn.addEventListener('click', (e) => {
     e.stopPropagation()
     e.preventDefault()
     toggleSidebar()
   })
 
-  // ── Tooltip custom centré — remplace le title natif (mal positionné sur Claude) ──
+  // ── Custom centered tooltip — replaces the native title (poorly positioned on Claude) ──
   toggleBtn.addEventListener('mouseenter', () => {
     if (document.getElementById('flompt-toggle-tooltip')) return
     const rect = toggleBtn.getBoundingClientRect()
@@ -369,7 +369,7 @@ import integrations from './integrations/index.js'
     tip.id = 'flompt-toggle-tooltip'
     tip.textContent = 'Enhance'
     document.body.appendChild(tip)
-    // Centrer horizontalement après insertion (pour connaître la largeur réelle)
+    // Center horizontally after insertion (to know the actual width)
     requestAnimationFrame(() => {
       const tw = tip.offsetWidth
       const th = tip.offsetHeight
@@ -385,19 +385,19 @@ import integrations from './integrations/index.js'
     setTimeout(() => tip.remove(), 180)
   })
   toggleBtn.addEventListener('click', () => {
-    // Cacher le tooltip au clic (la sidebar s'ouvre)
+    // Hide the tooltip on click (the sidebar opens)
     const tip = document.getElementById('flompt-toggle-tooltip')
     if (tip) tip.remove()
   }, true)
 
-  // ── Insertion du toggle — zone outils de la toolbar ─────────────────────
+  // ── Toggle insertion — toolbar tools area ─────────────────────
   //
-  // Stratégie :
-  //   1. Trouver le bouton Send pour localiser le toolbar général
-  //   2. Identifier les boutons "outils" (tout sauf send/voice/mic)
-  //   3. Insérer flompt APRÈS le premier bouton outil (zone outils native)
-  //   4. Fallback : juste avant le bouton send
-  //   5. Fallback final : bouton flottant
+  // Strategy:
+  //   1. Find the Send button to locate the general toolbar
+  //   2. Identify "tool" buttons (everything except send/voice/mic)
+  //   3. Insert flompt AFTER the first tool button (native tools area)
+  //   4. Fallback: just before the send button
+  //   5. Final fallback: floating button
 
   function findSendBtnByTraversal () {
     const input = platform?.getInput()
@@ -424,9 +424,9 @@ import integrations from './integrations/index.js'
   }
 
   /**
-   * Trouve le premier bouton "outil" dans la toolbar (attach, search, tools…).
-   * Exclut send, voice/mic/record — remonte depuis le sendBtn pour trouver
-   * un niveau contenant à la fois des outils ET le bouton send.
+   * Finds the first "tool" button in the toolbar (attach, search, tools...).
+   * Excludes send, voice/mic/record — traverses up from sendBtn to find
+   * a level containing both tools AND the send button.
    */
   function findFirstToolBtn () {
     const sendBtn = platform?.getSendBtn?.() || findSendBtnByTraversal()
@@ -451,7 +451,7 @@ import integrations from './integrations/index.js'
       const allBtns  = Array.from(toolbar.querySelectorAll('button'))
       const toolBtns = allBtns.filter(b => b !== toggleBtn && !isSendLike(b))
 
-      // Bon niveau : contient des outils ET un bouton send-like
+      // Right level: contains tools AND a send-like button
       if (toolBtns.length > 0 && allBtns.some(isSendLike)) {
         return toolBtns[0]
       }
@@ -478,23 +478,23 @@ import integrations from './integrations/index.js'
       return true
     }
 
-    // ── Essai 1 : zone outils ─────────────────────────────────────────────
+    // ── Attempt 1: tools area ─────────────────────────────────────────────
     const firstTool = findFirstToolBtn()
     if (firstTool) {
       let container = firstTool.parentElement
-      // Éviter les <label> (file input) et <a>
+      // Avoid <label> (file input) and <a>
       while (container && (container.tagName === 'LABEL' || container.tagName === 'A')) {
         container = container.parentElement
       }
       if (container) {
-        // Insérer juste après le premier bouton outil — intégré dans la zone outils
+        // Insert just after the first tool button — integrated in the tools area
         container.insertBefore(toggleBtn, firstTool.nextSibling)
         platform?.onButtonMounted?.(toggleBtn)
         return true
       }
     }
 
-    // ── Essai 2 : fallback juste avant le bouton send ─────────────────────
+    // ── Attempt 2: fallback just before the send button ─────────────────────
     const sendBtn = platform?.getSendBtn?.() || findSendBtnByTraversal()
     if (!sendBtn) return false
 
@@ -509,7 +509,7 @@ import integrations from './integrations/index.js'
     return true
   }
 
-  // Retry avec timer unique (pas de race condition)
+  // Retry with single timer (no race condition)
   let mountTimer    = null
   let mountAttempts = 0
 
@@ -522,7 +522,7 @@ import integrations from './integrations/index.js'
     if (tryInsertInToolbar()) return
 
     if (++mountAttempts >= 20) {
-      // Fallback définitif : bouton flottant bas-droite
+      // Definitive fallback: floating button bottom-right
       if (!toggleBtn.isConnected) {
         toggleBtn.classList.add('flompt-floating')
         document.body.appendChild(toggleBtn)
@@ -533,10 +533,10 @@ import integrations from './integrations/index.js'
     scheduleMount(500)
   }
 
-  // Lancement immédiat
+  // Immediate launch
   scheduleMount(0)
 
-  // Ré-insertion si le bouton disparaît (navigation SPA)
+  // Re-insert if the button disappears (SPA navigation)
   setInterval(() => {
     if (!toggleBtn.isConnected) {
       mountAttempts = 0
@@ -544,28 +544,28 @@ import integrations from './integrations/index.js'
     }
   }, 2000)
 
-  // ── Live update : app → plateforme (brut, sans toast ni fermeture) ──────────
+  // ── Live update: app → platform (raw, without toast or close) ──────────
   //
-  // execCommand est la seule voie universelle (React, ProseMirror, Angular) —
-  // textContent seul est écrasé par le virtual DOM de ces frameworks.
+  // execCommand is the only universal path (React, ProseMirror, Angular) —
+  // textContent alone is overwritten by the virtual DOM of these frameworks.
   //
-  // Flow :
-  //  1. el.focus() + selectAll + execCommand('insertText') → remplace TOUT le contenu
-  //  2. Fallback beforeinput/textContent/input si execCommand échoue
-  //  3. iframeEl.focus() — opération DOM locale (pas cross-origin), synchrone
-  //     Le browser route le focus vers le dernier élément actif dans l'iframe,
-  //     l'user peut continuer à taper sans interruption perceptible
+  // Flow:
+  //  1. el.focus() + selectAll + execCommand('insertText') → replaces ALL content
+  //  2. Fallback beforeinput/textContent/input if execCommand fails
+  //  3. iframeEl.focus() — local DOM operation (not cross-origin), synchronous
+  //     The browser routes focus to the last active element in the iframe,
+  //     the user can continue typing without noticeable interruption
   function liveUpdatePlatformInput (text) {
     const el = platform?.getInput()
     if (!el) return
 
-    // Écho : l'app renvoie ce qu'elle vient de recevoir — rien à faire
+    // Echo: the app is sending back what it just received — nothing to do
     if (getInputText() === text) return
 
     try {
       lastSentText = text
 
-      // Sauvegarder AVANT el.focus() — détermine si on doit rendre le focus à l'iframe
+      // Save BEFORE el.focus() — determines whether to return focus to the iframe
       const platformHasFocus = el === document.activeElement || el.contains(document.activeElement)
 
       el.focus()
@@ -588,8 +588,8 @@ import integrations from './integrations/index.js'
         el.dispatchEvent(new InputEvent('input', { bubbles: true, data: text }))
       }
 
-      // Rendre le focus à l'iframe seulement si l'user y était
-      // Si l'user tapait dans la plateforme → ne pas lui voler le focus
+      // Return focus to the iframe only if the user was there
+      // If the user was typing in the platform → don't steal their focus
       if (!platformHasFocus) iframeEl?.focus()
 
     } catch (err) {
@@ -597,39 +597,39 @@ import integrations from './integrations/index.js'
     }
   }
 
-  // ── Messages depuis l'iframe flompt ────────────────────────────────────────
+  // ── Messages from the flompt iframe ────────────────────────────────────────
   window.addEventListener('message', (event) => {
     if (event.origin !== FLOMPT_ORIGIN) return
 
     const { type, prompt, text } = event.data ?? {}
 
-    // Sync brute app → plateforme en temps réel (sans fermer la sidebar)
+    // Raw sync app → platform in real time (without closing the sidebar)
     if (type === 'FLOMPT_LIVE_UPDATE' && typeof text === 'string') {
       liveUpdatePlatformInput(text)
     }
 
-    // Injection finale du prompt compilé dans la plateforme (+ fermeture)
+    // Final injection of the compiled prompt into the platform (+ close)
     if (type === 'FLOMPT_INJECT' && typeof prompt === 'string') {
       injectPrompt(prompt)
     }
 
-    // Fermeture de la sidebar depuis l'app
+    // Sidebar close triggered from the app
     if (type === 'FLOMPT_CLOSE') {
       closeSidebar()
     }
 
-    // L'user clique "Import prompt" dans l'app → on lit et envoie l'input plateforme
+    // User clicks "Import prompt" in the app → read and send the platform input
     if (type === 'FLOMPT_SYNC_REQUEST') {
       sendPlatformInputToIframe()
     }
   })
 
-  // ── Message depuis le service worker (clic icône toolbar) ─────────────────
+  // ── Message from the service worker (toolbar icon click) ─────────────────
   chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === 'FLOMPT_TOGGLE') toggleSidebar()
   })
 
-  // ── Injection du prompt dans l'input de la plateforme ─────────────────────
+  // ── Prompt injection into the platform input ─────────────────────
   function injectPrompt (text) {
     if (!platform) {
       showToast('❌ Platform not detected. Try refreshing.', 'error')

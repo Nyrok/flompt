@@ -1,7 +1,7 @@
 /* ── flompt Extension Styles ────────────────────────────────────────────────
-   Design aligné sur l'app flompt — dark theme, accent #FF3570
+   Design aligned with the flompt app — dark theme, accent #FF3570
    All selectors are prefixed with #flompt- to avoid conflicts with host pages
-   v0.2.3 — Header nav-style (Caveat + accent), tooltip custom centré JS
+   v0.2.3 — Header nav-style (Caveat + accent), JS-centered custom tooltip
    ──────────────────────────────────────────────────────────────────────── */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
@@ -33,12 +33,12 @@ body.flompt-resizing {
   transition: none !important;
 }
 
-/* ── Resize handle — zone large + grip dots ───────────────────────────────── */
+/* ── Resize handle — wide zone + grip dots ───────────────────────────────── */
 #flompt-resize-handle {
   position: absolute !important;
   top: 0 !important;
-  left: -7px !important;          /* 7px outside + border = ~8px zone gauche */
-  width: 16px !important;         /* zone de grab totale : 16px, très facile à attraper */
+  left: -7px !important;          /* 7px outside + border = ~8px left zone */
+  width: 16px !important;         /* total grab zone: 16px, very easy to grab */
   height: 100% !important;
   cursor: ew-resize !important;
   z-index: 12 !important;
@@ -48,7 +48,7 @@ body.flompt-resizing {
   background: transparent !important;
 }
 
-/* Indicateur visuel : barre fine + 3 points grip */
+/* Visual indicator: thin bar + 3 grip dots */
 #flompt-resize-handle::before {
   content: '' !important;
   position: absolute !important;
@@ -62,7 +62,7 @@ body.flompt-resizing {
   border-radius: 2px !important;
 }
 
-/* 3 points grip centrés */
+/* 3 centered grip dots */
 #flompt-resize-handle::after {
   content: '' !important;
   position: absolute !important;
@@ -73,7 +73,7 @@ body.flompt-resizing {
   height: 4px !important;
   border-radius: 50% !important;
   background: rgba(255, 255, 255, 0) !important;
-  /* 3 dots verticaux via box-shadow */
+  /* 3 vertical dots via box-shadow */
   box-shadow:
     0 -10px 0 2px rgba(255, 255, 255, 0),
     0   0px 0 2px rgba(255, 255, 255, 0),
@@ -97,7 +97,7 @@ body.flompt-resizing {
   background: rgba(255, 53, 112, 0.55) !important;
 }
 
-/* ── Header interne — identique au nav flompt.dev (Caveat + accent) ─────────── */
+/* ── Internal header — identical to the flompt.dev nav (Caveat + accent) ─────────── */
 #flompt-header {
   height: 52px !important;
   background: rgba(17, 17, 17, 0.95) !important;
@@ -153,7 +153,7 @@ body.flompt-resizing {
   color: #FF3570 !important;
 }
 
-/* ── Toggle tooltip — centré via JS (getBoundingClientRect) ──────────────── */
+/* ── Toggle tooltip — centered via JS (getBoundingClientRect) ──────────────── */
 #flompt-toggle-tooltip {
   position: fixed !important;
   background: #1c1c1e !important;
@@ -240,12 +240,12 @@ body.flompt-body-shifted {
   transition: margin-right 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* ── Toggle button — style neutre matching les boutons natifs ─────────────── */
+/* ── Toggle button — neutral style matching native buttons ─────────────── */
 /*
-  Conçu pour s'intégrer comme un bouton parmi ses frères/sœurs :
-  - Taille similaire aux boutons de toolbar (~32px)
-  - Couleur neutre (currentColor inherit), fond transparent
-  - Pas de style flompt-specific pour passer inaperçu dans la toolbar
+  Designed to blend in as a button among its siblings:
+  - Similar size to toolbar buttons (~32px)
+  - Neutral color (currentColor inherit), transparent background
+  - No flompt-specific style to go unnoticed in the toolbar
 */
 #flompt-toggle {
   display: inline-flex !important;
@@ -259,7 +259,7 @@ body.flompt-body-shifted {
   cursor: pointer !important;
   padding: 0 !important;
   margin: 0 2px !important;
-  color: inherit !important;             /* hérite de la couleur de la toolbar */
+  color: inherit !important;             /* inherits the toolbar color */
   opacity: 0.72 !important;
   transition: opacity 0.15s, background 0.15s !important;
   flex-shrink: 0 !important;
@@ -279,7 +279,7 @@ body.flompt-body-shifted {
   background: rgba(128, 128, 128, 0.15) !important;
 }
 
-/* État actif (sidebar ouverte) — léger highlight discret */
+/* Active state (sidebar open) — subtle highlight */
 #flompt-toggle.flompt-active:not(.flompt-floating) {
   opacity: 1 !important;
   background: rgba(255, 53, 112, 0.12) !important;

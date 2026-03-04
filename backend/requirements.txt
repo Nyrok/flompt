@@ -5,11 +5,11 @@ pydantic==2.7.0
 python-dotenv==1.0.1
 httpx==0.27.0
 
-# AI providers (décommenter selon ton choix)
+# AI providers (uncomment according to your choice)
 # anthropic==0.34.0
 # openai==1.45.0
 
 # Prompt Guard — meta-llama/Llama-Guard-4-12B via HuggingFace Inference API
-# Aucune dépendance ML locale — appel HTTP via httpx (déjà dans les deps).
-# Nécessite HUGGINGFACE_TOKEN dans .env (licence Meta acceptée sur hf.co).
-# Si token absent ou API inaccessible, le guard se désactive automatiquement (fail-open).
+# No local ML dependencies — HTTP call via httpx (already in deps).
+# Requires HUGGINGFACE_TOKEN in .env (Meta license accepted on hf.co).
+# If token is absent or API is unreachable, the guard disables itself automatically (fail-open).

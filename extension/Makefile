@@ -8,7 +8,7 @@ DIST_DIR      := $(EXTENSION_DIR)/dist
 ZIP_CHROME  := flompt-extension.zip
 ZIP_FIREFOX := flompt-firefox.zip
 
-# Fichiers partagés (manifest ajouté séparément selon la cible)
+# Shared files (manifest added separately per target)
 # To add a new integration: add its file to SHARED_FILES (and update manifests).
 SHARED_FILES := background.js \
                 content-script.js \
@@ -31,13 +31,13 @@ all: icons pack
 
 all-browsers: icons pack firefox
 
-## icons — Génère les icônes PNG depuis icons/icon.svg
+## icons — Generate PNG icons from icons/icon.svg
 icons:
-	@echo "🎨 Génération des icônes PNG…"
+	@echo "🎨 Generating PNG icons…"
 	@node generate-icons.js
 	@echo ""
 
-## pack — Crée le zip distribuable pour le Chrome Web Store
+## pack — Create the distributable zip for the Chrome Web Store
 pack:
 	@echo "📦 Packaging Chrome Web Store…"
 	@mkdir -p $(DIST_DIR)
@@ -51,8 +51,8 @@ zf.close(); \
 size = os.path.getsize(out); \
 print(f'✅ Chrome  → dist/$(ZIP_CHROME)  ({size/1024:.1f} KB)')"
 
-## firefox — Crée le zip distribuable pour Firefox Add-ons (AMO)
-## Utilise manifest.firefox.json renommé en manifest.json dans l'archive
+## firefox — Create the distributable zip for Firefox Add-ons (AMO)
+## Uses manifest.firefox.json renamed to manifest.json inside the archive
 firefox:
 	@echo "📦 Packaging Firefox AMO…"
 	@mkdir -p $(DIST_DIR)
@@ -67,19 +67,19 @@ zf.close(); \
 size = os.path.getsize(out); \
 print(f'✅ Firefox → dist/$(ZIP_FIREFOX)  ({size/1024:.1f} KB)')"
 
-## clean — Supprime le dossier dist/
+## clean — Delete the dist/ directory
 clean:
-	@echo "🧹 Nettoyage…"
+	@echo "🧹 Cleaning…"
 	@rm -rf $(DIST_DIR)
-	@echo "✅ dist/ supprimé"
+	@echo "✅ dist/ deleted"
 
-## help — Affiche cette aide
+## help — Display this help
 help:
 	@echo ""
-	@echo "  make icons         Génère les icônes PNG depuis icons/icon.svg"
-	@echo "  make pack          Crée dist/$(ZIP_CHROME)  (Chrome Web Store)"
-	@echo "  make firefox       Crée dist/$(ZIP_FIREFOX) (Firefox AMO)"
+	@echo "  make icons         Generate PNG icons from icons/icon.svg"
+	@echo "  make pack          Create dist/$(ZIP_CHROME)  (Chrome Web Store)"
+	@echo "  make firefox       Create dist/$(ZIP_FIREFOX) (Firefox AMO)"
 	@echo "  make all           icons + pack (Chrome)"
-	@echo "  make all-browsers  icons + pack + firefox (les deux)"
-	@echo "  make clean         Supprime dist/"
+	@echo "  make all-browsers  icons + pack + firefox (both)"
+	@echo "  make clean         Delete dist/"
 	@echo ""

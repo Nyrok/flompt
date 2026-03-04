@@ -1,6 +1,6 @@
 #!/bin/bash
-# keepalive.sh — Boucle infinie qui s'assure que supervisord tourne toujours
-# Lance et autorestart supervisord si il s'arrête
+# keepalive.sh — Infinite loop that ensures supervisord is always running
+# Starts and auto-restarts supervisord if it stops
 
 SUPERVISORD=/home/botuser/.cache/pypoetry/virtualenvs/claude-code-telegram-9TtSrW0h-py3.11/bin/supervisord
 SUPERVISORCTL=/home/botuser/.cache/pypoetry/virtualenvs/claude-code-telegram-9TtSrW0h-py3.11/bin/supervisorctl
@@ -9,13 +9,13 @@ LOG=/tmp/flompt-keepalive.log
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> $LOG; }
 
-log "keepalive démarré (PID $$)"
+log "keepalive started (PID $$)"
 
 while true; do
   if ! $SUPERVISORCTL -c $CONF status > /dev/null 2>&1; then
-    log "supervisord DOWN — redémarrage..."
+    log "supervisord DOWN — restarting..."
 
-    # Libérer le port 8000 si un zombie l'occupe
+    # Free port 8000 if a zombie process is occupying it
     inode=$(awk '/00001F40/{print $10}' /proc/net/tcp 2>/dev/null | head -1)
     if [ -n "$inode" ]; then
       for pid in $(ls /proc/ 2>/dev/null | grep -E '^[0-9]+$'); do
@@ -28,7 +28,7 @@ while true; do
     fi
 
     $SUPERVISORD -c $CONF >> $LOG 2>&1
-    log "supervisord relancé"
+    log "supervisord restarted"
   fi
 
   sleep 30

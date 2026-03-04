@@ -14,30 +14,30 @@ router = APIRouter()
 
 async def _decompose_task(job_id: str, prompt: str) -> None:
     """
-    Background task :
-      1. Analyse de sécurité via Prompt Guard (statut "analyzing")
-      2. Si bloqué → statut "blocked", fin.
-      3. Si safe → entre dans la LLMQueue (statut "queued" → "processing")
-      4. Résultat stocké : "done" ou "error".
+    Background task:
+      1. Security analysis via Prompt Guard (status "analyzing")
+      2. If blocked -> status "blocked", end.
+      3. If safe -> enters the LLMQueue (status "queued" -> "processing")
+      4. Result stored: "done" or "error".
     """
     try:
-        # ── Étape 1 : Prompt Guard (Llama Guard 4 12B) ───────────────────────
+        # ── Step 1: Prompt Guard (Llama Guard 4 12B) ─────────────────────────
         is_safe, codes, names, raw = await prompt_guard_service.classify(prompt)
 
         if not is_safe:
             job_store.store_blocked(
                 job_id,
                 reason="PROMPT_BLOCKED",
-                violations=names,  # noms lisibles ex. ["Violent Crimes", "Hate"]
+                violations=names,  # human-readable names e.g. ["Violent Crimes", "Hate"]
             )
             return
 
-        # ── Étape 2 : Mise en file LLM ────────────────────────────────────────
+        # ── Step 2: LLM queue entry ───────────────────────────────────────────
         q = llm_queue.status
         estimated_position = q["pending"] + (1 if q["currently_processing"] else 0) + 1
         job_store.set_queued(job_id, estimated_position)
 
-        # ── Étape 3 : Décomposition LLM ───────────────────────────────────────
+        # ── Step 3: LLM decomposition ─────────────────────────────────────────
         result = await decompose(prompt, job_id=job_id)
         job_store.store_result(job_id, result.dict())
 
@@ -48,10 +48,10 @@ async def _decompose_task(job_id: str, prompt: str) -> None:
 @router.post("/decompose")
 async def decompose_prompt(body: DecomposeRequest) -> dict:
     """
-    Soumet un job de décomposition de façon asynchrone (fire-and-forget).
+    Submits a decomposition job asynchronously (fire-and-forget).
 
-    Retourne immédiatement { job_id, status: "analyzing", token }.
-    Le token JWT est requis pour accéder au statut/résultat du job.
+    Returns immediately { job_id, status: "analyzing", token }.
+    The JWT token is required to access the job status/result.
     """
     if not body.prompt.strip():
         raise HTTPException(status_code=422, detail="Le prompt ne peut pas être vide.")
@@ -59,10 +59,10 @@ async def decompose_prompt(body: DecomposeRequest) -> dict:
     job_id = body.job_id or str(uuid.uuid4())
     token = create_job_token(job_id)
 
-    # Enregistrer immédiatement comme "analyzing" (guard pas encore lancé)
+    # Register immediately as "analyzing" (guard not yet started)
     job_store.set_analyzing(job_id)
 
-    # Soumettre en arrière-plan — ne pas attendre
+    # Submit in the background — do not await
     asyncio.create_task(_decompose_task(job_id, body.prompt))
 
     return {"job_id": job_id, "status": "analyzing", "token": token}
@@ -75,19 +75,19 @@ async def ws_job_status(
     token: str | None = Query(default=None),
 ) -> None:
     """
-    WebSocket — pousse les mises à jour de statut d'un job en temps réel.
-    Requiert le token JWT retourné par POST /api/decompose (?token=...).
+    WebSocket — pushes job status updates in real time.
+    Requires the JWT token returned by POST /api/decompose (?token=...).
 
-    Messages envoyés :
+    Messages sent:
       { job_id, status: "queued",      position: N }
       { job_id, status: "processing",  position: 0 }
       { job_id, status: "done",        result: {nodes, edges} }
       { job_id, status: "error",       error: "..." }
 
-    La connexion se ferme automatiquement dès que le job est terminal (done/error).
-    Le job est supprimé de la mémoire après envoi de l'état terminal.
+    The connection closes automatically once the job reaches a terminal state (done/error).
+    The job is removed from memory after the terminal state is sent.
     """
-    # ── Auth : vérifier le token avant d'accepter la connexion ───────────────
+    # ── Auth: verify the token before accepting the connection ────────────────
     if not token or not verify_job_token(token, job_id):
         await websocket.close(code=4001, reason="Token invalide ou manquant")
         return
@@ -98,7 +98,7 @@ async def ws_job_status(
 
     try:
         while True:
-            # Priorité : statut live de la LLMQueue (position exacte)
+            # Priority: live status from LLMQueue (exact position)
             live = llm_queue.get_job_status(job_id)
             if live:
                 current = live
@@ -106,12 +106,12 @@ async def ws_job_status(
                 stored = job_store.get(job_id)
                 current = {"job_id": job_id, **(stored or {"status": "unknown"})}
 
-            # N'envoyer que si le statut a changé
+            # Only send if the status has changed
             if current != last_payload:
                 await websocket.send_json(current)
                 last_payload = current
 
-            # Fermer sur état terminal
+            # Close on terminal state
             if current.get("status") in ("done", "error", "blocked"):
                 terminal_reached = True
                 break
@@ -125,6 +125,6 @@ async def ws_job_status(
             await websocket.close()
         except Exception:
             pass
-        # Nettoyer le job de la mémoire après envoi de l'état terminal
+        # Clean up the job from memory after sending the terminal state
         if terminal_reached:
             job_store.delete(job_id)

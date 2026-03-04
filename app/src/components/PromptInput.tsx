@@ -7,7 +7,7 @@ import { analytics, setSource } from '@/lib/analytics'
 import { isExtension } from '@/lib/platform'
 import { STAR_EVENT } from '@/components/StarPopup'
 
-// ─── Composant ────────────────────────────────────────────────────────────────
+// ─── Component ────────────────────────────────────────────────────────────────
 
 const PromptInput = () => {
   const {
@@ -24,7 +24,7 @@ const PromptInput = () => {
   const [platformName, setPlatformName] = useState<string | null>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  // ── Réception import depuis la plateforme (extension uniquement) ──────────
+  // ── Receive import from the platform (extension only) ────────────────────
   useEffect(() => {
     if (!isExtension) return
 
@@ -70,19 +70,19 @@ const PromptInput = () => {
     setTimeout(() => setActiveTab('canvas'), 0)
 
     try {
-      // ── 1. Soumettre le job — retour immédiat (statut initial : "analyzing") ──
+      // ── 1. Submit the job — returns immediately (initial status: "analyzing") ──
       const { status: initStatus, position, token } = await decomposePrompt(prompt, jobId)
       setQueueStatus({
         position: position ?? 0,
         status: initStatus === 'analyzing' ? 'analyzing' : 'queued',
       })
 
-      // ── 2. Attendre le résultat via WebSocket ─────────────────────────────
+      // ── 2. Wait for the result via WebSocket ──────────────────────────────
       const result = await watchJobStatus(jobId, token, (pos, status) => {
         setQueueStatus({ position: pos, status })
       })
 
-      // ── 3. Appliquer le résultat ──────────────────────────────────────────
+      // ── 3. Apply the result ───────────────────────────────────────────────
       setNodes(result.nodes)
       setEdges(result.edges)
       setLastDecomposedPrompt(prompt)
@@ -92,7 +92,7 @@ const PromptInput = () => {
     } catch (e) {
       setActiveTab('input')
 
-      // Cas spécial : prompt bloqué par Llama Guard 4 avec catégories de violation
+      // Special case: prompt blocked by Llama Guard 4 with violation categories
       type BlockedErr = Error & { jobError?: string; violations?: string[] }
       const jobErr = (e as BlockedErr)?.jobError
 
@@ -102,7 +102,7 @@ const PromptInput = () => {
         setError(`${t.errors.blocked}${detail}`)
         analytics.error('decompose', 'blocked')
       } else {
-        // Erreur job store générique vs erreur réseau (AxiosError)
+        // Generic job store error vs network error (AxiosError)
         const errType = jobErr !== undefined
           ? classifyJobError(jobErr)
           : classifyError(e)
@@ -133,7 +133,7 @@ const PromptInput = () => {
     <div className="prompt-input-panel">
       <h2 className="panel-title">{t.promptInput.title}</h2>
 
-      {/* Bouton import plateforme — visible uniquement dans l'extension */}
+      {/* Platform import button — visible only in the extension */}
       {isExtension && (
         <button
           className="btn btn-secondary btn-import-platform"

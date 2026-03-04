@@ -6,14 +6,14 @@ LOG=/tmp/flompt-watchdog.log
 
 log() { echo "[$(date '+%H:%M:%S')] $1" >> $LOG; }
 
-# Si supervisor répond déjà → rien à faire
+# If supervisor is already responding → nothing to do
 if $SUPERVISORCTL -c $CONF status > /dev/null 2>&1; then
   exit 0
 fi
 
-log "supervisor down, démarrage en cours..."
+log "supervisor down, starting..."
 
-# Libérer le port 8000 si un ancien uvicorn l'occupe
+# Free port 8000 if an old uvicorn process is occupying it
 inode=$(awk '/00001F40/{print $10}' /proc/net/tcp 2>/dev/null | head -1)
 if [ -n "$inode" ]; then
   for pid in $(ls /proc/ 2>/dev/null | grep -E '^[0-9]+$'); do
@@ -25,6 +25,6 @@ if [ -n "$inode" ]; then
   sleep 1
 fi
 
-# Lancer supervisord
+# Start supervisord
 $SUPERVISORD -c $CONF >> $LOG 2>&1
-log "supervisord démarré"
+log "supervisord started"

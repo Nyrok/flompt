@@ -1,8 +1,8 @@
 """
 Decomposer Service
 
-Analyse un prompt brut et retourne une liste de FlomptNodes + FlomptEdges.
-Utilise l'AI service si disponible, sinon fallback sur la décomposition heuristique.
+Analyzes a raw prompt and returns a list of FlomptNodes + FlomptEdges.
+Uses the AI service if available, otherwise falls back to heuristic decomposition.
 """
 
 import re
@@ -16,17 +16,17 @@ from typing import Optional
 from app.services.ai_service import decompose_with_ai, _get_anthropic_key, _get_openai_key, _get_groq_key
 
 BLOCK_META = {
-    BlockType.role: {"label": "Role", "description": "Définit la persona / le rôle de l'IA"},
-    BlockType.context: {"label": "Context", "description": "Fournit le contexte de la tâche"},
-    BlockType.objective: {"label": "Objective", "description": "Ce qu'on veut accomplir"},
-    BlockType.input: {"label": "Input", "description": "Données fournies à l'IA"},
-    BlockType.document: {"label": "Document", "description": "Contenu externe injecté en XML (<document>)"},
-    BlockType.constraints: {"label": "Constraints", "description": "Règles et limites à respecter"},
-    BlockType.output_format: {"label": "Output Format", "description": "Format attendu de la réponse"},
-    BlockType.format_control: {"label": "Format Control", "description": "Directives de style Claude (ton, verbosité, markdown)"},
+    BlockType.role: {"label": "Role", "description": "Defines the AI persona / role"},
+    BlockType.context: {"label": "Context", "description": "Provides task context"},
+    BlockType.objective: {"label": "Objective", "description": "What we want to accomplish"},
+    BlockType.input: {"label": "Input", "description": "Data provided to the AI"},
+    BlockType.document: {"label": "Document", "description": "External content injected as XML (<document>)"},
+    BlockType.constraints: {"label": "Constraints", "description": "Rules and limits to respect"},
+    BlockType.output_format: {"label": "Output Format", "description": "Expected response format"},
+    BlockType.format_control: {"label": "Format Control", "description": "Claude style directives (tone, verbosity, markdown)"},
     BlockType.examples: {"label": "Examples", "description": "Few-shot input/output pairs"},
-    BlockType.chain_of_thought: {"label": "Chain of Thought", "description": "Instructions de raisonnement pas à pas"},
-    BlockType.language: {"label": "Language", "description": "Langue de réponse de l'IA"},
+    BlockType.chain_of_thought: {"label": "Chain of Thought", "description": "Step-by-step reasoning instructions"},
+    BlockType.language: {"label": "Language", "description": "AI response language"},
 }
 
 # Keywords heuristics for fallback
@@ -57,7 +57,7 @@ def _build_nodes_and_edges(raw_blocks: list[dict]) -> DecomposeResponse:
             BlockType(block.get("type", ""))
             valid_blocks.append(block)
         except ValueError:
-            # Bloc avec type inconnu retourné par le LLM → on ignore
+            # Block with unknown type returned by the LLM -> skip it
             continue
     raw_blocks = valid_blocks
 
@@ -115,7 +115,7 @@ def _heuristic_decompose(raw_prompt: str) -> list[dict]:
     lower = raw_prompt.lower()
     found: list[dict] = []
 
-    # Default order (Claude best practices: documents first, then persona → task → constraints → examples → reasoning → format → language)
+    # Default order (Claude best practices: documents first, then persona -> task -> constraints -> examples -> reasoning -> format -> language)
     ordered = [
         BlockType.document, BlockType.role, BlockType.context, BlockType.objective,
         BlockType.input, BlockType.constraints, BlockType.examples,

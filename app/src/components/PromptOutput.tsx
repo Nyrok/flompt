@@ -8,14 +8,14 @@ import { isExtension } from '@/lib/platform'
 import { STAR_EVENT } from '@/components/StarPopup'
 import type { OutputFormat } from '@/types/blocks'
 
-// ─── Config des boutons de sélection ────────────────────────────────────────
+// ─── Selection button config ─────────────────────────────────────────────────
 const FORMAT_OPTIONS: Array<{ format: OutputFormat; label: string; title: string }> = [
   { format: 'claude',  label: 'Claude',  title: 'XML — Claude-optimized' },
   { format: 'chatgpt', label: 'ChatGPT', title: 'Markdown — ChatGPT-optimized' },
   { format: 'gemini',  label: 'Gemini',  title: 'Markdown — Gemini-optimized' },
 ]
 
-// ─── Composant ────────────────────────────────────────────────────────────────
+// ─── Component ────────────────────────────────────────────────────────────────
 
 const PromptOutput = () => {
   const { nodes, edges, compiledPrompt, setCompiledPrompt, outputFormat, setOutputFormat } = useFlowStore()
@@ -23,7 +23,7 @@ const PromptOutput = () => {
   const [copied,   setCopied]   = useState(false)
   const [injected, setInjected] = useState(false)
 
-  // ── En mode extension : auto-sélectionner le format depuis la plateforme ──
+  // ── In extension mode: auto-select the format from the platform ───────────
   useEffect(() => {
     if (!isExtension) return
     const onMessage = (event: MessageEvent) => {
@@ -37,14 +37,14 @@ const PromptOutput = () => {
     return () => window.removeEventListener('message', onMessage)
   }, [setOutputFormat])
 
-  // ── Texte affiché pour la plateforme sélectionnée ─────────────────────────
-  // Guard pour les anciens compiledPrompt persistés (format pré-migration sans .formats)
+  // ── Text displayed for the selected platform ──────────────────────────────
+  // Guard for legacy persisted compiledPrompt (pre-migration format without .formats)
   const currentRaw: string | null = compiledPrompt?.formats?.[outputFormat] ?? null
 
   const handleCompile = () => {
     if (nodes.length === 0) return
     analytics.compileClicked()
-    // Génère les 3 formats en une seule passe
+    // Generate all 3 formats in a single pass
     const result = assemblePrompt(nodes, edges)
     setCompiledPrompt(result)
     analytics.compileCompleted(result.tokenEstimate)
@@ -80,7 +80,7 @@ const PromptOutput = () => {
     analytics.promptExported('json')
   }
 
-  /** Envoie le prompt compilé (format courant) vers le content script de l'extension */
+  /** Sends the compiled prompt (current format) to the extension content script */
   const handleInjectToAI = useCallback(() => {
     if (!currentRaw) return
     window.parent.postMessage({ type: 'FLOMPT_INJECT', prompt: currentRaw }, '*')
@@ -115,7 +115,7 @@ const PromptOutput = () => {
         )}
       </div>
 
-      {/* Sélecteur de plateforme cible — switche l'affichage sans recompiler */}
+      {/* Target platform selector — switches the display without recompiling */}
       <div className="format-selector" role="group" aria-label="Target AI platform">
         {FORMAT_OPTIONS.map(({ format, label, title }) => (
           <button
@@ -134,7 +134,7 @@ const PromptOutput = () => {
         <>
           <pre className="compiled-output">{currentRaw}</pre>
           <div className="export-actions">
-            {/* Send to AI — uniquement dans la sidebar extension */}
+            {/* Send to AI — only in the extension sidebar */}
             {isExtension && (
               <button
                 className={`btn btn-primary export-inject${injected ? ' injected' : ''}`}

@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 /**
  * generate-icons.js
- * Génère les icônes PNG de l'extension à partir de icons/icon.svg
+ * Generates the extension's PNG icons from icons/icon.svg
  * Usage: node generate-icons.js
- * Dépendance: npm install sharp  (ou: npm install sharp --prefix /tmp/flompt-tools)
+ * Dependency: npm install sharp  (or: npm install sharp --prefix /tmp/flompt-tools)
  */
 
 const path = require('path')
 const fs   = require('fs')
 
-// Cherche sharp localement ou dans /tmp/flompt-tools
+// Look for sharp locally or in /tmp/flompt-tools
 let sharp
 try {
   sharp = require('sharp')
@@ -17,7 +17,7 @@ try {
   try {
     sharp = require('/tmp/flompt-tools/node_modules/sharp')
   } catch {
-    console.error('❌ sharp introuvable. Lance: npm install sharp --prefix /tmp/flompt-tools')
+    console.error('❌ sharp not found. Run: npm install sharp --prefix /tmp/flompt-tools')
     process.exit(1)
   }
 }
@@ -29,11 +29,11 @@ const SIZES = [16, 32, 48, 128]
 
 async function run() {
   if (!fs.existsSync(SOURCE)) {
-    console.error(`❌ Source introuvable: ${SOURCE}`)
+    console.error(`❌ Source not found: ${SOURCE}`)
     process.exit(1)
   }
 
-  console.log(`📦 Génération des icônes depuis icons/icon.svg…\n`)
+  console.log(`📦 Generating icons from icons/icon.svg…\n`)
 
   for (const size of SIZES) {
     const dest = path.join(ICONS_DIR, `icon${size}.png`)
@@ -44,10 +44,10 @@ async function run() {
     console.log(`  ✓ icon${size}.png  (${size}×${size}px)`)
   }
 
-  console.log(`\n✅ ${SIZES.length} icônes générées dans icons/`)
+  console.log(`\n✅ ${SIZES.length} icons generated in icons/`)
 }
 
 run().catch(err => {
-  console.error('❌ Erreur:', err.message)
+  console.error('❌ Error:', err.message)
   process.exit(1)
 })

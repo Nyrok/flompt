@@ -23,7 +23,7 @@ export function classifyError(e: unknown): ApiErrorType {
   return 'unknown'
 }
 
-/** Classifie une erreur backend retournée via le job store (string). */
+/** Classifies a backend error returned via the job store (string). */
 export function classifyJobError(errorMsg: string): ApiErrorType {
   const msg = errorMsg.toLowerCase()
   if (msg === 'prompt_blocked') return 'blocked'
@@ -34,15 +34,15 @@ export function classifyJobError(errorMsg: string): ApiErrorType {
 }
 
 // ─── Decompose (async / fire-and-forget) ─────────────────────────────────────
-// POST /api/decompose → retourne immédiatement { job_id, status, token }
-// WS   /api/ws/job/{job_id}?token=... → statut temps réel jusqu'à done/error
+// POST /api/decompose → returns immediately { job_id, status, token }
+// WS   /api/ws/job/{job_id}?token=... → real-time status until done/error
 
 export interface DecomposeResponse {
   nodes: FlomptNode[]
   edges: FlomptEdge[]
 }
 
-/** Réponse immédiate du POST /api/decompose. */
+/** Immediate response from POST /api/decompose. */
 export interface DecomposeJobStarted {
   job_id: string
   status: 'analyzing' | 'queued'
@@ -50,26 +50,26 @@ export interface DecomposeJobStarted {
   token: string
 }
 
-/** Réponse du WS /api/ws/job/{job_id} au fil du streaming. */
+/** Response from WS /api/ws/job/{job_id} during streaming. */
 export interface JobPollResponse {
   job_id: string
   status: 'analyzing' | 'queued' | 'processing' | 'done' | 'error' | 'blocked' | 'unknown'
   position?: number | null
-  result?: DecomposeResponse   // présent quand status === 'done'
-  error?: string               // présent quand status === 'error' | 'blocked'
-  violations?: string[]        // noms lisibles des catégories violées (status === 'blocked')
+  result?: DecomposeResponse   // present when status === 'done'
+  error?: string               // present when status === 'error' | 'blocked'
+  violations?: string[]        // human-readable names of violated categories (status === 'blocked')
 }
 
-/** Soumet le job — retourne immédiatement avec job_id, token et position estimée. */
+/** Submits the job — returns immediately with job_id, token, and estimated position. */
 export const decomposePrompt = async (rawPrompt: string, jobId: string): Promise<DecomposeJobStarted> => {
   const { data } = await client.post<DecomposeJobStarted>('/decompose', { prompt: rawPrompt, job_id: jobId })
   return data
 }
 
 /**
- * Ouvre une connexion WebSocket vers /api/ws/job/{jobId}?token=... et résout
- * la promesse dès que le job est terminé (done/error/blocked).
- * Pousse les updates de statut via le callback `onStatus`.
+ * Opens a WebSocket connection to /api/ws/job/{jobId}?token=... and resolves
+ * the promise as soon as the job is finished (done/error/blocked).
+ * Pushes status updates via the `onStatus` callback.
  */
 export function watchJobStatus(
   jobId: string,
@@ -81,7 +81,7 @@ export function watchJobStatus(
     const wsUrl = `${protocol}//${window.location.host}/api/ws/job/${jobId}?token=${encodeURIComponent(token)}`
     const ws = new WebSocket(wsUrl)
 
-    // Flag pour éviter de resolve/reject plusieurs fois
+    // Flag to avoid resolving/rejecting more than once
     let settled = false
 
     const settle = (fn: () => void) => {
@@ -131,7 +131,7 @@ export function watchJobStatus(
     }
 
     ws.onclose = () => {
-      // Connexion fermée sans état terminal (drop réseau, timeout proxy, redémarrage serveur…)
+      // Connection closed without a terminal state (network drop, proxy timeout, server restart…)
       settle(() => {
         const err = new Error('WebSocket closed before job completion')
         reject(err)
@@ -140,4 +140,4 @@ export function watchJobStatus(
   })
 }
 
-// compilePrompt supprimé — l'assemblage est désormais 100% local (voir PromptOutput.tsx)
+// compilePrompt removed — assembly is now 100% local (see PromptOutput.tsx)

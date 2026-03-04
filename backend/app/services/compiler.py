@@ -1,14 +1,14 @@
 """
 Compiler Service
 
-Recompile une liste ordonnée de blocs en un prompt optimisé machine-readable.
-Utilise l'AI service si disponible, sinon fallback sur la compilation structurée.
+Recompiles an ordered list of blocks into a machine-readable optimized prompt.
+Uses the AI service if available, otherwise falls back to structured compilation.
 """
 
 from app.models.blocks import BlockData, BlockType, CompiledPrompt
 from app.services.ai_service import compile_with_ai, _get_anthropic_key, _get_openai_key
 
-# Ordre canonique des blocs dans le prompt final
+# Canonical block order in the final prompt
 CANONICAL_ORDER: list[BlockType] = [
     BlockType.role,
     BlockType.context,
@@ -20,7 +20,7 @@ CANONICAL_ORDER: list[BlockType] = [
     BlockType.chain_of_thought,
 ]
 
-# Tags XML pour le format machine-readable
+# XML tags for the machine-readable format
 BLOCK_TAGS: dict[BlockType, str] = {
     BlockType.role: "role",
     BlockType.context: "ctx",
@@ -34,16 +34,16 @@ BLOCK_TAGS: dict[BlockType, str] = {
 
 
 def _estimate_tokens(text: str) -> int:
-    """Estimation rapide : ~4 chars = 1 token."""
+    """Quick estimate: ~4 chars = 1 token."""
     return max(1, len(text) // 4)
 
 
 def _structural_compile(blocks: list[BlockData]) -> str:
     """
-    Fallback : compile les blocs en XML structuré machine-readable.
-    Tri selon l'ordre canonique, ignore les blocs vides.
+    Fallback: compiles blocks into structured machine-readable XML.
+    Sorted according to canonical order, empty blocks ignored.
     """
-    # Trier selon l'ordre canonique
+    # Sort according to canonical order
     ordered = sorted(
         [b for b in blocks if b.content.strip()],
         key=lambda b: CANONICAL_ORDER.index(b.type) if b.type in CANONICAL_ORDER else 99
@@ -59,7 +59,7 @@ def _structural_compile(blocks: list[BlockData]) -> str:
 
 
 async def compile(blocks: list[BlockData]) -> CompiledPrompt:
-    """Main entry point — AI si disponible, sinon structurel."""
+    """Main entry point — AI if available, else structural."""
     ai_available = bool(_get_anthropic_key() or _get_openai_key())
 
     if ai_available:

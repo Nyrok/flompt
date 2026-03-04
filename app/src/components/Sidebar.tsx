@@ -11,7 +11,7 @@ const Sidebar = () => {
   const { t }   = useLocale()
   const ROW_HEIGHT = 180
 
-  // ── Scroll + effets blur haut/bas ──────────────────────────────────────────
+  // ── Scroll + top/bottom blur effects ─────────────────────────────────────
   const listRef        = useRef<HTMLDivElement>(null)
   const [showTopBlur, setShowTopBlur]       = useState(false)
   const [showBottomBlur, setShowBottomBlur] = useState(false)
@@ -25,7 +25,7 @@ const Sidebar = () => {
     setShowBottomBlur(maxScroll > 6 && scrollTop < maxScroll - 6)
   }, [])
 
-  // Vérifier l'état initial et re-vérifier si le contenu change de taille
+  // Check initial state and re-check when content size changes
   useEffect(() => {
     updateBlur()
     const el = listRef.current
@@ -35,12 +35,12 @@ const Sidebar = () => {
     return () => ro.disconnect()
   }, [updateBlur])
 
-  // ── Création de nœud ────────────────────────────────────────────────────────
+  // ── Node creation ────────────────────────────────────────────────────────
   const createNode = (type: BlockType, position?: { x: number; y: number }): FlomptNode => {
     const tr  = t.blocks[type]
     const idx = nodes.length
 
-    // response_style : initialiser options + content dès la création
+    // response_style: initialize options + content on creation
     const extraData = type === 'response_style'
       ? {
           options: { ...DEFAULT_RESPONSE_STYLE } as Record<string, string | boolean>,
@@ -68,16 +68,16 @@ const Sidebar = () => {
       <h3 className="panel-title">{t.sidebar.title}</h3>
       <p className="sidebar-hint">{t.sidebar.hint}</p>
 
-      {/* Wrapper avec position:relative pour ancrer les overlays blur */}
+      {/* Wrapper with position:relative to anchor the blur overlays */}
       <div className="block-list-wrapper">
 
-        {/* Gradient haut — apparaît dès qu'on a scrollé */}
+        {/* Top gradient — appears as soon as the user has scrolled */}
         <div
           className={`block-list-blur block-list-blur--top${showTopBlur ? ' block-list-blur--visible' : ''}`}
           aria-hidden="true"
         />
 
-        {/* Liste scrollable verticalement */}
+        {/* Vertically scrollable list */}
         <div
           className="block-list"
           ref={listRef}
@@ -109,7 +109,7 @@ const Sidebar = () => {
           })}
         </div>
 
-        {/* Gradient bas — apparaît si scroll possible vers le bas */}
+        {/* Bottom gradient — appears when scrolling down is possible */}
         <div
           className={`block-list-blur block-list-blur--bottom${showBottomBlur ? ' block-list-blur--visible' : ''}`}
           aria-hidden="true"

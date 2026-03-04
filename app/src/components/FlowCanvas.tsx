@@ -28,7 +28,7 @@ const CanvasInner = () => {
   const prevNodeCount = useRef(nodes.length)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  // Auto-fit quand les noeuds changent (décomposition)
+  // Auto-fit when nodes change (decomposition)
   useEffect(() => {
     if (nodes.length > 0 && nodes.length !== prevNodeCount.current) {
       setTimeout(() => fitView({ padding: 0.2, duration: 400 }), 50)
@@ -43,7 +43,7 @@ const CanvasInner = () => {
     }
   }, [activeTab, fitView])
 
-  // Drag-and-drop depuis la sidebar
+  // Drag-and-drop from the sidebar
   const onDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault()
     e.dataTransfer.dropEffect = 'move'

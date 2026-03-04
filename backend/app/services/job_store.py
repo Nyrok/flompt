@@ -1,8 +1,8 @@
 """
-Job Store — stocke les résultats des jobs LLM asynchrones.
+Job Store — stores results of async LLM jobs.
 
-Permet au client de récupérer résultat/erreur via polling
-après que le worker a terminé. TTL auto pour éviter les fuites mémoire.
+Allows the client to retrieve result/error via polling
+after the worker has finished. Auto-TTL to avoid memory leaks.
 """
 
 import time
@@ -11,15 +11,15 @@ from typing import Any, Optional
 
 class JobStore:
     """
-    Stocke les résultats des jobs asynchrones en mémoire.
-    Thread-safe en contexte asyncio (single-threaded).
+    Stores async job results in memory.
+    Thread-safe in asyncio context (single-threaded).
 
-    Cycle de vie d'un job :
-      preregister()   → status="queued"  (soumis, pas encore en queue LLM)
-      store_result()  → status="done"    (résultat disponible)
-      store_error()   → status="error"   (erreur disponible)
+    Job lifecycle:
+      preregister()   -> status="queued"  (submitted, not yet in LLM queue)
+      store_result()  -> status="done"    (result available)
+      store_error()   -> status="error"   (error available)
 
-    TTL : les résultats sont nettoyés après `ttl_seconds` (défaut 5 min).
+    TTL: results are cleaned up after `ttl_seconds` (default 5 min).
     """
 
     def __init__(self, ttl_seconds: int = 300):
@@ -29,24 +29,24 @@ class JobStore:
 
     def preregister(self, job_id: str, estimated_position: int) -> None:
         """
-        Enregistre un job AVANT qu'il entre dans la LLMQueue.
-        Évite le race condition où le client poll avant que le background
-        task ait eu le temps de s'enregistrer dans la queue.
+        Registers a job BEFORE it enters the LLMQueue.
+        Avoids the race condition where the client polls before the background
+        task has had time to register itself in the queue.
         """
         self._jobs[job_id] = {"status": "queued", "position": estimated_position}
         self._timestamps[job_id] = time.monotonic()
 
     def set_analyzing(self, job_id: str) -> None:
         """
-        Marque le job comme en cours d'analyse de sécurité (Prompt Guard).
-        Appelé juste avant de lancer l'inférence du guard.
+        Marks the job as undergoing security analysis (Prompt Guard).
+        Called just before launching the guard inference.
         """
         self._jobs[job_id] = {"status": "analyzing"}
         self._timestamps[job_id] = time.monotonic()
 
     def set_queued(self, job_id: str, estimated_position: int) -> None:
         """
-        Passe le job de 'analyzing' à 'queued' une fois le guard passé.
+        Transitions the job from 'analyzing' to 'queued' once the guard has passed.
         """
         self._jobs[job_id] = {"status": "queued", "position": estimated_position}
         self._timestamps[job_id] = time.monotonic()
@@ -58,10 +58,10 @@ class JobStore:
         violations: Optional[list] = None,
     ) -> None:
         """
-        Marque le job comme bloqué par le Prompt Guard (état terminal).
+        Marks the job as blocked by the Prompt Guard (terminal state).
 
-        violations : liste des noms lisibles des catégories violées,
-                     ex. ["Violent Crimes", "Hate"] — transmis au client via WS.
+        violations: list of human-readable names of violated categories,
+                    e.g. ["Violent Crimes", "Hate"] — sent to the client via WS.
         """
         self._jobs[job_id] = {
             "status": "blocked",
@@ -72,28 +72,28 @@ class JobStore:
         self._cleanup()
 
     def store_result(self, job_id: str, result: Any) -> None:
-        """Marque le job comme terminé et stocke le résultat."""
+        """Marks the job as finished and stores the result."""
         self._jobs[job_id] = {"status": "done", "result": result}
         self._timestamps[job_id] = time.monotonic()
         self._cleanup()
 
     def store_error(self, job_id: str, error: str) -> None:
-        """Marque le job en erreur."""
+        """Marks the job as failed with an error."""
         self._jobs[job_id] = {"status": "error", "error": error}
         self._timestamps[job_id] = time.monotonic()
         self._cleanup()
 
     def get(self, job_id: str) -> Optional[dict]:
-        """Retourne les données du job, ou None si inconnu/expiré."""
+        """Returns the job data, or None if unknown/expired."""
         return self._jobs.get(job_id)
 
     def delete(self, job_id: str) -> None:
-        """Supprime immédiatement un job de la mémoire (appelé après état terminal)."""
+        """Immediately removes a job from memory (called after terminal state)."""
         self._jobs.pop(job_id, None)
         self._timestamps.pop(job_id, None)
 
     def _cleanup(self) -> None:
-        """Purge les jobs expirés (appelé à chaque store_*)."""
+        """Purges expired jobs (called on each store_*)."""
         now = time.monotonic()
         expired = [
             jid for jid, ts in self._timestamps.items()
@@ -104,5 +104,5 @@ class JobStore:
             self._timestamps.pop(jid, None)
 
 
-# Instance globale partagée
+# Shared global instance
 job_store = JobStore()

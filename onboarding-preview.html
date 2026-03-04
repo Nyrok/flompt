@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onboarding Preview — flompt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #1c1c1e;
+      --bg-2:  #242424;
+      --bg-3:  #2a2a2a;
+      --surface:       #2f2f2f;
+      --border:        rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text:       #f0f0f0;
+      --text-muted: #9a9a9a;
+      --text-dim:   #5a5a5a;
+      --accent:       #FF3570;
+      --accent-light: #ff6b9d;
+      --accent-glow:  rgba(255, 53, 112, 0.22);
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .scenes {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .scene {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .scene-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* Canvas background simulation */
+    .canvas-bg {
+      position: relative;
+      width: 600px;
+      height: 420px;
+      background: #07071a;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.07);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Dot grid */
+    .canvas-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #1e1e3a 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    /* Floating blocks behind card */
+    .ghost-nodes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .ghost-node {
+      position: absolute;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.2);
+      opacity: 0.7;
+    }
+
+    /* ─── Onboarding card ─── */
+    .onboarding-card {
+      position: relative;
+      z-index: 10;
+      width: 380px;
+      background: var(--bg-3);
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      padding: 28px 28px 22px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.025),
+        0 28px 80px rgba(0,0,0,0.75),
+        0 0 60px rgba(255,53,112,0.05);
+    }
+
+    .onboarding-header { margin-bottom: 22px; }
+
+    .onboarding-logo {
+      font-family: 'Caveat', cursive;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .onboarding-heading {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 3px;
+    }
+
+    .onboarding-tagline {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .onboarding-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .onboarding-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+    }
+
+    .onboarding-step-num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      border: 1px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .onboarding-step-title {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .onboarding-step-desc {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .onboarding-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: stretch;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+
+    .onboarding-cta {
+      padding: 11px 20px;
+      border-radius: 9px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.86rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      font-family: var(--font);
+    }
+
+    .onboarding-skip {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.74rem;
+      cursor: pointer;
+      padding: 4px 0;
+      text-align: center;
+      font-family: var(--font);
+    }
+
+    /* ─── Full app context screenshot ─── */
+    .app-shell {
+      width: 900px;
+      height: 580px;
+      background: var(--bg);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.07);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+    }
+
+    /* Topbar */
+    .app-topbar {
+      height: 52px;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .app-logo {
+      font-family: 'Caveat', cursive;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .app-tabs {
+      display: flex;
+      gap: 2px;
+      margin-left: 16px;
+    }
+    .app-tab {
+      padding: 5px 14px;
+      border-radius: 7px;
+      font-size: 0.77rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .app-tab.active {
+      background: rgba(255,53,112,0.12);
+      color: var(--accent);
+    }
+    .app-tab-right {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+    }
+    .app-lang-btn {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .app-lang-btn.active {
+      color: var(--text);
+      border-color: var(--border-strong);
+    }
+
+    /* Body */
+    .app-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    .app-sidebar {
+      width: 190px;
+      background: var(--bg-2);
+      border-right: 1px solid var(--border);
+      padding: 14px 10px;
+      flex-shrink: 0;
+    }
+    .sidebar-section {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+      padding: 0 6px;
+    }
+    .sidebar-block {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 8px;
+      border-radius: 7px;
+      margin-bottom: 3px;
+      cursor: grab;
+    }
+    .sidebar-block:hover { background: var(--surface); }
+    .sb-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .sb-label { font-size: 0.72rem; font-weight: 500; color: var(--text-muted); }
+
+    /* Canvas area */
+    .app-canvas {
+      flex: 1;
+      position: relative;
+      background: #07071a;
+    }
+    .app-canvas::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #1e1e3a 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .app-canvas-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Onboarding Canvas Preview</h1>
+
+  <div class="scenes">
+
+    <!-- Scene 1: Full app context -->
+    <div class="scene">
+      <span class="scene-label">Full view (EN)</span>
+      <div class="app-shell">
+        <!-- Topbar -->
+        <div class="app-topbar">
+          <span class="app-logo">flompt</span>
+          <div class="app-tabs">
+            <div class="app-tab">Prompt</div>
+            <div class="app-tab active">Canvas</div>
+            <div class="app-tab">Output</div>
+          </div>
+          <div class="app-tab-right">
+            <div class="app-lang-btn">FR</div>
+            <div class="app-lang-btn active">EN</div>
+          </div>
+        </div>
+        <!-- Body -->
+        <div class="app-body">
+          <!-- Sidebar -->
+          <div class="app-sidebar">
+            <div class="sidebar-section">Blocks</div>
+            <div class="sidebar-block"><div class="sb-dot" style="background:#c084fc"></div><span class="sb-label">Role</span></div>
+            <div class="sidebar-block"><div class="sb-dot" style="background:#fbbf24"></div><span class="sb-label">Objective</span></div>
+            <div class="sidebar-block"><div class="sb-dot" style="background:#fb7185"></div><span class="sb-label">Context</span></div>
+            <div class="sidebar-block"><div class="sb-dot" style="background:#34d399"></div><span class="sb-label">Constraints</span></div>
+            <div class="sidebar-block"><div class="sb-dot" style="background:#60a5fa"></div><span class="sb-label">Examples</span></div>
+            <div class="sidebar-block"><div class="sb-dot" style="background:#f97316"></div><span class="sb-label">Output Format</span></div>
+            <div class="sidebar-block"><div class="sb-dot" style="background:#a78bfa"></div><span class="sb-label">Chain of Thought</span></div>
+            <div class="sidebar-block"><div class="sb-dot" style="background:#e879f9"></div><span class="sb-label">Persona</span></div>
+            <div class="sidebar-block"><div class="sb-dot" style="background:#94a3b8"></div><span class="sb-label">Custom</span></div>
+          </div>
+          <!-- Canvas with onboarding -->
+          <div class="app-canvas">
+            <!-- Ghost nodes -->
+            <div class="ghost-nodes">
+              <div class="ghost-node" style="top:15%;left:5%;">Role</div>
+              <div class="ghost-node" style="bottom:20%;right:6%;">Output</div>
+              <div class="ghost-node" style="top:60%;left:8%;">Context</div>
+            </div>
+            <!-- Onboarding card -->
+            <div class="app-canvas-inner">
+              <div class="onboarding-card">
+                <div class="onboarding-header">
+                  <span class="onboarding-logo">flompt</span>
+                  <h2 class="onboarding-heading">Build your first prompt</h2>
+                  <p class="onboarding-tagline">Structure your ideas into optimized AI blocks</p>
+                </div>
+                <div class="onboarding-steps">
+                  <div class="onboarding-step">
+                    <div class="onboarding-step-num" style="color:#c084fc;border-color:#c084fc50;">1</div>
+                    <div>
+                      <p class="onboarding-step-title">Describe your task</p>
+                      <p class="onboarding-step-desc">Enter your raw idea in the Prompt tab — as vague or detailed as you like.</p>
+                    </div>
+                  </div>
+                  <div class="onboarding-step">
+                    <div class="onboarding-step-num" style="color:#fbbf24;border-color:#fbbf2450;">2</div>
+                    <div>
+                      <p class="onboarding-step-title">Decompose into blocks</p>
+                      <p class="onboarding-step-desc">Hit Decompose and flompt splits your prompt into typed, editable blocks on the canvas.</p>
+                    </div>
+                  </div>
+                  <div class="onboarding-step">
+                    <div class="onboarding-step-num" style="color:#FF3570;border-color:#FF357050;">3</div>
+                    <div>
+                      <p class="onboarding-step-title">Compile & copy</p>
+                      <p class="onboarding-step-desc">Reorder, tweak, then compile into a machine-ready prompt — with token count.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="onboarding-actions">
+                  <button class="onboarding-cta">✦ Try with an example</button>
+                  <button class="onboarding-skip">Start from scratch →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 2: Card alone (FR) -->
+    <div class="scene">
+      <span class="scene-label">Card alone (FR)</span>
+      <div class="canvas-bg" style="width:460px;height:400px;">
+        <div class="ghost-nodes">
+          <div class="ghost-node" style="top:12%;left:4%;">Role</div>
+          <div class="ghost-node" style="bottom:15%;right:5%;">Format</div>
+        </div>
+        <div class="onboarding-card">
+          <div class="onboarding-header">
+            <span class="onboarding-logo">flompt</span>
+            <h2 class="onboarding-heading">Build your first prompt</h2>
+            <p class="onboarding-tagline">Structure your ideas into optimized AI blocks</p>
+          </div>
+          <div class="onboarding-steps">
+            <div class="onboarding-step">
+              <div class="onboarding-step-num" style="color:#c084fc;border-color:#c084fc50;">1</div>
+              <div>
+                <p class="onboarding-step-title">Describe your task</p>
+                <p class="onboarding-step-desc">Enter your raw idea in the Prompt tab — as vague or detailed as you like.</p>
+              </div>
+            </div>
+            <div class="onboarding-step">
+              <div class="onboarding-step-num" style="color:#fbbf24;border-color:#fbbf2450;">2</div>
+              <div>
+                <p class="onboarding-step-title">Decompose into blocks</p>
+                <p class="onboarding-step-desc">Click Decompose and flompt splits your prompt into typed, editable blocks on the canvas.</p>
+              </div>
+            </div>
+            <div class="onboarding-step">
+              <div class="onboarding-step-num" style="color:#FF3570;border-color:#FF357050;">3</div>
+              <div>
+                <p class="onboarding-step-title">Compile &amp; copy</p>
+                <p class="onboarding-step-desc">Reorder, tweak, then compile into a machine-ready prompt — with token count.</p>
+              </div>
+            </div>
+          </div>
+          <div class="onboarding-actions">
+            <button class="onboarding-cta">✦ Try with an example</button>
+            <button class="onboarding-skip">Start from scratch →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:0.65rem;color:#5a5a5a;text-align:center;">
+    Open in the browser to see the final render ·
+    <code style="background:#2a2a2a;padding:2px 6px;border-radius:4px;color:#9a9a9a;">
+      localStorage.removeItem('flompt-onboarded')
+    </code>
+    to re-test the onboarding in the app
+  </p>
+
+</body>
+</html>

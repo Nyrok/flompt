@@ -410,7 +410,7 @@ body {
   scrollbar-color: var(--border-strong) transparent;
 }
 
-/* ── Effets blur/opacité haut et bas ─────────────────────────────────────── */
+/* ── Top and bottom blur/opacity effects ─────────────────────────────────── */
 .block-list-blur {
   position: absolute;
   left: 0;
@@ -517,7 +517,7 @@ body {
   padding: 8px 8px 8px 12px;
   border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
   border-bottom: 1px solid var(--border);
-  background: rgba(255,255,255,0.02);    /* légère surbrillance header */
+  background: rgba(255,255,255,0.02);    /* subtle header highlight */
 }
 
 .block-header-left { display: flex; align-items: flex-start; gap: 8px; min-width: 0; flex: 1; }
@@ -607,7 +607,7 @@ body {
 
 /* ── Block Shape Variants — Flowchart-inspired ───────────────────────────── */
 
-/* === Input (Entrée) — rounded top, "start" feel === */
+/* === Input — rounded top, "start" feel === */
 .block-node[data-block-type="input"] {
   border-radius: 20px 20px var(--radius) var(--radius);
   border-top: 3px solid var(--block-color);
@@ -621,7 +621,7 @@ body {
   background: color-mix(in srgb, var(--block-color) 22%, transparent);
 }
 
-/* === Output (Sortie) — rounded bottom, "end" feel === */
+/* === Output — rounded bottom, "end" feel === */
 .block-node[data-block-type="output_format"] {
   border-radius: var(--radius) var(--radius) 20px 20px;
   border-bottom: 3px solid var(--block-color);
@@ -632,7 +632,7 @@ body {
   background: color-mix(in srgb, var(--block-color) 22%, transparent);
 }
 
-/* === Rôle — Hexagon / Preparation === */
+/* === Role — Hexagon / Preparation === */
 .block-node[data-block-type="role"] {
   background: transparent;
   border-color: transparent;
@@ -693,7 +693,7 @@ body {
   filter: drop-shadow(0 0 6px var(--block-color));
 }
 
-/* === Contexte — Parallelogram / I-O shape === */
+/* === Context — Parallelogram / I-O shape === */
 .block-node[data-block-type="context"] {
   transform: skewX(-6deg);
 }
@@ -701,14 +701,14 @@ body {
   transform: skewX(6deg);
 }
 
-/* === Objectif — Bold Process Rectangle (double side borders) === */
+/* === Objective — Bold Process Rectangle (double side borders) === */
 .block-node[data-block-type="objective"] {
   border-width: 2px;
   border-left: 5px solid var(--block-color);
   border-right: 5px solid var(--block-color);
 }
 
-/* === Contraintes — Octagon / Decision === */
+/* === Constraints — Octagon / Decision === */
 .block-node[data-block-type="constraints"] {
   background: transparent;
   border-color: transparent;
@@ -1524,7 +1524,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5px;
-    max-height: none; /* plein écran sur mobile */
+    max-height: none; /* full screen on mobile */
     overflow-y: visible;
   }
 
@@ -1537,7 +1537,7 @@ body {
   .react-flow__connection { z-index: 1 !important; }
 }
 
-/* ── Responsive — Très petit (≤ 380px) ───────────────────────────────────── */
+/* ── Responsive — Very small (≤ 380px) ───────────────────────────────────── */
 @media (max-width: 380px) {
   .block-list { grid-template-columns: 1fr; }
   .header-actions { gap: 4px; }
@@ -1706,7 +1706,7 @@ body {
 .tab-btn .tab-icon { display: block; }
 
 /* React Flow overrides ─────────────────────────────────────────────────────── */
-/* Les wrappers de nœuds doivent laisser les handles déborder */
+/* Node wrappers must allow handles to overflow */
 .react-flow__node { overflow: visible !important; }
 .react-flow__controls {
   background: var(--bg-3) !important;

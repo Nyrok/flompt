@@ -28,7 +28,7 @@ const LANGUAGES = [
 
 const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
   const meta = BLOCK_META[data.type as keyof typeof BLOCK_META]
-  // Fallback gracieux si le type est inconnu (ne devrait pas arriver, mais défensif)
+  // Graceful fallback if the type is unknown (should not happen, but defensive)
   if (!meta) return null
   const Icon = meta.icon
   const { t, locale } = useLocale()
@@ -128,14 +128,14 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
     )
   }
 
-  // ── Response Style block : UI structurée ────────────────────────────────────
+  // ── Response Style block: structured UI ─────────────────────────────────────
   if (data.type === 'response_style') {
     const opts: ResponseStyleOptions = {
       ...DEFAULT_RESPONSE_STYLE,
       ...(data.options as Partial<ResponseStyleOptions> | undefined),
     }
 
-    // Cast local pour accéder aux clés étendues du bloc (BlockTranslation ne couvre que label/description)
+    // Local cast to access extended block keys (BlockTranslation only covers label/description)
     const rsTr = t.blocks.response_style as unknown as Record<string, string>
 
     const setOpt = <K extends keyof ResponseStyleOptions>(key: K, val: ResponseStyleOptions[K]) => {
@@ -207,7 +207,7 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
       >
         <Handle type="target" position={Position.Top} />
 
-        {/* Header — cliquable pour collapse */}
+        {/* Header — clickable to collapse */}
         <div
           className="rsp-header"
           onClick={() => setCollapsed(c => !c)}
@@ -250,7 +250,7 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
           </div>
         </div>
 
-        {/* Pill groups — masqués si collapsed */}
+        {/* Pill groups — hidden when collapsed */}
         {!collapsed && <div className="rsp-body nodrag nopan">
           {PILL_GROUPS.map(({ key, label, options }) => (
             <div key={key} className="rsp-row">

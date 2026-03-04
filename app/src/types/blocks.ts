@@ -36,7 +36,7 @@ export interface BlockData {
   content: string
   description: string
   summary?: string
-  /** Options structurées pour les blocs avec UI riche (ex: response_style) */
+  /** Structured options for blocks with rich UI (e.g. response_style) */
   options?: Record<string, string | boolean>
 }
 
@@ -56,77 +56,77 @@ export interface FlomptEdge {
 
 // ─── Block Metadata ──────────────────────────────────────────────────────────
 
-// Palette harmonisée DA Mermaid — tons doux sur fond sombre, accent pink #FF3570
+// Harmonized Mermaid design palette — soft tones on dark background, accent pink #FF3570
 export const BLOCK_META: Record<BlockType, { label: string; description: string; color: string; icon: LucideIcon }> = {
   document: {
     label: 'Document',
-    description: 'Contenu externe injecté via XML <document>',
+    description: 'External content injected via XML <document>',
     color: '#86efac',   // green-300 — grounding, source
     icon: FileText,
   },
   input: {
-    label: 'Entrée',
-    description: "Données fournies à l'IA",
-    color: '#4ade80',   // green-400 — signal « start »
+    label: 'Input',
+    description: 'Data provided to the AI',
+    color: '#4ade80',   // green-400 — "start" signal
     icon: LogIn,
   },
   role: {
-    label: 'Rôle',
-    description: "Définit la persona / le rôle de l'IA",
+    label: 'Role',
+    description: "Defines the AI's persona / role",
     color: '#c084fc',   // violet-400 — persona
     icon: UserRound,
   },
   context: {
-    label: 'Contexte',
-    description: 'Fournit le contexte de la tâche',
-    color: '#94a3b8',   // slate-400 — neutre, informatif
+    label: 'Context',
+    description: 'Provides background context for the task',
+    color: '#94a3b8',   // slate-400 — neutral, informational
     icon: Layers,
   },
   objective: {
-    label: 'Objectif',
-    description: "Ce qu'on veut accomplir",
-    color: '#fbbf24',   // amber-400 — cible, chaleureux
+    label: 'Objective',
+    description: 'What we want to accomplish',
+    color: '#fbbf24',   // amber-400 — target, warm
     icon: Target,
   },
   constraints: {
-    label: 'Contraintes',
-    description: 'Règles et limites à respecter',
-    color: '#fb7185',   // rose-400 — proche accent Mermaid
+    label: 'Constraints',
+    description: 'Rules and limits to respect',
+    color: '#fb7185',   // rose-400 — close to Mermaid accent
     icon: ShieldAlert,
   },
   examples: {
-    label: 'Exemples',
+    label: 'Examples',
     description: 'Few-shot input/output pairs',
-    color: '#c4b5fd',   // violet-300 — doux, pédagogique
+    color: '#c4b5fd',   // violet-300 — soft, pedagogical
     icon: Lightbulb,
   },
   chain_of_thought: {
-    label: 'Raisonnement',
-    description: 'Instructions de raisonnement pas à pas',
-    color: '#67e8f9',   // cyan-300 — logique, réflexion
+    label: 'Chain of Thought',
+    description: 'Step-by-step reasoning instructions',
+    color: '#67e8f9',   // cyan-300 — logic, reflection
     icon: GitBranch,
   },
   output_format: {
-    label: 'Sortie',
-    description: 'Format attendu de la réponse',
-    color: '#ff6b9d',   // accent-light — signal « fin », aligné DA
+    label: 'Output Format',
+    description: 'Expected format of the response',
+    color: '#ff6b9d',   // accent-light — "end" signal, aligned with design system
     icon: LogOut,
   },
   format_control: {
     label: 'Format Control',
-    description: 'Directives Claude libres : ton, verbosité, markdown',
-    color: '#fdba74',   // orange-300 — style, mise en forme
+    description: 'Free-form Claude directives: tone, verbosity, markdown',
+    color: '#fdba74',   // orange-300 — style, formatting
     icon: SlidersHorizontal,
   },
   response_style: {
     label: 'Response Style',
-    description: 'Verbosité, ton, prose, markdown, LaTeX',
+    description: 'Verbosity, tone, prose, markdown, LaTeX',
     color: '#2dd4bf',   // teal-400 — style & UX
     icon: Wand2,
   },
   language: {
-    label: 'Langue',
-    description: 'Langue de réponse de l\'IA',
+    label: 'Language',
+    description: 'Language the AI should respond in',
     color: '#38bdf8',   // sky-400 — international, communication
     icon: Globe,
   },
@@ -149,12 +149,12 @@ export const DEFAULT_RESPONSE_STYLE: ResponseStyleOptions = {
   prose:        'mixed',
   markdown:     'standard',
   math:         'auto',
-  skipPreamble: true,   // activé par défaut — quasi-universellement souhaité
+  skipPreamble: true,   // enabled by default — almost universally desired
 }
 
 /**
- * Génère les directives Claude à partir des options structurées.
- * Seules les valeurs non-default produisent du texte.
+ * Generates Claude directives from the structured options.
+ * Only non-default values produce output text.
  */
 export function generateResponseStyleContent(opts: ResponseStyleOptions): string {
   const parts: string[] = []
@@ -215,13 +215,13 @@ export function generateResponseStyleContent(opts: ResponseStyleOptions): string
 
 // ─── Output Format ───────────────────────────────────────────────────────────
 
-/** Format de sortie du prompt assemblé selon la plateforme cible */
+/** Output format of the assembled prompt according to the target platform */
 export type OutputFormat = 'claude' | 'chatgpt' | 'gemini'
 
 // ─── Compiled Prompt ─────────────────────────────────────────────────────────
 
 export interface CompiledPrompt {
-  /** Prompt assemblé pour chaque plateforme — généré en une seule passe */
+  /** Assembled prompt for each platform — generated in a single pass */
   formats: Record<OutputFormat, string>
   tokenEstimate: number
   blocks: BlockData[]

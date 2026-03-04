@@ -1,15 +1,15 @@
 """
-Prompt Guard Service — Filtre de sécurité via Groq (meta-llama/llama-guard-4-12b).
+Prompt Guard Service — Security filter via Groq (meta-llama/llama-guard-4-12b).
 
-Llama Guard 4 12B est le modèle de modération disponible sur Groq. Il utilise le même
-format de sortie ("safe" / "unsafe\nS{N}") et la même taxonomie MLCommons.
+Llama Guard 4 12B is the moderation model available on Groq. It uses the same
+output format ("safe" / "unsafe\nS{N}") and the same MLCommons taxonomy.
 
-Avantages vs HF Inference API :
-  - Utilise le GROQ_API_KEY déjà configuré (aucune nouvelle clé requise)
-  - Latence très faible (~100-300ms sur Groq)
-  - Pas de cold start
+Advantages vs HF Inference API:
+  - Uses the GROQ_API_KEY already configured (no new key required)
+  - Very low latency (~100-300ms on Groq)
+  - No cold start
 
-Taxonomie MLCommons Hazard S1–S13 (Llama Guard 4) :
+MLCommons Hazard Taxonomy S1-S13 (Llama Guard 4):
   S1  Violent Crimes            S8  Intellectual Property
   S2  Non-Violent Crimes        S9  Indiscriminate Weapons
   S3  Sex-Related Crimes        S10 Hate
@@ -18,16 +18,16 @@ Taxonomie MLCommons Hazard S1–S13 (Llama Guard 4) :
   S6  Specialized Advice        S13 Elections
   S7  Privacy
 
-Format de réponse :
-  "safe"           → prompt conforme
-  "unsafe\\nS9"    → violation Indiscriminate Weapons
-  "unsafe\\nS1\\nS10" → violations multiples
+Response format:
+  "safe"           -> prompt compliant
+  "unsafe\\nS9"    -> Indiscriminate Weapons violation
+  "unsafe\\nS1\\nS10" -> multiple violations
 
-Fail-open si GROQ_API_KEY absent ou si l'API échoue.
+Fail-open if GROQ_API_KEY is absent or if the API fails.
 
-Env vars :
-  GROQ_API_KEY=gsk_...          (requis — même clé que le LLM principal)
-  PROMPT_GUARD_ENABLED=true     (défaut : true)
+Env vars:
+  GROQ_API_KEY=gsk_...          (required — same key as the main LLM)
+  PROMPT_GUARD_ENABLED=true     (default: true)
 """
 
 import os
@@ -40,7 +40,7 @@ GUARD_MODEL = "meta-llama/llama-guard-4-12b"
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 TIMEOUT = 20.0
 
-# Taxonomie MLCommons Hazard Taxonomy — Llama Guard 3
+# MLCommons Hazard Taxonomy — Llama Guard 3
 HAZARD_CATEGORIES: dict[str, str] = {
     "S1":  "Violent Crimes",
     "S2":  "Non-Violent Crimes",
@@ -68,8 +68,8 @@ def _get_groq_key() -> str | None:
 
 async def _call_groq_guard(prompt: str) -> str:
     """
-    Appelle llama-guard-3-8b via l'API Groq.
-    Retourne la réponse brute : "safe" ou "unsafe\\nS9".
+    Calls llama-guard-3-8b via the Groq API.
+    Returns the raw response: "safe" or "unsafe\\nS9".
     """
     key = _get_groq_key()
 
@@ -92,13 +92,13 @@ async def _call_groq_guard(prompt: str) -> str:
 
 def _parse_response(raw: str) -> tuple[bool, list[str], list[str]]:
     """
-    Parse la sortie de Llama Guard 3.
+    Parses the Llama Guard 3 output.
 
-    "safe"              → (True, [], [])
-    "unsafe\\nS9"       → (False, ["S9"], ["Indiscriminate Weapons"])
-    "unsafe\\nS1\\nS10" → (False, ["S1","S10"], ["Violent Crimes","Hate"])
+    "safe"              -> (True, [], [])
+    "unsafe\\nS9"       -> (False, ["S9"], ["Indiscriminate Weapons"])
+    "unsafe\\nS1\\nS10" -> (False, ["S1","S10"], ["Violent Crimes","Hate"])
 
-    Robuste aux variantes : majuscules, virgules, espaces.
+    Robust to variants: uppercase, commas, spaces.
     """
     lines = [l.strip() for l in raw.strip().splitlines() if l.strip()]
 
@@ -122,22 +122,22 @@ def _parse_response(raw: str) -> tuple[bool, list[str], list[str]]:
 
 async def classify(prompt: str) -> tuple[bool, list[str], list[str], str]:
     """
-    Classifie un prompt via llama-guard-3-8b (Groq).
+    Classifies a prompt via llama-guard-3-8b (Groq).
 
-    Retourne : (is_safe, violation_codes, violation_names, raw_response)
-      is_safe         : True → prompt conforme
-      violation_codes : ["S9"] — codes MLCommons
-      violation_names : ["Indiscriminate Weapons"] — transmis au client
-      raw_response    : réponse brute du modèle
+    Returns: (is_safe, violation_codes, violation_names, raw_response)
+      is_safe         : True -> prompt compliant
+      violation_codes : ["S9"] — MLCommons codes
+      violation_names : ["Indiscriminate Weapons"] — sent to the client
+      raw_response    : raw model response
 
-    Fail-open si guard désactivé, clé Groq absente, ou erreur API.
+    Fail-open if guard is disabled, Groq key is absent, or API error.
     """
     if not _is_enabled():
         return True, [], [], "safe"
 
     key = _get_groq_key()
     if not key:
-        logger.warning("[Prompt Guard] ⚠️  GROQ_API_KEY manquant — fail-open.")
+        logger.warning("[Prompt Guard] ⚠️  GROQ_API_KEY missing — fail-open.")
         return True, [], [], "safe"
 
     try:
@@ -148,13 +148,13 @@ async def classify(prompt: str) -> tuple[bool, list[str], list[str], str]:
         return is_safe, codes, names, raw
 
     except httpx.HTTPStatusError as e:
-        logger.warning(f"[Prompt Guard] ⚠️  Erreur Groq HTTP {e.response.status_code} — fail-open.")
+        logger.warning(f"[Prompt Guard] ⚠️  Groq HTTP error {e.response.status_code} — fail-open.")
         return True, [], [], "safe"
 
     except httpx.TimeoutException:
-        logger.warning("[Prompt Guard] ⏱️  Timeout Groq — fail-open.")
+        logger.warning("[Prompt Guard] ⏱️  Groq timeout — fail-open.")
         return True, [], [], "safe"
 
     except Exception as exc:
-        logger.warning(f"[Prompt Guard] ⚠️  Erreur inattendue — fail-open. {exc}")
+        logger.warning(f"[Prompt Guard] ⚠️  Unexpected error — fail-open. {exc}")
         return True, [], [], "safe"
