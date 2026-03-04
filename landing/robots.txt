@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /blog/
+
+# App SPA — not useful for indexing
+Disallow: /app/
+
+# Backend endpoints
+Disallow: /api/
+Disallow: /mcp/
+Disallow: /health
+
+Sitemap: https://flompt.dev/blog/sitemap.xml
