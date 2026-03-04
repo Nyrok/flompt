@@ -9,11 +9,12 @@ import ReactFlow, {
   ReactFlowProvider,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
-import { Play, Sparkles, ShieldCheck } from 'lucide-react'
+import { Play, Sparkles, ShieldCheck, Undo2, Redo2, Trash2 } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { assemblePrompt } from '@/lib/assemblePrompt'
 import BlockNode from './BlockNode'
 import CustomEdge from './CustomEdge'
+import CanvasBlockBar from './CanvasBlockBar'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType, FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -22,7 +23,7 @@ const nodeTypes = { block: BlockNode }
 const edgeTypes = { custom: CustomEdge }
 
 const CanvasInner = () => {
-  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, isDecomposing, addNode, activeTab, queueStatus } = useFlowStore()
+  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, isDecomposing, addNode, activeTab, queueStatus, undo, redo, reset, past, future } = useFlowStore()
   const { t } = useLocale()
   const { fitView, screenToFlowPosition } = useReactFlow()
   const prevNodeCount = useRef(nodes.length)
@@ -98,6 +99,41 @@ const CanvasInner = () => {
           style={{ background: 'rgba(7, 7, 26, 0.9)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '10px' }}
         />
       </ReactFlow>
+
+      {/* Block type palette — left side, vertical */}
+      <CanvasBlockBar />
+
+      {/* Canvas control bar — top-left, horizontal */}
+      <div className="canvas-ctrl-bar">
+        <button
+          className="canvas-ctrl-btn"
+          onClick={undo}
+          disabled={past.length === 0}
+          title={t.header.undo}
+          aria-label={t.header.undo}
+        >
+          <Undo2 size={13} aria-hidden="true" />
+        </button>
+        <button
+          className="canvas-ctrl-btn"
+          onClick={redo}
+          disabled={future.length === 0}
+          title={t.header.redo}
+          aria-label={t.header.redo}
+        >
+          <Redo2 size={13} aria-hidden="true" />
+        </button>
+        <div className="canvas-ctrl-divider" aria-hidden="true" />
+        <button
+          className="canvas-ctrl-btn canvas-ctrl-btn--danger"
+          onClick={() => { if (confirm(t.header.resetConfirm)) reset() }}
+          title={t.header.reset}
+          aria-label={t.header.reset}
+          disabled={nodes.length === 0}
+        >
+          <Trash2 size={13} aria-hidden="true" />
+        </button>
+      </div>
 
       {/* Empty state */}
       {nodes.length === 0 && !isDecomposing && (

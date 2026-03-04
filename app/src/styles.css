@@ -1430,6 +1430,85 @@ body {
 .react-flow__background { background: var(--bg) !important; }
 .react-flow__background pattern circle { fill: rgba(255,255,255,0.06) !important; }
 
+/* ── Canvas block bar (left palette) ─────────────────────────────────────── */
+.canvas-block-bar {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-height: calc(100% - 20px);
+  overflow-y: auto;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 5px;
+  scrollbar-width: none;
+}
+.canvas-block-bar::-webkit-scrollbar { display: none; }
+
+.canvas-block-btn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  color: var(--block-color, var(--text-muted));
+  cursor: pointer;
+  transition: background 120ms, border-color 120ms;
+  flex-shrink: 0;
+}
+.canvas-block-btn:hover {
+  background: var(--surface);
+  border-color: var(--border-strong);
+}
+
+/* ── Canvas ctrl bar (undo/redo/clear) ───────────────────────────────────── */
+.canvas-ctrl-bar {
+  position: absolute;
+  top: 10px;
+  left: 62px; /* right of the block bar (10px + 40px + 12px) */
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.canvas-ctrl-btn {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 120ms, color 120ms;
+}
+.canvas-ctrl-btn:hover:not(:disabled) { background: var(--surface); color: var(--text); }
+.canvas-ctrl-btn:disabled { opacity: 0.28; cursor: not-allowed; }
+.canvas-ctrl-btn--danger:hover:not(:disabled) { color: var(--error); }
+
+.canvas-ctrl-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--border);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
 /* ── Responsive — Tablet (≤ 1024px) ──────────────────────────────────────── */
 @media (max-width: 1024px) {
   .left-panel, .right-panel {
