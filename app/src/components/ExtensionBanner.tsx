@@ -4,14 +4,12 @@ import { useLocale } from '@/i18n/LocaleContext'
 import { track } from '@/lib/analytics'
 
 const BANNER_KEY = 'flompt-ext-banner-v1'
-const EXT_URL = 'https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc'
-const FIREFOX_URL = 'https://addons.mozilla.org/addon/flompt-visual-prompt-builder/'
+const INSTALL_URL = 'https://flompt.dev/#extension'
 
 const ExtensionBanner = () => {
   const { t } = useLocale()
   const [visible, setVisible] = useState(false)
-  const isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.includes('Firefox')
-  const installUrl = isFirefox ? FIREFOX_URL : EXT_URL
+  const installUrl = INSTALL_URL
 
   useEffect(() => {
     if (window.matchMedia('(max-width: 768px)').matches) return

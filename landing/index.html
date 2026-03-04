@@ -540,12 +540,14 @@
     .ext-popup__icon { font-size: 2.5rem; display: block; margin-bottom: 14px; }
     .ext-popup__title { font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
     .ext-popup__desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px; }
+    .ext-popup__cta-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
     .ext-popup__cta {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       background: var(--accent); color: #fff; font-size: 0.9rem; font-weight: 600;
       padding: 13px 24px; border-radius: 10px; text-decoration: none;
-      transition: filter 150ms; margin-bottom: 14px; width: 100%;
+      transition: filter 150ms; white-space: nowrap; width: 100%;
     }
+    .ext-popup__cta--firefox { background: #ff6611; }
     .ext-popup__cta:hover { filter: brightness(1.1); color: #fff; }
     .ext-popup__skip {
       background: none; border: none; cursor: pointer;
@@ -1344,21 +1346,23 @@ statistics. Write in English.</pre>
   >
     <div class="ext-popup">
       <button class="ext-popup__close" aria-label="Close" id="ext-popup-close">×</button>
-      <svg class="ext-popup__icon" width="44" height="44" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="color:rgba(255,255,255,0.5);margin-bottom:14px;display:block;margin-left:auto;margin-right:auto"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/></svg>
+      <svg class="ext-popup__icon" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="color:rgba(255,255,255,0.55);margin-bottom:14px;display:block;margin-left:auto;margin-right:auto;">
+        <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"/>
+        <rect x="14" y="2" width="8" height="8" rx="1"/>
+      </svg>
       <h2 id="ext-popup-title" class="ext-popup__title">flompt is now on Chrome &amp; Firefox!</h2>
       <p class="ext-popup__desc">
         Use flompt directly inside ChatGPT, Claude &amp; Gemini. No tab switching needed.
       </p>
-      <div style="display:flex; gap:10px; margin-bottom:14px;">
+      <div class="ext-popup__cta-group">
         <a
           href="https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc"
           target="_blank"
           rel="noopener noreferrer"
           class="ext-popup__cta"
           id="ext-popup-cta"
-          style="margin-bottom:0; flex:1;"
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/>
           </svg>
           Add to Chrome
@@ -1367,11 +1371,10 @@ statistics. Write in English.</pre>
           href="https://addons.mozilla.org/addon/flompt-visual-prompt-builder/"
           target="_blank"
           rel="noopener noreferrer"
-          class="ext-popup__cta"
+          class="ext-popup__cta ext-popup__cta--firefox"
           id="ext-popup-cta-firefox"
-          style="margin-bottom:0; flex:1; background:#ff6611;"
         >
-          <svg width="18" height="18" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M130.22 127.548C130.38 127.558 130.3 127.558 130.22 127.548V127.548ZM481.64 172.898C471.03 147.398 449.56 119.898 432.7 111.168C446.42 138.058 454.37 165.048 457.4 185.168C457.405 185.306 457.422 185.443 457.45 185.578C429.87 116.828 383.098 89.1089 344.9 28.7479C329.908 5.05792 333.976 3.51792 331.82 4.08792L331.7 4.15792C284.99 30.1109 256.365 82.5289 249.12 126.898C232.503 127.771 216.219 131.895 201.19 139.035C199.838 139.649 198.736 140.706 198.066 142.031C197.396 143.356 197.199 144.87 197.506 146.323C197.7 147.162 198.068 147.951 198.586 148.639C199.103 149.327 199.76 149.899 200.512 150.318C201.264 150.737 202.096 150.993 202.954 151.071C203.811 151.148 204.676 151.045 205.491 150.768L206.011 150.558C221.511 143.255 238.408 139.393 255.541 139.238C318.369 138.669 352.698 183.262 363.161 201.528C350.161 192.378 326.811 183.338 304.341 187.248C392.081 231.108 368.541 381.784 246.951 376.448C187.487 373.838 149.881 325.467 146.421 285.648C146.421 285.648 157.671 243.698 227.041 243.698C234.541 243.698 255.971 222.778 256.371 216.698C256.281 214.698 213.836 197.822 197.281 181.518C188.434 172.805 184.229 168.611 180.511 165.458C178.499 163.75 176.392 162.158 174.201 160.688C168.638 141.231 168.399 120.638 173.51 101.058C148.45 112.468 128.96 130.508 114.8 146.428H114.68C105.01 134.178 105.68 93.7779 106.25 85.3479C106.13 84.8179 99.022 89.0159 98.1 89.6579C89.5342 95.7103 81.5528 102.55 74.26 110.088C57.969 126.688 30.128 160.242 18.76 211.318C14.224 231.701 12 255.739 12 263.618C12 398.318 121.21 507.508 255.92 507.508C376.56 507.508 478.939 420.281 496.35 304.888C507.922 228.192 481.64 173.82 481.64 172.898Z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M130.22 127.548C130.38 127.558 130.3 127.558 130.22 127.548V127.548ZM481.64 172.898C471.03 147.398 449.56 119.898 432.7 111.168C446.42 138.058 454.37 165.048 457.4 185.168C457.405 185.306 457.422 185.443 457.45 185.578C429.87 116.828 383.098 89.1089 344.9 28.7479C329.908 5.05792 333.976 3.51792 331.82 4.08792L331.7 4.15792C284.99 30.1109 256.365 82.5289 249.12 126.898C232.503 127.771 216.219 131.895 201.19 139.035C199.838 139.649 198.736 140.706 198.066 142.031C197.396 143.356 197.199 144.87 197.506 146.323C197.7 147.162 198.068 147.951 198.586 148.639C199.103 149.327 199.76 149.899 200.512 150.318C201.264 150.737 202.096 150.993 202.954 151.071C203.811 151.148 204.676 151.045 205.491 150.768L206.011 150.558C221.511 143.255 238.408 139.393 255.541 139.238C318.369 138.669 352.698 183.262 363.161 201.528C350.161 192.378 326.811 183.338 304.341 187.248C392.081 231.108 368.541 381.784 246.951 376.448C187.487 373.838 149.881 325.467 146.421 285.648C146.421 285.648 157.671 243.698 227.041 243.698C234.541 243.698 255.971 222.778 256.371 216.698C256.281 214.698 213.836 197.822 197.281 181.518C188.434 172.805 184.229 168.611 180.511 165.458C178.499 163.75 176.392 162.158 174.201 160.688C168.638 141.231 168.399 120.638 173.51 101.058C148.45 112.468 128.96 130.508 114.8 146.428H114.68C105.01 134.178 105.68 93.7779 106.25 85.3479C106.13 84.8179 99.022 89.0159 98.1 89.6579C89.5342 95.7103 81.5528 102.55 74.26 110.088C57.969 126.688 30.128 160.242 18.76 211.318C14.224 231.701 12 255.739 12 263.618C12 398.318 121.21 507.508 255.92 507.508C376.56 507.508 478.939 420.281 496.35 304.888C507.922 228.192 481.64 173.82 481.64 172.898Z"/></svg>
           Add to Firefox
         </a>
       </div>
