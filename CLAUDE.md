@@ -206,7 +206,3 @@ Ordered as assembled (TYPE_PRIORITY in `assemblePrompt.ts`):
 - **When adding/removing a block** → update ALL of the above. Don't forget blog FR articles.
 - Landing block count stat must stay in sync with actual block count (currently **12**)
 
-### 10. GitHub Organisation (in progress)
-- Goal: create `flompt` org with 5 repos: app, blog, landing, backend, deploy
-- The `deploy` repo will contain git submodules pointing to the other 4
-- The `Nyrok/flompt-legacy` repo is the original monorepo temporarily renamed
