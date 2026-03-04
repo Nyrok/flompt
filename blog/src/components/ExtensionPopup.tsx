@@ -2,18 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import posthog from "posthog-js";
+import { FaFirefoxBrowser } from "react-icons/fa6";
 import type { Locale } from "@/i18n/config";
 import { getTranslations } from "@/i18n/translations";
 
 const ChromeSvg = ({ size = 18 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
     <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/>
-  </svg>
-);
-
-const FirefoxSvg = ({ size = 18 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-    <path d="M21.805 8.345a9.946 9.946 0 0 0-.468-1.562c-.24-.6-.527-1.177-.856-1.726a10.07 10.07 0 0 0-1.207-1.611 9.95 9.95 0 0 0-1.576-1.305 9.77 9.77 0 0 0-1.866-.925A9.716 9.716 0 0 0 12 .75a9.717 9.717 0 0 0-3.832.466 9.77 9.77 0 0 0-1.866.925 9.95 9.95 0 0 0-1.576 1.305A10.07 10.07 0 0 0 3.52 5.057a9.97 9.97 0 0 0-.856 1.726 9.946 9.946 0 0 0-.469 1.562A10.01 10.01 0 0 0 2 9.99c0 2.76 1.116 5.26 2.929 7.073A9.952 9.952 0 0 0 12 20.25a9.952 9.952 0 0 0 7.071-3.187A9.964 9.964 0 0 0 22 9.99a10.01 10.01 0 0 0-.195-1.645zM12 18.75a8.25 8.25 0 1 1 0-16.5 8.25 8.25 0 0 1 0 16.5z"/>
   </svg>
 );
 
@@ -124,7 +119,7 @@ export default function ExtensionPopup({ locale }: { locale: Locale }) {
 
         <div style={{ display: "flex", justifyContent: "center", gap: "12px", marginBottom: "14px", color: "rgba(255,255,255,0.6)" }}>
           <ChromeSvg size={40} />
-          <span style={{ color: "rgba(255,102,17,0.8)" }}><FirefoxSvg size={40} /></span>
+          <span style={{ color: "rgba(255,102,17,0.8)" }}><FaFirefoxBrowser size={40} aria-hidden="true" /></span>
         </div>
 
         <h2
@@ -200,7 +195,7 @@ export default function ExtensionPopup({ locale }: { locale: Locale }) {
               flex: 1,
             }}
           >
-            <FirefoxSvg size={16} />
+            <FaFirefoxBrowser size={16} aria-hidden="true" />
             {t.extension.popupCtaFirefox}
           </a>
         </div>
