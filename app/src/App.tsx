@@ -142,8 +142,8 @@ const App = () => {
       {/* Extension popup — web only, once after 20s */}
       {!isExtension && <ExtensionPopup />}
 
-      {/* Star popup — web only, after first decompose or compile */}
-      {!isExtension && <StarPopup />}
+      {/* Star popup — after first decompose, compile, or inject to AI */}
+      <StarPopup />
 
       <nav className="tab-bar" aria-label={t.accessibility.mainTabs}>
         <div role="tablist" className="tab-list-inner">

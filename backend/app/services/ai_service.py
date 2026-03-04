@@ -57,14 +57,16 @@ DECOMPOSE_SYSTEM_PROMPT = """You are a prompt engineering expert specializing in
 
 Block types available:
 - role: The AI persona/role (who the AI should be)
+- audience: Who the output is written for — expertise level, role, background (e.g. "Software engineers familiar with REST APIs but new to async programming")
 - context: Background information and situational context
-- objective: The main goal or task to accomplish
+- objective: The main task to accomplish (what to DO)
+- goal: The end goal and success criteria — why the task matters and what good looks like (e.g. "Help the reader decide in 2 minutes whether to integrate this API")
 - input: Data or variables provided to the AI (code, text to analyze, etc.)
 - document: External reference content for XML grounding (articles, code files, datasets) — ONLY use if the prompt explicitly references external documents to inject; content = the document placeholder or excerpt
 - constraints: Rules, restrictions, and limits
 - output_format: Expected response format and structure (JSON, markdown, numbered list, etc.)
-- format_control: Claude-specific formatting directives — tone, verbosity, markdown on/off, response length (e.g. "Be concise. Use markdown headers. No preamble.")
 - examples: Few-shot input/output pairs — format content as "Input: [...]\nOutput: [...]" pairs separated by blank lines
+- chain_of_thought: Explicit step-by-step reasoning instructions (e.g. "Think step by step before answering. First identify X, then evaluate Y, then conclude Z.")
 - language: The language the AI should respond in (auto-detect from the user's prompt)
 
 Return ONLY valid JSON, no markdown:

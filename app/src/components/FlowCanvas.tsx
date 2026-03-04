@@ -18,6 +18,7 @@ import CanvasBlockBar from './CanvasBlockBar'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType, FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
+import { STAR_EVENT } from '@/components/StarPopup'
 
 const nodeTypes = { block: BlockNode }
 const edgeTypes = { custom: CustomEdge }
@@ -198,6 +199,7 @@ const CanvasInner = () => {
             const result = assemblePrompt(currentNodes, currentEdges)
             setResult(result)
             switchTab('output')
+            window.dispatchEvent(new CustomEvent(STAR_EVENT))
           }}
           title={t.promptOutput.compile}
           aria-label={t.promptOutput.compile}

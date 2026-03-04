@@ -8,8 +8,10 @@ import {
   Lightbulb,
   Languages,
   FileText,
-  SlidersHorizontal,
   Wand2,
+  Zap,
+  Users,
+  Flag,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -17,15 +19,17 @@ import type { LucideIcon } from 'lucide-react'
 
 export type BlockType =
   | 'role'
+  | 'audience'
   | 'context'
   | 'objective'
+  | 'goal'
   | 'input'
   | 'document'
   | 'constraints'
-  | 'output_format'
-  | 'format_control'
-  | 'response_style'
   | 'examples'
+  | 'chain_of_thought'
+  | 'output_format'
+  | 'response_style'
   | 'language'
 
 export interface BlockData {
@@ -74,6 +78,12 @@ export const BLOCK_META: Record<BlockType, { label: string; description: string;
     color: '#c084fc',   // violet-400 — persona
     icon: UserRound,
   },
+  audience: {
+    label: 'Audience',
+    description: 'Who the output is written for',
+    color: '#93c5fd',   // blue-300 — people, readers
+    icon: Users,
+  },
   context: {
     label: 'Context',
     description: 'Provides background context for the task',
@@ -85,6 +95,12 @@ export const BLOCK_META: Record<BlockType, { label: string; description: string;
     description: 'What we want to accomplish',
     color: '#fbbf24',   // amber-400 — target, warm
     icon: Target,
+  },
+  goal: {
+    label: 'Goal',
+    description: 'End goal and success criteria',
+    color: '#6ee7b7',   // emerald-300 — achievement, outcome
+    icon: Flag,
   },
   constraints: {
     label: 'Constraints',
@@ -98,17 +114,17 @@ export const BLOCK_META: Record<BlockType, { label: string; description: string;
     color: '#c4b5fd',   // violet-300 — soft, pedagogical
     icon: Lightbulb,
   },
+  chain_of_thought: {
+    label: 'Chain of Thought',
+    description: 'Step-by-step reasoning instructions',
+    color: '#fde68a',   // amber-200 — thinking, reasoning
+    icon: Zap,
+  },
   output_format: {
     label: 'Output Format',
     description: 'Expected format of the response',
     color: '#ff6b9d',   // accent-light — "end" signal, aligned with design system
     icon: LogOut,
-  },
-  format_control: {
-    label: 'Format Control',
-    description: 'Free-form Claude directives: tone, verbosity, markdown',
-    color: '#fdba74',   // orange-300 — style, formatting
-    icon: SlidersHorizontal,
   },
   response_style: {
     label: 'Response Style',

@@ -11,23 +11,29 @@ from app.services.ai_service import compile_with_ai, _get_anthropic_key, _get_op
 # Canonical block order in the final prompt
 CANONICAL_ORDER: list[BlockType] = [
     BlockType.role,
+    BlockType.audience,
     BlockType.context,
     BlockType.objective,
+    BlockType.goal,
     BlockType.input,
     BlockType.constraints,
-    BlockType.output_format,
     BlockType.examples,
+    BlockType.chain_of_thought,
+    BlockType.output_format,
 ]
 
 # XML tags for the machine-readable format
 BLOCK_TAGS: dict[BlockType, str] = {
-    BlockType.role: "role",
-    BlockType.context: "ctx",
-    BlockType.objective: "objective",
-    BlockType.input: "input",
-    BlockType.constraints: "constraints",
-    BlockType.output_format: "format",
-    BlockType.examples: "examples",
+    BlockType.role:            "role",
+    BlockType.audience:        "audience",
+    BlockType.context:         "ctx",
+    BlockType.objective:       "objective",
+    BlockType.goal:            "goal",
+    BlockType.input:           "input",
+    BlockType.constraints:     "constraints",
+    BlockType.examples:        "examples",
+    BlockType.chain_of_thought: "thinking",
+    BlockType.output_format:   "format",
 }
 
 

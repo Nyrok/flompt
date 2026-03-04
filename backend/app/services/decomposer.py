@@ -17,28 +17,32 @@ from app.services.ai_service import decompose_with_ai, _get_anthropic_key, _get_
 
 BLOCK_META = {
     BlockType.role: {"label": "Role", "description": "Defines the AI persona / role"},
+    BlockType.audience: {"label": "Audience", "description": "Who the output is written for"},
     BlockType.context: {"label": "Context", "description": "Provides task context"},
     BlockType.objective: {"label": "Objective", "description": "What we want to accomplish"},
+    BlockType.goal: {"label": "Goal", "description": "End goal and success criteria"},
     BlockType.input: {"label": "Input", "description": "Data provided to the AI"},
     BlockType.document: {"label": "Document", "description": "External content injected as XML (<document>)"},
     BlockType.constraints: {"label": "Constraints", "description": "Rules and limits to respect"},
     BlockType.output_format: {"label": "Output Format", "description": "Expected response format"},
-    BlockType.format_control: {"label": "Format Control", "description": "Claude style directives (tone, verbosity, markdown)"},
     BlockType.examples: {"label": "Examples", "description": "Few-shot input/output pairs"},
+    BlockType.chain_of_thought: {"label": "Chain of Thought", "description": "Step-by-step reasoning instructions"},
     BlockType.language: {"label": "Language", "description": "AI response language"},
 }
 
 # Keywords heuristics for fallback
 HEURISTIC_KEYWORDS: dict[BlockType, list[str]] = {
     BlockType.role: ["you are", "act as", "tu es", "agis comme", "your role"],
+    BlockType.audience: ["for a", "written for", "aimed at", "pour un", "pour une", "audience:", "destiné à"],
     BlockType.context: ["context", "background", "given that", "étant donné", "in this scenario"],
     BlockType.objective: ["your goal", "you must", "you should", "ton objectif", "you need to", "task:"],
+    BlockType.goal: ["success", "end goal", "the goal is", "objectif final", "criteria", "critères"],
     BlockType.input: ["input:", "data:", "the following", "voici", "here is"],
     BlockType.document: ["document:", "file:", "article:", "the document", "le document", "following document", "document suivant"],
     BlockType.constraints: ["do not", "never", "always", "ne pas", "forbidden", "constraint", "rule:"],
     BlockType.output_format: ["output", "format", "return", "respond with", "retourne", "répondre en"],
-    BlockType.format_control: ["be concise", "be brief", "no preamble", "use markdown", "without markdown", "sois concis", "sans préambule"],
     BlockType.examples: ["example", "for instance", "e.g.", "par exemple", "such as"],
+    BlockType.chain_of_thought: ["step by step", "think step", "reason through", "étape par étape", "raisonne", "chain of thought", "cot"],
     BlockType.language: ["in english", "in french", "en français", "en anglais", "respond in", "répondre en", "language:", "langue:"],
 }
 
@@ -113,11 +117,12 @@ def _heuristic_decompose(raw_prompt: str) -> list[dict]:
     lower = raw_prompt.lower()
     found: list[dict] = []
 
-    # Default order (Claude best practices: documents first, then persona -> task -> constraints -> examples -> reasoning -> format -> language)
+    # Default order (Claude best practices: documents first, then persona -> audience -> task -> goal -> constraints -> examples -> cot -> format -> language)
     ordered = [
-        BlockType.document, BlockType.role, BlockType.context, BlockType.objective,
-        BlockType.input, BlockType.constraints, BlockType.examples,
-        BlockType.output_format, BlockType.format_control,
+        BlockType.document, BlockType.role, BlockType.audience, BlockType.context,
+        BlockType.objective, BlockType.goal, BlockType.input, BlockType.constraints,
+        BlockType.examples, BlockType.chain_of_thought,
+        BlockType.output_format,
         BlockType.language,
     ]
 

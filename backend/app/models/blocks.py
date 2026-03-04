@@ -5,15 +5,17 @@ from pydantic import BaseModel
 
 class BlockType(str, Enum):
     role = "role"
+    audience = "audience"
     context = "context"
     objective = "objective"
+    goal = "goal"
     input = "input"
     constraints = "constraints"
-    output_format = "output_format"
     examples = "examples"
+    chain_of_thought = "chain_of_thought"
+    output_format = "output_format"
     language = "language"
     document = "document"          # Claude: <document index="N"> XML grounding
-    format_control = "format_control"  # Claude: verbosity / markdown / tone
 
 
 class BlockData(BaseModel):

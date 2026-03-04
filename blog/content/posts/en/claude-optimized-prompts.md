@@ -71,14 +71,16 @@ Anthropic's research shows that the order of your prompt sections affects Claude
 
 1. **Documents** (grounding first — always)
 2. **Role** (persona)
-3. **Context** (background)
-4. **Objective** (main task)
-5. **Input** (data to process)
-6. **Constraints** (rules)
-7. **Examples** (few-shot)
-8. **Output format** (response structure)
-9. **Format control** (style directives)
-10. **Language** (last)
+3. **Audience** (who reads the output)
+4. **Context** (background)
+5. **Objective** (main task — what to do)
+6. **Goal** (end goal and success criteria)
+7. **Input** (data to process)
+8. **Constraints** (rules)
+9. **Examples** (few-shot)
+10. **Chain of Thought** (reasoning instructions)
+11. **Output format** (response structure)
+12. **Language** (last)
 
 The reasoning: Claude reads prompts top-to-bottom. Grounding documents first gives Claude the context it needs to correctly interpret everything that follows. Instructions at the end are harder to ignore and thus more reliably followed.
 
@@ -86,20 +88,9 @@ The reasoning: Claude reads prompts top-to-bottom. Grounding documents first giv
 
 ---
 
-## 4. Separate format from structure with Format Control
+## 4. Use Response Style for formatting directives
 
-Most prompts mix "what to return" with "how to write it." That makes iteration harder — changing the tone forces you to rewrite the format definition too.
-
-The **Format Control** block is dedicated to Claude-specific style directives:
-
-```xml
-<format_instructions>
-  Be concise. No preamble. Use markdown headers.
-  Maximum 3 paragraphs per section.
-</format_instructions>
-```
-
-Keep output format (JSON schema, numbered list, table columns) in **Output Format**. Keep style (verbosity, tone, markdown on/off) in **Format Control**. Iterate them independently.
+The **Response Style** block handles all Claude-specific style directives — verbosity, tone, prose format, markdown, LaTeX — through a structured UI. No need to manually write formatting instructions.
 
 ---
 
@@ -120,9 +111,15 @@ Here's what a well-structured prompt looks like when all best practices are appl
   <role>
     Senior Python developer specializing in code review
   </role>
+  <audience>
+    Mid-level engineers who will triage and fix the issues
+  </audience>
   <objective>
     Review the provided code for bugs, performance issues, and style violations
   </objective>
+  <goal>
+    Help the team prioritize what to fix first. Surface critical issues clearly so the reviewer can act in under 5 minutes.
+  </goal>
   <constraints>
     Focus on critical issues. Ignore cosmetic formatting.
   </constraints>
@@ -132,12 +129,12 @@ Here's what a well-structured prompt looks like when all best practices are appl
       <ideal_response>No issues found. Simple, correct, readable.</ideal_response>
     </example>
   </examples>
+  <thinking>
+    Think step by step. First identify the issue type, then assess severity, then suggest a fix.
+  </thinking>
   <output_format>
     Numbered list. One issue per line. Severity: [critical/warning/info].
   </output_format>
-  <format_instructions>
-    Be concise. No preamble. Use code references (line numbers).
-  </format_instructions>
   <language>English</language>
 </prompt>
 ```

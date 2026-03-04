@@ -69,21 +69,23 @@ Compiles a list of blocks into a Claude-optimized XML prompt.
 
 ### `list_block_types`
 
-Returns all 11 block types with descriptions and the recommended canonical order.
+Returns all 12 block types with descriptions and the recommended canonical order.
 
 **No input required.**
 
 | Block type | Description |
 |---|---|
 | `role` | Persona / who the AI is |
+| `audience` | Who the output is written for |
 | `context` | Background info |
-| `objective` | Main task |
+| `objective` | Main task (what to do) |
+| `goal` | End goal and success criteria |
 | `input` | Data to process |
 | `document` | External content (XML grounding) |
 | `constraints` | Rules and limits |
-| `output_format` | Expected response format |
-| `format_control` | Claude style directives (markdown, verbosity…) |
 | `examples` | Few-shot input/output pairs |
+| `chain_of_thought` | Step-by-step reasoning instructions |
+| `output_format` | Expected response format |
 | `language` | Output language |
 
 ---

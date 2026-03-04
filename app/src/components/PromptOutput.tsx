@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { Clipboard, ClipboardCheck, FileText, Braces, Sparkles, Play, Share2, Send } from 'lucide-react'
+import { Clipboard, ClipboardCheck, FileText, Braces, Sparkles, Play, Send, Github } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics } from '@/lib/analytics'
@@ -86,25 +86,10 @@ const PromptOutput = () => {
     window.parent.postMessage({ type: 'FLOMPT_INJECT', prompt: currentRaw }, '*')
     setInjected(true)
     analytics.promptCopied()
+    window.dispatchEvent(new CustomEvent(STAR_EVENT))
     setTimeout(() => setInjected(false), 2500)
   }, [currentRaw])
 
-  const handleShare = async () => {
-    const shareData = {
-      title: t.promptOutput.shareTitle,
-      text:  t.promptOutput.shareText,
-      url:   'https://flompt.dev',
-    }
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData)
-      } else {
-        await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-      }
-    } catch { /* user cancelled */ }
-  }
 
   return (
     <div className="prompt-output-panel">
@@ -201,9 +186,15 @@ const PromptOutput = () => {
         </button>
       )}
 
-      <button className="btn btn-secondary btn-share" onClick={handleShare} aria-label={t.promptOutput.share}>
-        <Share2 size={13} aria-hidden="true" /> {t.promptOutput.share}
-      </button>
+      <a
+        className="btn btn-secondary btn-share"
+        href="https://github.com/Nyrok/flompt"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+      >
+        <Github size={13} aria-hidden="true" /> View source code
+      </a>
     </div>
   )
 }

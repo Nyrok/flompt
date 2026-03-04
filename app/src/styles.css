@@ -320,6 +320,7 @@ body {
   gap: 6px;
   font-family: var(--font);
   letter-spacing: -0.01em;
+  text-decoration: none;
 }
 .btn:disabled { opacity: 0.35; cursor: not-allowed; }
 

@@ -139,15 +139,17 @@
   },
 
   "blocks": {
-    "document":         { "label": "Document",       "description": "Contenu externe injecté en XML <document>" },
-    "input":            { "label": "Entrée",         "description": "Données fournies à l'IA" },
-    "role":             { "label": "Rôle",           "description": "Définit la persona / le rôle de l'IA" },
-    "context":          { "label": "Contexte",       "description": "Fournit le contexte de la tâche" },
-    "objective":        { "label": "Objectif",       "description": "Ce qu'on veut accomplir" },
-    "constraints":      { "label": "Contraintes",    "description": "Règles et limites à respecter" },
-    "examples":         { "label": "Exemples",       "description": "Paires input/output few-shot" },
-    "output_format":    { "label": "Sortie",         "description": "Format attendu de la réponse" },
-    "format_control":   { "label": "Format Control", "description": "Directives Claude : ton, verbosité, markdown" },
+    "document":         { "label": "Document",        "description": "Contenu externe injecté en XML <document>" },
+    "input":            { "label": "Entrée",          "description": "Données fournies à l'IA" },
+    "role":             { "label": "Rôle",            "description": "Définit la persona / le rôle de l'IA" },
+    "audience":         { "label": "Audience",        "description": "À qui s'adresse le résultat" },
+    "context":          { "label": "Contexte",        "description": "Fournit le contexte de la tâche" },
+    "objective":        { "label": "Objectif",        "description": "Ce qu'on veut accomplir" },
+    "goal":             { "label": "Objectif final",  "description": "But final et critères de succès" },
+    "constraints":      { "label": "Contraintes",     "description": "Règles et limites à respecter" },
+    "examples":         { "label": "Exemples",        "description": "Paires input/output few-shot" },
+    "chain_of_thought": { "label": "Raisonnement",    "description": "Instructions de raisonnement étape par étape" },
+    "output_format":    { "label": "Sortie",          "description": "Format attendu de la réponse" },
     "response_style":   {
       "label": "Style de réponse", "description": "Verbosité, ton, prose, markdown, LaTeX",
       "verbosity": "Verbosité", "concise": "Concis", "balanced": "Équilibré", "detailed": "Détaillé",
@@ -157,6 +159,6 @@
       "math": "Math", "mathAuto": "Auto", "mathPlain": "Texte",
       "skipPreamble": "Pas de préambule (\"Voici…\")"
     },
-    "language":         { "label": "Langue",         "description": "Langue de réponse de l'IA" }
+    "language":         { "label": "Langue",          "description": "Langue de réponse de l'IA" }
   }
 }

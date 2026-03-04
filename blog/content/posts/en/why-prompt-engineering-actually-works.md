@@ -101,13 +101,16 @@ Put it all together, and a well-engineered prompt has a clear structure:
 
 1. **Documents** — reference material, grounded in `<document>` tags
 2. **Role** — who the AI is in this context
-3. **Context** — background and motivation
-4. **Objective** — the specific task
-5. **Input** — the data being processed
-6. **Constraints** — rules and limitations
-7. **Examples** — few-shot demonstrations in `<examples>` tags
-8. **Output format** — the expected response structure
-9. **Format control** — tone, verbosity, markdown on/off
+3. **Audience** — who the output is written for
+4. **Context** — background and motivation
+5. **Objective** — the specific task (what to do)
+6. **Goal** — the end goal and success criteria (what good looks like)
+7. **Input** — the data being processed
+8. **Constraints** — rules and limitations
+9. **Examples** — few-shot demonstrations in `<examples>` tags
+10. **Chain of Thought** — step-by-step reasoning instructions
+11. **Output format** — the expected response structure
+12. **Response Style** — verbosity, tone, prose, markdown (structured UI)
 
 This is exactly the ordering flompt enforces automatically. Not because it's arbitrary convention — because it follows Anthropic's own recommendations for how Claude processes information most effectively.
 

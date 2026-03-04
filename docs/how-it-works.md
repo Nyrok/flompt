@@ -12,7 +12,7 @@ flompt sends your prompt to the backend (FastAPI), which uses Claude to analyze 
 
 Each block is:
 
-- Assigned a **type** from 11 possible categories
+- Assigned a **type** from 12 possible categories
 - Given a **2-5 word AI-generated summary** for quick identification on the canvas
 - **Auto-positioned** with 180px vertical spacing
 - **Auto-connected** top-to-bottom to represent reading order
@@ -63,8 +63,8 @@ Click **Assemble prompt** in the output panel. Assembly is **100% local** — no
 **Final ordering follows Anthropic's official best practices:**
 
 ```
-documents → role → context → objective → input → constraints →
-examples → output_format → format_control → language
+documents → role → audience → context → objective → goal → input →
+constraints → examples → chain_of_thought → output_format → language
 ```
 
 ### Output format — Claude-optimized XML

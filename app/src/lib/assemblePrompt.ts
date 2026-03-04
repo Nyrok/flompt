@@ -8,15 +8,17 @@ import { generateResponseStyleContent } from '@/types/blocks'
 const TYPE_PRIORITY: Record<BlockType, number> = {
   document:        0,   // XML grounding — always first
   role:            1,   // persona
-  context:         2,   // background
-  objective:       3,   // main task
-  input:           4,   // data/variables
-  constraints:     5,   // rules
-  examples:        6,   // few-shot
-  output_format:   7,   // response format
-  format_control:  9,   // free-text style directives
-  response_style:  9,   // structured style directives (same priority as format_control)
-  language:        10,  // language instruction — always last
+  audience:        2,   // who it's for
+  context:         3,   // background
+  objective:       4,   // main task
+  goal:            5,   // success criteria
+  input:           6,   // data/variables
+  constraints:     7,   // rules
+  examples:        8,   // few-shot
+  chain_of_thought: 9,  // reasoning instructions
+  output_format:   10,  // response format
+  response_style:  11,  // structured style directives
+  language:        12,  // language instruction — always last
 }
 
 // ─── Topological sort (Kahn's algorithm) ────────────────────────────────────
@@ -187,11 +189,9 @@ function renderExamples(content: string): string {
 
 /**
  * Standard block renderer — wraps content in a simple XML tag.
- * format_control → <format_instructions>
  */
 function renderStandardBlock(type: BlockType, content: string): string {
   const tagMap: Partial<Record<BlockType, string>> = {
-    format_control:   'format_instructions',
     response_style:   'format_instructions',
     output_format:    'output_format',
   }
@@ -204,13 +204,15 @@ function renderStandardBlock(type: BlockType, content: string): string {
 
 const MD_HEADING: Record<BlockType, string> = {
   role:             'Role',
+  audience:         'Audience',
   context:          'Context',
   objective:        'Objective',
+  goal:             'Goal',
   input:            'Input',
   constraints:      'Constraints',
   examples:         'Examples',
+  chain_of_thought: 'Chain of Thought',
   output_format:    'Output Format',
-  format_control:   'Style Guidelines',
   response_style:   'Style Guidelines',
   language:         'Language',
   document:         'Documents',

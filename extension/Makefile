@@ -25,11 +25,11 @@ SHARED_FILES := background.js \
                 icons/logo.svg \
                 fonts/caveat-bold.woff2
 
-.PHONY: all icons pack firefox all-browsers clean help
+.PHONY: all icons pack chrome firefox clean help
 
-all: icons pack
+all: icons pack firefox
 
-all-browsers: icons pack firefox
+chrome: pack
 
 ## icons — Generate PNG icons from icons/icon.svg
 icons:
@@ -76,10 +76,9 @@ clean:
 ## help — Display this help
 help:
 	@echo ""
-	@echo "  make icons         Generate PNG icons from icons/icon.svg"
-	@echo "  make pack          Create dist/$(ZIP_CHROME)  (Chrome Web Store)"
+	@echo "  make               icons + chrome + firefox (both)"
+	@echo "  make chrome        Create dist/$(ZIP_CHROME)  (Chrome Web Store)"
 	@echo "  make firefox       Create dist/$(ZIP_FIREFOX) (Firefox AMO)"
-	@echo "  make all           icons + pack (Chrome)"
-	@echo "  make all-browsers  icons + pack + firefox (both)"
+	@echo "  make icons         Generate PNG icons from icons/icon.svg"
 	@echo "  make clean         Delete dist/"
 	@echo ""
