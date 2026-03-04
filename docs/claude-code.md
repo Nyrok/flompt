@@ -84,7 +84,6 @@ Returns all 11 block types with descriptions and the recommended canonical order
 | `output_format` | Expected response format |
 | `format_control` | Claude style directives (markdown, verbosity…) |
 | `examples` | Few-shot input/output pairs |
-| `chain_of_thought` | Step-by-step reasoning instructions |
 | `language` | Output language |
 
 ---

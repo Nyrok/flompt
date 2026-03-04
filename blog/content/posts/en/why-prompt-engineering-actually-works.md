@@ -106,9 +106,8 @@ Put it all together, and a well-engineered prompt has a clear structure:
 5. **Input** — the data being processed
 6. **Constraints** — rules and limitations
 7. **Examples** — few-shot demonstrations in `<examples>` tags
-8. **Chain of thought** — step-by-step reasoning instruction
-9. **Output format** — the expected response structure
-10. **Format control** — tone, verbosity, markdown on/off
+8. **Output format** — the expected response structure
+9. **Format control** — tone, verbosity, markdown on/off
 
 This is exactly the ordering flompt enforces automatically. Not because it's arbitrary convention — because it follows Anthropic's own recommendations for how Claude processes information most effectively.
 

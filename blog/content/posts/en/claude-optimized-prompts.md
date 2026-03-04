@@ -76,10 +76,9 @@ Anthropic's research shows that the order of your prompt sections affects Claude
 5. **Input** (data to process)
 6. **Constraints** (rules)
 7. **Examples** (few-shot)
-8. **Chain of thought** (reasoning instructions)
-9. **Output format** (response structure)
-10. **Format control** (style directives)
-11. **Language** (last)
+8. **Output format** (response structure)
+9. **Format control** (style directives)
+10. **Language** (last)
 
 The reasoning: Claude reads prompts top-to-bottom. Grounding documents first gives Claude the context it needs to correctly interpret everything that follows. Instructions at the end are harder to ignore and thus more reliably followed.
 
@@ -101,24 +100,6 @@ The **Format Control** block is dedicated to Claude-specific style directives:
 ```
 
 Keep output format (JSON schema, numbered list, table columns) in **Output Format**. Keep style (verbosity, tone, markdown on/off) in **Format Control**. Iterate them independently.
-
----
-
-## 5. Chain of thought — explicit, not implicit
-
-Saying "think step by step" works. But being explicit about *what* to think through works better:
-
-```xml
-<thinking>
-  Before answering:
-  1. Identify the root cause
-  2. List at least 2 alternative approaches
-  3. Evaluate trade-offs
-  Then provide your recommendation.
-</thinking>
-```
-
-Explicit reasoning instructions produce more structured, auditable responses — especially on complex technical or analytical tasks.
 
 ---
 
@@ -151,9 +132,6 @@ Here's what a well-structured prompt looks like when all best practices are appl
       <ideal_response>No issues found. Simple, correct, readable.</ideal_response>
     </example>
   </examples>
-  <thinking>
-    Check for: off-by-one errors, null dereferences, inefficient loops, missing error handling.
-  </thinking>
   <output_format>
     Numbered list. One issue per line. Severity: [critical/warning/info].
   </output_format>

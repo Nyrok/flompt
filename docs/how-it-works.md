@@ -64,7 +64,7 @@ Click **Assemble prompt** in the output panel. Assembly is **100% local** — no
 
 ```
 documents → role → context → objective → input → constraints →
-examples → chain_of_thought → output_format → format_control → language
+examples → output_format → format_control → language
 ```
 
 ### Output format — Claude-optimized XML

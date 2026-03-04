@@ -100,23 +100,6 @@ Color: violet-light `#c4b5fd`
 
 ---
 
-## Chain of Thought
-
-Instructs Claude to reason step by step before answering. Improves accuracy on complex, multi-step, or ambiguous tasks.
-
-**Examples:** `"Think step by step before answering"`, `"First identify the root cause, then propose a fix, then explain the trade-offs"`
-
-**Assembled as:**
-```xml
-<thinking>
-  Think step by step before answering.
-</thinking>
-```
-
-Color: cyan `#67e8f9`
-
----
-
 ## Output Format
 
 Specifies the expected response structure — JSON, bullet list, table, numbered steps, prose, markdown, etc.
@@ -163,7 +146,7 @@ flompt automatically applies Anthropic's recommended block ordering:
 
 ```
 documents → role → context → objective → input → constraints →
-examples → chain_of_thought → output_format → format_control → language
+examples → output_format → format_control → language
 ```
 
 This order is enforced regardless of how blocks are arranged on the canvas — the assembler sorts them optimally.
