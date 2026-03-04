@@ -17,6 +17,7 @@
 
 <p align="center">
   <a href="https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc"><img src="https://img.shields.io/badge/Chrome_Web_Store-Add_to_Chrome-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Chrome Web Store" /></a>
+  <a href="https://addons.mozilla.org/addon/flompt-visual-prompt-builder/"><img src="https://img.shields.io/badge/Firefox_Add--ons-Add_to_Firefox-FF6611?style=for-the-badge&logo=firefox&logoColor=white" alt="Firefox Add-ons" /></a>
 </p>
 
 <p align="center">
@@ -71,7 +72,7 @@ Blocks are automatically ordered following Anthropic's recommended prompt struct
 
 ---
 
-## 🧩 Chrome Extension
+## 🧩 Browser Extension
 
 Use flompt directly inside ChatGPT, Claude, and Gemini. Without leaving your tab.
 
@@ -82,6 +83,9 @@ Use flompt directly inside ChatGPT, Claude, and Gemini. Without leaving your tab
 <p>
   <a href="https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc">
     <img src="https://img.shields.io/badge/Chrome_Web_Store-Add_to_Chrome-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Add to Chrome" />
+  </a>
+  <a href="https://addons.mozilla.org/addon/flompt-visual-prompt-builder/">
+    <img src="https://img.shields.io/badge/Firefox_Add--ons-Add_to_Firefox-FF6611?style=for-the-badge&logo=firefox&logoColor=white" alt="Add to Firefox" />
   </a>
 </p>
 
@@ -535,7 +539,7 @@ cd /projects/flompt && ./deploy.sh
 | **Reverse Proxy** | Caddy (auto-TLS via Let's Encrypt) |
 | **Process Manager** | Supervisord + keepalive watchdog |
 | **Blog** | Next.js 15 (static export), Tailwind CSS |
-| **Extension** | Chrome MV3 (content script + sidebar) |
+| **Extension** | Chrome & Firefox MV3 (content script + sidebar) |
 | **i18n** | English & French |
 
 ---
@@ -546,7 +550,7 @@ cd /projects/flompt && ./deploy.sh
 - 🤖 **AI-powered decomposition**: Paste a prompt, get structured blocks
 - ⚡ **Async job queue**: Non-blocking decomposition with live progress tracking
 - 🦾 **Claude-optimized output**: XML structured following Anthropic best practices
-- 🧩 **Chrome extension**: Enhance button inside ChatGPT, Claude & Gemini
+- 🧩 **Browser extension**: Enhance button inside ChatGPT, Claude & Gemini (Chrome & Firefox)
 - 🤖 **Claude Code MCP**: Native tool integration via Model Context Protocol
 - 📱 **Responsive**: Full touch support, tap-to-connect
 - 🌙 **Dark theme**: Mermaid-inspired warm dark UI

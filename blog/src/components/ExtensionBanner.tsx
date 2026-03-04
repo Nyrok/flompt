@@ -13,6 +13,10 @@ const ChromeSvg = () => (
 const BANNER_KEY = "flompt-ext-banner-v1";
 const EXT_URL =
   "https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc";
+const FIREFOX_URL = "https://addons.mozilla.org/addon/flompt-visual-prompt-builder/";
+
+const isFirefox = typeof navigator !== "undefined" && navigator.userAgent.includes("Firefox");
+const installUrl = isFirefox ? FIREFOX_URL : EXT_URL;
 
 export default function ExtensionBanner({ locale }: { locale: Locale }) {
   const t = getTranslations(locale);
@@ -86,7 +90,7 @@ export default function ExtensionBanner({ locale }: { locale: Locale }) {
         </span>
 
         <a
-          href={EXT_URL}
+          href={installUrl}
           target="_blank"
           rel="noopener noreferrer"
           style={{

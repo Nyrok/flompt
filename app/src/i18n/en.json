@@ -121,12 +121,13 @@
   },
 
   "extension": {
-    "bannerText": "flompt is now a Chrome extension. Use it inside ChatGPT, Claude & Gemini.",
+    "bannerText": "flompt is now available on Chrome & Firefox. Use it inside ChatGPT, Claude & Gemini.",
     "bannerCta": "Install →",
     "bannerClose": "Close extension announcement",
-    "popupTitle": "flompt is now on Chrome!",
-    "popupDesc": "Use flompt directly inside ChatGPT, Claude & Gemini. No tab switching needed.",
+    "popupTitle": "flompt is now on Chrome & Firefox!",
+    "popupDesc": "Use flompt directly inside ChatGPT, Claude & Gemini. Available on Chrome and Firefox. No tab switching needed.",
     "popupCta": "Install the extension",
+    "popupCtaFirefox": "Add to Firefox",
     "popupSkip": "Maybe later"
   },
 

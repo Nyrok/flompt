@@ -5,10 +5,13 @@ import { track } from '@/lib/analytics'
 
 const BANNER_KEY = 'flompt-ext-banner-v1'
 const EXT_URL = 'https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc'
+const FIREFOX_URL = 'https://addons.mozilla.org/addon/flompt-visual-prompt-builder/'
 
 const ExtensionBanner = () => {
   const { t } = useLocale()
   const [visible, setVisible] = useState(false)
+  const isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.includes('Firefox')
+  const installUrl = isFirefox ? FIREFOX_URL : EXT_URL
 
   useEffect(() => {
     if (window.matchMedia('(max-width: 768px)').matches) return
@@ -34,7 +37,7 @@ const ExtensionBanner = () => {
         <span className="ext-banner__badge" aria-hidden="true">NEW</span>
         <span className="ext-banner__text">{t.extension.bannerText}</span>
         <a
-          href={EXT_URL}
+          href={installUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="ext-banner__cta"

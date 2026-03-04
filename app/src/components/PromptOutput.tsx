@@ -189,15 +189,17 @@ const PromptOutput = () => {
         </div>
       )}
 
-      <button
-        className="btn btn-primary"
-        onClick={handleCompile}
-        disabled={nodes.length === 0 || compiledPrompt !== null}
-        data-tour="compile-btn"
-        aria-disabled={nodes.length === 0 || compiledPrompt !== null}
-      >
-        <Play size={14} aria-hidden="true" /> {t.promptOutput.compile}
-      </button>
+      {compiledPrompt === null && (
+        <button
+          className="btn btn-primary"
+          onClick={handleCompile}
+          disabled={nodes.length === 0}
+          data-tour="compile-btn"
+          aria-disabled={nodes.length === 0}
+        >
+          <Play size={14} aria-hidden="true" /> {t.promptOutput.compile}
+        </button>
+      )}
 
       <button className="btn btn-secondary btn-share" onClick={handleShare} aria-label={t.promptOutput.share}>
         <Share2 size={13} aria-hidden="true" /> {t.promptOutput.share}

@@ -28,12 +28,13 @@
     "techTitle": "Technologies"
   },
   "extension": {
-    "bannerText": "flompt est maintenant une extension Chrome. Utilisez-le dans ChatGPT, Claude & Gemini.",
+    "bannerText": "flompt est disponible sur Chrome & Firefox. Utilisez-le dans ChatGPT, Claude & Gemini.",
     "bannerCta": "Installer →",
     "bannerClose": "Fermer l'annonce de l'extension",
-    "popupTitle": "flompt est sur Chrome !",
-    "popupDesc": "Utilisez flompt directement dans ChatGPT, Claude & Gemini. Sans changer d'onglet.",
-    "popupCta": "Installer l'extension",
+    "popupTitle": "flompt est sur Chrome & Firefox !",
+    "popupDesc": "Utilisez flompt directement dans ChatGPT, Claude & Gemini — sur Chrome et Firefox. Sans changer d'onglet.",
+    "popupCta": "Ajouter à Chrome",
+    "popupCtaFirefox": "Ajouter à Firefox",
     "popupSkip": "Plus tard"
   },
 

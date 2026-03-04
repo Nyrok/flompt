@@ -3,10 +3,12 @@ import { X } from 'lucide-react'
 import { useLocale } from '@/i18n/LocaleContext'
 import { track } from '@/lib/analytics'
 import ChromeIcon from '@/components/ChromeIcon'
+import FirefoxIcon from '@/components/FirefoxIcon'
 
 const POPUP_KEY = 'flompt-ext-popup-v1'
 const POPUP_DELAY = 20_000 // 20s — after guided tour
 const EXT_URL = 'https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc'
+const FIREFOX_URL = 'https://addons.mozilla.org/addon/flompt-visual-prompt-builder/'
 
 const ExtensionPopup = () => {
   const { t } = useLocale()
@@ -71,25 +73,43 @@ const ExtensionPopup = () => {
           <X size={16} aria-hidden="true" />
         </button>
 
-        <ChromeIcon size={40} className="ext-popup__icon" />
+        <div className="ext-popup__icons" aria-hidden="true">
+          <ChromeIcon size={40} className="ext-popup__icon" />
+          <FirefoxIcon size={40} className="ext-popup__icon" />
+        </div>
         <h2 id="ext-popup-title" className="ext-popup__title">
           {t.extension.popupTitle}
         </h2>
         <p className="ext-popup__desc">{t.extension.popupDesc}</p>
 
-        <a
-          href={EXT_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ext-popup__cta"
-          onClick={() => {
-            track('extension_install_clicked', { source: 'app_popup' })
-            dismiss()
-          }}
-        >
-          <ChromeIcon size={16} />
-          {t.extension.popupCta}
-        </a>
+        <div className="ext-popup__cta-group">
+          <a
+            href={EXT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ext-popup__cta"
+            onClick={() => {
+              track('extension_install_clicked', { source: 'app_popup', browser: 'chrome' })
+              dismiss()
+            }}
+          >
+            <ChromeIcon size={16} />
+            {t.extension.popupCta}
+          </a>
+          <a
+            href={FIREFOX_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ext-popup__cta"
+            onClick={() => {
+              track('extension_install_clicked', { source: 'app_popup', browser: 'firefox' })
+              dismiss()
+            }}
+          >
+            <FirefoxIcon size={16} />
+            {t.extension.popupCtaFirefox}
+          </a>
+        </div>
 
         <button className="ext-popup__skip" onClick={dismiss}>
           {t.extension.popupSkip}

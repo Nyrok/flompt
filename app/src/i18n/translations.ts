@@ -117,6 +117,7 @@ export interface Translations {
     popupTitle: string
     popupDesc: string
     popupCta: string
+    popupCtaFirefox: string
     popupSkip: string
   }
   starPopup: {

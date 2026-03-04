@@ -126,7 +126,8 @@
     "bannerClose": "Fermer l'annonce de l'extension",
     "popupTitle": "flompt est sur Chrome !",
     "popupDesc": "Utilisez flompt directement dans ChatGPT, Claude & Gemini. Sans changer d'onglet.",
-    "popupCta": "Installer l'extension",
+    "popupCta": "Ajouter à Chrome",
+    "popupCtaFirefox": "Ajouter à Firefox",
     "popupSkip": "Plus tard"
   },
 

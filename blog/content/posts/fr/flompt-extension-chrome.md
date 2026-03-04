@@ -1,8 +1,8 @@
 ---
-title: "L'extension Chrome Flompt : construis tes prompts sans quitter ChatGPT"
+title: "L'extension Flompt : construis tes prompts sans quitter ChatGPT — sur Chrome & Firefox"
 date: "2026-02-25"
-excerpt: "Flompt est maintenant disponible en extension Chrome. Construis des prompts structurés en XML directement depuis la sidebar de ChatGPT, Claude ou Gemini. Sans copier-coller."
-tags: ["extension chrome", "flompt", "prompt engineering", "productivité"]
+excerpt: "Flompt est maintenant disponible en extension Chrome & Firefox. Construis des prompts structurés en XML directement depuis la sidebar de ChatGPT, Claude ou Gemini. Sans copier-coller."
+tags: ["extension chrome", "extension firefox", "flompt", "prompt engineering", "productivité"]
 ---
 
 ## Le problème du contexte
@@ -11,7 +11,7 @@ Quand tu travailles avec une IA, tu as deux onglets ouverts. Celui de ton outil 
 
 Ce va-et-vient est invisible dans les tutoriels mais constant dans la pratique. C'est du temps perdu, de la friction ajoutée, et une source d'erreurs : mauvaise version collée, contexte oublié, modification perdue.
 
-L'extension Chrome Flompt supprime ce problème.
+L'extension Flompt supprime ce problème — disponible sur Chrome et Firefox.
 
 ## Ce que fait l'extension
 
@@ -58,9 +58,11 @@ Si pour une raison quelconque la barre d'outils est introuvable (mise à jour de
 
 ## Comment l'installer
 
-Installe directement depuis le Chrome Web Store. Un clic, aucun mode développeur requis :
+Installe directement depuis le Chrome Web Store ou Firefox Add-ons. Un clic, aucun mode développeur requis :
 
 → [**Ajouter à Chrome**](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc)
+
+→ [**Ajouter à Firefox**](https://addons.mozilla.org/addon/flompt-visual-prompt-builder/)
 
 Une fois installée, ouvre ChatGPT, Claude ou Gemini. Le bouton **✦ flompt** apparaît directement dans la barre d'outils de saisie.
 
@@ -74,4 +76,4 @@ Et comme le flow est sauvegardé automatiquement entre les sessions, tu reprends
 
 ---
 
-[**Ajouter à Chrome →**](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc) · [Essayer l'app web](https://flompt.dev/app)
+[**Ajouter à Chrome →**](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc) · [**Ajouter à Firefox →**](https://addons.mozilla.org/addon/flompt-visual-prompt-builder/) · [Essayer l'app web](https://flompt.dev/app)
