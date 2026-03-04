@@ -192,9 +192,9 @@ const PromptOutput = () => {
       <button
         className="btn btn-primary"
         onClick={handleCompile}
-        disabled={nodes.length === 0}
+        disabled={nodes.length === 0 || compiledPrompt !== null}
         data-tour="compile-btn"
-        aria-disabled={nodes.length === 0}
+        aria-disabled={nodes.length === 0 || compiledPrompt !== null}
       >
         <Play size={14} aria-hidden="true" /> {t.promptOutput.compile}
       </button>

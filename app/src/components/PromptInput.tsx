@@ -12,6 +12,7 @@ import { STAR_EVENT } from '@/components/StarPopup'
 const PromptInput = () => {
   const {
     rawPrompt, setRawPrompt,
+    lastDecomposedPrompt, setLastDecomposedPrompt,
     setNodes, setEdges,
     setIsDecomposing, isDecomposing,
     setActiveTab,
@@ -84,6 +85,7 @@ const PromptInput = () => {
       // ── 3. Appliquer le résultat ──────────────────────────────────────────
       setNodes(result.nodes)
       setEdges(result.edges)
+      setLastDecomposedPrompt(prompt)
       analytics.decomposeCompleted(result.nodes.length)
       window.dispatchEvent(new CustomEvent(STAR_EVENT))
 
@@ -182,7 +184,7 @@ const PromptInput = () => {
       <button
         className="btn btn-primary"
         onClick={handleDecompose}
-        disabled={isDecomposing || !rawPrompt.trim()}
+        disabled={isDecomposing || !rawPrompt.trim() || rawPrompt.trim() === lastDecomposedPrompt.trim()}
         data-tour="decompose-btn"
         aria-busy={isDecomposing}
       >

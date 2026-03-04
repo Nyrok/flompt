@@ -20,6 +20,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
       capture_pageview:  false, // manual below
       capture_pageleave: true,
       enable_heatmaps:   true,
+      capture_exceptions: true, // error tracking
       session_recording: {
         maskAllInputs: false,
       },

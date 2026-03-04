@@ -21,6 +21,7 @@ interface FlowState {
   nodes: FlomptNode[]
   edges: FlomptEdge[]
   rawPrompt: string
+  lastDecomposedPrompt: string
   compiledPrompt: CompiledPrompt | null
   isDecomposing: boolean
   activeTab: Tab
@@ -42,6 +43,7 @@ interface FlowState {
   updateNodeData: (id: string, patch: Partial<import('@/types/blocks').BlockData>) => void
   addNode: (node: FlomptNode) => void
   removeNode: (id: string) => void
+  setLastDecomposedPrompt: (prompt: string) => void
   setCompiledPrompt: (prompt: CompiledPrompt | null) => void
   setIsDecomposing: (v: boolean) => void
   setActiveTab: (tab: Tab) => void
@@ -65,6 +67,7 @@ export const useFlowStore = create<FlowState>()(
       nodes: [],
       edges: [],
       rawPrompt: '',
+      lastDecomposedPrompt: '',
       compiledPrompt: null,
       isDecomposing: false,
       activeTab: 'input' as Tab,
@@ -148,6 +151,7 @@ export const useFlowStore = create<FlowState>()(
           compiledPrompt: null,
         })),
 
+      setLastDecomposedPrompt: (prompt) => set({ lastDecomposedPrompt: prompt }),
       setCompiledPrompt: (prompt) => set({ compiledPrompt: prompt }),
       setIsDecomposing: (v) => set({ isDecomposing: v }),
       setActiveTab: (tab) => set({ activeTab: tab }),

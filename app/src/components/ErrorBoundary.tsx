@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import type { ReactNode, ErrorInfo } from 'react'
+import posthog from 'posthog-js'
 import { track } from '@/lib/analytics'
 
 interface Props  { children: ReactNode }
@@ -9,6 +10,9 @@ export class ErrorBoundary extends Component<Props, State> {
   state: State = { crashed: false }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
+    posthog.captureException(error, {
+      component: info.componentStack?.split('\n')[1]?.trim(),
+    })
     track('app_crash', {
       message:    error.message,
       stack:      error.stack?.slice(0, 500),
