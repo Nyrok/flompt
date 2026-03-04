@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Undo2, Redo2, PenLine, Network, Sparkles, Trash2, Github } from 'lucide-react'
+import { PenLine, Network, Sparkles, Github } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { initAnalytics, setSource, analytics } from '@/lib/analytics'
 import FlowCanvas from '@/components/FlowCanvas'
@@ -25,7 +25,7 @@ const TAB_IDS: { id: Tab; Icon: LucideIcon }[] = [
 ]
 
 const App = () => {
-  const { undo, redo, reset, past, future, nodes, activeTab, setActiveTab, isDecomposing } = useFlowStore()
+  const { undo, redo, nodes, activeTab, setActiveTab, isDecomposing } = useFlowStore()
   const { t, locale, setLocale } = useLocale()
   const mainRef = useRef<HTMLElement>(null)
 
@@ -82,24 +82,6 @@ const App = () => {
           )}
 
           <div className="header-actions">
-            <button
-              className="btn-icon"
-              onClick={undo}
-              disabled={past.length === 0}
-              title={t.header.undo}
-              aria-label={t.header.undo}
-            >
-              <Undo2 size={14} aria-hidden="true" />
-            </button>
-            <button
-              className="btn-icon"
-              onClick={redo}
-              disabled={future.length === 0}
-              title={t.header.redo}
-              aria-label={t.header.redo}
-            >
-              <Redo2 size={14} aria-hidden="true" />
-            </button>
             <KeyboardShortcuts />
             <button
               className="btn-locale"
@@ -119,14 +101,6 @@ const App = () => {
             >
               <Github size={14} aria-hidden="true" />
             </a>
-            <button
-              className="btn-icon btn-clear-desktop"
-              onClick={() => { if (confirm(t.header.resetConfirm)) reset() }}
-              title={t.header.reset}
-              aria-label={t.header.reset}
-            >
-              <Trash2 size={14} aria-hidden="true" />
-            </button>
           </div>
         </header>
       )}

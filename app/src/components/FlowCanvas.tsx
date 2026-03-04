@@ -106,6 +106,16 @@ const CanvasInner = () => {
       {/* Canvas control bar — top-left, horizontal */}
       <div className="canvas-ctrl-bar">
         <button
+          className="canvas-ctrl-btn canvas-ctrl-btn--danger"
+          onClick={() => { if (confirm(t.header.resetConfirm)) reset() }}
+          title={t.header.reset}
+          aria-label={t.header.reset}
+          disabled={nodes.length === 0}
+        >
+          <Trash2 size={13} aria-hidden="true" />
+        </button>
+        <div className="canvas-ctrl-divider" aria-hidden="true" />
+        <button
           className="canvas-ctrl-btn"
           onClick={undo}
           disabled={past.length === 0}
@@ -122,16 +132,6 @@ const CanvasInner = () => {
           aria-label={t.header.redo}
         >
           <Redo2 size={13} aria-hidden="true" />
-        </button>
-        <div className="canvas-ctrl-divider" aria-hidden="true" />
-        <button
-          className="canvas-ctrl-btn canvas-ctrl-btn--danger"
-          onClick={() => { if (confirm(t.header.resetConfirm)) reset() }}
-          title={t.header.reset}
-          aria-label={t.header.reset}
-          disabled={nodes.length === 0}
-        >
-          <Trash2 size={13} aria-hidden="true" />
         </button>
       </div>
 
