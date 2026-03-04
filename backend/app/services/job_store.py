@@ -6,7 +6,7 @@ after the worker has finished. Auto-TTL to avoid memory leaks.
 """
 
 import time
-from typing import Any, Optional
+from typing import Any
 
 
 class JobStore:
@@ -15,9 +15,9 @@ class JobStore:
     Thread-safe in asyncio context (single-threaded).
 
     Job lifecycle:
-      preregister()   -> status="queued"  (submitted, not yet in LLM queue)
-      store_result()  -> status="done"    (result available)
-      store_error()   -> status="error"   (error available)
+      set_queued()    -> status="queued"   (submitted, waiting for LLM)
+      store_result()  -> status="done"     (result available)
+      store_error()   -> status="error"    (error available)
 
     TTL: results are cleaned up after `ttl_seconds` (default 5 min).
     """
@@ -27,49 +27,12 @@ class JobStore:
         self._timestamps: dict[str, float] = {}
         self._ttl = ttl_seconds
 
-    def preregister(self, job_id: str, estimated_position: int) -> None:
-        """
-        Registers a job BEFORE it enters the LLMQueue.
-        Avoids the race condition where the client polls before the background
-        task has had time to register itself in the queue.
-        """
-        self._jobs[job_id] = {"status": "queued", "position": estimated_position}
-        self._timestamps[job_id] = time.monotonic()
-
-    def set_analyzing(self, job_id: str) -> None:
-        """
-        Marks the job as undergoing security analysis (Prompt Guard).
-        Called just before launching the guard inference.
-        """
-        self._jobs[job_id] = {"status": "analyzing"}
-        self._timestamps[job_id] = time.monotonic()
-
     def set_queued(self, job_id: str, estimated_position: int) -> None:
         """
-        Transitions the job from 'analyzing' to 'queued' once the guard has passed.
+        Registers the job as queued with an estimated position.
         """
         self._jobs[job_id] = {"status": "queued", "position": estimated_position}
         self._timestamps[job_id] = time.monotonic()
-
-    def store_blocked(
-        self,
-        job_id: str,
-        reason: str = "PROMPT_BLOCKED",
-        violations: Optional[list] = None,
-    ) -> None:
-        """
-        Marks the job as blocked by the Prompt Guard (terminal state).
-
-        violations: list of human-readable names of violated categories,
-                    e.g. ["Violent Crimes", "Hate"] — sent to the client via WS.
-        """
-        self._jobs[job_id] = {
-            "status": "blocked",
-            "error": reason,
-            "violations": violations or [],
-        }
-        self._timestamps[job_id] = time.monotonic()
-        self._cleanup()
 
     def store_result(self, job_id: str, result: Any) -> None:
         """Marks the job as finished and stores the result."""

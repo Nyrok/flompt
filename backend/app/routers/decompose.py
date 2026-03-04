@@ -6,7 +6,6 @@ from app.models.blocks import DecomposeRequest
 from app.services.decomposer import decompose
 from app.services.job_store import job_store
 from app.services.ai_service import llm_queue
-from app.services import prompt_guard_service
 from app.auth import create_job_token, verify_job_token
 
 router = APIRouter()
@@ -15,29 +14,16 @@ router = APIRouter()
 async def _decompose_task(job_id: str, prompt: str) -> None:
     """
     Background task:
-      1. Security analysis via Prompt Guard (status "analyzing")
-      2. If blocked -> status "blocked", end.
-      3. If safe -> enters the LLMQueue (status "queued" -> "processing")
-      4. Result stored: "done" or "error".
+      1. Enters the LLMQueue (status "queued" -> "processing")
+      2. Result stored: "done" or "error".
     """
     try:
-        # ── Step 1: Prompt Guard (Llama Guard 4 12B) ─────────────────────────
-        is_safe, codes, names, raw = await prompt_guard_service.classify(prompt)
-
-        if not is_safe:
-            job_store.store_blocked(
-                job_id,
-                reason="PROMPT_BLOCKED",
-                violations=names,  # human-readable names e.g. ["Violent Crimes", "Hate"]
-            )
-            return
-
-        # ── Step 2: LLM queue entry ───────────────────────────────────────────
+        # ── Step 1: LLM queue entry ───────────────────────────────────────────
         q = llm_queue.status
         estimated_position = q["pending"] + (1 if q["currently_processing"] else 0) + 1
         job_store.set_queued(job_id, estimated_position)
 
-        # ── Step 3: LLM decomposition ─────────────────────────────────────────
+        # ── Step 2: LLM decomposition ─────────────────────────────────────────
         result = await decompose(prompt, job_id=job_id)
         job_store.store_result(job_id, result.dict())
 
@@ -50,7 +36,7 @@ async def decompose_prompt(body: DecomposeRequest) -> dict:
     """
     Submits a decomposition job asynchronously (fire-and-forget).
 
-    Returns immediately { job_id, status: "analyzing", token }.
+    Returns immediately { job_id, status: "queued", token }.
     The JWT token is required to access the job status/result.
     """
     if not body.prompt.strip():
@@ -59,13 +45,15 @@ async def decompose_prompt(body: DecomposeRequest) -> dict:
     job_id = body.job_id or str(uuid.uuid4())
     token = create_job_token(job_id)
 
-    # Register immediately as "analyzing" (guard not yet started)
-    job_store.set_analyzing(job_id)
+    # Register immediately as "queued"
+    q = llm_queue.status
+    estimated_position = q["pending"] + (1 if q["currently_processing"] else 0) + 1
+    job_store.set_queued(job_id, estimated_position)
 
     # Submit in the background — do not await
     asyncio.create_task(_decompose_task(job_id, body.prompt))
 
-    return {"job_id": job_id, "status": "analyzing", "token": token}
+    return {"job_id": job_id, "status": "queued", "token": token}
 
 
 @router.websocket("/ws/job/{job_id}")
@@ -112,7 +100,7 @@ async def ws_job_status(
                 last_payload = current
 
             # Close on terminal state
-            if current.get("status") in ("done", "error", "blocked"):
+            if current.get("status") in ("done", "error"):
                 terminal_reached = True
                 break
 
