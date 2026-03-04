@@ -7,7 +7,7 @@ import {
   LogOut,
   Lightbulb,
   GitBranch,
-  Globe,
+  Languages,
   FileText,
   SlidersHorizontal,
   Wand2,
@@ -128,7 +128,7 @@ export const BLOCK_META: Record<BlockType, { label: string; description: string;
     label: 'Language',
     description: 'Language the AI should respond in',
     color: '#38bdf8',   // sky-400 — international, communication
-    icon: Globe,
+    icon: Languages,
   },
 }
 
