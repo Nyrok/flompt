@@ -1908,10 +1908,12 @@ body {
   border-radius: 10px;
   text-decoration: none;
   transition: filter var(--transition-fast);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   width: 100%;
+  white-space: nowrap;
 }
 .ext-popup__cta:hover { filter: brightness(1.12); color: #fff; }
+.ext-popup__cta--firefox { background: #ff6611; }
 .ext-popup__skip {
   background: none;
   border: none;

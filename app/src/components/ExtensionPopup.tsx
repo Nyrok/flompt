@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { X } from 'lucide-react'
+import { X, Blocks } from 'lucide-react'
 import { useLocale } from '@/i18n/LocaleContext'
 import { track } from '@/lib/analytics'
 import ChromeIcon from '@/components/ChromeIcon'
@@ -73,10 +73,7 @@ const ExtensionPopup = () => {
           <X size={16} aria-hidden="true" />
         </button>
 
-        <div className="ext-popup__icons" aria-hidden="true">
-          <ChromeIcon size={40} className="ext-popup__icon" />
-          <FirefoxIcon size={40} className="ext-popup__icon" />
-        </div>
+        <Blocks size={40} className="ext-popup__icon" aria-hidden="true" />
         <h2 id="ext-popup-title" className="ext-popup__title">
           {t.extension.popupTitle}
         </h2>
@@ -100,13 +97,13 @@ const ExtensionPopup = () => {
             href={FIREFOX_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="ext-popup__cta"
+            className="ext-popup__cta ext-popup__cta--firefox"
             onClick={() => {
               track('extension_install_clicked', { source: 'app_popup', browser: 'firefox' })
               dismiss()
             }}
           >
-            <FirefoxIcon size={16} />
+            <FirefoxIcon size={16} style={{ color: '#fff' }} />
             {t.extension.popupCtaFirefox}
           </a>
         </div>
