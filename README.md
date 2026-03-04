@@ -46,20 +46,22 @@ Instead of writing one long block of text, flompt lets you:
 
 ## 🧩 Block Types
 
-11 specialized blocks that map directly to Claude's prompt engineering best practices:
+12 specialized blocks that map directly to Claude's prompt engineering best practices:
 
 | Block | Purpose | Claude XML |
 |-------|---------|-----------|
+| **Document** | External content grounding | `<documents><document>` |
 | **Role** | AI persona & expertise | `<role>` |
+| **Audience** | Who the output is written for | `<audience>` |
 | **Context** | Background information | `<context>` |
-| **Objective** | What you want to achieve | `<objective>` |
+| **Objective** | What to DO | `<objective>` |
+| **Goal** | End goal & success criteria | `<goal>` |
 | **Input** | Data you're providing | `<input>` |
 | **Constraints** | Rules & limitations | `<constraints>` |
-| **Output Format** | Expected output structure | `<output_format>` |
 | **Examples** | Few-shot demonstrations | `<examples><example>` |
-| **Chain of Thought** | Reasoning steps | `<thinking>` |
-| **Document** | External content grounding | `<documents><document>` |
-| **Format Control** | Claude-specific directives (tone, verbosity, markdown) | `<format_instructions>` |
+| **Chain of Thought** | Step-by-step reasoning | `<thinking>` |
+| **Output Format** | Expected output structure | `<output_format>` |
+| **Response Style** | Verbosity, tone, prose, markdown (structured UI) | `<format_instructions>` |
 | **Language** | Response language | `<language>` |
 
 Blocks are automatically ordered following Anthropic's recommended prompt structure.
@@ -159,7 +161,7 @@ Output: ✅ Prompt compiled (142 estimated tokens):
 
 #### `list_block_types()`
 
-Lists all 11 available block types with descriptions and the recommended canonical ordering. Useful when manually crafting blocks.
+Lists all 12 available block types with descriptions and the recommended canonical ordering. Useful when manually crafting blocks.
 
 ### Typical Workflow
 
