@@ -8,13 +8,14 @@
 - **Git email** : nyrokgaming1@gmail.com
 
 ## Stack
-- **App** : React 18 + TypeScript + React Flow v11 + Zustand + Vite (SPA dans `/app`)
-- **Blog** : Next.js 15 + Tailwind CSS (static export in `/blog`, bilingual FR/EN)
-- **Landing** : HTML statique (dans `/landing`)
+- **App** : React 18 + TypeScript + React Flow v11 + Zustand + Vite (SPA in `/app`)
+- **Blog** : Next.js 16 + Tailwind CSS (static export in `/blog`, bilingual FR/EN)
+- **Landing** : Static HTML (in `/landing`)
 - **Backend** : FastAPI + Uvicorn (Python 3.12, port 8000)
 - **Reverse Proxy** : Caddy (auto-TLS Let's Encrypt, port 443)
-- **IA** : Anthropic Claude (pluggable, via httpx)
-- **i18n** : FR/EN via LocaleContext (app) + fichiers markdown (blog)
+- **AI** : Anthropic Claude (pluggable, via httpx) + Groq (Llama Guard 4 prompt safety)
+- **Analytics** : PostHog (EU region) — autocapture, session replay, heatmaps, error tracking
+- **i18n** : FR/EN via LocaleContext (app) + markdown files (blog)
 
 ## Deployment Architecture
 ```
@@ -78,6 +79,24 @@ curl -sk -o /dev/null -w "%{http_code}" https://flompt.dev/health
 
 ---
 
+## Analytics & Error Tracking (PostHog)
+- **Project** : EU region (`https://eu.i.posthog.com`)
+- **MCP** : installed via `claude mcp add --transport http posthog https://mcp.posthog.com/mcp` (user scope)
+- **App** : `posthog-js` initialized in `src/lib/analytics.ts` with `capture_exceptions: true`, session replay, heatmaps
+- **Blog** : `posthog-js` initialized in `PostHogProvider.tsx` with `capture_exceptions: true`
+- **Error boundaries** :
+  - App → `ErrorBoundary.tsx` calls `posthog.captureException(error)` + `track('app_crash')`
+  - Blog → `src/app/error.tsx` calls `posthog.captureException(error)`
+- **Env vars** : `VITE_POSTHOG_KEY` (app) / `NEXT_PUBLIC_POSTHOG_KEY` (blog)
+
+---
+
+## Key UX Behaviours
+- **Decompose button** : disabled while decomposing, disabled if `rawPrompt` hasn't changed since last successful decomposition (`lastDecomposedPrompt` in Zustand store)
+- **Assemble Prompt button** : disabled if `nodes.length === 0` OR `compiledPrompt !== null` (i.e. already compiled and no changes since — the store resets `compiledPrompt` to `null` on any node/edge mutation)
+
+---
+
 ## Design / Branding
 - **Logo** : no icon, the title "flompt" in Caveat font (handwritten) is enough
 - **Font titre** : `Caveat` (Google Fonts), 700, accent color + glow
@@ -116,22 +135,27 @@ curl -sk -o /dev/null -w "%{http_code}" https://flompt.dev/health
 - To resize without shifting position → use `transform: scale()`
 - `connectOnClick={true}` + `ConnectionMode.Loose` = click source then target, no drag
 
-### 5. Understand intent before acting
+### 5. English only
+- **The entire codebase must be in English** — comments, docstrings, log messages, inline strings, CSS comments, shell scripts, Makefiles, config files
+- The only exception: i18n translation files (`fr.json`, `translations.ts`) and French blog post content (`content/fr/`) which are intentionally in French for end users
+- Never write French comments or strings anywhere else
+
+### 6. Understand intent before acting
 - **If the request is ambiguous about WHAT** (not how) → ask for clarification
 - **Rule** : if a change is destructive or structural (type swaps, architecture refactor), confirm intent
 
-### 6. Before git add
+### 7. Before git add
 - **Check `.gitignore`** — `*.png`, `caddy`, `dist/`, `.next/`, `node_modules/` are ignored
 - For images in `app/public/`, use `git add -f`
 - Never commit the `caddy` binary (50MB)
 - Never commit `.env`, `credentials.json`
 
-### 7. After each change
+### 8. After each change
 1. Build the app/blog depending on what changed
 2. Check routes via curl (landing, app, blog, health)
 3. Never say "done" without having verified
 
-### 8. GitHub Organisation (in progress)
+### 9. GitHub Organisation (in progress)
 - Goal: create `flompt` org with 5 repos: app, blog, landing, backend, deploy
 - The `deploy` repo will contain git submodules pointing to the other 4
 - The `Nyrok/flompt-legacy` repo is the original monorepo temporarily renamed
