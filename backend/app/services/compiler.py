@@ -17,7 +17,6 @@ CANONICAL_ORDER: list[BlockType] = [
     BlockType.constraints,
     BlockType.output_format,
     BlockType.examples,
-    BlockType.chain_of_thought,
 ]
 
 # XML tags for the machine-readable format
@@ -29,7 +28,6 @@ BLOCK_TAGS: dict[BlockType, str] = {
     BlockType.constraints: "constraints",
     BlockType.output_format: "format",
     BlockType.examples: "examples",
-    BlockType.chain_of_thought: "cot",
 }
 
 

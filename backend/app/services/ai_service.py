@@ -65,7 +65,6 @@ Block types available:
 - output_format: Expected response format and structure (JSON, markdown, numbered list, etc.)
 - format_control: Claude-specific formatting directives — tone, verbosity, markdown on/off, response length (e.g. "Be concise. Use markdown headers. No preamble.")
 - examples: Few-shot input/output pairs — format content as "Input: [...]\nOutput: [...]" pairs separated by blank lines
-- chain_of_thought: Explicit reasoning instructions (e.g. "Think step by step before answering. Show your reasoning.")
 - language: The language the AI should respond in (auto-detect from the user's prompt)
 
 Return ONLY valid JSON, no markdown:

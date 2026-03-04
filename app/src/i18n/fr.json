@@ -146,7 +146,6 @@
     "objective":        { "label": "Objectif",       "description": "Ce qu'on veut accomplir" },
     "constraints":      { "label": "Contraintes",    "description": "Règles et limites à respecter" },
     "examples":         { "label": "Exemples",       "description": "Paires input/output few-shot" },
-    "chain_of_thought": { "label": "Raisonnement",   "description": "Instructions de raisonnement pas à pas" },
     "output_format":    { "label": "Sortie",         "description": "Format attendu de la réponse" },
     "format_control":   { "label": "Format Control", "description": "Directives Claude : ton, verbosité, markdown" },
     "response_style":   {

@@ -6,7 +6,6 @@ import {
   ShieldAlert,
   LogOut,
   Lightbulb,
-  GitBranch,
   Languages,
   FileText,
   SlidersHorizontal,
@@ -27,7 +26,6 @@ export type BlockType =
   | 'format_control'
   | 'response_style'
   | 'examples'
-  | 'chain_of_thought'
   | 'language'
 
 export interface BlockData {
@@ -99,12 +97,6 @@ export const BLOCK_META: Record<BlockType, { label: string; description: string;
     description: 'Few-shot input/output pairs',
     color: '#c4b5fd',   // violet-300 — soft, pedagogical
     icon: Lightbulb,
-  },
-  chain_of_thought: {
-    label: 'Chain of Thought',
-    description: 'Step-by-step reasoning instructions',
-    color: '#67e8f9',   // cyan-300 — logic, reflection
-    icon: GitBranch,
   },
   output_format: {
     label: 'Output Format',

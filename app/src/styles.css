@@ -805,14 +805,6 @@ body {
   );
 }
 
-/* === Raisonnement — Rounded Rect / Manual Operation === */
-.block-node[data-block-type="chain_of_thought"] {
-  border-radius: var(--radius-xl);
-  border-left-width: 3px;
-}
-.block-node[data-block-type="chain_of_thought"] .block-header {
-  border-radius: calc(var(--radius-xl) - 1px) calc(var(--radius-xl) - 1px) 0 0;
-}
 
 /* === Language — Compact inline select block === */
 .block-node[data-block-type="language"] {

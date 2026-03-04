@@ -25,7 +25,6 @@ BLOCK_META = {
     BlockType.output_format: {"label": "Output Format", "description": "Expected response format"},
     BlockType.format_control: {"label": "Format Control", "description": "Claude style directives (tone, verbosity, markdown)"},
     BlockType.examples: {"label": "Examples", "description": "Few-shot input/output pairs"},
-    BlockType.chain_of_thought: {"label": "Chain of Thought", "description": "Step-by-step reasoning instructions"},
     BlockType.language: {"label": "Language", "description": "AI response language"},
 }
 
@@ -40,7 +39,6 @@ HEURISTIC_KEYWORDS: dict[BlockType, list[str]] = {
     BlockType.output_format: ["output", "format", "return", "respond with", "retourne", "répondre en"],
     BlockType.format_control: ["be concise", "be brief", "no preamble", "use markdown", "without markdown", "sois concis", "sans préambule"],
     BlockType.examples: ["example", "for instance", "e.g.", "par exemple", "such as"],
-    BlockType.chain_of_thought: ["step by step", "think", "reason", "étape", "raisonne", "chain of thought"],
     BlockType.language: ["in english", "in french", "en français", "en anglais", "respond in", "répondre en", "language:", "langue:"],
 }
 
@@ -119,7 +117,7 @@ def _heuristic_decompose(raw_prompt: str) -> list[dict]:
     ordered = [
         BlockType.document, BlockType.role, BlockType.context, BlockType.objective,
         BlockType.input, BlockType.constraints, BlockType.examples,
-        BlockType.chain_of_thought, BlockType.output_format, BlockType.format_control,
+        BlockType.output_format, BlockType.format_control,
         BlockType.language,
     ]
 

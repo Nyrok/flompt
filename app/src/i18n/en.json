@@ -146,7 +146,6 @@
     "objective":        { "label": "Objective",        "description": "What we want to accomplish" },
     "constraints":      { "label": "Constraints",      "description": "Rules and limits to respect" },
     "examples":         { "label": "Examples",         "description": "Few-shot input/output pairs" },
-    "chain_of_thought": { "label": "Chain of Thought", "description": "Step-by-step reasoning instructions" },
     "output_format":    { "label": "Output",           "description": "Expected format of the response" },
     "format_control":   { "label": "Format Control",   "description": "Claude directives: tone, verbosity, markdown" },
     "response_style":   {
