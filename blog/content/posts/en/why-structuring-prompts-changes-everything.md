@@ -1,7 +1,7 @@
 ---
 title: "Why structuring your prompts changes everything"
 date: "2026-02-24"
-excerpt: "A well-structured prompt doesn't just give a better answer — it transforms how you think about AI interaction."
+excerpt: "A well-structured prompt doesn't just give a better answer. It transforms how you think about AI interaction."
 tags: ["prompt engineering", "structure", "fundamentals"]
 ---
 
@@ -9,7 +9,7 @@ tags: ["prompt engineering", "structure", "fundamentals"]
 
 We've all done it: open ChatGPT, type a vague sentence, and hope the AI guesses what we want. Sometimes it works. Often, not really.
 
-The problem isn't the AI — it's the input. A prompt is an **instruction**, and like any instruction, its clarity determines the quality of the result.
+The problem isn't the AI. It's the input. A prompt is an **instruction**, and like any instruction, its clarity determines the quality of the result.
 
 ## Structure as leverage
 
@@ -39,7 +39,7 @@ The difference is striking. The second prompt gives an immediately usable result
 
 ## Why visual helps
 
-Writing a structured prompt in raw text is possible — but it's like coding without an IDE. You can, but you lose efficiency.
+Writing a structured prompt in raw text is possible, but it's like coding without an IDE. You can, but you lose efficiency.
 
 That's exactly the problem visual building solves: see each block, reposition it, modify it independently. You go from linear writing to **modular assembly**.
 

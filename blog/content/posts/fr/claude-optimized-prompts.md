@@ -1,21 +1,21 @@
 ---
 title: "Comment écrire des prompts optimisés pour Claude : XML, documents et exemples structurés"
 date: "2026-02-25"
-excerpt: "Les meilleures pratiques officielles d'Anthropic, traduites en techniques concrètes — et comment flompt les applique automatiquement."
+excerpt: "Les meilleures pratiques officielles d'Anthropic, traduites en techniques concrètes, et comment flompt les applique automatiquement."
 tags: ["Claude", "prompt engineering", "XML", "Anthropic", "meilleures pratiques"]
 ---
 
-## Claude est différent — tes prompts devraient l'être aussi
+## Claude est différent. Tes prompts devraient l'être aussi.
 
 La plupart des guides de prompt engineering traitent tous les LLMs de la même façon. Mais Claude a des comportements spécifiques, des patterns d'entraînement particuliers et des capacités de parsing XML qui rendent les prompts bien structurés **mesurément plus efficaces**.
 
-Anthropic a publié des recommandations détaillées à ce sujet. Voici ce qui compte vraiment — et comment flompt l'applique automatiquement.
+Anthropic a publié des recommandations détaillées à ce sujet. Voici ce qui compte vraiment, et comment flompt l'applique automatiquement.
 
 ---
 
 ## 1. Le grounding par document avec `<document>` XML
 
-Quand tu veux que Claude raisonne sur du contenu externe — un article, un fichier de code, un contrat — la meilleure façon de le fournir n'est pas de le coller en ligne. C'est d'utiliser le format XML document d'Anthropic :
+Quand tu veux que Claude raisonne sur du contenu externe (un article, un fichier de code, un contrat), la meilleure façon de le fournir n'est pas de le coller en ligne. C'est d'utiliser le format XML document d'Anthropic :
 
 ```xml
 <documents>
@@ -28,11 +28,11 @@ Quand tu veux que Claude raisonne sur du contenu externe — un article, un fich
 </documents>
 ```
 
-Cette structure indique à Claude : *c'est un document de référence, pas une instruction*. Il le traite différemment — avec plus de précision, une meilleure attribution des sources, et moins de risque d'injection d'instructions malveillantes.
+Cette structure indique à Claude : *c'est un document de référence, pas une instruction*. Il le traite différemment : avec plus de précision, une meilleure attribution des sources, et moins de risque d'injection d'instructions malveillantes.
 
 Anthropic rapporte jusqu'à **30% d'amélioration de précision** sur les tâches basées sur des documents, par rapport à l'injection en texte brut.
 
-**Dans flompt :** Le bloc **Document** gère ça automatiquement. Ajoute ton contenu, et l'assembleur l'enveloppe dans le bon format XML — indexé, sourcé, prêt pour Claude.
+**Dans flompt :** Le bloc **Document** gère ça automatiquement. Ajoute ton contenu, et l'assembleur l'enveloppe dans le bon format XML, indexé, sourcé, et prêt pour Claude.
 
 ---
 
@@ -59,7 +59,7 @@ Utilise le format XML structuré :
 </examples>
 ```
 
-Ce format est non ambigu — Claude sait exactement où l'exemple commence et se termine, quelle est l'entrée et à quoi ressemble la réponse idéale. Pas de fuite accidentelle entre les exemples.
+Ce format est non ambigu. Claude sait exactement où l'exemple commence et se termine, quelle est l'entrée et à quoi ressemble la réponse idéale. Pas de fuite accidentelle entre les exemples.
 
 **Dans flompt :** Écris tes exemples sous la forme `Input: [...]\nOutput: [...]` dans le bloc **Exemples**. L'assembleur les parse et génère le XML approprié automatiquement.
 
@@ -69,11 +69,11 @@ Ce format est non ambigu — Claude sait exactement où l'exemple commence et se
 
 Les recherches d'Anthropic montrent que l'ordre des sections de ton prompt affecte les performances de Claude. L'ordre recommandé est :
 
-1. **Documents** (grounding en premier — toujours)
+1. **Documents** (grounding en premier, toujours)
 2. **Rôle** (persona)
 3. **Audience** (à qui s'adresse le résultat)
 4. **Contexte** (background)
-5. **Objectif** (tâche principale — ce qu'il faut faire)
+5. **Objectif** (la tâche principale, ce qu'il faut faire)
 6. **Objectif final** (but final et critères de succès)
 7. **Entrée** (données à traiter)
 8. **Contraintes** (règles)
@@ -90,7 +90,7 @@ La logique : Claude lit les prompts de haut en bas. Placer les documents en prem
 
 ## 4. Utilise le Style de réponse pour les directives de formatage
 
-Le bloc **Style de réponse** gère toutes les directives de style spécifiques à Claude — verbosité, ton, format de prose, markdown, LaTeX — via une interface structurée. Plus besoin d'écrire manuellement des instructions de formatage.
+Le bloc **Style de réponse** gère toutes les directives de style spécifiques à Claude : verbosité, ton, format de prose, markdown, LaTeX. C'est une interface structurée, donc plus besoin d'écrire manuellement des instructions de formatage.
 
 ---
 
@@ -139,12 +139,12 @@ Voici à quoi ressemble un prompt bien structuré quand toutes les bonnes pratiq
 </prompt>
 ```
 
-Tu peux construire toute cette structure dans flompt — visuellement, bloc par bloc — et l'assembler en un clic. Pas d'écriture XML manuelle requise.
+Tu peux construire toute cette structure dans flompt, visuellement bloc par bloc, et l'assembler en un clic. Pas d'écriture XML manuelle requise.
 
 ---
 
 ## Commencer à construire
 
-flompt applique toutes ces bonnes pratiques automatiquement. Ajoute tes blocs, assemble, et obtiens un prompt optimisé pour Claude — prêt à coller directement dans n'importe quelle interface Claude ou appel API.
+flompt applique toutes ces bonnes pratiques automatiquement. Ajoute tes blocs, assemble, et obtiens un prompt optimisé pour Claude, prêt à coller directement dans n'importe quelle interface Claude ou appel API.
 
 [Ouvrir flompt →](/app)

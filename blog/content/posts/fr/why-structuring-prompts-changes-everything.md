@@ -1,7 +1,7 @@
 ---
 title: "Pourquoi structurer ses prompts change tout"
 date: "2026-02-24"
-excerpt: "Un prompt bien structuré ne donne pas juste une meilleure réponse — il transforme votre façon de penser l'interaction avec l'IA."
+excerpt: "Un prompt bien structuré ne donne pas juste une meilleure réponse. Il transforme votre façon de penser l'interaction avec l'IA."
 tags: ["prompt engineering", "structure", "fondamentaux"]
 ---
 
@@ -9,7 +9,7 @@ tags: ["prompt engineering", "structure", "fondamentaux"]
 
 On a tous fait ça : ouvrir ChatGPT, taper une phrase vague et espérer que l'IA devine ce qu'on veut. Parfois ça marche. Souvent, pas vraiment.
 
-Le problème n'est pas l'IA — c'est l'input. Un prompt est une **instruction**, et comme toute instruction, sa clarté détermine la qualité du résultat.
+Le problème n'est pas l'IA. C'est l'input. Un prompt est une **instruction**, et comme toute instruction, sa clarté détermine la qualité du résultat.
 
 ## La structure comme levier
 
@@ -39,7 +39,7 @@ La différence est flagrante. Le second prompt donne un résultat utilisable imm
 
 ## Pourquoi le visuel aide
 
-Écrire un prompt structuré en texte brut, c'est possible — mais c'est comme coder sans IDE. On peut, mais on perd en efficacité.
+Écrire un prompt structuré en texte brut, c'est possible, mais c'est comme coder sans IDE. On peut, mais on perd en efficacité.
 
 C'est exactement le problème que résout la construction visuelle : voir chaque bloc, le repositionner, le modifier indépendamment. On passe de l'écriture linéaire à l'**assemblage modulaire**.
 

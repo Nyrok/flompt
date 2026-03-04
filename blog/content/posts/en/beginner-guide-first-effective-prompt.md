@@ -48,7 +48,7 @@ It's clear, measurable, and actionable. The AI knows exactly what to produce.
 
 ## Step 4: Iterate
 
-Your first prompt probably won't be perfect — and that's normal. Iteration is part of the process:
+Your first prompt probably won't be perfect, and that's normal. Iteration is part of the process:
 
 1. Send your prompt
 2. Read the response carefully

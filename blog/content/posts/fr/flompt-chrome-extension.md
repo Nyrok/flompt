@@ -1,5 +1,5 @@
 ---
-title: "L'extension Flompt : construis tes prompts sans quitter ChatGPT — sur Chrome & Firefox"
+title: "L'extension Flompt : construis tes prompts sans quitter ChatGPT, sur Chrome et Firefox"
 date: "2026-02-25"
 excerpt: "Flompt est maintenant disponible en extension Chrome & Firefox. Construis des prompts structurés en XML directement depuis la sidebar de ChatGPT, Claude ou Gemini. Sans copier-coller."
 tags: ["extension chrome", "extension firefox", "flompt", "prompt engineering", "productivité"]
@@ -11,7 +11,7 @@ Quand tu travailles avec une IA, tu as deux onglets ouverts. Celui de ton outil 
 
 Ce va-et-vient est invisible dans les tutoriels mais constant dans la pratique. C'est du temps perdu, de la friction ajoutée, et une source d'erreurs : mauvaise version collée, contexte oublié, modification perdue.
 
-L'extension Flompt supprime ce problème — disponible sur Chrome et Firefox.
+L'extension Flompt supprime ce problème. Elle est disponible sur Chrome et Firefox.
 
 ## Ce que fait l'extension
 

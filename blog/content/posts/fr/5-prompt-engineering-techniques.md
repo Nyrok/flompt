@@ -7,13 +7,13 @@ tags: ["prompt engineering", "techniques", "guide"]
 
 ## Au-delà du prompt basique
 
-Le prompt engineering n'est pas de la magie — c'est une discipline. Comme en programmation, il existe des patterns qui marchent et des anti-patterns à éviter.
+Le prompt engineering n'est pas de la magie. C'est une discipline. Comme en programmation, il existe des patterns qui marchent et des anti-patterns à éviter.
 
 Voici 5 techniques que vous pouvez appliquer immédiatement.
 
 ## 1. Le cadrage par rôle (Role Prompting)
 
-Donner un rôle à l'IA change radicalement son comportement. Ce n'est pas juste un gadget — ça active des patterns de réponse spécifiques dans le modèle.
+Donner un rôle à l'IA change radicalement son comportement. Ce n'est pas juste un gadget. Ça active des patterns de réponse spécifiques dans le modèle.
 
 ```
 Tu es un architecte logiciel senior avec 15 ans d'expérience
@@ -90,7 +90,7 @@ Ces 5 techniques ne sont pas mutuellement exclusives. Un prompt efficace combine
 - Un **chain-of-thought** pour les tâches complexes
 - Des **contraintes** positives et négatives
 
-C'est exactement cette combinaison que la construction visuelle de prompts rend intuitive — chaque technique devient un bloc que vous pouvez activer, modifier ou retirer.
+C'est exactement cette combinaison que la construction visuelle de prompts rend intuitive. Chaque technique devient un bloc que vous pouvez activer, modifier ou retirer.
 
 ## Prochain pas
 

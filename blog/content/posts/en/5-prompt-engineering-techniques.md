@@ -7,13 +7,13 @@ tags: ["prompt engineering", "techniques", "guide"]
 
 ## Beyond the basic prompt
 
-Prompt engineering isn't magic — it's a discipline. Just like programming, there are patterns that work and anti-patterns to avoid.
+Prompt engineering isn't magic. It's a discipline. Just like programming, there are patterns that work and anti-patterns to avoid.
 
 Here are 5 techniques you can apply immediately.
 
 ## 1. Role prompting
 
-Giving the AI a role radically changes its behavior. This isn't a gimmick — it activates specific response patterns in the model.
+Giving the AI a role radically changes its behavior. This isn't a gimmick. It activates specific response patterns in the model.
 
 ```
 You are a senior software architect with 15 years of experience
@@ -90,7 +90,7 @@ These 5 techniques aren't mutually exclusive. An effective prompt often combines
 - **Chain-of-thought** for complex tasks
 - Positive and negative **constraints**
 
-This is exactly the combination that visual prompt building makes intuitive — each technique becomes a block you can activate, modify, or remove.
+This is exactly the combination that visual prompt building makes intuitive. Each technique becomes a block you can activate, modify, or remove.
 
 ## Next step
 

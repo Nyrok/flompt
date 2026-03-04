@@ -9,7 +9,7 @@ tags: ["visual prompting", "flompt", "productivité"]
 
 Le prompting tel qu'on le connaît aujourd'hui est fondamentalement linéaire. On écrit un bloc de texte, on l'envoie, on espère que c'est assez clair. C'est la version "notepad" de l'interaction avec l'IA.
 
-Ça fonctionne pour les cas simples. Mais dès que la complexité augmente — prompts multi-étapes, contextes riches, contraintes croisées — le texte brut montre ses failles :
+Ça fonctionne pour les cas simples. Mais dès que la complexité augmente (prompts multi-étapes, contextes riches, contraintes croisées), le texte brut montre ses failles :
 
 - **Difficile à relire** : Un prompt de 500 mots est un mur de texte
 - **Dur à itérer** : Modifier un composant risque de casser le reste
@@ -27,7 +27,7 @@ Imaginez un éditeur où chaque composant de votre prompt est un bloc distinct :
 | Tester sans contraintes | Copier, supprimer manuellement | Désactiver le bloc "Contraintes" |
 | Réutiliser un contexte | Copier-coller entre fenêtres | Glisser un bloc sauvegardé |
 
-La différence n'est pas cosmétique — c'est une différence de **workflow**.
+La différence n'est pas cosmétique. C'est une différence de **workflow**.
 
 ## L'analogie avec le développement
 
@@ -63,6 +63,6 @@ Ce qu'elle fait, c'est enlever la charge cognitive de la **gestion de structure*
 
 ## Conclusion
 
-Le texte brut restera toujours une option — comme vim est toujours une option pour coder. Mais pour la majorité des utilisateurs, un outil qui rend la structure visible et manipulable représente un gain massif en productivité et en qualité.
+Le texte brut restera toujours une option, comme vim est toujours une option pour coder. Mais pour la majorité des utilisateurs, un outil qui rend la structure visible et manipulable représente un gain massif en productivité et en qualité.
 
 Le futur du prompting est visuel. La question n'est pas "si", mais "quand" ça deviendra la norme.

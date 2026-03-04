@@ -9,7 +9,7 @@ tags: ["visual prompting", "flompt", "productivity"]
 
 Prompting as we know it today is fundamentally linear. You write a block of text, send it, and hope it's clear enough. It's the "notepad" version of AI interaction.
 
-It works for simple cases. But as complexity grows — multi-step prompts, rich contexts, cross-constraints — raw text shows its cracks:
+It works for simple cases. But as complexity grows (multi-step prompts, rich contexts, cross-constraints), raw text shows its cracks:
 
 - **Hard to review**: A 500-word prompt is a wall of text
 - **Hard to iterate**: Modifying one component risks breaking the rest
@@ -27,7 +27,7 @@ Imagine an editor where every component of your prompt is a distinct block:
 | Test without constraints | Copy, manually delete | Toggle off the "Constraints" block |
 | Reuse a context | Copy-paste between windows | Drag a saved block |
 
-The difference isn't cosmetic — it's a **workflow** difference.
+The difference isn't cosmetic. It's a **workflow** difference.
 
 ## The development analogy
 
@@ -63,6 +63,6 @@ What it does is remove the cognitive load of **structure management** so you can
 
 ## Conclusion
 
-Raw text will always remain an option — just like vim is still an option for coding. But for the majority of users, a tool that makes structure visible and manipulable represents a massive gain in productivity and quality.
+Raw text will always remain an option, just like vim is still an option for coding. But for the majority of users, a tool that makes structure visible and manipulable represents a massive gain in productivity and quality.
 
 The future of prompting is visual. The question isn't "if" but "when" it becomes the norm.

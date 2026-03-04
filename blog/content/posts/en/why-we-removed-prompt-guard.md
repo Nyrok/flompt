@@ -5,7 +5,7 @@ excerpt: "We shipped Llama Guard to filter unsafe prompts. Then we watched it si
 tags: ["transparency", "product", "ux", "open source"]
 ---
 
-When we first launched Flompt's decompose feature — where you paste a prompt and the AI breaks it into structured blocks — we added a security layer called Prompt Guard.
+When we first launched Flompt's decompose feature (where you paste a prompt and the AI breaks it into structured blocks), we added a security layer called Prompt Guard.
 
 The idea was reasonable: run every prompt through Llama Guard 4 (via Groq) before sending it to the LLM. Detect harmful content. Reject anything flagged as unsafe.
 
@@ -29,7 +29,7 @@ In practice: it was the wrong tool for this use case.
 
 Prompt engineers work with unusual inputs by definition. They write prompts *about* violence for fiction. They simulate dangerous personas to test AI guardrails. They craft adversarial examples to study model behavior. They produce content for cybersecurity research, legal contexts, medical documentation.
 
-Llama Guard was trained on a wide hazard taxonomy — which means it flags wide. A prompt about *writing* a thriller scene with conflict got blocked. A prompt testing jailbreak resilience got blocked. A prompt for a medical chatbot that mentioned "overdose thresholds" got blocked.
+Llama Guard was trained on a wide hazard taxonomy, which means it flags wide. A prompt about *writing* a thriller scene with conflict got blocked. A prompt testing jailbreak resilience got blocked. A prompt for a medical chatbot that mentioned "overdose thresholds" got blocked.
 
 These aren't edge cases for prompt engineers. These are core use cases.
 
@@ -45,7 +45,7 @@ Before: paste prompt → decompose → done.
 
 After: paste prompt → *analyzing…* → decompose → done.
 
-That `analyzing` phase was a mandatory wait — running Groq inference on a 12B model — before the actual work started. On a good day, it added roughly one second. On a bad day (cold start, rate limit, network latency), it added three to five.
+That `analyzing` phase was a mandatory wait: Groq inference on a 12B model, running before the actual work started. On a good day, it added roughly one second. On a bad day (cold start, rate limit, network latency), three to five.
 
 This might sound small. It isn't. **The "analyzing" spinner was the first feedback the user saw.** Before the decomposition had even started, we were already telling them: *wait, we're inspecting your prompt.*
 
@@ -57,7 +57,7 @@ That's a bad first impression. It signals distrust. It adds friction at the exac
 
 This is the blunt one.
 
-Free tools live and die on the first few seconds of the user experience. The path from "I'll try this" to "I'm staying" is short. Any friction in that window — especially friction that looks like a rejection — pushes people out.
+Free tools live and die on the first few seconds of the user experience. The path from "I'll try this" to "I'm staying" is short. Any friction in that window, especially anything that looks like a rejection, pushes people out.
 
 We were literally rejecting users on their first decompose attempt.
 
@@ -69,11 +69,11 @@ Not because their prompts were malicious. Because a general-purpose safety model
 
 `PROMPT_GUARD_ENABLED=false` lived in our `.env` for weeks before we finally deleted the code.
 
-Partly inertia. Partly the feeling that we might need it "later." Partly the assumption that the problem was calibration — maybe with a different model, different thresholds, a different setup, it would work.
+Partly inertia. Partly the feeling that we might need it "later." Partly the assumption that the problem was calibration. Maybe with a different model, different thresholds, a different setup, it would work.
 
 But the more we looked at it, the more we realized: **Prompt Guard was solving a problem we don't actually have.**
 
-Flompt is a free, open-source tool. There's no accounts system. No generated content goes anywhere — the AI's response is displayed in the user's own chat interface, on the user's own screen, using the user's own API or browser session. We're not a content platform. We're not hosting or amplifying anything.
+Flompt is a free, open-source tool. There's no accounts system. No generated content goes anywhere. The AI's response is displayed in the user's own chat interface, on the user's own screen, using the user's own API or browser session. We're not a content platform. We're not hosting or amplifying anything.
 
 Running a safety filter over inputs to a prompt-building tool is cargo-cult security: the appearance of protection without meaningful risk reduction.
 
@@ -85,7 +85,7 @@ Nothing, and that's the point.
 
 The backend now goes directly from `queued` → `processing` → `done`. No analyzing step. No blocked state. No false positives.
 
-If moderation ever becomes genuinely necessary — for a specific use case, at scale, with the right calibration — it belongs at the application layer, not as a blanket filter on every prompt decomposition request.
+If moderation ever becomes genuinely necessary (for a specific use case, at scale, with the right calibration), it belongs at the application layer, not as a blanket filter on every prompt decomposition request.
 
 Until then: we trust our users to know what they're building.
 

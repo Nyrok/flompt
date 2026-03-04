@@ -1,21 +1,21 @@
 ---
 title: "How to write Claude-optimized prompts: XML, documents, and structured examples"
 date: "2026-02-25"
-excerpt: "Anthropic's official best practices, translated into concrete techniques you can use today — and how flompt applies them automatically."
+excerpt: "Anthropic's official best practices, translated into concrete techniques you can use today, and how flompt applies them automatically."
 tags: ["Claude", "prompt engineering", "XML", "Anthropic", "best practices"]
 ---
 
-## Claude is different — and your prompts should be too
+## Claude is different. Your prompts should be too.
 
 Most prompt engineering guides treat all LLMs the same. But Claude has specific behaviors, training patterns, and XML parsing capabilities that make well-structured prompts measurably more effective.
 
-Anthropic has published detailed guidance on this. Here's what matters most — and how flompt applies it automatically.
+Anthropic has published detailed guidance on this. Here's what matters most, and how flompt applies it automatically.
 
 ---
 
 ## 1. Document grounding with `<document>` XML
 
-When you need Claude to reason over external content — an article, a code file, a contract — the best way to provide it isn't to paste it inline. It's to use Anthropic's document XML format:
+When you need Claude to reason over external content (an article, a code file, a contract), the best way to provide it isn't to paste it inline. It's to use Anthropic's document XML format:
 
 ```xml
 <documents>
@@ -28,11 +28,11 @@ When you need Claude to reason over external content — an article, a code file
 </documents>
 ```
 
-This structure tells Claude: *this is a reference document, not an instruction*. It processes it differently — more accurately, with better source attribution, and with less risk of instruction injection.
+This structure tells Claude: *this is a reference document, not an instruction*. It processes it differently: more accurately, with better source attribution, and with less risk of instruction injection.
 
 Anthropic reports up to **30% accuracy improvements** on document-grounded tasks compared to plain-text injection.
 
-**In flompt:** The **Document** block handles this automatically. Add your content, and the assembler wraps it in the correct XML format — indexed, sourced, ready for Claude.
+**In flompt:** The **Document** block handles this automatically. Add your content, and the assembler wraps it in the correct XML format, indexed, sourced, and ready for Claude.
 
 ---
 
@@ -59,7 +59,7 @@ Use the structured XML format:
 </examples>
 ```
 
-This format is unambiguous — Claude knows exactly where the example starts and ends, what the input is, and what the ideal response looks like. No accidental bleed between examples.
+This format is unambiguous. Claude knows exactly where the example starts and ends, what the input is, and what the ideal response looks like. No accidental bleed between examples.
 
 **In flompt:** Write your examples as `Input: [...]\nOutput: [...]` pairs in the **Examples** block. The assembler parses them and generates the proper XML automatically.
 
@@ -69,11 +69,11 @@ This format is unambiguous — Claude knows exactly where the example starts and
 
 Anthropic's research shows that the order of your prompt sections affects Claude's performance. The recommended order is:
 
-1. **Documents** (grounding first — always)
+1. **Documents** (grounding first, always)
 2. **Role** (persona)
 3. **Audience** (who reads the output)
 4. **Context** (background)
-5. **Objective** (main task — what to do)
+5. **Objective** (the main task, what to do)
 6. **Goal** (end goal and success criteria)
 7. **Input** (data to process)
 8. **Constraints** (rules)
@@ -90,7 +90,7 @@ The reasoning: Claude reads prompts top-to-bottom. Grounding documents first giv
 
 ## 4. Use Response Style for formatting directives
 
-The **Response Style** block handles all Claude-specific style directives — verbosity, tone, prose format, markdown, LaTeX — through a structured UI. No need to manually write formatting instructions.
+The **Response Style** block handles all Claude-specific style directives: verbosity, tone, prose format, markdown, LaTeX. It's a structured UI, so no need to manually write formatting instructions.
 
 ---
 
@@ -139,12 +139,12 @@ Here's what a well-structured prompt looks like when all best practices are appl
 </prompt>
 ```
 
-You can build this entire structure in flompt — visually, block by block — and assemble it in one click. No manual XML writing required.
+You can build this entire structure in flompt, visually block by block, and assemble it in one click. No manual XML writing required.
 
 ---
 
 ## Start building
 
-flompt applies all of these best practices automatically. Add your blocks, assemble, and get a Claude-optimized prompt — ready to paste directly into any Claude interface or API call.
+flompt applies all of these best practices automatically. Add your blocks, assemble, and get a Claude-optimized prompt ready to paste directly into any Claude interface or API call.
 
 [Open flompt →](/app)

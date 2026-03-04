@@ -1,5 +1,5 @@
 ---
-title: "The Flompt Extension: Build Prompts Without Leaving ChatGPT — on Chrome & Firefox"
+title: "The Flompt Extension: Build Prompts Without Leaving ChatGPT, on Chrome and Firefox"
 date: "2026-02-25"
 excerpt: "Flompt is now available as a Chrome & Firefox extension. Build structured XML prompts directly from ChatGPT, Claude, or Gemini's sidebar. No copy-pasting required."
 tags: ["chrome extension", "firefox extension", "flompt", "prompt engineering", "productivity"]
@@ -11,7 +11,7 @@ When you work with AI, you have two tabs open. Your prompting tool. ChatGPT or C
 
 This back-and-forth is invisible in tutorials but constant in practice. It's wasted time, added friction, and a source of errors: wrong version pasted, forgotten context, lost edits.
 
-The Flompt browser extension removes this problem entirely — available on Chrome and Firefox.
+The Flompt browser extension removes this problem. It's available on Chrome and Firefox.
 
 ## What the Extension Does
 

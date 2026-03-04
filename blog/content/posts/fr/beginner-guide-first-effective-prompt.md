@@ -48,7 +48,7 @@ C'est clair, c'est mesurable, c'est actionnable. L'IA sait exactement ce qu'elle
 
 ## Étape 4 : Itérer
 
-Votre premier prompt ne sera probablement pas parfait — et c'est normal. L'itération fait partie du processus :
+Votre premier prompt ne sera probablement pas parfait, et c'est normal. L'itération fait partie du processus :
 
 1. Envoyez votre prompt
 2. Lisez la réponse attentivement
