@@ -23,10 +23,15 @@ function getInitialLocale(): Locale {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (stored && LOCALES.includes(stored as Locale)) return stored as Locale
   } catch {}
-  // Auto-detect from browser language
+  // Auto-detect from browser preferred languages (ordered list)
   try {
-    const lang = navigator.language.slice(0, 2).toLowerCase()
-    if (LOCALES.includes(lang as Locale)) return lang as Locale
+    const preferred = navigator.languages?.length
+      ? navigator.languages
+      : [navigator.language]
+    for (const lang of preferred) {
+      const code = lang.slice(0, 2).toLowerCase()
+      if (LOCALES.includes(code as Locale)) return code as Locale
+    }
   } catch {}
   return 'en'
 }
