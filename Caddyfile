@@ -45,7 +45,7 @@ flompt.dev {
 	# ── App SPA → /app ───────────────────────────────────────────
 	handle_path /app* {
 		root * /projects/flompt/app/dist
-		try_files {path} /index.html
+		try_files {path} {path}/index.html /index.html
 		file_server {
 			precompressed gzip
 		}

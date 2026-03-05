@@ -19,11 +19,17 @@ const LocaleContext = createContext<LocaleContextValue | null>(null)
 const STORAGE_KEY = 'flompt-locale'
 
 function getInitialLocale(): Locale {
+  // 1. URL path: /app/fr → 'fr', /app → 'en'
+  try {
+    const pathLocale = window.location.pathname.split('/')[2]
+    if (pathLocale && LOCALES.includes(pathLocale as Locale)) return pathLocale as Locale
+  } catch {}
+  // 2. localStorage (user's explicit choice)
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (stored && LOCALES.includes(stored as Locale)) return stored as Locale
   } catch {}
-  // Auto-detect from browser preferred languages (ordered list)
+  // 3. Browser preferred languages (ordered list)
   try {
     const preferred = navigator.languages?.length
       ? navigator.languages

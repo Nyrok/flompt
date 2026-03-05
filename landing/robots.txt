@@ -2,8 +2,8 @@ User-agent: *
 Allow: /
 Allow: /blog/
 
-# App SPA — not useful for indexing
-Disallow: /app/
+# App SPA assets — not useful for indexing (locale pages are allowed)
+Disallow: /app/assets/
 
 # Backend endpoints
 Disallow: /api/
