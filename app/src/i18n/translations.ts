@@ -8,12 +8,13 @@ import jaRaw from './ja.json'
 import trRaw from './tr.json'
 import zhRaw from './zh.json'
 import arRaw from './ar.json'
+import ruRaw from './ru.json'
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
-export type Locale = 'en' | 'fr' | 'es' | 'de' | 'pt' | 'ja' | 'tr' | 'zh' | 'ar'
+export type Locale = 'en' | 'fr' | 'es' | 'de' | 'pt' | 'ja' | 'tr' | 'zh' | 'ar' | 'ru'
 
-export const LOCALES: Locale[] = ['en', 'fr', 'es', 'de', 'pt', 'ja', 'tr', 'zh', 'ar']
+export const LOCALES: Locale[] = ['en', 'fr', 'es', 'de', 'pt', 'ja', 'tr', 'zh', 'ar', 'ru']
 
 export const RTL_LOCALES: Locale[] = ['ar']
 
@@ -27,6 +28,7 @@ export const LOCALE_LABELS: Record<Locale, string> = {
   tr: 'TR',
   zh: 'ZH',
   ar: 'AR',
+  ru: 'RU',
 }
 
 export interface BlockTranslation {
@@ -196,4 +198,5 @@ export const translations: Record<Locale, Translations> = {
   tr: build(trRaw as typeof enRaw),
   zh: build(zhRaw as typeof enRaw),
   ar: build(arRaw as typeof enRaw),
+  ru: build(ruRaw as typeof enRaw),
 }
