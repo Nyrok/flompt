@@ -1,0 +1,164 @@
+{
+  "nodeCount": "{n} 个块",
+  "nodeCountPlural": "{n} 个块",
+
+  "tabs": { "input": "提示词", "canvas": "画布", "output": "结果" },
+
+  "header": {
+    "undo": "撤销 (Ctrl+Z)",
+    "redo": "重做 (Ctrl+Y)",
+    "reset": "重置",
+    "resetConfirm": "重置画布？",
+    "autosaved": "已自动保存",
+    "github": "在 GitHub 上为 flompt 点星（在新标签页中打开）"
+  },
+
+  "accessibility": {
+    "skipToMain": "跳到主内容",
+    "switchLocale": "切换语言",
+    "inputPanel": "输入面板",
+    "outputPanel": "输出面板",
+    "mainTabs": "主标签页"
+  },
+
+  "promptInput": {
+    "title": "原始提示词",
+    "placeholder": "在此粘贴您的提示词…",
+    "decompose": "分解为块",
+    "decomposing": "分解中…",
+    "errorDecompose": "分解失败。请重试。",
+    "paste": "从剪贴板粘贴",
+    "importFromPlatform": "从页面导入提示词",
+    "queuePosition": "队列位置：{n}",
+    "queueProcessing": "处理中…",
+    "queueAnalyzing": "安全分析中…"
+  },
+
+  "promptOutput": {
+    "title": "结果",
+    "compile": "组装提示词",
+    "compiling": "组装中…",
+    "copy": "复制",
+    "copied": "已复制！",
+    "placeholder": "构建您的流程图\n然后组装以生成提示词。",
+    "errorCompile": "组装失败。请重试。",
+    "exportTxt": ".txt",
+    "exportJson": ".json",
+    "exportTxtLabel": "导出为 .txt 文件",
+    "exportJsonLabel": "导出为 .json 文件",
+    "share": "分享 flompt",
+    "shareTitle": "flompt：可视化 AI 提示词构建器",
+    "shareText": "来看看 flompt！将任何 AI 提示词转化为可视化流程。免费且开源。",
+    "sendToAI": "发送到 AI",
+    "injected": "已注入！",
+    "injectLabel": "将提示词发送到 AI 聊天输入框",
+    "injectedLabel": "提示词已注入！"
+  },
+
+  "errors": {
+    "overloaded": "AI 当前过载。请稍等片刻后重试。",
+    "timeout": "请求超时。AI 响应时间过长。请重试。",
+    "network": "连接丢失。请检查您的网络连接并重试。",
+    "server": "服务器错误。请在几秒钟后重试。",
+    "blocked": "您的提示词被安全过滤器标记。请重新表述。",
+    "unknown": "出现了一些问题。请重试。"
+  },
+
+  "sidebar": {
+    "title": "块",
+    "hint": "点击添加 · 拖到画布"
+  },
+
+  "block": {
+    "duplicate": "复制",
+    "expand": "展开",
+    "collapse": "折叠",
+    "delete": "删除",
+    "chars": "字",
+    "deleteConnection": "删除连接"
+  },
+
+  "canvas": {
+    "empty": "空画布",
+    "emptyHint": "在左侧粘贴提示词并点击",
+    "emptyDecompose": "分解，或从侧边栏拖动一个块。"
+  },
+
+  "shortcuts": {
+    "title": "键盘快捷键",
+    "close": "按 Esc 或 ? 关闭",
+    "list": [
+      { "keys": ["Ctrl", "Z"],       "label": "撤销" },
+      { "keys": ["Ctrl", "Y"],       "label": "重做" },
+      { "keys": ["Ctrl", "⇧", "Z"], "label": "重做（备选）" },
+      { "keys": ["Del"],             "label": "删除选中块" },
+      { "keys": ["Ctrl", "A"],       "label": "全选" },
+      { "keys": ["Scroll"],          "label": "缩放" },
+      { "keys": ["Drag"],            "label": "移动块" },
+      { "keys": ["Bg drag"],         "label": "平移画布" },
+      { "keys": ["?"],               "label": "显示快捷键" }
+    ]
+  },
+
+  "tour": {
+    "step1title": "您的原始提示词",
+    "step1desc": "在此输入或粘贴任意文本。模糊或详细都无所谓。flompt 将为您进行结构化。",
+    "stepBlocksTitle": "构建块",
+    "stepBlocksDesc": "每种块类型针对提示词的一个部分：角色、目标、限制、输出格式…点击添加一个，或将其拖到画布上。",
+    "step2title": "分解为块",
+    "step2desc": "flompt 将您的提示词发送给 AI，AI 将其分解为类型化的块：角色、目标、限制等。",
+    "step2action": "帮我分解",
+    "step3title": "编辑您的块",
+    "step3desc": "每个块是提示词的一个方面。编辑内容，通过拖动重新排序，并从左侧边栏添加块。",
+    "step4title": "编译",
+    "step4desc": "点击编译以生成最终提示词：结构化、优化，可粘贴到任何 LLM。",
+    "stepOf": "{n} / {total}",
+    "next": "下一步",
+    "finish": "明白了",
+    "skip": "跳过",
+    "acting": "分解中…",
+    "samplePrompt": "您是一名高级 Python 开发人员。请检查以下代码的错误、性能问题和风格违规。简明扼要，优先处理关键问题，并用一句话解释每个发现。以编号列表形式回答。"
+  },
+
+  "extension": {
+    "bannerText": "flompt 现已在 Chrome 和 Firefox 上可用。在 ChatGPT、Claude 和 Gemini 中使用它。",
+    "bannerCta": "安装 →",
+    "bannerClose": "关闭扩展公告",
+    "popupTitle": "flompt 现已在 Chrome 和 Firefox 上！",
+    "popupDesc": "直接在 ChatGPT、Claude 和 Gemini 中使用 flompt。适用于 Chrome 和 Firefox。无需切换标签页。",
+    "popupCta": "安装扩展",
+    "popupCtaFirefox": "添加到 Firefox",
+    "popupSkip": "稍后再说"
+  },
+
+  "starPopup": {
+    "title": "喜欢 flompt 吗？",
+    "desc": "flompt 是免费且开源的。如果对您有用，在 GitHub 上的 ⭐ 有助于我们成长并保持活跃。",
+    "cta": "在 GitHub 上点星",
+    "skip": "稍后再说"
+  },
+
+  "blocks": {
+    "document":         { "label": "文档",             "description": "通过 XML <document> 注入的外部内容" },
+    "input":            { "label": "输入",             "description": "提供给 AI 的数据" },
+    "role":             { "label": "角色",             "description": "定义 AI 的角色 / 身份" },
+    "audience":         { "label": "受众",             "description": "输出内容面向的人群" },
+    "context":          { "label": "上下文",           "description": "为任务提供背景信息" },
+    "objective":        { "label": "目标",             "description": "我们想要实现的目标" },
+    "goal":             { "label": "终极目标",         "description": "最终目标和成功标准" },
+    "constraints":      { "label": "限制",             "description": "需要遵守的规则和限制" },
+    "examples":         { "label": "示例",             "description": "Few-shot 输入/输出对" },
+    "chain_of_thought": { "label": "思维链",           "description": "逐步推理指令" },
+    "output_format":    { "label": "输出",             "description": "预期的响应格式" },
+    "response_style":   {
+      "label": "响应风格", "description": "详细程度、语气、散文、Markdown、LaTeX",
+      "verbosity": "详细程度", "concise": "简洁", "balanced": "均衡", "detailed": "详细",
+      "tone": "语气", "conversational": "随意", "neutral": "中性", "formal": "正式",
+      "prose": "格式", "flowing": "散文", "mixed": "混合", "structured": "列表",
+      "mdNone": "无", "mdMinimal": "最简", "mdStandard": "标准", "mdRich": "丰富",
+      "math": "数学", "mathAuto": "自动", "mathPlain": "纯文本",
+      "skipPreamble": "跳过前言"
+    },
+    "language":         { "label": "语言",             "description": "AI 应该回复的语言" }
+  }
+}

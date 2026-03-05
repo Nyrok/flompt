@@ -14,7 +14,7 @@ import StarPopup from '@/components/StarPopup'
 import { useFlowStore } from '@/store/flowStore'
 import type { Tab } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
-import { LOCALES, LOCALE_LABELS } from '@/i18n/translations'
+import { LOCALES, LOCALE_LABELS, RTL_LOCALES } from '@/i18n/translations'
 import type { Locale } from '@/i18n/translations'
 import { isExtension } from '@/lib/platform'
 import './styles.css'
@@ -36,9 +36,10 @@ const App = () => {
     setSource(isExtension ? 'extension' : 'web')
   }, [])
 
-  // Sync html[lang] with locale
+  // Sync html[lang] and html[dir] with locale
   useEffect(() => {
     document.documentElement.lang = locale
+    document.documentElement.dir = RTL_LOCALES.includes(locale) ? 'rtl' : 'ltr'
   }, [locale])
 
   useEffect(() => {

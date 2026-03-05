@@ -1,0 +1,164 @@
+{
+  "nodeCount": "{n} كتلة",
+  "nodeCountPlural": "{n} كتل",
+
+  "tabs": { "input": "الطلب", "canvas": "اللوحة", "output": "النتيجة" },
+
+  "header": {
+    "undo": "تراجع (Ctrl+Z)",
+    "redo": "إعادة (Ctrl+Y)",
+    "reset": "إعادة تعيين",
+    "resetConfirm": "هل تريد إعادة تعيين اللوحة؟",
+    "autosaved": "تم الحفظ تلقائياً",
+    "github": "امنح flompt نجمة على GitHub (يفتح في تبويب جديد)"
+  },
+
+  "accessibility": {
+    "skipToMain": "انتقل إلى المحتوى الرئيسي",
+    "switchLocale": "تغيير اللغة",
+    "inputPanel": "لوحة الإدخال",
+    "outputPanel": "لوحة الإخراج",
+    "mainTabs": "التبويبات الرئيسية"
+  },
+
+  "promptInput": {
+    "title": "الطلب الخام",
+    "placeholder": "الصق طلبك هنا…",
+    "decompose": "تفكيك إلى كتل",
+    "decomposing": "جارٍ التفكيك…",
+    "errorDecompose": "فشل التفكيك. يرجى المحاولة مرة أخرى.",
+    "paste": "لصق من الحافظة",
+    "importFromPlatform": "استيراد الطلب من الصفحة",
+    "queuePosition": "موضع في قائمة الانتظار: {n}",
+    "queueProcessing": "جارٍ المعالجة…",
+    "queueAnalyzing": "جارٍ تحليل الأمان…"
+  },
+
+  "promptOutput": {
+    "title": "النتيجة",
+    "compile": "تجميع الطلب",
+    "compiling": "جارٍ التجميع…",
+    "copy": "نسخ",
+    "copied": "تم النسخ!",
+    "placeholder": "ابنِ مخطط التدفق الخاص بك\nثم قم بالتجميع لإنشاء الطلب.",
+    "errorCompile": "فشل التجميع. يرجى المحاولة مرة أخرى.",
+    "exportTxt": ".txt",
+    "exportJson": ".json",
+    "exportTxtLabel": "تصدير كملف .txt",
+    "exportJsonLabel": "تصدير كملف .json",
+    "share": "مشاركة flompt",
+    "shareTitle": "flompt: منشئ طلبات الذكاء الاصطناعي المرئي",
+    "shareText": "اكتشف flompt! حوّل أي طلب ذكاء اصطناعي إلى تدفق مرئي. مجاني ومفتوح المصدر.",
+    "sendToAI": "إرسال إلى الذكاء الاصطناعي",
+    "injected": "تم الحقن!",
+    "injectLabel": "إرسال الطلب إلى مدخل الدردشة",
+    "injectedLabel": "تم حقن الطلب!"
+  },
+
+  "errors": {
+    "overloaded": "الذكاء الاصطناعي مثقل الآن. يرجى الانتظار لحظة والمحاولة مرة أخرى.",
+    "timeout": "انتهت مهلة الطلب. استغرق الذكاء الاصطناعي وقتاً طويلاً للرد. حاول مرة أخرى.",
+    "network": "انقطع الاتصال. تحقق من اتصالك بالإنترنت وحاول مرة أخرى.",
+    "server": "خطأ في الخادم. يرجى المحاولة مرة أخرى بعد بضع ثوانٍ.",
+    "blocked": "تم تحديد طلبك بواسطة فلتر الأمان. يرجى إعادة صياغته.",
+    "unknown": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
+  },
+
+  "sidebar": {
+    "title": "الكتل",
+    "hint": "انقر للإضافة · اسحب إلى اللوحة"
+  },
+
+  "block": {
+    "duplicate": "نسخ",
+    "expand": "توسيع",
+    "collapse": "طي",
+    "delete": "حذف",
+    "chars": "حرف",
+    "deleteConnection": "حذف الاتصال"
+  },
+
+  "canvas": {
+    "empty": "لوحة فارغة",
+    "emptyHint": "الصق طلباً على اليسار وانقر ",
+    "emptyDecompose": "تفكيك، أو اسحب كتلة من الشريط الجانبي."
+  },
+
+  "shortcuts": {
+    "title": "اختصارات لوحة المفاتيح",
+    "close": "اضغط Esc أو ? للإغلاق",
+    "list": [
+      { "keys": ["Ctrl", "Z"],       "label": "تراجع" },
+      { "keys": ["Ctrl", "Y"],       "label": "إعادة" },
+      { "keys": ["Ctrl", "⇧", "Z"], "label": "إعادة (بديل)" },
+      { "keys": ["Del"],             "label": "حذف الكتلة المحددة" },
+      { "keys": ["Ctrl", "A"],       "label": "تحديد الكل" },
+      { "keys": ["Scroll"],          "label": "تكبير/تصغير" },
+      { "keys": ["Drag"],            "label": "تحريك كتلة" },
+      { "keys": ["Bg drag"],         "label": "تحريك اللوحة" },
+      { "keys": ["?"],               "label": "عرض الاختصارات" }
+    ]
+  },
+
+  "tour": {
+    "step1title": "طلبك الخام",
+    "step1desc": "اكتب أو الصق أي نص هنا. غامضاً أو مفصلاً، لا يهم. سيقوم flompt بهيكلته لك.",
+    "stepBlocksTitle": "لبنات البناء",
+    "stepBlocksDesc": "كل نوع من الكتل يستهدف جزءاً من طلبك: الدور، الهدف، القيود، تنسيق الإخراج… انقر لإضافة واحدة، أو اسحبها إلى اللوحة.",
+    "step2title": "تفكيك إلى كتل",
+    "step2desc": "يرسل flompt طلبك إلى الذكاء الاصطناعي الذي يقسّمه إلى كتل مصنّفة: الدور، الهدف، القيود والمزيد.",
+    "step2action": "فكّك من أجلي",
+    "step3title": "حرّر كتلك",
+    "step3desc": "كل كتلة هي جانب من جوانب طلبك. حرّر المحتوى، أعد الترتيب بالسحب، وأضف كتلاً من الشريط الجانبي.",
+    "step4title": "تجميع",
+    "step4desc": "اضغط تجميع لإنشاء طلبك النهائي: منظّم، محسّن، وجاهز للصقه في أي نموذج لغوي.",
+    "stepOf": "{n} / {total}",
+    "next": "التالي",
+    "finish": "فهمت",
+    "skip": "تخطّى",
+    "acting": "جارٍ التفكيك…",
+    "samplePrompt": "أنت مطور Python كبير. راجع الكود التالي بحثاً عن الأخطاء ومشاكل الأداء وانتهاكات الأسلوب. كن موجزاً، وأعطِ الأولوية للمشاكل الحرجة، واشرح كل نتيجة في جملة واحدة. أجب بقائمة مرقّمة."
+  },
+
+  "extension": {
+    "bannerText": "flompt متاح الآن على Chrome وFirefox. استخدمه داخل ChatGPT وClaude وGemini.",
+    "bannerCta": "تثبيت →",
+    "bannerClose": "إغلاق إعلان الامتداد",
+    "popupTitle": "flompt متاح الآن على Chrome وFirefox!",
+    "popupDesc": "استخدم flompt مباشرة داخل ChatGPT وClaude وGemini. متاح على Chrome وFirefox. لا حاجة لتبديل التبويبات.",
+    "popupCta": "تثبيت الامتداد",
+    "popupCtaFirefox": "إضافة إلى Firefox",
+    "popupSkip": "ربما لاحقاً"
+  },
+
+  "starPopup": {
+    "title": "هل تستمتع بـ flompt؟",
+    "desc": "flompt مجاني ومفتوح المصدر. إذا كان مفيداً لك، فإن ⭐ على GitHub يساعدنا على النمو والاستمرار.",
+    "cta": "امنح نجمة على GitHub",
+    "skip": "ربما لاحقاً"
+  },
+
+  "blocks": {
+    "document":         { "label": "مستند",            "description": "محتوى خارجي محقون عبر XML <document>" },
+    "input":            { "label": "مدخلات",           "description": "البيانات المقدمة للذكاء الاصطناعي" },
+    "role":             { "label": "الدور",            "description": "يحدد شخصية / دور الذكاء الاصطناعي" },
+    "audience":         { "label": "الجمهور",          "description": "من تُكتب الإخراجات من أجله" },
+    "context":          { "label": "السياق",           "description": "يوفر سياقاً للمهمة" },
+    "objective":        { "label": "الهدف",            "description": "ما نريد تحقيقه" },
+    "goal":             { "label": "الغاية",           "description": "الهدف النهائي ومعايير النجاح" },
+    "constraints":      { "label": "القيود",           "description": "القواعد والحدود الواجب احترامها" },
+    "examples":         { "label": "أمثلة",            "description": "أزواج الإدخال/الإخراج Few-shot" },
+    "chain_of_thought": { "label": "سلسلة التفكير",   "description": "تعليمات الاستدلال خطوة بخطوة" },
+    "output_format":    { "label": "الإخراج",          "description": "التنسيق المتوقع للرد" },
+    "response_style":   {
+      "label": "أسلوب الرد", "description": "التفصيل، النبرة، النثر، Markdown، LaTeX",
+      "verbosity": "التفصيل", "concise": "موجز", "balanced": "متوازن", "detailed": "مفصّل",
+      "tone": "النبرة", "conversational": "عادي", "neutral": "محايد", "formal": "رسمي",
+      "prose": "التنسيق", "flowing": "نثر", "mixed": "مختلط", "structured": "قوائم",
+      "mdNone": "لا شيء", "mdMinimal": "أدنى", "mdStandard": "قياسي", "mdRich": "غني",
+      "math": "رياضيات", "mathAuto": "تلقائي", "mathPlain": "عادي",
+      "skipPreamble": "تخطّى المقدمة"
+    },
+    "language":         { "label": "اللغة",            "description": "اللغة التي يجب أن يرد بها الذكاء الاصطناعي" }
+  }
+}

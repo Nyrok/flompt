@@ -1,0 +1,164 @@
+{
+  "nodeCount": "{n} blok",
+  "nodeCountPlural": "{n} blok",
+
+  "tabs": { "input": "Prompt", "canvas": "Kanvas", "output": "Sonuç" },
+
+  "header": {
+    "undo": "Geri Al (Ctrl+Z)",
+    "redo": "Yeniden Yap (Ctrl+Y)",
+    "reset": "Sıfırla",
+    "resetConfirm": "Kanvas sıfırlansın mı?",
+    "autosaved": "Otomatik kaydedildi",
+    "github": "GitHub'da flompt'a yıldız ver (yeni sekmede açılır)"
+  },
+
+  "accessibility": {
+    "skipToMain": "Ana içeriğe geç",
+    "switchLocale": "Dil değiştir",
+    "inputPanel": "Giriş paneli",
+    "outputPanel": "Çıkış paneli",
+    "mainTabs": "Ana sekmeler"
+  },
+
+  "promptInput": {
+    "title": "Ham Prompt",
+    "placeholder": "Promptunuzu buraya yapıştırın…",
+    "decompose": "Bloklara ayır",
+    "decomposing": "Ayrıştırılıyor…",
+    "errorDecompose": "Ayrıştırma başarısız oldu. Lütfen tekrar deneyin.",
+    "paste": "Panodan yapıştır",
+    "importFromPlatform": "Sayfadan prompt içe aktar",
+    "queuePosition": "Sıra pozisyonu: {n}",
+    "queueProcessing": "İşleniyor…",
+    "queueAnalyzing": "Güvenlik analiz ediliyor…"
+  },
+
+  "promptOutput": {
+    "title": "Sonuç",
+    "compile": "Prompt oluştur",
+    "compiling": "Oluşturuluyor…",
+    "copy": "Kopyala",
+    "copied": "Kopyalandı!",
+    "placeholder": "Akış şemanızı oluşturun\nsonra prompt oluşturmak için derleyin.",
+    "errorCompile": "Derleme başarısız oldu. Lütfen tekrar deneyin.",
+    "exportTxt": ".txt",
+    "exportJson": ".json",
+    "exportTxtLabel": ".txt dosyası olarak dışa aktar",
+    "exportJsonLabel": ".json dosyası olarak dışa aktar",
+    "share": "flompt'u paylaş",
+    "shareTitle": "flompt: Görsel AI Prompt Oluşturucu",
+    "shareText": "flompt'a göz atın! Herhangi bir AI promptunu görsel bir akışa dönüştürün. Ücretsiz ve açık kaynak.",
+    "sendToAI": "AI'ya gönder",
+    "injected": "Enjekte edildi!",
+    "injectLabel": "Promptu AI sohbet girişine gönder",
+    "injectedLabel": "Prompt enjekte edildi!"
+  },
+
+  "errors": {
+    "overloaded": "AI şu anda aşırı yüklü. Lütfen bir süre bekleyip tekrar deneyin.",
+    "timeout": "İstek zaman aşımına uğradı. AI yanıt vermek için çok uzun sürdü. Tekrar deneyin.",
+    "network": "Bağlantı kesildi. İnternet bağlantınızı kontrol edip tekrar deneyin.",
+    "server": "Sunucu hatası. Lütfen birkaç saniye sonra tekrar deneyin.",
+    "blocked": "Promptunuz güvenlik filtremiz tarafından işaretlendi. Lütfen yeniden ifade edin.",
+    "unknown": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin."
+  },
+
+  "sidebar": {
+    "title": "Bloklar",
+    "hint": "Eklemek için tıkla · Kanvasa sürükle"
+  },
+
+  "block": {
+    "duplicate": "Çoğalt",
+    "expand": "Genişlet",
+    "collapse": "Daralt",
+    "delete": "Sil",
+    "chars": "kar.",
+    "deleteConnection": "Bağlantıyı sil"
+  },
+
+  "canvas": {
+    "empty": "Boş kanvas",
+    "emptyHint": "Soldaki alana bir prompt yapıştırın ve ",
+    "emptyDecompose": "Ayır'a tıklayın veya kenar çubuğundan bir blok sürükleyin."
+  },
+
+  "shortcuts": {
+    "title": "Klavye Kısayolları",
+    "close": "Kapatmak için Esc veya ? tuşuna basın",
+    "list": [
+      { "keys": ["Ctrl", "Z"],       "label": "Geri al" },
+      { "keys": ["Ctrl", "Y"],       "label": "Yeniden yap" },
+      { "keys": ["Ctrl", "⇧", "Z"], "label": "Yeniden yap (alternatif)" },
+      { "keys": ["Del"],             "label": "Seçili bloğu sil" },
+      { "keys": ["Ctrl", "A"],       "label": "Tümünü seç" },
+      { "keys": ["Scroll"],          "label": "Yakınlaştır/uzaklaştır" },
+      { "keys": ["Drag"],            "label": "Blok taşı" },
+      { "keys": ["Bg drag"],         "label": "Kanvası kaydır" },
+      { "keys": ["?"],               "label": "Kısayolları göster" }
+    ]
+  },
+
+  "tour": {
+    "step1title": "Ham promptunuz",
+    "step1desc": "Buraya herhangi bir metin yazın veya yapıştırın. Belirsiz veya ayrıntılı olsun, fark etmez. flompt sizin için yapılandıracak.",
+    "stepBlocksTitle": "Yapı taşları",
+    "stepBlocksDesc": "Her blok türü promptunuzun bir bölümünü hedefler: Rol, Amaç, Kısıtlamalar, Çıktı Formatı… Eklemek için tıklayın veya kanvasa sürükleyin.",
+    "step2title": "Bloklara ayır",
+    "step2desc": "flompt promptunuzu AI'ya gönderir ve AI onu Rol, Amaç, Kısıtlamalar gibi yazılı bloklara böler.",
+    "step2action": "Benim için ayır",
+    "step3title": "Bloklarınızı düzenleyin",
+    "step3desc": "Her blok promptunuzun bir yönüdür. İçeriği düzenleyin, sürükleyerek yeniden sıralayın ve kenar çubuğundan blok ekleyin.",
+    "step4title": "Derle",
+    "step4desc": "Son promptunuzu oluşturmak için Derle'ye tıklayın: yapılandırılmış, optimize edilmiş ve herhangi bir LLM'e yapıştırmaya hazır.",
+    "stepOf": "{n} / {total}",
+    "next": "İleri",
+    "finish": "Anladım",
+    "skip": "Atla",
+    "acting": "Ayrıştırılıyor…",
+    "samplePrompt": "Kıdemli bir Python geliştiricisisiniz. Aşağıdaki kodu hatalar, performans sorunları ve stil ihlalleri açısından gözden geçirin. Kısa olun, kritik sorunları önceliklendirin ve her bulguyu tek cümlede açıklayın. Numaralı bir liste ile yanıt verin."
+  },
+
+  "extension": {
+    "bannerText": "flompt artık Chrome ve Firefox'ta mevcut. ChatGPT, Claude ve Gemini içinde kullanın.",
+    "bannerCta": "Yükle →",
+    "bannerClose": "Uzantı duyurusunu kapat",
+    "popupTitle": "flompt artık Chrome ve Firefox'ta!",
+    "popupDesc": "flompt'u doğrudan ChatGPT, Claude ve Gemini içinde kullanın. Chrome ve Firefox'ta mevcut. Sekme değiştirmeye gerek yok.",
+    "popupCta": "Uzantıyı yükle",
+    "popupCtaFirefox": "Firefox'a ekle",
+    "popupSkip": "Belki daha sonra"
+  },
+
+  "starPopup": {
+    "title": "flompt'tan memnun musunuz?",
+    "desc": "flompt ücretsiz ve açık kaynaktır. Faydalı bulduysanız, GitHub'daki ⭐ büyümemize ve hayatta kalmamıza yardımcı olur.",
+    "cta": "GitHub'da yıldız ver",
+    "skip": "Belki daha sonra"
+  },
+
+  "blocks": {
+    "document":         { "label": "Belge",            "description": "XML <document> aracılığıyla enjekte edilen harici içerik" },
+    "input":            { "label": "Giriş",            "description": "AI'ya sağlanan veriler" },
+    "role":             { "label": "Rol",              "description": "AI'nın kişiliğini / rolünü tanımlar" },
+    "audience":         { "label": "Hedef Kitle",      "description": "Çıktının kim için yazıldığı" },
+    "context":          { "label": "Bağlam",           "description": "Görev için bağlam sağlar" },
+    "objective":        { "label": "Amaç",             "description": "Başarmak istediğimiz şey" },
+    "goal":             { "label": "Hedef",            "description": "Son hedef ve başarı kriterleri" },
+    "constraints":      { "label": "Kısıtlamalar",    "description": "Uyulması gereken kurallar ve sınırlar" },
+    "examples":         { "label": "Örnekler",         "description": "Few-shot giriş/çıkış çiftleri" },
+    "chain_of_thought": { "label": "Düşünce Zinciri",  "description": "Adım adım akıl yürütme talimatları" },
+    "output_format":    { "label": "Çıktı",            "description": "Beklenen yanıt formatı" },
+    "response_style":   {
+      "label": "Yanıt Stili", "description": "Ayrıntı düzeyi, ton, düzyazı, markdown, LaTeX",
+      "verbosity": "Ayrıntı", "concise": "Özlü", "balanced": "Dengeli", "detailed": "Ayrıntılı",
+      "tone": "Ton", "conversational": "Günlük", "neutral": "Nötr", "formal": "Resmi",
+      "prose": "Format", "flowing": "Düzyazı", "mixed": "Karma", "structured": "Listeler",
+      "mdNone": "Yok", "mdMinimal": "Minimal", "mdStandard": "Standart", "mdRich": "Zengin",
+      "math": "Matematik", "mathAuto": "Otomatik", "mathPlain": "Düz",
+      "skipPreamble": "Önsözü atla"
+    },
+    "language":         { "label": "Dil",              "description": "AI'nın yanıt vermesi gereken dil" }
+  }
+}

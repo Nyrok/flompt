@@ -5,12 +5,17 @@ import esRaw from './es.json'
 import deRaw from './de.json'
 import ptRaw from './pt.json'
 import jaRaw from './ja.json'
+import trRaw from './tr.json'
+import zhRaw from './zh.json'
+import arRaw from './ar.json'
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
-export type Locale = 'en' | 'fr' | 'es' | 'de' | 'pt' | 'ja'
+export type Locale = 'en' | 'fr' | 'es' | 'de' | 'pt' | 'ja' | 'tr' | 'zh' | 'ar'
 
-export const LOCALES: Locale[] = ['en', 'fr', 'es', 'de', 'pt', 'ja']
+export const LOCALES: Locale[] = ['en', 'fr', 'es', 'de', 'pt', 'ja', 'tr', 'zh', 'ar']
+
+export const RTL_LOCALES: Locale[] = ['ar']
 
 export const LOCALE_LABELS: Record<Locale, string> = {
   en: 'EN',
@@ -19,6 +24,9 @@ export const LOCALE_LABELS: Record<Locale, string> = {
   de: 'DE',
   pt: 'PT',
   ja: 'JA',
+  tr: 'TR',
+  zh: 'ZH',
+  ar: 'AR',
 }
 
 export interface BlockTranslation {
@@ -185,4 +193,7 @@ export const translations: Record<Locale, Translations> = {
   de: build(deRaw as typeof enRaw),
   pt: build(ptRaw as typeof enRaw),
   ja: build(jaRaw as typeof enRaw),
+  tr: build(trRaw as typeof enRaw),
+  zh: build(zhRaw as typeof enRaw),
+  ar: build(arRaw as typeof enRaw),
 }
