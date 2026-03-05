@@ -97,6 +97,6 @@ flompt.dev {
 	header @meta Cache-Control "public, max-age=86400"
 
 	# ── Cache: HTML → no-cache (always revalidate) ───────────────
-	@html path /index.html / /privacy /privacy.html /terms /terms.html
+	@html path /index.html / /privacy /privacy.html /terms /terms.html /about /about.html
 	header @html Cache-Control "no-cache, must-revalidate"
 }

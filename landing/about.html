@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>About — Hamza Konte · flompt</title>
+  <meta name="description" content="Hamza Konte, 20 ans. Software Engineer chez Bolero, étudiant à Paris-Dauphine PSL et 42 Paris. Créateur de flompt, un outil open-source de prompt engineering." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://flompt.dev/about" />
+
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https://flompt.dev/about" />
+  <meta property="og:title" content="Hamza Konte — Software Engineer & Builder" />
+  <meta property="og:description" content="20 ans, Software Engineer chez Bolero, étudiant Paris-Dauphine PSL + 42 Paris. Créateur de flompt." />
+  <meta property="og:site_name" content="flompt" />
+
+  <link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/app/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/app/apple-touch-icon.png" />
+  <meta name="theme-color" content="#ff3570" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital@1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FVR0T5J8F4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FVR0T5J8F4');
+  </script>
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:            #141413;
+      --bg-2:          #1a1918;
+      --bg-3:          #211f1d;
+      --border:        rgba(255,255,255,0.07);
+      --border-m:      rgba(255,255,255,0.10);
+      --border-warm:   rgba(135,134,127,0.14);
+      --text:          #faf9f5;
+      --text-muted:    #8a897f;
+      --text-dim:      #6b6963;
+      --accent:        #ff3570;
+      --accent-h:      #ff6090;
+      --accent-glow:   rgba(255,53,112,0.25);
+      --card-bg:       rgba(135,134,127,0.06);
+      --mono:          'JetBrains Mono','Menlo','Fira Code','Courier New',monospace;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── NAV ────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
+      background: rgba(20,20,19,0.88);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-warm);
+    }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto; padding: 0 24px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand span {
+      font-family: 'Caveat', cursive; font-size: 1.5rem;
+      font-weight: 700; color: var(--accent);
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: 0.875rem; color: var(--text-muted); transition: color 150ms; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); }
+    .btn-cta, .nav-links a.btn-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 20px; border-radius: 99px;
+      background: var(--accent); color: #fff;
+      font-size: 0.875rem; font-weight: 600;
+      transition: all 200ms; border: none; cursor: pointer;
+    }
+    .btn-cta:hover { background: var(--accent-h); box-shadow: 0 0 28px var(--accent-glow); }
+    .nav-hamburger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text-muted); border-radius: 2px; transition: all 200ms;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-menu {
+      display: none; position: fixed; top: 60px; left: 0; right: 0;
+      height: auto; background: #141413;
+      backdrop-filter: none; -webkit-backdrop-filter: none;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px 20px; flex-direction: column; gap: 4px; z-index: 1000;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      font-size: 1rem; color: var(--text-muted); padding: 12px 0;
+      border-bottom: 1px solid var(--border); transition: color 150ms;
+    }
+    .nav-mobile-menu a:last-child { border-bottom: none; padding-top: 16px; }
+    .nav-mobile-menu a:hover { color: var(--text); }
+    .nav-mobile-menu a.btn-cta { color: #fff; margin-top: 4px; padding: 9px 20px; }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    .about-hero {
+      padding: 130px 0 72px;
+    }
+    .about-hero-inner {
+      display: flex; align-items: flex-start; gap: 40px;
+    }
+    .about-avatar {
+      flex-shrink: 0;
+      width: 88px; height: 88px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255,53,112,0.18), rgba(255,53,112,0.06));
+      border: 1px solid rgba(255,53,112,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Caveat', cursive; font-size: 2.2rem; font-weight: 700;
+      color: var(--accent); letter-spacing: -1px;
+    }
+    .about-hero-text { flex: 1; }
+    .about-label {
+      font-size: 0.71rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--accent); margin-bottom: 12px;
+      display: block;
+    }
+    .about-hero-text h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -0.04em;
+      line-height: 1.1; margin-bottom: 10px;
+    }
+    .about-role {
+      font-size: 1rem; color: var(--text-muted); margin-bottom: 20px;
+    }
+    .about-role strong { color: var(--text); font-weight: 500; }
+    .about-socials {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .about-social-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.82rem; color: var(--text-dim);
+      border: 1px solid var(--border-m); border-radius: 8px; padding: 5px 12px;
+      transition: all 150ms;
+    }
+    .about-social-link:hover { color: var(--text-muted); border-color: rgba(255,255,255,0.18); }
+    .about-social-link svg { flex-shrink: 0; }
+
+    /* ── CONTENT ────────────────────────────────────────── */
+    .about-content { padding-bottom: 100px; }
+    .about-section { margin-bottom: 60px; }
+    .about-section-title {
+      font-size: 0.71rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 20px;
+    }
+
+    /* Bio */
+    .about-bio p {
+      font-size: 1rem; color: var(--text-muted); line-height: 1.85;
+      margin-bottom: 16px;
+    }
+    .about-bio p:last-child { margin-bottom: 0; }
+    .about-bio strong { color: var(--text); font-weight: 500; }
+
+    /* Currently */
+    .currently-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .currently-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 22px;
+      transition: border-color 200ms;
+    }
+    .currently-card:hover { border-color: var(--border-m); }
+    .currently-card-label {
+      font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.09em; color: var(--text-dim); margin-bottom: 8px;
+    }
+    .currently-card-name {
+      font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 4px;
+    }
+    .currently-card-role {
+      font-size: 0.83rem; color: var(--text-muted);
+    }
+
+    /* Stack */
+    .stack-list {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .stack-tag {
+      font-family: var(--mono); font-size: 0.79rem;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 6px; padding: 4px 12px; color: var(--text-muted);
+      transition: border-color 150ms, color 150ms;
+    }
+    .stack-tag:hover { border-color: var(--border-m); color: var(--text); }
+    .stack-tag.primary { color: var(--accent); border-color: rgba(255,53,112,0.2); background: rgba(255,53,112,0.05); }
+
+    /* Projects */
+    .projects-list { display: flex; flex-direction: column; gap: 12px; }
+    .project-card {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 16px;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 22px;
+      transition: border-color 200ms;
+    }
+    .project-card:hover { border-color: var(--border-m); }
+    .project-card.featured { border-color: rgba(255,53,112,0.2); background: rgba(255,53,112,0.04); }
+    .project-card.featured:hover { border-color: rgba(255,53,112,0.35); }
+    .project-card-body { flex: 1; }
+    .project-card-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+    }
+    .project-card-name {
+      font-size: 0.95rem; font-weight: 600; color: var(--text);
+    }
+    .project-card-badge {
+      font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; padding: 2px 7px; border-radius: 4px;
+      background: var(--accent); color: #fff;
+    }
+    .project-card-lang {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim);
+    }
+    .project-card-desc {
+      font-size: 0.85rem; color: var(--text-muted); line-height: 1.7;
+    }
+    .project-card-meta {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 0.78rem; color: var(--text-dim); flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .project-card-meta svg { flex-shrink: 0; }
+
+    /* CTA */
+    .about-cta {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 16px; padding: 40px 40px; text-align: center;
+      margin-bottom: 60px;
+    }
+    .about-cta h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+    .about-cta p {
+      font-size: 0.92rem; color: var(--text-muted); margin-bottom: 24px;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer { padding: 44px 0; border-top: 1px solid var(--border); }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .footer-brand span {
+      font-family: 'Caveat', cursive; font-weight: 700;
+      font-size: 1.3rem; color: var(--accent);
+    }
+    .footer-links { display: flex; align-items: center; gap: 24px; }
+    .footer-links a { font-size: 0.8rem; color: var(--text-dim); transition: color 150ms; }
+    .footer-links a:hover { color: var(--text-muted); }
+    .footer-credit { font-size: 0.75rem; color: var(--text-dim); }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .about-hero-inner { flex-direction: column; gap: 24px; }
+      .about-avatar { width: 72px; height: 72px; font-size: 1.8rem; }
+      .currently-grid { grid-template-columns: 1fr; }
+      .project-card { flex-direction: column; gap: 8px; }
+      .about-cta { padding: 28px 20px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── NAV ───────────────────────────────────────────── -->
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand" aria-label="flompt home"><span aria-hidden="true">flompt</span></a>
+      <div class="nav-links" role="list">
+        <a href="/#extension" role="listitem">Extension</a>
+        <a href="/docs" role="listitem">Docs</a>
+        <a href="/blog/en" role="listitem">Blog</a>
+        <a href="https://github.com/Nyrok/flompt" target="_blank" rel="noopener" role="listitem" aria-label="GitHub (opens in new tab)">GitHub</a>
+        <a href="/app" class="btn-cta" role="listitem">Open App</a>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav>
+
+  <nav class="nav-mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+    <a href="/#extension">Extension</a>
+    <a href="/docs">Docs</a>
+    <a href="/blog/en">Blog</a>
+    <a href="https://github.com/Nyrok/flompt" target="_blank" rel="noopener" aria-label="GitHub (opens in new tab)">GitHub</a>
+    <a href="/app" class="btn-cta">Open App &rarr;</a>
+  </nav>
+
+  <main>
+  <div class="container">
+
+    <!-- ── HERO ─────────────────────────────────────────── -->
+    <section class="about-hero">
+      <div class="about-hero-inner">
+        <div class="about-avatar" aria-hidden="true">HK</div>
+        <div class="about-hero-text">
+          <span class="about-label">About</span>
+          <h1>Hamza Konte</h1>
+          <p class="about-role">
+            <strong>Software Engineer</strong> at Bolero &nbsp;·&nbsp;
+            Paris-Dauphine PSL &amp; 42 Paris &nbsp;·&nbsp; 20 ans
+          </p>
+          <div class="about-socials">
+            <a href="https://github.com/Nyrok" target="_blank" rel="noopener" class="about-social-link" aria-label="GitHub (opens in new tab)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              Nyrok
+            </a>
+            <a href="https://www.linkedin.com/in/hamza-konte" target="_blank" rel="noopener" class="about-social-link" aria-label="LinkedIn (opens in new tab)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              hamza-konte
+            </a>
+            <a href="https://twitter.com/Nyrok10" target="_blank" rel="noopener" class="about-social-link" aria-label="Twitter (opens in new tab)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.844L1.254 2.25H8.08l4.253 5.626L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+              @Nyrok10
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CONTENT ────────────────────────────────────────── -->
+    <div class="about-content">
+
+      <!-- Bio -->
+      <section class="about-section about-bio">
+        <div class="about-section-title">Bio</div>
+        <p>
+          J'ai commencé à coder à 13 ans, en autodidacte, par curiosité. Des petits scripts, des projets qui ne marchaient pas, puis des projets qui marchaient. Ce qui devait être un hobby est devenu une pratique sérieuse, et aujourd'hui j'écris du code pour vivre et pour construire des choses qui ont de la valeur.
+        </p>
+        <p>
+          Je suis actuellement <strong>Software Engineer chez Bolero</strong>, où je travaille sur des problèmes back-end et full-stack. En parallèle, j'étudie l'informatique à <strong>Paris-Dauphine PSL</strong> pour la rigueur académique (algorithmique, mathématiques, théorie) et à <strong>42 Paris</strong> pour l'approche par projets et le peer-to-peer. Les deux se complètent bien.
+        </p>
+        <p>
+          Ma stack principale tourne autour de TypeScript et de Python, mais je suis à l'aise en C pour les projets bas niveau. J'aime comprendre comment les choses fonctionnent en dessous, pas juste les utiliser.
+        </p>
+        <p>
+          <strong>flompt</strong> est mon projet open-source principal. Au départ, c'était un outil que je me suis construit pour moi — je trouvais frustrant d'écrire des prompts dans une seule grande boite de texte sans structure. J'ai décidé de le rendre public, et il a évolué depuis vers un vrai outil de prompt engineering avec canvas visuel, optimisation Claude et extension navigateur.
+        </p>
+      </section>
+
+      <!-- Currently -->
+      <section class="about-section">
+        <div class="about-section-title">Currently</div>
+        <div class="currently-grid">
+          <div class="currently-card">
+            <div class="currently-card-label">Work</div>
+            <div class="currently-card-name">Bolero</div>
+            <div class="currently-card-role">Software Engineer</div>
+          </div>
+          <div class="currently-card">
+            <div class="currently-card-label">Education · Academic</div>
+            <div class="currently-card-name">Paris-Dauphine PSL</div>
+            <div class="currently-card-role">Computer Science</div>
+          </div>
+          <div class="currently-card">
+            <div class="currently-card-label">Education · Pratique</div>
+            <div class="currently-card-name">42 Paris</div>
+            <div class="currently-card-role">Peer-to-peer engineering school</div>
+          </div>
+          <div class="currently-card">
+            <div class="currently-card-label">Open Source</div>
+            <div class="currently-card-name">flompt</div>
+            <div class="currently-card-role">Maintainer &amp; creator</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stack -->
+      <section class="about-section">
+        <div class="about-section-title">Stack</div>
+        <div class="stack-list">
+          <span class="stack-tag primary">TypeScript</span>
+          <span class="stack-tag primary">Python</span>
+          <span class="stack-tag primary">C</span>
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Next.js</span>
+          <span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">Docker</span>
+          <span class="stack-tag">PostgreSQL</span>
+          <span class="stack-tag">Redis</span>
+          <span class="stack-tag">PHP</span>
+          <span class="stack-tag">C#</span>
+          <span class="stack-tag">Git</span>
+          <span class="stack-tag">Linux</span>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section class="about-section">
+        <div class="about-section-title">Projects</div>
+        <div class="projects-list">
+
+          <a href="https://flompt.dev" class="project-card featured" aria-label="flompt — visual AI prompt builder">
+            <div class="project-card-body">
+              <div class="project-card-header">
+                <span class="project-card-name">flompt</span>
+                <span class="project-card-badge">Flagship</span>
+                <span class="project-card-lang">TypeScript</span>
+              </div>
+              <p class="project-card-desc">
+                Visual AI prompt builder. Decompose any prompt into 11 semantic blocks, edit on a canvas, recompile as Claude-optimized XML. Includes a browser extension for ChatGPT, Claude and Gemini, and a Claude Code MCP integration.
+              </p>
+            </div>
+            <div class="project-card-meta">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              16
+            </div>
+          </a>
+
+          <a href="https://github.com/Nyrok/PACE-2025" target="_blank" rel="noopener" class="project-card" aria-label="PACE-2025 on GitHub (opens in new tab)">
+            <div class="project-card-body">
+              <div class="project-card-header">
+                <span class="project-card-name">PACE-2025</span>
+                <span class="project-card-lang">C</span>
+              </div>
+              <p class="project-card-desc">
+                Local search solver for the PACE 2025 Minimum Dominating Set challenge. Greedy construction heuristic combined with tabu search to escape local optima.
+              </p>
+            </div>
+            <div class="project-card-meta">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </div>
+          </a>
+
+          <a href="https://github.com/Nyrok/minishell" target="_blank" rel="noopener" class="project-card" aria-label="minishell on GitHub (opens in new tab)">
+            <div class="project-card-body">
+              <div class="project-card-header">
+                <span class="project-card-name">minishell</span>
+                <span class="project-card-lang">C</span>
+              </div>
+              <p class="project-card-desc">
+                A POSIX-compliant shell written in C as part of 42 Paris curriculum. Handles pipes, redirections, environment variables, built-in commands and signal management.
+              </p>
+            </div>
+            <div class="project-card-meta">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              2
+            </div>
+          </a>
+
+          <a href="https://github.com/Nyrok/LYVP" target="_blank" rel="noopener" class="project-card" aria-label="LYVP on GitHub (opens in new tab)">
+            <div class="project-card-body">
+              <div class="project-card-header">
+                <span class="project-card-name">LYVP</span>
+                <span class="project-card-lang">Python</span>
+              </div>
+              <p class="project-card-desc">
+                LED YouTube Video Player. Streams YouTube videos and renders them in real time on an LED matrix — because why not.
+              </p>
+            </div>
+            <div class="project-card-meta">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <div class="about-cta">
+        <h2>Try flompt</h2>
+        <p>Le projet open-source que j'ai construit pour mieux écrire des prompts. Gratuit, sans compte, MIT licensed.</p>
+        <a href="/app" class="btn-cta">Open flompt &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+  </main>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer>
+    <div class="container" style="max-width:1080px">
+      <div class="footer-inner">
+        <div class="footer-brand"><span>flompt</span></div>
+        <div class="footer-links">
+          <a href="/app">App</a>
+          <a href="/docs">Docs</a>
+          <a href="/blog/en">Blog</a>
+          <a href="https://github.com/Nyrok/flompt" target="_blank" rel="noopener">GitHub</a>
+          <a href="/about" style="color:var(--text-muted)">About</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+        </div>
+        <p class="footer-credit">Made by <a href="https://github.com/Nyrok" target="_blank" rel="noopener" style="color:var(--text-muted)">Nyrok</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-hidden', String(!open));
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+    }));
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && menu.classList.contains('open')) {
+        menu.classList.remove('open');
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+        btn.focus();
+      }
+    });
+  </script>
+
+</body>
+</html>
