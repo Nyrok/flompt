@@ -5,7 +5,7 @@
 EXTENSION_DIR := $(shell pwd)
 DIST_DIR      := $(EXTENSION_DIR)/dist
 
-ZIP_CHROME  := flompt-extension.zip
+ZIP_CHROME  := flompt-chrome.zip
 ZIP_FIREFOX := flompt-firefox.zip
 
 # Shared files (manifest added separately per target)
