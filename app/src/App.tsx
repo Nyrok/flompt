@@ -55,6 +55,9 @@ const App = () => {
   const handleLocaleChange = (next: Locale) => {
     setLocale(next)
     analytics.localeChanged(next)
+    // Sync URL so a reload restores the correct locale (URL path is priority #1)
+    const newPath = next === 'en' ? '/app' : `/app/${next}`
+    window.history.replaceState(null, '', newPath)
   }
 
   return (
