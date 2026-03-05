@@ -66,7 +66,7 @@ flompt.dev {
 		X-Frame-Options DENY
 		X-XSS-Protection "1; mode=block"
 		Permissions-Policy "camera=(), microphone=(), geolocation=()"
-		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://eu-assets.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://www.google-analytics.com https://stats.g.doubleclick.net; connect-src 'self' https://flompt.dev https://eu.i.posthog.com https://eu-assets.i.posthog.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-src https://demo.arcade.software;"
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://eu-assets.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://www.google-analytics.com https://stats.g.doubleclick.net https://avatars.githubusercontent.com; connect-src 'self' https://flompt.dev https://eu.i.posthog.com https://eu-assets.i.posthog.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-src https://demo.arcade.software;"
 	}
 
 	# ── Security headers for /app* — framing allowed from extensions ──
@@ -75,7 +75,7 @@ flompt.dev {
 		X-Content-Type-Options nosniff
 		X-XSS-Protection "1; mode=block"
 		Permissions-Policy "camera=(), microphone=(), geolocation=()"
-		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://eu-assets.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://www.google-analytics.com https://stats.g.doubleclick.net; connect-src 'self' https://flompt.dev https://eu.i.posthog.com https://eu-assets.i.posthog.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-ancestors https://chatgpt.com https://chat.openai.com https://claude.ai https://gemini.google.com chrome-extension:;"
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://eu-assets.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://www.google-analytics.com https://stats.g.doubleclick.net https://avatars.githubusercontent.com; connect-src 'self' https://flompt.dev https://eu.i.posthog.com https://eu-assets.i.posthog.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com; frame-ancestors https://chatgpt.com https://chat.openai.com https://claude.ai https://gemini.google.com chrome-extension:;"
 	}
 
 	# ── HSTS global (all routes) ───────────────────────────────

@@ -128,11 +128,11 @@
     .about-avatar {
       flex-shrink: 0;
       width: 88px; height: 88px; border-radius: 50%;
-      background: linear-gradient(135deg, rgba(255,53,112,0.18), rgba(255,53,112,0.06));
-      border: 1px solid rgba(255,53,112,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Caveat', cursive; font-size: 2.2rem; font-weight: 700;
-      color: var(--accent); letter-spacing: -1px;
+      border: 1px solid var(--border-m);
+      overflow: hidden;
+    }
+    .about-avatar img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
     .about-hero-text { flex: 1; }
     .about-label {
@@ -282,7 +282,7 @@
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
       .about-hero-inner { flex-direction: column; gap: 24px; }
-      .about-avatar { width: 72px; height: 72px; font-size: 1.8rem; }
+      .about-avatar { width: 72px; height: 72px; }
       .currently-grid { grid-template-columns: 1fr; }
       .project-card { flex-direction: column; gap: 8px; }
       .about-cta { padding: 28px 20px; }
@@ -324,7 +324,9 @@
     <!-- ── HERO ─────────────────────────────────────────── -->
     <section class="about-hero">
       <div class="about-hero-inner">
-        <div class="about-avatar" aria-hidden="true">HK</div>
+        <div class="about-avatar">
+          <img src="https://avatars.githubusercontent.com/Nyrok" alt="Hamza Konte" width="88" height="88" />
+        </div>
         <div class="about-hero-text">
           <span class="about-label">About</span>
           <h1>Hamza Konte</h1>
