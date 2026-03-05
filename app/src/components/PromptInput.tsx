@@ -156,6 +156,7 @@ const PromptInput = () => {
           id="raw-prompt-textarea"
           ref={textareaRef}
           className="prompt-textarea"
+          dir="auto"
           value={rawPrompt}
           onChange={(e) => setRawPrompt(e.target.value)}
           placeholder={t.promptInput.placeholder}

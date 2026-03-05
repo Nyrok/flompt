@@ -363,6 +363,7 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             id={`block-content-${id}`}
             ref={textareaRef}
             className="block-content"
+            dir="auto"
             value={data.content}
             placeholder={tr.description}
             onChange={(e) => updateNodeContent(id, e.target.value)}
