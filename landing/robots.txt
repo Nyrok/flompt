@@ -10,4 +10,5 @@ Disallow: /api/
 Disallow: /mcp/
 Disallow: /health
 
+Sitemap: https://flompt.dev/sitemap.xml
 Sitemap: https://flompt.dev/blog/sitemap.xml
