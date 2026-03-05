@@ -1510,7 +1510,13 @@ statistics. Write in English.</pre>
         posthog.capture('cta_clicked', { location: loc });
       }
       if (href.includes('github.com')) {
-        posthog.capture('github_clicked');
+        var gsrc = el.closest('nav') ? 'nav'
+                 : el.closest('.hero') ? 'hero'
+                 : el.closest('.cta-final') ? 'cta_final'
+                 : el.closest('footer') ? 'footer'
+                 : 'other';
+        posthog.capture('github_clicked', { source: gsrc });
+        if (typeof gtag !== 'undefined') gtag('event', 'github_click', { source: gsrc });
       }
       if (href.includes('chrome.google.com/webstore') && el.id !== 'ext-banner-cta' && el.id !== 'ext-popup-cta') {
         posthog.capture('extension_install_clicked', { source: 'section', browser: 'chrome' });

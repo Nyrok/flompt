@@ -92,6 +92,9 @@ export const analytics = {
   // Settings
   localeChanged: (locale: string)                     => track('locale_changed',  { locale }),
 
+  // GitHub
+  githubClicked: (source: string)                     => track('github_clicked',  { source }),
+
   // Errors
   error: (context: string, message?: string)          => track('error', { context, message }),
 }

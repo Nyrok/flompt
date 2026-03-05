@@ -192,6 +192,7 @@ const PromptOutput = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub"
+        onClick={() => analytics.githubClicked('prompt_output')}
       >
         <Github size={13} aria-hidden="true" /> View source code
       </a>

@@ -104,6 +104,7 @@ const App = () => {
               rel="noopener noreferrer"
               title={t.header.github}
               aria-label={t.header.github}
+              onClick={() => analytics.githubClicked('header')}
             >
               <Github size={14} aria-hidden="true" />
             </a>
