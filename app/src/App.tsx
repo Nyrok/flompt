@@ -14,6 +14,7 @@ import StarPopup from '@/components/StarPopup'
 import { useFlowStore } from '@/store/flowStore'
 import type { Tab } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
+import { LOCALES, LOCALE_LABELS } from '@/i18n/translations'
 import type { Locale } from '@/i18n/translations'
 import { isExtension } from '@/lib/platform'
 import './styles.css'
@@ -51,8 +52,7 @@ const App = () => {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [undo, redo])
 
-  const toggleLocale = () => {
-    const next = locale === 'en' ? 'fr' : 'en' as Locale
+  const handleLocaleChange = (next: Locale) => {
     setLocale(next)
     analytics.localeChanged(next)
   }
@@ -83,14 +83,17 @@ const App = () => {
 
           <div className="header-actions">
             <KeyboardShortcuts />
-            <button
+            <select
               className="btn-locale"
-              onClick={toggleLocale}
+              value={locale}
+              onChange={e => handleLocaleChange(e.target.value as Locale)}
               title={t.accessibility.switchLocale}
               aria-label={t.accessibility.switchLocale}
             >
-              {locale.toUpperCase()}
-            </button>
+              {LOCALES.map(l => (
+                <option key={l} value={l}>{LOCALE_LABELS[l]}</option>
+              ))}
+            </select>
             <a
               className="btn-icon btn-github"
               href="https://github.com/Nyrok/flompt"

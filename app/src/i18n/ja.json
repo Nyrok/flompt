@@ -1,0 +1,164 @@
+{
+  "nodeCount": "{n}ブロック",
+  "nodeCountPlural": "{n}ブロック",
+
+  "tabs": { "input": "プロンプト", "canvas": "キャンバス", "output": "結果" },
+
+  "header": {
+    "undo": "元に戻す (Ctrl+Z)",
+    "redo": "やり直す (Ctrl+Y)",
+    "reset": "リセット",
+    "resetConfirm": "キャンバスをリセットしますか？",
+    "autosaved": "自動保存済み",
+    "github": "GitHubでflomptにスターを付ける（新しいタブで開く）"
+  },
+
+  "accessibility": {
+    "skipToMain": "メインコンテンツへスキップ",
+    "switchLocale": "言語を切り替える",
+    "inputPanel": "入力パネル",
+    "outputPanel": "出力パネル",
+    "mainTabs": "メインタブ"
+  },
+
+  "promptInput": {
+    "title": "生のプロンプト",
+    "placeholder": "プロンプトをここに貼り付けてください…",
+    "decompose": "ブロックに分解する",
+    "decomposing": "分解中…",
+    "errorDecompose": "分解に失敗しました。もう一度お試しください。",
+    "paste": "クリップボードから貼り付け",
+    "importFromPlatform": "ページからプロンプトをインポート",
+    "queuePosition": "キュー位置: {n}",
+    "queueProcessing": "処理中…",
+    "queueAnalyzing": "セキュリティ解析中…"
+  },
+
+  "promptOutput": {
+    "title": "結果",
+    "compile": "プロンプトを組み立てる",
+    "compiling": "組み立て中…",
+    "copy": "コピー",
+    "copied": "コピーしました！",
+    "placeholder": "フローチャートを作成し、\n組み立ててプロンプトを生成してください。",
+    "errorCompile": "組み立てに失敗しました。もう一度お試しください。",
+    "exportTxt": ".txt",
+    "exportJson": ".json",
+    "exportTxtLabel": ".txtファイルとしてエクスポート",
+    "exportJsonLabel": ".jsonファイルとしてエクスポート",
+    "share": "flomptをシェア",
+    "shareTitle": "flompt: ビジュアルAIプロンプトビルダー",
+    "shareText": "flomptをチェック！AIプロンプトをビジュアルフローに変換。無料＆オープンソース。",
+    "sendToAI": "AIに送信",
+    "injected": "注入完了！",
+    "injectLabel": "AIチャット入力にプロンプトを送信",
+    "injectedLabel": "プロンプトを注入しました！"
+  },
+
+  "errors": {
+    "overloaded": "AIは現在過負荷状態です。しばらく待ってから再試行してください。",
+    "timeout": "リクエストがタイムアウトしました。AIの応答に時間がかかりすぎました。再試行してください。",
+    "network": "接続が切れました。インターネット接続を確認して再試行してください。",
+    "server": "サーバーエラーが発生しました。数秒後に再試行してください。",
+    "blocked": "プロンプトがセキュリティフィルターに引っかかりました。言い換えてください。",
+    "unknown": "エラーが発生しました。もう一度お試しください。"
+  },
+
+  "sidebar": {
+    "title": "ブロック",
+    "hint": "クリックで追加・キャンバスにドラッグ"
+  },
+
+  "block": {
+    "duplicate": "複製",
+    "expand": "展開",
+    "collapse": "折りたたむ",
+    "delete": "削除",
+    "chars": "文字",
+    "deleteConnection": "接続を削除"
+  },
+
+  "canvas": {
+    "empty": "空のキャンバス",
+    "emptyHint": "左にプロンプトを貼り付けて",
+    "emptyDecompose": "「分解」をクリックするか、サイドバーからブロックをドラッグしてください。"
+  },
+
+  "shortcuts": {
+    "title": "キーボードショートカット",
+    "close": "EscまたはEscを押して閉じる",
+    "list": [
+      { "keys": ["Ctrl", "Z"],       "label": "元に戻す" },
+      { "keys": ["Ctrl", "Y"],       "label": "やり直す" },
+      { "keys": ["Ctrl", "⇧", "Z"], "label": "やり直す（代替）" },
+      { "keys": ["Del"],             "label": "選択したブロックを削除" },
+      { "keys": ["Ctrl", "A"],       "label": "すべて選択" },
+      { "keys": ["Scroll"],          "label": "ズームイン/アウト" },
+      { "keys": ["Drag"],            "label": "ブロックを移動" },
+      { "keys": ["Bg drag"],         "label": "キャンバスをパン" },
+      { "keys": ["?"],               "label": "ショートカットを表示" }
+    ]
+  },
+
+  "tour": {
+    "step1title": "生のプロンプト",
+    "step1desc": "ここに任意のテキストを入力または貼り付けてください。曖昧でも詳細でも構いません。flomptが構造化します。",
+    "stepBlocksTitle": "ビルディングブロック",
+    "stepBlocksDesc": "各ブロックタイプはプロンプトの一部を担います：役割、目標、制約、出力形式…クリックして追加するか、キャンバスにドラッグしてください。",
+    "step2title": "ブロックに分解する",
+    "step2desc": "flomptはプロンプトをAIに送信し、役割、目標、制約などの型付きブロックに分解します。",
+    "step2action": "分解してみる",
+    "step3title": "ブロックを編集する",
+    "step3desc": "各ブロックはプロンプトの一側面です。内容を編集し、ドラッグで並び替え、サイドバーからブロックを追加してください。",
+    "step4title": "コンパイル",
+    "step4desc": "「コンパイル」をクリックして最終プロンプトを生成してください。構造化・最適化され、任意のLLMに貼り付けられる状態になります。",
+    "stepOf": "{n} / {total}",
+    "next": "次へ",
+    "finish": "了解",
+    "skip": "スキップ",
+    "acting": "分解中…",
+    "samplePrompt": "あなたはシニアPython開発者です。以下のコードのバグ、パフォーマンス問題、スタイル違反をレビューしてください。簡潔に、重要な問題を優先し、各発見を1文で説明してください。番号付きリストで回答してください。"
+  },
+
+  "extension": {
+    "bannerText": "flomptがChromeとFirefoxで利用可能になりました。ChatGPT、Claude、Gemini内で使用できます。",
+    "bannerCta": "インストール →",
+    "bannerClose": "拡張機能のお知らせを閉じる",
+    "popupTitle": "flomptがChromeとFirefoxに登場！",
+    "popupDesc": "ChatGPT、Claude、Gemini内で直接flomptを使用できます。ChromeとFirefoxで利用可能。タブ切り替え不要。",
+    "popupCta": "拡張機能をインストール",
+    "popupCtaFirefox": "Firefoxに追加",
+    "popupSkip": "後で"
+  },
+
+  "starPopup": {
+    "title": "flomptを楽しんでいますか？",
+    "desc": "flomptは無料＆オープンソースです。役に立つと感じたら、GitHubの⭐が私たちの成長と継続に役立ちます。",
+    "cta": "GitHubでスターを付ける",
+    "skip": "後で"
+  },
+
+  "blocks": {
+    "document":         { "label": "ドキュメント",       "description": "XML <document>で注入された外部コンテンツ" },
+    "input":            { "label": "入力",              "description": "AIに提供されるデータ" },
+    "role":             { "label": "役割",              "description": "AIのペルソナ/役割を定義" },
+    "audience":         { "label": "対象読者",           "description": "出力が誰向けに書かれるか" },
+    "context":          { "label": "コンテキスト",       "description": "タスクのコンテキストを提供" },
+    "objective":        { "label": "目標",              "description": "達成したいこと" },
+    "goal":             { "label": "ゴール",             "description": "最終目標と成功基準" },
+    "constraints":      { "label": "制約",              "description": "守るべきルールと制限" },
+    "examples":         { "label": "例",               "description": "Few-shotの入力/出力ペア" },
+    "chain_of_thought": { "label": "思考の連鎖",         "description": "ステップバイステップの推論指示" },
+    "output_format":    { "label": "出力",              "description": "期待される応答形式" },
+    "response_style":   {
+      "label": "応答スタイル", "description": "詳細度、トーン、文体、Markdown、LaTeX",
+      "verbosity": "詳細度", "concise": "簡潔", "balanced": "バランス", "detailed": "詳細",
+      "tone": "トーン", "conversational": "カジュアル", "neutral": "ニュートラル", "formal": "フォーマル",
+      "prose": "形式", "flowing": "散文", "mixed": "混合", "structured": "リスト",
+      "mdNone": "なし", "mdMinimal": "最小限", "mdStandard": "標準", "mdRich": "リッチ",
+      "math": "数学", "mathAuto": "自動", "mathPlain": "プレーン",
+      "skipPreamble": "前置きを省略"
+    },
+    "language":         { "label": "言語",              "description": "AIが応答すべき言語" }
+  }
+}

@@ -1,10 +1,25 @@
 import type { BlockType } from '@/types/blocks'
 import enRaw from './en.json'
 import frRaw from './fr.json'
+import esRaw from './es.json'
+import deRaw from './de.json'
+import ptRaw from './pt.json'
+import jaRaw from './ja.json'
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
-export type Locale = 'en' | 'fr'
+export type Locale = 'en' | 'fr' | 'es' | 'de' | 'pt' | 'ja'
+
+export const LOCALES: Locale[] = ['en', 'fr', 'es', 'de', 'pt', 'ja']
+
+export const LOCALE_LABELS: Record<Locale, string> = {
+  en: 'EN',
+  fr: 'FR',
+  es: 'ES',
+  de: 'DE',
+  pt: 'PT',
+  ja: 'JA',
+}
 
 export interface BlockTranslation {
   label: string
@@ -166,4 +181,8 @@ function build(raw: RawLocale): Translations {
 export const translations: Record<Locale, Translations> = {
   en: build(enRaw),
   fr: build(frRaw),
+  es: build(esRaw as typeof enRaw),
+  de: build(deRaw as typeof enRaw),
+  pt: build(ptRaw as typeof enRaw),
+  ja: build(jaRaw as typeof enRaw),
 }

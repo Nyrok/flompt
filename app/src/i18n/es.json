@@ -1,0 +1,164 @@
+{
+  "nodeCount": "{n} bloque",
+  "nodeCountPlural": "{n} bloques",
+
+  "tabs": { "input": "Prompt", "canvas": "Canvas", "output": "Resultado" },
+
+  "header": {
+    "undo": "Deshacer (Ctrl+Z)",
+    "redo": "Rehacer (Ctrl+Y)",
+    "reset": "Reiniciar",
+    "resetConfirm": "¿Reiniciar el canvas?",
+    "autosaved": "Guardado automático",
+    "github": "Dar estrella a flompt en GitHub (se abre en nueva pestaña)"
+  },
+
+  "accessibility": {
+    "skipToMain": "Saltar al contenido principal",
+    "switchLocale": "Cambiar idioma",
+    "inputPanel": "Panel de entrada",
+    "outputPanel": "Panel de salida",
+    "mainTabs": "Pestañas principales"
+  },
+
+  "promptInput": {
+    "title": "Prompt sin formato",
+    "placeholder": "Pega tu prompt aquí…",
+    "decompose": "Descomponer en bloques",
+    "decomposing": "Descomponiendo…",
+    "errorDecompose": "La descomposición ha fallado. Por favor, inténtalo de nuevo.",
+    "paste": "Pegar del portapapeles",
+    "importFromPlatform": "Importar prompt desde la página",
+    "queuePosition": "Posición en cola: {n}",
+    "queueProcessing": "Procesando…",
+    "queueAnalyzing": "Analizando seguridad…"
+  },
+
+  "promptOutput": {
+    "title": "Resultado",
+    "compile": "Ensamblar prompt",
+    "compiling": "Ensamblando…",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "placeholder": "Construye tu diagrama\nluego ensambla para generar el prompt.",
+    "errorCompile": "El ensamblaje ha fallado. Por favor, inténtalo de nuevo.",
+    "exportTxt": ".txt",
+    "exportJson": ".json",
+    "exportTxtLabel": "Exportar como archivo .txt",
+    "exportJsonLabel": "Exportar como archivo .json",
+    "share": "Compartir flompt",
+    "shareTitle": "flompt: Constructor visual de prompts IA",
+    "shareText": "¡Descubre flompt! Convierte cualquier prompt de IA en un flujo visual. Gratis y código abierto.",
+    "sendToAI": "Enviar a IA",
+    "injected": "¡Inyectado!",
+    "injectLabel": "Enviar prompt al chat de IA",
+    "injectedLabel": "¡Prompt inyectado!"
+  },
+
+  "errors": {
+    "overloaded": "La IA está sobrecargada en este momento. Por favor, espera un momento e inténtalo de nuevo.",
+    "timeout": "La solicitud ha expirado. La IA tardó demasiado en responder. Inténtalo de nuevo.",
+    "network": "Conexión perdida. Comprueba tu conexión a internet e inténtalo de nuevo.",
+    "server": "Error del servidor. Por favor, inténtalo de nuevo en unos segundos.",
+    "blocked": "Tu prompt fue marcado por nuestro filtro de seguridad. Por favor, reformúlalo.",
+    "unknown": "Algo ha ido mal. Por favor, inténtalo de nuevo."
+  },
+
+  "sidebar": {
+    "title": "Bloques",
+    "hint": "Clic para añadir · Arrastrar al canvas"
+  },
+
+  "block": {
+    "duplicate": "Duplicar",
+    "expand": "Expandir",
+    "collapse": "Contraer",
+    "delete": "Eliminar",
+    "chars": "car.",
+    "deleteConnection": "Eliminar conexión"
+  },
+
+  "canvas": {
+    "empty": "Canvas vacío",
+    "emptyHint": "Pega un prompt a la izquierda y haz clic en ",
+    "emptyDecompose": "Descomponer, o arrastra un bloque desde la barra lateral."
+  },
+
+  "shortcuts": {
+    "title": "Atajos de teclado",
+    "close": "Pulsa Esc o ? para cerrar",
+    "list": [
+      { "keys": ["Ctrl", "Z"],       "label": "Deshacer" },
+      { "keys": ["Ctrl", "Y"],       "label": "Rehacer" },
+      { "keys": ["Ctrl", "⇧", "Z"], "label": "Rehacer (alternativo)" },
+      { "keys": ["Del"],             "label": "Eliminar bloque seleccionado" },
+      { "keys": ["Ctrl", "A"],       "label": "Seleccionar todo" },
+      { "keys": ["Scroll"],          "label": "Zoom entra/sale" },
+      { "keys": ["Drag"],            "label": "Mover un bloque" },
+      { "keys": ["Bg drag"],         "label": "Desplazar canvas" },
+      { "keys": ["?"],               "label": "Mostrar atajos" }
+    ]
+  },
+
+  "tour": {
+    "step1title": "Tu prompt sin formato",
+    "step1desc": "Escribe o pega cualquier texto aquí. Vago o detallado, no importa. flompt lo estructurará por ti.",
+    "stepBlocksTitle": "Los bloques de construcción",
+    "stepBlocksDesc": "Cada tipo de bloque apunta a una parte de tu prompt: Rol, Objetivo, Restricciones, Formato de salida… Haz clic para añadir uno, o arrástralo al canvas.",
+    "step2title": "Descomponer en bloques",
+    "step2desc": "flompt envía tu prompt a la IA, que lo divide en bloques tipificados: Rol, Objetivo, Restricciones y más.",
+    "step2action": "Descomponer por mí",
+    "step3title": "Edita tus bloques",
+    "step3desc": "Cada bloque es un aspecto de tu prompt. Edita el contenido, reordena arrastrando y añade bloques desde la barra lateral.",
+    "step4title": "Compilar",
+    "step4desc": "Pulsa Compilar para generar tu prompt final: estructurado, optimizado y listo para pegar en cualquier LLM.",
+    "stepOf": "{n} / {total}",
+    "next": "Siguiente",
+    "finish": "Entendido",
+    "skip": "Omitir",
+    "acting": "Descomponiendo…",
+    "samplePrompt": "Eres un desarrollador Python senior. Revisa el siguiente código en busca de errores, problemas de rendimiento y violaciones de estilo. Sé conciso, prioriza los problemas críticos y explica cada hallazgo en una frase. Responde con una lista numerada."
+  },
+
+  "extension": {
+    "bannerText": "flompt ya está disponible en Chrome y Firefox. Úsalo dentro de ChatGPT, Claude y Gemini.",
+    "bannerCta": "Instalar →",
+    "bannerClose": "Cerrar anuncio de extensión",
+    "popupTitle": "¡flompt ya está en Chrome y Firefox!",
+    "popupDesc": "Usa flompt directamente dentro de ChatGPT, Claude y Gemini. Disponible en Chrome y Firefox. Sin cambiar de pestaña.",
+    "popupCta": "Instalar la extensión",
+    "popupCtaFirefox": "Añadir a Firefox",
+    "popupSkip": "Quizás más tarde"
+  },
+
+  "starPopup": {
+    "title": "¿Disfrutando flompt?",
+    "desc": "flompt es gratuito y de código abierto. Si te resulta útil, una ⭐ en GitHub nos ayuda a crecer y a mantenerlo vivo.",
+    "cta": "Dar estrella en GitHub",
+    "skip": "Quizás más tarde"
+  },
+
+  "blocks": {
+    "document":         { "label": "Documento",        "description": "Contenido externo inyectado mediante XML <document>" },
+    "input":            { "label": "Entrada",          "description": "Datos proporcionados a la IA" },
+    "role":             { "label": "Rol",              "description": "Define la persona / rol de la IA" },
+    "audience":         { "label": "Audiencia",        "description": "Para quién se escribe la respuesta" },
+    "context":          { "label": "Contexto",         "description": "Proporciona contexto para la tarea" },
+    "objective":        { "label": "Objetivo",         "description": "Lo que queremos lograr" },
+    "goal":             { "label": "Meta",             "description": "Meta final y criterios de éxito" },
+    "constraints":      { "label": "Restricciones",   "description": "Reglas y límites a respetar" },
+    "examples":         { "label": "Ejemplos",         "description": "Pares de entrada/salida few-shot" },
+    "chain_of_thought": { "label": "Cadena de pensamiento", "description": "Instrucciones de razonamiento paso a paso" },
+    "output_format":    { "label": "Formato de salida", "description": "Formato esperado de la respuesta" },
+    "response_style":   {
+      "label": "Estilo de respuesta", "description": "Verbosidad, tono, prosa, markdown, LaTeX",
+      "verbosity": "Verbosidad", "concise": "Conciso", "balanced": "Equilibrado", "detailed": "Detallado",
+      "tone": "Tono", "conversational": "Informal", "neutral": "Neutral", "formal": "Formal",
+      "prose": "Formato", "flowing": "Prosa", "mixed": "Mixto", "structured": "Listas",
+      "mdNone": "Ninguno", "mdMinimal": "Mínimo", "mdStandard": "Estándar", "mdRich": "Rico",
+      "math": "Matemáticas", "mathAuto": "Auto", "mathPlain": "Plano",
+      "skipPreamble": "Omitir preámbulo"
+    },
+    "language":         { "label": "Idioma",           "description": "Idioma en el que debe responder la IA" }
+  }
+}

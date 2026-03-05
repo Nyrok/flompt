@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from 'react'
-import { translations } from './translations'
+import { translations, LOCALES } from './translations'
 import type { Locale, Translations } from './translations'
 
 // ── Types ───────────────────────────────────────────────────────────────────
@@ -21,7 +21,12 @@ const STORAGE_KEY = 'flompt-locale'
 function getInitialLocale(): Locale {
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored === 'en' || stored === 'fr') return stored
+    if (stored && LOCALES.includes(stored as Locale)) return stored as Locale
+  } catch {}
+  // Auto-detect from browser language
+  try {
+    const lang = navigator.language.slice(0, 2).toLowerCase()
+    if (LOCALES.includes(lang as Locale)) return lang as Locale
   } catch {}
   return 'en'
 }

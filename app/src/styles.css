@@ -362,10 +362,10 @@ body {
 }
 .btn-icon:disabled { opacity: 0.28; cursor: not-allowed; }
 
-/* Locale toggle */
+/* Locale select */
 .btn-locale {
   height: 30px;
-  padding: 0 10px;
+  padding: 0 24px 0 10px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -376,11 +376,22 @@ body {
   letter-spacing: 0.08em;
   cursor: pointer;
   transition: all var(--transition-fast);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238a897f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
 }
 .btn-locale:hover {
-  background: var(--surface-hover);
+  background-color: var(--surface-hover);
   color: var(--text);
   border-color: var(--border-focus);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23faf9f5' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+.btn-locale option {
+  background: #1a1918;
+  color: #faf9f5;
+  font-weight: 700;
 }
 
 /* ── Sidebar ──────────────────────────────────────────────────────────────── */

@@ -1,0 +1,164 @@
+{
+  "nodeCount": "{n} Block",
+  "nodeCountPlural": "{n} Blöcke",
+
+  "tabs": { "input": "Prompt", "canvas": "Canvas", "output": "Ergebnis" },
+
+  "header": {
+    "undo": "Rückgängig (Ctrl+Z)",
+    "redo": "Wiederholen (Ctrl+Y)",
+    "reset": "Zurücksetzen",
+    "resetConfirm": "Canvas zurücksetzen?",
+    "autosaved": "Automatisch gespeichert",
+    "github": "flompt auf GitHub einen Stern geben (öffnet in neuem Tab)"
+  },
+
+  "accessibility": {
+    "skipToMain": "Zum Hauptinhalt springen",
+    "switchLocale": "Sprache wechseln",
+    "inputPanel": "Eingabebereich",
+    "outputPanel": "Ausgabebereich",
+    "mainTabs": "Hauptregisterkarten"
+  },
+
+  "promptInput": {
+    "title": "Roher Prompt",
+    "placeholder": "Füge deinen Prompt hier ein…",
+    "decompose": "In Blöcke zerlegen",
+    "decomposing": "Zerlege…",
+    "errorDecompose": "Zerlegung fehlgeschlagen. Bitte versuche es erneut.",
+    "paste": "Aus Zwischenablage einfügen",
+    "importFromPlatform": "Prompt von der Seite importieren",
+    "queuePosition": "Warteschlangenposition: {n}",
+    "queueProcessing": "Verarbeite…",
+    "queueAnalyzing": "Analysiere Sicherheit…"
+  },
+
+  "promptOutput": {
+    "title": "Ergebnis",
+    "compile": "Prompt zusammenstellen",
+    "compiling": "Zusammenstellen…",
+    "copy": "Kopieren",
+    "copied": "Kopiert!",
+    "placeholder": "Erstelle dein Flussdiagramm\nund stelle es dann zusammen, um den Prompt zu generieren.",
+    "errorCompile": "Zusammenstellung fehlgeschlagen. Bitte versuche es erneut.",
+    "exportTxt": ".txt",
+    "exportJson": ".json",
+    "exportTxtLabel": "Als .txt-Datei exportieren",
+    "exportJsonLabel": "Als .json-Datei exportieren",
+    "share": "flompt teilen",
+    "shareTitle": "flompt: Visueller KI-Prompt-Builder",
+    "shareText": "Schau dir flompt an! Wandle jeden KI-Prompt in einen visuellen Ablauf um. Kostenlos & Open Source.",
+    "sendToAI": "An KI senden",
+    "injected": "Injiziert!",
+    "injectLabel": "Prompt in KI-Chat-Eingabe senden",
+    "injectedLabel": "Prompt injiziert!"
+  },
+
+  "errors": {
+    "overloaded": "Die KI ist gerade überlastet. Bitte warte einen Moment und versuche es erneut.",
+    "timeout": "Anfrage abgelaufen. Die KI hat zu lange gebraucht, um zu antworten. Versuche es erneut.",
+    "network": "Verbindung unterbrochen. Überprüfe deine Internetverbindung und versuche es erneut.",
+    "server": "Serverfehler. Bitte versuche es in wenigen Sekunden erneut.",
+    "blocked": "Dein Prompt wurde von unserem Sicherheitsfilter markiert. Bitte formuliere ihn um.",
+    "unknown": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+  },
+
+  "sidebar": {
+    "title": "Blöcke",
+    "hint": "Klicken zum Hinzufügen · Auf Canvas ziehen"
+  },
+
+  "block": {
+    "duplicate": "Duplizieren",
+    "expand": "Erweitern",
+    "collapse": "Einklappen",
+    "delete": "Löschen",
+    "chars": "Zeich.",
+    "deleteConnection": "Verbindung löschen"
+  },
+
+  "canvas": {
+    "empty": "Leerer Canvas",
+    "emptyHint": "Füge links einen Prompt ein und klicke auf ",
+    "emptyDecompose": "Zerlegen, oder ziehe einen Block aus der Seitenleiste."
+  },
+
+  "shortcuts": {
+    "title": "Tastaturkürzel",
+    "close": "Drücke Esc oder ? zum Schließen",
+    "list": [
+      { "keys": ["Ctrl", "Z"],       "label": "Rückgängig" },
+      { "keys": ["Ctrl", "Y"],       "label": "Wiederholen" },
+      { "keys": ["Ctrl", "⇧", "Z"], "label": "Wiederholen (alternativ)" },
+      { "keys": ["Del"],             "label": "Ausgewählten Block löschen" },
+      { "keys": ["Ctrl", "A"],       "label": "Alles auswählen" },
+      { "keys": ["Scroll"],          "label": "Rein-/Rauszoomen" },
+      { "keys": ["Drag"],            "label": "Block verschieben" },
+      { "keys": ["Bg drag"],         "label": "Canvas verschieben" },
+      { "keys": ["?"],               "label": "Kürzel anzeigen" }
+    ]
+  },
+
+  "tour": {
+    "step1title": "Dein roher Prompt",
+    "step1desc": "Schreibe oder füge hier einen beliebigen Text ein. Vage oder detailliert, es spielt keine Rolle. flompt strukturiert ihn für dich.",
+    "stepBlocksTitle": "Die Bausteine",
+    "stepBlocksDesc": "Jeder Blocktyp zielt auf einen Teil deines Prompts ab: Rolle, Ziel, Einschränkungen, Ausgabeformat… Klicke, um einen hinzuzufügen, oder ziehe ihn auf den Canvas.",
+    "step2title": "In Blöcke zerlegen",
+    "step2desc": "flompt sendet deinen Prompt an die KI, die ihn in typisierte Blöcke aufteilt: Rolle, Ziel, Einschränkungen und mehr.",
+    "step2action": "Für mich zerlegen",
+    "step3title": "Bearbeite deine Blöcke",
+    "step3desc": "Jeder Block ist ein Aspekt deines Prompts. Bearbeite den Inhalt, ordne durch Ziehen neu an und füge Blöcke aus der Seitenleiste hinzu.",
+    "step4title": "Kompilieren",
+    "step4desc": "Klicke auf Kompilieren, um deinen finalen Prompt zu generieren: strukturiert, optimiert und bereit zum Einfügen in jedes LLM.",
+    "stepOf": "{n} / {total}",
+    "next": "Weiter",
+    "finish": "Verstanden",
+    "skip": "Überspringen",
+    "acting": "Zerlege…",
+    "samplePrompt": "Du bist ein Senior-Python-Entwickler. Überprüfe den folgenden Code auf Fehler, Leistungsprobleme und Stilverstoße. Sei präzise, priorisiere kritische Probleme und erkläre jeden Befund in einem Satz. Antworte mit einer nummerierten Liste."
+  },
+
+  "extension": {
+    "bannerText": "flompt ist jetzt auf Chrome & Firefox verfügbar. Nutze es in ChatGPT, Claude & Gemini.",
+    "bannerCta": "Installieren →",
+    "bannerClose": "Erweiterungsankündigung schließen",
+    "popupTitle": "flompt ist jetzt auf Chrome & Firefox!",
+    "popupDesc": "Nutze flompt direkt in ChatGPT, Claude & Gemini. Verfügbar auf Chrome und Firefox. Kein Tab-Wechsel nötig.",
+    "popupCta": "Erweiterung installieren",
+    "popupCtaFirefox": "Zu Firefox hinzufügen",
+    "popupSkip": "Vielleicht später"
+  },
+
+  "starPopup": {
+    "title": "Gefällt dir flompt?",
+    "desc": "flompt ist kostenlos & Open Source. Wenn es dir nützlich ist, hilft ein ⭐ auf GitHub uns zu wachsen und es am Leben zu erhalten.",
+    "cta": "Auf GitHub einen Stern geben",
+    "skip": "Vielleicht später"
+  },
+
+  "blocks": {
+    "document":         { "label": "Dokument",          "description": "Externer Inhalt, injiziert via XML <document>" },
+    "input":            { "label": "Eingabe",            "description": "Der KI bereitgestellte Daten" },
+    "role":             { "label": "Rolle",              "description": "Definiert die Persona / Rolle der KI" },
+    "audience":         { "label": "Zielgruppe",         "description": "Für wen die Ausgabe geschrieben wird" },
+    "context":          { "label": "Kontext",            "description": "Stellt Kontext für die Aufgabe bereit" },
+    "objective":        { "label": "Ziel",               "description": "Was wir erreichen wollen" },
+    "goal":             { "label": "Endziel",            "description": "Endziel und Erfolgskriterien" },
+    "constraints":      { "label": "Einschränkungen",   "description": "Zu beachtende Regeln und Grenzen" },
+    "examples":         { "label": "Beispiele",          "description": "Few-shot Eingabe/Ausgabe-Paare" },
+    "chain_of_thought": { "label": "Gedankenkette",      "description": "Schritt-für-Schritt-Anweisungen" },
+    "output_format":    { "label": "Ausgabe",            "description": "Erwartetes Format der Antwort" },
+    "response_style":   {
+      "label": "Antwortstil", "description": "Ausführlichkeit, Ton, Prosa, Markdown, LaTeX",
+      "verbosity": "Ausführlichkeit", "concise": "Prägnant", "balanced": "Ausgewogen", "detailed": "Detailliert",
+      "tone": "Ton", "conversational": "Locker", "neutral": "Neutral", "formal": "Formal",
+      "prose": "Format", "flowing": "Prosa", "mixed": "Gemischt", "structured": "Listen",
+      "mdNone": "Keins", "mdMinimal": "Minimal", "mdStandard": "Standard", "mdRich": "Reich",
+      "math": "Mathematik", "mathAuto": "Auto", "mathPlain": "Schlicht",
+      "skipPreamble": "Präambel überspringen"
+    },
+    "language":         { "label": "Sprache",            "description": "Sprache, in der die KI antworten soll" }
+  }
+}
