@@ -14,7 +14,8 @@
 - **Reverse Proxy** : Caddy (auto-TLS Let's Encrypt, port 443)
 - **AI** : Anthropic Claude (pluggable, via httpx) + Groq (Llama Guard 4 prompt safety — currently DISABLED via `PROMPT_GUARD_ENABLED=false` in `backend/.env`)
 - **Analytics** : PostHog (EU region) — autocapture, session replay, heatmaps, error tracking
-- **i18n** : FR/EN via LocaleContext (app) + markdown files (blog)
+- **i18n** : 10 languages (EN FR ES DE PT JA TR ZH AR RU) via LocaleContext + JSON files. Locale priority: URL path (`/app/fr`) → localStorage → default `'en'`
+- **SEO** : Static locale pages generated post-build (`app/scripts/generate-locale-pages.js`). Each `/app/[locale]` serves a dedicated HTML with localized title, description, canonical and hreflang×10
 
 ## Deployment Architecture
 ```
@@ -65,7 +66,7 @@ cd /projects/flompt/backend && .venv/bin/uvicorn app.main:app --host 0.0.0.0 --p
 # Extension
 cd /projects/flompt/extension
 make              # icons + chrome + firefox (both zips)
-make chrome       # dist/flompt-extension.zip (Chrome Web Store)
+make chrome       # dist/flompt-chrome.zip (Chrome Web Store)
 make firefox      # dist/flompt-firefox.zip (Firefox AMO)
 make icons        # regenerate PNG icons from icon.svg
 
@@ -147,7 +148,7 @@ Ordered as assembled (TYPE_PRIORITY in `assemblePrompt.ts`):
 - **Accent glow** : `text-shadow: 0 0 10px var(--accent-glow)`
 - **Theme** : Mermaid-inspired dark (#1c1c1e)
 - **Tagline** : "flow + prompt = flompt"
-- **SEO Language** : English (html lang="en", OG locale en_US)
+- **SEO Language** : English default (html lang="en", OG locale en_US). Locale pages at `/app/[locale]` use the correct lang + hreflang set
 - **Firefox icon** : `FaFirefoxBrowser` from `react-icons/fa6` (app + blog). Landing uses inline SVG extracted from the same package.
 
 ---

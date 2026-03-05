@@ -542,7 +542,7 @@ cd /projects/flompt && ./deploy.sh
 | **Process Manager** | Supervisord + keepalive watchdog |
 | **Blog** | Next.js 15 (static export), Tailwind CSS |
 | **Extension** | Chrome & Firefox MV3 (content script + sidebar) |
-| **i18n** | English & French |
+| **i18n** | 10 languages — EN FR ES DE PT JA TR ZH AR RU |
 
 ---
 
@@ -556,7 +556,7 @@ cd /projects/flompt && ./deploy.sh
 - 🤖 **Claude Code MCP**: Native tool integration via Model Context Protocol
 - 📱 **Responsive**: Full touch support, tap-to-connect
 - 🌙 **Dark theme**: Mermaid-inspired warm dark UI
-- 🌐 **Bilingual**: English & French interface
+- 🌐 **10 languages**: EN, FR, ES, DE, PT, JA, TR, ZH, AR, RU — each with a dedicated indexed page for SEO
 - 💾 **Auto-save**: Local persistence with Zustand
 - ⌨️ **Keyboard shortcuts**: Power-user friendly
 - 📋 **Export**: Copy, download as TXT or JSON
