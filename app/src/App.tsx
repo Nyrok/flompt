@@ -87,7 +87,7 @@ const App = () => {
           <div className="header-actions">
             <KeyboardShortcuts />
             <select
-              className="btn-locale"
+              className="btn-locale hide-mobile"
               value={locale}
               onChange={e => handleLocaleChange(e.target.value as Locale)}
               title={t.accessibility.switchLocale}
@@ -168,6 +168,17 @@ const App = () => {
             </button>
           ))}
         </div>
+        <select
+          className="btn-locale tab-bar-locale"
+          value={locale}
+          onChange={e => handleLocaleChange(e.target.value as Locale)}
+          title={t.accessibility.switchLocale}
+          aria-label={t.accessibility.switchLocale}
+        >
+          {LOCALES.map(l => (
+            <option key={l} value={l}>{LOCALE_LABELS[l]}</option>
+          ))}
+        </select>
       </nav>
     </div>
   )
