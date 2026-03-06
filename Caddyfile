@@ -23,6 +23,7 @@ flompt.dev {
 	# Config Claude Code : { "mcpServers": { "flompt": { "type": "http", "url": "https://flompt.dev/mcp/" } } }
 	# flush_interval -1 = streaming without buffering (required for SSE/streamable HTTP)
 	handle /mcp/* {
+		header X-Robots-Tag "noindex, nofollow"
 		reverse_proxy 127.0.0.1:8000 {
 			flush_interval -1
 		}
