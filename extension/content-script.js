@@ -5,6 +5,9 @@ import integrations from './integrations/index.js'
   if (window.__flomptInjected) return
   window.__flomptInjected = true
 
+  // Cross-browser API compatibility (Chrome / Firefox / Safari)
+  const browser = globalThis.browser ?? globalThis.chrome
+
   // ── Caveat font — bundled locally (platform CSPs block Google Fonts)
   if (!document.getElementById('flompt-caveat-font')) {
     const style = document.createElement('style')
@@ -14,7 +17,7 @@ import integrations from './integrations/index.js'
       font-style: normal;
       font-weight: 700;
       font-display: block;
-      src: url('${chrome.runtime.getURL('fonts/caveat-bold.woff2')}') format('woff2');
+      src: url('${browser.runtime.getURL('fonts/caveat-bold.woff2')}') format('woff2');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }`
     document.head.appendChild(style)
@@ -251,7 +254,7 @@ import integrations from './integrations/index.js'
     splashInner.id = 'flompt-splash-inner'
     const splashImg = document.createElement('img')
     splashImg.id = 'flompt-splash-icon'
-    splashImg.src = chrome.runtime.getURL('icons/icon.svg')
+    splashImg.src = browser.runtime.getURL('icons/icon.svg')
     splashImg.width = 72
     splashImg.height = 72
     splashImg.alt = ''
@@ -625,7 +628,7 @@ import integrations from './integrations/index.js'
   })
 
   // ── Message from the service worker (toolbar icon click) ─────────────────
-  chrome.runtime.onMessage.addListener((msg) => {
+  browser.runtime.onMessage.addListener((msg) => {
     if (msg.type === 'FLOMPT_TOGGLE') toggleSidebar()
   })
 

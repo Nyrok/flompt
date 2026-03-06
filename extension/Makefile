@@ -7,6 +7,7 @@ DIST_DIR      := $(EXTENSION_DIR)/dist
 
 ZIP_CHROME  := flompt-chrome.zip
 ZIP_FIREFOX := flompt-firefox.zip
+ZIP_SAFARI  := flompt-safari.zip
 
 # Shared files (manifest added separately per target)
 # To add a new integration: add its file to SHARED_FILES (and update manifests).
@@ -25,7 +26,7 @@ SHARED_FILES := background.js \
                 icons/logo.svg \
                 fonts/caveat-bold.woff2
 
-.PHONY: all icons pack chrome firefox clean help
+.PHONY: all icons pack chrome firefox safari clean help
 
 all: icons pack firefox
 
@@ -67,6 +68,25 @@ zf.close(); \
 size = os.path.getsize(out); \
 print(f'✅ Firefox → dist/$(ZIP_FIREFOX)  ({size/1024:.1f} KB)')"
 
+## safari — Create a zip for Safari (then convert with xcrun on macOS)
+safari:
+	@echo "📦 Packaging Safari…"
+	@mkdir -p $(DIST_DIR)
+	@python3 -c "\
+import zipfile, os; \
+files = ['manifest.safari.json'] + '$(SHARED_FILES)'.split(); \
+out = '$(DIST_DIR)/$(ZIP_SAFARI)'; \
+zf = zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED); \
+zf.write('manifest.safari.json', 'manifest.json'); \
+[zf.write(f) for f in files[1:] if os.path.exists(f)]; \
+zf.close(); \
+size = os.path.getsize(out); \
+print(f'✅ Safari  → dist/$(ZIP_SAFARI)  ({size/1024:.1f} KB)')"
+	@echo ""
+	@echo "  Next step (macOS only):"
+	@echo "  xcrun safari-web-extension-converter dist/$(ZIP_SAFARI) \\"
+	@echo "    --project-location ~/Desktop --app-name flompt --no-open"
+
 ## clean — Delete the dist/ directory
 clean:
 	@echo "🧹 Cleaning…"
@@ -79,6 +99,7 @@ help:
 	@echo "  make               icons + chrome + firefox (both)"
 	@echo "  make chrome        Create dist/$(ZIP_CHROME)  (Chrome Web Store)"
 	@echo "  make firefox       Create dist/$(ZIP_FIREFOX) (Firefox AMO)"
+	@echo "  make safari        Create dist/$(ZIP_SAFARI)  (Safari — xcrun on macOS)"
 	@echo "  make icons         Generate PNG icons from icons/icon.svg"
 	@echo "  make clean         Delete dist/"
 	@echo ""
