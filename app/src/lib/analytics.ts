@@ -40,6 +40,18 @@ export const initAnalytics = () => {
     // Exception autocapture — track JS errors in PostHog
     capture_exceptions: true,
 
+    // Drop "Script error." events — caused by cross-origin scripts (e.g. ChatGPT,
+    // Claude, Gemini) throwing errors that the browser masks for security reasons.
+    // These have no stack trace and no actionable info, so they're pure noise.
+    before_send: (event) => {
+      if (event?.event === '$exception') {
+        const list = event?.properties?.['$exception_list'] as Array<{ value?: string }> | undefined
+        const isScriptError = list?.every(e => !e.value || e.value === 'Script error.')
+        if (isScriptError) return null
+      }
+      return event
+    },
+
     loaded: (ph) => {
       if (import.meta.env.DEV as boolean) {
         ph.opt_out_capturing()
