@@ -464,7 +464,14 @@ import integrations from './integrations/index.js'
   }
 
   function tryInsertInToolbar () {
-    if (toggleBtn.isConnected) return true
+    // Already in toolbar (not floating) — nothing to do
+    if (toggleBtn.isConnected && !toggleBtn.classList.contains('flompt-floating')) return true
+
+    function commitInsert () {
+      toggleBtn.classList.remove('flompt-floating')
+      platform?.onButtonMounted?.(toggleBtn)
+      return true
+    }
 
     // ── Integration-specific target (getToolbarTarget) ────────────────────
     const target = platform?.getToolbarTarget?.()
@@ -477,8 +484,7 @@ import integrations from './integrations/index.js'
       } else { // 'prepend' (default)
         el.insertBefore(toggleBtn, el.firstElementChild)
       }
-      platform?.onButtonMounted?.(toggleBtn)
-      return true
+      return commitInsert()
     }
 
     // ── Attempt 1: tools area ─────────────────────────────────────────────
@@ -492,8 +498,7 @@ import integrations from './integrations/index.js'
       if (container) {
         // Insert just after the first tool button — integrated in the tools area
         container.insertBefore(toggleBtn, firstTool.nextSibling)
-        platform?.onButtonMounted?.(toggleBtn)
-        return true
+        return commitInsert()
       }
     }
 
@@ -508,8 +513,7 @@ import integrations from './integrations/index.js'
     if (!container) return false
 
     container.insertBefore(toggleBtn, sendBtn)
-    platform?.onButtonMounted?.(toggleBtn)
-    return true
+    return commitInsert()
   }
 
   // Retry with single timer (no race condition)
@@ -524,16 +528,14 @@ import integrations from './integrations/index.js'
   function mountToggleBtn () {
     if (tryInsertInToolbar()) return
 
-    if (++mountAttempts >= 20) {
-      // Definitive fallback: floating button bottom-right
-      if (!toggleBtn.isConnected) {
-        toggleBtn.classList.add('flompt-floating')
-        document.body.appendChild(toggleBtn)
-      }
-      return
+    // First failure → show floating immediately so the button is always visible
+    if (!toggleBtn.isConnected) {
+      toggleBtn.classList.add('flompt-floating')
+      document.body.appendChild(toggleBtn)
     }
 
-    scheduleMount(500)
+    // Keep retrying to upgrade from floating to toolbar (up to 20 attempts)
+    if (++mountAttempts < 20) scheduleMount(500)
   }
 
   // Immediate launch

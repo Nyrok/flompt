@@ -20,7 +20,9 @@ export default {
     return (
       document.querySelector('#prompt-textarea[contenteditable]') ||
       document.querySelector('#prompt-textarea') ||
-      document.querySelector('div[contenteditable="true"][data-virtualized="false"]')
+      document.querySelector('div[contenteditable="true"][data-virtualized="false"]') ||
+      document.querySelector('div[contenteditable="true"][id*="prompt"]') ||
+      [...document.querySelectorAll('div[contenteditable="true"]')].at(-1)
     )
   },
 
@@ -28,16 +30,21 @@ export default {
     return (
       document.querySelector('button[data-testid="send-button"]') ||
       document.querySelector('button[aria-label="Send prompt"]') ||
-      document.querySelector('button[aria-label="Send message"]')
+      document.querySelector('button[aria-label="Send message"]') ||
+      document.querySelector('button[aria-label*="Send"]') ||
+      document.querySelector('button[type="submit"]')
     )
   },
 
   getToolbarTarget () {
-    // Target: span inside the [grid-area:leading] div in the composer form
-    // CSS: #thread-bottom form > div:nth-child(2) > div > div.[grid-area:leading] > span
-    const el = document.querySelector(
-      '#thread-bottom form div[class*="[grid-area:leading]"] > span'
-    )
+    // Target: leading actions area next to the composer input — try multiple selectors
+    // as ChatGPT frequently updates its Tailwind CSS-in-JS class names
+    const el =
+      document.querySelector('#thread-bottom form div[class*="[grid-area:leading]"] > span') ||
+      document.querySelector('form div[class*="[grid-area:leading]"] > span')                ||
+      document.querySelector('form div[class*="leading"] > span[class]')                     ||
+      document.querySelector('#thread-bottom form > div > div > span')                       ||
+      null
     return el ? { el, position: 'append' } : null
   },
 }
