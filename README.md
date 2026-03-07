@@ -21,14 +21,14 @@
 </p>
 
 <p align="center">
-  <a href="https://glama.ai/mcp/servers/Nyrok/flompt">
-    <img width="380" height="200" src="https://glama.ai/mcp/servers/Nyrok/flompt/badge" alt="Glama MCP" />
-  </a>
+  <a href="https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc"><img src="https://img.shields.io/badge/Chrome_Web_Store-Add_to_Chrome-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Chrome Web Store" /></a>
+  <a href="https://addons.mozilla.org/addon/flompt-visual-prompt-builder/"><img src="https://img.shields.io/badge/Firefox_Add--ons-Add_to_Firefox-FF6611?style=for-the-badge&logo=firefox&logoColor=white" alt="Firefox Add-ons" /></a>
 </p>
 
 <p align="center">
-  <a href="https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc"><img src="https://img.shields.io/badge/Chrome_Web_Store-Add_to_Chrome-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Chrome Web Store" /></a>
-  <a href="https://addons.mozilla.org/addon/flompt-visual-prompt-builder/"><img src="https://img.shields.io/badge/Firefox_Add--ons-Add_to_Firefox-FF6611?style=for-the-badge&logo=firefox&logoColor=white" alt="Firefox Add-ons" /></a>
+  <a href="https://glama.ai/mcp/servers/Nyrok/flompt">
+    <img width="380" height="200" src="https://glama.ai/mcp/servers/Nyrok/flompt/badge" alt="Glama MCP" />
+  </a>
 </p>
 
 <p align="center">
