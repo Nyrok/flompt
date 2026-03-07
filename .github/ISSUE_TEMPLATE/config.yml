@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🌐 Try flompt live
+    url: https://flompt.dev
+    about: Test flompt directly in your browser — no account needed.
+  - name: 📖 Documentation
+    url: https://flompt.dev/docs
+    about: Read the docs before opening an issue.

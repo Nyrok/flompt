@@ -1,0 +1,57 @@
+name: ✨ Feature Request
+description: Suggest a new feature or improvement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea? We'd love to hear it. Please be as specific as possible.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the pain point or use case this feature addresses.
+      placeholder: "Right now, when I try to do X, I have to do Y which is tedious because..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe what you'd like to see implemented.
+      placeholder: "It would be great if flompt could..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of flompt does this affect?
+      options:
+        - Visual editor (canvas / blocks)
+        - AI decomposition
+        - Prompt compilation / XML output
+        - Browser extension
+        - Claude Code MCP integration
+        - Block types (add/modify a block)
+        - i18n / translations
+        - Self-hosting / deployment
+        - Performance
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Have you thought of other ways to solve this? Why do you prefer your proposed approach?
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Mockups, references, examples from other tools — anything that helps illustrate the idea.

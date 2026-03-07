@@ -13,6 +13,8 @@
   <a href="https://flompt.dev"><img src="https://img.shields.io/badge/🌐_Live-flompt.dev-FF3570?style=for-the-badge" alt="Live Demo" /></a>
   <a href="https://github.com/Nyrok/flompt/stargazers"><img src="https://img.shields.io/github/stars/Nyrok/flompt?style=for-the-badge&color=FFFF00" alt="Stars" /></a>
   <a href="https://github.com/Nyrok/flompt/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Nyrok/flompt?style=for-the-badge" alt="License" /></a>
+  <a href="https://github.com/Nyrok/flompt/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Nyrok/flompt/ci.yml?branch=master&style=for-the-badge&label=CI" alt="CI" /></a>
+  <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen?style=for-the-badge" alt="Contributions welcome" /></a>
 </p>
 
 <p align="center">
@@ -27,6 +29,16 @@
   <a href="https://github.com/Nyrok/flompt"><img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" /></a>
   <a href="https://github.com/Nyrok/flompt"><img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite" /></a>
 </p>
+
+---
+
+## 🎥 Demo
+
+**[→ Try it live at flompt.dev](https://flompt.dev)** — no account, no install needed.
+
+> Paste any prompt → AI decomposes it into blocks → drag & reorder → get a Claude-optimized XML prompt.
+
+![flompt demo](https://flompt.dev/app/og-image.png)
 
 ---
 
@@ -564,12 +576,28 @@ cd /projects/flompt && ./deploy.sh
 
 ---
 
+## 🤝 Contributing
+
+Contributions are welcome — bug reports, features, translations, and docs!
+
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md) to get started. The full changelog is in [`CHANGELOG.md`](CHANGELOG.md).
+
+---
+
 ## 📄 License
 
 [MIT](LICENSE) — Built by [Nyrok](https://github.com/Nyrok)
 
 ---
 
+<!-- GitHub Topics (set in repo Settings > About):
+     prompt-engineering, ai-tools, visual-editor, react-flow, claude-ai,
+     fastapi, browser-extension, mcp, typescript, open-source
+-->
+
 <p align="center">
-  <strong>⭐ Star this repo if flompt helps you write better prompts!</strong>
+  If flompt saves you time, a ⭐ on GitHub goes a long way — thank you!<br/>
+  <a href="https://github.com/Nyrok/flompt/stargazers">
+    <img src="https://img.shields.io/github/stars/Nyrok/flompt?style=social" alt="GitHub Stars" />
+  </a>
 </p>
