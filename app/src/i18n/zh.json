@@ -30,7 +30,7 @@
     "paste": "从剪贴板粘贴",
     "importFromPlatform": "从页面导入提示词",
     "queuePosition": "队列位置：{n}",
-    "queueProcessing": "处理中…",
+    "queueProcessing": "处理中…"
   },
 
   "promptOutput": {

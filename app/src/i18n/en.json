@@ -30,7 +30,7 @@
     "paste": "Paste from clipboard",
     "importFromPlatform": "Import prompt from page",
     "queuePosition": "Queue position: {n}",
-    "queueProcessing": "Processing…",
+    "queueProcessing": "Processing…"
   },
 
   "promptOutput": {

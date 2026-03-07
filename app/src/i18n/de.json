@@ -30,7 +30,7 @@
     "paste": "Aus Zwischenablage einfügen",
     "importFromPlatform": "Prompt von der Seite importieren",
     "queuePosition": "Warteschlangenposition: {n}",
-    "queueProcessing": "Verarbeite…",
+    "queueProcessing": "Verarbeite…"
   },
 
   "promptOutput": {

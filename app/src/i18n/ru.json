@@ -30,7 +30,7 @@
     "paste": "Вставить из буфера обмена",
     "importFromPlatform": "Импортировать промпт со страницы",
     "queuePosition": "Позиция в очереди: {n}",
-    "queueProcessing": "Обрабатывается…",
+    "queueProcessing": "Обрабатывается…"
   },
 
   "promptOutput": {

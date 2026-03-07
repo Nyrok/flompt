@@ -30,7 +30,7 @@
     "paste": "Pegar del portapapeles",
     "importFromPlatform": "Importar prompt desde la página",
     "queuePosition": "Posición en cola: {n}",
-    "queueProcessing": "Procesando…",
+    "queueProcessing": "Procesando…"
   },
 
   "promptOutput": {

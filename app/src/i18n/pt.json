@@ -30,7 +30,7 @@
     "paste": "Colar da área de transferência",
     "importFromPlatform": "Importar prompt da página",
     "queuePosition": "Posição na fila: {n}",
-    "queueProcessing": "Processando…",
+    "queueProcessing": "Processando…"
   },
 
   "promptOutput": {
