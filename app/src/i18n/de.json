@@ -60,7 +60,6 @@
     "timeout": "Anfrage abgelaufen. Die KI hat zu lange gebraucht, um zu antworten. Versuche es erneut.",
     "network": "Verbindung unterbrochen. Überprüfe deine Internetverbindung und versuche es erneut.",
     "server": "Serverfehler. Bitte versuche es in wenigen Sekunden erneut.",
-    "blocked": "Dein Prompt wurde von unserem Sicherheitsfilter markiert. Bitte formuliere ihn um.",
     "unknown": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
   },
 

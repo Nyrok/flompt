@@ -91,7 +91,6 @@ export interface Translations {
     timeout: string
     network: string
     server: string
-    blocked: string
     unknown: string
   }
   sidebar: {

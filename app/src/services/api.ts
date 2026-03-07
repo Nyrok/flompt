@@ -8,7 +8,7 @@ const client = axios.create({
 
 // ─── Error classification ────────────────────────────────────────────────────
 
-export type ApiErrorType = 'overloaded' | 'timeout' | 'network' | 'server' | 'blocked' | 'unknown'
+export type ApiErrorType = 'overloaded' | 'timeout' | 'network' | 'server' | 'unknown'
 
 export function classifyError(e: unknown): ApiErrorType {
   if (e instanceof AxiosError) {
@@ -26,7 +26,6 @@ export function classifyError(e: unknown): ApiErrorType {
 /** Classifies a backend error returned via the job store (string). */
 export function classifyJobError(errorMsg: string): ApiErrorType {
   const msg = errorMsg.toLowerCase()
-  if (msg === 'prompt_blocked') return 'blocked'
   if (msg.includes('529') || msg.includes('overloaded')) return 'overloaded'
   if (msg.includes('timeout') || msg.includes('timed out')) return 'timeout'
   if (msg.includes('network') || msg.includes('connection')) return 'network'
@@ -53,11 +52,10 @@ export interface DecomposeJobStarted {
 /** Response from WS /api/ws/job/{job_id} during streaming. */
 export interface JobPollResponse {
   job_id: string
-  status: 'analyzing' | 'queued' | 'processing' | 'done' | 'error' | 'blocked' | 'unknown'
+  status: 'analyzing' | 'queued' | 'processing' | 'done' | 'error' | 'unknown'
   position?: number | null
   result?: DecomposeResponse   // present when status === 'done'
-  error?: string               // present when status === 'error' | 'blocked'
-  violations?: string[]        // human-readable names of violated categories (status === 'blocked')
+  error?: string               // present when status === 'error'
 }
 
 /** Submits the job — returns immediately with job_id, token, and estimated position. */
@@ -68,7 +66,7 @@ export const decomposePrompt = async (rawPrompt: string, jobId: string): Promise
 
 /**
  * Opens a WebSocket connection to /api/ws/job/{jobId}?token=... and resolves
- * the promise as soon as the job is finished (done/error/blocked).
+ * the promise as soon as the job is finished (done/error).
  * Pushes status updates via the `onStatus` callback.
  */
 export function watchJobStatus(
@@ -103,14 +101,6 @@ export function watchJobStatus(
           ws.close()
           const err = new Error(data.error ?? 'Job failed')
           ;(err as Error & { jobError?: string }).jobError = data.error ?? ''
-          reject(err)
-        })
-      } else if (data.status === 'blocked') {
-        settle(() => {
-          ws.close()
-          const err = new Error('PROMPT_BLOCKED')
-          ;(err as Error & { jobError?: string; violations?: string[] }).jobError = 'PROMPT_BLOCKED'
-          ;(err as Error & { jobError?: string; violations?: string[] }).violations = data.violations ?? []
           reject(err)
         })
       } else if (data.status === 'analyzing') {

@@ -60,7 +60,6 @@
     "timeout": "İstek zaman aşımına uğradı. AI yanıt vermek için çok uzun sürdü. Tekrar deneyin.",
     "network": "Bağlantı kesildi. İnternet bağlantınızı kontrol edip tekrar deneyin.",
     "server": "Sunucu hatası. Lütfen birkaç saniye sonra tekrar deneyin.",
-    "blocked": "Promptunuz güvenlik filtremiz tarafından işaretlendi. Lütfen yeniden ifade edin.",
     "unknown": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin."
   },
 

@@ -60,7 +60,6 @@
     "timeout": "La solicitud ha expirado. La IA tardó demasiado en responder. Inténtalo de nuevo.",
     "network": "Conexión perdida. Comprueba tu conexión a internet e inténtalo de nuevo.",
     "server": "Error del servidor. Por favor, inténtalo de nuevo en unos segundos.",
-    "blocked": "Tu prompt fue marcado por nuestro filtro de seguridad. Por favor, reformúlalo.",
     "unknown": "Algo ha ido mal. Por favor, inténtalo de nuevo."
   },
 

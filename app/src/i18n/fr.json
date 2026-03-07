@@ -60,7 +60,6 @@
     "timeout": "Délai dépassé. L'IA a mis trop de temps. Réessayez.",
     "network": "Connexion perdue. Vérifiez votre internet et réessayez.",
     "server": "Erreur serveur. Réessayez dans quelques secondes.",
-    "blocked": "Ton prompt a été bloqué par notre filtre de sécurité. Reformule-le.",
     "unknown": "Une erreur est survenue. Réessayez."
   },
 

@@ -92,23 +92,14 @@ const PromptInput = () => {
     } catch (e) {
       setActiveTab('input')
 
-      // Special case: prompt blocked by Llama Guard 4 with violation categories
-      type BlockedErr = Error & { jobError?: string; violations?: string[] }
-      const jobErr = (e as BlockedErr)?.jobError
-
-      if (jobErr === 'PROMPT_BLOCKED') {
-        const violations: string[] = (e as BlockedErr).violations ?? []
-        const detail = violations.length > 0 ? ` — ${violations.join(', ')}` : ''
-        setError(`${t.errors.blocked}${detail}`)
-        analytics.error('decompose', 'blocked')
-      } else {
-        // Generic job store error vs network error (AxiosError)
-        const errType = jobErr !== undefined
-          ? classifyJobError(jobErr)
-          : classifyError(e)
-        setError(t.errors[errType])
-        analytics.error('decompose', errType)
-      }
+      // Generic job store error vs network error (AxiosError)
+      type JobErr = Error & { jobError?: string }
+      const jobErr = (e as JobErr)?.jobError
+      const errType = jobErr !== undefined
+        ? classifyJobError(jobErr)
+        : classifyError(e)
+      setError(t.errors[errType])
+      analytics.error('decompose', errType)
 
       console.error(e)
     } finally {

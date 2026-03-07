@@ -60,7 +60,6 @@
     "timeout": "Request timed out. The AI took too long to respond. Try again.",
     "network": "Connection lost. Check your internet and try again.",
     "server": "Server error. Please try again in a few seconds.",
-    "blocked": "Your prompt was flagged by our security filter. Please rephrase it.",
     "unknown": "Something went wrong. Please try again."
   },
 
