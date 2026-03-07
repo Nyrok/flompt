@@ -6,7 +6,7 @@ after the worker has finished. Auto-TTL to avoid memory leaks.
 """
 
 import time
-from typing import Any
+from typing import Any, Optional
 
 
 class JobStore:

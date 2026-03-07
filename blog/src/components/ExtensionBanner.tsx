@@ -20,6 +20,7 @@ export default function ExtensionBanner({ locale }: { locale: Locale }) {
   useEffect(() => {
     if (window.matchMedia('(max-width: 768px)').matches) return;
     try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (!localStorage.getItem(BANNER_KEY)) setVisible(true);
     } catch { /* noop */ }
   }, []);

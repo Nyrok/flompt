@@ -1,0 +1,4 @@
+[lint]
+# E402: load_dotenv() must run before other imports — this is intentional in main.py
+[lint.per-file-ignores]
+"app/main.py" = ["E402"]

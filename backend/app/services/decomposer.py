@@ -5,7 +5,6 @@ Analyzes a raw prompt and returns a list of FlomptNodes + FlomptEdges.
 Uses the AI service if available, otherwise falls back to heuristic decomposition.
 """
 
-import re
 import uuid
 import json
 from app.models.blocks import (
