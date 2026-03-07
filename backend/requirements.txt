@@ -9,7 +9,3 @@ httpx==0.27.0
 # anthropic==0.34.0
 # openai==1.45.0
 
-# Prompt Guard — meta-llama/Llama-Guard-4-12B via HuggingFace Inference API
-# No local ML dependencies — HTTP call via httpx (already in deps).
-# Requires HUGGINGFACE_TOKEN in .env (Meta license accepted on hf.co).
-# If token is absent or API is unreachable, the guard disables itself automatically (fail-open).
