@@ -13,6 +13,9 @@
   <a href="https://flompt.dev"><img src="https://img.shields.io/badge/🌐_Live-flompt.dev-FF3570?style=for-the-badge" alt="Live Demo" /></a>
   <a href="https://github.com/Nyrok/flompt/stargazers"><img src="https://img.shields.io/github/stars/Nyrok/flompt?style=for-the-badge&color=FFFF00" alt="Stars" /></a>
   <a href="https://github.com/Nyrok/flompt/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Nyrok/flompt?style=for-the-badge" alt="License" /></a>
+</p>
+
+<p align="center">
   <a href="https://github.com/Nyrok/flompt/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Nyrok/flompt/ci.yml?branch=master&style=for-the-badge&label=CI" alt="CI" /></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen?style=for-the-badge" alt="Contributions welcome" /></a>
 </p>
