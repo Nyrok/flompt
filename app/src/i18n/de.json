@@ -31,7 +31,6 @@
     "importFromPlatform": "Prompt von der Seite importieren",
     "queuePosition": "Warteschlangenposition: {n}",
     "queueProcessing": "Verarbeite…",
-    "queueAnalyzing": "Analysiere Sicherheit…"
   },
 
   "promptOutput": {

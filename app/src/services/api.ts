@@ -44,7 +44,7 @@ export interface DecomposeResponse {
 /** Immediate response from POST /api/decompose. */
 export interface DecomposeJobStarted {
   job_id: string
-  status: 'analyzing' | 'queued'
+  status: 'queued'
   position?: number
   token: string
 }
@@ -52,7 +52,7 @@ export interface DecomposeJobStarted {
 /** Response from WS /api/ws/job/{job_id} during streaming. */
 export interface JobPollResponse {
   job_id: string
-  status: 'analyzing' | 'queued' | 'processing' | 'done' | 'error' | 'unknown'
+  status: 'queued' | 'processing' | 'done' | 'error' | 'unknown'
   position?: number | null
   result?: DecomposeResponse   // present when status === 'done'
   error?: string               // present when status === 'error'
@@ -72,7 +72,7 @@ export const decomposePrompt = async (rawPrompt: string, jobId: string): Promise
 export function watchJobStatus(
   jobId: string,
   token: string,
-  onStatus: (pos: number, status: 'analyzing' | 'queued' | 'processing') => void,
+  onStatus: (pos: number, status: 'queued' | 'processing') => void,
 ): Promise<DecomposeResponse> {
   return new Promise((resolve, reject) => {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
@@ -103,8 +103,6 @@ export function watchJobStatus(
           ;(err as Error & { jobError?: string }).jobError = data.error ?? ''
           reject(err)
         })
-      } else if (data.status === 'analyzing') {
-        onStatus(0, 'analyzing')
       } else if (data.status === 'queued') {
         onStatus(data.position ?? 1, 'queued')
       } else if (data.status === 'processing') {

@@ -31,7 +31,6 @@
     "importFromPlatform": "从页面导入提示词",
     "queuePosition": "队列位置：{n}",
     "queueProcessing": "处理中…",
-    "queueAnalyzing": "安全分析中…"
   },
 
   "promptOutput": {

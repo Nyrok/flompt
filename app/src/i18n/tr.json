@@ -31,7 +31,6 @@
     "importFromPlatform": "Sayfadan prompt içe aktar",
     "queuePosition": "Sıra pozisyonu: {n}",
     "queueProcessing": "İşleniyor…",
-    "queueAnalyzing": "Güvenlik analiz ediliyor…"
   },
 
   "promptOutput": {

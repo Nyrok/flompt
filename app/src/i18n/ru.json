@@ -31,7 +31,6 @@
     "importFromPlatform": "Импортировать промпт со страницы",
     "queuePosition": "Позиция в очереди: {n}",
     "queueProcessing": "Обрабатывается…",
-    "queueAnalyzing": "Анализирую безопасность…"
   },
 
   "promptOutput": {

@@ -31,7 +31,6 @@
     "importFromPlatform": "استيراد الطلب من الصفحة",
     "queuePosition": "موضع في قائمة الانتظار: {n}",
     "queueProcessing": "جارٍ المعالجة…",
-    "queueAnalyzing": "جارٍ تحليل الأمان…"
   },
 
   "promptOutput": {

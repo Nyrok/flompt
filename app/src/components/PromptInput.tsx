@@ -70,11 +70,11 @@ const PromptInput = () => {
     setTimeout(() => setActiveTab('canvas'), 0)
 
     try {
-      // ── 1. Submit the job — returns immediately (initial status: "analyzing") ──
-      const { status: initStatus, position, token } = await decomposePrompt(prompt, jobId)
+      // ── 1. Submit the job — returns immediately ───────────────────────────
+      const { position, token } = await decomposePrompt(prompt, jobId)
       setQueueStatus({
         position: position ?? 0,
-        status: initStatus === 'analyzing' ? 'analyzing' : 'queued',
+        status: 'queued',
       })
 
       // ── 2. Wait for the result via WebSocket ──────────────────────────────

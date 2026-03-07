@@ -64,7 +64,6 @@ export interface Translations {
     importFromPlatform: string
     queuePosition: (n: number) => string
     queueProcessing: string
-    queueAnalyzing: string
   }
   promptOutput: {
     title: string

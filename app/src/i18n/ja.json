@@ -31,7 +31,6 @@
     "importFromPlatform": "ページからプロンプトをインポート",
     "queuePosition": "キュー位置: {n}",
     "queueProcessing": "処理中…",
-    "queueAnalyzing": "セキュリティ解析中…"
   },
 
   "promptOutput": {

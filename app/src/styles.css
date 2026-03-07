@@ -286,11 +286,6 @@ body {
   border-color: rgba(34, 197, 94, 0.25);
   color: #86efac;
 }
-.queue-status--analyzing {
-  background: rgba(99, 102, 241, 0.08);
-  border-color: rgba(99, 102, 241, 0.3);
-  color: #a5b4fc;
-}
 .queue-status__dot {
   width: 6px;
   height: 6px;

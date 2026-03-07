@@ -31,7 +31,6 @@
     "importFromPlatform": "Importar prompt desde la página",
     "queuePosition": "Posición en cola: {n}",
     "queueProcessing": "Procesando…",
-    "queueAnalyzing": "Analizando seguridad…"
   },
 
   "promptOutput": {
