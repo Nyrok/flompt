@@ -171,7 +171,7 @@ const CanvasInner = () => {
           {queueStatus && (
             <div className={`queue-status${queueStatus.status === 'processing' ? ' queue-status--processing' : ''}`}>
               <span className="queue-status__dot" aria-hidden="true" />
-              {queueStatus.status === 'processing'
+              {queueStatus.status === 'processing' || queueStatus.position === 0
                 ? t.promptInput.queueProcessing
                 : t.promptInput.queuePosition(queueStatus.position)
               }
