@@ -195,11 +195,14 @@ Ordered as assembled (TYPE_PRIORITY in `assemblePrompt.ts`):
 - For images in `app/public/`, use `git add -f`
 - Never commit the `caddy` binary (50MB)
 - Never commit `.env`, `credentials.json`
+- **NEVER add a Co-Authored-By line** in commit messages — commits are signed by Noryk only
 
 ### 8. After each change
-1. Build the app/blog depending on what changed
-2. Check routes via curl (landing, app, blog, health)
-3. Never say "done" without having verified
+1. **Always commit & push** after any file modification — no exception
+2. **Always redeploy** after each commit (`bash /projects/flompt/deploy.sh`)
+3. Build the app/blog depending on what changed
+4. Check routes via curl (landing, app, blog, health)
+5. Never say "done" without having verified
 
 ### 9. Coherence across surfaces
 - Block types exist in: `app/src/types/blocks.ts`, `assemblePrompt.ts`, `en.json`, `fr.json`, `backend/models/blocks.py`, `compiler.py`, `decomposer.py`, `ai_service.py`, `landing/index.html`, `docs/block-types.md`, `docs/claude-code.md`, `docs/how-it-works.md`, blog posts (EN + FR)
