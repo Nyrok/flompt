@@ -42,17 +42,20 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
   // Collapsed by default if block has an AI-generated summary
   const [collapsed, setCollapsed] = useState(!!data.summary)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+  // Cursor position saved in onChange (before React re-render resets it)
+  const cursorPosRef = useRef<{ start: number; end: number } | null>(null)
 
   // Auto-resize textarea — useLayoutEffect prevents cursor jump
   useLayoutEffect(() => {
     const el = textareaRef.current
     if (!el || collapsed) return
-    const start = el.selectionStart
-    const end = el.selectionEnd
     el.style.height = 'auto'
     el.style.height = `${el.scrollHeight}px`
-    // Restore cursor position after height change
-    try { el.setSelectionRange(start, end) } catch {}
+    // Restore cursor position captured before the re-render
+    if (cursorPosRef.current !== null) {
+      try { el.setSelectionRange(cursorPosRef.current.start, cursorPosRef.current.end) } catch {}
+      cursorPosRef.current = null
+    }
   }, [data.content, collapsed])
 
   const handleDuplicate = () => {
@@ -366,7 +369,10 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             dir="auto"
             value={data.content}
             placeholder={tr.description}
-            onChange={(e) => updateNodeContent(id, e.target.value)}
+            onChange={(e) => {
+              cursorPosRef.current = { start: e.target.selectionStart ?? 0, end: e.target.selectionEnd ?? 0 }
+              updateNodeContent(id, e.target.value)
+            }}
             style={{ minHeight: '64px', height: 'auto' }}
             aria-label={displayLabel}
           />
