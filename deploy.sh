@@ -54,11 +54,9 @@ if [ "$RESTART" = true ]; then
   ok "Backend started on :8000"
 
   log "Reloading Caddy..."
-  if $CADDY list-modules > /dev/null 2>&1; then
+  if curl -s --max-time 2 http://localhost:2019/config/ > /dev/null 2>&1; then
     $CADDY reload --config "$CADDYFILE" 2>&1 | tail -1
   else
-    $CADDY stop 2>/dev/null || true
-    sleep 1
     $CADDY start --config "$CADDYFILE" 2>&1 | tail -1
   fi
   ok "Caddy running"
