@@ -16,6 +16,12 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/Nyrok/flompt/stargazers">
+    <img src="https://flompt.dev/stars-svg" alt="Star goal progress" />
+  </a>
+</p>
+
+<p align="center">
   <a href="https://github.com/Nyrok/flompt/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Nyrok/flompt/ci.yml?branch=master&style=for-the-badge&label=CI" alt="CI" /></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen?style=for-the-badge" alt="Contributions welcome" /></a>
 </p>
@@ -608,8 +614,5 @@ Read [`CONTRIBUTING.md`](CONTRIBUTING.md) to get started. The full changelog is 
   If flompt saves you time, a ⭐ on GitHub goes a long way — thank you!<br/>
   <a href="https://github.com/Nyrok/flompt/stargazers">
     <img src="https://img.shields.io/github/stars/Nyrok/flompt?style=social" alt="GitHub Stars" />
-  </a><br/><br/>
-  <a href="https://github.com/Nyrok/flompt/stargazers">
-    <img src="https://flompt.dev/stars-svg" alt="Star goal progress" />
   </a>
 </p>
