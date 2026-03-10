@@ -60,7 +60,7 @@ function overlaps(
 export function layoutNodes(
   nodes: FlomptNode[],
   canvasWidth  = 900,
-  canvasHeight = 700,
+  _canvasHeight = 700,
 ): FlomptNode[] {
   const sorted = [...nodes].sort(
     (a, b) => (TYPE_PRIORITY[a.data.type] ?? 99) - (TYPE_PRIORITY[b.data.type] ?? 99)
