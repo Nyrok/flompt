@@ -3,6 +3,7 @@ import { Zap, ClipboardPaste, Download } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { decomposePrompt, watchJobStatus, classifyError, classifyJobError } from '@/services/api'
 import { useLocale } from '@/i18n/LocaleContext'
+import { layoutNodes } from '@/lib/layoutNodes'
 import { analytics, setSource } from '@/lib/analytics'
 import { isExtension } from '@/lib/platform'
 import { STAR_EVENT } from '@/components/StarPopup'
@@ -83,8 +84,8 @@ const PromptInput = () => {
       })
 
       // ── 3. Apply the result ───────────────────────────────────────────────
-      setNodes(result.nodes)
-      setEdges(result.edges)
+      setNodes(layoutNodes(result.nodes))
+      setEdges([])
       setLastDecomposedPrompt(prompt)
       analytics.decomposeCompleted(result.nodes.length)
       window.dispatchEvent(new CustomEvent(STAR_EVENT))

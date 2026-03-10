@@ -47,7 +47,8 @@ HEURISTIC_KEYWORDS: dict[BlockType, list[str]] = {
 
 
 def _build_nodes_and_edges(raw_blocks: list[dict]) -> DecomposeResponse:
-    """Convert raw block dicts to FlomptNodes and auto-link them."""
+    """Convert raw block dicts to FlomptNodes. Edges are no longer generated
+    — block ordering is handled on the frontend via TYPE_PRIORITY layout."""
     nodes: list[FlomptNode] = []
     edges: list[FlomptEdge] = []
 
@@ -97,14 +98,6 @@ def _build_nodes_and_edges(raw_blocks: list[dict]) -> DecomposeResponse:
                 summary=summary,
             )
         ))
-
-        if i > 0:
-            edges.append(FlomptEdge(
-                id=f"e{i-1}-{i}",
-                source=nodes[i - 1].id,
-                target=node_id,
-                animated=True,
-            ))
 
         y += 180.0
 

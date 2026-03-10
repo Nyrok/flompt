@@ -1,5 +1,4 @@
 import { memo, useState, useRef, useLayoutEffect } from 'react'
-import { Handle, Position } from 'reactflow'
 import type { NodeProps } from 'reactflow'
 import { Copy, ChevronDown, ChevronRight, X } from 'lucide-react'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
@@ -39,8 +38,7 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
   const addNode = useFlowStore((s) => s.addNode)
   const onNodesChange = useFlowStore((s) => s.onNodesChange)
   const nodes = useFlowStore((s) => s.nodes)
-  // Collapsed by default if block has an AI-generated summary
-  const [collapsed, setCollapsed] = useState(!!data.summary)
+  const [collapsed, setCollapsed] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   // Cursor position saved in onChange (before React re-render resets it)
   const cursorPosRef = useRef<{ start: number; end: number } | null>(null)
@@ -95,8 +93,7 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
         style={{ '--block-color': meta.color } as React.CSSProperties}
         className={`block-node block-node--language ${selected ? 'selected' : ''}`}
       >
-        <Handle type="target" position={Position.Top} />
-        <div className="language-block-inner">
+          <div className="language-block-inner">
           <span className="block-icon">
             <Icon size={13} />
           </span>
@@ -126,7 +123,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             <X size={11} aria-hidden="true" />
           </button>
         </div>
-        <Handle type="source" position={Position.Bottom} />
       </div>
     )
   }
@@ -208,8 +204,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
         style={{ '--block-color': meta.color } as React.CSSProperties}
         className={`block-node block-node--response-style ${selected ? 'selected' : ''}`}
       >
-        <Handle type="target" position={Position.Top} />
-
         {/* Header — clickable to collapse */}
         <div
           className="rsp-header"
@@ -287,8 +281,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             </span>
           </label>
         </div>}
-
-        <Handle type="source" position={Position.Bottom} />
       </div>
     )
   }
@@ -300,8 +292,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
       style={{ '--block-color': meta.color } as React.CSSProperties}
       className={`block-node ${selected ? 'selected' : ''}`}
     >
-      <Handle type="target" position={Position.Top} />
-
       <div
         className="block-header"
         onClick={() => setCollapsed((c) => !c)}
@@ -381,8 +371,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
           </div>
         </div>
       )}
-
-      <Handle type="source" position={Position.Bottom} />
     </div>
   )
 }

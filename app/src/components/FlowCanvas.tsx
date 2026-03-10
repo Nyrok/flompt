@@ -4,7 +4,6 @@ import ReactFlow, {
   Controls,
   MiniMap,
   BackgroundVariant,
-  ConnectionMode,
   useReactFlow,
   ReactFlowProvider,
 } from 'reactflow'
@@ -13,7 +12,6 @@ import { Play, Sparkles, Undo2, Redo2, Trash2 } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { assemblePrompt } from '@/lib/assemblePrompt'
 import BlockNode from './BlockNode'
-import CustomEdge from './CustomEdge'
 import CanvasBlockBar from './CanvasBlockBar'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType, FlomptNode } from '@/types/blocks'
@@ -21,10 +19,9 @@ import { useLocale } from '@/i18n/LocaleContext'
 import { STAR_EVENT } from '@/components/StarPopup'
 
 const nodeTypes = { block: BlockNode }
-const edgeTypes = { custom: CustomEdge }
 
 const CanvasInner = () => {
-  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, isDecomposing, addNode, activeTab, queueStatus, undo, redo, reset, past, future } = useFlowStore()
+  const { nodes, edges, onNodesChange, isDecomposing, addNode, activeTab, queueStatus, undo, redo, reset, past, future } = useFlowStore()
   const { t } = useLocale()
   const { fitView, screenToFlowPosition } = useReactFlow()
   const prevNodeCount = useRef(nodes.length)
@@ -80,17 +77,14 @@ const CanvasInner = () => {
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
         nodeTypes={nodeTypes}
-        edgeTypes={edgeTypes}
         fitView
         deleteKeyCode="Delete"
         snapToGrid
         snapGrid={[20, 20]}
-        connectionMode={ConnectionMode.Loose}
-        connectOnClick={true}
-        defaultEdgeOptions={{ type: 'custom' }}
+        nodesDraggable={true}
+        nodesConnectable={false}
+        elementsSelectable={true}
         proOptions={{ hideAttribution: true }}
       >
         <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="#1e1e3a" />
