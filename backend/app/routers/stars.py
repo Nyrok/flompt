@@ -6,7 +6,7 @@ from fastapi.responses import Response
 router = APIRouter()
 
 GOAL = 100
-CACHE_TTL = 3600  # 1 hour
+CACHE_TTL = 900  # 15 minutes
 
 _cache: dict = {"stars": 0, "expires_at": 0}
 
