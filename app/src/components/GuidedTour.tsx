@@ -3,7 +3,10 @@ import { ChevronRight, Check, Loader } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics } from '@/lib/analytics'
-import type { FlomptNode, FlomptEdge } from '@/types/blocks'
+import { layoutNodes } from '@/lib/layoutNodes'
+import type { FlomptNode } from '@/types/blocks'
+
+export const TOUR_DONE_EVENT = 'flompt:tour-done'
 
 const TOUR_KEY = 'flompt-onboarded'
 const TW = 280 // tooltip width
@@ -104,14 +107,6 @@ const EXAMPLE_NODES_FR: FlomptNode[] = [
   },
 ]
 
-const EXAMPLE_EDGES: FlomptEdge[] = [
-  { id: 'e0-1', source: 'role-2ef496',         target: 'input-92f78b',         animated: true },
-  { id: 'e1-2', source: 'input-92f78b',         target: 'objective-818108',     animated: true },
-  { id: 'e2-3', source: 'objective-818108',     target: 'constraints-a2557b',   animated: true },
-  { id: 'e3-4', source: 'constraints-a2557b',   target: 'output_format-66edf4', animated: true },
-  { id: 'e4-5', source: 'output_format-66edf4', target: 'language-4ac566',      animated: true },
-]
-
 // ── Component ────────────────────────────────────────────────────────────────
 
 const GuidedTour = () => {
@@ -165,6 +160,7 @@ const GuidedTour = () => {
     if (!completed) analytics.tourSkipped(step)
     localStorage.setItem(TOUR_KEY, '1')
     setActive(false)
+    window.dispatchEvent(new CustomEvent(TOUR_DONE_EVENT))
   }, [step])
 
   /* ── Next / Action ───────────────────────────────────────────────────────── */
@@ -176,9 +172,13 @@ const GuidedTour = () => {
       setActing(true)
       // Short fake loading — makes it feel real without an API call
       setTimeout(() => {
-        const isFr  = locale === 'fr'
-        setNodes(isFr ? EXAMPLE_NODES_FR : EXAMPLE_NODES_EN)
-        setEdges(EXAMPLE_EDGES)
+        const isFr   = locale === 'fr'
+        const raw    = isFr ? EXAMPLE_NODES_FR : EXAMPLE_NODES_EN
+        const rect   = document.querySelector('.flow-canvas')?.getBoundingClientRect()
+        const w      = rect?.width  ?? window.innerWidth
+        const h      = rect?.height ?? window.innerHeight
+        setNodes(layoutNodes(raw, w, h))
+        setEdges([])
         setActing(false)
         setStep(s => s + 1) // advance to canvas step
       }, 900)

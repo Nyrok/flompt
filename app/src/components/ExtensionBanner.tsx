@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 import { useLocale } from '@/i18n/LocaleContext'
 import { track } from '@/lib/analytics'
+import { TOUR_DONE_EVENT } from '@/components/GuidedTour'
 
 const BANNER_KEY = 'flompt-ext-banner-v1'
+const TOUR_KEY   = 'flompt-onboarded'
 const INSTALL_URL = 'https://flompt.dev/#extension'
 
 const ExtensionBanner = () => {
@@ -14,7 +16,16 @@ const ExtensionBanner = () => {
   useEffect(() => {
     if (window.matchMedia('(max-width: 768px)').matches) return
     try {
-      if (!localStorage.getItem(BANNER_KEY)) setVisible(true)
+      if (localStorage.getItem(BANNER_KEY)) return
+      // Don't show during onboarding — wait for tour completion
+      if (!localStorage.getItem(TOUR_KEY)) {
+        const onTourDone = () => {
+          try { if (!localStorage.getItem(BANNER_KEY)) setVisible(true) } catch { /* noop */ }
+        }
+        window.addEventListener(TOUR_DONE_EVENT, onTourDone, { once: true })
+        return () => window.removeEventListener(TOUR_DONE_EVENT, onTourDone)
+      }
+      setVisible(true)
     } catch { /* localStorage unavailable */ }
   }, [])
 

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { X, Star } from 'lucide-react'
 import { useLocale } from '@/i18n/LocaleContext'
 import { track } from '@/lib/analytics'
+import { STAR_POPUP_SHOW_EVENT } from '@/components/ExtensionPopup'
 
 const POPUP_KEY  = 'flompt-star-popup-v1'
 const GITHUB_URL = 'https://github.com/Nyrok/flompt'
@@ -25,7 +26,10 @@ const StarPopup = () => {
       } catch { return }
 
       // Delay to avoid interrupting the ongoing action
-      timer = setTimeout(() => setVisible(true), SHOW_DELAY)
+      timer = setTimeout(() => {
+        window.dispatchEvent(new CustomEvent(STAR_POPUP_SHOW_EVENT))
+        setVisible(true)
+      }, SHOW_DELAY)
     }
 
     window.addEventListener(STAR_EVENT, handler)
