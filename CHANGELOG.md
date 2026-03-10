@@ -10,6 +10,24 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.3.0] — 2026-03-10
+
+### Added
+- **Live star progress bar** — `GET /stars-svg` endpoint returns a dynamic SVG showing GitHub star count toward the 100-star goal (15-min cache, fallback on error). Displayed in README below the stars badge.
+- **Collision-free scatter layout** — after decomposition, blocks are placed randomly across the full canvas area with guaranteed no-overlap (300 attempts per block, H/V padding enforced). Layout uses real canvas dimensions via `getBoundingClientRect`.
+
+### Changed
+- **Blocks expand by default** after decomposition — no more auto-collapse on AI summary
+- **Edges and handles removed** — canvas is no longer a flow diagram; blocks are standalone cards. `nodesConnectable=false`, all `<Handle>` components removed, backend stops generating edges
+- **Layout applied in `FlowCanvas`** on `isDecomposing` transition using actual canvas size, replacing the static 2-column grid
+- **Landing page mockup** updated — handles and connection arrows removed from the SVG hero to match the current app
+
+### Fixed
+- Cursor jumps to end of textarea when typing in a controlled React textarea (`selectionStart/End` now saved in `onChange` before re-render, restored in `useLayoutEffect`)
+- `deploy.sh` Caddy check: `caddy list-modules` always exits 0 regardless of daemon state — switched to probing the admin API at `localhost:2019/config/`
+
+---
+
 ## [1.1.0] — 2026-03-06
 
 ### Added
