@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react'
+import { layoutNodes } from '@/lib/layoutNodes'
 import ReactFlow, {
   Background,
   Controls,
@@ -21,13 +22,27 @@ import { STAR_EVENT } from '@/components/StarPopup'
 const nodeTypes = { block: BlockNode }
 
 const CanvasInner = () => {
-  const { nodes, edges, onNodesChange, isDecomposing, addNode, activeTab, queueStatus, undo, redo, reset, past, future } = useFlowStore()
+  const { nodes, edges, onNodesChange, setNodes, isDecomposing, addNode, activeTab, queueStatus, undo, redo, reset, past, future } = useFlowStore()
   const { t } = useLocale()
   const { fitView, screenToFlowPosition } = useReactFlow()
   const prevNodeCount = useRef(nodes.length)
+  const prevIsDecomposing = useRef(isDecomposing)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  // Auto-fit when nodes change (decomposition)
+  // Apply scatter layout once decomposition finishes, using real canvas dimensions
+  useEffect(() => {
+    const wasDecomposing = prevIsDecomposing.current
+    prevIsDecomposing.current = isDecomposing
+    if (wasDecomposing && !isDecomposing && nodes.length > 0) {
+      const rect = wrapperRef.current?.getBoundingClientRect()
+      const w = rect?.width  ?? window.innerWidth
+      const h = rect?.height ?? window.innerHeight
+      setNodes(layoutNodes(nodes, w, h))
+      setTimeout(() => fitView({ padding: 0.15, duration: 450 }), 60)
+    }
+  }, [isDecomposing, nodes, setNodes, fitView])
+
+  // Auto-fit when nodes change (manual add/remove)
   useEffect(() => {
     if (nodes.length > 0 && nodes.length !== prevNodeCount.current) {
       setTimeout(() => fitView({ padding: 0.2, duration: 400 }), 50)
