@@ -680,26 +680,11 @@
 
         <!-- ── APP CANVAS MOCKUP ── -->
         <div class="hero-mockup">
-          <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="flompt canvas showing five connected prompt blocks: Role, Objective, Constraints, Output Format, Language">
+          <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="flompt canvas showing five prompt blocks scattered: Role, Objective, Constraints, Output Format, Language">
             <defs>
               <pattern id="dotgrid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
                 <circle cx="10" cy="10" r="0.7" fill="#252525"/>
               </pattern>
-              <marker id="ah-p" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
-                <path d="M0,0 L6,2.5 L0,5 Z" fill="rgba(192,132,252,0.65)"/>
-              </marker>
-              <marker id="ah-r" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
-                <path d="M0,0 L6,2.5 L0,5 Z" fill="rgba(251,113,133,0.65)"/>
-              </marker>
-              <marker id="ah-k" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
-                <path d="M0,0 L6,2.5 L0,5 Z" fill="rgba(255,125,170,0.65)"/>
-              </marker>
-              <marker id="ah-a" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
-                <path d="M0,0 L6,2.5 L0,5 Z" fill="rgba(251,191,36,0.65)"/>
-              </marker>
-              <marker id="ah-s" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
-                <path d="M0,0 L6,2.5 L0,5 Z" fill="rgba(56,189,248,0.65)"/>
-              </marker>
             </defs>
 
             <!-- Window -->
@@ -718,77 +703,45 @@
             <!-- Canvas -->
             <rect x="0" y="36" width="520" height="344" fill="url(#dotgrid)"/>
 
-            <!-- ── BLOCK: Role ── -->
-            <rect x="28" y="62" width="172" height="80" rx="8" fill="#181818" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <rect x="28" y="62" width="3" height="80" rx="1.5" fill="#c084fc"/>
-            <text x="42" y="82" font-family="Inter,system-ui,sans-serif" font-size="8" font-weight="700" fill="#9333ea" letter-spacing="0.8">ROLE</text>
-            <text x="42" y="100" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">Senior tech journalist</text>
-            <text x="42" y="118" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#4a4a4a">AI &amp; emerging tech</text>
-            <!-- right handle -->
-            <circle cx="200" cy="102" r="4.5" fill="#111" stroke="#c084fc" stroke-width="1.5"/>
-            <!-- bottom handle -->
-            <circle cx="114" cy="142" r="4.5" fill="#111" stroke="#c084fc" stroke-width="1.5"/>
+            <!-- ── BLOCK: Role (top-left) ── -->
+            <rect x="22" y="52" width="172" height="80" rx="8" fill="#181818" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <rect x="22" y="52" width="3" height="80" rx="1.5" fill="#c084fc"/>
+            <text x="36" y="72" font-family="Inter,system-ui,sans-serif" font-size="8" font-weight="700" fill="#9333ea" letter-spacing="0.8">ROLE</text>
+            <text x="36" y="90" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">Senior tech journalist</text>
+            <text x="36" y="108" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#4a4a4a">AI &amp; emerging tech</text>
 
-            <!-- ── BLOCK: Objective ── -->
-            <rect x="302" y="52" width="186" height="80" rx="8" fill="#181818" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <rect x="302" y="52" width="3" height="80" rx="1.5" fill="#fbbf24"/>
-            <text x="316" y="72" font-family="Inter,system-ui,sans-serif" font-size="8" font-weight="700" fill="#d97706" letter-spacing="0.8">OBJECTIVE</text>
-            <text x="316" y="91" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">Write a blog post about</text>
-            <text x="316" y="108" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">AI trends in 2025</text>
-            <text x="316" y="125" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#4a4a4a">1 500 words · engaging</text>
-            <!-- left handle -->
-            <circle cx="302" cy="92" r="4.5" fill="#111" stroke="#fbbf24" stroke-width="1.5"/>
-            <!-- bottom handle -->
-            <circle cx="395" cy="132" r="4.5" fill="#111" stroke="#fbbf24" stroke-width="1.5"/>
+            <!-- ── BLOCK: Objective (top-right, slightly lower) ── -->
+            <rect x="306" y="44" width="186" height="80" rx="8" fill="#181818" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <rect x="306" y="44" width="3" height="80" rx="1.5" fill="#fbbf24"/>
+            <text x="320" y="64" font-family="Inter,system-ui,sans-serif" font-size="8" font-weight="700" fill="#d97706" letter-spacing="0.8">OBJECTIVE</text>
+            <text x="320" y="83" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">Write a blog post about</text>
+            <text x="320" y="100" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">AI trends in 2025</text>
+            <text x="320" y="117" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#4a4a4a">1 500 words · engaging</text>
 
-            <!-- ── BLOCK: Constraints ── -->
-            <rect x="28" y="196" width="172" height="60" rx="8" fill="#181818" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <rect x="28" y="196" width="3" height="60" rx="1.5" fill="#fb7185"/>
-            <text x="42" y="212" font-family="Inter,system-ui,sans-serif" font-size="8" font-weight="700" fill="#e11d48" letter-spacing="0.8">CONSTRAINTS</text>
-            <text x="42" y="229" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">No bullet points</text>
-            <text x="42" y="244" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#4a4a4a">Active voice only</text>
-            <!-- right handle -->
-            <circle cx="200" cy="226" r="4.5" fill="#111" stroke="#fb7185" stroke-width="1.5"/>
-            <!-- top handle -->
-            <circle cx="114" cy="196" r="4.5" fill="#111" stroke="#fb7185" stroke-width="1.5"/>
-            <!-- bottom handle -->
-            <circle cx="114" cy="256" r="4.5" fill="#111" stroke="#fb7185" stroke-width="1.5"/>
+            <!-- ── BLOCK: Constraints (left, middle) ── -->
+            <rect x="38" y="182" width="172" height="60" rx="8" fill="#181818" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <rect x="38" y="182" width="3" height="60" rx="1.5" fill="#fb7185"/>
+            <text x="52" y="198" font-family="Inter,system-ui,sans-serif" font-size="8" font-weight="700" fill="#e11d48" letter-spacing="0.8">CONSTRAINTS</text>
+            <text x="52" y="215" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">No bullet points</text>
+            <text x="52" y="230" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#4a4a4a">Active voice only</text>
 
-            <!-- ── BLOCK: Output Format ── -->
-            <rect x="302" y="188" width="186" height="80" rx="8" fill="#181818" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <rect x="302" y="188" width="3" height="80" rx="1.5" fill="#ff7daa"/>
-            <text x="316" y="208" font-family="Inter,system-ui,sans-serif" font-size="8" font-weight="700" fill="#e879a0" letter-spacing="0.8">OUTPUT FORMAT</text>
-            <text x="316" y="227" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">Intro → 3 sections</text>
-            <text x="316" y="244" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">→ Conclusion + CTA</text>
-            <text x="316" y="261" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#4a4a4a">Use markdown headers</text>
-            <!-- left handle -->
-            <circle cx="302" cy="228" r="4.5" fill="#111" stroke="#ff7daa" stroke-width="1.5"/>
-            <!-- top handle -->
-            <circle cx="395" cy="188" r="4.5" fill="#111" stroke="#ff7daa" stroke-width="1.5"/>
+            <!-- ── BLOCK: Output Format (right, middle-low) ── -->
+            <rect x="294" y="172" width="186" height="80" rx="8" fill="#181818" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <rect x="294" y="172" width="3" height="80" rx="1.5" fill="#ff7daa"/>
+            <text x="308" y="192" font-family="Inter,system-ui,sans-serif" font-size="8" font-weight="700" fill="#e879a0" letter-spacing="0.8">OUTPUT FORMAT</text>
+            <text x="308" y="211" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">Intro → 3 sections</text>
+            <text x="308" y="228" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">→ Conclusion + CTA</text>
+            <text x="308" y="245" font-family="Inter,system-ui,sans-serif" font-size="9.5" fill="#4a4a4a">Use markdown headers</text>
 
-            <!-- ── BLOCK: Language ── -->
-            <rect x="28" y="278" width="172" height="46" rx="8" fill="#181818" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <rect x="28" y="278" width="3" height="46" rx="1.5" fill="#38bdf8"/>
-            <text x="42" y="295" font-family="Inter,system-ui,sans-serif" font-size="8" font-weight="700" fill="#0ea5e9" letter-spacing="0.8">LANGUAGE</text>
-            <text x="42" y="313" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">French</text>
-            <!-- top handle -->
-            <circle cx="114" cy="278" r="4.5" fill="#111" stroke="#38bdf8" stroke-width="1.5"/>
-
-            <!-- ── CONNECTIONS ── -->
-            <!-- Role → Objective -->
-            <path d="M204.5,102 C248,102 264,92 297.5,92" stroke="rgba(192,132,252,0.5)" stroke-width="1.5" fill="none" marker-end="url(#ah-p)"/>
-            <!-- Role → Constraints -->
-            <path d="M114,146.5 L114,191.5" stroke="rgba(251,113,133,0.5)" stroke-width="1.5" fill="none" marker-end="url(#ah-r)"/>
-            <!-- Objective → Output Format -->
-            <path d="M395,136.5 L395,183.5" stroke="rgba(255,125,170,0.5)" stroke-width="1.5" fill="none" marker-end="url(#ah-k)"/>
-            <!-- Constraints → Output Format -->
-            <path d="M204.5,226 C248,226 264,228 297.5,228" stroke="rgba(251,113,133,0.5)" stroke-width="1.5" fill="none" marker-end="url(#ah-r)"/>
-            <!-- Constraints → Language -->
-            <path d="M114,260.5 L114,273.5" stroke="rgba(56,189,248,0.5)" stroke-width="1.5" fill="none" marker-end="url(#ah-s)"/>
+            <!-- ── BLOCK: Language (center-bottom) ── -->
+            <rect x="166" y="300" width="172" height="46" rx="8" fill="#181818" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <rect x="166" y="300" width="3" height="46" rx="1.5" fill="#38bdf8"/>
+            <text x="180" y="317" font-family="Inter,system-ui,sans-serif" font-size="8" font-weight="700" fill="#0ea5e9" letter-spacing="0.8">LANGUAGE</text>
+            <text x="180" y="335" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#d4d4d4">French</text>
 
             <!-- ── ASSEMBLE BUTTON ── -->
-            <rect x="185" y="336" width="150" height="28" rx="6" fill="rgba(255,53,112,0.09)" stroke="rgba(255,53,112,0.22)" stroke-width="1"/>
-            <text x="260" y="355" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#ff3570" font-weight="500">⚡ Assemble prompt</text>
+            <rect x="185" y="354" width="150" height="20" rx="6" fill="rgba(255,53,112,0.09)" stroke="rgba(255,53,112,0.22)" stroke-width="1"/>
+            <text x="260" y="368" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#ff3570" font-weight="500">⚡ Assemble prompt</text>
           </svg>
         </div>
 
