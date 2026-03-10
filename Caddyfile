@@ -18,6 +18,10 @@ flompt.dev {
 		reverse_proxy 127.0.0.1:8000
 	}
 
+	handle /stars-svg {
+		reverse_proxy 127.0.0.1:8000
+	}
+
 	# ── MCP Server → FastAPI backend (streamable HTTP) ────────────
 	# Endpoint : POST https://flompt.dev/mcp/
 	# Config Claude Code : { "mcpServers": { "flompt": { "type": "http", "url": "https://flompt.dev/mcp/" } } }
