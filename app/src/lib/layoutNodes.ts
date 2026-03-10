@@ -17,9 +17,14 @@ const TYPE_PRIORITY: Record<BlockType, number> = {
 }
 
 const BLOCK_W    = 320   // block max-width
-const H_PAD      = 36    // min horizontal gap between blocks
-const V_PAD      = 32    // min vertical gap between blocks
+const H_PAD      = 40    // min horizontal gap between blocks
+const V_PAD      = 36    // min vertical gap between blocks
 const MAX_TRIES  = 300   // attempts before falling back to safe row
+
+// Flow coordinate space — independent of canvas pixel size.
+// fitView() zooms to fit everything, so we can use large values freely.
+const FLOW_W     = 2000  // horizontal scatter range
+const FLOW_H     = 1400  // vertical scatter range
 
 // Mobile layout constants
 const MOBILE_GAP = 20
@@ -71,9 +76,12 @@ export function layoutNodes(
     }))
   }
 
-  // ── Desktop: scatter across the full canvas area ──────────────────────────
-  const spreadX = Math.max(canvasWidth  - BLOCK_W  - 80, 400)
-  const spreadY = Math.max(canvasHeight - 80,            300)
+  // ── Desktop: scatter in flow coordinate space (not pixels) ───────────────
+  // fitView() handles zoom — positions can be much larger than the viewport.
+  // Use canvas aspect ratio to shape the scatter area, but keep it large.
+  const aspect  = canvasWidth > 0 ? canvasWidth / canvasHeight : 16 / 9
+  const spreadX = FLOW_W
+  const spreadY = Math.round(FLOW_W / aspect)
 
   type Rect = { x: number; y: number; w: number; h: number }
   const placed: Rect[] = []
