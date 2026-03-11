@@ -1,9 +1,0 @@
-checkpoints/
-dataset/data/raw.jsonl
-dataset/data/train.jsonl
-dataset/data/val.jsonl
-dataset/data/test.jsonl
-benchmark_results.json
-__pycache__/
-*.pyc
-

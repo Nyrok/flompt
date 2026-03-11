@@ -33,6 +33,7 @@ done
 # ── BUILD ────────────────────────────────────────────────────
 if [ "$BUILD" = true ]; then
   log "Building app (Vite)..."
+  rm -rf "$ROOT/app/dist" "$ROOT/app/node_modules/.vite"
   cd "$ROOT/app" && npm run build --silent 2>&1 | tail -3
   ok "App built → app/dist/"
 
@@ -64,7 +65,7 @@ fi
 
 # ── HEALTH CHECK ─────────────────────────────────────────────
 log "Running health checks..."
-sleep 3
+sleep 5
 
 check() {
   local name=$1 url=$2
