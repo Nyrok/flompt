@@ -425,10 +425,10 @@ body {
   overflow-y: auto;
   height: 100%;
   padding-bottom: 4px;
-  /* scrollbar fine */
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-strong) transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.block-list::-webkit-scrollbar { display: none; }
 
 /* ── Top and bottom blur/opacity effects ─────────────────────────────────── */
 .block-list-blur {
