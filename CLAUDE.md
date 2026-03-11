@@ -1,5 +1,8 @@
 # CLAUDE.md — flompt
 
+## ⚠️ Mandatory Rules
+- **NEVER commit or push `_uploads/` directories** — they exist at the root, in `blog/`, and in `extension/`. These folders contain raw uploaded files and must stay local only. They are in `.gitignore`; never override or bypass this rule.
+
 ## Project Identity
 - **flompt** = flow + prompt — Visual AI Prompt Builder
 - **URL** : https://flompt.dev

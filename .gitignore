@@ -11,3 +11,6 @@ __pycache__/
 !extension/icons/*.png
 screenshot.mjs
 caddy
+
+# Uploaded files (never commit)
+_uploads/
