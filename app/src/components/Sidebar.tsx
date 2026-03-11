@@ -56,7 +56,13 @@ const Sidebar = () => {
     }
   }
 
-  const handleAddBlock  = (type: BlockType) => addNode(createNode(type))
+  const handleAddBlock = (type: BlockType) => {
+    const node = createNode(type)
+    addNode(node)
+    window.dispatchEvent(new CustomEvent('flompt:block-added', {
+      detail: { label: node.data.label, color: BLOCK_META[type].color },
+    }))
+  }
 
   const handleDragStart = (e: React.DragEvent, type: BlockType) => {
     e.dataTransfer.setData('blockType', type)

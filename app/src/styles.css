@@ -171,9 +171,9 @@ body {
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-  overflow-y: auto;
+  overflow: hidden;
 }
-.right-panel { border-right: none; border-left: 1px solid var(--border); overflow-x: hidden; }
+.right-panel { border-right: none; border-left: 1px solid var(--border); overflow-x: hidden; overflow-y: auto; }
 
 .flow-canvas { flex: 1; min-height: 0; width: 100%; background: var(--bg); position: relative; }
 
@@ -391,7 +391,7 @@ body {
 }
 
 /* ── Sidebar ──────────────────────────────────────────────────────────────── */
-.sidebar { display: flex; flex-direction: column; gap: 6px; }
+.sidebar { display: flex; flex-direction: column; gap: 6px; flex: 1; min-height: 0; }
 .sidebar-hint {
   font-size: 0.67rem;
   color: var(--text-dim);
