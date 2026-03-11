@@ -1657,6 +1657,13 @@ body {
 
   .react-flow__edgedrag,
   .react-flow__connection { z-index: 1 !important; }
+
+  /* Block bar: pin to top so it never overlaps ReactFlow controls (bottom-left) */
+  .canvas-block-bar {
+    top: 52px;         /* below canvas-ctrl-bar (~44px) */
+    transform: none;
+    max-height: calc(100% - 220px); /* leave ~170px at bottom for controls + FAB */
+  }
 }
 
 /* ── Responsive — Very small (≤ 380px) ───────────────────────────────────── */
