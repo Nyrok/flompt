@@ -21,10 +21,7 @@ const H_PAD      = 120   // min horizontal gap between blocks
 const V_PAD      = 100   // min vertical gap between blocks
 const MAX_TRIES  = 400   // attempts before falling back to safe row
 
-// Flow coordinate space — independent of canvas pixel size.
-// fitView() zooms to fit everything, so we can use large values freely.
-const FLOW_W     = 5000  // horizontal scatter range
-const FLOW_H     = 3500  // vertical scatter range
+const MARGIN     = 150   // extra scatter padding beyond canvas edges
 
 // Mobile layout constants
 const MOBILE_GAP = 20
@@ -60,7 +57,7 @@ function overlaps(
 export function layoutNodes(
   nodes: FlomptNode[],
   canvasWidth  = 900,
-  _canvasHeight = 700,
+  canvasHeight = 700,
 ): FlomptNode[] {
   const sorted = [...nodes].sort(
     (a, b) => (TYPE_PRIORITY[a.data.type] ?? 99) - (TYPE_PRIORITY[b.data.type] ?? 99)
@@ -76,11 +73,9 @@ export function layoutNodes(
     }))
   }
 
-  // ── Desktop: scatter in flow coordinate space (not pixels) ───────────────
-  // fitView() handles zoom — positions can be much larger than the viewport.
-  // Use canvas aspect ratio to shape the scatter area, but keep it large.
-  const spreadX = FLOW_W
-  const spreadY = FLOW_H
+  // ── Desktop: scatter proportional to the real canvas size ────────────────
+  const spreadX = canvasWidth  + MARGIN
+  const spreadY = canvasHeight + MARGIN
 
   type Rect = { x: number; y: number; w: number; h: number }
   const placed: Rect[] = []
