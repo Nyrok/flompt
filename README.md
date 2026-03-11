@@ -22,7 +22,9 @@
 </p>
 
 <p align="center">
-  <iframe src="https://github.com/sponsors/Nyrok/button" title="Sponsor Nyrok" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
+  <a href="https://github.com/sponsors/Nyrok">
+    <img src="https://img.shields.io/badge/Sponsor-❤-ea4aaa?style=for-the-badge&logo=githubsponsors&logoColor=white" alt="Sponsor Nyrok" />
+  </a>
 </p>
 
 <p align="center">
