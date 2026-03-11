@@ -1,6 +1,90 @@
-import integrations from './integrations/index.js'
-
 ;(function () {
+  // ── Integrations (inlined — no ES module imports in content scripts) ────────
+  const integrations = [
+    {
+      name: 'ChatGPT',
+      hostnames: ['chatgpt.com', 'openai.com'],
+      getInput () {
+        return (
+          document.querySelector('#prompt-textarea[contenteditable]') ||
+          document.querySelector('#prompt-textarea') ||
+          document.querySelector('div[contenteditable="true"][data-virtualized="false"]') ||
+          document.querySelector('div[contenteditable="true"][id*="prompt"]') ||
+          [...document.querySelectorAll('div[contenteditable="true"]')].at(-1)
+        )
+      },
+      getSendBtn () {
+        return (
+          document.querySelector('button[data-testid="send-button"]') ||
+          document.querySelector('button[aria-label="Send prompt"]') ||
+          document.querySelector('button[aria-label="Send message"]') ||
+          document.querySelector('button[aria-label*="Send"]') ||
+          document.querySelector('button[type="submit"]')
+        )
+      },
+      getToolbarTarget () {
+        const el =
+          document.querySelector('#thread-bottom form div[class*="[grid-area:leading]"] > span') ||
+          document.querySelector('form div[class*="[grid-area:leading]"] > span')                ||
+          document.querySelector('form div[class*="leading"] > span[class]')                     ||
+          document.querySelector('#thread-bottom form > div > div > span')                       ||
+          null
+        return el ? { el, position: 'append' } : null
+      },
+    },
+    {
+      name: 'Claude',
+      hostnames: ['claude.ai'],
+      getInput () {
+        return (
+          document.querySelector('[data-testid="composer-text-input"] div[contenteditable]') ||
+          document.querySelector('.ProseMirror[contenteditable]') ||
+          document.querySelector('div[contenteditable="true"].ProseMirror') ||
+          [...document.querySelectorAll('[contenteditable="true"]')].at(-1) ||
+          [...document.querySelectorAll('[contenteditable]')].at(-1)
+        )
+      },
+      getSendBtn () {
+        return (
+          document.querySelector('button[aria-label="Send Message"]') ||
+          document.querySelector('button[aria-label="Send message"]') ||
+          document.querySelector('[data-testid="send-button"]')
+        )
+      },
+      onButtonMounted (btn) {
+        const parent = btn.parentElement
+        if (parent) parent.classList.add('inline-flex')
+        btn.style.setProperty('width',  '32px', 'important')
+        btn.style.setProperty('height', '32px', 'important')
+      },
+    },
+    {
+      name: 'Gemini',
+      hostnames: ['gemini.google.com'],
+      getInput () {
+        return (
+          document.querySelector('rich-textarea div[contenteditable]') ||
+          document.querySelector('rich-textarea [contenteditable="true"]') ||
+          [...document.querySelectorAll('[contenteditable="true"]')].at(-1)
+        )
+      },
+      getSendBtn () {
+        return (
+          document.querySelector('button.send-button') ||
+          document.querySelector('button[aria-label="Send message"]') ||
+          document.querySelector('button[mattooltip="Send message"]')
+        )
+      },
+      getToolbarTarget () {
+        const el = document.querySelector('.leading-actions-wrapper')
+        return el ? { el, position: 1 } : null
+      },
+      onButtonMounted (btn) {
+        btn.style.setProperty('border-radius', '50px', 'important')
+      },
+    },
+  ]
+
   // Guard against double injection
   if (window.__flomptInjected) return
   window.__flomptInjected = true
