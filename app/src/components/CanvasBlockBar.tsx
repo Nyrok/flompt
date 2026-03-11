@@ -30,6 +30,9 @@ const CanvasBlockBar = () => {
       data:     { type, label: tr.label, description: tr.description, ...extraData },
     }
     addNode(node)
+    window.dispatchEvent(new CustomEvent('flompt:block-added', {
+      detail: { label: tr.label, color: BLOCK_META[type].color },
+    }))
   }
 
   return (

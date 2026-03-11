@@ -46,19 +46,22 @@ const CanvasInner = () => {
   }, [isDecomposing, nodes, setNodes, fitView])
 
   // Auto-fit when nodes change (manual add/remove)
-  // Also show a brief chip when a single block is added (not during decomposition)
   useEffect(() => {
-    const prev = prevNodeCount.current
-    prevNodeCount.current = nodes.length
-    if (nodes.length > 0 && nodes.length !== prev) {
+    if (nodes.length > 0 && nodes.length !== prevNodeCount.current) {
       setTimeout(() => fitView({ padding: 0.2, duration: 400 }), 50)
     }
-    if (!isDecomposing && nodes.length === prev + 1) {
-      const added = nodes[nodes.length - 1]
-      const meta = BLOCK_META[added.data.type as BlockType]
-      if (meta) setChip({ label: added.data.label, color: meta.color, key: Date.now() })
+    prevNodeCount.current = nodes.length
+  }, [nodes.length, fitView])
+
+  // Show chip on explicit block-added event (dispatched from CanvasBlockBar + onDrop)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const { label, color } = (e as CustomEvent<{ label: string; color: string }>).detail
+      setChip({ label, color, key: Date.now() })
     }
-  }, [nodes, isDecomposing, fitView])
+    window.addEventListener('flompt:block-added', handler)
+    return () => window.removeEventListener('flompt:block-added', handler)
+  }, [])
 
   // Reset zoom when switching to canvas tab (especially on mobile)
   useEffect(() => {
@@ -94,6 +97,9 @@ const CanvasInner = () => {
       data: { type, label: tr.label, description: tr.description, ...extraData },
     }
     addNode(newNode)
+    window.dispatchEvent(new CustomEvent('flompt:block-added', {
+      detail: { label: tr.label, color: BLOCK_META[type].color },
+    }))
   }, [screenToFlowPosition, addNode, t.blocks])
 
   return (
