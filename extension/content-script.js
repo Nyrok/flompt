@@ -99,6 +99,7 @@ import integrations from './integrations/index.js'
   let iframeReady         = false
   let currentSidebarWidth = SIDEBAR_W_DEFAULT
   let pageShiftStyle      = null
+  let lastSentText        = ''
 
   // ── Manual import: platform → iframe (triggered by button in the app) ───
   /**
@@ -658,26 +659,7 @@ import integrations from './integrations/index.js'
       }
 
       try {
-        el.focus()
-        const sel = window.getSelection()
-        const range = document.createRange()
-        range.selectNodeContents(el)
-        sel.removeAllRanges()
-        sel.addRange(range)
-
-        const ok = document.execCommand('insertText', false, text)
-
-        if (!ok || el.textContent.trim() !== text.trim()) {
-          const bEvt = new InputEvent('beforeinput', {
-            bubbles: true, cancelable: true,
-            inputType: 'insertReplacementText',
-            data: text,
-          })
-          el.dispatchEvent(bEvt)
-          if (!bEvt.defaultPrevented) el.textContent = text
-          el.dispatchEvent(new InputEvent('input', { bubbles: true, data: text }))
-        }
-
+        setContentEditable(el, text)
         // Return focus to the platform input so user can hit Enter immediately
         el.focus()
         closeSidebar()
