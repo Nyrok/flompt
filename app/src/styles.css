@@ -194,6 +194,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  transition: opacity 180ms ease, max-height 220ms ease, margin 220ms ease;
 }
 .panel-title::after {
   content: '';
@@ -396,6 +397,17 @@ body {
   font-size: 0.67rem;
   color: var(--text-dim);
   margin-bottom: 2px;
+  transition: opacity 180ms ease, max-height 220ms ease, margin 220ms ease;
+}
+
+/* Hide title + hint when block list is scrolled */
+.sidebar--scrolled .panel-title,
+.sidebar--scrolled .sidebar-hint {
+  opacity: 0;
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 /* Wrapper scrollable avec effets blur haut/bas */

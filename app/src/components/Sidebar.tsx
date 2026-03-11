@@ -15,6 +15,7 @@ const Sidebar = () => {
   const listRef        = useRef<HTMLDivElement>(null)
   const [showTopBlur, setShowTopBlur]       = useState(false)
   const [showBottomBlur, setShowBottomBlur] = useState(false)
+  const [scrolled, setScrolled]             = useState(false)
 
   const updateBlur = useCallback(() => {
     const el = listRef.current
@@ -23,6 +24,7 @@ const Sidebar = () => {
     const maxScroll  = el.scrollHeight - el.clientHeight
     setShowTopBlur(scrollTop > 6)
     setShowBottomBlur(maxScroll > 6 && scrollTop < maxScroll - 6)
+    setScrolled(scrollTop > 6)
   }, [])
 
   // Check initial state and re-check when content size changes
@@ -70,7 +72,7 @@ const Sidebar = () => {
   }
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar${scrolled ? ' sidebar--scrolled' : ''}`}>
       <h3 className="panel-title">{t.sidebar.title}</h3>
       <p className="sidebar-hint">{t.sidebar.hint}</p>
 
