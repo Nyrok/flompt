@@ -22,6 +22,10 @@
 </p>
 
 <p align="center">
+  <iframe src="https://github.com/sponsors/Nyrok/button" title="Sponsor Nyrok" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
+</p>
+
+<p align="center">
   <a href="https://github.com/Nyrok/flompt/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Nyrok/flompt/ci.yml?branch=master&style=for-the-badge&label=CI" alt="CI" /></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen?style=for-the-badge" alt="Contributions welcome" /></a>
 </p>
