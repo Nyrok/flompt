@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { layoutNodes } from '@/lib/layoutNodes'
 import ReactFlow, {
   Background,
@@ -21,6 +21,8 @@ import { STAR_EVENT } from '@/components/StarPopup'
 
 const nodeTypes = { block: BlockNode }
 
+interface BlockChip { label: string; color: string; key: number }
+
 const CanvasInner = () => {
   const { nodes, edges, onNodesChange, setNodes, isDecomposing, addNode, activeTab, queueStatus, undo, redo, reset, past, future } = useFlowStore()
   const { t } = useLocale()
@@ -28,6 +30,7 @@ const CanvasInner = () => {
   const prevNodeCount = useRef(nodes.length)
   const prevIsDecomposing = useRef(isDecomposing)
   const wrapperRef = useRef<HTMLDivElement>(null)
+  const [chip, setChip] = useState<BlockChip | null>(null)
 
   // Apply scatter layout once decomposition finishes, using real canvas dimensions
   useEffect(() => {
@@ -43,12 +46,19 @@ const CanvasInner = () => {
   }, [isDecomposing, nodes, setNodes, fitView])
 
   // Auto-fit when nodes change (manual add/remove)
+  // Also show a brief chip when a single block is added (not during decomposition)
   useEffect(() => {
-    if (nodes.length > 0 && nodes.length !== prevNodeCount.current) {
+    const prev = prevNodeCount.current
+    prevNodeCount.current = nodes.length
+    if (nodes.length > 0 && nodes.length !== prev) {
       setTimeout(() => fitView({ padding: 0.2, duration: 400 }), 50)
     }
-    prevNodeCount.current = nodes.length
-  }, [nodes.length, fitView])
+    if (!isDecomposing && nodes.length === prev + 1) {
+      const added = nodes[nodes.length - 1]
+      const meta = BLOCK_META[added.data.type as BlockType]
+      if (meta) setChip({ label: added.data.label, color: meta.color, key: Date.now() })
+    }
+  }, [nodes, isDecomposing, fitView])
 
   // Reset zoom when switching to canvas tab (especially on mobile)
   useEffect(() => {
@@ -186,6 +196,21 @@ const CanvasInner = () => {
               }
             </div>
           )}
+        </div>
+      )}
+
+      {/* Block-added micro chip */}
+      {chip && (
+        <div
+          key={chip.key}
+          className="block-added-chip"
+          style={{ '--chip-color': chip.color } as React.CSSProperties}
+          onAnimationEnd={() => setChip(null)}
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <span className="block-added-chip__dot" aria-hidden="true" />
+          {chip.label}
         </div>
       )}
 
