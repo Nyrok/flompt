@@ -1654,11 +1654,14 @@ body {
   .tab-icon  { font-size: 1.1rem; line-height: 1; }
   .tab-label { font-size: 0.61rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
 
+  /* On mobile the left-panel itself scrolls — let sidebar + list expand naturally */
+  .sidebar { flex: none; min-height: unset; }
+  .block-list-wrapper { overflow: visible; flex: none; min-height: unset; }
   .block-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5px;
-    max-height: none; /* full screen on mobile */
+    height: auto;
     overflow-y: visible;
   }
 
