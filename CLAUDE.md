@@ -210,5 +210,5 @@ Ordered as assembled (TYPE_PRIORITY in `assemblePrompt.ts`):
 ### 9. Coherence across surfaces
 - Block types exist in: `app/src/types/blocks.ts`, `assemblePrompt.ts`, `en.json`, `fr.json`, `backend/models/blocks.py`, `compiler.py`, `decomposer.py`, `ai_service.py`, `landing/index.html`, `docs/block-types.md`, `docs/claude-code.md`, `docs/how-it-works.md`, blog posts (EN + FR)
 - **When adding/removing a block** → update ALL of the above. Don't forget blog FR articles.
-- Landing block count stat must stay in sync with actual block count (currently **12**)
+- Landing block count stat must stay in sync with actual block count (currently **13**)
 
