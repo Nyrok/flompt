@@ -50,6 +50,17 @@ flompt.dev/
 ├── extension/     # Browser extension (Chrome + Firefox)
 │   ├── Makefile   # make = both; make chrome; make firefox
 │   └── dist/      # Built zips (gitignored)
+├── templates/     # One JSON file per prompt template, organized by category
+│   ├── writing/   #   blog-post.json, cover-letter.json, …
+│   ├── code/      #   code-review.json, unit-tests.json, …
+│   ├── marketing/ #   landing-page.json, ad-copy.json, …
+│   ├── productivity/ # meeting-summary.json, okr-definition.json, …
+│   ├── design/    #   ux-audit.json, user-persona.json, …
+│   ├── education/ #   lesson-plan.json, quiz-generator.json, …
+│   ├── sales/     #   cold-email.json, sales-pitch.json, …
+│   ├── data/      #   data-analysis.json, ab-test.json, …
+│   ├── creative/  #   short-story.json, world-building.json, …
+│   └── personal/  #   career-roadmap.json, decision-framework.json, …
 ├── Caddyfile      # Reverse proxy config
 ├── caddy          # Caddy binary (gitignored, 50MB)
 └── CLAUDE.md      # This file
@@ -92,7 +103,42 @@ curl -sk -o /dev/null -w "%{http_code}" https://flompt.dev/health
 
 ---
 
-## Block Types (12 total)
+## Template Library
+
+Templates live in `app/templates/<category>/<id>.json` — one file per template, no TypeScript required.
+
+### Adding a template
+
+Create a JSON file in the matching category folder. Schema:
+
+```json
+{
+  "id": "my-template",
+  "category": "writing",
+  "i18n": {
+    "en": { "name": "My Template", "description": "One-sentence description." },
+    "fr": { "name": "Mon template", "description": "Description en une phrase." }
+  },
+  "blocks": [
+    { "type": "role",      "content": "You are a…" },
+    { "type": "objective", "content": "Write a…"  }
+  ]
+}
+```
+
+### Rules
+- `id` — unique, kebab-case, must match the filename (e.g. `my-template.json`)
+- `category` — one of: `writing` `code` `marketing` `productivity` `design` `education` `sales` `data` `creative` `personal`
+- `blocks[].type` — one of the 13 block types (see table below)
+- No positions, IDs, or React Flow internals needed — `src/lib/templates.ts` handles hydration via `import.meta.glob`
+- At least `en` and `fr` must be present in `i18n`; other locales fall back to `en`
+
+### How the loader works
+`app/src/lib/templates.ts` uses `import.meta.glob('../../templates/**/*.json', { eager: true })` to import all JSON files at Vite build time. `hydrate()` converts `blocks[]` → `FlomptNode[]` (positions + IDs auto-generated). Exports `TEMPLATES`, `TEMPLATE_CATEGORIES`, `CATEGORY_COLORS`, `LOCALE_TO_LANG` — no change needed in consuming components.
+
+---
+
+## Block Types (13 total)
 
 Ordered as assembled (TYPE_PRIORITY in `assemblePrompt.ts`):
 

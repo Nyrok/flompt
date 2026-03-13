@@ -388,6 +388,27 @@
     .mcp-tool-body span { font-size: 0.79rem; color: var(--text-muted); line-height: 1.5; }
     @media (max-width: 900px) { .mcp-inner { grid-template-columns: 1fr; } }
 
+    /* ── MAKE SECTION ──────────────────────────────────── */
+    .make-section { padding: 100px 0; background: var(--bg-2); }
+    .make-section .section-accent-line { background: #6B5DFA; }
+    .make-section .section-label { color: #8b7ffa; }
+    .make-section .section-title em { font-style: normal; color: #8b7ffa; }
+    .make-tool-icon {
+      width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(107,93,250,0.1); border: 1px solid rgba(107,93,250,0.2);
+      display: flex; align-items: center; justify-content: center; color: #8b7ffa;
+    }
+    .make-code-block {
+      background: #0e0e0d; border: 1px solid rgba(107,93,250,0.2);
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 0 60px rgba(107,93,250,0.06), 0 24px 60px rgba(0,0,0,0.5);
+    }
+    .make-code-block .mcp-code-block-chrome { border-color: rgba(107,93,250,0.15); }
+    .make-code-block .c-key   { color: #a5b4fc; }
+    .make-code-block .c-str   { color: #86efac; }
+    .make-code-block .c-num   { color: #fb923c; }
+    .make-code-block .c-punct { color: var(--text-dim); }
+
     /* ── STATS ─────────────────────────────────────────── */
     .stats-section {
       padding: 100px 0;
@@ -1001,6 +1022,62 @@
     </div>
   </section>
 
+  <!-- ── MAKE.COM ──────────────────────────────────── -->
+  <section class="make-section" id="make">
+    <div class="container">
+      <div class="mcp-inner">
+        <div class="mcp-text">
+          <div class="section-accent-line" style="background:#6B5DFA"></div>
+          <p class="section-label">Make.com integration</p>
+          <h2 class="section-title">Send your prompt to <em>any workflow</em>.</h2>
+          <p class="section-sub">Assemble your prompt in flompt, then fire it straight into a Make.com scenario with one click — no copy-paste, no tab switching.</p>
+
+          <div class="mcp-features">
+            <div class="mcp-feature">
+              <span class="make-tool-icon">⚡</span>
+              <div>
+                <strong>One-click webhook</strong>
+                <span>Paste your Make.com webhook URL once. flompt remembers it and sends the assembled prompt on demand.</span>
+              </div>
+            </div>
+            <div class="mcp-feature">
+              <span class="make-tool-icon">🔄</span>
+              <div>
+                <strong>Structured payload</strong>
+                <span>Receives <code>prompt</code>, <code>format</code>, <code>blockCount</code> and metadata — ready to route into GPT, Claude, or any HTTP module.</span>
+              </div>
+            </div>
+            <div class="mcp-feature">
+              <span class="make-tool-icon">📋</span>
+              <div>
+                <strong>Execution history</strong>
+                <span>The last 10 sends are stored locally so you can replay or audit any prompt flow at a glance.</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="/app" class="mcp-link" style="color:#8b7ffa;border-color:rgba(107,93,250,0.3)">Try the Make.com integration →</a>
+        </div>
+
+        <div class="make-code-block mcp-code-block" style="align-self:center">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(107,93,250,0.15)">
+            <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>
+            <span style="margin-left:8px;font-size:0.75rem;color:rgba(255,255,255,0.3);font-family:var(--mono)">POST → make.com/webhook/…</span>
+          </div>
+          <pre style="margin:0;font-size:0.82rem;line-height:1.7;font-family:var(--mono);color:rgba(255,255,255,0.85)">{
+  <span style="color:#8b7ffa">"prompt"</span>:     <span style="color:#86efac">"You are a senior…"</span>,
+  <span style="color:#8b7ffa">"format"</span>:     <span style="color:#86efac">"claude"</span>,
+  <span style="color:#8b7ffa">"blockCount"</span>: <span style="color:#fbbf24">5</span>,
+  <span style="color:#8b7ffa">"source"</span>:     <span style="color:#86efac">"flompt"</span>,
+  <span style="color:#8b7ffa">"sentAt"</span>:     <span style="color:#86efac">"2026-03-13T…"</span>
+}</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── TRANSFORMATION ─────────────────────────────── -->
   <section class="transform" id="how-it-works">
     <div class="container">
@@ -1162,49 +1239,52 @@ statistics. Write in English.</pre>
     </div>
   </section>
 
-  <!-- ── BUILT FOR CLAUDE ───────────────────────────── -->
-  <section class="claude-section" id="claude">
+  <!-- ── TEMPLATES ──────────────────────────────────── -->
+  <section class="claude-section" id="templates">
     <div class="container">
       <div class="blocks-intro">
         <div class="section-accent-line"></div>
-        <p class="section-label">Claude best practices, built-in</p>
-        <h2 class="section-title">Not just decompose. <em>Optimize.</em></h2>
-        <p class="section-sub">flompt applies Anthropic's official prompting guidelines automatically when you assemble. Every block knows its place.</p>
+        <p class="section-label">Template library</p>
+        <h2 class="section-title">100+ templates. <em>Zero blank page.</em></h2>
+        <p class="section-sub">Start from a battle-tested prompt flow for any use case. One click loads it into your canvas — blocks pre-filled, ready to edit and compile.</p>
       </div>
       <div class="claude-grid">
 
         <div class="claude-card">
-          <div class="claude-card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <div class="claude-card-icon" style="background:rgba(74,222,128,0.08);border-color:rgba(74,222,128,0.15);color:#4ade80">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           </div>
-          <h3>Document grounding</h3>
-          <p>The <strong>Document</strong> block wraps your content in Anthropic's <code>&lt;documents&gt;&lt;document index="N"&gt;</code> XML format, the structure Claude is trained to parse for highest accuracy.</p>
+          <h3>Code — 10 templates</h3>
+          <p>Code Review, Unit Test Writer, Debug Assistant, README Generator, SQL Query, Regex Generator, API Docs, Architecture Review and more. Paste your code, get structured feedback.</p>
         </div>
 
         <div class="claude-card">
-          <div class="claude-card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
-          </div>
-          <h3>Structured few-shot examples</h3>
-          <p>The <strong>Examples</strong> block parses your <code>Input / Output</code> pairs and generates <code>&lt;examples&gt;&lt;user_input&gt;&lt;ideal_response&gt;</code> XML, the exact format Anthropic recommends for consistent results.</p>
-        </div>
-
-        <div class="claude-card">
-          <div class="claude-card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3>Optimal block ordering</h3>
-          <p>Anthropic's research shows that block order matters. flompt always places documents first, then persona, task, constraints, examples and reasoning. Automatically, without you lifting a finger.</p>
-        </div>
-
-        <div class="claude-card">
-          <div class="claude-card-icon">
+          <div class="claude-card-icon" style="background:rgba(192,132,252,0.08);border-color:rgba(192,132,252,0.15);color:#c084fc">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>
           </div>
-          <h3>Format Control block</h3>
-          <p>A dedicated block for Claude-specific style directives: <em>be concise, use markdown, no preamble, respond in bullet points</em>. Assembled as <code>&lt;format_instructions&gt;</code> so Claude picks it up reliably.</p>
+          <h3>Writing — 10 templates</h3>
+          <p>Blog Post, Cover Letter, Press Release, LinkedIn Post, Essay Introduction, Professional Email, Story Outline and more. Structured writing prompts for every format.</p>
         </div>
 
+        <div class="claude-card">
+          <div class="claude-card-icon" style="background:rgba(255,107,157,0.08);border-color:rgba(255,107,157,0.15);color:#ff6b9d">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3>Marketing — 10 templates</h3>
+          <p>Landing Page Copy, Ad Copy, Email Sequence, Brand Positioning, Case Study, Newsletter, SEO Meta Tags and more. Conversion-focused prompt flows for every channel.</p>
+        </div>
+
+        <div class="claude-card">
+          <div class="claude-card-icon" style="background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.15);color:#fbbf24">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3>7 more categories</h3>
+          <p>Productivity, Design, Education, Sales, Data, Creative and Personal — OKRs, UX audits, lesson plans, sales pitches, data stories, character profiles and more.</p>
+        </div>
+
+      </div>
+      <div style="text-align:center;margin-top:48px">
+        <a href="/app" class="btn-cta" style="font-size:0.9rem;padding:11px 28px">Browse all 100+ templates &rarr;</a>
       </div>
     </div>
   </section>
@@ -1219,12 +1299,9 @@ statistics. Write in English.</pre>
           <div class="stat-sub">role · audience · context · objective · goal · input · constraints · examples · chain of thought · output format · response style · document · language</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Before</div>
-          <div class="stat-value stat-before">1 blob</div>
-          <div class="stat-arrow">↓</div>
-          <div class="stat-label" style="margin-top:0">After</div>
-          <div class="stat-value stat-after">structured</div>
-          <div class="stat-sub">Semantically decomposed, editable, recompilable</div>
+          <div class="stat-label">Templates</div>
+          <div class="stat-value">100+</div>
+          <div class="stat-sub">code · writing · marketing · design · education · sales · data · creative · personal · productivity</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Platforms</div>
@@ -1262,6 +1339,10 @@ statistics. Write in English.</pre>
         <div class="spec-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           <span><strong>Claude Code MCP</strong>: use flompt tools natively in your agent</span>
+        </div>
+        <div class="spec-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+          <span><strong>Make.com webhook</strong>: send prompts to any automation</span>
         </div>
       </div>
     </div>
