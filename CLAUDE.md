@@ -161,11 +161,6 @@ Ordered as assembled (TYPE_PRIORITY in `assemblePrompt.ts`):
 - `make_send_success` — webhook returned 2xx
 - `make_send_error` — props: `reason`
 
-### i18n
-- `makeIntegration` key group added to all 10 locales
-- EN + FR fully translated; other 8 locales use English strings
-- Type defined in `Translations` interface (`translations.ts`)
-
 ### Validation rules
 - Webhook URL must be a valid `http(s)://` URL containing `make.com`
 - Send button disabled if: no valid webhook URL OR no compiled prompt
