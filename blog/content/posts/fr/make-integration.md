@@ -1,6 +1,6 @@
 ---
 title: "Flompt + Make.com : automatisez vos workflows IA sans une ligne de code"
-date: "2026-03-13"
+date: "2026-03-14"
 excerpt: "Flompt peut maintenant envoyer vos prompts assemblés directement vers Make.com via webhook. Déclenchez n'importe quelle automatisation — Notion, Slack, Airtable, email — dès que votre prompt est prêt. Une contribution de @Refaltor77."
 tags: ["make.com", "automatisation", "workflow", "webhook", "communauté", "open-source"]
 ---
