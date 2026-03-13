@@ -477,8 +477,8 @@ body {
   text-align: left;
   transition: all var(--transition-fast);
   display: flex;
-  align-items: center;
-  gap: 9px;
+  flex-direction: column;
+  gap: 0;
   font-family: var(--font);
   color: var(--text-muted);
 }
@@ -487,6 +487,36 @@ body {
   color: var(--text);
   border-color: var(--border-strong);
   transform: translateX(2px);
+}
+
+.block-pill-main {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.block-pill-label {
+  font-size: 0.76rem;
+  font-weight: 500;
+}
+
+.block-pill-desc {
+  font-size: 0.64rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  line-height: 1.35;
+  padding-left: 31px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.22s ease, opacity 0.18s ease, margin-top 0.22s ease;
+  margin-top: 0;
+  pointer-events: none;
+}
+.block-pill:hover .block-pill-desc {
+  max-height: 40px;
+  opacity: 0.7;
+  margin-top: 4px;
 }
 
 .block-pill-icon {
@@ -577,6 +607,51 @@ body {
 }
 
 .block-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; margin-left: 4px; }
+
+/* ── Block info tooltip ── */
+.block-info-tip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: help;
+  opacity: 0;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+  margin-left: 2px;
+}
+.block-header:hover .block-info-tip,
+.rsp-header:hover .block-info-tip,
+.language-block-inner:hover .block-info-tip {
+  opacity: 0.5;
+}
+.block-info-tip:hover {
+  opacity: 1 !important;
+}
+.block-info-tip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1e;
+  color: #d1d1d6;
+  font-size: 0.68rem;
+  line-height: 1.45;
+  padding: 6px 9px;
+  border-radius: 7px;
+  width: 170px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s 0.3s;
+  z-index: 9999;
+  border: 1px solid #3a3a3e;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  white-space: normal;
+}
+.block-info-tip:hover::after {
+  opacity: 1;
+}
 
 .block-collapse, .block-remove {
   background: none;

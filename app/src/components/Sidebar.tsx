@@ -103,15 +103,17 @@ const Sidebar = () => {
                 onClick={() => handleAddBlock(type)}
                 draggable
                 onDragStart={(e) => handleDragStart(e, type)}
-                title={tr.description}
               >
-                <span
-                  className="block-pill-icon"
-                  style={{ background: `${meta.color}1a` }}
-                >
-                  <Icon size={13} />
+                <span className="block-pill-main">
+                  <span
+                    className="block-pill-icon"
+                    style={{ background: `${meta.color}1a` }}
+                  >
+                    <Icon size={13} />
+                  </span>
+                  <span className="block-pill-label">{tr.label}</span>
                 </span>
-                {tr.label}
+                <span className="block-pill-desc">{tr.description}</span>
               </button>
             )
           })}
