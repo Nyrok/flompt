@@ -1,0 +1,36 @@
+{
+  "id": "architecture-review",
+  "category": "code",
+  "i18n": {
+    "en": {
+      "name": "Architecture Review",
+      "description": "Review a system architecture for scalability and best practices."
+    },
+    "fr": {
+      "name": "Revue d'architecture",
+      "description": "Analysez une architecture système pour sa scalabilité et ses bonnes pratiques."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a principal engineer with deep experience in distributed systems and software architecture."
+    },
+    {
+      "type": "objective",
+      "content": "Review the architecture described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{describe your system: components, data flow, tech stack, scale, and any specific concerns}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Cover: scalability, single points of failure, security, data consistency, observability\n- Be specific — reference the exact components mentioned\n- Prioritize actionable recommendations"
+    },
+    {
+      "type": "output_format",
+      "content": "Strengths · Risks (🔴 critical / 🟡 concern) · Recommendations with rationale · Priority order"
+    }
+  ]
+}

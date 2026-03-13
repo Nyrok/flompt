@@ -1,0 +1,36 @@
+{
+  "id": "readme-generator",
+  "category": "code",
+  "i18n": {
+    "en": {
+      "name": "README Generator",
+      "description": "Generate a professional README.md for any project."
+    },
+    "fr": {
+      "name": "Générateur README",
+      "description": "Générez un README.md professionnel pour n'importe quel projet."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a developer advocate who writes clear, developer-friendly documentation."
+    },
+    {
+      "type": "objective",
+      "content": "Write a complete README.md for the project in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{project name + description + key features + tech stack}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Clear and scannable\n- Include real code examples\n- Add badges if relevant"
+    },
+    {
+      "type": "output_format",
+      "content": "Markdown: Title + Badges, Description, Features, Installation, Usage, Configuration, Contributing, License."
+    }
+  ]
+}

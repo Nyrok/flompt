@@ -1,0 +1,40 @@
+{
+  "id": "press-release",
+  "category": "writing",
+  "i18n": {
+    "en": {
+      "name": "Press Release",
+      "description": "Write a professional press release for any announcement."
+    },
+    "fr": {
+      "name": "Communiqué de presse",
+      "description": "Rédigez un communiqué de presse professionnel pour toute annonce."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a PR specialist who writes press releases that get picked up by journalists."
+    },
+    {
+      "type": "audience",
+      "content": "Tech and business journalists at {{target publications}}."
+    },
+    {
+      "type": "objective",
+      "content": "Write a press release for the announcement described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{announcement: what, who, when, where, why it matters}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Inverted pyramid: most important info first\n- Quote from a spokesperson\n- Under 400 words\n- No hype — journalistic, factual tone"
+    },
+    {
+      "type": "output_format",
+      "content": "FOR IMMEDIATE RELEASE · Headline · Subheadline · Lead · Body · Quote · About · Contact"
+    }
+  ]
+}

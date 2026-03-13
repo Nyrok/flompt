@@ -1,0 +1,40 @@
+{
+  "id": "blog-post",
+  "category": "writing",
+  "i18n": {
+    "en": {
+      "name": "Blog Post",
+      "description": "Write a structured, SEO-friendly blog post on any topic."
+    },
+    "fr": {
+      "name": "Article de blog",
+      "description": "Rédigez un article de blog structuré et optimisé SEO."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an expert content writer and SEO specialist with 10 years of experience."
+    },
+    {
+      "type": "audience",
+      "content": "General readers interested in the topic, ranging from beginners to intermediate level."
+    },
+    {
+      "type": "objective",
+      "content": "Write a complete, engaging blog post on the topic provided in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{topic}} — e.g. \"The future of AI in healthcare\""
+    },
+    {
+      "type": "constraints",
+      "content": "- 800–1200 words\n- Intro + 3–4 sections with H2 headings + conclusion\n- Simple, clear language\n- No clickbait titles"
+    },
+    {
+      "type": "output_format",
+      "content": "Markdown: H1 title, H2 sections, short paragraphs, CTA at the end."
+    }
+  ]
+}

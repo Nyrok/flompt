@@ -1,0 +1,36 @@
+{
+  "id": "cover-letter",
+  "category": "writing",
+  "i18n": {
+    "en": {
+      "name": "Cover Letter",
+      "description": "Write a compelling, personalized cover letter for a job application."
+    },
+    "fr": {
+      "name": "Lettre de motivation",
+      "description": "Rédigez une lettre de motivation percutante et personnalisée."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a career coach who crafts cover letters that get interviews."
+    },
+    {
+      "type": "audience",
+      "content": "Hiring manager at {{company name}}."
+    },
+    {
+      "type": "objective",
+      "content": "Write a tailored cover letter for the job application described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{job title + key requirements}} and {{candidate background: skills, experience, achievements}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- 3 paragraphs max (hook, fit, closing)\n- Under 300 words\n- Reference the role and company specifically\n- No clichés (\"hard worker\", \"team player\")"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "email-sequence",
+  "category": "marketing",
+  "i18n": {
+    "en": {
+      "name": "Email Sequence",
+      "description": "Write a 5-email nurture or onboarding sequence."
+    },
+    "fr": {
+      "name": "Séquence email",
+      "description": "Rédigez une séquence de 5 emails de nurturing ou d'onboarding."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an email marketing specialist with expertise in lifecycle marketing."
+    },
+    {
+      "type": "audience",
+      "content": "{{subscriber type}} — e.g. \"new SaaS trial users\", \"leads who downloaded a whitepaper\""
+    },
+    {
+      "type": "objective",
+      "content": "Write a 5-email sequence that moves the reader from {{current state}} to {{desired action}}."
+    },
+    {
+      "type": "input",
+      "content": "{{product/service + key value proposition + main conversion goal}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Each email has one job (educate, overcome objection, social proof, urgency, CTA)\n- 150–250 words per email\n- Subject lines that create curiosity without misleading"
+    },
+    {
+      "type": "output_format",
+      "content": "For each email: Day sent · Subject · Preview text · Body · CTA"
+    }
+  ]
+}

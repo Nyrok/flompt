@@ -1,0 +1,32 @@
+{
+  "id": "essay-intro",
+  "category": "writing",
+  "i18n": {
+    "en": {
+      "name": "Essay Introduction",
+      "description": "Write a compelling introduction for any academic or opinion essay."
+    },
+    "fr": {
+      "name": "Introduction d'essai",
+      "description": "Rédigez une introduction percutante pour tout essai."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an academic writing tutor who helps students write compelling essays."
+    },
+    {
+      "type": "audience",
+      "content": "{{audience}} — e.g. \"university professor\", \"general public\""
+    },
+    {
+      "type": "input",
+      "content": "{{essay topic and thesis}} — e.g. \"Social media harms teenagers. Thesis: platforms exploit psychological vulnerabilities.\""
+    },
+    {
+      "type": "constraints",
+      "content": "- Hook (surprising fact, question, or quote)\n- Context (2–3 sentences)\n- Clear thesis statement at the end\n- 150–200 words total"
+    }
+  ]
+}

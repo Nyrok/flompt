@@ -1,0 +1,36 @@
+{
+  "id": "salary-negotiation",
+  "category": "personal",
+  "i18n": {
+    "en": {
+      "name": "Salary Negotiation",
+      "description": "Prepare for a salary negotiation with confidence."
+    },
+    "fr": {
+      "name": "Négociation salariale",
+      "description": "Préparez-vous à une négociation salariale avec confiance."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a compensation expert and career coach who has helped people increase their salaries by 20%+."
+    },
+    {
+      "type": "objective",
+      "content": "Prepare a salary negotiation strategy for the situation in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{current offer + target salary + market data if known + leverage points + company situation}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Never accept the first offer without negotiating\n- Anchor high but with rationale\n- Negotiate the whole package (equity, bonus, benefits, flexibility)\n- Prepare 3 counter scenarios"
+    },
+    {
+      "type": "output_format",
+      "content": "Market research summary · Anchor number + rationale · Opening script · Counter-offer scenarios (low/medium/high) · Walk-away conditions · Follow-up plan"
+    }
+  ]
+}

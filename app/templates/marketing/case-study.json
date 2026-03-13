@@ -1,0 +1,36 @@
+{
+  "id": "case-study",
+  "category": "marketing",
+  "i18n": {
+    "en": {
+      "name": "Case Study",
+      "description": "Write a compelling customer case study or success story."
+    },
+    "fr": {
+      "name": "Étude de cas",
+      "description": "Rédigez une étude de cas client ou un témoignage de succès."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a content marketer who writes case studies that build trust and drive pipeline."
+    },
+    {
+      "type": "objective",
+      "content": "Write a customer case study based on the information in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{customer name/industry + challenge + solution used + measurable results}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Lead with the result in the headline\n- Quantify everything possible (%, time saved, revenue impact)\n- Let the customer's voice come through with quotes\n- 400–600 words"
+    },
+    {
+      "type": "output_format",
+      "content": "Headline (result) · Customer snapshot · Challenge · Solution · Results (metrics) · Quote · CTA"
+    }
+  ]
+}

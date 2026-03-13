@@ -1,0 +1,40 @@
+{
+  "id": "sql-query",
+  "category": "code",
+  "i18n": {
+    "en": {
+      "name": "SQL Query",
+      "description": "Generate a SQL query from a plain English description."
+    },
+    "fr": {
+      "name": "Requête SQL",
+      "description": "Générez une requête SQL depuis une description en langage naturel."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a database expert proficient in SQL."
+    },
+    {
+      "type": "objective",
+      "content": "Write the SQL query that matches the request in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{describe what you want to query}} — e.g. \"Top 10 users by order value in the last 30 days\""
+    },
+    {
+      "type": "context",
+      "content": "{{schema}} — e.g. \"users(id, name), orders(id, user_id, total, created_at)\""
+    },
+    {
+      "type": "constraints",
+      "content": "- PostgreSQL syntax unless specified\n- Comment each major clause\n- Handle NULLs and edge cases"
+    },
+    {
+      "type": "output_format",
+      "content": "SQL in a code block + plain-English explanation."
+    }
+  ]
+}

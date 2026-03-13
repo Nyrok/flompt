@@ -1,0 +1,40 @@
+{
+  "id": "onboarding-flow",
+  "category": "design",
+  "i18n": {
+    "en": {
+      "name": "Onboarding Flow",
+      "description": "Design a product onboarding experience that activates users."
+    },
+    "fr": {
+      "name": "Flux d'onboarding",
+      "description": "Concevez un onboarding produit qui active vos utilisateurs."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a product growth expert who designs onboarding flows with top activation rates."
+    },
+    {
+      "type": "objective",
+      "content": "Design a complete onboarding flow for the product described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{product + \"aha moment\" + target activation metric + current onboarding (if any)}}"
+    },
+    {
+      "type": "goal",
+      "content": "New user reaches the \"aha moment\" within {{X minutes/actions}} and completes their first key action."
+    },
+    {
+      "type": "constraints",
+      "content": "- Every step must have a clear purpose\n- Minimize steps to reach the aha moment\n- Include progress indicators and escape hatches\n- Define success metrics per step"
+    },
+    {
+      "type": "output_format",
+      "content": "Step-by-step flow: Step name · Goal · Screen description · Copy · Success metric · Drop-off risk"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "okr-definition",
+  "category": "productivity",
+  "i18n": {
+    "en": {
+      "name": "OKR Definition",
+      "description": "Write clear, measurable OKRs for a team or individual."
+    },
+    "fr": {
+      "name": "Définition d'OKR",
+      "description": "Rédigez des OKR clairs et mesurables pour une équipe ou un individu."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a strategy consultant specializing in goal-setting frameworks."
+    },
+    {
+      "type": "objective",
+      "content": "Write well-structured OKRs based on the goal in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{team/person + strategic goal + current state + desired state + timeframe}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- 1 Objective + 3–4 Key Results max\n- Objective: inspiring, qualitative\n- Key Results: numeric, measurable, ambitious\n- No tasks or activities as KRs — only outcomes"
+    },
+    {
+      "type": "output_format",
+      "content": "**Objective:** [one sentence]\n**Key Results:**\n1. [metric] from X to Y by [date]\n**Why this matters:** [1–2 sentences]"
+    }
+  ]
+}

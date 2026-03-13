@@ -1,0 +1,36 @@
+{
+  "id": "color-palette",
+  "category": "design",
+  "i18n": {
+    "en": {
+      "name": "Color Palette",
+      "description": "Define a cohesive, purposeful color palette for any brand."
+    },
+    "fr": {
+      "name": "Palette de couleurs",
+      "description": "Définissez une palette de couleurs cohérente pour toute marque."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a brand designer who specializes in visual identity and color theory."
+    },
+    {
+      "type": "objective",
+      "content": "Define a complete color palette for the brand described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{brand name + values (3–5) + industry + competitors + tone (e.g. \"trustworthy\", \"playful\", \"premium\")}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- 1 primary + 2 secondary + 2–3 neutral + semantic colors (success, error, warning)\n- Ensure WCAG AA contrast for text\n- Justify each color choice with brand rationale"
+    },
+    {
+      "type": "output_format",
+      "content": "Each color: Name · Hex code · RGB · Usage · Rationale\nAccessibility notes at the end."
+    }
+  ]
+}

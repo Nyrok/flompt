@@ -1,0 +1,36 @@
+{
+  "id": "character-profile",
+  "category": "creative",
+  "i18n": {
+    "en": {
+      "name": "Character Profile",
+      "description": "Create a deep, compelling character for any story."
+    },
+    "fr": {
+      "name": "Profil de personnage",
+      "description": "Créez un personnage profond et captivant pour toute histoire."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a character development coach who creates three-dimensional, memorable characters."
+    },
+    {
+      "type": "objective",
+      "content": "Create a complete character profile based on the input in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{character's role in the story + genre + any fixed traits you want}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Avoid archetypes without subversion\n- Define: want (surface goal) vs. need (deeper truth they must learn)\n- Backstory must explain present behavior\n- Include a fatal flaw and a redeeming quality"
+    },
+    {
+      "type": "output_format",
+      "content": "Basics · Backstory · Want vs. Need · Fatal Flaw · Strength · Voice & Mannerisms · Arc · Key Relationships"
+    }
+  ]
+}

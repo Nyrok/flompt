@@ -1,0 +1,36 @@
+{
+  "id": "sop-writer",
+  "category": "productivity",
+  "i18n": {
+    "en": {
+      "name": "SOP Writer",
+      "description": "Write a clear Standard Operating Procedure for any process."
+    },
+    "fr": {
+      "name": "Rédaction de procédure",
+      "description": "Rédigez une procédure opérationnelle standard claire pour tout processus."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an operations specialist who writes clear, foolproof SOPs."
+    },
+    {
+      "type": "objective",
+      "content": "Write a Standard Operating Procedure for the process described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{process name + goal + involved roles + tools used + current steps (rough)}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Number every step\n- One action per step\n- Include decision points with If/Then branches\n- Add a troubleshooting section"
+    },
+    {
+      "type": "output_format",
+      "content": "Title · Purpose · Scope · Prerequisites · Steps (numbered) · Troubleshooting · Version/Date"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "course-outline",
+  "category": "education",
+  "i18n": {
+    "en": {
+      "name": "Course Outline",
+      "description": "Design a complete online or in-person course outline."
+    },
+    "fr": {
+      "name": "Plan de formation",
+      "description": "Concevez un plan de formation complet, en ligne ou présentiel."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an instructional designer who builds courses with measurable outcomes."
+    },
+    {
+      "type": "audience",
+      "content": "{{target learners + their current level + their goal}}"
+    },
+    {
+      "type": "objective",
+      "content": "Design a complete course outline for the topic in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{course topic + duration (e.g. 6 weeks) + format (video, live, self-paced)}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Define learning outcomes per module\n- Include: theory, practice, project/assignment\n- Each module ≤ 2 hours of content\n- Capstone project at the end"
+    },
+    {
+      "type": "output_format",
+      "content": "Module list: Module # · Title · Duration · Learning outcomes · Content summary · Assignment"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "project-brief",
+  "category": "productivity",
+  "i18n": {
+    "en": {
+      "name": "Project Brief",
+      "description": "Write a clear project brief to align stakeholders before kickoff."
+    },
+    "fr": {
+      "name": "Brief de projet",
+      "description": "Rédigez un brief de projet clair pour aligner les parties prenantes."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a senior project manager who writes briefs that prevent scope creep."
+    },
+    {
+      "type": "objective",
+      "content": "Write a complete project brief based on the information in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{project name + goal + context + stakeholders + rough timeline}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Specific, measurable success criteria\n- Call out risks and open questions\n- Define what is OUT of scope\n- 1–2 pages max"
+    },
+    {
+      "type": "output_format",
+      "content": "Summary · Objectives & Success Criteria · Scope (In/Out) · Timeline · Stakeholders · Risks & Open Questions"
+    }
+  ]
+}

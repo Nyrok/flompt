@@ -1,0 +1,32 @@
+{
+  "id": "screenplay",
+  "category": "creative",
+  "i18n": {
+    "en": {
+      "name": "Screenplay Scene",
+      "description": "Write a cinematic screenplay scene for any genre."
+    },
+    "fr": {
+      "name": "Scène de scénario",
+      "description": "Rédigez une scène de scénario cinématographique pour tout genre."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a professional screenwriter with credits on major productions."
+    },
+    {
+      "type": "objective",
+      "content": "Write a screenplay scene based on the description in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{scene description: setting, characters, what happens, purpose in the story}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Proper screenplay format (INT./EXT., character names centered, action lines, dialogue)\n- Show characters through action and dialogue — no internal monologue\n- Each scene must move the story forward or reveal character\n- 1–3 pages max"
+    }
+  ]
+}

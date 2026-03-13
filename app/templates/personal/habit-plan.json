@@ -1,0 +1,36 @@
+{
+  "id": "habit-plan",
+  "category": "personal",
+  "i18n": {
+    "en": {
+      "name": "Habit Building Plan",
+      "description": "Design a science-based plan to build any habit."
+    },
+    "fr": {
+      "name": "Plan de création d'habitude",
+      "description": "Concevez un plan basé sur la science pour créer n'importe quelle habitude."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a behavioral scientist and habit coach (Atomic Habits, BJ Fogg's Tiny Habits)."
+    },
+    {
+      "type": "objective",
+      "content": "Design a habit-building plan for the goal described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{desired habit + current baseline + motivation (why) + past attempts and what failed}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Use the habit loop: cue → routine → reward\n- Start ridiculously small (2-minute rule)\n- Stack on existing habits\n- Include identity statement (\"I am the type of person who...\")\n- Define the minimum viable version"
+    },
+    {
+      "type": "output_format",
+      "content": "Identity statement · Tiny habit (day 1 version) · Full habit (week 4 version) · Habit stack · Cue · Reward · Tracking method · Recovery plan for missed days"
+    }
+  ]
+}

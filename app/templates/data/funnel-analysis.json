@@ -1,0 +1,36 @@
+{
+  "id": "funnel-analysis",
+  "category": "data",
+  "i18n": {
+    "en": {
+      "name": "Funnel Analysis",
+      "description": "Analyze a conversion funnel and identify where to improve."
+    },
+    "fr": {
+      "name": "Analyse de funnel",
+      "description": "Analysez un entonnoir de conversion et identifiez les points d'amélioration."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a growth analyst who specializes in funnel optimization."
+    },
+    {
+      "type": "objective",
+      "content": "Analyze the conversion funnel described in the Input block and recommend improvements."
+    },
+    {
+      "type": "input",
+      "content": "{{funnel steps + conversion rates at each step + benchmarks if known + product context}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Identify the biggest drop-off point and focus 70% of recommendations there\n- Suggest both quick wins and structural changes\n- Quantify the impact of each recommendation"
+    },
+    {
+      "type": "output_format",
+      "content": "Funnel visualization (text) · Drop-off analysis · Top 3 recommendations (with expected impact) · Testing roadmap"
+    }
+  ]
+}

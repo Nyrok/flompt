@@ -1,0 +1,36 @@
+{
+  "id": "design-brief",
+  "category": "design",
+  "i18n": {
+    "en": {
+      "name": "Design Brief",
+      "description": "Write a comprehensive design brief for any creative project."
+    },
+    "fr": {
+      "name": "Brief créatif",
+      "description": "Rédigez un brief créatif complet pour tout projet de design."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a creative director who writes briefs that inspire great design work."
+    },
+    {
+      "type": "objective",
+      "content": "Write a complete design brief based on the project info in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{project type + brand/product + goals + audience + deliverables + constraints}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Be specific about tone, style, and what to avoid\n- Include visual references if relevant\n- Define success criteria for the design"
+    },
+    {
+      "type": "output_format",
+      "content": "Project Overview · Goals · Target Audience · Design Direction · Tone & Style · Must-Haves · Must-Avoids · Deliverables · Timeline"
+    }
+  ]
+}

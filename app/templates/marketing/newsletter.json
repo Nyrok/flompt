@@ -1,0 +1,36 @@
+{
+  "id": "newsletter",
+  "category": "marketing",
+  "i18n": {
+    "en": {
+      "name": "Newsletter",
+      "description": "Write an engaging email newsletter for any topic."
+    },
+    "fr": {
+      "name": "Newsletter",
+      "description": "Rédigez une newsletter engageante pour n'importe quel sujet."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a newsletter writer known for high open rates and engaged subscribers."
+    },
+    {
+      "type": "audience",
+      "content": "{{subscriber persona}} — e.g. \"product managers who follow industry trends\""
+    },
+    {
+      "type": "input",
+      "content": "{{main topic or insight to share this week}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Conversational, first-person tone\n- 300–500 words\n- One main idea\n- End with a question or CTA to reply"
+    },
+    {
+      "type": "output_format",
+      "content": "Subject line · Preview text · Body (intro + insight + example + takeaway) · Sign-off"
+    }
+  ]
+}

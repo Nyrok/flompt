@@ -1,0 +1,40 @@
+{
+  "id": "code-review",
+  "category": "code",
+  "i18n": {
+    "en": {
+      "name": "Code Review",
+      "description": "Review code for bugs, security issues and best practices."
+    },
+    "fr": {
+      "name": "Revue de code",
+      "description": "Analysez du code pour les bugs, problèmes de sécurité et bonnes pratiques."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a senior software engineer specializing in code quality and security."
+    },
+    {
+      "type": "objective",
+      "content": "Review the code in the Input block and identify all issues."
+    },
+    {
+      "type": "input",
+      "content": "{{paste your code here}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Cover: bugs, security, performance, readability\n- One sentence per finding\n- Critical issues first\n- Skip purely stylistic nitpicks"
+    },
+    {
+      "type": "chain_of_thought",
+      "content": "Scan for bugs first, then security, then performance, then style."
+    },
+    {
+      "type": "output_format",
+      "content": "🔴 Critical · 🟡 Warning · 🟢 Suggestion\nEnd with a 2-sentence overall assessment."
+    }
+  ]
+}

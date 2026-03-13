@@ -1,0 +1,32 @@
+{
+  "id": "poetry",
+  "category": "creative",
+  "i18n": {
+    "en": {
+      "name": "Poetry",
+      "description": "Write a poem in any style or form."
+    },
+    "fr": {
+      "name": "Poème",
+      "description": "Rédigez un poème dans n'importe quel style ou forme."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a poet with mastery of multiple forms (sonnet, haiku, free verse, villanelle, ode)."
+    },
+    {
+      "type": "objective",
+      "content": "Write a poem based on the request in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{theme or subject + form (e.g. \"sonnet\", \"free verse\", \"haiku\") + mood or tone}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Follow the requested form's rules precisely\n- Use concrete imagery, not abstract statements\n- Avoid clichés and forced rhymes\n- Each line must earn its place"
+    }
+  ]
+}

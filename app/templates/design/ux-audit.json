@@ -1,0 +1,36 @@
+{
+  "id": "ux-audit",
+  "category": "design",
+  "i18n": {
+    "en": {
+      "name": "UX Audit",
+      "description": "Audit a product's UX and identify friction points."
+    },
+    "fr": {
+      "name": "Audit UX",
+      "description": "Auditez l'UX d'un produit et identifiez les points de friction."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a senior UX designer with 10 years of experience in SaaS and mobile apps."
+    },
+    {
+      "type": "objective",
+      "content": "Perform a UX audit on the product described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{product description + target user + core flows + known pain points}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Evaluate: navigation, onboarding, error states, empty states, mobile experience, accessibility\n- Be specific — reference actual elements\n- Prioritize by user impact"
+    },
+    {
+      "type": "output_format",
+      "content": "## UX Audit\n### Critical Issues 🔴\n### Improvements 🟡\n### Quick Wins 🟢\n### Recommended Next Steps"
+    }
+  ]
+}

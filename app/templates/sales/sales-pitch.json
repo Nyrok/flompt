@@ -1,0 +1,36 @@
+{
+  "id": "sales-pitch",
+  "category": "sales",
+  "i18n": {
+    "en": {
+      "name": "Sales Pitch",
+      "description": "Write a compelling sales pitch for any product or service."
+    },
+    "fr": {
+      "name": "Pitch commercial",
+      "description": "Rédigez un pitch commercial percutant pour tout produit ou service."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an elite sales consultant who trains reps at top SaaS companies."
+    },
+    {
+      "type": "audience",
+      "content": "{{buyer persona: role, company size, key concerns}}"
+    },
+    {
+      "type": "objective",
+      "content": "Write a compelling sales pitch for the product/service in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{product/service + key differentiators + relevant case study or proof point}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Open with the prospect's pain, not your product\n- Use the SPIN framework (Situation, Problem, Implication, Need-payoff)\n- One memorable proof point with numbers\n- Close with a clear next step"
+    }
+  ]
+}

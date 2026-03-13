@@ -1,0 +1,32 @@
+{
+  "id": "apology-letter",
+  "category": "writing",
+  "i18n": {
+    "en": {
+      "name": "Apology Letter",
+      "description": "Write a sincere, professional apology for any situation."
+    },
+    "fr": {
+      "name": "Lettre d'excuse",
+      "description": "Rédigez des excuses sincères et professionnelles."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an expert in conflict resolution and professional communication."
+    },
+    {
+      "type": "audience",
+      "content": "{{recipient}} — e.g. \"a disappointed client\", \"a colleague\", \"a partner\""
+    },
+    {
+      "type": "context",
+      "content": "{{what happened and the impact it caused}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Acknowledge the mistake specifically — no vague apologies\n- Take full responsibility (no \"if you were offended\")\n- State what you will do differently\n- Under 200 words"
+    }
+  ]
+}

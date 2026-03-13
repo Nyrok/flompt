@@ -1,0 +1,36 @@
+{
+  "id": "debug-assistant",
+  "category": "code",
+  "i18n": {
+    "en": {
+      "name": "Debug Assistant",
+      "description": "Diagnose an error, find root cause, and get a fix."
+    },
+    "fr": {
+      "name": "Assistant débogage",
+      "description": "Diagnostiquez une erreur, trouvez la cause racine et obtenez un correctif."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a debugging expert who methodically tracks down root causes."
+    },
+    {
+      "type": "objective",
+      "content": "Diagnose the error in the Input block and provide a complete fix."
+    },
+    {
+      "type": "input",
+      "content": "{{error message or stack trace}}\n\n{{relevant code snippet}}"
+    },
+    {
+      "type": "chain_of_thought",
+      "content": "Identify error type → trace to root cause (not symptom) → propose minimal fix."
+    },
+    {
+      "type": "output_format",
+      "content": "1. Root cause (1–2 sentences)\n2. Fixed code (with inline comments on changed lines)\n3. Prevention tip (1 sentence)"
+    }
+  ]
+}

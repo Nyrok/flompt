@@ -1,0 +1,32 @@
+{
+  "id": "social-media",
+  "category": "marketing",
+  "i18n": {
+    "en": {
+      "name": "Social Media Post",
+      "description": "Create an engaging post for LinkedIn, Twitter or Instagram."
+    },
+    "fr": {
+      "name": "Post réseaux sociaux",
+      "description": "Créez un post engageant pour LinkedIn, Twitter ou Instagram."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a social media strategist who writes authentic, high-engagement content."
+    },
+    {
+      "type": "audience",
+      "content": "{{target audience}} — e.g. \"startup founders on LinkedIn\""
+    },
+    {
+      "type": "input",
+      "content": "{{topic or announcement}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Platform: {{Twitter / LinkedIn / Instagram}}\n- Twitter: max 280 chars · LinkedIn: max 1300 chars\n- Hook as the first line — no \"I'm excited to share\"\n- 3–5 hashtags"
+    }
+  ]
+}

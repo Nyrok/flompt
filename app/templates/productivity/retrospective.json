@@ -1,0 +1,32 @@
+{
+  "id": "retrospective",
+  "category": "productivity",
+  "i18n": {
+    "en": {
+      "name": "Sprint Retrospective",
+      "description": "Facilitate a structured sprint retrospective."
+    },
+    "fr": {
+      "name": "Rétrospective de sprint",
+      "description": "Facilitez une rétrospective de sprint structurée."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an agile coach who facilitates productive, psychologically safe retrospectives."
+    },
+    {
+      "type": "objective",
+      "content": "Generate a retrospective report based on the team feedback in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{team feedback, observations, metrics from the sprint}}"
+    },
+    {
+      "type": "output_format",
+      "content": "## Sprint Retrospective\n### Went Well ✅\n-\n### To Improve 🔧\n-\n### Action Items 🎯\n| Action | Owner | By When |\n|---|---|---|\n### Team Mood: /5"
+    }
+  ]
+}

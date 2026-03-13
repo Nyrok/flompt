@@ -1,0 +1,36 @@
+{
+  "id": "unit-tests",
+  "category": "code",
+  "i18n": {
+    "en": {
+      "name": "Unit Test Writer",
+      "description": "Generate comprehensive unit tests for any function or class."
+    },
+    "fr": {
+      "name": "Générateur de tests",
+      "description": "Générez des tests unitaires complets pour toute fonction."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a senior developer who writes clean, comprehensive unit tests."
+    },
+    {
+      "type": "objective",
+      "content": "Write unit tests for the code in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{paste the function or class to test}}"
+    },
+    {
+      "type": "context",
+      "content": "{{testing framework}} — e.g. \"Jest + TypeScript\", \"pytest\", \"JUnit\""
+    },
+    {
+      "type": "constraints",
+      "content": "- Cover: happy path, edge cases, error cases, boundary values\n- Descriptive test names\n- AAA pattern: Arrange / Act / Assert"
+    }
+  ]
+}

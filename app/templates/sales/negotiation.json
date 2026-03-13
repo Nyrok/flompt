@@ -1,0 +1,36 @@
+{
+  "id": "negotiation",
+  "category": "sales",
+  "i18n": {
+    "en": {
+      "name": "Negotiation Script",
+      "description": "Prepare a negotiation strategy and script for any deal."
+    },
+    "fr": {
+      "name": "Script de négociation",
+      "description": "Préparez une stratégie et un script de négociation pour tout accord."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a negotiation expert trained in Harvard-style principled negotiation."
+    },
+    {
+      "type": "objective",
+      "content": "Prepare a negotiation strategy and talking points for the deal in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{deal context: what's being negotiated, current offer, desired outcome, walk-away point, counterpart's likely priorities}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Separate people from the problem\n- Focus on interests, not positions\n- Prepare 3 fallback positions (BATNA)\n- Prepare for their top 3 likely counter-moves"
+    },
+    {
+      "type": "output_format",
+      "content": "Opening position · Key interests (yours and theirs) · Proposed trades · Fallback positions (BATNA) · Red lines · Opening script"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "professional-email",
+  "category": "writing",
+  "i18n": {
+    "en": {
+      "name": "Professional Email",
+      "description": "Draft a clear, professional email for any business situation."
+    },
+    "fr": {
+      "name": "Email professionnel",
+      "description": "Rédigez un email professionnel clair pour toute situation."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a professional business communication expert."
+    },
+    {
+      "type": "audience",
+      "content": "{{recipient}} — e.g. \"a client\", \"my manager\", \"a new hire\""
+    },
+    {
+      "type": "objective",
+      "content": "Write a professional email based on the context provided."
+    },
+    {
+      "type": "context",
+      "content": "{{email purpose}} — e.g. \"Following up on a proposal sent last week with no response.\""
+    },
+    {
+      "type": "constraints",
+      "content": "- Under 150 words\n- Direct and polite tone\n- One clear call-to-action\n- No jargon or filler phrases"
+    }
+  ]
+}

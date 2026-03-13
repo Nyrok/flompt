@@ -1,0 +1,40 @@
+{
+  "id": "workshop-design",
+  "category": "education",
+  "i18n": {
+    "en": {
+      "name": "Workshop Design",
+      "description": "Design an engaging workshop for any topic or skill."
+    },
+    "fr": {
+      "name": "Conception d'atelier",
+      "description": "Concevez un atelier engageant sur tout sujet ou compétence."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a facilitator and workshop designer who creates memorable learning experiences."
+    },
+    {
+      "type": "audience",
+      "content": "{{participants: number, role, experience level}}"
+    },
+    {
+      "type": "objective",
+      "content": "Design a complete workshop for the topic and goal in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{workshop topic + duration + desired outcome + format (in-person/virtual)}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Alternate between input and activity every 20 minutes\n- Include: icebreaker, group exercises, individual reflection, takeaways\n- Design for the lowest-experience participant"
+    },
+    {
+      "type": "output_format",
+      "content": "Agenda (with times) · Materials needed · Facilitation notes · Discussion questions · Takeaway sheet · Follow-up actions"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "follow-up",
+  "category": "sales",
+  "i18n": {
+    "en": {
+      "name": "Follow-up Email",
+      "description": "Write effective follow-up emails for any sales or business situation."
+    },
+    "fr": {
+      "name": "Email de suivi",
+      "description": "Rédigez des emails de suivi efficaces pour toute situation commerciale."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a sales professional who writes follow-up emails that re-engage without being pushy."
+    },
+    {
+      "type": "audience",
+      "content": "{{prospect: where they are in the funnel, last interaction, time since last contact}}"
+    },
+    {
+      "type": "objective",
+      "content": "Write a follow-up email based on the context in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{what was discussed last + what was promised + any changes since + goal of this email}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Reference the previous conversation specifically\n- Add new value (insight, case study, relevant news)\n- Soft CTA — make it easy to say yes\n- Under 100 words"
+    }
+  ]
+}

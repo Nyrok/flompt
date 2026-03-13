@@ -1,0 +1,32 @@
+{
+  "id": "short-story",
+  "category": "creative",
+  "i18n": {
+    "en": {
+      "name": "Short Story",
+      "description": "Write a compelling short story in any genre."
+    },
+    "fr": {
+      "name": "Nouvelle",
+      "description": "Écrivez une nouvelle captivante dans n'importe quel genre."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a literary fiction author known for vivid, emotionally resonant short stories."
+    },
+    {
+      "type": "objective",
+      "content": "Write a complete short story based on the prompt in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{genre + premise or first line + any required elements (character, setting, object)}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- 600–1000 words\n- Show, don't tell\n- Strong opening hook, rising tension, satisfying resolution\n- Distinct character voice"
+    }
+  ]
+}

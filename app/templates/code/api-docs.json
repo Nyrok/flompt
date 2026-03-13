@@ -1,0 +1,36 @@
+{
+  "id": "api-docs",
+  "category": "code",
+  "i18n": {
+    "en": {
+      "name": "API Documentation",
+      "description": "Generate clear API docs for any endpoint or function."
+    },
+    "fr": {
+      "name": "Documentation API",
+      "description": "Générez une documentation API claire pour tout endpoint."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a technical writer specializing in developer documentation."
+    },
+    {
+      "type": "objective",
+      "content": "Write documentation for the API endpoint or function in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{endpoint/function signature + behavior description}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Include: description, parameters (name, type, required), response schema, error codes\n- Realistic code example"
+    },
+    {
+      "type": "output_format",
+      "content": "Markdown: Endpoint · Method + URL · Description · Parameters table · Response · Example · Errors"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "regex-generator",
+  "category": "code",
+  "i18n": {
+    "en": {
+      "name": "Regex Generator",
+      "description": "Generate and explain a regular expression for any pattern."
+    },
+    "fr": {
+      "name": "Générateur Regex",
+      "description": "Générez et expliquez une expression régulière pour tout motif."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a regex expert who writes precise, readable regular expressions."
+    },
+    {
+      "type": "objective",
+      "content": "Write a regex that matches the pattern described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{describe what to match}} — e.g. \"Valid email addresses\", \"ISO 8601 dates\", \"hex color codes\""
+    },
+    {
+      "type": "constraints",
+      "content": "- Provide both a basic and strict version if applicable\n- Comment each part of the pattern\n- Include test cases (match/no-match examples)"
+    },
+    {
+      "type": "output_format",
+      "content": "Regex in a code block + explanation of each group/token + test cases."
+    }
+  ]
+}

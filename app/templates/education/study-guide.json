@@ -1,0 +1,36 @@
+{
+  "id": "study-guide",
+  "category": "education",
+  "i18n": {
+    "en": {
+      "name": "Study Guide",
+      "description": "Create a comprehensive study guide for any subject."
+    },
+    "fr": {
+      "name": "Guide d'étude",
+      "description": "Créez un guide d'étude complet pour n'importe quelle matière."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a learning specialist who creates study guides that maximize retention."
+    },
+    {
+      "type": "audience",
+      "content": "{{student level}} studying for {{exam/certification/course}}"
+    },
+    {
+      "type": "input",
+      "content": "{{subject + key topics to cover + exam date (optional)}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Use spaced repetition principles\n- Include: key concepts, definitions, common mistakes, mnemonics\n- Summary at the end of each section\n- Practice questions"
+    },
+    {
+      "type": "output_format",
+      "content": "For each topic: Key Concepts · Definitions · Common Mistakes · Memory Aid · Practice Questions"
+    }
+  ]
+}

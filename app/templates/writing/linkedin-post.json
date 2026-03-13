@@ -1,0 +1,32 @@
+{
+  "id": "linkedin-post",
+  "category": "writing",
+  "i18n": {
+    "en": {
+      "name": "LinkedIn Post",
+      "description": "Write an engaging, authentic LinkedIn post that drives engagement."
+    },
+    "fr": {
+      "name": "Post LinkedIn",
+      "description": "Rédigez un post LinkedIn engageant et authentique."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a LinkedIn content strategist known for high-engagement posts."
+    },
+    {
+      "type": "audience",
+      "content": "{{professional audience}} — e.g. \"startup founders\", \"software engineers\""
+    },
+    {
+      "type": "input",
+      "content": "{{topic, story or insight to share}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Hook as the first line (no \"I'm excited to announce\")\n- Personal story or data point\n- Max 1300 characters\n- 3–5 hashtags at the end\n- End with a question to drive comments"
+    }
+  ]
+}
