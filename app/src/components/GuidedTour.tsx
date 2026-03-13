@@ -125,11 +125,12 @@ const GuidedTour = () => {
 
   // Step definitions
   const steps = [
-    { target: '.prompt-textarea',            placement: 'right' as Placement,      title: t.tour.step1title,       desc: t.tour.step1desc,       nextLabel: t.tour.next },
-    { target: '.block-list',                 placement: 'right' as Placement,      title: t.tour.stepBlocksTitle,  desc: t.tour.stepBlocksDesc,  nextLabel: t.tour.next },
-    { target: '[data-tour="decompose-btn"]', placement: 'right' as Placement,      title: t.tour.step2title,       desc: t.tour.step2desc,       nextLabel: t.tour.step2action, action: 'decompose' as const },
-    { target: '.flow-canvas',                placement: 'inside-top' as Placement, title: t.tour.step3title,       desc: t.tour.step3desc,       nextLabel: t.tour.next },
-    { target: '[data-tour="compile-btn"]',   placement: 'left' as Placement,       title: t.tour.step4title,       desc: t.tour.step4desc,       nextLabel: t.tour.finish, action: 'finish' as const },
+    { target: '.prompt-textarea',            placement: 'right' as Placement,      title: t.tour.step1title,         desc: t.tour.step1desc,         nextLabel: t.tour.next },
+    { target: '.block-list',                 placement: 'right' as Placement,      title: t.tour.stepBlocksTitle,    desc: t.tour.stepBlocksDesc,    nextLabel: t.tour.next },
+    { target: '.sidebar-library-btn',        placement: 'right' as Placement,      title: t.tour.stepLibraryTitle,   desc: t.tour.stepLibraryDesc,   nextLabel: t.tour.next },
+    { target: '[data-tour="decompose-btn"]', placement: 'right' as Placement,      title: t.tour.step2title,         desc: t.tour.step2desc,         nextLabel: t.tour.step2action, action: 'decompose' as const },
+    { target: '.flow-canvas',                placement: 'inside-top' as Placement, title: t.tour.step3title,         desc: t.tour.step3desc,         nextLabel: t.tour.next },
+    { target: '[data-tour="compile-btn"]',   placement: 'left' as Placement,       title: t.tour.step4title,         desc: t.tour.step4desc,         nextLabel: t.tour.finish, action: 'finish' as const },
   ]
 
   const cur = steps[step]
