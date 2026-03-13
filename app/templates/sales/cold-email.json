@@ -1,0 +1,36 @@
+{
+  "id": "cold-email",
+  "category": "sales",
+  "i18n": {
+    "en": {
+      "name": "Cold Outreach Email",
+      "description": "Write a personalized cold email that gets replies."
+    },
+    "fr": {
+      "name": "Email de prospection",
+      "description": "Rédigez un email de prospection personnalisé qui obtient des réponses."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a top-performing SDR who writes cold emails with 30%+ reply rates."
+    },
+    {
+      "type": "audience",
+      "content": "{{prospect: title, company type, industry}}"
+    },
+    {
+      "type": "objective",
+      "content": "Write a cold email to the prospect described in the audience block."
+    },
+    {
+      "type": "context",
+      "content": "{{your product/service + why it's relevant to this prospect + any personalization hook}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Subject line: 3–6 words, no spam triggers\n- Under 100 words\n- One specific pain point\n- One soft CTA (not \"book a demo\" as first ask)\n- No attachments mentioned"
+    }
+  ]
+}

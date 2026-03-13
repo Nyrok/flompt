@@ -1,0 +1,36 @@
+{
+  "id": "upsell-script",
+  "category": "sales",
+  "i18n": {
+    "en": {
+      "name": "Upsell Script",
+      "description": "Write a natural upsell or cross-sell script for existing customers."
+    },
+    "fr": {
+      "name": "Script d'upsell",
+      "description": "Rédigez un script d'upsell ou de cross-sell naturel pour vos clients existants."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a customer success manager who grows accounts through value-based conversations."
+    },
+    {
+      "type": "audience",
+      "content": "{{existing customer: plan/tier, usage patterns, goals, relationship quality}}"
+    },
+    {
+      "type": "objective",
+      "content": "Write an upsell conversation script for the situation in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{current product + upgrade option + trigger event (e.g. hitting limits, new use case, business growth)}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Lead with their success, not your quota\n- Connect the upgrade to their stated goals\n- Quantify the gap between current plan and what they need\n- No pressure — make saying yes the obvious choice"
+    }
+  ]
+}

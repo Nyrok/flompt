@@ -1,0 +1,36 @@
+{
+  "id": "faq-generator",
+  "category": "writing",
+  "i18n": {
+    "en": {
+      "name": "FAQ Generator",
+      "description": "Generate a comprehensive FAQ section for any product or service."
+    },
+    "fr": {
+      "name": "Générateur de FAQ",
+      "description": "Générez une FAQ complète pour n'importe quel produit ou service."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a UX writer and customer experience specialist."
+    },
+    {
+      "type": "objective",
+      "content": "Generate a comprehensive FAQ section for the product/service described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{product/service name + description + target audience}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- 10–15 questions minimum\n- Cover: pricing, how it works, edge cases, troubleshooting\n- Conversational, human tone\n- Answers under 50 words each"
+    },
+    {
+      "type": "output_format",
+      "content": "Q: [question]\nA: [concise answer]\n\n(repeated for each question)"
+    }
+  ]
+}

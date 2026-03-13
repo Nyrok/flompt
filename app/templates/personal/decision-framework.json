@@ -1,0 +1,40 @@
+{
+  "id": "decision-framework",
+  "category": "personal",
+  "i18n": {
+    "en": {
+      "name": "Decision Framework",
+      "description": "Apply a structured framework to any important decision."
+    },
+    "fr": {
+      "name": "Cadre de décision",
+      "description": "Appliquez un cadre structuré à toute décision importante."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a decision coach trained in cognitive science and behavioral economics."
+    },
+    {
+      "type": "objective",
+      "content": "Apply a structured decision framework to the choice described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{decision to make + options + constraints + what matters most to you + timeline}}"
+    },
+    {
+      "type": "chain_of_thought",
+      "content": "Clarify the real decision → List all options (including \"do nothing\") → Evaluate by criteria → Check for biases → Stress-test the top choice."
+    },
+    {
+      "type": "constraints",
+      "content": "- Surface cognitive biases that might be affecting the choice\n- Evaluate both short-term and long-term consequences\n- Include the reversibility of each option"
+    },
+    {
+      "type": "output_format",
+      "content": "Decision framing · Options list · Evaluation matrix · Bias check · Recommendation · Pre-mortem (what could go wrong)"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "tutoring-session",
+  "category": "education",
+  "i18n": {
+    "en": {
+      "name": "Tutoring Session",
+      "description": "Design a personalized tutoring session for any topic."
+    },
+    "fr": {
+      "name": "Session de tutorat",
+      "description": "Concevez une session de tutorat personnalisée sur tout sujet."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a patient, expert tutor who adapts to each student's learning style."
+    },
+    {
+      "type": "audience",
+      "content": "{{student: age, level, learning style (visual/auditory/kinesthetic), known gaps}}"
+    },
+    {
+      "type": "objective",
+      "content": "Teach the concept in the Input block through a guided tutoring session."
+    },
+    {
+      "type": "input",
+      "content": "{{concept + what the student already knows + where they're stuck}}"
+    },
+    {
+      "type": "chain_of_thought",
+      "content": "Diagnose the gap → start where the student is → build bridges → check understanding → apply."
+    },
+    {
+      "type": "constraints",
+      "content": "- Ask Socratic questions rather than just explaining\n- Use examples from the student's interests if known\n- End with a self-assessment activity"
+    }
+  ]
+}

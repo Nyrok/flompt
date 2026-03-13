@@ -1,0 +1,32 @@
+{
+  "id": "meeting-summary",
+  "category": "productivity",
+  "i18n": {
+    "en": {
+      "name": "Meeting Summary",
+      "description": "Turn raw meeting notes into a clean, actionable summary."
+    },
+    "fr": {
+      "name": "Compte-rendu de réunion",
+      "description": "Transformez des notes brutes en compte-rendu structuré et actionnable."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an executive assistant specializing in meeting documentation."
+    },
+    {
+      "type": "objective",
+      "content": "Summarize the meeting notes in the Input block into a structured document."
+    },
+    {
+      "type": "input",
+      "content": "{{paste raw meeting notes or transcript}}"
+    },
+    {
+      "type": "output_format",
+      "content": "## Meeting Summary\n**Date:** · **Attendees:**\n### Key Decisions\n-\n### Action Items\n| Owner | Task | Due Date |\n|---|---|---|\n### Next Steps\n-"
+    }
+  ]
+}

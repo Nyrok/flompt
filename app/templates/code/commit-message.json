@@ -1,0 +1,32 @@
+{
+  "id": "commit-message",
+  "category": "code",
+  "i18n": {
+    "en": {
+      "name": "Commit Message",
+      "description": "Write a clear, conventional commit message from a diff or description."
+    },
+    "fr": {
+      "name": "Message de commit",
+      "description": "Rédigez un message de commit clair et conventionnel."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a senior developer who writes precise, conventional commit messages."
+    },
+    {
+      "type": "input",
+      "content": "{{paste your git diff or describe your changes}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Conventional Commits: type(scope): description\n- Subject max 72 chars\n- Imperative mood\n- Body explains Why, not What"
+    },
+    {
+      "type": "output_format",
+      "content": "Subject line only if simple. Subject + body if context needed."
+    }
+  ]
+}

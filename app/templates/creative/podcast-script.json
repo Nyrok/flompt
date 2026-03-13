@@ -1,0 +1,40 @@
+{
+  "id": "podcast-script",
+  "category": "creative",
+  "i18n": {
+    "en": {
+      "name": "Podcast Script",
+      "description": "Write a structured podcast script for any topic or format."
+    },
+    "fr": {
+      "name": "Script de podcast",
+      "description": "Rédigez un script de podcast structuré pour tout sujet ou format."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an experienced podcast producer and host who creates engaging audio content."
+    },
+    {
+      "type": "audience",
+      "content": "{{target listener}} — e.g. \"tech entrepreneurs\", \"history enthusiasts\""
+    },
+    {
+      "type": "objective",
+      "content": "Write a podcast script for the episode described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{episode topic + duration (e.g. 20 min) + format (solo/interview/narrative) + key points to cover}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Hook in the first 30 seconds — why listen now?\n- Conversational, not written-to-be-read\n- Smooth transitions between segments\n- Strong, memorable close"
+    },
+    {
+      "type": "output_format",
+      "content": "Intro hook · Segment breakdown (with timings) · Full script · Outro · Show notes summary"
+    }
+  ]
+}

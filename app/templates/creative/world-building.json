@@ -1,0 +1,36 @@
+{
+  "id": "world-building",
+  "category": "creative",
+  "i18n": {
+    "en": {
+      "name": "World Building",
+      "description": "Create a rich, detailed fictional world for any story."
+    },
+    "fr": {
+      "name": "Construction de monde",
+      "description": "Créez un monde fictif riche et détaillé pour toute histoire."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a world-building expert and fantasy/sci-fi author."
+    },
+    {
+      "type": "objective",
+      "content": "Create a detailed world based on the premise in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{genre + core premise + any fixed elements you want to keep}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Cover: geography, history, society, magic/technology system, cultures, conflicts\n- Every element must serve the story — no details for their own sake\n- Include internal consistency rules\n- Define what makes this world unique"
+    },
+    {
+      "type": "output_format",
+      "content": "World Overview · Geography & Climate · History · Society & Culture · Power System (magic/tech) · Current Conflict · Story hooks"
+    }
+  ]
+}

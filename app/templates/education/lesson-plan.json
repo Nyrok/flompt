@@ -1,0 +1,40 @@
+{
+  "id": "lesson-plan",
+  "category": "education",
+  "i18n": {
+    "en": {
+      "name": "Lesson Plan",
+      "description": "Create a structured lesson plan on any topic."
+    },
+    "fr": {
+      "name": "Plan de cours",
+      "description": "Créez un plan de cours structuré sur n'importe quel sujet."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an experienced teacher who designs engaging, effective lessons."
+    },
+    {
+      "type": "audience",
+      "content": "{{student level}} — e.g. \"high school students\", \"adult learners\", \"university undergraduates\""
+    },
+    {
+      "type": "objective",
+      "content": "Create a complete lesson plan for the topic in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{topic + duration (e.g. 60 min) + prerequisites + learning goals}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Include warm-up, main content, practice, and wrap-up\n- At least 2 interactive activities\n- Assessment method at the end"
+    },
+    {
+      "type": "output_format",
+      "content": "Duration · Objectives · Materials · Activities (with timings) · Assessment · Differentiation tips"
+    }
+  ]
+}

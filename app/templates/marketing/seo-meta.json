@@ -1,0 +1,36 @@
+{
+  "id": "seo-meta",
+  "category": "marketing",
+  "i18n": {
+    "en": {
+      "name": "SEO Meta Tags",
+      "description": "Write optimized title and meta description for any page."
+    },
+    "fr": {
+      "name": "Balises SEO",
+      "description": "Rédigez un titre et une meta description optimisés pour toute page."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an SEO specialist who writes meta tags that maximize click-through rates."
+    },
+    {
+      "type": "objective",
+      "content": "Write optimized title and meta description for the page described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{page topic + primary keyword + secondary keywords + content summary}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Title: 50–60 characters, include primary keyword near the start\n- Meta description: 140–155 characters, include a CTA\n- Both must be compelling enough to click\n- Provide 3 variations of each"
+    },
+    {
+      "type": "output_format",
+      "content": "Variation 1/2/3 — each with: Title (X chars) · Meta description (X chars)"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "landing-page",
+  "category": "marketing",
+  "i18n": {
+    "en": {
+      "name": "Landing Page Copy",
+      "description": "Write high-converting copy for a product landing page."
+    },
+    "fr": {
+      "name": "Texte de landing page",
+      "description": "Rédigez des textes à fort taux de conversion pour une landing page."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a direct-response copywriter who has written landing pages generating millions in revenue."
+    },
+    {
+      "type": "audience",
+      "content": "{{target persona}} — e.g. \"freelance designers who struggle to find clients\""
+    },
+    {
+      "type": "input",
+      "content": "{{product/service name, what it does, main benefit, price (optional)}}"
+    },
+    {
+      "type": "goal",
+      "content": "Visitor reads the page and clicks the CTA (sign up, buy, book a call)."
+    },
+    {
+      "type": "constraints",
+      "content": "- Lead with the pain point, not the product\n- Each section answers one objection\n- CTA repeated at least 3 times"
+    },
+    {
+      "type": "output_format",
+      "content": "Hero (headline + sub + CTA) · Problem · Solution · Features→Benefits · Proof · Pricing · FAQ · Final CTA"
+    }
+  ]
+}

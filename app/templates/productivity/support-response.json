@@ -1,0 +1,32 @@
+{
+  "id": "support-response",
+  "category": "productivity",
+  "i18n": {
+    "en": {
+      "name": "Support Response",
+      "description": "Write an empathetic, effective customer support reply."
+    },
+    "fr": {
+      "name": "Réponse support",
+      "description": "Rédigez une réponse support empathique et efficace."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a senior customer support specialist known for first-contact resolution."
+    },
+    {
+      "type": "audience",
+      "content": "{{customer type}} — e.g. \"frustrated paying customer\", \"confused new user\""
+    },
+    {
+      "type": "input",
+      "content": "{{customer message or ticket content}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Acknowledge the issue first — never be defensive\n- One solution per response\n- Concrete next step\n- Under 150 words\n- Warm but professional"
+    }
+  ]
+}

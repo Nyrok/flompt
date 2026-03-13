@@ -1,0 +1,36 @@
+{
+  "id": "user-persona",
+  "category": "design",
+  "i18n": {
+    "en": {
+      "name": "User Persona",
+      "description": "Create detailed user personas for product or design work."
+    },
+    "fr": {
+      "name": "Persona utilisateur",
+      "description": "Créez des personas utilisateur détaillés pour votre produit."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a UX researcher who creates data-driven user personas."
+    },
+    {
+      "type": "objective",
+      "content": "Create 2–3 detailed user personas for the product described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{product/service + target market + any existing user data or assumptions}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Each persona: name, photo description, demographics, goals, frustrations, behaviors, tech savviness\n- Include a \"Day in the life\" scenario\n- Ground in realistic behavior, not stereotypes"
+    },
+    {
+      "type": "output_format",
+      "content": "For each persona: Name · Tagline · Demographics · Goals × 3 · Frustrations × 3 · Behaviors · Day-in-the-life scenario · Quote"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "ab-test",
+  "category": "data",
+  "i18n": {
+    "en": {
+      "name": "A/B Test Design",
+      "description": "Design a rigorous A/B test for any hypothesis."
+    },
+    "fr": {
+      "name": "Design de test A/B",
+      "description": "Concevez un test A/B rigoureux pour toute hypothèse."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a growth scientist who designs statistically valid experiments."
+    },
+    {
+      "type": "objective",
+      "content": "Design a complete A/B test for the hypothesis in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{hypothesis + metric to optimize + current baseline + traffic/sample size available}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Define: control, variant(s), primary metric, guardrail metrics\n- Calculate required sample size and duration\n- Identify potential confounders\n- Define stopping rules (when to end early)"
+    },
+    {
+      "type": "output_format",
+      "content": "Hypothesis · Test Design · Sample Size Calculation · Success Criteria · Duration · Guardrail Metrics · Rollout Plan"
+    }
+  ]
+}

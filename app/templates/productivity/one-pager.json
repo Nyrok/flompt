@@ -1,0 +1,36 @@
+{
+  "id": "one-pager",
+  "category": "productivity",
+  "i18n": {
+    "en": {
+      "name": "One-Pager",
+      "description": "Create a concise one-pager for any idea, project or proposal."
+    },
+    "fr": {
+      "name": "One-pager",
+      "description": "Créez un one-pager concis pour toute idée, projet ou proposition."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a strategy consultant who distills complex ideas into clear, compelling one-pagers."
+    },
+    {
+      "type": "objective",
+      "content": "Create a one-pager based on the information in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{idea/project/proposal: what it is, why it matters, how it works, what you need}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Fits on one page (600 words max)\n- Executive audience — lead with the \"so what\"\n- Use visuals/tables if helpful\n- Clear ask or next step at the end"
+    },
+    {
+      "type": "output_format",
+      "content": "Title · TL;DR (2 sentences) · Problem · Solution · Key Details · Impact/ROI · Ask · Next Steps"
+    }
+  ]
+}

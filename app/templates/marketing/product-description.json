@@ -1,0 +1,36 @@
+{
+  "id": "product-description",
+  "category": "marketing",
+  "i18n": {
+    "en": {
+      "name": "Product Description",
+      "description": "Write a persuasive product description that converts."
+    },
+    "fr": {
+      "name": "Description produit",
+      "description": "Rédigez une description produit persuasive qui convertit."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a conversion copywriter specializing in e-commerce and SaaS."
+    },
+    {
+      "type": "audience",
+      "content": "{{ideal customer}} — e.g. \"busy professionals aged 25–40\""
+    },
+    {
+      "type": "input",
+      "content": "{{product name, features, key differentiators}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Lead with benefits, not features\n- 150–250 words\n- Avoid unproven superlatives\n- End with a clear CTA"
+    },
+    {
+      "type": "output_format",
+      "content": "Headline + 2–3 paragraphs + bullet features + CTA"
+    }
+  ]
+}

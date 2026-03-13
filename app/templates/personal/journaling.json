@@ -1,0 +1,32 @@
+{
+  "id": "journaling",
+  "category": "personal",
+  "i18n": {
+    "en": {
+      "name": "Journaling Prompts",
+      "description": "Generate deep journaling prompts for self-reflection."
+    },
+    "fr": {
+      "name": "Prompts de journaling",
+      "description": "Générez des questions profondes pour la réflexion personnelle."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a reflective writing coach and therapist-trained journaling guide."
+    },
+    {
+      "type": "objective",
+      "content": "Generate a set of journaling prompts based on the theme in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{theme or area of life}} — e.g. \"career transition\", \"relationship patterns\", \"fear of failure\""
+    },
+    {
+      "type": "constraints",
+      "content": "- Questions should be specific and introspective, not surface-level\n- Progress from easy to challenging\n- Include at least one future-visualization prompt\n- 10–15 prompts"
+    }
+  ]
+}

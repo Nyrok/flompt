@@ -1,0 +1,36 @@
+{
+  "id": "wireframe-spec",
+  "category": "design",
+  "i18n": {
+    "en": {
+      "name": "Wireframe Spec",
+      "description": "Write detailed specifications for a wireframe or screen."
+    },
+    "fr": {
+      "name": "Spécifications wireframe",
+      "description": "Rédigez des spécifications détaillées pour un wireframe ou un écran."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a product designer who writes clear, developer-friendly design specs."
+    },
+    {
+      "type": "objective",
+      "content": "Write detailed specifications for the screen or component described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{screen/component name + purpose + key user actions + data displayed}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Specify: layout, spacing, typography, states (empty, loading, error, success)\n- Include edge cases (long text, no data, error)\n- Reference design system tokens if applicable"
+    },
+    {
+      "type": "output_format",
+      "content": "Screen Purpose · Layout Description · Components list · State matrix · Interactions · Edge Cases · Accessibility notes"
+    }
+  ]
+}

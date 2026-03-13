@@ -1,0 +1,36 @@
+{
+  "id": "networking-message",
+  "category": "personal",
+  "i18n": {
+    "en": {
+      "name": "Networking Message",
+      "description": "Write a personalized message to connect with anyone."
+    },
+    "fr": {
+      "name": "Message de networking",
+      "description": "Rédigez un message personnalisé pour contacter n'importe qui."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a networking coach who believes in genuine, value-first outreach."
+    },
+    {
+      "type": "audience",
+      "content": "{{person you're reaching out to: name, role, why you admire them}}"
+    },
+    {
+      "type": "objective",
+      "content": "Write a personalized networking message based on the context in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{context: mutual connection, their work that inspired you, specific reason for reaching out}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Reference something specific about their work (not generic flattery)\n- Make the ask small and easy to say yes to\n- Under 100 words\n- No \"picking your brain\" or other clichés"
+    }
+  ]
+}

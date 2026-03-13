@@ -1,0 +1,36 @@
+{
+  "id": "kpi-dashboard",
+  "category": "data",
+  "i18n": {
+    "en": {
+      "name": "KPI Dashboard",
+      "description": "Define the right KPIs and metrics for any business function."
+    },
+    "fr": {
+      "name": "Tableau de bord KPI",
+      "description": "Définissez les bons KPI et métriques pour toute fonction business."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a data strategy consultant who designs measurement frameworks."
+    },
+    {
+      "type": "objective",
+      "content": "Define a KPI framework for the business function described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{business function (e.g. \"Marketing\", \"Customer Success\") + goals + current metrics tracked}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Max 5–7 KPIs (avoid metric overload)\n- Include: metric name, formula, target, frequency, data source\n- Separate leading from lagging indicators\n- Tie each KPI to a business outcome"
+    },
+    {
+      "type": "output_format",
+      "content": "Table: KPI · Formula · Current Benchmark · Target · Owner · Frequency · Data Source\nPriority order with rationale."
+    }
+  ]
+}

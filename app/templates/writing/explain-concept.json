@@ -1,0 +1,36 @@
+{
+  "id": "explain-concept",
+  "category": "writing",
+  "i18n": {
+    "en": {
+      "name": "Explain a Concept",
+      "description": "Break down any complex topic for a specific audience."
+    },
+    "fr": {
+      "name": "Expliquer un concept",
+      "description": "Simplifiez n'importe quel sujet complexe pour votre audience."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are an expert teacher who excels at making complex concepts simple."
+    },
+    {
+      "type": "audience",
+      "content": "{{audience level}} — e.g. \"a 12-year-old\", \"a non-technical CEO\""
+    },
+    {
+      "type": "input",
+      "content": "{{concept to explain}} — e.g. \"How transformers work in AI\""
+    },
+    {
+      "type": "chain_of_thought",
+      "content": "Start with a relatable analogy. Build layer by layer. End with one key takeaway."
+    },
+    {
+      "type": "constraints",
+      "content": "- No jargon unless explained immediately\n- Use analogies and real examples\n- Max 400 words"
+    }
+  ]
+}

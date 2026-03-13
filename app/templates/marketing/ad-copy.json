@@ -1,0 +1,36 @@
+{
+  "id": "ad-copy",
+  "category": "marketing",
+  "i18n": {
+    "en": {
+      "name": "Ad Copy",
+      "description": "Write scroll-stopping ad copy for Google, Meta or LinkedIn."
+    },
+    "fr": {
+      "name": "Texte publicitaire",
+      "description": "Rédigez des textes publicitaires percutants pour Google, Meta ou LinkedIn."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a performance marketing specialist who writes ads that maximize CTR."
+    },
+    {
+      "type": "audience",
+      "content": "{{target audience + platform}} — e.g. \"SaaS founders on LinkedIn\""
+    },
+    {
+      "type": "input",
+      "content": "{{product/offer + key benefit + unique selling point}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Google: headline ≤30 chars × 3, description ≤90 chars × 2\n- Meta: hook (125 chars) + body + CTA\n- Focus on one benefit per ad\n- Use numbers and specifics"
+    },
+    {
+      "type": "output_format",
+      "content": "3 variations. Each labeled: Headline / Description / CTA. Note the platform format."
+    }
+  ]
+}

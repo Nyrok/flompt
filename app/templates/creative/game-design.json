@@ -1,0 +1,36 @@
+{
+  "id": "game-design",
+  "category": "creative",
+  "i18n": {
+    "en": {
+      "name": "Game Design Doc",
+      "description": "Write a game design document for any type of game."
+    },
+    "fr": {
+      "name": "Document de conception jeu",
+      "description": "Rédigez un document de conception de jeu pour tout type de jeu."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a game designer with experience across indie and AAA titles."
+    },
+    {
+      "type": "objective",
+      "content": "Write a game design document for the game concept in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{game concept + genre + platform + target audience + core mechanics}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Define the core loop in one sentence\n- Every mechanic must serve the player fantasy\n- Include monetization and retention mechanics if applicable\n- Identify the biggest design risks"
+    },
+    {
+      "type": "output_format",
+      "content": "High Concept · Core Loop · Mechanics · Player Fantasy · Progression System · Art Direction · Technical Requirements · Risks"
+    }
+  ]
+}

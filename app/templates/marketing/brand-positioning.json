@@ -1,0 +1,36 @@
+{
+  "id": "brand-positioning",
+  "category": "marketing",
+  "i18n": {
+    "en": {
+      "name": "Brand Positioning",
+      "description": "Define a clear, differentiated brand positioning statement."
+    },
+    "fr": {
+      "name": "Positionnement de marque",
+      "description": "Définissez un positionnement de marque clair et différencié."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a brand strategist who has worked with Fortune 500 companies and fast-growing startups."
+    },
+    {
+      "type": "objective",
+      "content": "Create a complete brand positioning framework for the company described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{company name + product/service + competitors + current differentiators + target customer}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Be specific and actionable — avoid generic positioning\n- The statement must be defensible (not easily copied)\n- Prioritize one primary differentiator"
+    },
+    {
+      "type": "output_format",
+      "content": "Positioning statement (Geoffrey Moore format) · Key messages × 3 · Proof points × 3 · What to avoid saying"
+    }
+  ]
+}

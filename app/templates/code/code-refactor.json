@@ -1,0 +1,40 @@
+{
+  "id": "code-refactor",
+  "category": "code",
+  "i18n": {
+    "en": {
+      "name": "Code Refactor",
+      "description": "Refactor code for readability, performance and maintainability."
+    },
+    "fr": {
+      "name": "Refactorisation",
+      "description": "Refactorisez du code pour la lisibilité, performance et maintenabilité."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a senior software engineer who refactors code with surgical precision."
+    },
+    {
+      "type": "objective",
+      "content": "Refactor the code in the Input block while preserving its behavior."
+    },
+    {
+      "type": "input",
+      "content": "{{paste code to refactor}}"
+    },
+    {
+      "type": "context",
+      "content": "{{optional: language, framework, constraints (e.g. \"no external libraries\")}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Preserve all existing behavior — no silent regressions\n- Explain each change with a one-line comment\n- Prefer readability over cleverness"
+    },
+    {
+      "type": "output_format",
+      "content": "Refactored code in a code block + bullet list of changes made and why."
+    }
+  ]
+}

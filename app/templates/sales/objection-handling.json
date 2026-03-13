@@ -1,0 +1,40 @@
+{
+  "id": "objection-handling",
+  "category": "sales",
+  "i18n": {
+    "en": {
+      "name": "Objection Handling",
+      "description": "Prepare responses to the most common sales objections."
+    },
+    "fr": {
+      "name": "Réponses aux objections",
+      "description": "Préparez des réponses aux objections commerciales les plus courantes."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a sales coach who has trained hundreds of reps to handle objections with empathy."
+    },
+    {
+      "type": "objective",
+      "content": "Write responses to the sales objections listed in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{objections list}} — e.g. \"Too expensive\", \"We're happy with our current solution\", \"Not the right time\", \"Need to check with my boss\""
+    },
+    {
+      "type": "context",
+      "content": "{{your product/service + target buyer + typical deal size}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Use the ACP framework: Acknowledge → Clarify → Position\n- Never argue or dismiss the concern\n- Include a pivot question after each response\n- Realistic and conversational tone"
+    },
+    {
+      "type": "output_format",
+      "content": "For each objection: Acknowledge · Clarify (question) · Position (response) · Pivot"
+    }
+  ]
+}

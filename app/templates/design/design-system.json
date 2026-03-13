@@ -1,0 +1,36 @@
+{
+  "id": "design-system",
+  "category": "design",
+  "i18n": {
+    "en": {
+      "name": "Design System",
+      "description": "Define a design system structure for a product."
+    },
+    "fr": {
+      "name": "Design system",
+      "description": "Définissez la structure d'un design system pour un produit."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a design systems lead who has built systems used by 100+ designers and engineers."
+    },
+    {
+      "type": "objective",
+      "content": "Define the structure and key components of a design system for the product in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{product type + tech stack + team size + current design maturity}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Prioritize the highest-ROI components first (don't boil the ocean)\n- Define naming conventions, token structure, and versioning approach\n- Include governance model (who owns what)"
+    },
+    {
+      "type": "output_format",
+      "content": "Foundation (tokens, grid, typography) · Core components list · Documentation structure · Governance model · Rollout phases"
+    }
+  ]
+}

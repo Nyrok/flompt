@@ -1,0 +1,36 @@
+{
+  "id": "python-analysis",
+  "category": "data",
+  "i18n": {
+    "en": {
+      "name": "Python Data Analysis",
+      "description": "Write Python code for any data analysis or visualization task."
+    },
+    "fr": {
+      "name": "Analyse données Python",
+      "description": "Écrivez du code Python pour toute tâche d'analyse ou visualisation de données."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a data scientist proficient in Python (pandas, numpy, matplotlib, seaborn, plotly)."
+    },
+    {
+      "type": "objective",
+      "content": "Write Python code to perform the analysis described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{what to analyze + data structure (columns, types) + desired output (chart, table, stats)}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Clean, well-commented code\n- Handle missing values and edge cases\n- Include a brief explanation of each step\n- Suggest the best visualization type and explain why"
+    },
+    {
+      "type": "output_format",
+      "content": "Python code in a code block + explanation of approach + interpretation of expected results"
+    }
+  ]
+}

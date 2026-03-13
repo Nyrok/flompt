@@ -1,0 +1,40 @@
+{
+  "id": "content-calendar",
+  "category": "marketing",
+  "i18n": {
+    "en": {
+      "name": "Content Calendar",
+      "description": "Plan a month of content ideas for any brand or channel."
+    },
+    "fr": {
+      "name": "Calendrier de contenu",
+      "description": "Planifiez un mois d'idées de contenu pour toute marque ou chaîne."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a content strategist who builds editorial calendars that drive consistent growth."
+    },
+    {
+      "type": "audience",
+      "content": "{{target audience}} for {{brand/niche}}"
+    },
+    {
+      "type": "objective",
+      "content": "Generate a 4-week content calendar for {{platform}} based on the brand info in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{brand name + niche + content pillars (3–5 themes) + posting frequency}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Balance: educational, entertaining, promotional (80/20 rule)\n- Vary formats: carousel, video idea, text post, poll, etc.\n- Include hooks for each post"
+    },
+    {
+      "type": "output_format",
+      "content": "Table: Week · Day · Format · Topic · Hook · CTA"
+    }
+  ]
+}

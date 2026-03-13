@@ -1,0 +1,40 @@
+{
+  "id": "proposal",
+  "category": "sales",
+  "i18n": {
+    "en": {
+      "name": "Sales Proposal",
+      "description": "Write a professional sales proposal that closes deals."
+    },
+    "fr": {
+      "name": "Proposition commerciale",
+      "description": "Rédigez une proposition commerciale professionnelle qui conclut des ventes."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a solution consultant who writes proposals with 60%+ close rates."
+    },
+    {
+      "type": "audience",
+      "content": "{{decision maker: role, company, key priorities, known concerns}}"
+    },
+    {
+      "type": "objective",
+      "content": "Write a complete sales proposal based on the deal info in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{prospect situation + pain points + proposed solution + pricing + timeline}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Lead with their problem, not your product\n- Tie every feature to a business outcome\n- Include ROI calculation if possible\n- Clear, simple pricing (no hidden fees)\n- Specific next steps and expiration date"
+    },
+    {
+      "type": "output_format",
+      "content": "Executive Summary · Situation Analysis · Proposed Solution · Investment · Expected ROI · Timeline · Next Steps"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "discovery-questions",
+  "category": "sales",
+  "i18n": {
+    "en": {
+      "name": "Discovery Questions",
+      "description": "Generate powerful discovery questions for any sales call."
+    },
+    "fr": {
+      "name": "Questions de découverte",
+      "description": "Générez des questions de découverte puissantes pour tout entretien commercial."
+    }
+  },
+  "blocks": [
+    {
+      "type": "role",
+      "content": "You are a senior account executive known for running insightful discovery calls."
+    },
+    {
+      "type": "audience",
+      "content": "{{prospect: role, company type, likely pain points}}"
+    },
+    {
+      "type": "objective",
+      "content": "Generate a discovery question bank for the sales call described in the Input block."
+    },
+    {
+      "type": "input",
+      "content": "{{product you sell + stage of the funnel + what you need to uncover}}"
+    },
+    {
+      "type": "constraints",
+      "content": "- Cover: current situation, pain, impact, timeline, decision process, budget\n- Mix open and probing questions\n- Avoid yes/no questions\n- Include escalating questions (surface → deep)"
+    },
+    {
+      "type": "output_format",
+      "content": "Categories: Situation · Problem · Impact · Priority · Process/Timeline · Budget · Decision Makers\n5 questions per category."
+    }
+  ]
+}
