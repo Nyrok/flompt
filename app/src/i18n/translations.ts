@@ -157,6 +157,29 @@ export interface Translations {
     cta: string
     skip: string
   }
+  makeIntegration: {
+    title: string
+    panelLabel: string
+    close: string
+    webhookLabel: string
+    paste: string
+    configured: string
+    notConfigured: string
+    invalidUrl: string
+    test: string
+    testing: string
+    testOk: string
+    testFail: string
+    noPrompt: string
+    send: string
+    sending: string
+    sent: string
+    sendError: string
+    history: string
+    clearHistory: string
+    docs: string
+    openPanel: string
+  }
   blocks: Record<BlockType, BlockTranslation>
 }
 
@@ -189,6 +212,7 @@ function build(raw: RawLocale): Translations {
     tour: raw.tour,
     extension: raw.extension,
     starPopup: raw.starPopup,
+    makeIntegration: raw.makeIntegration,
     blocks: raw.blocks as Record<BlockType, BlockTranslation>,
   }
 }
