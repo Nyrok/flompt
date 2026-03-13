@@ -2,7 +2,7 @@
   "nodeCount": "{n} bloc",
   "nodeCountPlural": "{n} blocs",
 
-  "tabs": { "input": "Prompt", "canvas": "Canvas", "output": "Résultat" },
+  "tabs": { "input": "Prompt", "canvas": "Canvas", "output": "Résultat", "library": "Bibliothèque" },
 
   "header": {
     "undo": "Annuler (Ctrl+Z)",
@@ -60,6 +60,18 @@
     "network": "Connexion perdue. Vérifiez votre internet et réessayez.",
     "server": "Erreur serveur. Réessayez dans quelques secondes.",
     "unknown": "Une erreur est survenue. Réessayez."
+  },
+
+  "library": {
+    "hint": "Cliquez sur un template pour le charger dans le canvas.",
+    "outputLang": "Langue de réponse",
+    "noLang": "Auto (sans bloc langue)",
+    "categories": {
+      "all": "Tous", "writing": "Rédaction", "code": "Code",
+      "marketing": "Marketing", "productivity": "Productivité",
+      "design": "Design", "education": "Éducation", "sales": "Ventes",
+      "data": "Données", "creative": "Créatif", "personal": "Personnel"
+    }
   },
 
   "sidebar": {

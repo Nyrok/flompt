@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { PenLine, Network, Sparkles, Github } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { initAnalytics, setSource, analytics } from '@/lib/analytics'
@@ -6,6 +6,7 @@ import FlowCanvas from '@/components/FlowCanvas'
 import Sidebar from '@/components/Sidebar'
 import PromptInput from '@/components/PromptInput'
 import PromptOutput from '@/components/PromptOutput'
+import TemplateLibrary from '@/components/TemplateLibrary'
 import KeyboardShortcuts from '@/components/KeyboardShortcuts'
 import GuidedTour from '@/components/GuidedTour'
 import ExtensionBanner from '@/components/ExtensionBanner'
@@ -29,6 +30,7 @@ const App = () => {
   const { undo, redo, nodes, activeTab, setActiveTab, isDecomposing } = useFlowStore()
   const { t, locale, setLocale } = useLocale()
   const mainRef = useRef<HTMLElement>(null)
+  const [libraryOpen, setLibraryOpen] = useState(false)
 
   // Init PostHog after first render — non-blocking
   useEffect(() => {
@@ -126,7 +128,7 @@ const App = () => {
         >
           <PromptInput />
           <div className="panel-divider" role="separator" />
-          <Sidebar />
+          <Sidebar onOpenLibrary={() => setLibraryOpen(true)} />
         </aside>
 
         <div
@@ -143,7 +145,18 @@ const App = () => {
         >
           <PromptOutput />
         </aside>
+
       </main>
+
+      {/* Template library overlay */}
+      {libraryOpen && (
+        <div className="library-overlay" role="dialog" aria-modal="true" aria-label="Template library">
+          <div className="library-overlay-backdrop" onClick={() => setLibraryOpen(false)} />
+          <div className="library-overlay-panel">
+            <TemplateLibrary onClose={() => setLibraryOpen(false)} />
+          </div>
+        </div>
+      )}
 
       {/* Guided tour — desktop only, first visit only */}
       <GuidedTour />

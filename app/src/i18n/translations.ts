@@ -38,7 +38,7 @@ export interface BlockTranslation {
 
 export interface Translations {
   nodeCount: (n: number) => string
-  tabs: { input: string; canvas: string; output: string }
+  tabs: { input: string; canvas: string; output: string; library: string }
   header: {
     undo: string
     redo: string
@@ -91,6 +91,12 @@ export interface Translations {
     network: string
     server: string
     unknown: string
+  }
+  library: {
+    hint: string
+    outputLang: string
+    noLang: string
+    categories: Record<string, string>
   }
   sidebar: {
     title: string
@@ -173,6 +179,7 @@ function build(raw: RawLocale): Translations {
 
     promptOutput: raw.promptOutput,
     errors: raw.errors,
+    library: raw.library,
     sidebar: raw.sidebar,
     block: raw.block,
     canvas: raw.canvas,

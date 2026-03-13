@@ -10,7 +10,7 @@ interface Snapshot {
   edges: FlomptEdge[]
 }
 
-export type Tab = 'input' | 'canvas' | 'output'
+export type Tab = 'input' | 'canvas' | 'output' | 'library'
 
 export interface QueueStatus {
   position: number  // 1 = next in queue, 0 = currently processing
