@@ -194,7 +194,7 @@ Output: ✅ Prompt compiled (142 estimated tokens):
 
 #### `list_block_types()`
 
-Lists all 12 available block types with descriptions and the recommended canonical ordering. Useful when manually crafting blocks.
+Lists all 13 available block types with descriptions and the recommended canonical ordering. Useful when manually crafting blocks.
 
 ### Typical Workflow
 
