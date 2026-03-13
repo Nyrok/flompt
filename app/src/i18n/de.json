@@ -1,9 +1,12 @@
 {
   "nodeCount": "{n} Block",
   "nodeCountPlural": "{n} Blöcke",
-
-  "tabs": { "input": "Prompt", "canvas": "Canvas", "output": "Ergebnis" },
-
+  "tabs": {
+    "library": "Library",
+    "input": "Prompt",
+    "canvas": "Canvas",
+    "output": "Ergebnis"
+  },
   "header": {
     "undo": "Rückgängig (Ctrl+Z)",
     "redo": "Wiederholen (Ctrl+Y)",
@@ -12,7 +15,6 @@
     "autosaved": "Automatisch gespeichert",
     "github": "flompt auf GitHub einen Stern geben (öffnet in neuem Tab)"
   },
-
   "accessibility": {
     "skipToMain": "Zum Hauptinhalt springen",
     "switchLocale": "Sprache wechseln",
@@ -20,7 +22,6 @@
     "outputPanel": "Ausgabebereich",
     "mainTabs": "Hauptregisterkarten"
   },
-
   "promptInput": {
     "title": "Roher Prompt",
     "placeholder": "Füge deinen Prompt hier ein…",
@@ -32,7 +33,6 @@
     "queuePosition": "Warteschlangenposition: {n}",
     "queueProcessing": "Verarbeite…"
   },
-
   "promptOutput": {
     "title": "Ergebnis",
     "compile": "Prompt zusammenstellen",
@@ -53,7 +53,6 @@
     "injectLabel": "Prompt in KI-Chat-Eingabe senden",
     "injectedLabel": "Prompt injiziert!"
   },
-
   "errors": {
     "overloaded": "Die KI ist gerade überlastet. Bitte warte einen Moment und versuche es erneut.",
     "timeout": "Anfrage abgelaufen. Die KI hat zu lange gebraucht, um zu antworten. Versuche es erneut.",
@@ -61,12 +60,28 @@
     "server": "Serverfehler. Bitte versuche es in wenigen Sekunden erneut.",
     "unknown": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
   },
-
+  "library": {
+    "hint": "Click a template to load it into the canvas.",
+    "outputLang": "Response language",
+    "noLang": "Auto (no language block)",
+    "categories": {
+      "all": "All",
+      "writing": "Writing",
+      "code": "Code",
+      "marketing": "Marketing",
+      "productivity": "Productivity",
+      "design": "Design",
+      "education": "Education",
+      "sales": "Sales",
+      "data": "Data",
+      "creative": "Creative",
+      "personal": "Personal"
+    }
+  },
   "sidebar": {
     "title": "Blöcke",
     "hint": "Klicken zum Hinzufügen · Auf Canvas ziehen"
   },
-
   "block": {
     "duplicate": "Duplizieren",
     "expand": "Erweitern",
@@ -75,29 +90,76 @@
     "chars": "Zeich.",
     "deleteConnection": "Verbindung löschen"
   },
-
   "canvas": {
     "empty": "Leerer Canvas",
     "emptyHint": "Füge links einen Prompt ein und klicke auf ",
     "emptyDecompose": "Zerlegen, oder ziehe einen Block aus der Seitenleiste."
   },
-
   "shortcuts": {
     "title": "Tastaturkürzel",
     "close": "Drücke Esc oder ? zum Schließen",
     "list": [
-      { "keys": ["Ctrl", "Z"],       "label": "Rückgängig" },
-      { "keys": ["Ctrl", "Y"],       "label": "Wiederholen" },
-      { "keys": ["Ctrl", "⇧", "Z"], "label": "Wiederholen (alternativ)" },
-      { "keys": ["Del"],             "label": "Ausgewählten Block löschen" },
-      { "keys": ["Ctrl", "A"],       "label": "Alles auswählen" },
-      { "keys": ["Scroll"],          "label": "Rein-/Rauszoomen" },
-      { "keys": ["Drag"],            "label": "Block verschieben" },
-      { "keys": ["Bg drag"],         "label": "Canvas verschieben" },
-      { "keys": ["?"],               "label": "Kürzel anzeigen" }
+      {
+        "keys": [
+          "Ctrl",
+          "Z"
+        ],
+        "label": "Rückgängig"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "Y"
+        ],
+        "label": "Wiederholen"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "⇧",
+          "Z"
+        ],
+        "label": "Wiederholen (alternativ)"
+      },
+      {
+        "keys": [
+          "Del"
+        ],
+        "label": "Ausgewählten Block löschen"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "A"
+        ],
+        "label": "Alles auswählen"
+      },
+      {
+        "keys": [
+          "Scroll"
+        ],
+        "label": "Rein-/Rauszoomen"
+      },
+      {
+        "keys": [
+          "Drag"
+        ],
+        "label": "Block verschieben"
+      },
+      {
+        "keys": [
+          "Bg drag"
+        ],
+        "label": "Canvas verschieben"
+      },
+      {
+        "keys": [
+          "?"
+        ],
+        "label": "Kürzel anzeigen"
+      }
     ]
   },
-
   "tour": {
     "step1title": "Dein roher Prompt",
     "step1desc": "Schreibe oder füge hier einen beliebigen Text ein. Vage oder detailliert, es spielt keine Rolle. flompt strukturiert ihn für dich.",
@@ -117,7 +179,6 @@
     "acting": "Zerlege…",
     "samplePrompt": "Du bist ein Senior-Python-Entwickler. Überprüfe den folgenden Code auf Fehler, Leistungsprobleme und Stilverstoße. Sei präzise, priorisiere kritische Probleme und erkläre jeden Befund in einem Satz. Antworte mit einer nummerierten Liste."
   },
-
   "extension": {
     "bannerText": "flompt ist jetzt auf Chrome & Firefox verfügbar. Nutze es in ChatGPT, Claude & Gemini.",
     "bannerCta": "Installieren →",
@@ -128,35 +189,84 @@
     "popupCtaFirefox": "Zu Firefox hinzufügen",
     "popupSkip": "Vielleicht später"
   },
-
   "starPopup": {
     "title": "Gefällt dir flompt?",
     "desc": "flompt ist kostenlos & Open Source. Wenn es dir nützlich ist, hilft ein ⭐ auf GitHub uns zu wachsen und es am Leben zu erhalten.",
     "cta": "Auf GitHub einen Stern geben",
     "skip": "Vielleicht später"
   },
-
   "blocks": {
-    "document":         { "label": "Dokument",          "description": "Externer Inhalt, injiziert via XML <document>" },
-    "input":            { "label": "Eingabe",            "description": "Der KI bereitgestellte Daten" },
-    "role":             { "label": "Rolle",              "description": "Definiert die Persona / Rolle der KI" },
-    "audience":         { "label": "Zielgruppe",         "description": "Für wen die Ausgabe geschrieben wird" },
-    "context":          { "label": "Kontext",            "description": "Stellt Kontext für die Aufgabe bereit" },
-    "objective":        { "label": "Ziel",               "description": "Was wir erreichen wollen" },
-    "goal":             { "label": "Endziel",            "description": "Endziel und Erfolgskriterien" },
-    "constraints":      { "label": "Einschränkungen",   "description": "Zu beachtende Regeln und Grenzen" },
-    "examples":         { "label": "Beispiele",          "description": "Few-shot Eingabe/Ausgabe-Paare" },
-    "chain_of_thought": { "label": "Gedankenkette",      "description": "Schritt-für-Schritt-Anweisungen" },
-    "output_format":    { "label": "Ausgabe",            "description": "Erwartetes Format der Antwort" },
-    "response_style":   {
-      "label": "Antwortstil", "description": "Ausführlichkeit, Ton, Prosa, Markdown, LaTeX",
-      "verbosity": "Ausführlichkeit", "concise": "Prägnant", "balanced": "Ausgewogen", "detailed": "Detailliert",
-      "tone": "Ton", "conversational": "Locker", "neutral": "Neutral", "formal": "Formal",
-      "prose": "Format", "flowing": "Prosa", "mixed": "Gemischt", "structured": "Listen",
-      "mdNone": "Keins", "mdMinimal": "Minimal", "mdStandard": "Standard", "mdRich": "Reich",
-      "math": "Mathematik", "mathAuto": "Auto", "mathPlain": "Schlicht",
+    "document": {
+      "label": "Dokument",
+      "description": "Externer Inhalt, injiziert via XML <document>"
+    },
+    "input": {
+      "label": "Eingabe",
+      "description": "Der KI bereitgestellte Daten"
+    },
+    "role": {
+      "label": "Rolle",
+      "description": "Definiert die Persona / Rolle der KI"
+    },
+    "audience": {
+      "label": "Zielgruppe",
+      "description": "Für wen die Ausgabe geschrieben wird"
+    },
+    "context": {
+      "label": "Kontext",
+      "description": "Stellt Kontext für die Aufgabe bereit"
+    },
+    "objective": {
+      "label": "Ziel",
+      "description": "Was wir erreichen wollen"
+    },
+    "goal": {
+      "label": "Endziel",
+      "description": "Endziel und Erfolgskriterien"
+    },
+    "constraints": {
+      "label": "Einschränkungen",
+      "description": "Zu beachtende Regeln und Grenzen"
+    },
+    "examples": {
+      "label": "Beispiele",
+      "description": "Few-shot Eingabe/Ausgabe-Paare"
+    },
+    "chain_of_thought": {
+      "label": "Gedankenkette",
+      "description": "Schritt-für-Schritt-Anweisungen"
+    },
+    "output_format": {
+      "label": "Ausgabe",
+      "description": "Erwartetes Format der Antwort"
+    },
+    "response_style": {
+      "label": "Antwortstil",
+      "description": "Ausführlichkeit, Ton, Prosa, Markdown, LaTeX",
+      "verbosity": "Ausführlichkeit",
+      "concise": "Prägnant",
+      "balanced": "Ausgewogen",
+      "detailed": "Detailliert",
+      "tone": "Ton",
+      "conversational": "Locker",
+      "neutral": "Neutral",
+      "formal": "Formal",
+      "prose": "Format",
+      "flowing": "Prosa",
+      "mixed": "Gemischt",
+      "structured": "Listen",
+      "mdNone": "Keins",
+      "mdMinimal": "Minimal",
+      "mdStandard": "Standard",
+      "mdRich": "Reich",
+      "math": "Mathematik",
+      "mathAuto": "Auto",
+      "mathPlain": "Schlicht",
       "skipPreamble": "Präambel überspringen"
     },
-    "language":         { "label": "Sprache",            "description": "Sprache, in der die KI antworten soll" }
+    "language": {
+      "label": "Sprache",
+      "description": "Sprache, in der die KI antworten soll"
+    }
   }
 }

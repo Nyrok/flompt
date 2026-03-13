@@ -2,7 +2,7 @@
   "nodeCount": "{n} block",
   "nodeCountPlural": "{n} blocks",
 
-  "tabs": { "input": "Prompt", "canvas": "Canvas", "output": "Result" },
+  "tabs": { "input": "Prompt", "canvas": "Canvas", "output": "Result", "library": "Library" },
 
   "header": {
     "undo": "Undo (Ctrl+Z)",
@@ -60,6 +60,18 @@
     "network": "Connection lost. Check your internet and try again.",
     "server": "Server error. Please try again in a few seconds.",
     "unknown": "Something went wrong. Please try again."
+  },
+
+  "library": {
+    "hint": "Click a template to load it into the canvas.",
+    "outputLang": "Response language",
+    "noLang": "Auto (no language block)",
+    "categories": {
+      "all": "All", "writing": "Writing", "code": "Code",
+      "marketing": "Marketing", "productivity": "Productivity",
+      "design": "Design", "education": "Education", "sales": "Sales",
+      "data": "Data", "creative": "Creative", "personal": "Personal"
+    }
   },
 
   "sidebar": {

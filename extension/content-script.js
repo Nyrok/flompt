@@ -365,9 +365,6 @@
         s.classList.add('flompt-splash-hidden')
         setTimeout(() => s.remove(), 450)
       }
-      // Send the platform name immediately on load — the button shows
-      // "Import from Claude" right away without waiting for the first click
-      // Also includes the optimal format for this platform
       if (platform?.name) {
         iframeEl.contentWindow.postMessage({
           type: 'FLOMPT_PLATFORM_INFO',
@@ -375,6 +372,9 @@
           format: PLATFORM_FORMAT[platform.name] || 'claude',
         }, '*')
       }
+      // Auto-import the platform input on first load
+      const text = getInputText()
+      if (text.trim()) sendPlatformInputToIframe()
     })
 
     // Internal header (close button visible inside)
@@ -405,7 +405,19 @@
       toggleBtn.style.setProperty('right', (currentSidebarWidth + 20) + 'px', 'important')
     }
 
-    // No automatic sync — the user triggers import manually
+    // If the iframe is already loaded (subsequent opens): re-send platform info
+    // and auto-import the current input text
+    if (iframeReady) {
+      if (platform?.name) {
+        iframeEl.contentWindow.postMessage({
+          type: 'FLOMPT_PLATFORM_INFO',
+          platform: platform.name,
+          format: PLATFORM_FORMAT[platform.name] || 'claude',
+        }, '*')
+      }
+      const text = getInputText()
+      if (text.trim()) sendPlatformInputToIframe()
+    }
   }
 
   function closeSidebar () {
