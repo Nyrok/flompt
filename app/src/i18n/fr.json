@@ -150,6 +150,30 @@
     "skip": "Plus tard"
   },
 
+  "makeIntegration": {
+    "title": "Envoyer vers Make",
+    "panelLabel": "Panneau d'intégration Make.com",
+    "close": "Fermer le panneau Make",
+    "webhookLabel": "URL du webhook",
+    "paste": "Coller depuis le presse-papiers",
+    "configured": "Webhook configuré",
+    "notConfigured": "Non configuré",
+    "invalidUrl": "Doit être une URL make.com valide",
+    "test": "Tester",
+    "testing": "Test en cours…",
+    "testOk": "Accessible",
+    "testFail": "Inaccessible",
+    "noPrompt": "Assembler d'abord le prompt",
+    "send": "Envoyer vers Make",
+    "sending": "Envoi…",
+    "sent": "Envoyé !",
+    "sendError": "Échec — réessayer",
+    "history": "Envois récents",
+    "clearHistory": "Effacer",
+    "docs": "Documentation webhook Make.com",
+    "openPanel": "Envoyer vers Make.com"
+  },
+
   "blocks": {
     "document":         { "label": "Document",        "description": "Contenu externe injecté en XML <document>" },
     "input":            { "label": "Entrée",          "description": "Données fournies à l'IA" },

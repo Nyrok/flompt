@@ -122,6 +122,52 @@ Ordered as assembled (TYPE_PRIORITY in `assemblePrompt.ts`):
 
 ---
 
+## Make.com Integration
+
+### Architecture
+- **No backend** — all state lives in `localStorage` via a persisted Zustand store (`flompt-make`)
+- **Entry point** — "Send to Make.com" button in `PromptOutput.tsx` (web only, hidden when `isExtension === true`)
+- **Panel** — slide-in overlay from the right (`MakeIntegration.tsx`), mounted globally in `App.tsx`
+
+### Key files
+
+| File | Role |
+|------|------|
+| `app/src/store/makeStore.ts` | Persisted Zustand store — `webhookUrl` + `history` (last 10) saved to localStorage; `isPanelOpen`, `isSending`, `lastStatus` are transient |
+| `app/src/components/MakeIntegration.tsx` | Full panel UI: webhook input, test button, prompt preview, send button, execution history, docs link |
+
+### Payload sent to Make
+```json
+{
+  "prompt": "<assembled prompt text>",
+  "format": "claude | chatgpt | gemini",
+  "blockCount": 5,
+  "source": "flompt",
+  "sentAt": "<ISO string>"
+}
+```
+
+### CSS tokens
+```css
+--make:       #6B5DFA   /* Make brand purple */
+--make-2:     #5548d4   /* hover state */
+--make-light: rgba(107, 93, 250, 0.15)
+--make-glow:  rgba(107, 93, 250, 0.3)
+```
+
+### Analytics events
+- `make_panel_opened` — user opens the panel
+- `make_send_prompt` — props: `format`, `block_count`, `chars`
+- `make_send_success` — webhook returned 2xx
+- `make_send_error` — props: `reason`
+
+### Validation rules
+- Webhook URL must be a valid `http(s)://` URL containing `make.com`
+- Send button disabled if: no valid webhook URL OR no compiled prompt
+- Test = POST with `{ _flompt_ping: true }` — Make webhooks always return 200
+
+---
+
 ## Analytics & Error Tracking (PostHog)
 - **Project** : EU region (`https://eu.i.posthog.com`)
 - **MCP** : installed via `claude mcp add --transport http posthog https://mcp.posthog.com/mcp` (user scope)

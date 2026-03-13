@@ -1,11 +1,12 @@
 import { useState, useCallback, useEffect } from 'react'
-import { Clipboard, ClipboardCheck, FileText, Braces, Sparkles, Play, Send, Github } from 'lucide-react'
+import { Clipboard, ClipboardCheck, FileText, Braces, Sparkles, Play, Send, Github, Zap } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics } from '@/lib/analytics'
 import { assemblePrompt } from '@/lib/assemblePrompt'
 import { isExtension } from '@/lib/platform'
 import { STAR_EVENT } from '@/components/StarPopup'
+import { useMakeStore } from '@/store/makeStore'
 import type { OutputFormat } from '@/types/blocks'
 
 // ─── Selection button config ─────────────────────────────────────────────────
@@ -20,6 +21,7 @@ const FORMAT_OPTIONS: Array<{ format: OutputFormat; label: string; title: string
 const PromptOutput = () => {
   const { nodes, edges, compiledPrompt, setCompiledPrompt, outputFormat, setOutputFormat } = useFlowStore()
   const { t } = useLocale()
+  const { setIsPanelOpen: openMakePanel } = useMakeStore()
   const [copied,   setCopied]   = useState(false)
   const [injected, setInjected] = useState(false)
 
@@ -183,6 +185,20 @@ const PromptOutput = () => {
           aria-disabled={nodes.length === 0}
         >
           <Play size={14} aria-hidden="true" /> {t.promptOutput.compile}
+        </button>
+      )}
+
+      {/* Send to Make.com */}
+      {!isExtension && (
+        <button
+          className="make-open-btn"
+          onClick={() => {
+            openMakePanel(true)
+            analytics.makePanelOpened()
+          }}
+          title={t.makeIntegration.openPanel}
+        >
+          <Zap size={13} aria-hidden="true" /> {t.makeIntegration.openPanel}
         </button>
       )}
 

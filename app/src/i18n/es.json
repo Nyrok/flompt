@@ -195,6 +195,30 @@
     "cta": "Dar estrella en GitHub",
     "skip": "Quizás más tarde"
   },
+  "makeIntegration": {
+    "title": "Send to Make",
+    "panelLabel": "Make.com integration panel",
+    "close": "Close Make panel",
+    "webhookLabel": "Webhook URL",
+    "paste": "Paste from clipboard",
+    "configured": "Webhook configured",
+    "notConfigured": "Not configured",
+    "invalidUrl": "Must be a valid make.com URL",
+    "test": "Test",
+    "testing": "Testing…",
+    "testOk": "Reachable",
+    "testFail": "Unreachable",
+    "noPrompt": "Assemble your prompt first",
+    "send": "Send to Make",
+    "sending": "Sending…",
+    "sent": "Sent!",
+    "sendError": "Failed — retry",
+    "history": "Recent sends",
+    "clearHistory": "Clear",
+    "docs": "Make.com webhook docs",
+    "openPanel": "Send to Make.com"
+  },
+
   "blocks": {
     "document": {
       "label": "Documento",
