@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { BookOpen } from 'lucide-react'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
 
-const Sidebar = () => {
+const Sidebar = ({ onOpenLibrary }: { onOpenLibrary?: () => void }) => {
   const addNode = useFlowStore((s) => s.addNode)
   const nodes   = useFlowStore((s) => s.nodes)
   const { t }   = useLocale()
@@ -73,7 +74,15 @@ const Sidebar = () => {
 
   return (
     <aside className={`sidebar${scrolled ? ' sidebar--scrolled' : ''}`}>
-      <h3 className="panel-title">{t.sidebar.title}</h3>
+      <div className="sidebar-header">
+        <h3 className="panel-title">{t.sidebar.title}</h3>
+        {onOpenLibrary && (
+          <button className="sidebar-library-btn" onClick={onOpenLibrary} title="Templates" aria-label="Open template library">
+            <BookOpen size={13} aria-hidden="true" />
+            <span>Templates</span>
+          </button>
+        )}
+      </div>
       <p className="sidebar-hint">{t.sidebar.hint}</p>
 
       {/* Wrapper with position:relative to anchor the blur overlays */}
@@ -103,15 +112,17 @@ const Sidebar = () => {
                 onClick={() => handleAddBlock(type)}
                 draggable
                 onDragStart={(e) => handleDragStart(e, type)}
-                title={tr.description}
               >
-                <span
-                  className="block-pill-icon"
-                  style={{ background: `${meta.color}1a` }}
-                >
-                  <Icon size={13} />
+                <span className="block-pill-main">
+                  <span
+                    className="block-pill-icon"
+                    style={{ background: `${meta.color}1a` }}
+                  >
+                    <Icon size={13} />
+                  </span>
+                  <span className="block-pill-label">{tr.label}</span>
                 </span>
-                {tr.label}
+                <span className="block-pill-desc">{tr.description}</span>
               </button>
             )
           })}
