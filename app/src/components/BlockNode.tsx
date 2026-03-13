@@ -1,6 +1,6 @@
 import { memo, useState, useRef, useLayoutEffect } from 'react'
 import type { NodeProps } from 'reactflow'
-import { Copy, ChevronDown, ChevronRight, X, Info } from 'lucide-react'
+import { Copy, ChevronDown, ChevronRight, X } from 'lucide-react'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockData, ResponseStyleOptions } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
@@ -98,14 +98,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             <Icon size={13} />
           </span>
           <span className="block-label">{tr.label}</span>
-          <span
-            className="block-info-tip"
-            data-tooltip={tr.description}
-            onClick={(e) => e.stopPropagation()}
-            aria-label={tr.description}
-          >
-            <Info size={10} aria-hidden="true" />
-          </span>
           <select
             className="language-select nodrag nopan"
             value={matchLang()}
@@ -224,14 +216,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
         >
           <span className="block-icon" aria-hidden="true"><Icon size={13} /></span>
           <span className="block-label">{tr?.label ?? 'Response Style'}</span>
-          <span
-            className="block-info-tip"
-            data-tooltip={tr.description}
-            onClick={(e) => e.stopPropagation()}
-            aria-label={tr.description}
-          >
-            <Info size={10} aria-hidden="true" />
-          </span>
           <div className="block-actions">
             <button
               className="block-collapse"
@@ -330,14 +314,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
           ) : (
             <span className="block-label">{displayLabel}</span>
           )}
-          <span
-            className="block-info-tip"
-            data-tooltip={tr.description}
-            onClick={(e) => e.stopPropagation()}
-            aria-label={tr.description}
-          >
-            <Info size={10} aria-hidden="true" />
-          </span>
         </div>
         <div className="block-actions">
           <button
