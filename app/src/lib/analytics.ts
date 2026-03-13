@@ -107,6 +107,12 @@ export const analytics = {
   // GitHub
   githubClicked: (source: string)                     => track('github_clicked',  { source }),
 
+  // Make.com integration
+  makePanelOpened:  ()                                                => track('make_panel_opened'),
+  makeSendPrompt:   (format: string, blockCount: number, chars: number) => track('make_send_prompt', { format, block_count: blockCount, chars }),
+  makeSuccess:      ()                                                => track('make_send_success'),
+  makeError:        (reason: string)                                  => track('make_send_error', { reason }),
+
   // Errors
   error: (context: string, message?: string)          => track('error', { context, message }),
 }

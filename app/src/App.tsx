@@ -12,6 +12,7 @@ import GuidedTour from '@/components/GuidedTour'
 import ExtensionBanner from '@/components/ExtensionBanner'
 import ExtensionPopup from '@/components/ExtensionPopup'
 import StarPopup from '@/components/StarPopup'
+import MakeIntegration from '@/components/MakeIntegration'
 import { useFlowStore } from '@/store/flowStore'
 import type { Tab } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -166,6 +167,9 @@ const App = () => {
 
       {/* Star popup — after first decompose, compile, or inject to AI */}
       <StarPopup />
+
+      {/* Make.com integration panel — web only */}
+      {!isExtension && <MakeIntegration />}
 
       <nav className="tab-bar" aria-label={t.accessibility.mainTabs}>
         <div role="tablist" className="tab-list-inner">
