@@ -1,9 +1,12 @@
 {
   "nodeCount": "{n} блок",
   "nodeCountPlural": "{n} блоков",
-
-  "tabs": { "input": "Промпт", "canvas": "Холст", "output": "Результат" },
-
+  "tabs": {
+    "library": "Library",
+    "input": "Промпт",
+    "canvas": "Холст",
+    "output": "Результат"
+  },
   "header": {
     "undo": "Отменить (Ctrl+Z)",
     "redo": "Повторить (Ctrl+Y)",
@@ -12,7 +15,6 @@
     "autosaved": "Автосохранено",
     "github": "Поставить звезду flompt на GitHub (открывается в новой вкладке)"
   },
-
   "accessibility": {
     "skipToMain": "Перейти к основному содержимому",
     "switchLocale": "Сменить язык",
@@ -20,7 +22,6 @@
     "outputPanel": "Панель вывода",
     "mainTabs": "Основные вкладки"
   },
-
   "promptInput": {
     "title": "Исходный промпт",
     "placeholder": "Вставьте ваш промпт сюда…",
@@ -32,7 +33,6 @@
     "queuePosition": "Позиция в очереди: {n}",
     "queueProcessing": "Обрабатывается…"
   },
-
   "promptOutput": {
     "title": "Результат",
     "compile": "Собрать промпт",
@@ -53,7 +53,6 @@
     "injectLabel": "Отправить промпт в чат с ИИ",
     "injectedLabel": "Промпт внедрён!"
   },
-
   "errors": {
     "overloaded": "ИИ сейчас перегружен. Пожалуйста, подождите и попробуйте снова.",
     "timeout": "Время ожидания запроса истекло. ИИ отвечал слишком долго. Попробуйте снова.",
@@ -61,12 +60,28 @@
     "server": "Ошибка сервера. Пожалуйста, попробуйте снова через несколько секунд.",
     "unknown": "Что-то пошло не так. Пожалуйста, попробуйте снова."
   },
-
+  "library": {
+    "hint": "Click a template to load it into the canvas.",
+    "outputLang": "Response language",
+    "noLang": "Auto (no language block)",
+    "categories": {
+      "all": "All",
+      "writing": "Writing",
+      "code": "Code",
+      "marketing": "Marketing",
+      "productivity": "Productivity",
+      "design": "Design",
+      "education": "Education",
+      "sales": "Sales",
+      "data": "Data",
+      "creative": "Creative",
+      "personal": "Personal"
+    }
+  },
   "sidebar": {
     "title": "Блоки",
     "hint": "Нажмите для добавления · Перетащите на холст"
   },
-
   "block": {
     "duplicate": "Дублировать",
     "expand": "Развернуть",
@@ -75,29 +90,76 @@
     "chars": "сим.",
     "deleteConnection": "Удалить связь"
   },
-
   "canvas": {
     "empty": "Пустой холст",
     "emptyHint": "Вставьте промпт слева и нажмите ",
     "emptyDecompose": "«Разбить», или перетащите блок из боковой панели."
   },
-
   "shortcuts": {
     "title": "Горячие клавиши",
     "close": "Нажмите Esc или ? для закрытия",
     "list": [
-      { "keys": ["Ctrl", "Z"],       "label": "Отменить" },
-      { "keys": ["Ctrl", "Y"],       "label": "Повторить" },
-      { "keys": ["Ctrl", "⇧", "Z"], "label": "Повторить (альт.)" },
-      { "keys": ["Del"],             "label": "Удалить выбранный блок" },
-      { "keys": ["Ctrl", "A"],       "label": "Выбрать всё" },
-      { "keys": ["Scroll"],          "label": "Масштаб" },
-      { "keys": ["Drag"],            "label": "Переместить блок" },
-      { "keys": ["Bg drag"],         "label": "Сдвинуть холст" },
-      { "keys": ["?"],               "label": "Показать горячие клавиши" }
+      {
+        "keys": [
+          "Ctrl",
+          "Z"
+        ],
+        "label": "Отменить"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "Y"
+        ],
+        "label": "Повторить"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "⇧",
+          "Z"
+        ],
+        "label": "Повторить (альт.)"
+      },
+      {
+        "keys": [
+          "Del"
+        ],
+        "label": "Удалить выбранный блок"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "A"
+        ],
+        "label": "Выбрать всё"
+      },
+      {
+        "keys": [
+          "Scroll"
+        ],
+        "label": "Масштаб"
+      },
+      {
+        "keys": [
+          "Drag"
+        ],
+        "label": "Переместить блок"
+      },
+      {
+        "keys": [
+          "Bg drag"
+        ],
+        "label": "Сдвинуть холст"
+      },
+      {
+        "keys": [
+          "?"
+        ],
+        "label": "Показать горячие клавиши"
+      }
     ]
   },
-
   "tour": {
     "step1title": "Ваш исходный промпт",
     "step1desc": "Введите или вставьте любой текст. Расплывчатый или подробный — не важно. flompt структурирует его за вас.",
@@ -117,7 +179,6 @@
     "acting": "Разбиваю…",
     "samplePrompt": "Вы — опытный Python-разработчик. Проверьте следующий код на наличие ошибок, проблем с производительностью и нарушений стиля. Будьте лаконичны, приоритизируйте критические проблемы и объясните каждую находку в одном предложении. Ответьте нумерованным списком."
   },
-
   "extension": {
     "bannerText": "flompt теперь доступен на Chrome и Firefox. Используйте его в ChatGPT, Claude и Gemini.",
     "bannerCta": "Установить →",
@@ -128,35 +189,84 @@
     "popupCtaFirefox": "Добавить в Firefox",
     "popupSkip": "Может быть позже"
   },
-
   "starPopup": {
     "title": "Нравится flompt?",
     "desc": "flompt бесплатен и с открытым исходным кодом. Если он вам полезен, ⭐ на GitHub поможет нам расти и развиваться.",
     "cta": "Поставить звезду на GitHub",
     "skip": "Может быть позже"
   },
-
   "blocks": {
-    "document":         { "label": "Документ",          "description": "Внешний контент, внедрённый через XML <document>" },
-    "input":            { "label": "Входные данные",    "description": "Данные, предоставленные ИИ" },
-    "role":             { "label": "Роль",              "description": "Определяет персону / роль ИИ" },
-    "audience":         { "label": "Аудитория",         "description": "Для кого написан вывод" },
-    "context":          { "label": "Контекст",          "description": "Предоставляет контекст для задачи" },
-    "objective":        { "label": "Задача",            "description": "Чего мы хотим достичь" },
-    "goal":             { "label": "Цель",              "description": "Конечная цель и критерии успеха" },
-    "constraints":      { "label": "Ограничения",       "description": "Правила и лимиты для соблюдения" },
-    "examples":         { "label": "Примеры",           "description": "Пары ввод/вывод для few-shot" },
-    "chain_of_thought": { "label": "Цепочка мыслей",   "description": "Инструкции для пошагового рассуждения" },
-    "output_format":    { "label": "Вывод",             "description": "Ожидаемый формат ответа" },
-    "response_style":   {
-      "label": "Стиль ответа", "description": "Детализация, тон, проза, Markdown, LaTeX",
-      "verbosity": "Детализация", "concise": "Кратко", "balanced": "Сбалансировано", "detailed": "Подробно",
-      "tone": "Тон", "conversational": "Разговорный", "neutral": "Нейтральный", "formal": "Формальный",
-      "prose": "Формат", "flowing": "Проза", "mixed": "Смешанный", "structured": "Списки",
-      "mdNone": "Нет", "mdMinimal": "Минимальный", "mdStandard": "Стандартный", "mdRich": "Богатый",
-      "math": "Математика", "mathAuto": "Авто", "mathPlain": "Простой",
+    "document": {
+      "label": "Документ",
+      "description": "Внешний контент, внедрённый через XML <document>"
+    },
+    "input": {
+      "label": "Входные данные",
+      "description": "Данные, предоставленные ИИ"
+    },
+    "role": {
+      "label": "Роль",
+      "description": "Определяет персону / роль ИИ"
+    },
+    "audience": {
+      "label": "Аудитория",
+      "description": "Для кого написан вывод"
+    },
+    "context": {
+      "label": "Контекст",
+      "description": "Предоставляет контекст для задачи"
+    },
+    "objective": {
+      "label": "Задача",
+      "description": "Чего мы хотим достичь"
+    },
+    "goal": {
+      "label": "Цель",
+      "description": "Конечная цель и критерии успеха"
+    },
+    "constraints": {
+      "label": "Ограничения",
+      "description": "Правила и лимиты для соблюдения"
+    },
+    "examples": {
+      "label": "Примеры",
+      "description": "Пары ввод/вывод для few-shot"
+    },
+    "chain_of_thought": {
+      "label": "Цепочка мыслей",
+      "description": "Инструкции для пошагового рассуждения"
+    },
+    "output_format": {
+      "label": "Вывод",
+      "description": "Ожидаемый формат ответа"
+    },
+    "response_style": {
+      "label": "Стиль ответа",
+      "description": "Детализация, тон, проза, Markdown, LaTeX",
+      "verbosity": "Детализация",
+      "concise": "Кратко",
+      "balanced": "Сбалансировано",
+      "detailed": "Подробно",
+      "tone": "Тон",
+      "conversational": "Разговорный",
+      "neutral": "Нейтральный",
+      "formal": "Формальный",
+      "prose": "Формат",
+      "flowing": "Проза",
+      "mixed": "Смешанный",
+      "structured": "Списки",
+      "mdNone": "Нет",
+      "mdMinimal": "Минимальный",
+      "mdStandard": "Стандартный",
+      "mdRich": "Богатый",
+      "math": "Математика",
+      "mathAuto": "Авто",
+      "mathPlain": "Простой",
       "skipPreamble": "Пропустить преамбулу"
     },
-    "language":         { "label": "Язык",              "description": "Язык, на котором должен отвечать ИИ" }
+    "language": {
+      "label": "Язык",
+      "description": "Язык, на котором должен отвечать ИИ"
+    }
   }
 }

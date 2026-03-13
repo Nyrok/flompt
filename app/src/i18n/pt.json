@@ -1,9 +1,12 @@
 {
   "nodeCount": "{n} bloco",
   "nodeCountPlural": "{n} blocos",
-
-  "tabs": { "input": "Prompt", "canvas": "Canvas", "output": "Resultado" },
-
+  "tabs": {
+    "library": "Library",
+    "input": "Prompt",
+    "canvas": "Canvas",
+    "output": "Resultado"
+  },
   "header": {
     "undo": "Desfazer (Ctrl+Z)",
     "redo": "Refazer (Ctrl+Y)",
@@ -12,7 +15,6 @@
     "autosaved": "Salvo automaticamente",
     "github": "Dar estrela ao flompt no GitHub (abre em nova aba)"
   },
-
   "accessibility": {
     "skipToMain": "Ir para o conteúdo principal",
     "switchLocale": "Mudar idioma",
@@ -20,7 +22,6 @@
     "outputPanel": "Painel de saída",
     "mainTabs": "Abas principais"
   },
-
   "promptInput": {
     "title": "Prompt bruto",
     "placeholder": "Cole seu prompt aqui…",
@@ -32,7 +33,6 @@
     "queuePosition": "Posição na fila: {n}",
     "queueProcessing": "Processando…"
   },
-
   "promptOutput": {
     "title": "Resultado",
     "compile": "Montar prompt",
@@ -53,7 +53,6 @@
     "injectLabel": "Enviar prompt para o chat de IA",
     "injectedLabel": "Prompt injetado!"
   },
-
   "errors": {
     "overloaded": "A IA está sobrecarregada agora. Por favor, aguarde um momento e tente novamente.",
     "timeout": "A solicitação expirou. A IA demorou muito para responder. Tente novamente.",
@@ -61,12 +60,28 @@
     "server": "Erro do servidor. Por favor, tente novamente em alguns segundos.",
     "unknown": "Algo deu errado. Por favor, tente novamente."
   },
-
+  "library": {
+    "hint": "Click a template to load it into the canvas.",
+    "outputLang": "Response language",
+    "noLang": "Auto (no language block)",
+    "categories": {
+      "all": "All",
+      "writing": "Writing",
+      "code": "Code",
+      "marketing": "Marketing",
+      "productivity": "Productivity",
+      "design": "Design",
+      "education": "Education",
+      "sales": "Sales",
+      "data": "Data",
+      "creative": "Creative",
+      "personal": "Personal"
+    }
+  },
   "sidebar": {
     "title": "Blocos",
     "hint": "Clique para adicionar · Arraste para o canvas"
   },
-
   "block": {
     "duplicate": "Duplicar",
     "expand": "Expandir",
@@ -75,29 +90,76 @@
     "chars": "car.",
     "deleteConnection": "Excluir conexão"
   },
-
   "canvas": {
     "empty": "Canvas vazio",
     "emptyHint": "Cole um prompt à esquerda e clique em ",
     "emptyDecompose": "Decompor, ou arraste um bloco da barra lateral."
   },
-
   "shortcuts": {
     "title": "Atalhos de teclado",
     "close": "Pressione Esc ou ? para fechar",
     "list": [
-      { "keys": ["Ctrl", "Z"],       "label": "Desfazer" },
-      { "keys": ["Ctrl", "Y"],       "label": "Refazer" },
-      { "keys": ["Ctrl", "⇧", "Z"], "label": "Refazer (alternativo)" },
-      { "keys": ["Del"],             "label": "Excluir bloco selecionado" },
-      { "keys": ["Ctrl", "A"],       "label": "Selecionar tudo" },
-      { "keys": ["Scroll"],          "label": "Aproximar/afastar" },
-      { "keys": ["Drag"],            "label": "Mover um bloco" },
-      { "keys": ["Bg drag"],         "label": "Mover canvas" },
-      { "keys": ["?"],               "label": "Mostrar atalhos" }
+      {
+        "keys": [
+          "Ctrl",
+          "Z"
+        ],
+        "label": "Desfazer"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "Y"
+        ],
+        "label": "Refazer"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "⇧",
+          "Z"
+        ],
+        "label": "Refazer (alternativo)"
+      },
+      {
+        "keys": [
+          "Del"
+        ],
+        "label": "Excluir bloco selecionado"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "A"
+        ],
+        "label": "Selecionar tudo"
+      },
+      {
+        "keys": [
+          "Scroll"
+        ],
+        "label": "Aproximar/afastar"
+      },
+      {
+        "keys": [
+          "Drag"
+        ],
+        "label": "Mover um bloco"
+      },
+      {
+        "keys": [
+          "Bg drag"
+        ],
+        "label": "Mover canvas"
+      },
+      {
+        "keys": [
+          "?"
+        ],
+        "label": "Mostrar atalhos"
+      }
     ]
   },
-
   "tour": {
     "step1title": "Seu prompt bruto",
     "step1desc": "Digite ou cole qualquer texto aqui. Vago ou detalhado, não importa. O flompt vai estruturá-lo para você.",
@@ -117,7 +179,6 @@
     "acting": "Decompondo…",
     "samplePrompt": "Você é um desenvolvedor Python sênior. Revise o código a seguir em busca de bugs, problemas de desempenho e violações de estilo. Seja conciso, priorize problemas críticos e explique cada achado em uma frase. Responda com uma lista numerada."
   },
-
   "extension": {
     "bannerText": "O flompt agora está disponível no Chrome e Firefox. Use-o dentro do ChatGPT, Claude e Gemini.",
     "bannerCta": "Instalar →",
@@ -128,35 +189,84 @@
     "popupCtaFirefox": "Adicionar ao Firefox",
     "popupSkip": "Talvez mais tarde"
   },
-
   "starPopup": {
     "title": "Gostando do flompt?",
     "desc": "O flompt é gratuito e open source. Se for útil para você, uma ⭐ no GitHub nos ajuda a crescer e a mantê-lo vivo.",
     "cta": "Dar estrela no GitHub",
     "skip": "Talvez mais tarde"
   },
-
   "blocks": {
-    "document":         { "label": "Documento",         "description": "Conteúdo externo injetado via XML <document>" },
-    "input":            { "label": "Entrada",           "description": "Dados fornecidos à IA" },
-    "role":             { "label": "Papel",             "description": "Define a persona / papel da IA" },
-    "audience":         { "label": "Público",           "description": "Para quem a saída é escrita" },
-    "context":          { "label": "Contexto",          "description": "Fornece contexto para a tarefa" },
-    "objective":        { "label": "Objetivo",          "description": "O que queremos alcançar" },
-    "goal":             { "label": "Meta",              "description": "Meta final e critérios de sucesso" },
-    "constraints":      { "label": "Restrições",        "description": "Regras e limites a respeitar" },
-    "examples":         { "label": "Exemplos",          "description": "Pares de entrada/saída few-shot" },
-    "chain_of_thought": { "label": "Cadeia de pensamento", "description": "Instruções de raciocínio passo a passo" },
-    "output_format":    { "label": "Saída",             "description": "Formato esperado da resposta" },
-    "response_style":   {
-      "label": "Estilo de resposta", "description": "Verbosidade, tom, prosa, markdown, LaTeX",
-      "verbosity": "Verbosidade", "concise": "Conciso", "balanced": "Equilibrado", "detailed": "Detalhado",
-      "tone": "Tom", "conversational": "Informal", "neutral": "Neutro", "formal": "Formal",
-      "prose": "Formato", "flowing": "Prosa", "mixed": "Misto", "structured": "Listas",
-      "mdNone": "Nenhum", "mdMinimal": "Mínimo", "mdStandard": "Padrão", "mdRich": "Rico",
-      "math": "Matemática", "mathAuto": "Auto", "mathPlain": "Simples",
+    "document": {
+      "label": "Documento",
+      "description": "Conteúdo externo injetado via XML <document>"
+    },
+    "input": {
+      "label": "Entrada",
+      "description": "Dados fornecidos à IA"
+    },
+    "role": {
+      "label": "Papel",
+      "description": "Define a persona / papel da IA"
+    },
+    "audience": {
+      "label": "Público",
+      "description": "Para quem a saída é escrita"
+    },
+    "context": {
+      "label": "Contexto",
+      "description": "Fornece contexto para a tarefa"
+    },
+    "objective": {
+      "label": "Objetivo",
+      "description": "O que queremos alcançar"
+    },
+    "goal": {
+      "label": "Meta",
+      "description": "Meta final e critérios de sucesso"
+    },
+    "constraints": {
+      "label": "Restrições",
+      "description": "Regras e limites a respeitar"
+    },
+    "examples": {
+      "label": "Exemplos",
+      "description": "Pares de entrada/saída few-shot"
+    },
+    "chain_of_thought": {
+      "label": "Cadeia de pensamento",
+      "description": "Instruções de raciocínio passo a passo"
+    },
+    "output_format": {
+      "label": "Saída",
+      "description": "Formato esperado da resposta"
+    },
+    "response_style": {
+      "label": "Estilo de resposta",
+      "description": "Verbosidade, tom, prosa, markdown, LaTeX",
+      "verbosity": "Verbosidade",
+      "concise": "Conciso",
+      "balanced": "Equilibrado",
+      "detailed": "Detalhado",
+      "tone": "Tom",
+      "conversational": "Informal",
+      "neutral": "Neutro",
+      "formal": "Formal",
+      "prose": "Formato",
+      "flowing": "Prosa",
+      "mixed": "Misto",
+      "structured": "Listas",
+      "mdNone": "Nenhum",
+      "mdMinimal": "Mínimo",
+      "mdStandard": "Padrão",
+      "mdRich": "Rico",
+      "math": "Matemática",
+      "mathAuto": "Auto",
+      "mathPlain": "Simples",
       "skipPreamble": "Pular preâmbulo"
     },
-    "language":         { "label": "Idioma",            "description": "Idioma em que a IA deve responder" }
+    "language": {
+      "label": "Idioma",
+      "description": "Idioma em que a IA deve responder"
+    }
   }
 }

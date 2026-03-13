@@ -108,12 +108,12 @@
   }
 
   // ── Config ─────────────────────────────────────────────────────────────────
-  const DEV_MODE      = false
+  const DEV_MODE      = true
   const FLOMPT_URL    = DEV_MODE
-    ? 'http://localhost:5173/app/?extension=1'
+    ? 'http://localhost:5174/app/?extension=1'
     : 'https://flompt.dev/app/?extension=1'
   const FLOMPT_ORIGIN = DEV_MODE
-    ? 'http://localhost:5173'
+    ? 'http://localhost:5174'
     : 'https://flompt.dev'
 
   const SIDEBAR_W_DEFAULT = 440
