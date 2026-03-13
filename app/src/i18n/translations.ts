@@ -125,6 +125,8 @@ export interface Translations {
     step1desc: string
     stepBlocksTitle: string
     stepBlocksDesc: string
+    stepLibraryTitle: string
+    stepLibraryDesc: string
     step2title: string
     step2desc: string
     step2action: string

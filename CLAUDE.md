@@ -177,7 +177,7 @@ Ordered as assembled (TYPE_PRIORITY in `assemblePrompt.ts`):
 - `basePath: "/blog"` → assets in the HTML are prefixed `/blog/_next/...`
 - `handle_path /blog*` strips `/blog`, files are found in `out/_next/...`
 - After every blog change: `rm -rf .next && npm run build` then check CSS/JS assets
-- **Blog slugs MUST match between EN and FR** — the locale switcher relies on identical filenames in `content/posts/en/` and `content/posts/fr/`
+- **Blog slugs MUST match between EN and FR** — the locale switcher relies on identical filenames in `content/posts/en/` and `content/posts/fr/`. The slug is ALWAYS the English filename (e.g. `template-library.md` in both locales, never `bibliotheque-templates.md`). Never translate the slug into French.
 
 ### 4. Before touching React Flow handles
 - Handles are positioned by React Flow with `position: absolute` + `top`/`left`

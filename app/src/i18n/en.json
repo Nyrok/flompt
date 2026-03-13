@@ -115,6 +115,8 @@
     "step1desc": "Type or paste any text here. Vague or detailed, it doesn't matter. flompt will structure it for you.",
     "stepBlocksTitle": "The building blocks",
     "stepBlocksDesc": "Each block type targets one part of your prompt: Role, Objective, Constraints, Output Format… Click to add one, or drag it onto the canvas.",
+    "stepLibraryTitle": "100+ ready-to-use templates",
+    "stepLibraryDesc": "Don't start from scratch. The template library gives you pre-built prompt flows for code review, writing, marketing, education and more — one click to load.",
     "step2title": "Decompose into blocks",
     "step2desc": "flompt sends your prompt to the AI, which breaks it into typed blocks: Role, Objective, Constraints and more.",
     "step2action": "Decompose for me",
