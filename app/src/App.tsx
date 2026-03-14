@@ -13,7 +13,9 @@ import ExtensionBanner from '@/components/ExtensionBanner'
 import ExtensionPopup from '@/components/ExtensionPopup'
 import StarPopup from '@/components/StarPopup'
 import MakeIntegration from '@/components/MakeIntegration'
+import ProjectSelector from '@/components/ProjectSelector'
 import { useFlowStore } from '@/store/flowStore'
+import { useProjectStore } from '@/store/projectStore'
 import type { Tab } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import { LOCALES, LOCALE_LABELS } from '@/i18n/translations'
@@ -37,6 +39,18 @@ const App = () => {
   useEffect(() => {
     initAnalytics()
     setSource(isExtension ? 'extension' : 'web')
+  }, [])
+
+  // Auto-save current project when flowStore changes (debounced)
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>
+    const unsub = useFlowStore.subscribe(() => {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        useProjectStore.getState().saveCurrentProject()
+      }, 1000)
+    })
+    return () => { unsub(); clearTimeout(timer) }
   }, [])
 
   // Sync html[lang] — layout always stays LTR, RTL only applies to text content
@@ -80,12 +94,15 @@ const App = () => {
 
           <div className="header-spacer" />
 
-          {/* Node count */}
+          <ProjectSelector />
+
           {nodes.length > 0 && (
             <span className="node-count hide-mobile" aria-live="polite" aria-atomic="true">
               {t.nodeCount(nodes.length)}
             </span>
           )}
+
+          <div className="header-spacer" />
 
           <div className="header-actions">
             <select

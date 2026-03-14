@@ -218,6 +218,12 @@
     "docs": "Make.com webhook docs",
     "openPanel": "Send to Make.com"
   },
+  "projects": {
+    "newProject": "New project",
+    "selectProject": "Switch project",
+    "rename": "Rename",
+    "delete": "Delete"
+  },
 
   "blocks": {
     "document": {

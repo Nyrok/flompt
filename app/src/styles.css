@@ -391,6 +391,201 @@ body {
   font-weight: 700;
 }
 
+/* ── Project Selector ─────────────────────────────────────────────────────── */
+.psel { position: relative; }
+
+.psel-pill {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
+}
+.psel-pill:hover { border-color: var(--border-strong); }
+
+/* "New project" button when no projects exist */
+.psel-create-first {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 30px;
+  padding: 0 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.psel-create-first:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+/* Current project name — main clickable area */
+.psel-current {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 10px;
+  height: 100%;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 11px;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+.psel-current:hover { color: var(--text); }
+
+.psel-name {
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.psel-chevron {
+  opacity: 0.5;
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+}
+.psel-chevron.open { transform: rotate(180deg); }
+
+/* Divider + "add" button inside the pill */
+.psel-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 100%;
+  background: none;
+  border: none;
+  border-left: 1px solid var(--border);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.psel-add:hover { color: var(--accent-light); background: var(--accent-bg); }
+
+/* Inline rename form inside dropdown items */
+.psel-rename {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 4px;
+}
+.psel-rename-input {
+  flex: 1;
+  height: 24px;
+  padding: 0 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-focus);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 11px;
+  outline: none;
+}
+.psel-rename-ok {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  color: var(--success);
+  cursor: pointer;
+}
+.psel-rename-ok:hover { background: rgba(16,185,129,0.1); }
+
+/* Dropdown list */
+.psel-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 180px;
+  background: var(--bg-3);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 4px;
+  z-index: 200;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.psel-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  background: none;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 11px;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+.psel-item:hover { background: var(--surface-hover); color: var(--text); }
+.psel-item.active {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.psel-item-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.psel-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+.psel-item:hover .psel-item-actions { opacity: 1; }
+
+.psel-item-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.psel-item-action:hover { color: var(--text); background: var(--surface); }
+.psel-item-action--delete:hover { color: var(--error); background: rgba(239,68,68,0.1); }
+
+.psel-item-new {
+  color: var(--text-dim);
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 5px 5px;
+  margin-top: 2px;
+  padding-top: 8px;
+}
+.psel-item-new:hover { color: var(--accent-light); }
+
 /* ── Sidebar ──────────────────────────────────────────────────────────────── */
 .sidebar { display: flex; flex-direction: column; gap: 6px; flex: 1; min-height: 0; }
 .sidebar-hint {
