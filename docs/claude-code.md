@@ -69,7 +69,7 @@ Compiles a list of blocks into a Claude-optimized XML prompt.
 
 ### `list_block_types`
 
-Returns all 12 block types with descriptions and the recommended canonical order.
+Returns all 13 block types with descriptions and the recommended canonical order.
 
 **No input required.**
 
@@ -86,6 +86,7 @@ Returns all 12 block types with descriptions and the recommended canonical order
 | `examples` | Few-shot input/output pairs |
 | `chain_of_thought` | Step-by-step reasoning instructions |
 | `output_format` | Expected response format |
+| `response_style` | Tone, voice, and style of the response |
 | `language` | Output language |
 
 ---

@@ -12,7 +12,7 @@ flompt sends your prompt to the backend (FastAPI), which uses Claude to analyze 
 
 Each block is:
 
-- Assigned a **type** from 12 possible categories
+- Assigned a **type** from 13 possible categories
 - Given a **2-5 word AI-generated summary** for quick identification on the canvas
 - **Auto-positioned** with 180px vertical spacing
 - **Auto-connected** top-to-bottom to represent reading order
@@ -48,6 +48,8 @@ Once on the canvas, you have full control:
 
 The canvas uses a **20px snap-to-grid** and supports a minimap for large flows. Your session is **auto-saved** to localStorage — no data is lost on refresh.
 
+> **Projects tip:** Each project has its own independent canvas state. Switch projects from the header pill to work on multiple prompt flows without losing context. See [Projects](./projects.md).
+
 ---
 
 ## Step 3: Assemble
@@ -64,7 +66,7 @@ Click **Assemble prompt** in the output panel. Assembly is **100% local** — no
 
 ```
 documents → role → audience → context → objective → goal → input →
-constraints → examples → chain_of_thought → output_format → language
+constraints → examples → chain_of_thought → output_format → response_style → language
 ```
 
 ### Output format — Claude-optimized XML
@@ -114,6 +116,7 @@ After assembling, you can:
 - **Export as `.json`** — full session export (nodes, edges, assembled output)
 - **Share** via native browser share API (if supported)
 - **Send to AI** *(extension only)* — inject directly into the active AI chat
+- **Send to Make.com** — fire the prompt to a Make webhook for automation → [Make.com integration](./make-integration.md)
 
 ---
 
