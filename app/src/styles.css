@@ -580,11 +580,23 @@ body {
 .psel-item-new {
   color: var(--text-dim);
   border-top: 1px solid var(--border);
-  border-radius: 0 0 5px 5px;
+  border-radius: 0;
   margin-top: 2px;
   padding-top: 8px;
 }
 .psel-item-new:hover { color: var(--accent-light); }
+
+.psel-separator {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 6px;
+}
+
+.psel-item-io {
+  color: var(--text-dim);
+  gap: 6px;
+}
+.psel-item-io:hover { color: var(--text-muted); }
 
 /* ── Sidebar ──────────────────────────────────────────────────────────────── */
 .sidebar { display: flex; flex-direction: column; gap: 6px; flex: 1; min-height: 0; }

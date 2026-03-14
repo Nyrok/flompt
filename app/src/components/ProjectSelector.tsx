@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
-import { Plus, Trash2, Pencil, Check, ChevronDown } from 'lucide-react'
-import { useProjectStore } from '@/store/projectStore'
+import { Plus, Trash2, Pencil, Check, ChevronDown, Download, Upload } from 'lucide-react'
+import { useProjectStore, DEFAULT_PROJECT_ID } from '@/store/projectStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics } from '@/lib/analytics'
 
@@ -8,6 +8,7 @@ const ProjectSelector = () => {
   const {
     projects, currentProjectId,
     createProject, switchProject, renameProject, deleteProject,
+    exportProjects, importProjects, ensureDefault,
   } = useProjectStore()
   const { t } = useLocale()
 
@@ -15,9 +16,15 @@ const ProjectSelector = () => {
   const [renamingId, setRenamingId] = useState<string | null>(null)
   const [renameValue, setRenameValue] = useState('')
   const renameRef = useRef<HTMLInputElement>(null)
+  const importRef = useRef<HTMLInputElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const currentProject = projects.find((p) => p.id === currentProjectId)
+
+  // Ensure default project exists on mount
+  useEffect(() => {
+    ensureDefault(t.projects.defaultProject)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Focus rename input when entering rename mode
   useEffect(() => {
@@ -73,14 +80,17 @@ const ProjectSelector = () => {
     analytics.projectDeleted()
   }
 
-  // No projects yet — single create button
-  if (projects.length === 0) {
-    return (
-      <button className="psel-pill psel-create-first" onClick={handleCreate}>
-        <Plus size={13} strokeWidth={2.5} />
-        <span className="hide-mobile">{t.projects.newProject}</span>
-      </button>
-    )
+  const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    await importProjects(file)
+    e.target.value = ''
+    setIsOpen(false)
+  }
+
+  const handleExport = () => {
+    exportProjects()
+    setIsOpen(false)
   }
 
   return (
@@ -99,6 +109,15 @@ const ProjectSelector = () => {
           <Plus size={13} strokeWidth={2.5} />
         </button>
       </div>
+
+      {/* Hidden file input for import */}
+      <input
+        ref={importRef}
+        type="file"
+        accept=".json"
+        onChange={handleImport}
+        style={{ display: 'none' }}
+      />
 
       {/* Dropdown menu */}
       {isOpen && (
@@ -142,7 +161,7 @@ const ProjectSelector = () => {
                     >
                       <Pencil size={11} />
                     </span>
-                    {projects.length > 1 && (
+                    {p.id !== DEFAULT_PROJECT_ID && (
                       <span
                         className="psel-item-action psel-item-action--delete"
                         onClick={(e) => handleDelete(e, p.id)}
@@ -156,9 +175,21 @@ const ProjectSelector = () => {
               )}
             </div>
           ))}
+
           <button className="psel-item psel-item-new" onClick={handleCreate}>
             <Plus size={12} />
             <span>{t.projects.newProject}</span>
+          </button>
+
+          {/* Export / Import */}
+          <div className="psel-separator" />
+          <button className="psel-item psel-item-io" onClick={handleExport}>
+            <Download size={12} />
+            <span>{t.projects.export}</span>
+          </button>
+          <button className="psel-item psel-item-io" onClick={() => importRef.current?.click()}>
+            <Upload size={12} />
+            <span>{t.projects.import}</span>
           </button>
         </div>
       )}

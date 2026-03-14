@@ -175,10 +175,13 @@
   },
 
   "projects": {
+    "defaultProject": "Projet par défaut",
     "newProject": "Nouveau projet",
     "selectProject": "Changer de projet",
     "rename": "Renommer",
-    "delete": "Supprimer"
+    "delete": "Supprimer",
+    "export": "Exporter les projets",
+    "import": "Importer des projets"
   },
 
   "blocks": {

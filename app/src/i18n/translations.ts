@@ -158,10 +158,13 @@ export interface Translations {
     skip: string
   }
   projects: {
+    defaultProject: string
     newProject: string
     selectProject: string
     rename: string
     delete: string
+    export: string
+    import: string
   }
   makeIntegration: {
     title: string
