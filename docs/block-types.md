@@ -1,6 +1,6 @@
 # Block Types
 
-flompt organizes prompts into **12 semantic block types**, each representing a distinct aspect of a well-structured AI prompt. The assembler applies Anthropic's Claude best practices automatically — blocks are ordered, wrapped in the right XML, and formatted for maximum accuracy.
+flompt organizes prompts into **13 semantic block types**, each representing a distinct aspect of a well-structured AI prompt. The assembler applies Anthropic's Claude best practices automatically — blocks are ordered, wrapped in the right XML, and formatted for maximum accuracy.
 
 ---
 
@@ -155,6 +155,18 @@ Color: accent `#ff6b9d`
 
 ---
 
+## Response Style
+
+Controls the tone, voice, and style of the response — distinct from Output Format (which specifies structure) and Constraints (which set limits).
+
+**Examples:** `"Write in a conversational, approachable tone — avoid jargon"`, `"Use short sentences. Active voice. No filler phrases."`, `"Match the tone of a senior engineer writing an internal RFC."`
+
+**Why it matters:** The same objective with a "formal academic" vs. "casual conversational" response style will produce completely different outputs. Making it explicit prevents Claude from defaulting to a generic neutral tone.
+
+Color: teal `#5eead4`
+
+---
+
 ## Language
 
 Specifies the language for Claude's response. Auto-detected on decomposition based on your prompt's language — always placed last in the assembled prompt.
@@ -169,7 +181,7 @@ flompt automatically applies Anthropic's recommended block ordering:
 
 ```
 documents → role → audience → context → objective → goal → input →
-constraints → examples → chain_of_thought → output_format → language
+constraints → examples → chain_of_thought → output_format → response_style → language
 ```
 
 This order is enforced regardless of how blocks are arranged on the canvas — the assembler sorts them optimally.
