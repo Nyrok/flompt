@@ -177,7 +177,11 @@
     "finish": "明白了",
     "skip": "跳过",
     "acting": "分解中…",
-    "samplePrompt": "您是一名高级 Python 开发人员。请检查以下代码的错误、性能问题和风格违规。简明扼要，优先处理关键问题，并用一句话解释每个发现。以编号列表形式回答。"
+    "samplePrompt": "您是一名高级 Python 开发人员。请检查以下代码的错误、性能问题和风格违规。简明扼要，优先处理关键问题，并用一句话解释每个发现。以编号列表形式回答。",
+    "stepLibraryTitle": "100+ 即用模板",
+    "stepLibraryDesc": "无需从零开始。模板库提供代码审查、写作、营销等现成的提示词流程 — 一键加载。",
+    "stepProjectTitle": "多个工作区",
+    "stepProjectDesc": "创建独立项目 — 每个项目保存自己的画布和提示词。从顶部切换项目，导出为 JSON 与团队共享。"
   },
   "extension": {
     "bannerText": "flompt 现已在 Chrome 和 Firefox 上可用。在 ChatGPT、Claude 和 Gemini 中使用它。",
@@ -227,7 +231,6 @@
     "export": "Export projects",
     "import": "Import projects"
   },
-
   "blocks": {
     "document": {
       "label": "文档",

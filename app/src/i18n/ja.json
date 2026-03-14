@@ -177,7 +177,11 @@
     "finish": "了解",
     "skip": "スキップ",
     "acting": "分解中…",
-    "samplePrompt": "あなたはシニアPython開発者です。以下のコードのバグ、パフォーマンス問題、スタイル違反をレビューしてください。簡潔に、重要な問題を優先し、各発見を1文で説明してください。番号付きリストで回答してください。"
+    "samplePrompt": "あなたはシニアPython開発者です。以下のコードのバグ、パフォーマンス問題、スタイル違反をレビューしてください。簡潔に、重要な問題を優先し、各発見を1文で説明してください。番号付きリストで回答してください。",
+    "stepLibraryTitle": "100以上の使えるテンプレート",
+    "stepLibraryDesc": "白紙から始める必要はありません。コードレビュー、ライティング、マーケティングなど、すぐに使えるプロンプトフローが揃っています — クリック一つで読み込めます。",
+    "stepProjectTitle": "複数のワークスペース",
+    "stepProjectDesc": "独立したプロジェクトを作成できます。それぞれが独自のキャンバスとプロンプトを保存します。ヘッダーから切り替え、JSONにエクスポートして共有できます。"
   },
   "extension": {
     "bannerText": "flomptがChromeとFirefoxで利用可能になりました。ChatGPT、Claude、Gemini内で使用できます。",
@@ -227,7 +231,6 @@
     "export": "Export projects",
     "import": "Import projects"
   },
-
   "blocks": {
     "document": {
       "label": "ドキュメント",
