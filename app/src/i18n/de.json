@@ -177,7 +177,11 @@
     "finish": "Verstanden",
     "skip": "Überspringen",
     "acting": "Zerlege…",
-    "samplePrompt": "Du bist ein Senior-Python-Entwickler. Überprüfe den folgenden Code auf Fehler, Leistungsprobleme und Stilverstoße. Sei präzise, priorisiere kritische Probleme und erkläre jeden Befund in einem Satz. Antworte mit einer nummerierten Liste."
+    "samplePrompt": "Du bist ein Senior-Python-Entwickler. Überprüfe den folgenden Code auf Fehler, Leistungsprobleme und Stilverstoße. Sei präzise, priorisiere kritische Probleme und erkläre jeden Befund in einem Satz. Antworte mit einer nummerierten Liste.",
+    "stepLibraryTitle": "100+ gebrauchsfertige Templates",
+    "stepLibraryDesc": "Kein Anfang von Null. Die Template-Bibliothek bietet vorgefertigte Prompt-Flows für Code-Review, Texten, Marketing und mehr — ein Klick zum Laden.",
+    "stepProjectTitle": "Mehrere Arbeitsbereiche",
+    "stepProjectDesc": "Erstelle unabhängige Projekte — jedes speichert seinen eigenen Canvas und Prompt. Wechsle über den Header, exportiere als JSON zum Teilen."
   },
   "extension": {
     "bannerText": "flompt ist jetzt auf Chrome & Firefox verfügbar. Nutze es in ChatGPT, Claude & Gemini.",
@@ -227,7 +231,6 @@
     "export": "Export projects",
     "import": "Import projects"
   },
-
   "blocks": {
     "document": {
       "label": "Dokument",

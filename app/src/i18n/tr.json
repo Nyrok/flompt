@@ -177,7 +177,11 @@
     "finish": "Anladım",
     "skip": "Atla",
     "acting": "Ayrıştırılıyor…",
-    "samplePrompt": "Kıdemli bir Python geliştiricisisiniz. Aşağıdaki kodu hatalar, performans sorunları ve stil ihlalleri açısından gözden geçirin. Kısa olun, kritik sorunları önceliklendirin ve her bulguyu tek cümlede açıklayın. Numaralı bir liste ile yanıt verin."
+    "samplePrompt": "Kıdemli bir Python geliştiricisisiniz. Aşağıdaki kodu hatalar, performans sorunları ve stil ihlalleri açısından gözden geçirin. Kısa olun, kritik sorunları önceliklendirin ve her bulguyu tek cümlede açıklayın. Numaralı bir liste ile yanıt verin.",
+    "stepLibraryTitle": "100'den fazla hazır şablon",
+    "stepLibraryDesc": "Sıfırdan başlamayın. Kütüphane, kod incelemesi, yazım, pazarlama ve daha fazlası için hazır prompt akışları sunar — yüklemek için bir tıklama.",
+    "stepProjectTitle": "Birden fazla çalışma alanı",
+    "stepProjectDesc": "Bağımsız projeler oluşturun — her biri kendi canvas ve promptunu kaydeder. Başlıktan geçiş yapın, JSON olarak dışa aktarıp paylaşın."
   },
   "extension": {
     "bannerText": "flompt artık Chrome ve Firefox'ta mevcut. ChatGPT, Claude ve Gemini içinde kullanın.",
@@ -227,7 +231,6 @@
     "export": "Export projects",
     "import": "Import projects"
   },
-
   "blocks": {
     "document": {
       "label": "Belge",

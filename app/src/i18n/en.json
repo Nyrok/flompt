@@ -1,9 +1,12 @@
 {
   "nodeCount": "{n} block",
   "nodeCountPlural": "{n} blocks",
-
-  "tabs": { "input": "Prompt", "canvas": "Canvas", "output": "Result", "library": "Library" },
-
+  "tabs": {
+    "input": "Prompt",
+    "canvas": "Canvas",
+    "output": "Result",
+    "library": "Library"
+  },
   "header": {
     "undo": "Undo (Ctrl+Z)",
     "redo": "Redo (Ctrl+Y)",
@@ -12,7 +15,6 @@
     "autosaved": "Auto-saved",
     "github": "Star flompt on GitHub (opens in new tab)"
   },
-
   "accessibility": {
     "skipToMain": "Skip to main content",
     "switchLocale": "Passer en français",
@@ -20,7 +22,6 @@
     "outputPanel": "Output panel",
     "mainTabs": "Main tabs"
   },
-
   "promptInput": {
     "title": "Raw Prompt",
     "placeholder": "Paste your prompt here…",
@@ -32,7 +33,6 @@
     "queuePosition": "Queue position: {n}",
     "queueProcessing": "Processing…"
   },
-
   "promptOutput": {
     "title": "Result",
     "compile": "Assemble prompt",
@@ -53,7 +53,6 @@
     "injectLabel": "Send prompt to AI chat input",
     "injectedLabel": "Prompt injected!"
   },
-
   "errors": {
     "overloaded": "AI is overloaded right now. Please wait a moment and try again.",
     "timeout": "Request timed out. The AI took too long to respond. Try again.",
@@ -61,24 +60,28 @@
     "server": "Server error. Please try again in a few seconds.",
     "unknown": "Something went wrong. Please try again."
   },
-
   "library": {
     "hint": "Click a template to load it into the canvas.",
     "outputLang": "Response language",
     "noLang": "Auto (no language block)",
     "categories": {
-      "all": "All", "writing": "Writing", "code": "Code",
-      "marketing": "Marketing", "productivity": "Productivity",
-      "design": "Design", "education": "Education", "sales": "Sales",
-      "data": "Data", "creative": "Creative", "personal": "Personal"
+      "all": "All",
+      "writing": "Writing",
+      "code": "Code",
+      "marketing": "Marketing",
+      "productivity": "Productivity",
+      "design": "Design",
+      "education": "Education",
+      "sales": "Sales",
+      "data": "Data",
+      "creative": "Creative",
+      "personal": "Personal"
     }
   },
-
   "sidebar": {
     "title": "Blocks",
     "hint": "Click to add · Drag to canvas"
   },
-
   "block": {
     "duplicate": "Duplicate",
     "expand": "Expand",
@@ -87,29 +90,76 @@
     "chars": "ch.",
     "deleteConnection": "Delete connection"
   },
-
   "canvas": {
     "empty": "Empty canvas",
     "emptyHint": "Paste a prompt on the left and click ",
     "emptyDecompose": "Decompose, or drag a block from the sidebar."
   },
-
   "shortcuts": {
     "title": "Keyboard Shortcuts",
     "close": "Press Esc or ? to close",
     "list": [
-      { "keys": ["Ctrl", "Z"],       "label": "Undo" },
-      { "keys": ["Ctrl", "Y"],       "label": "Redo" },
-      { "keys": ["Ctrl", "⇧", "Z"], "label": "Redo (alt)" },
-      { "keys": ["Del"],             "label": "Delete selected block" },
-      { "keys": ["Ctrl", "A"],       "label": "Select all" },
-      { "keys": ["Scroll"],          "label": "Zoom in/out" },
-      { "keys": ["Drag"],            "label": "Move a block" },
-      { "keys": ["Bg drag"],         "label": "Pan canvas" },
-      { "keys": ["?"],               "label": "Show shortcuts" }
+      {
+        "keys": [
+          "Ctrl",
+          "Z"
+        ],
+        "label": "Undo"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "Y"
+        ],
+        "label": "Redo"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "⇧",
+          "Z"
+        ],
+        "label": "Redo (alt)"
+      },
+      {
+        "keys": [
+          "Del"
+        ],
+        "label": "Delete selected block"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "A"
+        ],
+        "label": "Select all"
+      },
+      {
+        "keys": [
+          "Scroll"
+        ],
+        "label": "Zoom in/out"
+      },
+      {
+        "keys": [
+          "Drag"
+        ],
+        "label": "Move a block"
+      },
+      {
+        "keys": [
+          "Bg drag"
+        ],
+        "label": "Pan canvas"
+      },
+      {
+        "keys": [
+          "?"
+        ],
+        "label": "Show shortcuts"
+      }
     ]
   },
-
   "tour": {
     "step1title": "Your raw prompt",
     "step1desc": "Type or paste any text here. Vague or detailed, it doesn't matter. flompt will structure it for you.",
@@ -129,9 +179,10 @@
     "finish": "Got it",
     "skip": "Skip",
     "acting": "Decomposing…",
-    "samplePrompt": "You are a senior Python developer. Review the following code for bugs, performance issues, and style violations. Be concise, prioritize critical issues, and explain each finding in one sentence. Respond with a numbered list."
+    "samplePrompt": "You are a senior Python developer. Review the following code for bugs, performance issues, and style violations. Be concise, prioritize critical issues, and explain each finding in one sentence. Respond with a numbered list.",
+    "stepProjectTitle": "Multiple workspaces",
+    "stepProjectDesc": "Create independent projects — each saves its own canvas and prompt. Switch from the header, export as JSON to share with your team."
   },
-
   "extension": {
     "bannerText": "flompt is now available on Chrome & Firefox. Use it inside ChatGPT, Claude & Gemini.",
     "bannerCta": "Install →",
@@ -142,14 +193,12 @@
     "popupCtaFirefox": "Add to Firefox",
     "popupSkip": "Maybe later"
   },
-
   "starPopup": {
     "title": "Enjoying flompt?",
     "desc": "flompt is free & open-source. If it's useful to you, a ⭐ on GitHub helps us grow and keeps it alive.",
     "cta": "Star on GitHub",
     "skip": "Maybe later"
   },
-
   "makeIntegration": {
     "title": "Send to Make",
     "panelLabel": "Make.com integration panel",
@@ -173,7 +222,6 @@
     "docs": "Make.com webhook docs",
     "openPanel": "Send to Make.com"
   },
-
   "projects": {
     "defaultProject": "Default project",
     "newProject": "New project",
@@ -183,28 +231,78 @@
     "export": "Export projects",
     "import": "Import projects"
   },
-
   "blocks": {
-    "document":         { "label": "Document",         "description": "External content injected via XML <document>" },
-    "input":            { "label": "Input",            "description": "Data provided to the AI" },
-    "role":             { "label": "Role",             "description": "Defines the AI's persona / role" },
-    "audience":         { "label": "Audience",         "description": "Who the output is written for" },
-    "context":          { "label": "Context",          "description": "Provides context for the task" },
-    "objective":        { "label": "Objective",        "description": "What we want to accomplish" },
-    "goal":             { "label": "Goal",             "description": "End goal and success criteria" },
-    "constraints":      { "label": "Constraints",      "description": "Rules and limits to respect" },
-    "examples":         { "label": "Examples",         "description": "Few-shot input/output pairs" },
-    "chain_of_thought": { "label": "Chain of Thought", "description": "Step-by-step reasoning instructions" },
-    "output_format":    { "label": "Output",           "description": "Expected format of the response" },
-    "response_style":   {
-      "label": "Response Style", "description": "Verbosity, tone, prose, markdown, LaTeX",
-      "verbosity": "Verbosity", "concise": "Concise", "balanced": "Balanced", "detailed": "Detailed",
-      "tone": "Tone", "conversational": "Casual", "neutral": "Neutral", "formal": "Formal",
-      "prose": "Format", "flowing": "Prose", "mixed": "Mixed", "structured": "Lists",
-      "mdNone": "None", "mdMinimal": "Minimal", "mdStandard": "Standard", "mdRich": "Rich",
-      "math": "Math", "mathAuto": "Auto", "mathPlain": "Plain",
+    "document": {
+      "label": "Document",
+      "description": "External content injected via XML <document>"
+    },
+    "input": {
+      "label": "Input",
+      "description": "Data provided to the AI"
+    },
+    "role": {
+      "label": "Role",
+      "description": "Defines the AI's persona / role"
+    },
+    "audience": {
+      "label": "Audience",
+      "description": "Who the output is written for"
+    },
+    "context": {
+      "label": "Context",
+      "description": "Provides context for the task"
+    },
+    "objective": {
+      "label": "Objective",
+      "description": "What we want to accomplish"
+    },
+    "goal": {
+      "label": "Goal",
+      "description": "End goal and success criteria"
+    },
+    "constraints": {
+      "label": "Constraints",
+      "description": "Rules and limits to respect"
+    },
+    "examples": {
+      "label": "Examples",
+      "description": "Few-shot input/output pairs"
+    },
+    "chain_of_thought": {
+      "label": "Chain of Thought",
+      "description": "Step-by-step reasoning instructions"
+    },
+    "output_format": {
+      "label": "Output",
+      "description": "Expected format of the response"
+    },
+    "response_style": {
+      "label": "Response Style",
+      "description": "Verbosity, tone, prose, markdown, LaTeX",
+      "verbosity": "Verbosity",
+      "concise": "Concise",
+      "balanced": "Balanced",
+      "detailed": "Detailed",
+      "tone": "Tone",
+      "conversational": "Casual",
+      "neutral": "Neutral",
+      "formal": "Formal",
+      "prose": "Format",
+      "flowing": "Prose",
+      "mixed": "Mixed",
+      "structured": "Lists",
+      "mdNone": "None",
+      "mdMinimal": "Minimal",
+      "mdStandard": "Standard",
+      "mdRich": "Rich",
+      "math": "Math",
+      "mathAuto": "Auto",
+      "mathPlain": "Plain",
       "skipPreamble": "Skip preamble"
     },
-    "language":         { "label": "Language",         "description": "Language the AI should respond in" }
+    "language": {
+      "label": "Language",
+      "description": "Language the AI should respond in"
+    }
   }
 }

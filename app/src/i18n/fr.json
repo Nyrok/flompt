@@ -1,9 +1,12 @@
 {
   "nodeCount": "{n} bloc",
   "nodeCountPlural": "{n} blocs",
-
-  "tabs": { "input": "Prompt", "canvas": "Canvas", "output": "Résultat", "library": "Bibliothèque" },
-
+  "tabs": {
+    "input": "Prompt",
+    "canvas": "Canvas",
+    "output": "Résultat",
+    "library": "Bibliothèque"
+  },
   "header": {
     "undo": "Annuler (Ctrl+Z)",
     "redo": "Rétablir (Ctrl+Y)",
@@ -12,7 +15,6 @@
     "autosaved": "Sauvegardé",
     "github": "Voir flompt sur GitHub (s'ouvre dans un nouvel onglet)"
   },
-
   "accessibility": {
     "skipToMain": "Aller au contenu principal",
     "switchLocale": "Switch to English",
@@ -20,7 +22,6 @@
     "outputPanel": "Panneau de résultat",
     "mainTabs": "Onglets principaux"
   },
-
   "promptInput": {
     "title": "Prompt brut",
     "placeholder": "Colle ton prompt ici…",
@@ -32,7 +33,6 @@
     "queuePosition": "Position dans la file : {n}",
     "queueProcessing": "Traitement en cours…"
   },
-
   "promptOutput": {
     "title": "Résultat",
     "compile": "Assembler le prompt",
@@ -53,7 +53,6 @@
     "injectLabel": "Envoyer le prompt dans le chat IA",
     "injectedLabel": "Prompt envoyé !"
   },
-
   "errors": {
     "overloaded": "L'IA est surchargée. Patientez un instant et réessayez.",
     "timeout": "Délai dépassé. L'IA a mis trop de temps. Réessayez.",
@@ -61,24 +60,28 @@
     "server": "Erreur serveur. Réessayez dans quelques secondes.",
     "unknown": "Une erreur est survenue. Réessayez."
   },
-
   "library": {
     "hint": "Cliquez sur un template pour le charger dans le canvas.",
     "outputLang": "Langue de réponse",
     "noLang": "Auto (sans bloc langue)",
     "categories": {
-      "all": "Tous", "writing": "Rédaction", "code": "Code",
-      "marketing": "Marketing", "productivity": "Productivité",
-      "design": "Design", "education": "Éducation", "sales": "Ventes",
-      "data": "Données", "creative": "Créatif", "personal": "Personnel"
+      "all": "Tous",
+      "writing": "Rédaction",
+      "code": "Code",
+      "marketing": "Marketing",
+      "productivity": "Productivité",
+      "design": "Design",
+      "education": "Éducation",
+      "sales": "Ventes",
+      "data": "Données",
+      "creative": "Créatif",
+      "personal": "Personnel"
     }
   },
-
   "sidebar": {
     "title": "Blocs",
     "hint": "Clic pour ajouter · Glisser vers le canvas"
   },
-
   "block": {
     "duplicate": "Dupliquer",
     "expand": "Développer",
@@ -87,29 +90,76 @@
     "chars": "car.",
     "deleteConnection": "Supprimer la connexion"
   },
-
   "canvas": {
     "empty": "Canvas vide",
     "emptyHint": "Colle un prompt à gauche et clique sur ",
     "emptyDecompose": "Décomposer, ou glisse un bloc depuis la sidebar."
   },
-
   "shortcuts": {
     "title": "Raccourcis clavier",
     "close": "Appuie sur Esc ou ? pour fermer",
     "list": [
-      { "keys": ["Ctrl", "Z"],       "label": "Annuler" },
-      { "keys": ["Ctrl", "Y"],       "label": "Rétablir" },
-      { "keys": ["Ctrl", "⇧", "Z"], "label": "Rétablir (alt)" },
-      { "keys": ["Del"],             "label": "Supprimer le bloc sélectionné" },
-      { "keys": ["Ctrl", "A"],       "label": "Tout sélectionner" },
-      { "keys": ["Scroll"],          "label": "Zoom in/out" },
-      { "keys": ["Drag"],            "label": "Déplacer un bloc" },
-      { "keys": ["Bg drag"],         "label": "Déplacer le canvas" },
-      { "keys": ["?"],               "label": "Afficher les raccourcis" }
+      {
+        "keys": [
+          "Ctrl",
+          "Z"
+        ],
+        "label": "Annuler"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "Y"
+        ],
+        "label": "Rétablir"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "⇧",
+          "Z"
+        ],
+        "label": "Rétablir (alt)"
+      },
+      {
+        "keys": [
+          "Del"
+        ],
+        "label": "Supprimer le bloc sélectionné"
+      },
+      {
+        "keys": [
+          "Ctrl",
+          "A"
+        ],
+        "label": "Tout sélectionner"
+      },
+      {
+        "keys": [
+          "Scroll"
+        ],
+        "label": "Zoom in/out"
+      },
+      {
+        "keys": [
+          "Drag"
+        ],
+        "label": "Déplacer un bloc"
+      },
+      {
+        "keys": [
+          "Bg drag"
+        ],
+        "label": "Déplacer le canvas"
+      },
+      {
+        "keys": [
+          "?"
+        ],
+        "label": "Afficher les raccourcis"
+      }
     ]
   },
-
   "tour": {
     "step1title": "Ton prompt brut",
     "step1desc": "Tape ou colle n'importe quel texte ici. Vague ou détaillé, peu importe. flompt se charge de le structurer.",
@@ -129,9 +179,10 @@
     "finish": "Compris",
     "skip": "Passer",
     "acting": "Décomposition…",
-    "samplePrompt": "Tu es un développeur Python senior. Fais une revue du code suivant : identifie les bugs, les problèmes de performance et les violations de style. Sois concis, priorise les problèmes critiques, et explique chaque point en une phrase. Réponds avec une liste numérotée."
+    "samplePrompt": "Tu es un développeur Python senior. Fais une revue du code suivant : identifie les bugs, les problèmes de performance et les violations de style. Sois concis, priorise les problèmes critiques, et explique chaque point en une phrase. Réponds avec une liste numérotée.",
+    "stepProjectTitle": "Plusieurs espaces de travail",
+    "stepProjectDesc": "Créez des projets indépendants — chacun sauvegarde son propre canvas et prompt. Changez depuis le header, exportez en JSON pour partager avec votre équipe."
   },
-
   "extension": {
     "bannerText": "flompt est maintenant une extension Chrome. Utilisez-le dans ChatGPT, Claude & Gemini.",
     "bannerCta": "Installer →",
@@ -142,14 +193,12 @@
     "popupCtaFirefox": "Ajouter à Firefox",
     "popupSkip": "Plus tard"
   },
-
   "starPopup": {
     "title": "flompt te plaît ?",
     "desc": "flompt est gratuit & open-source. Si il t'est utile, une ⭐ sur GitHub nous aide à grandir et à le faire vivre.",
     "cta": "Étoiler sur GitHub",
     "skip": "Plus tard"
   },
-
   "makeIntegration": {
     "title": "Envoyer vers Make",
     "panelLabel": "Panneau d'intégration Make.com",
@@ -173,7 +222,6 @@
     "docs": "Documentation webhook Make.com",
     "openPanel": "Envoyer vers Make.com"
   },
-
   "projects": {
     "defaultProject": "Projet par défaut",
     "newProject": "Nouveau projet",
@@ -183,28 +231,78 @@
     "export": "Exporter les projets",
     "import": "Importer des projets"
   },
-
   "blocks": {
-    "document":         { "label": "Document",        "description": "Contenu externe injecté en XML <document>" },
-    "input":            { "label": "Entrée",          "description": "Données fournies à l'IA" },
-    "role":             { "label": "Rôle",            "description": "Définit la persona / le rôle de l'IA" },
-    "audience":         { "label": "Audience",        "description": "À qui s'adresse le résultat" },
-    "context":          { "label": "Contexte",        "description": "Fournit le contexte de la tâche" },
-    "objective":        { "label": "Objectif",        "description": "Ce qu'on veut accomplir" },
-    "goal":             { "label": "Objectif final",  "description": "But final et critères de succès" },
-    "constraints":      { "label": "Contraintes",     "description": "Règles et limites à respecter" },
-    "examples":         { "label": "Exemples",        "description": "Paires input/output few-shot" },
-    "chain_of_thought": { "label": "Raisonnement",    "description": "Instructions de raisonnement étape par étape" },
-    "output_format":    { "label": "Sortie",          "description": "Format attendu de la réponse" },
-    "response_style":   {
-      "label": "Style de réponse", "description": "Verbosité, ton, prose, markdown, LaTeX",
-      "verbosity": "Verbosité", "concise": "Concis", "balanced": "Équilibré", "detailed": "Détaillé",
-      "tone": "Ton", "conversational": "Naturel", "neutral": "Neutre", "formal": "Formel",
-      "prose": "Format", "flowing": "Prose", "mixed": "Mixte", "structured": "Listes",
-      "mdNone": "Aucun", "mdMinimal": "Minimal", "mdStandard": "Standard", "mdRich": "Riche",
-      "math": "Math", "mathAuto": "Auto", "mathPlain": "Texte",
+    "document": {
+      "label": "Document",
+      "description": "Contenu externe injecté en XML <document>"
+    },
+    "input": {
+      "label": "Entrée",
+      "description": "Données fournies à l'IA"
+    },
+    "role": {
+      "label": "Rôle",
+      "description": "Définit la persona / le rôle de l'IA"
+    },
+    "audience": {
+      "label": "Audience",
+      "description": "À qui s'adresse le résultat"
+    },
+    "context": {
+      "label": "Contexte",
+      "description": "Fournit le contexte de la tâche"
+    },
+    "objective": {
+      "label": "Objectif",
+      "description": "Ce qu'on veut accomplir"
+    },
+    "goal": {
+      "label": "Objectif final",
+      "description": "But final et critères de succès"
+    },
+    "constraints": {
+      "label": "Contraintes",
+      "description": "Règles et limites à respecter"
+    },
+    "examples": {
+      "label": "Exemples",
+      "description": "Paires input/output few-shot"
+    },
+    "chain_of_thought": {
+      "label": "Raisonnement",
+      "description": "Instructions de raisonnement étape par étape"
+    },
+    "output_format": {
+      "label": "Sortie",
+      "description": "Format attendu de la réponse"
+    },
+    "response_style": {
+      "label": "Style de réponse",
+      "description": "Verbosité, ton, prose, markdown, LaTeX",
+      "verbosity": "Verbosité",
+      "concise": "Concis",
+      "balanced": "Équilibré",
+      "detailed": "Détaillé",
+      "tone": "Ton",
+      "conversational": "Naturel",
+      "neutral": "Neutre",
+      "formal": "Formel",
+      "prose": "Format",
+      "flowing": "Prose",
+      "mixed": "Mixte",
+      "structured": "Listes",
+      "mdNone": "Aucun",
+      "mdMinimal": "Minimal",
+      "mdStandard": "Standard",
+      "mdRich": "Riche",
+      "math": "Math",
+      "mathAuto": "Auto",
+      "mathPlain": "Texte",
       "skipPreamble": "Pas de préambule"
     },
-    "language":         { "label": "Langue",          "description": "Langue de réponse de l'IA" }
+    "language": {
+      "label": "Langue",
+      "description": "Langue de réponse de l'IA"
+    }
   }
 }

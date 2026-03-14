@@ -177,7 +177,11 @@
     "finish": "Entendi",
     "skip": "Pular",
     "acting": "Decompondo…",
-    "samplePrompt": "Você é um desenvolvedor Python sênior. Revise o código a seguir em busca de bugs, problemas de desempenho e violações de estilo. Seja conciso, priorize problemas críticos e explique cada achado em uma frase. Responda com uma lista numerada."
+    "samplePrompt": "Você é um desenvolvedor Python sênior. Revise o código a seguir em busca de bugs, problemas de desempenho e violações de estilo. Seja conciso, priorize problemas críticos e explique cada achado em uma frase. Responda com uma lista numerada.",
+    "stepLibraryTitle": "100+ templates prontos para usar",
+    "stepLibraryDesc": "Não comece do zero. A biblioteca oferece fluxos de prompts para revisão de código, redação, marketing e mais — um clique para carregar.",
+    "stepProjectTitle": "Vários espaços de trabalho",
+    "stepProjectDesc": "Crie projetos independentes — cada um salva seu próprio canvas e prompt. Troque pelo cabeçalho, exporte como JSON para compartilhar."
   },
   "extension": {
     "bannerText": "O flompt agora está disponível no Chrome e Firefox. Use-o dentro do ChatGPT, Claude e Gemini.",
@@ -227,7 +231,6 @@
     "export": "Export projects",
     "import": "Import projects"
   },
-
   "blocks": {
     "document": {
       "label": "Documento",
