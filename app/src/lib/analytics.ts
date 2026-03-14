@@ -113,6 +113,11 @@ export const analytics = {
   makeSuccess:      ()                                                => track('make_send_success'),
   makeError:        (reason: string)                                  => track('make_send_error', { reason }),
 
+  // Projects
+  projectCreated:  ()                     => track('project_created'),
+  projectSwitched: (name: string)         => track('project_switched', { project_name: name }),
+  projectDeleted:  ()                     => track('project_deleted'),
+
   // Errors
   error: (context: string, message?: string)          => track('error', { context, message }),
 }

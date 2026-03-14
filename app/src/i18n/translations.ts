@@ -157,6 +157,12 @@ export interface Translations {
     cta: string
     skip: string
   }
+  projects: {
+    newProject: string
+    selectProject: string
+    rename: string
+    delete: string
+  }
   makeIntegration: {
     title: string
     panelLabel: string
@@ -212,6 +218,7 @@ function build(raw: RawLocale): Translations {
     tour: raw.tour,
     extension: raw.extension,
     starPopup: raw.starPopup,
+    projects: raw.projects,
     makeIntegration: raw.makeIntegration,
     blocks: raw.blocks as Record<BlockType, BlockTranslation>,
   }
