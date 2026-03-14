@@ -16,6 +16,7 @@
 - **Backend** : FastAPI + Uvicorn (Python 3.12, port 8000)
 - **Reverse Proxy** : Caddy (auto-TLS Let's Encrypt, port 443)
 - **AI** : Anthropic Claude (pluggable, via httpx) + Groq (Llama Guard 4 prompt safety — currently DISABLED via `PROMPT_GUARD_ENABLED=false` in `backend/.env`)
+- **MCP** : FastMCP server (`backend/app/mcp_server.py`) exposes decompose/compile tools — registered on Glama.ai
 - **Analytics** : PostHog (EU region) — autocapture, session replay, heatmaps, error tracking
 - **i18n** : 10 languages (EN FR ES DE PT JA TR ZH AR RU) via LocaleContext + JSON files. Locale priority: URL path (`/app/fr`) → localStorage → default `'en'`
 - **SEO** : Static locale pages generated post-build (`app/scripts/generate-locale-pages.js`). Each `/app/[locale]` serves a dedicated HTML with localized title, description, canonical and hreflang×10
@@ -50,17 +51,12 @@ flompt.dev/
 ├── extension/     # Browser extension (Chrome + Firefox)
 │   ├── Makefile   # make = both; make chrome; make firefox
 │   └── dist/      # Built zips (gitignored)
-├── templates/     # One JSON file per prompt template, organized by category
-│   ├── writing/   #   blog-post.json, cover-letter.json, …
-│   ├── code/      #   code-review.json, unit-tests.json, …
-│   ├── marketing/ #   landing-page.json, ad-copy.json, …
-│   ├── productivity/ # meeting-summary.json, okr-definition.json, …
-│   ├── design/    #   ux-audit.json, user-persona.json, …
-│   ├── education/ #   lesson-plan.json, quiz-generator.json, …
-│   ├── sales/     #   cold-email.json, sales-pitch.json, …
-│   ├── data/      #   data-analysis.json, ab-test.json, …
-│   ├── creative/  #   short-story.json, world-building.json, …
-│   └── personal/  #   career-roadmap.json, decision-framework.json, …
+├── docs/          # Documentation (block-types, chrome-extension, how-it-works, claude-code)
+├── marketing/     # Marketing strategy, post drafts, activity logs
+├── deploy.sh      # Full redeploy script (builds app+blog, restarts backend, reloads Caddy, health checks)
+├── docker-compose.yml  # Local development (backend + frontend services)
+├── supervisord.conf    # Production process manager (backend + Caddy)
+├── watchdog.sh / keepalive.sh  # Supervisor health monitoring
 ├── Caddyfile      # Reverse proxy config
 ├── caddy          # Caddy binary (gitignored, 50MB)
 └── CLAUDE.md      # This file
@@ -89,7 +85,10 @@ cd /projects/flompt && ./caddy start --config Caddyfile
 ./caddy reload --config /projects/flompt/Caddyfile
 ./caddy stop
 
-# Full redeploy
+# Full redeploy (preferred — handles everything)
+bash /projects/flompt/deploy.sh
+
+# Manual redeploy
 cd /projects/flompt/app && npm run build
 cd /projects/flompt/blog && rm -rf .next && npm run build
 ./caddy reload --config /projects/flompt/Caddyfile
@@ -211,6 +210,48 @@ Ordered as assembled (TYPE_PRIORITY in `assemblePrompt.ts`):
 - Webhook URL must be a valid `http(s)://` URL containing `make.com`
 - Send button disabled if: no valid webhook URL OR no compiled prompt
 - Test = POST with `{ _flompt_ping: true }` — Make webhooks always return 200
+
+---
+
+## MCP Server (Claude Code Integration)
+
+flompt exposes its core tools as an MCP (Model Context Protocol) server so Claude Code and other MCP clients can decompose and compile prompts programmatically.
+
+### Key files
+
+| File | Role |
+|------|------|
+| `backend/app/mcp_server.py` | FastMCP server — exposes `decompose_prompt` and `compile_prompt` tools |
+| `backend/mcp_stdio.py` | Stdio transport entry point for local MCP usage |
+| `Dockerfile` (root) | Builds standalone MCP container image |
+| `glama.json` | Glama.ai MCP registry schema |
+
+### Tools exposed
+- `decompose_prompt` — breaks a raw prompt into structured blocks
+- `compile_prompt` — assembles blocks into Claude-optimized XML
+
+### Connection
+```bash
+# Remote (HTTP)
+claude mcp add --transport http --scope user flompt https://flompt.dev/mcp/
+
+# Local (stdio)
+python backend/mcp_stdio.py
+```
+
+---
+
+## Deployment Infrastructure
+
+### Production process management
+- `supervisord.conf` manages two processes: `flompt-backend` (uvicorn) and `flompt-caddy`
+- `watchdog.sh` monitors supervisor, kills zombie uvicorn processes on port 8000
+- `keepalive.sh` auto-restarts supervisor if it stops
+
+### Docker (local dev / MCP)
+- `docker-compose.yml` — local dev with backend + frontend services
+- Root `Dockerfile` — standalone MCP server container (Python 3.12, runs `mcp_stdio.py`)
+- `backend/Dockerfile` — FastAPI container (Python 3.12 slim)
 
 ---
 
