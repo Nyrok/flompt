@@ -96,15 +96,14 @@ const App = () => {
 
           <ProjectSelector />
 
-          {nodes.length > 0 && (
-            <span className="node-count hide-mobile" aria-live="polite" aria-atomic="true">
-              {t.nodeCount(nodes.length)}
-            </span>
-          )}
-
           <div className="header-spacer" />
 
           <div className="header-actions">
+            {nodes.length > 0 && (
+              <span className="node-count hide-mobile" aria-live="polite" aria-atomic="true">
+                {t.nodeCount(nodes.length)}
+              </span>
+            )}
             <select
               className="btn-locale"
               value={locale}

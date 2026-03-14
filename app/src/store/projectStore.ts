@@ -3,6 +3,8 @@ import { persist } from 'zustand/middleware'
 import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode, FlomptEdge, CompiledPrompt, OutputFormat } from '@/types/blocks'
 
+export const DEFAULT_PROJECT_ID = '__default__'
+
 export interface Project {
   id: string
   name: string
@@ -20,11 +22,14 @@ interface ProjectState {
   projects: Project[]
   currentProjectId: string | null
 
+  ensureDefault: (name: string) => void
   createProject: (name?: string) => void
   switchProject: (id: string) => void
   renameProject: (id: string, name: string) => void
   deleteProject: (id: string) => void
   saveCurrentProject: () => void
+  exportProjects: () => void
+  importProjects: (file: File) => Promise<void>
 }
 
 /** Snapshot the current flowStore state into a Project shape. */
@@ -69,6 +74,24 @@ export const useProjectStore = create<ProjectState>()(
     (set, get) => ({
       projects: [],
       currentProjectId: null,
+
+      ensureDefault: (name: string) => {
+        const { projects } = get()
+        if (projects.length > 0) return
+        const now = new Date().toISOString()
+        const defaultProject: Project = {
+          id: DEFAULT_PROJECT_ID,
+          name,
+          createdAt: now,
+          updatedAt: now,
+          nodes: [],
+          edges: [],
+          rawPrompt: '',
+          compiledPrompt: null,
+          outputFormat: 'claude',
+        }
+        set({ projects: [defaultProject], currentProjectId: DEFAULT_PROJECT_ID })
+      },
 
       createProject: (name) => {
         const { projects, currentProjectId } = get()
@@ -139,22 +162,16 @@ export const useProjectStore = create<ProjectState>()(
       },
 
       deleteProject: (id) => {
+        // Cannot delete the default project
+        if (id === DEFAULT_PROJECT_ID) return
+
         const { projects, currentProjectId } = get()
         const remaining = projects.filter((p) => p.id !== id)
 
         if (id === currentProjectId) {
-          // Switch to another project or clear
-          if (remaining.length > 0) {
-            const next = remaining[remaining.length - 1]
-            set({ projects: remaining, currentProjectId: next.id })
-            loadIntoFlow(next)
-          } else {
-            set({ projects: [], currentProjectId: null })
-            useFlowStore.setState({
-              nodes: [], edges: [], rawPrompt: '', compiledPrompt: null,
-              lastDecomposedPrompt: '', past: [], future: [],
-            })
-          }
+          const next = remaining[remaining.length - 1]
+          set({ projects: remaining, currentProjectId: next.id })
+          loadIntoFlow(next)
         } else {
           set({ projects: remaining })
         }
@@ -171,6 +188,44 @@ export const useProjectStore = create<ProjectState>()(
               : p
           ),
         })
+      },
+
+      exportProjects: () => {
+        // Save current state first
+        get().saveCurrentProject()
+        const { projects } = get()
+        const json = JSON.stringify(projects, null, 2)
+        const blob = new Blob([json], { type: 'application/json' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `flompt-projects-${new Date().toISOString().slice(0, 10)}.json`
+        a.click()
+        URL.revokeObjectURL(url)
+      },
+
+      importProjects: async (file: File) => {
+        try {
+          const text = await file.text()
+          const imported: Project[] = JSON.parse(text)
+          if (!Array.isArray(imported) || imported.length === 0) return
+
+          // Save current state
+          get().saveCurrentProject()
+
+          const { projects } = get()
+          const existingIds = new Set(projects.map((p) => p.id))
+
+          // Merge: skip duplicates by id
+          const newProjects = imported.filter((p) => !existingIds.has(p.id))
+          if (newProjects.length === 0) return
+
+          set((s) => ({
+            projects: [...s.projects, ...newProjects],
+          }))
+        } catch (e) {
+          console.error('Failed to import projects:', e)
+        }
       },
     }),
     {

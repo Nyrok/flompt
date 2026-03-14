@@ -219,10 +219,13 @@
     "openPanel": "Send to Make.com"
   },
   "projects": {
+    "defaultProject": "Default project",
     "newProject": "New project",
     "selectProject": "Switch project",
     "rename": "Rename",
-    "delete": "Delete"
+    "delete": "Delete",
+    "export": "Export projects",
+    "import": "Import projects"
   },
 
   "blocks": {
