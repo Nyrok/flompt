@@ -30,7 +30,7 @@ const TAB_IDS: { id: Tab; Icon: LucideIcon }[] = [
 ]
 
 const App = () => {
-  const { undo, redo, nodes, activeTab, setActiveTab, isDecomposing } = useFlowStore()
+  const { undo, redo, activeTab, setActiveTab, isDecomposing } = useFlowStore()
   const { t, locale, setLocale } = useLocale()
   const mainRef = useRef<HTMLElement>(null)
   const [libraryOpen, setLibraryOpen] = useState(false)
@@ -99,11 +99,6 @@ const App = () => {
           <div className="header-spacer" />
 
           <div className="header-actions">
-            {nodes.length > 0 && (
-              <span className="node-count hide-mobile" aria-live="polite" aria-atomic="true">
-                {t.nodeCount(nodes.length)}
-              </span>
-            )}
             <select
               className="btn-locale"
               value={locale}
