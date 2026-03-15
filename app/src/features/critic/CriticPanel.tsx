@@ -70,7 +70,7 @@ export default function CriticPanel() {
                 {result.dimensions.map(d => (
                   <div key={d.name} className="critic-dim">
                     <div className="critic-dim-header">
-                      <span className="critic-dim-name">{d.name}</span>
+                      <span className="critic-dim-name">{tc.dimensions[d.name] ?? d.name}</span>
                       <span className="critic-dim-score" style={{ color: d.score >= 7 ? '#22c55e' : d.score >= 4 ? '#f59e0b' : '#ef4444' }}>
                         {d.score}/10
                       </span>

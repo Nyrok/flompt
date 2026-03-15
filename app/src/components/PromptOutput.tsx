@@ -28,7 +28,7 @@ const FORMAT_OPTIONS: Array<{ format: OutputFormat; label: string; title: string
 
 const PromptOutput = () => {
   const { nodes, edges, compiledPrompt, setCompiledPrompt, outputFormat, setOutputFormat } = useFlowStore()
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const { setIsPanelOpen: openMakePanel } = useMakeStore()
   const [copied,   setCopied]   = useState(false)
   const [injected, setInjected] = useState(false)
@@ -130,7 +130,7 @@ const PromptOutput = () => {
     setCriticLoading(true)
     setCriticError(null)
     try {
-      const result = await critiquePrompt(currentRaw)
+      const result = await critiquePrompt(currentRaw, locale)
       setCriticResult(result as CriticResult)
     } catch {
       setCriticError('Evaluation failed. Please try again.')

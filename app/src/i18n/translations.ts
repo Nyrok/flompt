@@ -195,7 +195,7 @@ export interface Translations {
     close: string
     debugger: { title: string; loading: string; empty: string; noIssues: string; scoreLabel: string; wordsBefore: string; wordsSaved: string; suggestions: string; applyFix: string }
     compressor: { title: string; loading: string; targetReduction: string; before: string; after: string; saved: string; words: string; original: string; compressed: string; changes: string; noChanges: string; apply: string }
-    critic: { title: string; loading: string; empty: string; overallScore: string; strengths: string; weaknesses: string }
+    critic: { title: string; loading: string; empty: string; overallScore: string; strengths: string; weaknesses: string; dimensions: Record<string, string> }
     systemPrompt: { title: string; loading: string; empty: string; copyAll: string; copied: string; apply: string }
     cost: { title: string; note: string }
     memory: { title: string; new: string; searchPlaceholder: string; noBlocks: string; noResults: string; namePlaceholder: string; contentPlaceholder: string; tagsPlaceholder: string; save: string; cancel: string }

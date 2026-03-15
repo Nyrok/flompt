@@ -264,7 +264,15 @@
       "empty": "Click \"Score\" in the Result panel to evaluate your prompt.",
       "overallScore": "Overall score",
       "strengths": "Strengths",
-      "weaknesses": "Weaknesses"
+      "weaknesses": "Weaknesses",
+      "dimensions": {
+        "clarity": "Clarity",
+        "specificity": "Specificity",
+        "structure": "Structure",
+        "examples": "Examples",
+        "constraints": "Constraints",
+        "format": "Format"
+      }
     },
     "systemPrompt": {
       "title": "System Prompt Generator",

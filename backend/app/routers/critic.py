@@ -9,6 +9,6 @@ async def critic_endpoint(req: CriticRequest) -> CriticResult:
     if not req.prompt.strip():
         raise HTTPException(status_code=400, detail="Prompt cannot be empty")
     try:
-        return await critique_prompt(req.prompt)
+        return await critique_prompt(req.prompt, req.locale)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
