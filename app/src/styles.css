@@ -2590,7 +2590,7 @@ body {
 .make-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 98;
+  z-index: 101;
   background: rgba(0, 0, 0, 0.45);
   animation: makeBackdropIn var(--transition-base) ease forwards;
 }
@@ -2606,7 +2606,7 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 99;
+  z-index: 102;
   width: 300px;
   background: var(--bg-2);
   border-left: 1px solid var(--border-strong);
