@@ -207,9 +207,9 @@ const PromptInput = () => {
           className="btn btn-secondary"
           onClick={handleGenerateSystemPrompt}
           disabled={!rawPrompt.trim()}
-          title="Generate a structured system prompt"
+          title={t.ide.inputButtons.systemPrompt}
         >
-          <Wand2 size={13} /> System Prompt
+          <Wand2 size={13} /> {t.ide.inputButtons.systemPrompt}
         </button>
       )}
     </div>

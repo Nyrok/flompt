@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLocale } from '@/i18n/LocaleContext'
 import { MODELS, estimateCost, formatCost, tokenBadgeColor } from './pricing'
 
 interface Props {
@@ -7,6 +8,8 @@ interface Props {
 
 export default function CostPopover({ tokens }: Props) {
   const [open, setOpen] = useState(false)
+  const { t } = useLocale()
+  const tc = t.ide.cost
 
   return (
     <div className="cost-popover-wrapper">
@@ -15,7 +18,7 @@ export default function CostPopover({ tokens }: Props) {
         style={{ color: tokenBadgeColor(tokens) }}
         onClick={() => setOpen(o => !o)}
         aria-expanded={open}
-        title="Estimated cost per model"
+        title={tc.title}
       >
         ~{tokens.toLocaleString()} tokens
       </button>
@@ -24,7 +27,7 @@ export default function CostPopover({ tokens }: Props) {
         <>
           <div className="cost-popover-backdrop" onClick={() => setOpen(false)} />
           <div className="cost-popover">
-            <div className="cost-popover-title">Estimated input cost</div>
+            <div className="cost-popover-title">{tc.title}</div>
             <table className="cost-table">
               <tbody>
                 {MODELS.map(m => (
@@ -35,7 +38,7 @@ export default function CostPopover({ tokens }: Props) {
                 ))}
               </tbody>
             </table>
-            <p className="cost-popover-note">Input cost only. Prices may vary.</p>
+            <p className="cost-popover-note">{tc.note}</p>
           </div>
         </>
       )}
