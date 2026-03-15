@@ -10,6 +10,24 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.4.0] — 2026-03-15
+
+### Added
+- **Prompt IDE** — Full integrated IDE panel with 7 new tools directly in the builder (@Refaltor77):
+  - **Debugger** — detects logical flaws and ambiguities in the prompt
+  - **Critic** — rates the prompt across 5 dimensions with a radar chart
+  - **Compressor** — reduces token count while preserving intent
+  - **System Prompt** — generates a ready-to-use system prompt from the current blocks
+  - **Cost Estimator** — live token count with cost estimate per provider
+  - **Context Memory** — persistent memory blocks (company, persona, style…) reusable across sessions via IndexedDB
+  - **Version History** — saves and restores named prompt snapshots with diff view
+- **Make.com integration** — webhook panel to send compiled prompts directly to a Make.com scenario, with execution history and test mode (@Refaltor77)
+- **Template Library** — 100+ categorized prompt templates with full i18n (EN/FR/ES/DE/PT/JA/TR/ZH/AR/RU) and response language selector (@Refaltor77)
+- **Multi-project system** — local workspaces with persistence, export/import, default project and block count in navbar (@Nyrok)
+- **Projects step** in Guided Tour onboarding (@Nyrok)
+
+---
+
 ## [1.3.0] — 2026-03-10
 
 ### Added
