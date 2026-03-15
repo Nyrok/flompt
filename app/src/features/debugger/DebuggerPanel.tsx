@@ -103,12 +103,14 @@ export default function DebuggerPanel({ onApplyFix }: Props) {
                 </div>
               )}
 
-              <button
-                className="debugger-apply-btn"
-                onClick={() => { onApplyFix(result.fixedPrompt); setOpen(false) }}
-              >
-                <Wand2 size={13} /> {td.applyFix}
-              </button>
+              {result.score < 100 && (
+                <button
+                  className="debugger-apply-btn"
+                  onClick={() => { onApplyFix(result.fixedPrompt); setOpen(false) }}
+                >
+                  <Wand2 size={13} /> {td.applyFix}
+                </button>
+              )}
             </>
           )}
 
