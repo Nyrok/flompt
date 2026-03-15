@@ -129,3 +129,51 @@ export function watchJobStatus(
 }
 
 // compilePrompt removed — assembly is now 100% local (see PromptOutput.tsx)
+
+// ─── AI IDE features ─────────────────────────────────────────────────────────
+
+export interface DebugResult {
+  issues: Array<{
+    id: string; severity: string; category: string
+    message: string; location?: string; suggestion: string
+  }>
+  score: number; fixedPrompt: string; improvements: string[]
+  tokensBefore: number; tokensAfter: number
+}
+
+export const debugPrompt = async (prompt: string): Promise<DebugResult> => {
+  const { data } = await client.post<DebugResult>('/debug', { prompt })
+  return data
+}
+
+export interface CompressResult {
+  compressedPrompt: string
+  changes: Array<{ type: string; original: string; replacement: string | null; reason: string; tokensSaved: number }>
+  tokensBefore: number; tokensAfter: number; reductionPercent: number
+}
+
+export const compressPrompt = async (prompt: string, targetReduction = 0.5): Promise<CompressResult> => {
+  const { data } = await client.post<CompressResult>('/compress', { prompt, target_reduction: targetReduction })
+  return data
+}
+
+export interface CriticResult {
+  overallScore: number; grade: string
+  dimensions: Array<{ name: string; score: number; feedback: string }>
+  strengths: string[]; weaknesses: string[]; topRecommendation: string
+}
+
+export const critiquePrompt = async (prompt: string): Promise<CriticResult> => {
+  const { data } = await client.post<CriticResult>('/critic', { prompt })
+  return data
+}
+
+export interface SystemPromptResult {
+  sections: Array<{ name: string; content: string }>
+  fullPrompt: string; totalTokens: number
+}
+
+export const generateSystemPrompt = async (prompt: string): Promise<SystemPromptResult> => {
+  const { data } = await client.post<SystemPromptResult>('/system-prompt', { prompt })
+  return data
+}
