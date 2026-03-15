@@ -100,7 +100,7 @@ const PromptOutput = () => {
     setDebugLoading(true)
     setDebugError(null)
     try {
-      const result = await debugPrompt(currentRaw)
+      const result = await debugPrompt(currentRaw, locale)
       setDebugResult(result as DebugResult)
     } catch {
       setDebugError('Debug failed. Please try again.')
@@ -115,7 +115,7 @@ const PromptOutput = () => {
     setCompressLoading(true)
     setCompressError(null)
     try {
-      const result = await compressPrompt(currentRaw, targetReduction)
+      const result = await compressPrompt(currentRaw, targetReduction, locale)
       setCompressResult(result as CompressResult)
     } catch {
       setCompressError('Compression failed. Please try again.')

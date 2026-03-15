@@ -20,7 +20,7 @@ const PromptInput = () => {
     setQueueStatus,
     setCompiledPrompt,
   } = useFlowStore()
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const [error, setError] = useState<string | null>(null)
   const [platformName, setPlatformName] = useState<string | null>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -117,7 +117,7 @@ const PromptInput = () => {
     setSysLoading(true)
     setSysError(null)
     try {
-      const result = await generateSystemPrompt(rawPrompt)
+      const result = await generateSystemPrompt(rawPrompt, locale)
       setSysResult(result)
     } catch {
       setSysError('System prompt generation failed.')

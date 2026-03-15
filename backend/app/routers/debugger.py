@@ -9,6 +9,6 @@ async def debug_endpoint(req: DebugRequest) -> DebugResult:
     if not req.prompt.strip():
         raise HTTPException(status_code=400, detail="Prompt cannot be empty")
     try:
-        return await debug_prompt(req.prompt)
+        return await debug_prompt(req.prompt, req.locale)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

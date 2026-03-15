@@ -4,6 +4,7 @@ from typing import Literal
 class CompressRequest(BaseModel):
     prompt: str
     target_reduction: float = 0.5
+    locale: str = "en"
 
 class CompressChange(BaseModel):
     type: Literal["removed", "optimized", "merged"]

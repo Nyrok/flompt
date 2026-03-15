@@ -22,9 +22,16 @@ Rules:
 - NEVER remove role, objective, constraints, or examples content
 - Respond in the same language as the prompt"""
 
-async def compress_prompt(prompt: str, target_reduction: float = 0.5) -> CompressResult:
+LOCALE_LANGUAGE_MAP: dict[str, str] = {
+    "en": "English", "fr": "French", "de": "German", "es": "Spanish",
+    "pt": "Portuguese", "ja": "Japanese", "tr": "Turkish",
+    "zh": "Chinese", "ar": "Arabic", "ru": "Russian",
+}
+
+async def compress_prompt(prompt: str, target_reduction: float = 0.5, locale: str = "en") -> CompressResult:
     tokens_before = len(prompt.split())
-    user_msg = f"Target: reduce by ~{int(target_reduction * 100)}%\n\nPrompt:\n{prompt}"
+    language = LOCALE_LANGUAGE_MAP.get(locale, "English")
+    user_msg = f"Respond entirely in {language}. Target: reduce by ~{int(target_reduction * 100)}%\n\nPrompt:\n{prompt}"
     raw = await _call_llm_direct(COMPRESS_SYSTEM_PROMPT, user_msg)
     data = json.loads(_strip_markdown_json(raw))
     compressed = data.get("compressed_prompt", prompt)
