@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { PenLine, Network, Sparkles, Github } from 'lucide-react'
+import { PenLine, Network, Sparkles, Github, History, Brain } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { initAnalytics, setSource, analytics } from '@/lib/analytics'
 import FlowCanvas from '@/components/FlowCanvas'
@@ -21,6 +21,14 @@ import { useLocale } from '@/i18n/LocaleContext'
 import { LOCALES, LOCALE_LABELS } from '@/i18n/translations'
 import type { Locale } from '@/i18n/translations'
 import { isExtension } from '@/lib/platform'
+import DebuggerPanel from '@/features/debugger/DebuggerPanel'
+import CompressorModal from '@/features/compressor/CompressorModal'
+import CriticPanel from '@/features/critic/CriticPanel'
+import SystemPromptModal from '@/features/system-prompt/SystemPromptModal'
+import MemoryPanel from '@/features/context-memory/MemoryPanel'
+import VersionHistory from '@/features/versioning/VersionHistory'
+import { useVersionStore } from '@/features/versioning/useVersionStore'
+import { useMemoryStore } from '@/features/context-memory/useMemoryStore'
 import './styles.css'
 
 const TAB_IDS: { id: Tab; Icon: LucideIcon }[] = [
@@ -30,10 +38,31 @@ const TAB_IDS: { id: Tab; Icon: LucideIcon }[] = [
 ]
 
 const App = () => {
-  const { undo, redo, activeTab, setActiveTab, isDecomposing } = useFlowStore()
+  const { undo, redo, activeTab, setActiveTab, isDecomposing, setRawPrompt } = useFlowStore()
   const { t, locale, setLocale } = useLocale()
+  const { currentProjectId } = useProjectStore()
+  const { setOpen: openVersions, load: loadVersions } = useVersionStore()
+  const { setOpen: openMemory } = useMemoryStore()
   const mainRef = useRef<HTMLElement>(null)
   const [libraryOpen, setLibraryOpen] = useState(false)
+
+  const handleOpenVersions = () => {
+    openVersions(true)
+    if (currentProjectId) loadVersions(currentProjectId)
+  }
+
+  const handleApplyDebugFix = (fixedPrompt: string) => {
+    setRawPrompt(fixedPrompt)
+  }
+
+  const handleApplyCompression = (compressed: string) => {
+    setRawPrompt(compressed)
+  }
+
+  const handleApplySystemPromptToCanvas = (sections: Array<{ name: string; content: string }>) => {
+    const full = sections.map(s => `## ${s.name}\n${s.content}`).join('\n\n')
+    setRawPrompt(full)
+  }
 
   // Init PostHog after first render — non-blocking
   useEffect(() => {
@@ -99,6 +128,12 @@ const App = () => {
           <div className="header-spacer" />
 
           <div className="header-actions">
+            <button className="btn-icon" title="Version History" onClick={handleOpenVersions} aria-label="Version History">
+              <History size={14} />
+            </button>
+            <button className="btn-icon" title="Context Memory" onClick={() => openMemory(true)} aria-label="Context Memory">
+              <Brain size={14} />
+            </button>
             <select
               className="btn-locale"
               value={locale}
@@ -181,6 +216,14 @@ const App = () => {
 
       {/* Make.com integration panel — web only */}
       {!isExtension && <MakeIntegration />}
+
+      {/* IDE feature panels — web only */}
+      {!isExtension && <DebuggerPanel onApplyFix={handleApplyDebugFix} />}
+      {!isExtension && <CompressorModal onApply={handleApplyCompression} />}
+      {!isExtension && <CriticPanel />}
+      {!isExtension && <SystemPromptModal onApplyToCanvas={handleApplySystemPromptToCanvas} />}
+      {!isExtension && <MemoryPanel />}
+      {!isExtension && <VersionHistory projectId={currentProjectId ?? '__default__'} />}
 
       <nav className="tab-bar" aria-label={t.accessibility.mainTabs}>
         <div role="tablist" className="tab-list-inner">

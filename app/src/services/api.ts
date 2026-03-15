@@ -129,3 +129,81 @@ export function watchJobStatus(
 }
 
 // compilePrompt removed — assembly is now 100% local (see PromptOutput.tsx)
+
+// ─── AI IDE features ─────────────────────────────────────────────────────────
+
+export interface DebugResult {
+  issues: Array<{
+    id: string; severity: string; category: string
+    message: string; location?: string; suggestion: string
+  }>
+  score: number; fixedPrompt: string; improvements: string[]
+  tokensBefore: number; tokensAfter: number
+}
+
+export const debugPrompt = async (prompt: string, locale = 'en'): Promise<DebugResult> => {
+  const { data } = await client.post<any>('/debug', { prompt, locale })
+  return {
+    issues: data.issues ?? [],
+    score: data.score ?? 50,
+    fixedPrompt: data.fixed_prompt ?? prompt,
+    improvements: data.improvements ?? [],
+    tokensBefore: data.tokens_before ?? 0,
+    tokensAfter: data.tokens_after ?? 0,
+  }
+}
+
+export interface CompressResult {
+  compressedPrompt: string
+  changes: Array<{ type: string; original: string; replacement: string | null; reason: string; tokensSaved: number }>
+  tokensBefore: number; tokensAfter: number; reductionPercent: number
+}
+
+export const compressPrompt = async (prompt: string, targetReduction = 0.5, locale = 'en'): Promise<CompressResult> => {
+  const { data } = await client.post<any>('/compress', { prompt, target_reduction: targetReduction, locale })
+  return {
+    compressedPrompt: data.compressed_prompt ?? prompt,
+    changes: (data.changes ?? []).map((c: any) => ({
+      type: c.type,
+      original: c.original,
+      replacement: c.replacement ?? null,
+      reason: c.reason,
+      tokensSaved: c.tokens_saved ?? 0,
+    })),
+    tokensBefore: data.tokens_before ?? 0,
+    tokensAfter: data.tokens_after ?? 0,
+    reductionPercent: data.reduction_percent ?? 0,
+  }
+}
+
+export interface CriticResult {
+  overallScore: number; grade: string
+  dimensions: Array<{ name: string; score: number; feedback: string }>
+  strengths: string[]; weaknesses: string[]; topRecommendation: string
+}
+
+export const critiquePrompt = async (prompt: string, locale = 'en'): Promise<CriticResult> => {
+  const { data } = await client.post<any>('/critic', { prompt, locale })
+  return {
+    overallScore: data.overall_score ?? 5,
+    grade: data.grade ?? 'C',
+    dimensions: data.dimensions ?? [],
+    strengths: data.strengths ?? [],
+    weaknesses: data.weaknesses ?? [],
+    topRecommendation: data.top_recommendation ?? '',
+  }
+}
+
+export interface SystemPromptResult {
+  sections: Array<{ name: string; content: string }>
+  fullPrompt: string; totalTokens: number
+}
+
+export const generateSystemPrompt = async (prompt: string, locale = 'en'): Promise<SystemPromptResult> => {
+  const { data } = await client.post<any>('/system-prompt', { prompt, locale })
+  return {
+    sections: data.sections ?? [],
+    fullPrompt: data.full_prompt ?? '',
+    totalTokens: data.total_tokens ?? 0,
+  }
+}

@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { Clipboard, ClipboardCheck, FileText, Braces, Sparkles, Play, Send, Github, Zap } from 'lucide-react'
+import { Clipboard, ClipboardCheck, FileText, Braces, Sparkles, Play, Send, Github, Zap, Bug, Scissors, Star as StarIcon } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics } from '@/lib/analytics'
@@ -8,6 +8,14 @@ import { isExtension } from '@/lib/platform'
 import { STAR_EVENT } from '@/components/StarPopup'
 import { useMakeStore } from '@/store/makeStore'
 import type { OutputFormat } from '@/types/blocks'
+import CostPopover from '@/features/cost-estimator/CostPopover'
+import { useDebuggerStore } from '@/features/debugger/useDebuggerStore'
+import { useCompressorStore } from '@/features/compressor/useCompressorStore'
+import { useCriticStore } from '@/features/critic/useCriticStore'
+import { debugPrompt, compressPrompt, critiquePrompt } from '@/services/api'
+import type { DebugResult } from '@/features/debugger/types'
+import type { CompressResult } from '@/features/compressor/types'
+import type { CriticResult } from '@/features/critic/types'
 
 // ─── Selection button config ─────────────────────────────────────────────────
 const FORMAT_OPTIONS: Array<{ format: OutputFormat; label: string; title: string }> = [
@@ -20,7 +28,7 @@ const FORMAT_OPTIONS: Array<{ format: OutputFormat; label: string; title: string
 
 const PromptOutput = () => {
   const { nodes, edges, compiledPrompt, setCompiledPrompt, outputFormat, setOutputFormat } = useFlowStore()
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const { setIsPanelOpen: openMakePanel } = useMakeStore()
   const [copied,   setCopied]   = useState(false)
   const [injected, setInjected] = useState(false)
@@ -82,6 +90,55 @@ const PromptOutput = () => {
     analytics.promptExported('json')
   }
 
+  const { setOpen: openDebugger, setLoading: setDebugLoading, setResult: setDebugResult, setError: setDebugError } = useDebuggerStore()
+  const { setOpen: openCompressor, setLoading: setCompressLoading, setResult: setCompressResult, setError: setCompressError, targetReduction } = useCompressorStore()
+  const { setOpen: openCritic, setLoading: setCriticLoading, setResult: setCriticResult, setError: setCriticError } = useCriticStore()
+
+  const handleDebug = async () => {
+    if (!currentRaw) return
+    openDebugger(true)
+    setDebugLoading(true)
+    setDebugError(null)
+    try {
+      const result = await debugPrompt(currentRaw, locale)
+      setDebugResult(result as DebugResult)
+    } catch {
+      setDebugError('Debug failed. Please try again.')
+    } finally {
+      setDebugLoading(false)
+    }
+  }
+
+  const handleCompress = async () => {
+    if (!currentRaw) return
+    openCompressor(true)
+    setCompressLoading(true)
+    setCompressError(null)
+    try {
+      const result = await compressPrompt(currentRaw, targetReduction, locale)
+      setCompressResult(result as CompressResult)
+    } catch {
+      setCompressError('Compression failed. Please try again.')
+    } finally {
+      setCompressLoading(false)
+    }
+  }
+
+  const handleCritic = async () => {
+    if (!currentRaw) return
+    openCritic(true)
+    setCriticLoading(true)
+    setCriticError(null)
+    try {
+      const result = await critiquePrompt(currentRaw, locale)
+      setCriticResult(result as CriticResult)
+    } catch {
+      setCriticError('Evaluation failed. Please try again.')
+    } finally {
+      setCriticLoading(false)
+    }
+  }
+
   /** Sends the compiled prompt (current format) to the extension content script */
   const handleInjectToAI = useCallback(() => {
     if (!currentRaw) return
@@ -98,7 +155,7 @@ const PromptOutput = () => {
       <div className="output-header">
         <h2 className="panel-title">{t.promptOutput.title}</h2>
         {compiledPrompt && (
-          <span className="token-badge">~{compiledPrompt.tokenEstimate} tokens</span>
+          <CostPopover tokens={compiledPrompt.tokenEstimate} />
         )}
       </div>
 
@@ -165,6 +222,19 @@ const PromptOutput = () => {
                 <Braces size={13} aria-hidden="true" /> {t.promptOutput.exportJson}
               </button>
             </div>
+            {!isExtension && (
+              <div className="output-ide-actions">
+                <button className="btn btn-secondary export-btn" onClick={handleDebug} title={t.ide.outputButtons.debug}>
+                  <Bug size={13} /> {t.ide.outputButtons.debug}
+                </button>
+                <button className="btn btn-secondary export-btn" onClick={handleCompress} title={t.ide.outputButtons.compress}>
+                  <Scissors size={13} /> {t.ide.outputButtons.compress}
+                </button>
+                <button className="btn btn-secondary export-btn" onClick={handleCritic} title={t.ide.outputButtons.score}>
+                  <StarIcon size={13} /> {t.ide.outputButtons.score}
+                </button>
+              </div>
+            )}
           </div>
         </>
       ) : (
