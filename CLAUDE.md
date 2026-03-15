@@ -345,3 +345,9 @@ python backend/mcp_stdio.py
 - **When adding/removing a block** → update ALL of the above. Don't forget blog FR articles.
 - Landing block count stat must stay in sync with actual block count (currently **13**)
 
+### 10. Backend — known pitfalls
+- **`idb` package** must be installed in `app/` (`npm install idb`) — required by `src/lib/db.ts` (Context Memory + Version History). If missing, `tsc` fails and `npm run build` produces no `dist/`.
+- **AI_MODEL in `backend/.env`** must be a valid model ID for the configured provider. For Groq: use `llama-3.3-70b-versatile` (supports `response_format: json_object`). The value `openai/gpt-oss-120b` is **invalid** on Groq.
+- **Backend restart** — `supervisorctl` is not available in this environment. To restart the backend, find the PID via `cat /proc/*/cmdline | tr '\0' ' '` and `kill -9 <pid>`, then relaunch with `cd /projects/flompt/backend && nohup .venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 > /tmp/flompt-backend.log 2>&1 &`. `pkill`/`fuser` are unreliable here.
+- **New routers won't load** until the backend process is fully restarted — verify with `curl -s http://localhost:8000/openapi.json | python3 -c "import sys,json; [print(p) for p in json.load(sys.stdin)['paths']]"`
+
