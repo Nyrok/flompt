@@ -2,6 +2,7 @@ from pydantic import BaseModel
 
 class SystemPromptRequest(BaseModel):
     prompt: str
+    locale: str = "en"
 
 class SystemSection(BaseModel):
     name: str

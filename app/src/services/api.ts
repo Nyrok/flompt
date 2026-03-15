@@ -141,8 +141,8 @@ export interface DebugResult {
   tokensBefore: number; tokensAfter: number
 }
 
-export const debugPrompt = async (prompt: string): Promise<DebugResult> => {
-  const { data } = await client.post<any>('/debug', { prompt })
+export const debugPrompt = async (prompt: string, locale = 'en'): Promise<DebugResult> => {
+  const { data } = await client.post<any>('/debug', { prompt, locale })
   return {
     issues: data.issues ?? [],
     score: data.score ?? 50,
@@ -159,8 +159,8 @@ export interface CompressResult {
   tokensBefore: number; tokensAfter: number; reductionPercent: number
 }
 
-export const compressPrompt = async (prompt: string, targetReduction = 0.5): Promise<CompressResult> => {
-  const { data } = await client.post<any>('/compress', { prompt, target_reduction: targetReduction })
+export const compressPrompt = async (prompt: string, targetReduction = 0.5, locale = 'en'): Promise<CompressResult> => {
+  const { data } = await client.post<any>('/compress', { prompt, target_reduction: targetReduction, locale })
   return {
     compressedPrompt: data.compressed_prompt ?? prompt,
     changes: (data.changes ?? []).map((c: any) => ({
@@ -199,8 +199,8 @@ export interface SystemPromptResult {
   fullPrompt: string; totalTokens: number
 }
 
-export const generateSystemPrompt = async (prompt: string): Promise<SystemPromptResult> => {
-  const { data } = await client.post<any>('/system-prompt', { prompt })
+export const generateSystemPrompt = async (prompt: string, locale = 'en'): Promise<SystemPromptResult> => {
+  const { data } = await client.post<any>('/system-prompt', { prompt, locale })
   return {
     sections: data.sections ?? [],
     fullPrompt: data.full_prompt ?? '',

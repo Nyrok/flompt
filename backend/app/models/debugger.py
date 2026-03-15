@@ -3,6 +3,7 @@ from typing import Literal
 
 class DebugRequest(BaseModel):
     prompt: str
+    locale: str = "en"
 
 class DebugIssue(BaseModel):
     id: str

@@ -9,6 +9,6 @@ async def system_prompt_endpoint(req: SystemPromptRequest) -> SystemPromptResult
     if not req.prompt.strip():
         raise HTTPException(status_code=400, detail="Prompt cannot be empty")
     try:
-        return await generate_system_prompt(req.prompt)
+        return await generate_system_prompt(req.prompt, req.locale)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

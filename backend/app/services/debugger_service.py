@@ -23,10 +23,19 @@ DEBUGGER_SYSTEM_PROMPT = """You are a prompt engineering expert. Analyze the pro
 Scoring rules: start at 100. Deduct: missing_role -15, vague_objective -20, missing_context -10, contradiction -25, redundancy -10, token_waste -5, missing_format -10.
 Return at least score and fixed_prompt even if no issues found."""
 
-async def debug_prompt(prompt: str) -> DebugResult:
+LOCALE_LANGUAGE_MAP: dict[str, str] = {
+    "en": "English", "fr": "French", "de": "German", "es": "Spanish",
+    "pt": "Portuguese", "ja": "Japanese", "tr": "Turkish",
+    "zh": "Chinese", "ar": "Arabic", "ru": "Russian",
+}
+
+async def debug_prompt(prompt: str, locale: str = "en") -> DebugResult:
     tokens_before = len(prompt.split())
-    raw = await _call_llm_direct(DEBUGGER_SYSTEM_PROMPT, prompt)
+    language = LOCALE_LANGUAGE_MAP.get(locale, "English")
+    user_msg = f"Respond entirely in {language}.\n\n{prompt}"
+    raw = await _call_llm_direct(DEBUGGER_SYSTEM_PROMPT, user_msg)
     data = json.loads(_strip_markdown_json(raw))
+
     issues = [DebugIssue(id=i.get("id", str(uuid.uuid4())), **{k: v for k, v in i.items() if k != "id"}) for i in data.get("issues", [])]
     tokens_after = len(data.get("fixed_prompt", prompt).split())
     return DebugResult(
