@@ -182,8 +182,8 @@ export interface CriticResult {
   strengths: string[]; weaknesses: string[]; topRecommendation: string
 }
 
-export const critiquePrompt = async (prompt: string): Promise<CriticResult> => {
-  const { data } = await client.post<any>('/critic', { prompt })
+export const critiquePrompt = async (prompt: string, locale = 'en'): Promise<CriticResult> => {
+  const { data } = await client.post<any>('/critic', { prompt, locale })
   return {
     overallScore: data.overall_score ?? 5,
     grade: data.grade ?? 'C',

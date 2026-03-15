@@ -8,6 +8,7 @@ class CriticDimension(BaseModel):
 
 class CriticRequest(BaseModel):
     prompt: str
+    locale: str = "en"
 
 class CriticResult(BaseModel):
     overall_score: float

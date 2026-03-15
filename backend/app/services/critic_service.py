@@ -18,10 +18,18 @@ CRITIC_SYSTEM_PROMPT = """You are a senior prompt engineering evaluator. Score t
   "weaknesses": ["...", "..."],
   "top_recommendation": "Single most impactful improvement"
 }
-Grade: A=9-10, B=7-8, C=5-6, D=3-4, F=0-2. Respond in the prompt's language."""
+Grade: A=9-10, B=7-8, C=5-6, D=3-4, F=0-2."""
 
-async def critique_prompt(prompt: str) -> CriticResult:
-    raw = await _call_llm_direct(CRITIC_SYSTEM_PROMPT, prompt)
+LOCALE_LANGUAGE_MAP: dict[str, str] = {
+    "en": "English", "fr": "French", "de": "German", "es": "Spanish",
+    "pt": "Portuguese", "ja": "Japanese", "tr": "Turkish",
+    "zh": "Chinese", "ar": "Arabic", "ru": "Russian",
+}
+
+async def critique_prompt(prompt: str, locale: str = "en") -> CriticResult:
+    language = LOCALE_LANGUAGE_MAP.get(locale, "English")
+    user_msg = f"Respond entirely in {language}.\n\n{prompt}"
+    raw = await _call_llm_direct(CRITIC_SYSTEM_PROMPT, user_msg)
     data = json.loads(_strip_markdown_json(raw))
     dims = [CriticDimension(**d) for d in data.get("dimensions", [])]
     return CriticResult(

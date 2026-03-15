@@ -264,7 +264,15 @@
       "empty": "Cliquez sur « Score » dans le panneau Résultat pour évaluer votre prompt.",
       "overallScore": "Score global",
       "strengths": "Points forts",
-      "weaknesses": "Points faibles"
+      "weaknesses": "Points faibles",
+      "dimensions": {
+        "clarity": "Clarté",
+        "specificity": "Spécificité",
+        "structure": "Structure",
+        "examples": "Exemples",
+        "constraints": "Contraintes",
+        "format": "Format"
+      }
     },
     "systemPrompt": {
       "title": "Générateur de system prompt",
