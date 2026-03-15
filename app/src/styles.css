@@ -3229,6 +3229,26 @@ body {
 .diff-line--removed .diff-line-marker { color: #ef4444; }
 .diff-line-content { flex: 1; padding: 1px 6px; white-space: pre-wrap; word-break: break-all; color: var(--text); }
 
+/* ─── IDE shared close button ──────────────────────────────────────────── */
+.ide-close-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 8px; border: none; cursor: pointer;
+  background: transparent; color: var(--text-dim);
+  transition: background 0.12s, color 0.12s; flex-shrink: 0;
+}
+.ide-close-btn:hover { background: rgba(255,255,255,0.07); color: var(--text); }
+
+/* ─── IDE shared action button (Restore, Compare…) ─────────────────────── */
+.ide-action-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 9px; border-radius: 7px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--text-dim); font-size: 11px; cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.ide-action-btn:hover { background: var(--surface-hover, rgba(255,255,255,0.05)); color: var(--text); border-color: var(--text-dim); }
+.ide-action-btn--danger:hover { border-color: #ef4444; color: #ef4444; background: rgba(239,68,68,0.07); }
+
 /* ─── IDE action buttons in output ──────────────────────────────────────── */
 .output-ide-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
 

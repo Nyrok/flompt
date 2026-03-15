@@ -1,5 +1,6 @@
 import { X, Star, Loader, TrendingUp, TrendingDown, Lightbulb } from 'lucide-react'
 import { useCriticStore } from './useCriticStore'
+import { useLocale } from '@/i18n/LocaleContext'
 import RadarChart from './RadarChart'
 
 function gradeColor(grade: string) {
@@ -12,20 +13,22 @@ function gradeColor(grade: string) {
 
 export default function CriticPanel() {
   const { isOpen, isLoading, result, error, setOpen } = useCriticStore()
+  const { t } = useLocale()
+  const tc = t.ide.critic
 
   if (!isOpen) return null
 
   return (
     <>
       <div className="debugger-backdrop" onClick={() => setOpen(false)} />
-      <aside className="critic-panel" role="dialog" aria-label="AI Prompt Critic" aria-modal="true">
+      <aside className="critic-panel" role="dialog" aria-label={tc.title} aria-modal="true">
         <div className="debugger-header">
           <div className="debugger-brand">
             <Star size={15} />
-            <span className="debugger-title">AI Prompt Critic</span>
+            <span className="debugger-title">{tc.title}</span>
           </div>
-          <button className="make-close-btn" onClick={() => setOpen(false)} aria-label="Close">
-            <X size={14} />
+          <button className="ide-close-btn" onClick={() => setOpen(false)} aria-label={t.ide.close}>
+            <X size={15} />
           </button>
         </div>
 
@@ -33,7 +36,7 @@ export default function CriticPanel() {
           {isLoading && (
             <div className="debugger-loading">
               <Loader size={20} className="spin" />
-              <span>Evaluating your prompt…</span>
+              <span>{tc.loading}</span>
             </div>
           )}
 
@@ -51,7 +54,7 @@ export default function CriticPanel() {
                   <div className="critic-overall-score" style={{ color: gradeColor(result.grade) }}>
                     {result.overallScore.toFixed(1)} / 10
                   </div>
-                  <div className="debugger-section-label">Overall score</div>
+                  <div className="debugger-section-label">{tc.overallScore}</div>
                 </div>
                 <RadarChart dimensions={result.dimensions} />
               </div>
@@ -81,7 +84,7 @@ export default function CriticPanel() {
                 <div className="critic-section">
                   <div className="debugger-brand" style={{ marginBottom: 6 }}>
                     <TrendingUp size={12} style={{ color: '#22c55e' }} />
-                    <span className="debugger-section-label">Strengths</span>
+                    <span className="debugger-section-label">{tc.strengths}</span>
                   </div>
                   <ul className="critic-list critic-list--strengths">
                     {result.strengths.map((s, i) => <li key={i}>{s}</li>)}
@@ -93,7 +96,7 @@ export default function CriticPanel() {
                 <div className="critic-section">
                   <div className="debugger-brand" style={{ marginBottom: 6 }}>
                     <TrendingDown size={12} style={{ color: '#ef4444' }} />
-                    <span className="debugger-section-label">Weaknesses</span>
+                    <span className="debugger-section-label">{tc.weaknesses}</span>
                   </div>
                   <ul className="critic-list critic-list--weaknesses">
                     {result.weaknesses.map((w, i) => <li key={i}>{w}</li>)}
@@ -104,9 +107,7 @@ export default function CriticPanel() {
           )}
 
           {!isLoading && !result && !error && (
-            <div className="debugger-empty">
-              Click "Score" in the Result panel to evaluate your prompt.
-            </div>
+            <div className="debugger-empty">{tc.empty}</div>
           )}
         </div>
       </aside>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { X, Wand2, Copy, CheckCircle, Loader } from 'lucide-react'
 import { useSystemPromptStore } from './useSystemPromptStore'
+import { useLocale } from '@/i18n/LocaleContext'
 
 const SECTION_COLORS: Record<string, string> = {
   SYSTEM:        '#c084fc',
@@ -17,6 +18,8 @@ interface Props {
 
 export default function SystemPromptModal({ onApplyToCanvas }: Props) {
   const { isOpen, isLoading, result, error, editedSections, setOpen, updateSection } = useSystemPromptStore()
+  const { t } = useLocale()
+  const ts = t.ide.systemPrompt
   const [copied, setCopied] = useState(false)
 
   if (!isOpen) return null
@@ -30,27 +33,30 @@ export default function SystemPromptModal({ onApplyToCanvas }: Props) {
   }
 
   return (
-    <div className="compressor-overlay" role="dialog" aria-modal="true" aria-label="System Prompt Generator">
+    <div className="compressor-overlay" role="dialog" aria-modal="true" aria-label={ts.title}>
       <div className="compressor-backdrop" onClick={() => setOpen(false)} />
       <div className="compressor-modal" style={{ maxWidth: 700 }}>
         <div className="compressor-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <Wand2 size={15} />
-            <span className="compressor-title">System Prompt Generator</span>
+            <span className="compressor-title">{ts.title}</span>
           </div>
-          <div style={{ display: 'flex', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
             {result && !isLoading && (
               <>
-                <button className="btn btn-secondary export-btn" style={{ fontSize: 11 }} onClick={handleCopy}>
-                  {copied ? <><CheckCircle size={11} /> Copied!</> : <><Copy size={11} /> Copy all</>}
+                <button className="ide-action-btn" onClick={handleCopy}>
+                  {copied
+                    ? <><CheckCircle size={11} /> {ts.copied}</>
+                    : <><Copy size={11} /> {ts.copyAll}</>
+                  }
                 </button>
                 <button className="debugger-apply-btn" style={{ margin: 0 }} onClick={() => { onApplyToCanvas(editedSections); setOpen(false) }}>
-                  Apply to canvas
+                  {ts.apply}
                 </button>
               </>
             )}
-            <button className="make-close-btn" onClick={() => setOpen(false)} aria-label="Close">
-              <X size={14} />
+            <button className="ide-close-btn" onClick={() => setOpen(false)} aria-label={t.ide.close}>
+              <X size={15} />
             </button>
           </div>
         </div>
@@ -58,7 +64,7 @@ export default function SystemPromptModal({ onApplyToCanvas }: Props) {
         {isLoading && (
           <div className="debugger-loading" style={{ padding: 40 }}>
             <Loader size={20} className="spin" />
-            <span>Generating system prompt…</span>
+            <span>{ts.loading}</span>
           </div>
         )}
 
@@ -85,9 +91,7 @@ export default function SystemPromptModal({ onApplyToCanvas }: Props) {
         )}
 
         {!isLoading && !result && !error && (
-          <div className="debugger-empty" style={{ padding: 32 }}>
-            Click "Generate System Prompt" in the Prompt input to get started.
-          </div>
+          <div className="debugger-empty" style={{ padding: 32 }}>{ts.empty}</div>
         )}
       </div>
     </div>

@@ -191,6 +191,18 @@ export interface Translations {
     docs: string
     openPanel: string
   }
+  ide: {
+    close: string
+    debugger: { title: string; loading: string; empty: string; noIssues: string; scoreLabel: string; wordsBefore: string; wordsSaved: string; suggestions: string; applyFix: string }
+    compressor: { title: string; loading: string; targetReduction: string; before: string; after: string; saved: string; words: string; original: string; compressed: string; changes: string; noChanges: string; apply: string }
+    critic: { title: string; loading: string; empty: string; overallScore: string; strengths: string; weaknesses: string }
+    systemPrompt: { title: string; loading: string; empty: string; copyAll: string; copied: string; apply: string }
+    cost: { title: string; note: string }
+    memory: { title: string; new: string; searchPlaceholder: string; noBlocks: string; noResults: string; namePlaceholder: string; contentPlaceholder: string; tagsPlaceholder: string; save: string; cancel: string }
+    versioning: { title: string; messagePlaceholder: string; save: string; saving: string; compareHint: string; noVersions: string; restore: string; compare: string; diff: string; justNow: string; minsAgo: string; hoursAgo: string; daysAgo: string }
+    outputButtons: { debug: string; compress: string; score: string }
+    inputButtons: { systemPrompt: string }
+  }
   blocks: Record<BlockType, BlockTranslation>
 }
 
@@ -225,6 +237,7 @@ function build(raw: RawLocale): Translations {
     starPopup: raw.starPopup,
     projects: raw.projects,
     makeIntegration: raw.makeIntegration,
+    ide: (raw as any).ide,
     blocks: raw.blocks as Record<BlockType, BlockTranslation>,
   }
 }

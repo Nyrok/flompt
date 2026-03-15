@@ -231,6 +231,89 @@
     "export": "Export projects",
     "import": "Import projects"
   },
+  "ide": {
+    "close": "Close",
+    "debugger": {
+      "title": "Prompt Debugger",
+      "loading": "Analyzing your prompt…",
+      "empty": "Click \"Debug\" in the Result panel to analyze your prompt.",
+      "noIssues": "No issues detected — great prompt!",
+      "scoreLabel": "/ 100",
+      "wordsBefore": "Before: {n} words",
+      "wordsSaved": "Fix saves ~{n} words",
+      "suggestions": "Suggestions",
+      "applyFix": "Apply Fixed Prompt"
+    },
+    "compressor": {
+      "title": "Prompt Compressor",
+      "loading": "Compressing…",
+      "targetReduction": "Target reduction:",
+      "before": "Before",
+      "after": "After",
+      "saved": "Saved",
+      "words": "words",
+      "original": "Original",
+      "compressed": "Compressed prompt",
+      "changes": "Changes",
+      "noChanges": "(no changes)",
+      "apply": "Apply Compressed Prompt"
+    },
+    "critic": {
+      "title": "AI Prompt Critic",
+      "loading": "Evaluating your prompt…",
+      "empty": "Click \"Score\" in the Result panel to evaluate your prompt.",
+      "overallScore": "Overall score",
+      "strengths": "Strengths",
+      "weaknesses": "Weaknesses"
+    },
+    "systemPrompt": {
+      "title": "System Prompt Generator",
+      "loading": "Generating system prompt…",
+      "empty": "Click \"System Prompt\" in the Prompt input to get started.",
+      "copyAll": "Copy all",
+      "copied": "Copied!",
+      "apply": "Apply to canvas"
+    },
+    "cost": {
+      "title": "Estimated input cost",
+      "note": "Input cost only. Prices may vary."
+    },
+    "memory": {
+      "title": "Context Memory",
+      "new": "New",
+      "searchPlaceholder": "Search memory…",
+      "noBlocks": "No memory blocks yet. Click + New to add one.",
+      "noResults": "No results.",
+      "namePlaceholder": "Name",
+      "contentPlaceholder": "Content…",
+      "tagsPlaceholder": "Tags (comma separated)",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "versioning": {
+      "title": "Version History",
+      "messagePlaceholder": "Version message (optional)",
+      "save": "Save",
+      "saving": "Saving…",
+      "compareHint": "Select second version to compare",
+      "noVersions": "No saved versions yet.",
+      "restore": "Restore",
+      "compare": "Compare",
+      "diff": "Diff",
+      "justNow": "just now",
+      "minsAgo": "{n}m ago",
+      "hoursAgo": "{n}h ago",
+      "daysAgo": "{n}d ago"
+    },
+    "outputButtons": {
+      "debug": "Debug",
+      "compress": "Compress",
+      "score": "Score"
+    },
+    "inputButtons": {
+      "systemPrompt": "System Prompt"
+    }
+  },
   "blocks": {
     "document": {
       "label": "Document",

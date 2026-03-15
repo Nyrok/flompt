@@ -224,14 +224,14 @@ const PromptOutput = () => {
             </div>
             {!isExtension && (
               <div className="output-ide-actions">
-                <button className="btn btn-secondary export-btn" onClick={handleDebug} title="Analyze prompt issues">
-                  <Bug size={13} /> Debug
+                <button className="btn btn-secondary export-btn" onClick={handleDebug} title={t.ide.outputButtons.debug}>
+                  <Bug size={13} /> {t.ide.outputButtons.debug}
                 </button>
-                <button className="btn btn-secondary export-btn" onClick={handleCompress} title="Compress prompt tokens">
-                  <Scissors size={13} /> Compress
+                <button className="btn btn-secondary export-btn" onClick={handleCompress} title={t.ide.outputButtons.compress}>
+                  <Scissors size={13} /> {t.ide.outputButtons.compress}
                 </button>
-                <button className="btn btn-secondary export-btn" onClick={handleCritic} title="Score prompt quality">
-                  <StarIcon size={13} /> Score
+                <button className="btn btn-secondary export-btn" onClick={handleCritic} title={t.ide.outputButtons.score}>
+                  <StarIcon size={13} /> {t.ide.outputButtons.score}
                 </button>
               </div>
             )}

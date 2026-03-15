@@ -1,5 +1,6 @@
 import { X, Scissors, Trash2, GitMerge, Loader } from 'lucide-react'
 import { useCompressorStore } from './useCompressorStore'
+import { useLocale } from '@/i18n/LocaleContext'
 import type { CompressChange } from './types'
 
 function changeIcon(type: CompressChange['type']) {
@@ -14,6 +15,8 @@ interface Props {
 
 export default function CompressorModal({ onApply }: Props) {
   const { isOpen, isLoading, result, error, targetReduction, setOpen, setTargetReduction } = useCompressorStore()
+  const { t } = useLocale()
+  const tc = t.ide.compressor
 
   if (!isOpen) return null
 
@@ -24,17 +27,17 @@ export default function CompressorModal({ onApply }: Props) {
   ]
 
   return (
-    <div className="compressor-overlay" role="dialog" aria-modal="true" aria-label="Prompt Compressor">
+    <div className="compressor-overlay" role="dialog" aria-modal="true" aria-label={tc.title}>
       <div className="compressor-backdrop" onClick={() => setOpen(false)} />
       <div className="compressor-modal">
         <div className="compressor-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <Scissors size={15} />
-            <span className="compressor-title">Prompt Compressor</span>
+            <span className="compressor-title">{tc.title}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div className="compressor-target-row">
-              <span className="debugger-section-label">Target reduction:</span>
+              <span className="debugger-section-label">{tc.targetReduction}</span>
               {reductionOptions.map(opt => (
                 <button
                   key={opt.value}
@@ -46,8 +49,8 @@ export default function CompressorModal({ onApply }: Props) {
                 </button>
               ))}
             </div>
-            <button className="make-close-btn" onClick={() => setOpen(false)} aria-label="Close">
-              <X size={14} />
+            <button className="ide-close-btn" onClick={() => setOpen(false)} aria-label={t.ide.close}>
+              <X size={15} />
             </button>
           </div>
         </div>
@@ -55,7 +58,7 @@ export default function CompressorModal({ onApply }: Props) {
         {isLoading && (
           <div className="debugger-loading" style={{ padding: 40 }}>
             <Loader size={20} className="spin" />
-            <span>Compressing…</span>
+            <span>{tc.loading}</span>
           </div>
         )}
 
@@ -67,37 +70,39 @@ export default function CompressorModal({ onApply }: Props) {
           <div className="compressor-body">
             <div className="compressor-stats">
               <div className="compressor-stat">
-                <span className="compressor-stat-label">Before</span>
-                <span className="compressor-stat-value">{result.tokensBefore} words</span>
+                <span className="compressor-stat-label">{tc.before}</span>
+                <span className="compressor-stat-value">{result.tokensBefore} <small>{tc.words}</small></span>
               </div>
               <div className="compressor-stat">
-                <span className="compressor-stat-label">After</span>
-                <span className="compressor-stat-value" style={{ color: '#22c55e' }}>{result.tokensAfter} words</span>
+                <span className="compressor-stat-label">{tc.after}</span>
+                <span className="compressor-stat-value" style={{ color: '#22c55e' }}>{result.tokensAfter} <small>{tc.words}</small></span>
               </div>
               <div className="compressor-stat">
-                <span className="compressor-stat-label">Saved</span>
+                <span className="compressor-stat-label">{tc.saved}</span>
                 <span className="compressor-stat-value" style={{ color: '#22c55e' }}>-{result.reductionPercent}%</span>
               </div>
             </div>
 
             <div className="compressor-columns">
               <div className="compressor-col">
-                <span className="debugger-section-label">Original</span>
-                <pre className="compressor-pre">{result.changes.map(c => c.original).join('\n') || '(no changes)'}</pre>
+                <span className="debugger-section-label">{tc.original}</span>
+                <pre className="compressor-pre">
+                  {result.changes.map(c => c.original).join('\n') || tc.noChanges}
+                </pre>
               </div>
               <div className="compressor-col">
-                <span className="debugger-section-label">Compressed prompt</span>
+                <span className="debugger-section-label">{tc.compressed}</span>
                 <pre className="compressor-pre">{result.compressedPrompt}</pre>
               </div>
             </div>
 
             {result.changes.length > 0 && (
               <div className="compressor-changes">
-                <span className="debugger-section-label">Changes ({result.changes.length})</span>
+                <span className="debugger-section-label">{tc.changes} ({result.changes.length})</span>
                 <ul className="compressor-change-list">
                   {result.changes.map((c, i) => (
                     <li key={i} className="compressor-change-item">
-                      {changeIcon(c.type)}
+                      {changeIcon(c.type as CompressChange['type'])}
                       <span className="compressor-change-type">{c.type}</span>
                       <span className="compressor-change-reason">{c.reason}</span>
                       <span className="compressor-change-saved">-{c.tokensSaved}w</span>
@@ -112,9 +117,13 @@ export default function CompressorModal({ onApply }: Props) {
               style={{ margin: '12px 16px 16px' }}
               onClick={() => { onApply(result.compressedPrompt); setOpen(false) }}
             >
-              Apply Compressed Prompt
+              {tc.apply}
             </button>
           </div>
+        )}
+
+        {!isLoading && !result && !error && (
+          <div className="debugger-empty" style={{ padding: 32 }}></div>
         )}
       </div>
     </div>

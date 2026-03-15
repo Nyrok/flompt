@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { X, History, RotateCcw, GitCompare, Trash2, Save, Clock } from 'lucide-react'
 import { useVersionStore } from './useVersionStore'
+import { useLocale } from '@/i18n/LocaleContext'
 import type { PromptVersion } from '@/lib/db'
 
-function timeAgo(iso: string): string {
+function timeAgo(iso: string, tv: typeof import('@/i18n/translations').translations['en']['ide']['versioning']): string {
   const diff = Date.now() - new Date(iso).getTime()
   const mins = Math.floor(diff / 60000)
-  if (mins < 1) return 'just now'
-  if (mins < 60) return `${mins}m ago`
+  if (mins < 1) return tv.justNow
+  if (mins < 60) return tv.minsAgo.replace('{n}', String(mins))
   const hours = Math.floor(mins / 60)
-  if (hours < 24) return `${hours}h ago`
-  return `${Math.floor(hours / 24)}d ago`
+  if (hours < 24) return tv.hoursAgo.replace('{n}', String(hours))
+  return tv.daysAgo.replace('{n}', String(Math.floor(hours / 24)))
 }
 
 interface Props {
@@ -19,6 +20,8 @@ interface Props {
 
 export default function VersionHistory({ projectId }: Props) {
   const { versions, isOpen, diffView, setOpen, save, rollback, showDiff, closeDiff, remove } = useVersionStore()
+  const { t } = useLocale()
+  const tv = t.ide.versioning
   const [message, setMessage] = useState('')
   const [compareA, setCompareA] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
@@ -44,14 +47,14 @@ export default function VersionHistory({ projectId }: Props) {
   return (
     <>
       <div className="debugger-backdrop" onClick={() => { setOpen(false); closeDiff() }} />
-      <aside className="version-panel" role="dialog" aria-label="Version History" aria-modal="true">
+      <aside className="version-panel" role="dialog" aria-label={tv.title} aria-modal="true">
         <div className="debugger-header">
           <div className="debugger-brand">
             <History size={15} />
-            <span className="debugger-title">Version History</span>
+            <span className="debugger-title">{tv.title}</span>
           </div>
-          <button className="make-close-btn" onClick={() => { setOpen(false); closeDiff() }} aria-label="Close">
-            <X size={14} />
+          <button className="ide-close-btn" onClick={() => { setOpen(false); closeDiff() }} aria-label={t.ide.close}>
+            <X size={15} />
           </button>
         </div>
 
@@ -59,27 +62,29 @@ export default function VersionHistory({ projectId }: Props) {
           <input
             className="make-webhook-input"
             style={{ flex: 1, fontSize: 12 }}
-            placeholder="Version message (optional)"
+            placeholder={tv.messagePlaceholder}
             value={message}
             onChange={e => setMessage(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && handleSave()}
           />
           <button className="debugger-apply-btn" style={{ margin: 0, whiteSpace: 'nowrap' }} onClick={handleSave} disabled={saving}>
-            <Save size={12} /> {saving ? 'Saving…' : 'Save'}
+            <Save size={12} /> {saving ? tv.saving : tv.save}
           </button>
         </div>
 
         {compareA && (
           <div className="version-compare-hint">
-            <GitCompare size={12} /> Select second version to compare
+            <GitCompare size={12} /> {tv.compareHint}
           </div>
         )}
 
         {diffView && (
           <div className="version-diff">
             <div className="version-diff-header">
-              <span className="debugger-section-label">Diff</span>
-              <button className="make-close-btn" onClick={closeDiff}><X size={12} /></button>
+              <span className="debugger-section-label">{tv.diff}</span>
+              <button className="ide-close-btn" style={{ width: 26, height: 26 }} onClick={closeDiff}>
+                <X size={12} />
+              </button>
             </div>
             <div className="version-diff-body">
               {diffView.lines.map((line, i) => (
@@ -98,26 +103,26 @@ export default function VersionHistory({ projectId }: Props) {
 
         <div className="version-list">
           {versions.length === 0 && (
-            <div className="debugger-empty">No saved versions yet.</div>
+            <div className="debugger-empty">{tv.noVersions}</div>
           )}
           {versions.map((v: PromptVersion) => (
             <div key={v.id} className={`version-item${compareA === v.id ? ' version-item--selected' : ''}`}>
               <div className="version-item-header">
                 <span className="version-item-label">{v.label}</span>
-                <span className="version-item-time"><Clock size={10} /> {timeAgo(v.createdAt)}</span>
+                <span className="version-item-time"><Clock size={10} /> {timeAgo(v.createdAt, tv)}</span>
               </div>
               {v.tokenCount > 0 && (
                 <span className="version-item-tokens">{v.tokenCount} tokens</span>
               )}
               <div className="version-item-actions">
-                <button className="btn btn-secondary export-btn" style={{ fontSize: 10, padding: '2px 6px' }} title="Rollback to this version" onClick={() => rollback(v)}>
-                  <RotateCcw size={10} /> Restore
+                <button className="ide-action-btn" title={tv.restore} onClick={() => rollback(v)}>
+                  <RotateCcw size={10} /> {tv.restore}
                 </button>
-                <button className="btn btn-secondary export-btn" style={{ fontSize: 10, padding: '2px 6px' }} title="Compare" onClick={() => handleCompareSelect(v.id)}>
-                  <GitCompare size={10} /> Compare
+                <button className="ide-action-btn" title={tv.compare} onClick={() => handleCompareSelect(v.id)}>
+                  <GitCompare size={10} /> {tv.compare}
                 </button>
-                <button className="make-close-btn" title="Delete version" onClick={() => remove(v.id)}>
-                  <Trash2 size={11} />
+                <button className="ide-action-btn ide-action-btn--danger" title="Delete" onClick={() => remove(v.id)}>
+                  <Trash2 size={10} />
                 </button>
               </div>
             </div>

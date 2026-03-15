@@ -142,8 +142,15 @@ export interface DebugResult {
 }
 
 export const debugPrompt = async (prompt: string): Promise<DebugResult> => {
-  const { data } = await client.post<DebugResult>('/debug', { prompt })
-  return data
+  const { data } = await client.post<any>('/debug', { prompt })
+  return {
+    issues: data.issues ?? [],
+    score: data.score ?? 50,
+    fixedPrompt: data.fixed_prompt ?? prompt,
+    improvements: data.improvements ?? [],
+    tokensBefore: data.tokens_before ?? 0,
+    tokensAfter: data.tokens_after ?? 0,
+  }
 }
 
 export interface CompressResult {
@@ -153,8 +160,20 @@ export interface CompressResult {
 }
 
 export const compressPrompt = async (prompt: string, targetReduction = 0.5): Promise<CompressResult> => {
-  const { data } = await client.post<CompressResult>('/compress', { prompt, target_reduction: targetReduction })
-  return data
+  const { data } = await client.post<any>('/compress', { prompt, target_reduction: targetReduction })
+  return {
+    compressedPrompt: data.compressed_prompt ?? prompt,
+    changes: (data.changes ?? []).map((c: any) => ({
+      type: c.type,
+      original: c.original,
+      replacement: c.replacement ?? null,
+      reason: c.reason,
+      tokensSaved: c.tokens_saved ?? 0,
+    })),
+    tokensBefore: data.tokens_before ?? 0,
+    tokensAfter: data.tokens_after ?? 0,
+    reductionPercent: data.reduction_percent ?? 0,
+  }
 }
 
 export interface CriticResult {
@@ -164,8 +183,15 @@ export interface CriticResult {
 }
 
 export const critiquePrompt = async (prompt: string): Promise<CriticResult> => {
-  const { data } = await client.post<CriticResult>('/critic', { prompt })
-  return data
+  const { data } = await client.post<any>('/critic', { prompt })
+  return {
+    overallScore: data.overall_score ?? 5,
+    grade: data.grade ?? 'C',
+    dimensions: data.dimensions ?? [],
+    strengths: data.strengths ?? [],
+    weaknesses: data.weaknesses ?? [],
+    topRecommendation: data.top_recommendation ?? '',
+  }
 }
 
 export interface SystemPromptResult {
@@ -174,6 +200,10 @@ export interface SystemPromptResult {
 }
 
 export const generateSystemPrompt = async (prompt: string): Promise<SystemPromptResult> => {
-  const { data } = await client.post<SystemPromptResult>('/system-prompt', { prompt })
-  return data
+  const { data } = await client.post<any>('/system-prompt', { prompt })
+  return {
+    sections: data.sections ?? [],
+    fullPrompt: data.full_prompt ?? '',
+    totalTokens: data.total_tokens ?? 0,
+  }
 }

@@ -1,5 +1,6 @@
 import { X, AlertCircle, AlertTriangle, Info, CheckCircle, Loader, Wand2 } from 'lucide-react'
 import { useDebuggerStore } from './useDebuggerStore'
+import { useLocale } from '@/i18n/LocaleContext'
 import type { IssueSeverity } from './types'
 
 function severityIcon(s: IssueSeverity) {
@@ -20,20 +21,22 @@ interface Props {
 
 export default function DebuggerPanel({ onApplyFix }: Props) {
   const { isOpen, isLoading, result, error, setOpen } = useDebuggerStore()
+  const { t } = useLocale()
+  const td = t.ide.debugger
 
   if (!isOpen) return null
 
   return (
     <>
       <div className="debugger-backdrop" onClick={() => setOpen(false)} />
-      <aside className="debugger-panel" role="dialog" aria-label="Prompt Debugger" aria-modal="true">
+      <aside className="debugger-panel" role="dialog" aria-label={td.title} aria-modal="true">
         <div className="debugger-header">
           <div className="debugger-brand">
             <AlertCircle size={15} />
-            <span className="debugger-title">Prompt Debugger</span>
+            <span className="debugger-title">{td.title}</span>
           </div>
-          <button className="make-close-btn" onClick={() => setOpen(false)} aria-label="Close">
-            <X size={14} />
+          <button className="ide-close-btn" onClick={() => setOpen(false)} aria-label={t.ide.close}>
+            <X size={15} />
           </button>
         </div>
 
@@ -41,7 +44,7 @@ export default function DebuggerPanel({ onApplyFix }: Props) {
           {isLoading && (
             <div className="debugger-loading">
               <Loader size={20} className="spin" />
-              <span>Analyzing your prompt…</span>
+              <span>{td.loading}</span>
             </div>
           )}
 
@@ -54,17 +57,17 @@ export default function DebuggerPanel({ onApplyFix }: Props) {
           {result && !isLoading && (
             <>
               <div className="debugger-score-row">
-                <div className="debugger-score-gauge" style={{ '--score-color': scoreColor(result.score) } as React.CSSProperties}>
+                <div className="debugger-score-gauge">
                   <span className="debugger-score-number" style={{ color: scoreColor(result.score) }}>
                     {result.score}
                   </span>
-                  <span className="debugger-score-label">/ 100</span>
+                  <span className="debugger-score-label">{td.scoreLabel}</span>
                 </div>
                 <div className="debugger-token-delta">
-                  <span>Before: {result.tokensBefore} words</span>
+                  <span>{td.wordsBefore.replace('{n}', String(result.tokensBefore))}</span>
                   {result.tokensAfter < result.tokensBefore && (
                     <span className="debugger-token-saved">
-                      Fix saves ~{result.tokensBefore - result.tokensAfter} words
+                      {td.wordsSaved.replace('{n}', String(result.tokensBefore - result.tokensAfter))}
                     </span>
                   )}
                 </div>
@@ -73,14 +76,14 @@ export default function DebuggerPanel({ onApplyFix }: Props) {
               {result.issues.length === 0 ? (
                 <div className="debugger-no-issues">
                   <CheckCircle size={16} style={{ color: '#22c55e' }} />
-                  <span>No issues detected — great prompt!</span>
+                  <span>{td.noIssues}</span>
                 </div>
               ) : (
                 <ul className="debugger-issues">
                   {result.issues.map((issue) => (
                     <li key={issue.id} className={`debugger-issue debugger-issue--${issue.severity}`}>
                       <div className="debugger-issue-header">
-                        {severityIcon(issue.severity)}
+                        {severityIcon(issue.severity as IssueSeverity)}
                         <span className="debugger-issue-message">{issue.message}</span>
                       </div>
                       <p className="debugger-issue-suggestion">{issue.suggestion}</p>
@@ -91,7 +94,7 @@ export default function DebuggerPanel({ onApplyFix }: Props) {
 
               {result.improvements.length > 0 && (
                 <div className="debugger-improvements">
-                  <span className="debugger-section-label">Suggestions</span>
+                  <span className="debugger-section-label">{td.suggestions}</span>
                   <ul>
                     {result.improvements.map((imp, i) => (
                       <li key={i}>{imp}</li>
@@ -104,15 +107,13 @@ export default function DebuggerPanel({ onApplyFix }: Props) {
                 className="debugger-apply-btn"
                 onClick={() => { onApplyFix(result.fixedPrompt); setOpen(false) }}
               >
-                <Wand2 size={13} /> Apply Fixed Prompt
+                <Wand2 size={13} /> {td.applyFix}
               </button>
             </>
           )}
 
           {!isLoading && !result && !error && (
-            <div className="debugger-empty">
-              Click "Debug" in the Result panel to analyze your prompt.
-            </div>
+            <div className="debugger-empty">{td.empty}</div>
           )}
         </div>
       </aside>
