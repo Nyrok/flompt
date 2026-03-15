@@ -231,6 +231,97 @@
     "export": "Exporter les projets",
     "import": "Importer des projets"
   },
+  "ide": {
+    "close": "Fermer",
+    "debugger": {
+      "title": "Débogueur de prompt",
+      "loading": "Analyse en cours…",
+      "empty": "Cliquez sur « Déboguer » dans le panneau Résultat pour analyser votre prompt.",
+      "noIssues": "Aucun problème détecté — excellent prompt !",
+      "scoreLabel": "/ 100",
+      "wordsBefore": "Avant : {n} mots",
+      "wordsSaved": "La correction économise ~{n} mots",
+      "suggestions": "Suggestions",
+      "applyFix": "Appliquer le prompt corrigé"
+    },
+    "compressor": {
+      "title": "Compresseur de prompt",
+      "loading": "Compression…",
+      "targetReduction": "Réduction cible :",
+      "before": "Avant",
+      "after": "Après",
+      "saved": "Économisé",
+      "words": "mots",
+      "original": "Original",
+      "compressed": "Prompt compressé",
+      "changes": "Modifications",
+      "noChanges": "(aucune modification)",
+      "apply": "Appliquer le prompt compressé"
+    },
+    "critic": {
+      "title": "Critique IA de prompt",
+      "loading": "Évaluation en cours…",
+      "empty": "Cliquez sur « Score » dans le panneau Résultat pour évaluer votre prompt.",
+      "overallScore": "Score global",
+      "strengths": "Points forts",
+      "weaknesses": "Points faibles",
+      "dimensions": {
+        "clarity": "Clarté",
+        "specificity": "Spécificité",
+        "structure": "Structure",
+        "examples": "Exemples",
+        "constraints": "Contraintes",
+        "format": "Format"
+      }
+    },
+    "systemPrompt": {
+      "title": "Générateur de system prompt",
+      "loading": "Génération en cours…",
+      "empty": "Cliquez sur « System Prompt » dans la saisie pour démarrer.",
+      "copyAll": "Tout copier",
+      "copied": "Copié !",
+      "apply": "Appliquer au canvas"
+    },
+    "cost": {
+      "title": "Coût d'entrée estimé",
+      "note": "Coût d'entrée uniquement. Prix susceptibles de varier."
+    },
+    "memory": {
+      "title": "Mémoire contextuelle",
+      "new": "Nouveau",
+      "searchPlaceholder": "Rechercher…",
+      "noBlocks": "Aucun bloc en mémoire. Cliquez sur + Nouveau pour en ajouter.",
+      "noResults": "Aucun résultat.",
+      "namePlaceholder": "Nom",
+      "contentPlaceholder": "Contenu…",
+      "tagsPlaceholder": "Tags (séparés par des virgules)",
+      "save": "Sauvegarder",
+      "cancel": "Annuler"
+    },
+    "versioning": {
+      "title": "Historique des versions",
+      "messagePlaceholder": "Message de version (optionnel)",
+      "save": "Sauvegarder",
+      "saving": "Sauvegarde…",
+      "compareHint": "Sélectionnez une seconde version pour comparer",
+      "noVersions": "Aucune version sauvegardée.",
+      "restore": "Restaurer",
+      "compare": "Comparer",
+      "diff": "Diff",
+      "justNow": "à l'instant",
+      "minsAgo": "il y a {n}min",
+      "hoursAgo": "il y a {n}h",
+      "daysAgo": "il y a {n}j"
+    },
+    "outputButtons": {
+      "debug": "Déboguer",
+      "compress": "Compresser",
+      "score": "Score"
+    },
+    "inputButtons": {
+      "systemPrompt": "System Prompt"
+    }
+  },
   "blocks": {
     "document": {
       "label": "Document",
