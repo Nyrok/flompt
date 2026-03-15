@@ -2338,9 +2338,9 @@ body {
   gap: 4px;
   padding: 3px 8px;
   border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-dim);
+  border: 1px solid var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
   font-size: 0.63rem;
   font-weight: 600;
   cursor: pointer;
