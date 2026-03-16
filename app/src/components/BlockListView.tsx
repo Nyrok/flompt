@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from 'react'
-import { X, ChevronDown, ChevronRight, Trash2, Undo2, Redo2, LayoutList, Network, Eye, EyeOff, Copy } from 'lucide-react'
+import { X, Trash2, Undo2, Redo2, LayoutList, Network, Eye, EyeOff, Copy, Play, ChevronUp, ChevronDown } from 'lucide-react'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
+import { assemblePrompt } from '@/lib/assemblePrompt'
+import { STAR_EVENT } from '@/components/StarPopup'
 
 interface Props {
   canvasView: 'list' | 'canvas'
@@ -12,22 +14,30 @@ interface Props {
 }
 
 const BlockListView = ({ canvasView, onToggleView }: Props) => {
-  const { nodes, setNodes, removeNode, updateNodeContent, addNode, toggleNodeHidden, reset, undo, redo, past, future } = useFlowStore()
+  const {
+    nodes, removeNode, updateNodeContent, addNode, toggleNodeHidden,
+    reset, undo, redo, past, future, setCompiledPrompt, setActiveTab,
+  } = useFlowStore()
   const { t } = useLocale()
 
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set())
-  const [order, setOrder]         = useState<string[]>(() => nodes.map(n => n.id))
+  // Local visual order — purely UI, never written back to the store (avoids infinite loop)
+  const [order, setOrder] = useState<string[]>(() => nodes.map(n => n.id))
 
-  // After a keyboard reorder, refocus the moved card
+  // After a keyboard/button reorder, refocus the moved card
   const focusAfterMove = useRef<string | null>(null)
 
-  // Keep order in sync when nodes change externally (undo/redo, decompose…)
+  // Keep order in sync when nodes change externally (undo/redo, decompose, add, delete…)
+  // Bails out if IDs haven't changed, preventing unnecessary re-renders.
   useEffect(() => {
     setOrder(prev => {
       const incoming = nodes.map(n => n.id)
       const kept  = prev.filter(id => incoming.includes(id))
       const added = incoming.filter(id => !kept.includes(id))
-      return [...kept, ...added]
+      const next  = [...kept, ...added]
+      // Reference-stable bail-out: avoid triggering downstream effects when nothing changed
+      if (next.length === prev.length && next.every((id, i) => id === prev[i])) return prev
+      return next
     })
   }, [nodes])
 
@@ -52,7 +62,7 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
     })
   }
 
-  // ── Reorder (keyboard) ────────────────────────────────────────────────────
+  // ── Reorder ───────────────────────────────────────────────────────────────
   const moveBlock = (id: string, idx: number, dir: 'up' | 'down') => {
     const targetIdx = dir === 'up' ? idx - 1 : idx + 1
     if (targetIdx < 0 || targetIdx >= order.length) return
@@ -89,11 +99,15 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
     }
   }
 
-  // Sync order back to store when it changes
-  useEffect(() => {
-    setNodes(order.map(id => nodes.find(n => n.id === id)).filter(Boolean) as FlomptNode[])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [order])
+  // ── Compile ───────────────────────────────────────────────────────────────
+  const handleCompile = () => {
+    const { nodes: n, edges: e } = useFlowStore.getState()
+    if (n.length === 0) return
+    const result = assemblePrompt(n, e)
+    setCompiledPrompt(result)
+    setActiveTab('output')
+    window.dispatchEvent(new CustomEvent(STAR_EVENT))
+  }
 
   // ── Duplicate block ───────────────────────────────────────────────────────
   const handleDuplicate = (node: FlomptNode) => {
@@ -162,6 +176,16 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
           >
             <Redo2 size={13} />
           </button>
+          <div className="canvas-ctrl-divider" aria-hidden="true" />
+          <button
+            className="canvas-ctrl-btn canvas-ctrl-btn--compile"
+            onClick={handleCompile}
+            disabled={nodes.length === 0}
+            title={t.promptOutput.compile}
+            aria-label={t.promptOutput.compile}
+          >
+            <Play size={13} />
+          </button>
         </div>
 
         {/* Center: add block pills */}
@@ -218,6 +242,8 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
             const meta        = BLOCK_META[node.data.type]
             const Icon        = meta.icon
             const isCollapsed = collapsed.has(node.id)
+            const isFirst     = idx === 0
+            const isLast      = idx === orderedNodes.length - 1
             return (
               <div
                 key={node.id}
@@ -233,7 +259,7 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                   aria-expanded={!isCollapsed}
                   tabIndex={0}
                 >
-                  {/* Eye toggle — left anchor, where grip handle was */}
+                  {/* Eye toggle — left anchor */}
                   <button
                     className="block-list-card-eye"
                     onClick={e => { e.stopPropagation(); toggleNodeHidden(node.id) }}
@@ -257,9 +283,36 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
 
                   {/* Right actions — always pinned */}
                   <span className="block-list-card-actions">
-                    <span className="block-list-card-chevron">
-                      {isCollapsed ? <ChevronRight size={12} /> : <ChevronDown size={12} />}
-                    </span>
+                    {/* Collapse/expand: − or + */}
+                    <button
+                      className="block-list-card-action-btn block-list-card-toggle"
+                      onClick={e => { e.stopPropagation(); toggleCollapse(node.id) }}
+                      title={isCollapsed ? 'Expand' : 'Collapse'}
+                      aria-label={isCollapsed ? 'Expand' : 'Collapse'}
+                    >
+                      {isCollapsed ? '+' : '−'}
+                    </button>
+                    {/* Ranking: up */}
+                    <button
+                      className="block-list-card-action-btn"
+                      onClick={e => { e.stopPropagation(); moveBlock(node.id, idx, 'up') }}
+                      title="Move up"
+                      aria-label="Move up"
+                      disabled={isFirst}
+                    >
+                      <ChevronUp size={12} />
+                    </button>
+                    {/* Ranking: down */}
+                    <button
+                      className="block-list-card-action-btn"
+                      onClick={e => { e.stopPropagation(); moveBlock(node.id, idx, 'down') }}
+                      title="Move down"
+                      aria-label="Move down"
+                      disabled={isLast}
+                    >
+                      <ChevronDown size={12} />
+                    </button>
+                    {/* Duplicate */}
                     <button
                       className="block-list-card-action-btn"
                       onClick={e => { e.stopPropagation(); handleDuplicate(node) }}
@@ -268,6 +321,7 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                     >
                       <Copy size={12} />
                     </button>
+                    {/* Delete */}
                     <button
                       className="block-list-card-delete"
                       onClick={e => { e.stopPropagation(); removeNode(node.id) }}
