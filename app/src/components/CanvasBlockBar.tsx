@@ -3,7 +3,7 @@ import type { BlockType, FlomptNode } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 
-const CanvasBlockBar = () => {
+const CanvasBlockBar = ({ mobileOnly = false }: { mobileOnly?: boolean }) => {
   const addNode = useFlowStore(s => s.addNode)
   const nodes   = useFlowStore(s => s.nodes)
   const { t }   = useLocale()
@@ -36,7 +36,7 @@ const CanvasBlockBar = () => {
   }
 
   return (
-    <div className="canvas-block-bar" aria-label="Block types">
+    <div className={`canvas-block-bar${mobileOnly ? ' canvas-block-bar--mobile-only' : ''}`} aria-label="Block types">
       {(Object.keys(BLOCK_META) as BlockType[]).map(type => {
         const meta = BLOCK_META[type]
         const Icon = meta.icon
