@@ -9,11 +9,12 @@ const TYPE_PRIORITY: Record<BlockType, number> = {
   goal:             5,
   input:            6,
   constraints:      7,
-  examples:         8,
-  chain_of_thought: 9,
-  output_format:    10,
-  response_style:   11,
-  language:         12,
+  guardrails:       8,
+  examples:         9,
+  chain_of_thought: 10,
+  output_format:    11,
+  response_style:   12,
+  language:         13,
 }
 
 const BLOCK_W    = 320   // block max-width
