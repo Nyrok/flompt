@@ -9,7 +9,7 @@
 
 ## Features
 
-* [List View](list-view.md)
+* [Views](views.md)
 * [Template Library](template-library.md)
 * [Projects](projects.md)
 * [Make.com Integration](make-integration.md)
