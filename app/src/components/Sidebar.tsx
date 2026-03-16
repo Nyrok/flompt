@@ -6,6 +6,8 @@ import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
 
+const isMobile = () => window.matchMedia('(max-width: 768px)').matches
+
 const Sidebar = ({ onOpenLibrary }: { onOpenLibrary?: () => void }) => {
   const addNode = useFlowStore((s) => s.addNode)
   const nodes   = useFlowStore((s) => s.nodes)
@@ -83,7 +85,7 @@ const Sidebar = ({ onOpenLibrary }: { onOpenLibrary?: () => void }) => {
           </button>
         )}
       </div>
-      <p className="sidebar-hint">{t.sidebar.hint}</p>
+      <p className="sidebar-hint sidebar-hint--desktop">{t.sidebar.hint}</p>
 
       {/* Wrapper with position:relative to anchor the blur overlays */}
       <div className="block-list-wrapper">
@@ -109,7 +111,7 @@ const Sidebar = ({ onOpenLibrary }: { onOpenLibrary?: () => void }) => {
                 key={type}
                 className="block-pill"
                 style={{ borderColor: `${meta.color}55`, color: meta.color }}
-                onClick={() => handleAddBlock(type)}
+                onClick={() => { if (!isMobile()) handleAddBlock(type) }}
                 draggable
                 onDragStart={(e) => handleDragStart(e, type)}
               >

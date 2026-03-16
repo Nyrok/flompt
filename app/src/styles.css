@@ -3751,3 +3751,11 @@ body {
 .btn-audit-pulse:hover {
   animation: none;
 }
+
+/* ─── Sidebar — mobile: read-only, no click affordance ──────────────────── */
+@media (max-width: 768px) {
+  .sidebar-hint--desktop { display: none; }
+  .block-pill { cursor: default; }
+  .block-pill:hover { background: transparent; opacity: 1; }
+  .block-pill:active { transform: none; }
+}
