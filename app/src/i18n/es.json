@@ -32,7 +32,7 @@
     "importFromPlatform": "Importar prompt desde la página",
     "queuePosition": "Posición en cola: {n}",
     "queueProcessing": "Procesando…",
-    "auditPrompt": "Audit your prompt"
+    "auditPrompt": "Analizar prompt"
   },
   "promptOutput": {
     "title": "Resultado",
@@ -62,9 +62,9 @@
     "unknown": "Algo ha ido mal. Por favor, inténtalo de nuevo."
   },
   "library": {
-    "hint": "Click a template to load it into the canvas.",
-    "outputLang": "Response language",
-    "noLang": "Auto (no language block)",
+    "hint": "Haga clic en una plantilla para cargar los bloques",
+    "outputLang": "Idioma de respuesta",
+    "noLang": "Auto (sin bloque de idioma)",
     "categories": {
       "all": "All",
       "writing": "Writing",
@@ -307,10 +307,10 @@
     }
   },
   "audit": {
-    "title": "Prompt audit",
-    "hint": "{n} key blocks are missing. Add them to improve your prompt.",
-    "addBlock": "Add",
-    "perfect": "All key blocks are present — solid prompt.",
-    "blocksPresent": "key blocks present"
+    "title": "Auditoría del prompt",
+    "hint": "Faltan {n} bloques clave. Añádelos para mejorar tu prompt.",
+    "addBlock": "Añadir",
+    "perfect": "Todos los bloques clave están presentes — prompt sólido.",
+    "blocksPresent": "bloques clave presentes"
   }
 }

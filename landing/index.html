@@ -167,7 +167,7 @@
 
     .nav-hamburger {
       display: none; flex-direction: column; justify-content: center; gap: 5px;
-      width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px;
+      width: 44px; height: 44px; background: none; border: none; cursor: pointer; padding: 4px;
     }
     .nav-hamburger span {
       display: block; width: 22px; height: 2px;
@@ -551,6 +551,9 @@
       .specs-row { gap: 28px; }
       .ext-inner { grid-template-columns: 1fr; gap: 40px; }
     }
+    @media (max-width: 640px) {
+      .hero-grid { gap: 32px; }
+    }
     @media (max-width: 600px) {
       .hero { padding-top: 110px; padding-bottom: 56px; }
       .hero h1 { font-size: 2.1rem; }
@@ -734,7 +737,7 @@
           </div>
           <h1>Your AI is only as good<br/>as your <em>prompt.</em></h1>
           <p class="hero-desc">
-            Anthropic's own research shows that structure, not a better model, is what separates a frustrating AI interaction from a remarkable one. flompt turns that insight into a tool: decompose any prompt into 13 structured blocks, edit visually, recompile as Claude-optimized XML.
+            Anthropic's own research shows that structure, not a better model, is what separates a frustrating AI interaction from a remarkable one. flompt turns that insight into a tool: decompose any prompt into 16 structured blocks, edit visually, recompile as Claude-optimized XML.
           </p>
           <div class="hero-actions">
             <a href="/app" class="btn-cta">Start building &rarr;</a>
@@ -1031,7 +1034,7 @@
               </div>
               <div class="mcp-tool-body">
                 <strong>list_block_types</strong>
-                <span>Returns all 13 block types with descriptions and the recommended ordering.</span>
+                <span>Returns all 16 block types with descriptions and the recommended ordering.</span>
               </div>
             </li>
           </ul>
