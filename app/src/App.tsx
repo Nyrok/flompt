@@ -4,6 +4,7 @@ import type { LucideIcon } from 'lucide-react'
 import { initAnalytics, setSource, analytics } from '@/lib/analytics'
 import FlowCanvas from '@/components/FlowCanvas'
 import BlockListView from '@/components/BlockListView'
+import CanvasBlockBar from '@/components/CanvasBlockBar'
 import Sidebar from '@/components/Sidebar'
 import PromptInput from '@/components/PromptInput'
 import PromptOutput from '@/components/PromptOutput'
@@ -185,6 +186,9 @@ const App = () => {
           className={`canvas-wrap${activeTab !== 'canvas' ? ' panel-hidden' : ''}`}
           aria-hidden={activeTab !== 'canvas'}
         >
+          {/* Block bar — visible in both views */}
+          <CanvasBlockBar />
+
           {/* View toggle */}
           <div className="canvas-view-toggle">
             <button

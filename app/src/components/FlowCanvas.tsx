@@ -13,7 +13,6 @@ import { Play, Sparkles, Undo2, Redo2, Trash2 } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { assemblePrompt } from '@/lib/assemblePrompt'
 import BlockNode from './BlockNode'
-import CanvasBlockBar from './CanvasBlockBar'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType, FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -127,8 +126,6 @@ const CanvasInner = () => {
       </ReactFlow>
 
       {/* Block type palette — left side, vertical */}
-      <CanvasBlockBar />
-
       {/* Canvas control bar — top-left, horizontal */}
       <div className="canvas-ctrl-bar">
         <button
