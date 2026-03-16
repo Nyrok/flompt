@@ -693,7 +693,6 @@ body {
   background: var(--surface-hover);
   color: var(--text);
   border-color: var(--border-strong);
-  transform: translateX(2px);
 }
 
 .block-pill-main {
