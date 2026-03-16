@@ -1849,6 +1849,43 @@ body {
 }
 .block-list-card-delete:hover { background: var(--surface); color: var(--error, #f87171); }
 
+/* Eye toggle — left anchor */
+.block-list-card-eye {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.block-list-card-eye:hover { background: var(--surface); color: var(--text); }
+.block-list-card--hidden .block-list-card-eye { color: var(--accent); }
+
+/* Duplicate / generic action button */
+.block-list-card-action-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.block-list-card-action-btn:hover { background: var(--surface); color: var(--text); }
+
 .block-list-card-textarea {
   width: 100%;
   padding: 6px 10px 8px;
