@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { X, Brain, Plus, Trash2, Star, Search, LogIn } from 'lucide-react'
+import CustomSelect from '@/components/CustomSelect'
 import { useMemoryStore } from './useMemoryStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import type { BlockType } from '@/types/blocks'
@@ -71,12 +72,20 @@ export default function MemoryPanel() {
           <div className="memory-create-form">
             <input className="make-webhook-input" placeholder={tm.namePlaceholder} value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
             <div style={{ display: 'flex', gap: 6 }}>
-              <select className="make-webhook-input" style={{ flex: 1 }} value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value as typeof CATEGORIES[number] }))}>
-                {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-              </select>
-              <select className="make-webhook-input" style={{ flex: 1 }} value={form.blockType} onChange={e => setForm(f => ({ ...f, blockType: e.target.value as BlockType }))}>
-                {BLOCK_TYPES.map(bt => <option key={bt} value={bt}>{bt}</option>)}
-              </select>
+              <CustomSelect
+                value={form.category}
+                onChange={v => setForm(f => ({ ...f, category: v as typeof CATEGORIES[number] }))}
+                options={CATEGORIES.map(c => ({ value: c, label: c }))}
+                triggerClassName="csel-trigger--full"
+                className="csel--flex"
+              />
+              <CustomSelect
+                value={form.blockType}
+                onChange={v => setForm(f => ({ ...f, blockType: v as BlockType }))}
+                options={BLOCK_TYPES.map(bt => ({ value: bt, label: bt }))}
+                triggerClassName="csel-trigger--full"
+                className="csel--flex"
+              />
             </div>
             <textarea className="make-webhook-input" style={{ minHeight: 80, resize: 'vertical', fontFamily: 'inherit' }} placeholder={tm.contentPlaceholder} value={form.content} onChange={e => setForm(f => ({ ...f, content: e.target.value }))} />
             <input className="make-webhook-input" placeholder={tm.tagsPlaceholder} value={form.tags} onChange={e => setForm(f => ({ ...f, tags: e.target.value }))} />

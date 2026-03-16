@@ -37,6 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "flompt blog",
+    locale: "fr_FR",
     images: [
       {
         url: "https://flompt.dev/og-image.png",

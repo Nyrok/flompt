@@ -8,6 +8,9 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://flompt.dev/blog/sitemap.xml",
+    sitemap: [
+      "https://flompt.dev/blog/sitemap.xml",
+      "https://flompt.dev/sitemap.xml",
+    ],
   };
 }

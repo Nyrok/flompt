@@ -115,7 +115,8 @@ const PromptOutput = () => {
     try {
       const result = await compressPrompt(currentRaw, targetReduction, locale)
       setCompressResult(result as CompressResult)
-    } catch {
+    } catch (e) {
+      console.error('[compress] error:', e)
       setCompressError('Compression failed. Please try again.')
     } finally {
       setCompressLoading(false)

@@ -115,27 +115,45 @@ body {
 }
 
 .prose h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
-}
-
-.prose h2 {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
   color: var(--text-primary);
 }
 
-.prose h3 {
+.prose h2 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-top: 1.75rem;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
+}
+
+.prose h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-primary);
+}
+
+@media (min-width: 640px) {
+  .prose h1 {
+    font-size: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .prose h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose h3 {
+    font-size: 1.25rem;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 .prose p {
@@ -196,6 +214,8 @@ body {
 .prose img {
   border-radius: var(--radius-standard);
   margin: 1.5rem 0;
+  max-width: 100%;
+  height: auto;
 }
 
 .prose a {
@@ -215,30 +235,34 @@ body {
   margin: 2rem 0;
 }
 
+/* Table — wrapped in a scrollable div so it doesn't overflow on mobile */
 .prose table {
   width: 100%;
+  min-width: 480px; /* force scroll on narrow viewports */
   border-collapse: collapse;
-  margin: 1.5rem 0;
-  display: table;
+}
+
+.prose .table-wrapper {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.5rem 0;
+  border-radius: var(--radius-standard);
 }
 
-.prose thead {
-  display: table-header-group;
-}
-
-.prose tbody {
-  display: table-row-group;
+/* Fallback: table without wrapper still scrolls */
+.prose > table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.5rem 0;
 }
 
 .prose tr {
-  display: table-row;
   border-bottom: 1px solid var(--border-subtle);
 }
 
 .prose th,
 .prose td {
-  display: table-cell;
   border: 1px solid var(--border-medium);
   padding: 0.5rem 0.75rem;
   text-align: left;

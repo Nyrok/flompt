@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from typing import Literal
 
 class CompressRequest(BaseModel):
     prompt: str
@@ -7,11 +6,11 @@ class CompressRequest(BaseModel):
     locale: str = "en"
 
 class CompressChange(BaseModel):
-    type: Literal["removed", "optimized", "merged"]
+    type: str  # LLM may return values outside a strict Literal
     original: str
     replacement: str | None = None
     reason: str
-    tokens_saved: int
+    tokens_saved: int = 0
 
 class CompressResult(BaseModel):
     compressed_prompt: str

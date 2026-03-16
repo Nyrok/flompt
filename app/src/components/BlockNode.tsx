@@ -1,6 +1,7 @@
 import { memo, useState, useRef, useLayoutEffect } from 'react'
 import type { NodeProps } from 'reactflow'
 import { Copy, ChevronDown, ChevronRight, X, Eye, EyeOff } from 'lucide-react'
+import CustomSelect from '@/components/CustomSelect'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockData, ResponseStyleOptions } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
@@ -99,22 +100,14 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             <Icon size={13} />
           </span>
           <span className="block-label">{tr.label}</span>
-          <select
-            className="language-select nodrag nopan"
+          <CustomSelect
             value={matchLang()}
-            onChange={(e) => { e.stopPropagation(); handleLangChange(e.target.value) }}
-            onMouseDown={(e) => e.stopPropagation()}
-            onTouchStart={(e) => e.stopPropagation()}
-            onClick={(e) => e.stopPropagation()}
-            aria-label={tr.label}
-          >
-            <option value="" disabled>—</option>
-            {LANGUAGES.map((l) => (
-              <option key={l.code} value={l.code}>
-                {locale === 'fr' ? l.fr : l.en}
-              </option>
-            ))}
-          </select>
+            onChange={handleLangChange}
+            options={LANGUAGES.map(l => ({ value: l.code, label: locale === 'fr' ? l.fr : l.en }))}
+            placeholder="—"
+            triggerClassName="csel-trigger--sm"
+            noReactFlow
+          />
           <button
             className="block-collapse"
             onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}

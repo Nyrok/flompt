@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { X, Trash2, Undo2, Redo2, LayoutList, Network, Eye, EyeOff, Copy, Play, ChevronUp, ChevronDown } from 'lucide-react'
+import CustomSelect from '@/components/CustomSelect'
+import CanvasBlockBar from '@/components/CanvasBlockBar'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { ResponseStyleOptions } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
@@ -185,6 +187,9 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
           </button>
         </div>
 
+        {/* Center: block type bar */}
+        <CanvasBlockBar toolbar />
+
         {/* Right: view toggle */}
         <div className="block-list-toolbar-right">
           <div className="canvas-view-toggle" style={{ position: 'static', boxShadow: 'none' }}>
@@ -320,21 +325,16 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                   }
                   return (
                     <div className="block-list-card-body" onClick={e => e.stopPropagation()}>
-                      <select
-                        className="block-list-card-lang-select"
+                      <CustomSelect
                         value={matchLang()}
-                        onChange={e => {
-                          const lang = LANGUAGES.find(l => l.code === e.target.value)
+                        onChange={code => {
+                          const lang = LANGUAGES.find(l => l.code === code)
                           if (lang) updateNodeContent(node.id, lang.en)
                         }}
-                      >
-                        <option value="" disabled>—</option>
-                        {LANGUAGES.map(l => (
-                          <option key={l.code} value={l.code}>
-                            {locale === 'fr' ? l.fr : l.en}
-                          </option>
-                        ))}
-                      </select>
+                        options={LANGUAGES.map(l => ({ value: l.code, label: locale === 'fr' ? l.fr : l.en }))}
+                        placeholder="—"
+                        triggerClassName="csel-trigger--full"
+                      />
                     </div>
                   )
                 })()}

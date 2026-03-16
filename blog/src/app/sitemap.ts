@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllSlugs } from "@/lib/posts";
+import { getAllPosts } from "@/lib/posts";
 import { locales } from "@/i18n/config";
 
 export const dynamic = "force-static";
@@ -27,12 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     });
 
-    // Blog posts
-    const slugs = getAllSlugs(locale);
-    for (const slug of slugs) {
+    // Blog posts — use actual post date as lastModified
+    const posts = getAllPosts(locale);
+    for (const post of posts) {
       entries.push({
-        url: `${baseUrl}/blog/${locale}/posts/${slug}`,
-        lastModified: now,
+        url: `${baseUrl}/blog/${locale}/posts/${post.slug}`,
+        lastModified: new Date(post.date).toISOString(),
         changeFrequency: "monthly",
         priority: 0.7,
       });
