@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { X, Trash2, Undo2, Redo2, LayoutList, Network, Eye, EyeOff, Copy, Play, ChevronUp, ChevronDown } from 'lucide-react'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
-import type { BlockType, ResponseStyleOptions } from '@/types/blocks'
+import type { ResponseStyleOptions } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -136,26 +136,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
     })
   }
 
-  // ── Add block ─────────────────────────────────────────────────────────────
-  const handleAddBlock = (type: BlockType) => {
-    const tr = t.blocks[type]
-    const extraData = type === 'response_style'
-      ? {
-          options: { ...DEFAULT_RESPONSE_STYLE } as Record<string, string | boolean>,
-          content: generateResponseStyleContent(DEFAULT_RESPONSE_STYLE),
-        }
-      : { content: '' }
-    const node: FlomptNode = {
-      id:       `${type}-${Date.now()}`,
-      type:     'block',
-      position: { x: 60, y: 60 + nodes.length * 180 },
-      data:     { type, label: tr.label, description: tr.description, ...extraData },
-    }
-    addNode(node)
-    window.dispatchEvent(new CustomEvent('flompt:block-added', {
-      detail: { label: tr.label, color: BLOCK_META[type].color },
-    }))
-  }
 
   return (
     <div className="block-list-view">
@@ -203,26 +183,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
           >
             <Play size={13} />
           </button>
-        </div>
-
-        {/* Center: add block pills */}
-        <div className="block-list-toolbar-center">
-          {(Object.keys(BLOCK_META) as BlockType[]).map(type => {
-            const meta = BLOCK_META[type]
-            const Icon = meta.icon
-            return (
-              <button
-                key={type}
-                className="canvas-block-btn"
-                style={{ '--block-color': meta.color } as React.CSSProperties}
-                title={t.blocks[type].label}
-                aria-label={t.blocks[type].label}
-                onClick={() => handleAddBlock(type)}
-              >
-                <Icon size={14} aria-hidden="true" />
-              </button>
-            )
-          })}
         </div>
 
         {/* Right: view toggle */}
