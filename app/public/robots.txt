@@ -10,3 +10,8 @@ Crawl-delay: 1
 
 # Block API endpoints from indexing
 Disallow: /api/
+
+# Allow private pages to be indexed
+Allow: /privacy
+Allow: /terms
+Allow: /about
