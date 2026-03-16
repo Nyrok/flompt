@@ -258,8 +258,8 @@ const App = () => {
       {/* Post-decompose audit panel */}
       {!isExtension && <AuditPanel />}
 
-      {/* Mobile FAB — assemble & go to output (canvas + input tabs) */}
-      {!isExtension && nodes.length > 0 && activeTab !== 'output' && (
+      {/* Mobile FAB — assemble & go to output (canvas tab only) */}
+      {!isExtension && nodes.length > 0 && activeTab === 'canvas' && (
         <button
           className="mobile-fab"
           onClick={() => {
