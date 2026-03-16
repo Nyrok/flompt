@@ -216,40 +216,63 @@ export interface Translations {
   }
 }
 
+// ── Deep merge — any missing key in a locale falls back to English ──────────
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function deepMerge(base: any, override: any): any {
+  if (typeof base !== 'object' || base === null) return override ?? base
+  const result = { ...base }
+  for (const key of Object.keys(override ?? {})) {
+    if (
+      typeof override[key] === 'object' &&
+      override[key] !== null &&
+      !Array.isArray(override[key]) &&
+      typeof base[key] === 'object' &&
+      base[key] !== null
+    ) {
+      result[key] = deepMerge(base[key], override[key])
+    } else if (override[key] !== undefined) {
+      result[key] = override[key]
+    }
+  }
+  return result
+}
+
 // ── Builder — wraps JSON into the typed Translations shape ─────────────────
 
 type RawLocale = typeof enRaw
 
-function build(raw: RawLocale): Translations {
+function build(raw: RawLocale, fallback: RawLocale = raw): Translations {
+  const r = deepMerge(fallback, raw) as RawLocale
   return {
     // Functions built from template strings
     nodeCount: (n) =>
-      (n === 1 ? raw.nodeCount : raw.nodeCountPlural).replace('{n}', String(n)),
+      (n === 1 ? r.nodeCount : r.nodeCountPlural).replace('{n}', String(n)),
 
-    tabs: raw.tabs,
-    header: raw.header,
-    accessibility: raw.accessibility,
+    tabs: r.tabs,
+    header: r.header,
+    accessibility: r.accessibility,
 
     promptInput: {
-      ...raw.promptInput,
-      queuePosition: (n) => raw.promptInput.queuePosition.replace('{n}', String(n)),
+      ...r.promptInput,
+      queuePosition: (n) => r.promptInput.queuePosition.replace('{n}', String(n)),
     },
 
-    promptOutput: raw.promptOutput,
-    errors: raw.errors,
-    library: raw.library,
-    sidebar: raw.sidebar,
-    block: raw.block,
-    canvas: raw.canvas,
-    shortcuts: raw.shortcuts,
-    tour: raw.tour,
-    extension: raw.extension,
-    starPopup: raw.starPopup,
-    projects: raw.projects,
-    makeIntegration: raw.makeIntegration,
-    ide: (raw as any).ide,
-    blocks: raw.blocks as Record<BlockType, BlockTranslation>,
-    audit: (raw as any).audit,
+    promptOutput: r.promptOutput,
+    errors: r.errors,
+    library: r.library,
+    sidebar: r.sidebar,
+    block: r.block,
+    canvas: r.canvas,
+    shortcuts: r.shortcuts,
+    tour: r.tour,
+    extension: r.extension,
+    starPopup: r.starPopup,
+    projects: r.projects,
+    makeIntegration: r.makeIntegration,
+    ide: (r as any).ide,
+    blocks: r.blocks as Record<BlockType, BlockTranslation>,
+    audit: (r as any).audit,
   }
 }
 
@@ -257,13 +280,13 @@ function build(raw: RawLocale): Translations {
 
 export const translations: Record<Locale, Translations> = {
   en: build(enRaw),
-  fr: build(frRaw),
-  es: build(esRaw as typeof enRaw),
-  de: build(deRaw as typeof enRaw),
-  pt: build(ptRaw as typeof enRaw),
-  ja: build(jaRaw as typeof enRaw),
-  tr: build(trRaw as typeof enRaw),
-  zh: build(zhRaw as typeof enRaw),
-  ar: build(arRaw as typeof enRaw),
-  ru: build(ruRaw as typeof enRaw),
+  fr: build(frRaw, enRaw),
+  es: build(esRaw as typeof enRaw, enRaw),
+  de: build(deRaw as typeof enRaw, enRaw),
+  pt: build(ptRaw as typeof enRaw, enRaw),
+  ja: build(jaRaw as typeof enRaw, enRaw),
+  tr: build(trRaw as typeof enRaw, enRaw),
+  zh: build(zhRaw as typeof enRaw, enRaw),
+  ar: build(arRaw as typeof enRaw, enRaw),
+  ru: build(ruRaw as typeof enRaw, enRaw),
 }
