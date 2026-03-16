@@ -31,7 +31,8 @@
     "paste": "Panodan yapıştır",
     "importFromPlatform": "Sayfadan prompt içe aktar",
     "queuePosition": "Sıra pozisyonu: {n}",
-    "queueProcessing": "İşleniyor…"
+    "queueProcessing": "İşleniyor…",
+    "auditPrompt": "Audit your prompt"
   },
   "promptOutput": {
     "title": "Sonuç",
@@ -304,5 +305,12 @@
       "label": "Dil",
       "description": "AI'nın yanıt vermesi gereken dil"
     }
+  },
+  "audit": {
+    "title": "Prompt audit",
+    "hint": "{n} key blocks are missing. Add them to improve your prompt.",
+    "addBlock": "Add",
+    "perfect": "All key blocks are present — solid prompt.",
+    "blocksPresent": "key blocks present"
   }
 }

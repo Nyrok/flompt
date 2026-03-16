@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Zap, ClipboardPaste, Download, ScanSearch } from 'lucide-react'
+import { Zap, ClipboardPaste, Download, ShieldCheck } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { decomposePrompt, watchJobStatus, classifyError, classifyJobError } from '@/services/api'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -25,6 +25,7 @@ const PromptInput = () => {
   const { t } = useLocale()
   const [error, setError] = useState<string | null>(null)
   const [platformName, setPlatformName] = useState<string | null>(null)
+  const [auditSeen, setAuditSeen] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   // ── Receive import from the platform (extension only) ────────────────────
@@ -69,6 +70,7 @@ const PromptInput = () => {
     setQueueStatus(null)
     setCompiledPrompt(null)
     setIsDecomposing(true)
+    setAuditSeen(false)
     analytics.decomposeClicked()
     setTimeout(() => setActiveTab('canvas'), 0)
 
@@ -183,18 +185,19 @@ const PromptInput = () => {
 
       {rawPrompt.trim() && rawPrompt.trim() === lastDecomposedPrompt.trim() && nodes.length > 0 && !isDecomposing ? (
         <button
-          className="btn btn-primary btn-audit-pulse"
+          className={`btn btn-primary${auditSeen ? '' : ' btn-audit-pulse'}`}
           onClick={() => {
             if (!auditResult) {
               const audit = computeAudit(nodes)
               setAuditResult(audit)
             }
+            setAuditSeen(true)
             openAudit(true)
           }}
           data-tour="decompose-btn"
           type="button"
         >
-          <ScanSearch size={14} aria-hidden="true" />
+          <ShieldCheck size={14} aria-hidden="true" />
           {t.promptInput.auditPrompt}
         </button>
       ) : (

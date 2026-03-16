@@ -31,7 +31,8 @@
     "paste": "لصق من الحافظة",
     "importFromPlatform": "استيراد الطلب من الصفحة",
     "queuePosition": "موضع في قائمة الانتظار: {n}",
-    "queueProcessing": "جارٍ المعالجة…"
+    "queueProcessing": "جارٍ المعالجة…",
+    "auditPrompt": "Audit your prompt"
   },
   "promptOutput": {
     "title": "النتيجة",
@@ -304,5 +305,12 @@
       "label": "اللغة",
       "description": "اللغة التي يجب أن يرد بها الذكاء الاصطناعي"
     }
+  },
+  "audit": {
+    "title": "Prompt audit",
+    "hint": "{n} key blocks are missing. Add them to improve your prompt.",
+    "addBlock": "Add",
+    "perfect": "All key blocks are present — solid prompt.",
+    "blocksPresent": "key blocks present"
   }
 }
