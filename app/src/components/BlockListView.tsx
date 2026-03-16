@@ -1,16 +1,14 @@
 import { useState, useRef, useEffect } from 'react'
-import { X, Plus, ChevronDown, ChevronRight, Trash2, Undo2, Redo2, GripVertical } from 'lucide-react'
-import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
-import type { BlockType } from '@/types/blocks'
+import { X, ChevronDown, ChevronRight, Trash2, Undo2, Redo2, GripVertical } from 'lucide-react'
+import { BLOCK_META } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
 
 const BlockListView = () => {
-  const { nodes, setNodes, removeNode, updateNodeContent, addNode, reset, undo, redo, past, future } = useFlowStore()
+  const { nodes, setNodes, removeNode, updateNodeContent, reset, undo, redo, past, future } = useFlowStore()
   const { t } = useLocale()
 
-  const [addOpen, setAddOpen]         = useState(false)
   const [collapsed, setCollapsed]     = useState<Set<string>>(new Set())
   // Local visual order — array of node IDs
   const [order, setOrder]             = useState<string[]>(() => nodes.map(n => n.id))
@@ -76,28 +74,6 @@ const BlockListView = () => {
     overIdx.current = null
     // Sync visual order back to the store (no assembly impact — TYPE_PRIORITY governs that)
     setNodes(order.map(id => nodes.find(n => n.id === id)).filter(Boolean) as FlomptNode[])
-  }
-
-  // ── Add block ─────────────────────────────────────────────────────────────
-  const createNode = (type: BlockType): FlomptNode => {
-    const tr = t.blocks[type]
-    const extraData = type === 'response_style'
-      ? {
-          options: { ...DEFAULT_RESPONSE_STYLE } as Record<string, string | boolean>,
-          content: generateResponseStyleContent(DEFAULT_RESPONSE_STYLE),
-        }
-      : { content: '' }
-    return {
-      id: `${type}-${Date.now()}`,
-      type: 'block',
-      position: { x: 60, y: 60 + nodes.length * 180 },
-      data: { type, label: tr.label, description: tr.description, ...extraData },
-    }
-  }
-
-  const handleAdd = (type: BlockType) => {
-    addNode(createNode(type))
-    setAddOpen(false)
   }
 
   return (
@@ -218,42 +194,6 @@ const BlockListView = () => {
           })}
         </div>
       )}
-
-      {/* ── Add block — mobile only (desktop has the sidebar) ── */}
-      <div className="block-list-view-add">
-        <button
-          className="block-list-view-add-btn"
-          onClick={() => setAddOpen(v => !v)}
-          aria-expanded={addOpen}
-        >
-          <Plus size={13} />
-          {t.sidebar.title}
-          <ChevronDown size={11} className={addOpen ? 'chevron-open' : ''} />
-        </button>
-
-        {addOpen && (
-          <div className="block-list-view-add-grid">
-            {(Object.keys(BLOCK_META) as BlockType[]).map(type => {
-              const meta = BLOCK_META[type]
-              const Icon = meta.icon
-              const tr   = t.blocks[type]
-              return (
-                <button
-                  key={type}
-                  className="block-list-add-pill"
-                  style={{ borderColor: `${meta.color}55`, color: meta.color }}
-                  onClick={() => handleAdd(type)}
-                >
-                  <span className="block-list-add-pill-icon" style={{ background: `${meta.color}1a` }}>
-                    <Icon size={12} />
-                  </span>
-                  {tr.label}
-                </button>
-              )
-            })}
-          </div>
-        )}
-      </div>
 
     </div>
   )
