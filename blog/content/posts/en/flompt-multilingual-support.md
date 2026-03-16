@@ -32,13 +32,13 @@ Every string in the interface is translated: block labels, tab names, error mess
 
 ## How It Works
 
-The i18n system is entirely client-side. Each language is a JSON file containing all interface strings. The translation is applied at runtime by a React context — no server round-trip, no build-per-locale.
+The i18n system is entirely client-side. Each language is a JSON file containing all interface strings. The translation is applied at runtime by a React context, no server round-trip, no build-per-locale.
 
 Language is determined in this order:
 
-1. **URL path** — visiting `flompt.dev/app/es` loads Spanish immediately
-2. **localStorage** — your last explicit choice is remembered across sessions
-3. **Default** — English if nothing else applies
+1. **URL path**: visiting `flompt.dev/app/es` loads Spanish immediately
+2. **localStorage**: your last explicit choice is remembered across sessions
+3. **Default**: English if nothing else applies
 
 Your choice is always persisted. If you switch to German, the next time you open the app it opens in German.
 
@@ -46,7 +46,7 @@ Your choice is always persisted. If you switch to German, the next time you open
 
 This is the other half of the release, and it matters for discoverability.
 
-Before today, `flompt.dev/app` was the only URL for the app — and it only served English HTML. Crawlers from Google, Bing, and others only indexed the English version.
+Before today, `flompt.dev/app` was the only URL for the app, and it only served English HTML. Crawlers from Google, Bing, and others only indexed the English version.
 
 Now every language has a dedicated static HTML page:
 
@@ -63,11 +63,11 @@ Now every language has a dedicated static HTML page:
 
 Each page has the correct `lang` attribute, a localized `<title>` and `<meta description>`, a canonical URL, and a full set of `hreflang` alternate links pointing across all 10 locales.
 
-This is standard multilingual SEO practice — the same approach used by large platforms to surface the right version to users across different regions.
+This is standard multilingual SEO practice, the same approach used by large platforms to surface the right version to users across different regions.
 
 ## What Stays the Same
 
-The app logic is identical across all languages. Blocks, canvas behavior, prompt assembly, keyboard shortcuts, auto-save — nothing changes. Only the interface strings are translated.
+The app logic is identical across all languages. Blocks, canvas behavior, prompt assembly, keyboard shortcuts, auto-save, nothing changes. Only the interface strings are translated.
 
 Prompts you write and blocks you create are always stored as-is. Switching your interface language doesn't alter your saved content.
 
