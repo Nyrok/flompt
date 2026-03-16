@@ -1155,6 +1155,60 @@ body {
   );
 }
 
+/* ── Tools block — dot grid (blueprint / workbench) ──────────────────────── */
+.block-node[data-block-type="tools"] {
+  background-image: radial-gradient(
+    circle,
+    rgba(251, 146, 60, 0.18) 1px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
+}
+.block-node[data-block-type="tools"] .block-header {
+  background: rgba(251, 146, 60, 0.07);
+}
+.block-node[data-block-type="tools"].selected {
+  box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.45);
+}
+
+.block-list-card[data-block-type="tools"] {
+  background-image: radial-gradient(
+    circle,
+    rgba(251, 146, 60, 0.12) 1px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
+}
+
+/* ── Environment block — horizontal scan lines (terminal) ─────────────────── */
+.block-node[data-block-type="environment"] {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 17px,
+    rgba(34, 211, 238, 0.045) 17px,
+    rgba(34, 211, 238, 0.045) 18px
+  );
+}
+.block-node[data-block-type="environment"] .block-header {
+  background: rgba(34, 211, 238, 0.07);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  letter-spacing: 0.01em;
+}
+.block-node[data-block-type="environment"].selected {
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.4);
+}
+
+.block-list-card[data-block-type="environment"] {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 17px,
+    rgba(34, 211, 238, 0.03) 17px,
+    rgba(34, 211, 238, 0.03) 18px
+  );
+}
+
 /* ── Response Style block ─────────────────────────────────────────────────── */
 .block-node--response-style {
   min-width: 260px;
