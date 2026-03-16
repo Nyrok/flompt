@@ -328,6 +328,12 @@ python backend/mcp_stdio.py
 - The only exception: i18n translation files (`fr.json`, `translations.ts`) and French blog post content (`content/fr/`) which are intentionally in French for end users
 - Never write French comments or strings anywhere else
 
+### 5. Writing style (all surfaces)
+- **No em dashes (—) or en dashes (–)**, ever. Use commas, periods, or rephrase.
+- **Short, concise, straight to the point.** No filler, no fluff, no corporate speak.
+- Sounds like a dev typing fast, not a polished essay or an AI-generated blog post.
+- Applies everywhere: marketing copy, README, landing page, blog, commit messages, comments, docs.
+
 ### 6. Understand intent before acting
 - **If the request is ambiguous about WHAT** (not how) → ask for clarification
 - **Rule** : if a change is destructive or structural (type swaps, architecture refactor), confirm intent
