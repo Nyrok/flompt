@@ -14,6 +14,7 @@ import GuidedTour from '@/components/GuidedTour'
 import ExtensionPopup from '@/components/ExtensionPopup'
 import MakeIntegration from '@/components/MakeIntegration'
 import ProjectSelector from '@/components/ProjectSelector'
+import CustomSelect from '@/components/CustomSelect'
 import { useFlowStore } from '@/store/flowStore'
 import { useProjectStore } from '@/store/projectStore'
 import type { Tab } from '@/store/flowStore'
@@ -146,17 +147,13 @@ const App = () => {
             <button className="btn-icon" title="Context Memory" onClick={() => openMemory(true)} aria-label="Context Memory">
               <Brain size={14} />
             </button>
-            <select
-              className="btn-locale"
+            <CustomSelect
               value={locale}
-              onChange={e => handleLocaleChange(e.target.value as Locale)}
-              title={t.accessibility.switchLocale}
-              aria-label={t.accessibility.switchLocale}
-            >
-              {LOCALES.map(l => (
-                <option key={l} value={l}>{LOCALE_LABELS[l]}</option>
-              ))}
-            </select>
+              onChange={v => handleLocaleChange(v as Locale)}
+              options={LOCALES.map(l => ({ value: l, label: LOCALE_LABELS[l] }))}
+              triggerClassName="csel-trigger--locale"
+              id="locale-select"
+            />
             <span className="hide-mobile">
               <KeyboardShortcuts />
             </span>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Wand2, X } from 'lucide-react'
+import CustomSelect from '@/components/CustomSelect'
 import { TEMPLATES, TEMPLATE_CATEGORIES, CATEGORY_COLORS, LOCALE_TO_LANG } from '@/lib/templates'
 import type { TemplateCategory } from '@/lib/templates'
 import { useFlowStore } from '@/store/flowStore'
@@ -67,17 +68,17 @@ const TemplateLibrary = ({ onClose }: { onClose?: () => void }) => {
         <label className="library-lang-label" htmlFor="library-lang-select">
           {t.library.outputLang}
         </label>
-        <select
+        <CustomSelect
           id="library-lang-select"
-          className="library-lang-select"
           value={outputLang}
-          onChange={e => setOutputLang(e.target.value)}
-        >
-          <option value="">{t.library.noLang}</option>
-          {Object.entries(LOCALE_TO_LANG).map(([code, name]) => (
-            <option key={code} value={name}>{name}</option>
-          ))}
-        </select>
+          onChange={setOutputLang}
+          options={[
+            { value: '', label: t.library.noLang },
+            ...Object.entries(LOCALE_TO_LANG).map(([code, name]) => ({ value: name, label: name, key: code })),
+          ]}
+          triggerClassName="csel-trigger--lib"
+          className="csel--flex"
+        />
       </div>
 
       {/* Category filters */}

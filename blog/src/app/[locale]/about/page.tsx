@@ -29,10 +29,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: t.about.paragraph1,
       locale: locale === "fr" ? "fr_FR" : "en_US",
       alternateLocale: locale === "fr" ? ["en_US"] : ["fr_FR"],
+      images: [
+        {
+          url: "https://flompt.dev/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "flompt — Visual AI Prompt Builder",
+        },
+      ],
     },
     twitter: {
+      card: "summary_large_image",
       title: t.about.pageTitle,
       description: t.about.paragraph1,
+      images: ["https://flompt.dev/og-image.png"],
     },
   };
 }
@@ -78,10 +88,10 @@ export default async function AboutPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <div className="max-w-3xl mx-auto px-6 py-16">
-        <h1 className="text-4xl font-bold tracking-tight mb-8">{t.about.title}</h1>
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+        <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mb-6 sm:mb-8">{t.about.title}</h1>
         <div className="max-w-none space-y-6">
-          <p className="text-lg leading-relaxed" style={{ color: "var(--text-muted)" }}>
+          <p className="text-base sm:text-lg leading-relaxed" style={{ color: "var(--text-muted)" }}>
             {t.about.paragraph1}
           </p>
           <p className="leading-relaxed" style={{ color: "var(--text-muted)" }}>
@@ -92,7 +102,7 @@ export default async function AboutPage({ params }: PageProps) {
           </p>
 
           <div
-            className="mt-12 p-6 rounded-lg"
+            className="mt-8 sm:mt-12 p-4 sm:p-6 rounded-lg"
             style={{
               backgroundColor: "var(--bg-card)",
               border: "1px solid var(--border-subtle)",

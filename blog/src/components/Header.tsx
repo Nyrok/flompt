@@ -23,17 +23,17 @@ export default function Header({ locale }: { locale: Locale }) {
         borderBottom: "1px solid var(--border-subtle)",
       }}
     >
-      <div className="max-w-3xl mx-auto px-6 h-full flex items-center justify-between">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between gap-3">
         {/* Brand */}
         <Link
           href={`/${locale}`}
-          className="flex items-center gap-1.5"
+          className="flex items-center gap-1.5 shrink-0"
           aria-label={t.accessibility.brandAriaLabel}
         >
           <span
             style={{
               fontFamily: "var(--font-handwritten), cursive",
-              fontSize: "1.5rem",
+              fontSize: "1.35rem",
               fontWeight: 700,
               color: "var(--accent)",
               textShadow: "0 0 10px var(--accent-glow)",
@@ -45,7 +45,7 @@ export default function Header({ locale }: { locale: Locale }) {
           <span
             style={{
               fontFamily: "var(--font-handwritten), cursive",
-              fontSize: "1.5rem",
+              fontSize: "1.35rem",
               color: "var(--text-muted)",
             }}
             aria-hidden="true"
@@ -55,11 +55,11 @@ export default function Header({ locale }: { locale: Locale }) {
         </Link>
 
         {/* Nav + Locale */}
-        <div className="flex items-center gap-5">
-          <nav className="flex items-center gap-5" aria-label="Main navigation">
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          <nav className="flex items-center gap-2 sm:gap-4" aria-label="Main navigation">
             <Link
               href={`/${locale}`}
-              className="text-sm transition-colors hover:opacity-80"
+              className="text-sm transition-colors hover:opacity-80 whitespace-nowrap"
               style={{ color: "var(--text-muted)" }}
               aria-current={isArticlesPage ? "page" : undefined}
             >
@@ -67,7 +67,7 @@ export default function Header({ locale }: { locale: Locale }) {
             </Link>
             <Link
               href={`/${locale}/about`}
-              className="text-sm transition-colors hover:opacity-80"
+              className="text-sm transition-colors hover:opacity-80 whitespace-nowrap hidden xs:inline"
               style={{ color: "var(--text-muted)" }}
               aria-current={isAboutPage ? "page" : undefined}
             >
@@ -75,7 +75,7 @@ export default function Header({ locale }: { locale: Locale }) {
             </Link>
             <a
               href="https://flompt.dev"
-              className="text-sm font-medium transition-all hover:brightness-110"
+              className="text-sm font-medium transition-all hover:brightness-110 whitespace-nowrap"
               style={{
                 color: "var(--accent)",
                 textShadow: "0 0 8px var(--accent-glow)",
@@ -88,13 +88,13 @@ export default function Header({ locale }: { locale: Locale }) {
           {/* Locale toggle — switches to other language */}
           <Link
             href={switchLocalePath}
-            className="inline-flex items-center justify-center uppercase transition-colors hover:opacity-80"
+            className="inline-flex items-center justify-center uppercase transition-colors hover:opacity-80 shrink-0"
             style={{
-              height: "30px",
+              height: "28px",
               fontSize: "11px",
               fontFamily: "monospace",
               fontWeight: 700,
-              padding: "0 10px",
+              padding: "0 8px",
               borderRadius: "var(--radius-pill)",
               border: "1px solid var(--border-medium)",
               color: "var(--text-muted)",

@@ -55,6 +55,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       tags: post.tags,
     },
     twitter: {
+      card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
       images: [ogImage],
@@ -98,20 +99,20 @@ export default async function PostPage({ params }: PageProps) {
   };
 
   return (
-    <article className="max-w-3xl mx-auto px-6 py-16">
+    <article className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <Link
         href={`/${locale}`}
-        className="inline-flex items-center text-sm transition-colors mb-8"
+        className="inline-flex items-center text-sm transition-colors mb-6 sm:mb-8"
         style={{ color: "var(--text-dim)" }}
       >
         {t.post.backToArticles}
       </Link>
 
-      <header className="mb-12">
+      <header className="mb-8 sm:mb-12">
         <div className="flex flex-col gap-2 mb-4">
           <time className="text-sm" style={{ color: "var(--text-dim)" }} dateTime={post.date}>
             {formatDate(post.date, locale as Locale)}
@@ -133,11 +134,11 @@ export default async function PostPage({ params }: PageProps) {
             </div>
           )}
         </div>
-        <h1 className="text-4xl font-bold tracking-tight leading-tight">
+        <h1 className="text-2xl sm:text-4xl font-bold tracking-tight leading-tight">
           {post.title}
         </h1>
         {post.excerpt && (
-          <p className="mt-4 text-lg leading-relaxed" style={{ color: "var(--text-muted)" }}>
+          <p className="mt-3 sm:mt-4 text-base sm:text-lg leading-relaxed" style={{ color: "var(--text-muted)" }}>
             {post.excerpt}
           </p>
         )}

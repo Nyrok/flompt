@@ -32,10 +32,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: t.home.subtitle,
       locale: locale === "fr" ? "fr_FR" : "en_US",
       alternateLocale: locale === "fr" ? ["en_US"] : ["fr_FR"],
+      images: [
+        {
+          url: "https://flompt.dev/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "flompt — Visual AI Prompt Builder",
+        },
+      ],
     },
     twitter: {
+      card: "summary_large_image",
       title: `${title} | flompt blog`,
       description: t.home.subtitle,
+      images: ["https://flompt.dev/og-image.png"],
     },
   };
 }
@@ -76,7 +86,7 @@ export default async function HomePage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <div className="max-w-3xl mx-auto px-6 py-16">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
         <section>
           <h2
             className="text-sm font-semibold uppercase tracking-wider mb-6"
