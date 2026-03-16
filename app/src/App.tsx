@@ -194,9 +194,11 @@ const App = () => {
           className={`canvas-wrap${activeTab !== 'canvas' ? ' panel-hidden' : ''}`}
           aria-hidden={activeTab !== 'canvas'}
         >
+          {/* Block bar: always on mobile (horizontal strip), desktop canvas-only */}
+          <CanvasBlockBar mobileOnly={canvasView === 'list'} />
+
           {canvasView === 'canvas' && (
             <>
-              <CanvasBlockBar />
               <div className="canvas-view-toggle">
                 <button
                   className="canvas-view-btn"
@@ -303,7 +305,7 @@ const App = () => {
               role="tab"
               aria-selected={activeTab === id}
               aria-controls={id === 'canvas' ? 'canvas-panel' : undefined}
-              className={`tab-btn${activeTab === id ? ' tab-btn--active' : ''}${id === 'output' ? ' tab-btn--output' : ''}`}
+              className={`tab-btn${activeTab === id ? ' tab-btn--active' : ''}`}
               onClick={() => setActiveTab(id)}
             >
               <Icon size={18} className="tab-icon" aria-hidden="true" />

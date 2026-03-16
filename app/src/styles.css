@@ -2046,6 +2046,12 @@ body {
 }
 .canvas-block-bar::-webkit-scrollbar { display: none; }
 
+/* Hidden on desktop when list view — only shown via mobile strip */
+.canvas-block-bar--mobile-only { display: none; }
+@media (max-width: 768px) {
+  .canvas-block-bar--mobile-only { display: flex; }
+}
+
 .canvas-block-btn {
   width: 30px;
   height: 30px;
@@ -2239,7 +2245,16 @@ body {
   .tab-icon  { font-size: 1.1rem; line-height: 1; }
   .tab-label { font-size: 0.61rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
 
-  /* sidebar + block list handled in dedicated mobile section below */
+  /* On mobile the left-panel itself scrolls — let sidebar + list expand naturally */
+  .sidebar { flex: none; min-height: unset; }
+  .block-list-wrapper { overflow: visible; flex: none; min-height: unset; }
+  .block-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    height: auto;
+    overflow-y: visible;
+  }
 
   .compiled-output { max-height: 45vh; }
   .skeleton-block { width: 140px; height: 90px; }
@@ -3813,52 +3828,33 @@ body {
   .tab-btn--output { display: none; }
 }
 
-/* ─── Sidebar blocks — 1 horizontal scrolling row on mobile ─────────────── */
+/* ─── Canvas block bar — horizontal strip on mobile ─────────────────────── */
 @media (max-width: 768px) {
-  .sidebar { flex: none; min-height: unset; gap: 4px; }
-  .block-list-wrapper {
-    overflow: hidden;
-    flex: none;
-    min-height: unset;
-    height: 52px;
-  }
-  .block-list {
-    display: flex;
+  .canvas-block-bar {
+    position: relative;
+    top: unset;
+    transform: none;
     flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 6px;
-    height: 52px;
+    width: 100%;
+    max-height: unset;
+    height: 48px;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 0 2px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    align-items: center;
-  }
-  .block-list::-webkit-scrollbar { display: none; }
-
-  /* Pills compact in horizontal mode */
-  .block-pill {
-    flex-shrink: 0;
-    flex-direction: row;
     gap: 6px;
-    padding: 6px 10px;
+    padding: 0 10px;
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    box-shadow: none;
     align-items: center;
-    height: 40px;
-    white-space: nowrap;
+    scrollbar-width: none;
+    z-index: 10;
   }
-  .block-pill-desc { display: none; }
-  .block-pill:hover .block-pill-desc { display: none; }
-
-  /* Repurpose top/bottom blur divs as left/right */
-  .block-list-blur--top {
-    top: 0; bottom: 0; left: 0; right: unset;
-    height: unset; width: 32px;
-    background: linear-gradient(to right, var(--bg-2) 0%, transparent 100%);
-  }
-  .block-list-blur--bottom {
-    bottom: 0; top: 0; right: 0; left: unset;
-    height: unset; width: 32px;
-    background: linear-gradient(to left, var(--bg-2) 0%, transparent 100%);
+  .canvas-block-bar::-webkit-scrollbar { display: none; }
+  .canvas-block-btn {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
   }
 }
