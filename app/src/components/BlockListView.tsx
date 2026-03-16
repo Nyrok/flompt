@@ -6,7 +6,6 @@ import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
 import { assemblePrompt } from '@/lib/assemblePrompt'
-import { STAR_EVENT } from '@/components/StarPopup'
 
 const LANGUAGES = [
   { code: 'en', en: 'English',    fr: 'Anglais' },
@@ -125,7 +124,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
     const result = assemblePrompt(n, e)
     setCompiledPrompt(result)
     setActiveTab('output')
-    window.dispatchEvent(new CustomEvent(STAR_EVENT))
   }
 
   // ── Duplicate block ───────────────────────────────────────────────────────

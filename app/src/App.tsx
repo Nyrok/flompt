@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { PenLine, Network, Sparkles, Github, History, Brain, LayoutList } from 'lucide-react'
+import { PenLine, Network, Sparkles, Github, History, Brain, LayoutList, Play, ShieldCheck } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { initAnalytics, setSource, analytics } from '@/lib/analytics'
 import FlowCanvas from '@/components/FlowCanvas'
@@ -22,6 +22,8 @@ import { LOCALES, LOCALE_LABELS } from '@/i18n/translations'
 import type { Locale } from '@/i18n/translations'
 import { isExtension } from '@/lib/platform'
 import AuditPanel from '@/features/audit/AuditPanel'
+import { useAuditStore } from '@/features/audit/useAuditStore'
+import { assemblePrompt } from '@/lib/assemblePrompt'
 import DebuggerPanel from '@/features/debugger/DebuggerPanel'
 import CompressorModal from '@/features/compressor/CompressorModal'
 import CriticPanel from '@/features/critic/CriticPanel'
@@ -38,7 +40,10 @@ const TAB_IDS: { id: Tab; Icon: LucideIcon }[] = [
 ]
 
 const App = () => {
-  const { undo, redo, activeTab, setActiveTab, isDecomposing, setRawPrompt } = useFlowStore()
+  const { undo, redo, activeTab, setActiveTab, isDecomposing, setRawPrompt, nodes, edges, setCompiledPrompt } = useFlowStore()
+  const { result: auditResult, setOpen: openAudit } = useAuditStore()
+  const [mobileAuditBadge, setMobileAuditBadge] = useState(false)
+  const prevAuditRef = useRef(auditResult)
   const { t, locale, setLocale } = useLocale()
   const { currentProjectId } = useProjectStore()
   const { setOpen: openVersions, load: loadVersions } = useVersionStore()
@@ -66,6 +71,16 @@ const App = () => {
   const handleApplyCompression = (compressed: string) => {
     setRawPrompt(compressed)
   }
+
+  // Mobile audit badge — show briefly after a new decompose result
+  useEffect(() => {
+    if (auditResult && auditResult !== prevAuditRef.current) {
+      prevAuditRef.current = auditResult
+      setMobileAuditBadge(true)
+      const timer = setTimeout(() => setMobileAuditBadge(false), 6000)
+      return () => clearTimeout(timer)
+    }
+  }, [auditResult])
 
   // Init PostHog after first render — non-blocking
   useEffect(() => {
@@ -241,6 +256,38 @@ const App = () => {
       {/* Post-decompose audit panel */}
       {!isExtension && <AuditPanel />}
 
+      {/* Mobile FAB — assemble & go to output (canvas + input tabs) */}
+      {!isExtension && nodes.length > 0 && activeTab !== 'output' && (
+        <button
+          className="mobile-fab"
+          onClick={() => {
+            const result = assemblePrompt(nodes, edges)
+            setCompiledPrompt(result)
+            setActiveTab('output')
+          }}
+          title={t.promptOutput.compile}
+          aria-label={t.promptOutput.compile}
+        >
+          <Play size={24} aria-hidden="true" />
+        </button>
+      )}
+
+      {/* Mobile audit badge — shown briefly after decompose */}
+      {!isExtension && mobileAuditBadge && auditResult && (
+        <button
+          className="mobile-audit-badge"
+          onClick={() => {
+            setMobileAuditBadge(false)
+            setActiveTab('input')
+            openAudit(true)
+          }}
+        >
+          <ShieldCheck size={13} aria-hidden="true" />
+          <span>Score {auditResult.score}/100</span>
+          <span className="mobile-audit-badge__cta">Audit →</span>
+        </button>
+      )}
+
       {/* IDE feature panels — web only */}
       {!isExtension && <DebuggerPanel onApplyFix={handleApplyDebugFix} />}
       {!isExtension && <CompressorModal onApply={handleApplyCompression} />}
@@ -256,7 +303,7 @@ const App = () => {
               role="tab"
               aria-selected={activeTab === id}
               aria-controls={id === 'canvas' ? 'canvas-panel' : undefined}
-              className={`tab-btn${activeTab === id ? ' tab-btn--active' : ''}`}
+              className={`tab-btn${activeTab === id ? ' tab-btn--active' : ''}${id === 'output' ? ' tab-btn--output' : ''}`}
               onClick={() => setActiveTab(id)}
             >
               <Icon size={18} className="tab-icon" aria-hidden="true" />

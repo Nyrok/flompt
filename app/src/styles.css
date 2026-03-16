@@ -2239,16 +2239,7 @@ body {
   .tab-icon  { font-size: 1.1rem; line-height: 1; }
   .tab-label { font-size: 0.61rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
 
-  /* On mobile the left-panel itself scrolls — let sidebar + list expand naturally */
-  .sidebar { flex: none; min-height: unset; }
-  .block-list-wrapper { overflow: visible; flex: none; min-height: unset; }
-  .block-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
-    height: auto;
-    overflow-y: visible;
-  }
+  /* sidebar + block list handled in dedicated mobile section below */
 
   .compiled-output { max-height: 45vh; }
   .skeleton-block { width: 140px; height: 90px; }
@@ -3758,4 +3749,116 @@ body {
   .block-pill { cursor: default; }
   .block-pill:hover { background: transparent; opacity: 1; }
   .block-pill:active { transform: none; }
+}
+
+/* ─── Mobile FAB (global, fixed) ────────────────────────────────────────── */
+.mobile-fab {
+  display: none;
+  position: fixed;
+  bottom: calc(64px + env(safe-area-inset-bottom, 0px) + 16px);
+  right: 18px;
+  z-index: 300;
+  width: 60px;
+  height: 60px;
+  border-radius: 99px;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(255, 53, 112, 0.5);
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+.mobile-fab:active { transform: scale(0.88); }
+.mobile-fab:hover  { background: var(--accent-light); }
+@media (max-width: 768px) {
+  .mobile-fab { display: flex; }
+}
+
+/* ─── Mobile audit badge ─────────────────────────────────────────────────── */
+.mobile-audit-badge {
+  display: none;
+  position: fixed;
+  bottom: calc(64px + env(safe-area-inset-bottom, 0px) + 88px);
+  right: 18px;
+  z-index: 300;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  white-space: nowrap;
+  animation: fadeInUp 0.25s ease;
+  font-family: var(--font);
+}
+.mobile-audit-badge__cta { color: var(--accent); }
+.mobile-audit-badge:hover { background: var(--surface-hover); color: var(--text); }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px) {
+  .mobile-audit-badge { display: flex; }
+}
+
+/* ─── Hide output tab on mobile (FAB replaces it) ────────────────────────── */
+@media (max-width: 768px) {
+  .tab-btn--output { display: none; }
+}
+
+/* ─── Sidebar blocks — 1 horizontal scrolling row on mobile ─────────────── */
+@media (max-width: 768px) {
+  .sidebar { flex: none; min-height: unset; gap: 4px; }
+  .block-list-wrapper {
+    overflow: hidden;
+    flex: none;
+    min-height: unset;
+    height: 52px;
+  }
+  .block-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 6px;
+    height: 52px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 2px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    align-items: center;
+  }
+  .block-list::-webkit-scrollbar { display: none; }
+
+  /* Pills compact in horizontal mode */
+  .block-pill {
+    flex-shrink: 0;
+    flex-direction: row;
+    gap: 6px;
+    padding: 6px 10px;
+    align-items: center;
+    height: 40px;
+    white-space: nowrap;
+  }
+  .block-pill-desc { display: none; }
+  .block-pill:hover .block-pill-desc { display: none; }
+
+  /* Repurpose top/bottom blur divs as left/right */
+  .block-list-blur--top {
+    top: 0; bottom: 0; left: 0; right: unset;
+    height: unset; width: 32px;
+    background: linear-gradient(to right, var(--bg-2) 0%, transparent 100%);
+  }
+  .block-list-blur--bottom {
+    bottom: 0; top: 0; right: 0; left: unset;
+    height: unset; width: 32px;
+    background: linear-gradient(to left, var(--bg-2) 0%, transparent 100%);
+  }
 }
