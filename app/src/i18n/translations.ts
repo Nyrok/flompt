@@ -134,6 +134,8 @@ export interface Translations {
     step2action: string
     step3title: string
     step3desc: string
+    stepViewTitle: string
+    stepViewDesc: string
     step4title: string
     step4desc: string
     stepOf: string

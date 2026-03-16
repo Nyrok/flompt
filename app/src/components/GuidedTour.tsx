@@ -129,9 +129,10 @@ const GuidedTour = () => {
     { target: '.block-list',                 placement: 'right' as Placement,      title: t.tour.stepBlocksTitle,    desc: t.tour.stepBlocksDesc,    nextLabel: t.tour.next },
     { target: '.sidebar-library-btn',        placement: 'right' as Placement,      title: t.tour.stepLibraryTitle,   desc: t.tour.stepLibraryDesc,   nextLabel: t.tour.next },
     { target: '.psel-pill',                  placement: 'bottom' as Placement,     title: t.tour.stepProjectTitle,   desc: t.tour.stepProjectDesc,   nextLabel: t.tour.next },
-    { target: '[data-tour="decompose-btn"]', placement: 'right' as Placement,      title: t.tour.step2title,         desc: t.tour.step2desc,         nextLabel: t.tour.step2action, action: 'decompose' as const },
-    { target: '.flow-canvas',                placement: 'inside-top' as Placement, title: t.tour.step3title,         desc: t.tour.step3desc,         nextLabel: t.tour.next },
-    { target: '[data-tour="compile-btn"]',   placement: 'left' as Placement,       title: t.tour.step4title,         desc: t.tour.step4desc,         nextLabel: t.tour.finish, action: 'finish' as const },
+    { target: '[data-tour="decompose-btn"]', placement: 'right' as Placement,       title: t.tour.step2title,      desc: t.tour.step2desc,      nextLabel: t.tour.step2action, action: 'decompose' as const },
+    { target: '.block-list-view',            placement: 'inside-top' as Placement,  title: t.tour.step3title,      desc: t.tour.step3desc,      nextLabel: t.tour.next },
+    { target: '.canvas-view-toggle',         placement: 'bottom' as Placement,      title: t.tour.stepViewTitle,   desc: t.tour.stepViewDesc,   nextLabel: t.tour.next },
+    { target: '[data-tour="compile-btn"]',   placement: 'left' as Placement,        title: t.tour.step4title,      desc: t.tour.step4desc,      nextLabel: t.tour.finish, action: 'finish' as const },
   ]
 
   const cur = steps[step]
