@@ -1711,22 +1711,43 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 12px;
-  padding-left: 62px;
   gap: 8px;
 }
 
-/* Actions bar — reuses canvas-ctrl-btn styles */
-.block-list-ctrl-bar {
+/* ── List view top toolbar ────────────────────────────────────────────────── */
+.block-list-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
+  flex-shrink: 0;
+}
+.block-list-toolbar-left {
   display: flex;
   align-items: center;
   gap: 2px;
-  background: var(--bg-2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 4px;
-  align-self: flex-start;
   flex-shrink: 0;
+}
+.block-list-toolbar-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.block-list-toolbar-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+/* View toggle inside list toolbar — override absolute positioning */
+.block-list-toolbar-right .canvas-view-toggle {
+  position: static;
+  transform: none;
+  box-shadow: none;
 }
 
 .block-list-view-empty {
@@ -1744,8 +1765,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding-bottom: 4px;
-  padding-right: 2px;
+  padding: 10px 10px 4px;
+  padding-right: 12px;
 }
 
 /* Card */
