@@ -186,30 +186,34 @@ const App = () => {
           className={`canvas-wrap${activeTab !== 'canvas' ? ' panel-hidden' : ''}`}
           aria-hidden={activeTab !== 'canvas'}
         >
-          {/* Block bar — visible in both views */}
-          <CanvasBlockBar />
+          {canvasView === 'canvas' && (
+            <>
+              <CanvasBlockBar />
+              <div className="canvas-view-toggle">
+                <button
+                  className="canvas-view-btn"
+                  onClick={() => toggleView('list')}
+                  title="List view"
+                  aria-label="List view"
+                >
+                  <LayoutList size={13} />
+                </button>
+                <button
+                  className="canvas-view-btn canvas-view-btn--active"
+                  onClick={() => toggleView('canvas')}
+                  title="Canvas view"
+                  aria-label="Canvas view"
+                >
+                  <Network size={13} />
+                </button>
+              </div>
+            </>
+          )}
 
-          {/* View toggle */}
-          <div className="canvas-view-toggle">
-            <button
-              className={`canvas-view-btn${canvasView === 'list' ? ' canvas-view-btn--active' : ''}`}
-              onClick={() => toggleView('list')}
-              title="List view"
-              aria-label="List view"
-            >
-              <LayoutList size={13} />
-            </button>
-            <button
-              className={`canvas-view-btn${canvasView === 'canvas' ? ' canvas-view-btn--active' : ''}`}
-              onClick={() => toggleView('canvas')}
-              title="Canvas view"
-              aria-label="Canvas view"
-            >
-              <Network size={13} />
-            </button>
-          </div>
-
-          {canvasView === 'list' ? <BlockListView /> : <FlowCanvas />}
+          {canvasView === 'list'
+            ? <BlockListView canvasView={canvasView} onToggleView={toggleView} />
+            : <FlowCanvas />
+          }
         </div>
 
         <aside

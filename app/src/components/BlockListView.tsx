@@ -1,12 +1,18 @@
 import { useState, useRef, useEffect } from 'react'
-import { X, ChevronDown, ChevronRight, Trash2, Undo2, Redo2, GripVertical } from 'lucide-react'
-import { BLOCK_META } from '@/types/blocks'
+import { X, ChevronDown, ChevronRight, Trash2, Undo2, Redo2, GripVertical, LayoutList, Network } from 'lucide-react'
+import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
+import type { BlockType } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
 
-const BlockListView = () => {
-  const { nodes, setNodes, removeNode, updateNodeContent, reset, undo, redo, past, future } = useFlowStore()
+interface Props {
+  canvasView: 'list' | 'canvas'
+  onToggleView: (v: 'list' | 'canvas') => void
+}
+
+const BlockListView = ({ canvasView, onToggleView }: Props) => {
+  const { nodes, setNodes, removeNode, updateNodeContent, addNode, reset, undo, redo, past, future } = useFlowStore()
   const { t } = useLocale()
 
   const [collapsed, setCollapsed]     = useState<Set<string>>(new Set())
@@ -76,39 +82,106 @@ const BlockListView = () => {
     setNodes(order.map(id => nodes.find(n => n.id === id)).filter(Boolean) as FlomptNode[])
   }
 
+  // ── Add block ─────────────────────────────────────────────────────────────
+  const handleAddBlock = (type: BlockType) => {
+    const tr = t.blocks[type]
+    const extraData = type === 'response_style'
+      ? {
+          options: { ...DEFAULT_RESPONSE_STYLE } as Record<string, string | boolean>,
+          content: generateResponseStyleContent(DEFAULT_RESPONSE_STYLE),
+        }
+      : { content: '' }
+    const node: FlomptNode = {
+      id:       `${type}-${Date.now()}`,
+      type:     'block',
+      position: { x: 60, y: 60 + nodes.length * 180 },
+      data:     { type, label: tr.label, description: tr.description, ...extraData },
+    }
+    addNode(node)
+    window.dispatchEvent(new CustomEvent('flompt:block-added', {
+      detail: { label: tr.label, color: BLOCK_META[type].color },
+    }))
+  }
+
   return (
     <div className="block-list-view">
 
-      {/* ── Actions bar (Clear / Undo / Redo) ── */}
-      <div className="block-list-ctrl-bar">
-        <button
-          className="canvas-ctrl-btn canvas-ctrl-btn--danger"
-          onClick={() => { if (confirm(t.header.resetConfirm)) reset() }}
-          title={t.header.reset}
-          aria-label={t.header.reset}
-          disabled={nodes.length === 0}
-        >
-          <Trash2 size={13} />
-        </button>
-        <div className="canvas-ctrl-divider" aria-hidden="true" />
-        <button
-          className="canvas-ctrl-btn"
-          onClick={undo}
-          disabled={past.length === 0}
-          title={t.header.undo}
-          aria-label={t.header.undo}
-        >
-          <Undo2 size={13} />
-        </button>
-        <button
-          className="canvas-ctrl-btn"
-          onClick={redo}
-          disabled={future.length === 0}
-          title={t.header.redo}
-          aria-label={t.header.redo}
-        >
-          <Redo2 size={13} />
-        </button>
+      {/* ── Top toolbar: actions | blocks | view toggle ── */}
+      <div className="block-list-toolbar">
+
+        {/* Left: actions */}
+        <div className="block-list-toolbar-left">
+          <button
+            className="canvas-ctrl-btn canvas-ctrl-btn--danger"
+            onClick={() => { if (confirm(t.header.resetConfirm)) reset() }}
+            title={t.header.reset}
+            aria-label={t.header.reset}
+            disabled={nodes.length === 0}
+          >
+            <Trash2 size={13} />
+          </button>
+          <div className="canvas-ctrl-divider" aria-hidden="true" />
+          <button
+            className="canvas-ctrl-btn"
+            onClick={undo}
+            disabled={past.length === 0}
+            title={t.header.undo}
+            aria-label={t.header.undo}
+          >
+            <Undo2 size={13} />
+          </button>
+          <button
+            className="canvas-ctrl-btn"
+            onClick={redo}
+            disabled={future.length === 0}
+            title={t.header.redo}
+            aria-label={t.header.redo}
+          >
+            <Redo2 size={13} />
+          </button>
+        </div>
+
+        {/* Center: add block pills */}
+        <div className="block-list-toolbar-center">
+          {(Object.keys(BLOCK_META) as BlockType[]).map(type => {
+            const meta = BLOCK_META[type]
+            const Icon = meta.icon
+            return (
+              <button
+                key={type}
+                className="canvas-block-btn"
+                style={{ '--block-color': meta.color } as React.CSSProperties}
+                title={t.blocks[type].label}
+                aria-label={t.blocks[type].label}
+                onClick={() => handleAddBlock(type)}
+              >
+                <Icon size={14} aria-hidden="true" />
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Right: view toggle */}
+        <div className="block-list-toolbar-right">
+          <div className="canvas-view-toggle" style={{ position: 'static', boxShadow: 'none' }}>
+            <button
+              className={`canvas-view-btn${canvasView === 'list' ? ' canvas-view-btn--active' : ''}`}
+              onClick={() => onToggleView('list')}
+              title="List view"
+              aria-label="List view"
+            >
+              <LayoutList size={13} />
+            </button>
+            <button
+              className={`canvas-view-btn${canvasView === 'canvas' ? ' canvas-view-btn--active' : ''}`}
+              onClick={() => onToggleView('canvas')}
+              title="Canvas view"
+              aria-label="Canvas view"
+            >
+              <Network size={13} />
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* ── Block cards ── */}
