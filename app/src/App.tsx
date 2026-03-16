@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { PenLine, Network, Sparkles, Github, History, Brain } from 'lucide-react'
+import { PenLine, Network, Sparkles, Github, History, Brain, LayoutList } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { initAnalytics, setSource, analytics } from '@/lib/analytics'
 import FlowCanvas from '@/components/FlowCanvas'
+import BlockListView from '@/components/BlockListView'
 import Sidebar from '@/components/Sidebar'
 import PromptInput from '@/components/PromptInput'
 import PromptOutput from '@/components/PromptOutput'
@@ -24,7 +25,6 @@ import { isExtension } from '@/lib/platform'
 import DebuggerPanel from '@/features/debugger/DebuggerPanel'
 import CompressorModal from '@/features/compressor/CompressorModal'
 import CriticPanel from '@/features/critic/CriticPanel'
-import SystemPromptModal from '@/features/system-prompt/SystemPromptModal'
 import MemoryPanel from '@/features/context-memory/MemoryPanel'
 import VersionHistory from '@/features/versioning/VersionHistory'
 import { useVersionStore } from '@/features/versioning/useVersionStore'
@@ -45,6 +45,14 @@ const App = () => {
   const { setOpen: openMemory } = useMemoryStore()
   const mainRef = useRef<HTMLElement>(null)
   const [libraryOpen, setLibraryOpen] = useState(false)
+  const [canvasView, setCanvasView] = useState<'list' | 'canvas'>(() => {
+    return (localStorage.getItem('flompt-canvas-view') as 'list' | 'canvas') ?? 'list'
+  })
+
+  const toggleView = (v: 'list' | 'canvas') => {
+    setCanvasView(v)
+    localStorage.setItem('flompt-canvas-view', v)
+  }
 
   const handleOpenVersions = () => {
     openVersions(true)
@@ -57,11 +65,6 @@ const App = () => {
 
   const handleApplyCompression = (compressed: string) => {
     setRawPrompt(compressed)
-  }
-
-  const handleApplySystemPromptToCanvas = (sections: Array<{ name: string; content: string }>) => {
-    const full = sections.map(s => `## ${s.name}\n${s.content}`).join('\n\n')
-    setRawPrompt(full)
   }
 
   // Init PostHog after first render — non-blocking
@@ -182,7 +185,27 @@ const App = () => {
           className={`canvas-wrap${activeTab !== 'canvas' ? ' panel-hidden' : ''}`}
           aria-hidden={activeTab !== 'canvas'}
         >
-          <FlowCanvas />
+          {/* View toggle */}
+          <div className="canvas-view-toggle">
+            <button
+              className={`canvas-view-btn${canvasView === 'list' ? ' canvas-view-btn--active' : ''}`}
+              onClick={() => toggleView('list')}
+              title="List view"
+              aria-label="List view"
+            >
+              <LayoutList size={13} />
+            </button>
+            <button
+              className={`canvas-view-btn${canvasView === 'canvas' ? ' canvas-view-btn--active' : ''}`}
+              onClick={() => toggleView('canvas')}
+              title="Canvas view"
+              aria-label="Canvas view"
+            >
+              <Network size={13} />
+            </button>
+          </div>
+
+          {canvasView === 'list' ? <BlockListView /> : <FlowCanvas />}
         </div>
 
         <aside
@@ -221,7 +244,6 @@ const App = () => {
       {!isExtension && <DebuggerPanel onApplyFix={handleApplyDebugFix} />}
       {!isExtension && <CompressorModal onApply={handleApplyCompression} />}
       {!isExtension && <CriticPanel />}
-      {!isExtension && <SystemPromptModal onApplyToCanvas={handleApplySystemPromptToCanvas} />}
       {!isExtension && <MemoryPanel />}
       {!isExtension && <VersionHistory projectId={currentProjectId ?? '__default__'} />}
 

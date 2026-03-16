@@ -1,12 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
-import { Zap, ClipboardPaste, Download, Wand2 } from 'lucide-react'
+import { Zap, ClipboardPaste, Download } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
-import { decomposePrompt, watchJobStatus, classifyError, classifyJobError, generateSystemPrompt } from '@/services/api'
+import { decomposePrompt, watchJobStatus, classifyError, classifyJobError } from '@/services/api'
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics, setSource } from '@/lib/analytics'
 import { isExtension } from '@/lib/platform'
 import { STAR_EVENT } from '@/components/StarPopup'
-import { useSystemPromptStore } from '@/features/system-prompt/useSystemPromptStore'
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -20,7 +19,7 @@ const PromptInput = () => {
     setQueueStatus,
     setCompiledPrompt,
   } = useFlowStore()
-  const { t, locale } = useLocale()
+  const { t } = useLocale()
   const [error, setError] = useState<string | null>(null)
   const [platformName, setPlatformName] = useState<string | null>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -109,23 +108,6 @@ const PromptInput = () => {
     }
   }
 
-  const { setOpen: openSysPrompt, setLoading: setSysLoading, setResult: setSysResult, setError: setSysError } = useSystemPromptStore()
-
-  const handleGenerateSystemPrompt = async () => {
-    if (!rawPrompt.trim()) return
-    openSysPrompt(true)
-    setSysLoading(true)
-    setSysError(null)
-    try {
-      const result = await generateSystemPrompt(rawPrompt, locale)
-      setSysResult(result)
-    } catch {
-      setSysError('System prompt generation failed.')
-    } finally {
-      setSysLoading(false)
-    }
-  }
-
   const handlePaste = async () => {
     try {
       const text = await navigator.clipboard.readText()
@@ -202,16 +184,6 @@ const PromptInput = () => {
         {isDecomposing ? t.promptInput.decomposing : t.promptInput.decompose}
       </button>
 
-      {!isExtension && (
-        <button
-          className="btn btn-secondary"
-          onClick={handleGenerateSystemPrompt}
-          disabled={!rawPrompt.trim()}
-          title={t.ide.inputButtons.systemPrompt}
-        >
-          <Wand2 size={13} /> {t.ide.inputButtons.systemPrompt}
-        </button>
-      )}
     </div>
   )
 }
