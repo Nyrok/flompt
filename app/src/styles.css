@@ -1133,12 +1133,12 @@ body {
     -45deg,
     transparent,
     transparent 14px,
-    rgba(239, 68, 68, 0.04) 14px,
-    rgba(239, 68, 68, 0.04) 28px
+    rgba(239, 68, 68, 0.03) 14px,
+    rgba(239, 68, 68, 0.03) 28px
   );
 }
 .block-node[data-block-type="guardrails"] .block-header {
-  background: rgba(239, 68, 68, 0.08);
+  background: transparent;
 }
 .block-node[data-block-type="guardrails"].selected {
   box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5);
@@ -1150,8 +1150,8 @@ body {
     -45deg,
     transparent,
     transparent 14px,
-    rgba(239, 68, 68, 0.03) 14px,
-    rgba(239, 68, 68, 0.03) 28px
+    rgba(239, 68, 68, 0.025) 14px,
+    rgba(239, 68, 68, 0.025) 28px
   );
 }
 
@@ -1159,13 +1159,13 @@ body {
 .block-node[data-block-type="tools"] {
   background-image: radial-gradient(
     circle,
-    rgba(251, 146, 60, 0.18) 1px,
+    rgba(251, 146, 60, 0.12) 1px,
     transparent 1px
   );
   background-size: 16px 16px;
 }
 .block-node[data-block-type="tools"] .block-header {
-  background: rgba(251, 146, 60, 0.07);
+  background: transparent;
 }
 .block-node[data-block-type="tools"].selected {
   box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.45);
@@ -1174,7 +1174,7 @@ body {
 .block-list-card[data-block-type="tools"] {
   background-image: radial-gradient(
     circle,
-    rgba(251, 146, 60, 0.12) 1px,
+    rgba(251, 146, 60, 0.08) 1px,
     transparent 1px
   );
   background-size: 16px 16px;
@@ -1186,12 +1186,12 @@ body {
     0deg,
     transparent,
     transparent 17px,
-    rgba(34, 211, 238, 0.045) 17px,
-    rgba(34, 211, 238, 0.045) 18px
+    rgba(34, 211, 238, 0.03) 17px,
+    rgba(34, 211, 238, 0.03) 18px
   );
 }
 .block-node[data-block-type="environment"] .block-header {
-  background: rgba(34, 211, 238, 0.07);
+  background: transparent;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   letter-spacing: 0.01em;
 }
@@ -1204,8 +1204,8 @@ body {
     0deg,
     transparent,
     transparent 17px,
-    rgba(34, 211, 238, 0.03) 17px,
-    rgba(34, 211, 238, 0.03) 18px
+    rgba(34, 211, 238, 0.025) 17px,
+    rgba(34, 211, 238, 0.025) 18px
   );
 }
 
