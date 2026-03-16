@@ -3,6 +3,7 @@ title: "Flompt parle maintenant 10 langues"
 date: "2026-03-05"
 excerpt: "L'interface de Flompt est désormais disponible en 10 langues : anglais, français, espagnol, allemand, portugais, japonais, turc, chinois, arabe et russe. Chaque langue a aussi sa propre page indexée pour une meilleure visibilité dans les moteurs de recherche."
 tags: ["multilingue", "i18n", "flompt", "mise à jour", "seo"]
+color: "primary"
 ---
 
 ## Pourquoi le multi-langue

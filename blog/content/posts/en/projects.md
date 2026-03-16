@@ -3,6 +3,7 @@ title: "Flompt Projects: Multiple Workspaces, Zero Data Retention"
 date: "2026-03-14"
 excerpt: "Flompt now supports multiple independent project workspaces, each with its own canvas, prompt, and output. Switch between them instantly, export and import as JSON, and keep everything local. Your data never leaves your browser."
 tags: ["projects", "privacy", "workflow", "local-first", "open-source"]
+color: "primary"
 ---
 
 ## The Problem with a Single Canvas

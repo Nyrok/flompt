@@ -3,6 +3,7 @@ title: "Stop Fighting the Canvas: Flompt's New List View Builds Prompts Faster"
 date: "2026-03-16"
 excerpt: "Flompt now ships a list view as the default interface: no drag, no coordinates, just stacked cards you can edit, hide, reorder, and compile instantly. The canvas is still there when you want it."
 tags: ["flompt", "list view", "ux", "prompt building", "release", "keyboard"]
+color: "primary"
 ---
 
 ## The Canvas Is Powerful. It Is Also Overhead.

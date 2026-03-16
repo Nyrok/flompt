@@ -3,6 +3,7 @@ title: "Flompt 1.4.0: We Built a Full Prompt IDE Right Into Your Browser"
 date: "2026-03-15"
 excerpt: "Flompt 1.4.0 ships a complete prompt development environment: debugger, critic, compressor, cost estimator, context memory, and version history. All local, all free. This is what prompt engineering looks like when you take it seriously."
 tags: ["flompt", "release", "prompt ide", "debugger", "ai tools", "open-source"]
+color: "primary"
 ---
 
 ## Prompts Are Software. Treat Them That Way.

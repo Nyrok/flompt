@@ -3,6 +3,7 @@ title: "The Flompt Extension: Build Prompts Without Leaving ChatGPT, on Chrome a
 date: "2026-02-25"
 excerpt: "Flompt is now available as a Chrome & Firefox extension. Build structured XML prompts directly from ChatGPT, Claude, or Gemini's sidebar. No copy-pasting required."
 tags: ["chrome extension", "firefox extension", "flompt", "prompt engineering", "productivity"]
+color: "primary"
 ---
 
 ## The Context-Switching Problem

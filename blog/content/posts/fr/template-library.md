@@ -3,6 +3,7 @@ title: "100+ templates dans Flompt : une contribution communautaire signée @Ref
 date: "2026-03-13"
 excerpt: "Flompt dispose désormais de plus de 100 templates de prompts prêts à l'emploi, répartis en 10 catégories, rédaction, code, marketing, éducation et plus. Une contribution majeure qui dessine l'avenir du projet."
 tags: ["templates", "communauté", "open-source", "prompt engineering", "flompt"]
+color: "primary"
 ---
 
 ## Une contribution qui change la donne

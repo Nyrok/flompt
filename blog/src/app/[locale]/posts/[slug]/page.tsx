@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const postUrl = `https://flompt.dev/blog/${locale}/posts/${slug}`;
   const altLocale = locale === "fr" ? "en" : "fr";
-  const ogImage = post.coverImage ?? "https://flompt.dev/og-image.png";
+  const ogImage = "https://flompt.dev/og-image.png";
 
   return {
     title: post.title,
@@ -95,7 +95,6 @@ export default async function PostPage({ params }: PageProps) {
       "@type": "WebPage",
       "@id": postUrl,
     },
-    ...(post.coverImage && { image: post.coverImage }),
   };
 
   return (

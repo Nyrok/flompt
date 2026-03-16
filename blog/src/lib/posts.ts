@@ -16,7 +16,7 @@ export interface PostMeta {
   title: string;
   date: string;
   excerpt: string;
-  coverImage?: string;
+  color?: string;
   tags?: string[];
 }
 
@@ -42,7 +42,7 @@ export function getAllPosts(locale: Locale): PostMeta[] {
         title: data.title || slug,
         date: data.date || new Date().toISOString(),
         excerpt: data.excerpt || "",
-        coverImage: data.coverImage,
+        color: data.color,
         tags: data.tags || [],
       } as PostMeta;
     });
@@ -75,7 +75,7 @@ export async function getPostBySlug(
     title: data.title || slug,
     date: data.date || new Date().toISOString(),
     excerpt: data.excerpt || "",
-    coverImage: data.coverImage,
+    color: data.color,
     tags: data.tags || [],
     contentHtml,
   };

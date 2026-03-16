@@ -3,6 +3,7 @@ title: "Fini le canvas par défaut : la vue liste de Flompt construit tes prompt
 date: "2026-03-16"
 excerpt: "Flompt propose maintenant une vue liste comme interface par défaut : pas de drag, pas de coordonnées, juste des cartes empilées que tu édites, masques, réordonnes et compiles instantanément. Le canvas est toujours là quand tu en as besoin."
 tags: ["flompt", "vue liste", "ux", "prompt building", "release", "clavier"]
+color: "primary"
 ---
 
 ## Le canvas est puissant. C'est aussi une surcharge.

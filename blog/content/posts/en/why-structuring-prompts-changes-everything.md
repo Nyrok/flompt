@@ -3,6 +3,7 @@ title: "Why structuring your prompts changes everything"
 date: "2026-02-24"
 excerpt: "A well-structured prompt doesn't just give a better answer. It transforms how you think about AI interaction."
 tags: ["prompt engineering", "structure", "fundamentals"]
+color: "primary"
 ---
 
 ## The raw prompt problem

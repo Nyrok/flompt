@@ -3,6 +3,7 @@ title: "Guide débutant : écrire son premier prompt efficace"
 date: "2026-02-10"
 excerpt: "Pas besoin d'être expert pour écrire des prompts qui marchent. Voici un guide pas-à-pas pour commencer du bon pied."
 tags: ["débutant", "guide", "prompt engineering"]
+color: "primary"
 ---
 
 ## Vous n'avez pas besoin d'être expert

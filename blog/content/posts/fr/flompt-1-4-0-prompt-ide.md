@@ -3,6 +3,7 @@ title: "Flompt 1.4.0 : on a intégré un vrai IDE de prompts dans le navigateur"
 date: "2026-03-15"
 excerpt: "Flompt 1.4.0 intègre un environnement de développement complet pour vos prompts : débogueur, critique, compresseur, estimateur de coût, mémoire contextuelle et historique de versions. Tout est local, tout est gratuit."
 tags: ["flompt", "release", "prompt ide", "débogueur", "ia", "open-source"]
+color: "primary"
 ---
 
 ## Un prompt, c'est du code. Traite-le comme tel.
