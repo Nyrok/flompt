@@ -122,11 +122,7 @@ const App = () => {
             <h1 className="logo">flompt</h1>
           </a>
 
-          <div className="header-spacer" />
-
           <ProjectSelector />
-
-          <div className="header-spacer" />
 
           <div className="header-actions">
             <button className="btn-icon" title="Version History" onClick={handleOpenVersions} aria-label="Version History">
