@@ -128,7 +128,7 @@ Create a JSON file in the matching category folder. Schema:
 ### Rules
 - `id` — unique, kebab-case, must match the filename (e.g. `my-template.json`)
 - `category` — one of: `writing` `code` `marketing` `productivity` `design` `education` `sales` `data` `creative` `personal`
-- `blocks[].type` — one of the 13 block types (see table below)
+- `blocks[].type` — one of the 16 block types (see table below)
 - No positions, IDs, or React Flow internals needed — `src/lib/templates.ts` handles hydration via `import.meta.glob`
 - At least `en` and `fr` must be present in `i18n`; other locales fall back to `en`
 
@@ -137,7 +137,7 @@ Create a JSON file in the matching category folder. Schema:
 
 ---
 
-## Block Types (13 total)
+## Block Types (16 total)
 
 Ordered as assembled (TYPE_PRIORITY in `assemblePrompt.ts`):
 
@@ -145,17 +145,20 @@ Ordered as assembled (TYPE_PRIORITY in `assemblePrompt.ts`):
 |---|------|------|-------|-------------|
 | 0 | `document` | FileText | `#86efac` | XML grounding via `<document>` — always first |
 | 1 | `role` | UserRound | `#c084fc` | AI persona / role |
-| 2 | `audience` | Users | `#93c5fd` | Who the output is written for |
-| 3 | `context` | Layers | `#94a3b8` | Background information |
-| 4 | `objective` | Target | `#fbbf24` | Main task (what to DO) |
-| 5 | `goal` | Flag | `#6ee7b7` | End goal and success criteria |
-| 6 | `input` | LogIn | `#4ade80` | Data/variables provided to the AI |
-| 7 | `constraints` | ShieldAlert | `#fb7185` | Rules and limits |
-| 8 | `examples` | Lightbulb | `#c4b5fd` | Few-shot input/output pairs |
-| 9 | `chain_of_thought` | Zap | `#fde68a` | Step-by-step reasoning instructions |
-| 10 | `output_format` | LogOut | `#ff6b9d` | Expected response format — rounded bottom |
-| 11 | `response_style` | Wand2 | `#2dd4bf` | Structured style UI (verbosity/tone/markdown/LaTeX) |
-| 12 | `language` | Languages | `#38bdf8` | Output language — always last |
+| 2 | `tools` | Wrench | `#fb923c` | Callable functions and tools the AI can use |
+| 3 | `audience` | Users | `#93c5fd` | Who the output is written for |
+| 4 | `context` | Layers | `#94a3b8` | Background information |
+| 5 | `environment` | Terminal | `#22d3ee` | System context: OS, paths, date, runtime |
+| 6 | `objective` | Target | `#fbbf24` | Main task (what to DO) |
+| 7 | `goal` | Flag | `#6ee7b7` | End goal and success criteria |
+| 8 | `input` | LogIn | `#4ade80` | Data/variables provided to the AI |
+| 9 | `constraints` | ShieldAlert | `#fb7185` | Rules and limits |
+| 10 | `guardrails` | Lock | `#ef4444` | Hard limits and safety refusals — dashed border visual |
+| 11 | `examples` | Lightbulb | `#c4b5fd` | Few-shot input/output pairs |
+| 12 | `chain_of_thought` | Zap | `#fde68a` | Step-by-step reasoning instructions |
+| 13 | `output_format` | LogOut | `#ff6b9d` | Expected response format — rounded bottom |
+| 14 | `response_style` | Wand2 | `#2dd4bf` | Structured style UI (verbosity/tone/markdown/LaTeX) |
+| 15 | `language` | Languages | `#38bdf8` | Output language — always last |
 
 **Removed blocks**: `chain_of_thought` was temporarily removed then restored (Zap icon). `format_control` was removed — `response_style` now covers all formatting directives.
 
@@ -273,6 +276,9 @@ python backend/mcp_stdio.py
 - **Star popup** (`StarPopup.tsx`) : shown once (localStorage key `flompt-star-popup-v1`) after `STAR_EVENT = 'flompt:action-completed'` fires. Triggered by: compile, decompose, inject to AI (extension), FAB assembly (mobile). Rendered in ALL modes (web + extension).
 - **Canvas overlays** : `CanvasBlockBar` (left, vertically centered) + `canvas-ctrl-bar` (top-left: Clear → Undo → Redo)
 - **Extension** : `isExtension` flag from `src/lib/platform.ts`. After inject → dispatches STAR_EVENT. GitHub button replaces Share button everywhere (`PromptOutput.tsx`).
+- **List View** : second editing mode (toggle top-right). Horizontal toolbar (left: actions + assemble, centre: add-block pills, right: view switcher). Each block is a card with header, editable textarea, ↑/↓ reorder, copy (duplicate), and delete buttons.
+- **Hide / Show** : Eye/EyeOff button on every block in both views. A hidden block is excluded from the assembled prompt. Rendered at reduced opacity (0.4 in List View, 0.35 in Canvas View).
+- **Duplicate** : Copy button on each card in List View — inserts a clone immediately after the source block with `hidden: false`.
 
 ---
 
@@ -343,7 +349,7 @@ python backend/mcp_stdio.py
 ### 9. Coherence across surfaces
 - Block types exist in: `app/src/types/blocks.ts`, `assemblePrompt.ts`, `en.json`, `fr.json`, `backend/models/blocks.py`, `compiler.py`, `decomposer.py`, `ai_service.py`, `landing/index.html`, `docs/block-types.md`, `docs/claude-code.md`, `docs/how-it-works.md`, blog posts (EN + FR)
 - **When adding/removing a block** → update ALL of the above. Don't forget blog FR articles.
-- Landing block count stat must stay in sync with actual block count (currently **13**)
+- Landing block count stat must stay in sync with actual block count (currently **16**)
 
 ### 10. Backend — known pitfalls
 - **`idb` package** must be installed in `app/` (`npm install idb`) — required by `src/lib/db.ts` (Context Memory + Version History). If missing, `tsc` fails and `npm run build` produces no `dist/`.

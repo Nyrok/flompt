@@ -79,18 +79,21 @@ Instead of writing one long block of text, flompt lets you:
 
 ## 🧩 Block Types
 
-12 specialized blocks that map directly to Claude's prompt engineering best practices:
+16 specialized blocks that map directly to Claude's prompt engineering best practices:
 
 | Block | Purpose | Claude XML |
 |-------|---------|-----------|
 | **Document** | External content grounding | `<documents><document>` |
 | **Role** | AI persona & expertise | `<role>` |
+| **Tools** | Callable functions the agent can use | `<tools>` |
 | **Audience** | Who the output is written for | `<audience>` |
 | **Context** | Background information | `<context>` |
+| **Environment** | System context: OS, paths, date, runtime | `<environment>` |
 | **Objective** | What to DO | `<objective>` |
 | **Goal** | End goal & success criteria | `<goal>` |
 | **Input** | Data you're providing | `<input>` |
 | **Constraints** | Rules & limitations | `<constraints>` |
+| **Guardrails** | Hard limits and safety refusals | `<guardrails>` |
 | **Examples** | Few-shot demonstrations | `<examples><example>` |
 | **Chain of Thought** | Step-by-step reasoning | `<thinking>` |
 | **Output Format** | Expected output structure | `<output_format>` |
@@ -194,7 +197,7 @@ Output: ✅ Prompt compiled (142 estimated tokens):
 
 #### `list_block_types()`
 
-Lists all 13 available block types with descriptions and the recommended canonical ordering. Useful when manually crafting blocks.
+Lists all 16 available block types with descriptions and the recommended canonical ordering. Useful when manually crafting blocks.
 
 ### Typical Workflow
 
@@ -582,6 +585,9 @@ cd /projects/flompt && ./deploy.sh
 ## 🌍 Features
 
 - 🎨 **Visual flowchart editor**: Drag-and-drop blocks with React Flow
+- 📋 **List View**: Dual-view editor — switch between canvas and linear card list at any time
+- 👁️ **Hide/Show blocks**: Toggle any block's visibility; hidden blocks are excluded from the assembled prompt
+- 📑 **Duplicate block**: Clone any block in one click from the List View
 - 🤖 **AI-powered decomposition**: Paste a prompt, get structured blocks
 - ⚡ **Async job queue**: Non-blocking decomposition with live progress tracking
 - 🦾 **Claude-optimized output**: XML structured following Anthropic best practices
