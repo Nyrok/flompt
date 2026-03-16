@@ -23,11 +23,20 @@ const Sidebar = ({ onOpenLibrary }: { onOpenLibrary?: () => void }) => {
   const updateBlur = useCallback(() => {
     const el = listRef.current
     if (!el) return
-    const scrollTop  = el.scrollTop
-    const maxScroll  = el.scrollHeight - el.clientHeight
-    setShowTopBlur(scrollTop > 6)
-    setShowBottomBlur(maxScroll > 6 && scrollTop < maxScroll - 6)
-    setScrolled(scrollTop > 6)
+    const mobile = window.matchMedia('(max-width: 768px)').matches
+    if (mobile) {
+      const scrollLeft = el.scrollLeft
+      const maxScrollH = el.scrollWidth - el.clientWidth
+      setShowTopBlur(scrollLeft > 6)
+      setShowBottomBlur(maxScrollH > 6 && scrollLeft < maxScrollH - 6)
+      setScrolled(false)
+    } else {
+      const scrollTop = el.scrollTop
+      const maxScroll = el.scrollHeight - el.clientHeight
+      setShowTopBlur(scrollTop > 6)
+      setShowBottomBlur(maxScroll > 6 && scrollTop < maxScroll - 6)
+      setScrolled(scrollTop > 6)
+    }
   }, [])
 
   // Check initial state and re-check when content size changes

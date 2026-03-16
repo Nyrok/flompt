@@ -9,14 +9,12 @@ import ReactFlow, {
   ReactFlowProvider,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
-import { Play, Sparkles, Undo2, Redo2, Trash2 } from 'lucide-react'
+import { Sparkles, Undo2, Redo2, Trash2 } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
-import { assemblePrompt } from '@/lib/assemblePrompt'
 import BlockNode from './BlockNode'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType, FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
-import { STAR_EVENT } from '@/components/StarPopup'
 
 const nodeTypes = { block: BlockNode }
 
@@ -217,24 +215,6 @@ const CanvasInner = () => {
         </div>
       )}
 
-      {/* Mobile FAB: assemble & navigate to output */}
-      {nodes.length > 0 && (
-        <button
-          className="canvas-fab"
-          onClick={() => {
-            const { nodes: currentNodes, edges: currentEdges, setCompiledPrompt: setResult, setActiveTab: switchTab } = useFlowStore.getState()
-            if (currentNodes.length === 0) return
-            const result = assemblePrompt(currentNodes, currentEdges)
-            setResult(result)
-            switchTab('output')
-            window.dispatchEvent(new CustomEvent(STAR_EVENT))
-          }}
-          title={t.promptOutput.compile}
-          aria-label={t.promptOutput.compile}
-        >
-          <Play size={22} aria-hidden="true" />
-        </button>
-      )}
     </div>
   )
 }
