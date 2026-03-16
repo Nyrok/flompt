@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Zap, ClipboardPaste, Download } from 'lucide-react'
+import { Zap, ClipboardPaste, Download, ScanSearch } from 'lucide-react'
 import { useFlowStore } from '@/store/flowStore'
 import { decomposePrompt, watchJobStatus, classifyError, classifyJobError } from '@/services/api'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -19,8 +19,9 @@ const PromptInput = () => {
     setActiveTab,
     setQueueStatus,
     setCompiledPrompt,
+    nodes,
   } = useFlowStore()
-  const { setOpen: openAudit, setResult: setAuditResult } = useAuditStore()
+  const { setOpen: openAudit, setResult: setAuditResult, result: auditResult } = useAuditStore()
   const { t } = useLocale()
   const [error, setError] = useState<string | null>(null)
   const [platformName, setPlatformName] = useState<string | null>(null)
@@ -90,11 +91,10 @@ const PromptInput = () => {
       setLastDecomposedPrompt(prompt)
       analytics.decomposeCompleted(result.nodes.length)
 
-      // ── 4. Compute audit and open the panel ───────────────────────────────
+      // ── 4. Pre-compute audit (stored, not opened) ─────────────────────────
       if (!isExtension) {
         const audit = computeAudit(result.nodes)
         setAuditResult(audit)
-        openAudit(true)
       }
 
     } catch (e) {
@@ -181,16 +181,35 @@ const PromptInput = () => {
         </p>
       )}
 
-      <button
-        className="btn btn-primary"
-        onClick={handleDecompose}
-        disabled={isDecomposing || !rawPrompt.trim() || rawPrompt.trim() === lastDecomposedPrompt.trim()}
-        data-tour="decompose-btn"
-        aria-busy={isDecomposing}
-      >
-        <Zap size={14} aria-hidden="true" />
-        {isDecomposing ? t.promptInput.decomposing : t.promptInput.decompose}
-      </button>
+      {rawPrompt.trim() && rawPrompt.trim() === lastDecomposedPrompt.trim() && nodes.length > 0 && !isDecomposing ? (
+        <button
+          className="btn btn-primary btn-audit-pulse"
+          onClick={() => {
+            if (!auditResult) {
+              const audit = computeAudit(nodes)
+              setAuditResult(audit)
+            }
+            openAudit(true)
+          }}
+          data-tour="decompose-btn"
+          type="button"
+        >
+          <ScanSearch size={14} aria-hidden="true" />
+          {t.promptInput.auditPrompt}
+        </button>
+      ) : (
+        <button
+          className="btn btn-primary"
+          onClick={handleDecompose}
+          disabled={isDecomposing || !rawPrompt.trim()}
+          data-tour="decompose-btn"
+          aria-busy={isDecomposing}
+          type="button"
+        >
+          <Zap size={14} aria-hidden="true" />
+          {isDecomposing ? t.promptInput.decomposing : t.promptInput.decompose}
+        </button>
+      )}
 
     </div>
   )

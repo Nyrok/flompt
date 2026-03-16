@@ -3734,3 +3734,15 @@ body {
 @media (max-width: 640px) {
   .audit-panel { width: 100%; }
 }
+
+/* ─── Audit pulse button ─────────────────────────────────────────────────── */
+@keyframes audit-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  50%       { box-shadow: 0 0 0 6px transparent; }
+}
+.btn-audit-pulse {
+  animation: audit-pulse 2s ease-in-out infinite;
+}
+.btn-audit-pulse:hover {
+  animation: none;
+}
