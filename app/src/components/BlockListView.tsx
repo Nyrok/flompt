@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { X, ChevronDown, ChevronRight, Trash2, Undo2, Redo2, GripVertical, LayoutList, Network } from 'lucide-react'
+import { X, ChevronDown, ChevronRight, Trash2, Undo2, Redo2, LayoutList, Network } from 'lucide-react'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
@@ -15,22 +15,30 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
   const { nodes, setNodes, removeNode, updateNodeContent, addNode, reset, undo, redo, past, future } = useFlowStore()
   const { t } = useLocale()
 
-  const [collapsed, setCollapsed]     = useState<Set<string>>(new Set())
-  // Local visual order — array of node IDs
-  const [order, setOrder]             = useState<string[]>(() => nodes.map(n => n.id))
+  const [collapsed, setCollapsed] = useState<Set<string>>(new Set())
+  const [order, setOrder]         = useState<string[]>(() => nodes.map(n => n.id))
 
-  // Keep order in sync when nodes change externally (decompose, undo/redo, etc.)
+  // After a keyboard reorder, refocus the moved card
+  const focusAfterMove = useRef<string | null>(null)
+
+  // Keep order in sync when nodes change externally (undo/redo, decompose…)
   useEffect(() => {
     setOrder(prev => {
       const incoming = nodes.map(n => n.id)
-      // Keep existing order for IDs already present, append new ones
-      const kept    = prev.filter(id => incoming.includes(id))
-      const added   = incoming.filter(id => !kept.includes(id))
+      const kept  = prev.filter(id => incoming.includes(id))
+      const added = incoming.filter(id => !kept.includes(id))
       return [...kept, ...added]
     })
   }, [nodes])
 
-  // Ordered list of nodes for rendering
+  // Focus moved card after re-render
+  useEffect(() => {
+    if (!focusAfterMove.current) return
+    const el = document.querySelector<HTMLElement>(`[data-block-id="${focusAfterMove.current}"]`)
+    el?.focus()
+    focusAfterMove.current = null
+  }, [order])
+
   const orderedNodes = order
     .map(id => nodes.find(n => n.id === id))
     .filter(Boolean) as FlomptNode[]
@@ -44,43 +52,48 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
     })
   }
 
-  // ── Drag to reorder ───────────────────────────────────────────────────────
-  const dragIdx  = useRef<number | null>(null)
-  const overIdx  = useRef<number | null>(null)
-  const canDrag  = useRef(false)
-
-  const handleDragStart = (e: React.DragEvent, idx: number) => {
-    if (!canDrag.current) { e.preventDefault(); return }
-    dragIdx.current = idx
-    e.dataTransfer.effectAllowed = 'move'
-    // Transparent drag ghost
-    const ghost = document.createElement('div')
-    ghost.style.cssText = 'position:fixed;top:-9999px'
-    document.body.appendChild(ghost)
-    e.dataTransfer.setDragImage(ghost, 0, 0)
-    setTimeout(() => document.body.removeChild(ghost), 0)
-  }
-
-  const handleDragOver = (e: React.DragEvent, idx: number) => {
-    e.preventDefault()
-    overIdx.current = idx
-    if (dragIdx.current === null || dragIdx.current === idx) return
+  // ── Reorder (keyboard) ────────────────────────────────────────────────────
+  const moveBlock = (id: string, idx: number, dir: 'up' | 'down') => {
+    const targetIdx = dir === 'up' ? idx - 1 : idx + 1
+    if (targetIdx < 0 || targetIdx >= order.length) return
     setOrder(prev => {
       const next = [...prev]
-      const [moved] = next.splice(dragIdx.current!, 1)
-      next.splice(idx, 0, moved)
-      dragIdx.current = idx
+      ;[next[idx], next[targetIdx]] = [next[targetIdx], next[idx]]
       return next
     })
+    focusAfterMove.current = id
   }
 
-  const handleDragEnd = () => {
-    canDrag.current = false
-    dragIdx.current = null
-    overIdx.current = null
-    // Sync visual order back to the store (no assembly impact — TYPE_PRIORITY governs that)
-    setNodes(order.map(id => nodes.find(n => n.id === id)).filter(Boolean) as FlomptNode[])
+  const handleCardKeyDown = (e: React.KeyboardEvent, id: string, idx: number) => {
+    switch (e.key) {
+      case 'ArrowLeft':
+        e.preventDefault()
+        moveBlock(id, idx, 'down')
+        break
+      case 'ArrowRight':
+        e.preventDefault()
+        moveBlock(id, idx, 'up')
+        break
+      case '-':
+        e.preventDefault()
+        setCollapsed(prev => new Set(prev).add(id))
+        break
+      case '+':
+      case '=':
+        e.preventDefault()
+        setCollapsed(prev => { const next = new Set(prev); next.delete(id); return next })
+        break
+      case 'Enter':
+        toggleCollapse(id)
+        break
+    }
   }
+
+  // Sync order back to store when it changes
+  useEffect(() => {
+    setNodes(order.map(id => nodes.find(n => n.id === id)).filter(Boolean) as FlomptNode[])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [order])
 
   // ── Add block ─────────────────────────────────────────────────────────────
   const handleAddBlock = (type: BlockType) => {
@@ -192,38 +205,24 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
       ) : (
         <div className="block-list-view-cards">
           {orderedNodes.map((node, idx) => {
-            const meta       = BLOCK_META[node.data.type]
-            const Icon       = meta.icon
+            const meta        = BLOCK_META[node.data.type]
+            const Icon        = meta.icon
             const isCollapsed = collapsed.has(node.id)
             return (
               <div
                 key={node.id}
                 className={`block-list-card${isCollapsed ? ' block-list-card--collapsed' : ''}`}
                 style={{ borderLeftColor: meta.color }}
-                draggable
-                onDragStart={e => handleDragStart(e, idx)}
-                onDragOver={e => handleDragOver(e, idx)}
-                onDragEnd={handleDragEnd}
               >
                 <div
                   className="block-list-card-header"
+                  data-block-id={node.id}
                   onClick={() => toggleCollapse(node.id)}
+                  onKeyDown={e => handleCardKeyDown(e, node.id, idx)}
                   role="button"
                   aria-expanded={!isCollapsed}
                   tabIndex={0}
-                  onKeyDown={e => e.key === 'Enter' && toggleCollapse(node.id)}
                 >
-                  {/* Drag handle — only this triggers drag */}
-                  <span
-                    className="block-list-drag-handle"
-                    onMouseDown={e => { e.stopPropagation(); canDrag.current = true }}
-                    onMouseUp={() => { canDrag.current = false }}
-                    onClick={e => e.stopPropagation()}
-                    aria-hidden="true"
-                  >
-                    <GripVertical size={13} />
-                  </span>
-
                   <span className="block-list-card-icon" style={{ color: meta.color, background: `${meta.color}1a` }}>
                     <Icon size={13} />
                   </span>
@@ -231,12 +230,12 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                     {node.data.label}
                   </span>
 
-                  {/* Content preview when collapsed — takes remaining space */}
+                  {/* Content preview when collapsed */}
                   {isCollapsed && node.data.content && (
                     <span className="block-list-card-preview">{node.data.content}</span>
                   )}
 
-                  {/* Right actions — always pinned to the right */}
+                  {/* Right actions — always pinned */}
                   <span className="block-list-card-actions">
                     <span className="block-list-card-chevron">
                       {isCollapsed ? <ChevronRight size={12} /> : <ChevronDown size={12} />}

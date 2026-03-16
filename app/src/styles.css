@@ -1791,18 +1791,6 @@ body {
 }
 .block-list-card-header:hover { background: var(--surface); }
 
-/* Drag handle */
-.block-list-drag-handle {
-  display: flex;
-  align-items: center;
-  color: var(--text-dim);
-  cursor: grab;
-  opacity: 0.4;
-  flex-shrink: 0;
-}
-.block-list-drag-handle:hover { opacity: 1; }
-.block-list-drag-handle:active { cursor: grabbing; }
-
 .block-list-card-icon {
   width: 22px;
   height: 22px;
