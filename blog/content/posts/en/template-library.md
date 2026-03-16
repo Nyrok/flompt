@@ -3,6 +3,7 @@ title: "100+ Templates in Flompt: A Community Contribution by @Refaltor77"
 date: "2026-03-13"
 excerpt: "Flompt now ships with over 100 ready-to-use prompt templates across 10 categories, writing, code, marketing, education and more. A major community contribution that shapes the future of the project."
 tags: ["templates", "community", "open-source", "prompt engineering", "flompt"]
+color: "primary"
 ---
 
 ## A Milestone Contribution

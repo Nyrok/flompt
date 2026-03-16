@@ -3,6 +3,7 @@ title: "Why prompt engineering actually works: lessons from Anthropic's official
 date: "2026-02-25"
 excerpt: "Vague instructions get vague answers. Here's what Anthropic's own research says about writing prompts that actually work, and why structure is the single biggest lever."
 tags: ["prompt engineering", "Claude", "best practices", "structured prompts"]
+color: "primary"
 ---
 
 We've all been there: you type something into ChatGPT or Claude, get a mediocre answer, and instinctively assume the model just isn't smart enough. But what if the model is brilliant, and the problem is actually your prompt?

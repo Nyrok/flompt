@@ -3,6 +3,7 @@ title: "Pourquoi le prompt engineering fonctionne vraiment : les leçons du guid
 date: "2026-02-25"
 excerpt: "Des instructions vagues donnent des réponses vagues. Voici ce que la recherche d'Anthropic dit sur l'écriture de prompts efficaces, et pourquoi la structure est le levier le plus puissant."
 tags: ["prompt engineering", "Claude", "bonnes pratiques", "prompts structurés"]
+color: "primary"
 ---
 
 On y est tous passés : on tape quelque chose dans ChatGPT ou Claude, on obtient une réponse médiocre, et on se dit instinctivement que le modèle n'est pas assez intelligent. Mais si le modèle était brillant, et que le problème était en réalité votre prompt ?

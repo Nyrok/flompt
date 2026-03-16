@@ -3,6 +3,7 @@ title: "How to write Claude-optimized prompts: XML, documents, and structured ex
 date: "2026-02-25"
 excerpt: "Anthropic's official best practices, translated into concrete techniques you can use today, and how flompt applies them automatically."
 tags: ["Claude", "prompt engineering", "XML", "Anthropic", "best practices"]
+color: "primary"
 ---
 
 ## Claude is different. Your prompts should be too.

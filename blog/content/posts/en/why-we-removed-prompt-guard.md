@@ -3,6 +3,7 @@ title: "Why We Removed the Prompt Guard"
 date: "2026-03-04"
 excerpt: "We shipped Llama Guard to filter unsafe prompts. Then we watched it silently kill conversion. Here's why we ripped it out."
 tags: ["transparency", "product", "ux", "open source"]
+color: "primary"
 ---
 
 When we first launched Flompt's decompose feature (where you paste a prompt and the AI breaks it into structured blocks), we added a security layer called Prompt Guard.

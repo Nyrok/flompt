@@ -3,6 +3,7 @@ title: "Comment écrire des prompts optimisés pour Claude : XML, documents et e
 date: "2026-02-25"
 excerpt: "Les meilleures pratiques officielles d'Anthropic, traduites en techniques concrètes, et comment flompt les applique automatiquement."
 tags: ["Claude", "prompt engineering", "XML", "Anthropic", "meilleures pratiques"]
+color: "primary"
 ---
 
 ## Claude est différent. Tes prompts devraient l'être aussi.

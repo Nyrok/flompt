@@ -3,6 +3,7 @@ title: "Pourquoi structurer ses prompts change tout"
 date: "2026-02-24"
 excerpt: "Un prompt bien structuré ne donne pas juste une meilleure réponse. Il transforme votre façon de penser l'interaction avec l'IA."
 tags: ["prompt engineering", "structure", "fondamentaux"]
+color: "primary"
 ---
 
 ## Le problème du prompt brut

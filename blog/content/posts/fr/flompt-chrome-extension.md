@@ -3,6 +3,7 @@ title: "L'extension Flompt : construis tes prompts sans quitter ChatGPT, sur Chr
 date: "2026-02-25"
 excerpt: "Flompt est maintenant disponible en extension Chrome & Firefox. Construis des prompts structurés en XML directement depuis la sidebar de ChatGPT, Claude ou Gemini. Sans copier-coller."
 tags: ["extension chrome", "extension firefox", "flompt", "prompt engineering", "productivité"]
+color: "primary"
 ---
 
 ## Le problème du contexte

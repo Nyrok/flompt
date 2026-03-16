@@ -3,6 +3,7 @@ title: "5 techniques de prompt engineering pour des réponses précises"
 date: "2026-02-20"
 excerpt: "Des méthodes concrètes pour obtenir exactement ce que vous voulez de l'IA, à chaque fois."
 tags: ["prompt engineering", "techniques", "guide"]
+color: "primary"
 ---
 
 ## Au-delà du prompt basique

@@ -3,6 +3,7 @@ title: "flompt est maintenant un outil natif de Claude Code"
 date: "2026-02-26"
 excerpt: "flompt intègre un serveur MCP. Ajoutez une ligne à la config de votre projet et decompose_prompt, compile_prompt deviennent des outils que Claude Code peut appeler directement. Sans installation, sans compte."
 tags: ["claude code", "MCP", "outils développeur", "intégration"]
+color: "primary"
 ---
 
 ## Le problème des prompts dans les workflows agentiques

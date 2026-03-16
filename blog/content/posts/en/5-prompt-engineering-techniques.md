@@ -3,6 +3,7 @@ title: "5 prompt engineering techniques for precise answers"
 date: "2026-02-20"
 excerpt: "Concrete methods to get exactly what you want from AI, every time."
 tags: ["prompt engineering", "techniques", "guide"]
+color: "primary"
 ---
 
 ## Beyond the basic prompt

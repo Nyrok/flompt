@@ -3,6 +3,7 @@ title: "Pourquoi on a retiré le Prompt Guard"
 date: "2026-03-04"
 excerpt: "On avait intégré Llama Guard pour filtrer les prompts dangereux. Puis on a regardé ce que ça faisait à la conversion. On l'a retiré entièrement."
 tags: ["transparence", "produit", "ux", "open source"]
+color: "primary"
 ---
 
 Quand on a lancé la fonctionnalité de décomposition de Flompt (tu colles un prompt, l'IA le découpe en blocs structurés), on a ajouté une couche de sécurité appelée Prompt Guard.
