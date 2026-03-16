@@ -5,7 +5,8 @@ import { decomposePrompt, watchJobStatus, classifyError, classifyJobError } from
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics, setSource } from '@/lib/analytics'
 import { isExtension } from '@/lib/platform'
-import { STAR_EVENT } from '@/components/StarPopup'
+import { computeAudit } from '@/features/audit/computeAudit'
+import { useAuditStore } from '@/features/audit/useAuditStore'
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -19,6 +20,7 @@ const PromptInput = () => {
     setQueueStatus,
     setCompiledPrompt,
   } = useFlowStore()
+  const { setOpen: openAudit, setResult: setAuditResult } = useAuditStore()
   const { t } = useLocale()
   const [error, setError] = useState<string | null>(null)
   const [platformName, setPlatformName] = useState<string | null>(null)
@@ -87,7 +89,13 @@ const PromptInput = () => {
       setEdges([])
       setLastDecomposedPrompt(prompt)
       analytics.decomposeCompleted(result.nodes.length)
-      window.dispatchEvent(new CustomEvent(STAR_EVENT))
+
+      // ── 4. Compute audit and open the panel ───────────────────────────────
+      if (!isExtension) {
+        const audit = computeAudit(result.nodes)
+        setAuditResult(audit)
+        openAudit(true)
+      }
 
     } catch (e) {
       setActiveTab('input')

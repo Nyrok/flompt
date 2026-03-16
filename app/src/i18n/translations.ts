@@ -206,6 +206,13 @@ export interface Translations {
     inputButtons: { systemPrompt: string }
   }
   blocks: Record<BlockType, BlockTranslation>
+  audit: {
+    title: string
+    hint: string
+    addBlock: string
+    perfect: string
+    blocksPresent: string
+  }
 }
 
 // ── Builder — wraps JSON into the typed Translations shape ─────────────────
@@ -241,6 +248,7 @@ function build(raw: RawLocale): Translations {
     makeIntegration: raw.makeIntegration,
     ide: (raw as any).ide,
     blocks: raw.blocks as Record<BlockType, BlockTranslation>,
+    audit: (raw as any).audit,
   }
 }
 

@@ -12,7 +12,6 @@ import TemplateLibrary from '@/components/TemplateLibrary'
 import KeyboardShortcuts from '@/components/KeyboardShortcuts'
 import GuidedTour from '@/components/GuidedTour'
 import ExtensionPopup from '@/components/ExtensionPopup'
-import StarPopup from '@/components/StarPopup'
 import MakeIntegration from '@/components/MakeIntegration'
 import ProjectSelector from '@/components/ProjectSelector'
 import { useFlowStore } from '@/store/flowStore'
@@ -22,6 +21,7 @@ import { useLocale } from '@/i18n/LocaleContext'
 import { LOCALES, LOCALE_LABELS } from '@/i18n/translations'
 import type { Locale } from '@/i18n/translations'
 import { isExtension } from '@/lib/platform'
+import AuditPanel from '@/features/audit/AuditPanel'
 import DebuggerPanel from '@/features/debugger/DebuggerPanel'
 import CompressorModal from '@/features/compressor/CompressorModal'
 import CriticPanel from '@/features/critic/CriticPanel'
@@ -235,11 +235,11 @@ const App = () => {
       {/* Extension popup — web only, once after 20s */}
       {!isExtension && <ExtensionPopup />}
 
-      {/* Star popup — after first decompose, compile, or inject to AI */}
-      <StarPopup />
-
       {/* Make.com integration panel — web only */}
       {!isExtension && <MakeIntegration />}
+
+      {/* Post-decompose audit panel */}
+      {!isExtension && <AuditPanel />}
 
       {/* IDE feature panels — web only */}
       {!isExtension && <DebuggerPanel onApplyFix={handleApplyDebugFix} />}

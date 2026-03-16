@@ -4,7 +4,6 @@ import { useLocale } from '@/i18n/LocaleContext'
 import { track } from '@/lib/analytics'
 import ChromeIcon from '@/components/ChromeIcon'
 import FirefoxIcon from '@/components/FirefoxIcon'
-import { STAR_EVENT } from '@/components/StarPopup'
 
 const POPUP_KEY = 'flompt-ext-popup-v1'
 const POPUP_DELAY = 20_000 // 20s — after guided tour
@@ -31,30 +30,8 @@ const ExtensionPopup = () => {
       } catch { /* noop */ }
     }, POPUP_DELAY)
 
-    // If the user completes an action (decompose/compile), star popup takes priority
-    const onStarEvent = () => {
-      clearTimeout(timer)
-      try { localStorage.setItem(POPUP_KEY, '1') } catch { /* noop */ }
-    }
-    window.addEventListener(STAR_EVENT, onStarEvent, { once: true })
-
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener(STAR_EVENT, onStarEvent)
-    }
+    return () => clearTimeout(timer)
   }, [])
-
-  // If StarPopup becomes visible while we're visible, yield to it
-  useEffect(() => {
-    const onStarShow = () => {
-      if (visible) {
-        try { localStorage.setItem(POPUP_KEY, '1') } catch { /* noop */ }
-        setVisible(false)
-      }
-    }
-    window.addEventListener(STAR_POPUP_SHOW_EVENT, onStarShow)
-    return () => window.removeEventListener(STAR_POPUP_SHOW_EVENT, onStarShow)
-  }, [visible])
 
   useEffect(() => {
     if (visible) closeRef.current?.focus()

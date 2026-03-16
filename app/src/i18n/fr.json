@@ -409,5 +409,12 @@
       "label": "Langue",
       "description": "Langue de réponse de l'IA"
     }
+  },
+  "audit": {
+    "title": "Audit du prompt",
+    "hint": "{n} blocs clés manquants. Ajoutez-les pour améliorer votre prompt.",
+    "addBlock": "Ajouter",
+    "perfect": "Tous les blocs clés sont présents — prompt solide.",
+    "blocksPresent": "blocs clés présents"
   }
 }
