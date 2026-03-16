@@ -1714,6 +1714,20 @@ body {
   padding: 12px;
   gap: 8px;
 }
+
+/* Actions bar — reuses canvas-ctrl-btn styles */
+.block-list-ctrl-bar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
 .block-list-view-empty {
   flex: 1;
   display: flex;
@@ -1728,10 +1742,12 @@ body {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   padding-bottom: 4px;
   padding-right: 2px;
 }
+
+/* Card */
 .block-list-card {
   border-radius: 8px;
   border: 1px solid var(--border);
@@ -1739,13 +1755,31 @@ body {
   background: var(--bg-2);
   overflow: hidden;
   flex-shrink: 0;
+  transition: opacity 0.15s;
 }
+.block-list-card[draggable]:active { opacity: 0.5; }
 .block-list-card-header {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 7px 8px 6px;
+  cursor: pointer;
+  user-select: none;
 }
+.block-list-card-header:hover { background: var(--surface); }
+
+/* Drag handle */
+.block-list-drag-handle {
+  display: flex;
+  align-items: center;
+  color: var(--text-dim);
+  cursor: grab;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+.block-list-drag-handle:hover { opacity: 1; }
+.block-list-drag-handle:active { cursor: grabbing; }
+
 .block-list-card-icon {
   width: 22px;
   height: 22px;
@@ -1760,8 +1794,26 @@ body {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  flex: 1;
+  flex-shrink: 0;
 }
+
+/* Content preview shown when collapsed */
+.block-list-card-preview {
+  flex: 1;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.block-list-card-chevron {
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
 .block-list-card-delete {
   width: 20px;
   height: 20px;
@@ -1777,6 +1829,7 @@ body {
   flex-shrink: 0;
 }
 .block-list-card-delete:hover { background: var(--surface); color: var(--error, #f87171); }
+
 .block-list-card-textarea {
   width: 100%;
   padding: 6px 10px 8px;
@@ -1795,8 +1848,8 @@ body {
 .block-list-card-textarea:focus { background: var(--surface); }
 .block-list-card-textarea::placeholder { color: var(--text-dim); opacity: 0.6; }
 
-/* ── Add block button ────────────────────────────────────────────────────── */
-.block-list-view-add { flex-shrink: 0; }
+/* ── Add block — hidden on desktop, visible on mobile ───────────────────── */
+.block-list-view-add { display: none; }
 .block-list-view-add-btn {
   display: flex;
   align-items: center;
@@ -1851,6 +1904,9 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+@media (max-width: 768px) {
+  .block-list-view-add { display: block; flex-shrink: 0; }
 }
 
 /* ── Canvas background override ──────────────────────────────────────────── */
