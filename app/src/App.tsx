@@ -11,7 +11,6 @@ import PromptOutput from '@/components/PromptOutput'
 import TemplateLibrary from '@/components/TemplateLibrary'
 import KeyboardShortcuts from '@/components/KeyboardShortcuts'
 import GuidedTour from '@/components/GuidedTour'
-import ExtensionBanner from '@/components/ExtensionBanner'
 import ExtensionPopup from '@/components/ExtensionPopup'
 import StarPopup from '@/components/StarPopup'
 import MakeIntegration from '@/components/MakeIntegration'
@@ -116,8 +115,6 @@ const App = () => {
       <a href="#main-content" className="skip-link">
         {t.accessibility.skipToMain}
       </a>
-
-      {!isExtension && <ExtensionBanner />}
 
       {!isExtension && (
         <header className="header">
