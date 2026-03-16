@@ -1765,6 +1765,7 @@ body {
   padding: 7px 8px 6px;
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
 }
 .block-list-card-header:hover { background: var(--surface); }
 
@@ -1806,6 +1807,14 @@ body {
   white-space: nowrap;
   text-overflow: ellipsis;
   min-width: 0;
+}
+/* Right-pinned wrapper — always stuck to the right */
+.block-list-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 .block-list-card-chevron {
   color: var(--text-dim);
