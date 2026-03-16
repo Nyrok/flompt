@@ -15,7 +15,7 @@ Think of it as **Figma for Prompts** — visual, structured, and modular.
 ## The three-step workflow
 
 1. **Decompose** — Paste any raw prompt. flompt's AI (Claude) automatically breaks it into semantic blocks.
-2. **Edit visually** — Drag, connect, and edit blocks on an interactive canvas powered by React Flow.
+2. **Edit visually** — Drag, connect, and edit blocks on an interactive canvas powered by React Flow, or switch to List View for a linear card-based layout. Hide any block to exclude it from assembly without deleting it.
 3. **Assemble** — Generate a structured XML prompt from your visual flow — 100% local, instant, ready to inject into any LLM.
 
 > No sign-up required. Free forever. Self-hostable under MIT license.
@@ -25,6 +25,12 @@ Think of it as **Figma for Prompts** — visual, structured, and modular.
 **100+ ready-to-use prompt templates** across 10 categories — code, writing, marketing, productivity, design, education, sales, data, creative, personal. One click loads a complete structured canvas. No blank page.
 
 → [Template Library documentation](./template-library.md)
+
+## List View
+
+Switch between **Canvas** and **List** view using the toggle in the top-right of the toolbar. List View displays all blocks as stacked cards — edit content inline, reorder with ↑/↓ buttons, duplicate blocks, and toggle visibility. Both views share the same block store and stay in sync.
+
+→ [List View documentation](./list-view.md)
 
 ## Projects
 

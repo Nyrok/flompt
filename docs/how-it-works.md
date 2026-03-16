@@ -35,18 +35,27 @@ dictionaries by a given key. Return only code, no explanations."
 
 ## Step 2: Edit Visually
 
-Once on the canvas, you have full control:
+flompt offers two editing views, switchable via the **List / Canvas toggle** in the top-right of the toolbar.
+
+### Canvas View
+
+The default view — an interactive React Flow canvas:
 
 | Action | How |
 |---|---|
 | **Reposition** a block | Drag it anywhere on the canvas |
 | **Connect** two blocks | Click the bottom handle of one, then the top handle of another |
 | **Edit content** | Click on any block — a textarea opens and auto-resizes |
-| **Add a block** | Click a block type in the left sidebar |
+| **Add a block** | Click a block type pill in the toolbar |
 | **Delete a block** | Click the × button or press `Delete` |
+| **Hide / Show** a block | Click the Eye icon on the block header |
 | **Undo / Redo** | `Ctrl+Z` / `Ctrl+Y` (last 30 states) |
 
 The canvas uses a **20px snap-to-grid** and supports a minimap for large flows. Your session is **auto-saved** to localStorage — no data is lost on refresh.
+
+### List View
+
+A linear, card-based view of all blocks — useful for editing content and reordering without navigating a canvas. See [List View](./list-view.md) for full documentation.
 
 > **Projects tip:** Each project has its own independent canvas state. Switch projects from the header pill to work on multiple prompt flows without losing context. See [Projects](./projects.md).
 
@@ -130,6 +139,8 @@ The Chrome extension brings flompt directly into ChatGPT, Claude, and Gemini as 
 
 ## Keyboard Shortcuts
 
+These shortcuts apply in the **Canvas view**:
+
 | Shortcut | Action |
 |---|---|
 | `Ctrl+Z` | Undo |
@@ -137,3 +148,5 @@ The Chrome extension brings flompt directly into ChatGPT, Claude, and Gemini as 
 | `Delete` | Delete selected block |
 | `Ctrl+A` | Select all blocks |
 | `Escape` | Deselect / close panel |
+
+In the **List view**, reordering is done via the ↑/↓ buttons on each card. There are no additional keyboard shortcuts specific to list view.
