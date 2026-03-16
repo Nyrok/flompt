@@ -8,18 +8,20 @@ import { generateResponseStyleContent } from '@/types/blocks'
 const TYPE_PRIORITY: Record<BlockType, number> = {
   document:        0,   // XML grounding — always first
   role:            1,   // persona
-  audience:        2,   // who it's for
-  context:         3,   // background
-  objective:       4,   // main task
-  goal:            5,   // success criteria
-  input:           6,   // data/variables
-  constraints:     7,   // rules
-  guardrails:      8,   // hard limits / safety refusals
-  examples:        9,   // few-shot
-  chain_of_thought: 10, // reasoning instructions
-  output_format:   11,  // response format
-  response_style:  12,  // structured style directives
-  language:        13,  // language instruction — always last
+  tools:           2,   // callable functions — declared right after role
+  audience:        3,   // who it's for
+  context:         4,   // background
+  environment:     5,   // system context (OS, paths, date…)
+  objective:       6,   // main task
+  goal:            7,   // success criteria
+  input:           8,   // data/variables
+  constraints:     9,   // rules
+  guardrails:      10,  // hard limits / safety refusals
+  examples:        11,  // few-shot
+  chain_of_thought: 12, // reasoning instructions
+  output_format:   13,  // response format
+  response_style:  14,  // structured style directives
+  language:        15,  // language instruction — always last
 }
 
 // ─── Topological sort (Kahn's algorithm) ────────────────────────────────────
@@ -210,6 +212,8 @@ const MD_HEADING: Record<BlockType, string> = {
   objective:        'Objective',
   goal:             'Goal',
   input:            'Input',
+  tools:            'Tools',
+  environment:      'Environment',
   constraints:      'Constraints',
   guardrails:       'Guardrails',
   examples:         'Examples',

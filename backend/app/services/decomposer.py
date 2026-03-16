@@ -16,8 +16,10 @@ from app.services.ai_service import decompose_with_ai, _get_anthropic_key, _get_
 
 BLOCK_META = {
     BlockType.role: {"label": "Role", "description": "Defines the AI persona / role"},
+    BlockType.tools: {"label": "Tools", "description": "Functions and tools the AI can call"},
     BlockType.audience: {"label": "Audience", "description": "Who the output is written for"},
     BlockType.context: {"label": "Context", "description": "Provides task context"},
+    BlockType.environment: {"label": "Environment", "description": "System context: OS, paths, date, runtime"},
     BlockType.objective: {"label": "Objective", "description": "What we want to accomplish"},
     BlockType.goal: {"label": "Goal", "description": "End goal and success criteria"},
     BlockType.input: {"label": "Input", "description": "Data provided to the AI"},
@@ -39,6 +41,8 @@ HEURISTIC_KEYWORDS: dict[BlockType, list[str]] = {
     BlockType.goal: ["success", "end goal", "the goal is", "objectif final", "criteria", "critères"],
     BlockType.input: ["input:", "data:", "the following", "voici", "here is"],
     BlockType.document: ["document:", "file:", "article:", "the document", "le document", "following document", "document suivant"],
+    BlockType.tools: ["function:", "tool:", "available tools", "you have access to", "call the", "tu peux utiliser", "outils disponibles", "fonctions disponibles"],
+    BlockType.environment: ["os:", "operating system", "working directory", "current date", "runtime:", "environment:", "system:", "date:", "path:", "répertoire", "système d'exploitation"],
     BlockType.constraints: ["do not", "never", "always", "ne pas", "forbidden", "constraint", "rule:"],
     BlockType.guardrails: ["refuse", "must not", "not allowed", "prohibited", "safety", "guardrail", "under no circumstances", "jamais sous aucun prétexte", "interdit de", "sécurité"],
     BlockType.output_format: ["output", "format", "return", "respond with", "retourne", "répondre en"],

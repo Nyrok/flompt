@@ -36,6 +36,24 @@ Color: violet `#c084fc`
 
 ---
 
+## Tools
+
+Declares the functions and tools the AI is allowed to call. Each entry describes a tool name, its purpose, and its parameters — giving the AI a precise, bounded set of available actions.
+
+**Example:**
+```
+search_web(query: string) — Search the internet for up-to-date information
+read_file(path: string) — Read the contents of a file at the given path
+run_terminal(command: string) — Execute a shell command in the current working directory
+create_memory(key: string, value: string) — Persist a value for later retrieval
+```
+
+**When to use:** When building agentic prompts where the AI needs to act — not just generate text. Tool declarations constrain and inform the model about what actions are possible, preventing hallucinated function calls and improving reliability.
+
+Color: orange `#fb923c`
+
+---
+
 ## Audience
 
 Specifies who the output is written for — their expertise level, role, background, or expectations. Distinct from Role (who the AI *is*), Audience defines who the AI is *speaking to*.
@@ -53,6 +71,25 @@ Color: blue `#93c5fd`
 Provides background information and situational context. This is the "why" behind the objective — it helps Claude understand the full picture before acting.
 
 Color: slate `#94a3b8`
+
+---
+
+## Environment
+
+Injects system-level context variables — the runtime state the AI needs to operate accurately. Distinct from Context (narrative background), Environment is machine-readable situational data.
+
+**Examples:**
+```
+OS: Ubuntu 22.04 LTS
+Working directory: /home/project
+Current date: 2026-03-16
+Runtime: Node.js 20.x
+Token budget: 8000
+```
+
+**When to use:** When building agents or system prompts where the AI needs to know where and when it is operating — current date, file paths, environment variables, available runtimes, token constraints.
+
+Color: cyan `#22d3ee`
 
 ---
 
@@ -204,7 +241,7 @@ Color: sky `#38bdf8`
 flompt automatically applies Anthropic's recommended block ordering:
 
 ```
-documents → role → audience → context → objective → goal → input →
+documents → role → tools → audience → context → environment → objective → goal → input →
 constraints → guardrails → examples → chain_of_thought → output_format → response_style → language
 ```
 

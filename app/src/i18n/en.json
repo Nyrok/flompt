@@ -353,6 +353,14 @@
       "label": "Goal",
       "description": "End goal and success criteria"
     },
+    "tools": {
+      "label": "Tools",
+      "description": "Functions and tools the AI can call"
+    },
+    "environment": {
+      "label": "Environment",
+      "description": "System context: OS, paths, date, runtime"
+    },
     "constraints": {
       "label": "Constraints",
       "description": "Rules and limits to respect"
