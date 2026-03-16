@@ -353,6 +353,14 @@
       "label": "Objectif final",
       "description": "But final et critères de succès"
     },
+    "tools": {
+      "label": "Outils",
+      "description": "Fonctions et outils que l'IA peut appeler"
+    },
+    "environment": {
+      "label": "Environnement",
+      "description": "Contexte système : OS, chemins, date, runtime"
+    },
     "constraints": {
       "label": "Contraintes",
       "description": "Règles et limites à respecter"

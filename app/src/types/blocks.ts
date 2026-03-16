@@ -13,6 +13,8 @@ import {
   Zap,
   Users,
   Flag,
+  Wrench,
+  Terminal,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -20,8 +22,10 @@ import type { LucideIcon } from 'lucide-react'
 
 export type BlockType =
   | 'role'
+  | 'tools'
   | 'audience'
   | 'context'
+  | 'environment'
   | 'objective'
   | 'goal'
   | 'input'
@@ -82,6 +86,12 @@ export const BLOCK_META: Record<BlockType, { label: string; description: string;
     color: '#c084fc',   // violet-400 — persona
     icon: UserRound,
   },
+  tools: {
+    label: 'Tools',
+    description: 'Functions and tools the AI can call',
+    color: '#fb923c',   // orange-400 — actionable, builder
+    icon: Wrench,
+  },
   audience: {
     label: 'Audience',
     description: 'Who the output is written for',
@@ -93,6 +103,12 @@ export const BLOCK_META: Record<BlockType, { label: string; description: string;
     description: 'Provides background context for the task',
     color: '#94a3b8',   // slate-400 — neutral, informational
     icon: Layers,
+  },
+  environment: {
+    label: 'Environment',
+    description: 'System context: OS, paths, date, runtime',
+    color: '#22d3ee',   // cyan-400 — system / terminal
+    icon: Terminal,
   },
   objective: {
     label: 'Objective',

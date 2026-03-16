@@ -5,8 +5,10 @@ from pydantic import BaseModel
 
 class BlockType(str, Enum):
     role = "role"
+    tools = "tools"
     audience = "audience"
     context = "context"
+    environment = "environment"
     objective = "objective"
     goal = "goal"
     input = "input"
