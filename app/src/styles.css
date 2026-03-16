@@ -1884,7 +1884,17 @@ body {
   flex-shrink: 0;
   transition: all var(--transition-fast);
 }
-.block-list-card-action-btn:hover { background: var(--surface); color: var(--text); }
+.block-list-card-action-btn:hover:not(:disabled) { background: var(--surface); color: var(--text); }
+.block-list-card-action-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+
+/* +/− toggle button */
+.block-list-card-toggle {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: monospace;
+  line-height: 1;
+  width: 18px;
+}
 
 .block-list-card-textarea {
   width: 100%;
@@ -1979,6 +1989,7 @@ body {
 .canvas-ctrl-btn:hover:not(:disabled) { background: var(--surface); color: var(--text); }
 .canvas-ctrl-btn:disabled { opacity: 0.28; cursor: not-allowed; }
 .canvas-ctrl-btn--danger:hover:not(:disabled) { color: var(--error); }
+.canvas-ctrl-btn--compile:hover:not(:disabled) { color: var(--accent); }
 
 .canvas-ctrl-divider {
   width: 1px;
