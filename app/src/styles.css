@@ -111,6 +111,7 @@ body {
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   padding: 0 20px;
   height: 54px;
@@ -156,7 +157,6 @@ body {
   font-weight: 500;
 }
 
-.header-spacer { flex: 1; }
 
 .header-actions { display: flex; align-items: center; gap: 5px; }
 
