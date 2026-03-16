@@ -3737,11 +3737,16 @@ body {
 
 /* ─── Audit pulse button ─────────────────────────────────────────────────── */
 @keyframes audit-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
-  50%       { box-shadow: 0 0 0 6px transparent; }
+  0%   { box-shadow: 0 0 0 0 rgba(255, 53, 112, 0.7); }
+  60%  { box-shadow: 0 0 0 9px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes audit-bg-flash {
+  0%, 100% { background: var(--accent); }
+  50%       { background: var(--accent-2); filter: brightness(1.15); }
 }
 .btn-audit-pulse {
-  animation: audit-pulse 2s ease-in-out infinite;
+  animation: audit-pulse 1.2s ease-out infinite, audit-bg-flash 1.2s ease-in-out infinite;
 }
 .btn-audit-pulse:hover {
   animation: none;

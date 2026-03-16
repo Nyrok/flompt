@@ -31,7 +31,8 @@
     "paste": "クリップボードから貼り付け",
     "importFromPlatform": "ページからプロンプトをインポート",
     "queuePosition": "キュー位置: {n}",
-    "queueProcessing": "処理中…"
+    "queueProcessing": "処理中…",
+    "auditPrompt": "Audit your prompt"
   },
   "promptOutput": {
     "title": "結果",
@@ -304,5 +305,12 @@
       "label": "言語",
       "description": "AIが応答すべき言語"
     }
+  },
+  "audit": {
+    "title": "Prompt audit",
+    "hint": "{n} key blocks are missing. Add them to improve your prompt.",
+    "addBlock": "Add",
+    "perfect": "All key blocks are present — solid prompt.",
+    "blocksPresent": "key blocks present"
   }
 }

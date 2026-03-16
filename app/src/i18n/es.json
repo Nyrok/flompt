@@ -31,7 +31,8 @@
     "paste": "Pegar del portapapeles",
     "importFromPlatform": "Importar prompt desde la página",
     "queuePosition": "Posición en cola: {n}",
-    "queueProcessing": "Procesando…"
+    "queueProcessing": "Procesando…",
+    "auditPrompt": "Audit your prompt"
   },
   "promptOutput": {
     "title": "Resultado",
@@ -304,5 +305,12 @@
       "label": "Idioma",
       "description": "Idioma en el que debe responder la IA"
     }
+  },
+  "audit": {
+    "title": "Prompt audit",
+    "hint": "{n} key blocks are missing. Add them to improve your prompt.",
+    "addBlock": "Add",
+    "perfect": "All key blocks are present — solid prompt.",
+    "blocksPresent": "key blocks present"
   }
 }

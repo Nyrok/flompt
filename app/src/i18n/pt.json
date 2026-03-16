@@ -31,7 +31,8 @@
     "paste": "Colar da área de transferência",
     "importFromPlatform": "Importar prompt da página",
     "queuePosition": "Posição na fila: {n}",
-    "queueProcessing": "Processando…"
+    "queueProcessing": "Processando…",
+    "auditPrompt": "Audit your prompt"
   },
   "promptOutput": {
     "title": "Resultado",
@@ -304,5 +305,12 @@
       "label": "Idioma",
       "description": "Idioma em que a IA deve responder"
     }
+  },
+  "audit": {
+    "title": "Prompt audit",
+    "hint": "{n} key blocks are missing. Add them to improve your prompt.",
+    "addBlock": "Add",
+    "perfect": "All key blocks are present — solid prompt.",
+    "blocksPresent": "key blocks present"
   }
 }

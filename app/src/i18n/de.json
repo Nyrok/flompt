@@ -31,7 +31,8 @@
     "paste": "Aus Zwischenablage einfügen",
     "importFromPlatform": "Prompt von der Seite importieren",
     "queuePosition": "Warteschlangenposition: {n}",
-    "queueProcessing": "Verarbeite…"
+    "queueProcessing": "Verarbeite…",
+    "auditPrompt": "Audit your prompt"
   },
   "promptOutput": {
     "title": "Ergebnis",
@@ -304,5 +305,12 @@
       "label": "Sprache",
       "description": "Sprache, in der die KI antworten soll"
     }
+  },
+  "audit": {
+    "title": "Prompt audit",
+    "hint": "{n} key blocks are missing. Add them to improve your prompt.",
+    "addBlock": "Add",
+    "perfect": "All key blocks are present — solid prompt.",
+    "blocksPresent": "key blocks present"
   }
 }
