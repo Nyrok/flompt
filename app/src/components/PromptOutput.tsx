@@ -5,8 +5,8 @@ import { useLocale } from '@/i18n/LocaleContext'
 import { analytics } from '@/lib/analytics'
 import { assemblePrompt } from '@/lib/assemblePrompt'
 import { isExtension } from '@/lib/platform'
-import { STAR_EVENT } from '@/components/StarPopup'
 import { useMakeStore } from '@/store/makeStore'
+import { track } from '@/lib/analytics'
 import type { OutputFormat } from '@/types/blocks'
 import CostPopover from '@/features/cost-estimator/CostPopover'
 import { useDebuggerStore } from '@/features/debugger/useDebuggerStore'
@@ -58,7 +58,6 @@ const PromptOutput = () => {
     const result = assemblePrompt(nodes, edges)
     setCompiledPrompt(result)
     analytics.compileCompleted(result.tokenEstimate)
-    window.dispatchEvent(new CustomEvent(STAR_EVENT))
   }
 
   const handleCopy = () => {
@@ -145,7 +144,6 @@ const PromptOutput = () => {
     window.parent.postMessage({ type: 'FLOMPT_INJECT', prompt: currentRaw }, '*')
     setInjected(true)
     analytics.promptCopied()
-    window.dispatchEvent(new CustomEvent(STAR_EVENT))
     setTimeout(() => setInjected(false), 2500)
   }, [currentRaw])
 
@@ -272,16 +270,31 @@ const PromptOutput = () => {
         </button>
       )}
 
-      <a
-        className="btn btn-secondary btn-share"
-        href="https://github.com/Nyrok/flompt"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub"
-        onClick={() => analytics.githubClicked('prompt_output')}
-      >
-        <Github size={13} aria-hidden="true" /> View source code
-      </a>
+      {compiledPrompt && !isExtension && (
+        <p className="output-community-cta">
+          Free &amp; open-source.{' '}
+          <a
+            href="https://github.com/Nyrok/flompt"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track('github_star_clicked', { source: 'output_cta' })}
+          >
+            <Github size={11} aria-hidden="true" /> Star on GitHub
+          </a>{' '}
+          if it helps.
+        </p>
+      )}
+      {!compiledPrompt && !isExtension && (
+        <a
+          className="output-source-link"
+          href="https://github.com/Nyrok/flompt"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => analytics.githubClicked('prompt_output')}
+        >
+          <Github size={11} aria-hidden="true" /> Open source
+        </a>
+      )}
     </div>
   )
 }
