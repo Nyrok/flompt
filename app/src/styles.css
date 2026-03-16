@@ -1676,6 +1676,183 @@ body {
 /* ── Canvas wrapper ───────────────────────────────────────────────────────── */
 .canvas-wrap { flex: 1; position: relative; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
 
+/* ── View toggle (list / canvas) ─────────────────────────────────────────── */
+.canvas-view-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  display: flex;
+  gap: 2px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+}
+.canvas-view-btn {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.canvas-view-btn:hover { background: var(--surface); color: var(--text); }
+.canvas-view-btn--active { background: var(--accent-bg); color: var(--accent); }
+
+/* ── Block list view ─────────────────────────────────────────────────────── */
+.block-list-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 12px;
+  gap: 8px;
+}
+.block-list-view-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: center;
+}
+.block-list-view-cards {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 4px;
+  padding-right: 2px;
+}
+.block-list-card {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  border-left: 3px solid transparent;
+  background: var(--bg-2);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.block-list-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 8px 6px;
+}
+.block-list-card-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.block-list-card-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex: 1;
+}
+.block-list-card-delete {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+.block-list-card-delete:hover { background: var(--surface); color: var(--error, #f87171); }
+.block-list-card-textarea {
+  width: 100%;
+  padding: 6px 10px 8px;
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  resize: vertical;
+  font-family: var(--font);
+  outline: none;
+  min-height: 56px;
+  box-sizing: border-box;
+}
+.block-list-card-textarea:focus { background: var(--surface); }
+.block-list-card-textarea::placeholder { color: var(--text-dim); opacity: 0.6; }
+
+/* ── Add block button ────────────────────────────────────────────────────── */
+.block-list-view-add { flex-shrink: 0; }
+.block-list-view-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px dashed var(--border);
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all var(--transition-fast);
+}
+.block-list-view-add-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+.block-list-view-add-btn .chevron-open { transform: rotate(180deg); }
+.block-list-view-add-btn svg { transition: transform var(--transition-fast); }
+.block-list-view-add-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  margin-top: 6px;
+  padding: 8px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.block-list-add-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 7px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-size: 0.65rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.block-list-add-pill:hover { background: var(--surface); border-color: currentColor; }
+.block-list-add-pill-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 /* ── Canvas background override ──────────────────────────────────────────── */
 .react-flow__background { background: var(--bg) !important; }
 .react-flow__background pattern circle { fill: rgba(255,255,255,0.06) !important; }
