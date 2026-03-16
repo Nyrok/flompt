@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>flompt: Your AI is only as good as your prompt | Visual Prompt Builder</title>
-  <meta name="description" content="Structure is the single biggest lever in AI output quality. flompt decomposes any prompt into 13 semantic blocks, lets you edit visually, and recompiles as Claude-optimized XML. Free & open-source." />
+  <meta name="description" content="Structure is the single biggest lever in AI output quality. flompt decomposes any prompt into 16 semantic blocks, lets you edit visually, and recompiles as Claude-optimized XML. Free & open-source." />
   <meta name="keywords" content="prompt builder, visual prompt editor, prompt engineering tool, AI prompt flow, flowchart prompt, prompt optimizer, Claude prompt, GPT prompt, LLM prompt builder, prompt decomposer, flompt" />
   <meta name="author" content="Nyrok" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -1183,7 +1183,7 @@ statistics. Write in English.</pre>
       <div class="blocks-intro">
         <div class="section-accent-line"></div>
         <p class="section-label">Prompt anatomy</p>
-        <h2 class="section-title">13 blocks for any prompt.</h2>
+        <h2 class="section-title">16 blocks for any prompt.</h2>
         <p class="section-sub">Every prompt is built from the same ingredients. flompt makes each one explicit, editable, and Claude-optimized.</p>
       </div>
       <div class="blocks-grid">
@@ -1231,9 +1231,25 @@ statistics. Write in English.</pre>
           <div class="bc-name">Output Format</div>
           <div class="bc-eg">Expected structure</div>
         </div>
+        <div class="block-card" style="--bc:#2dd4bf">
+          <div class="bc-name">Response Style</div>
+          <div class="bc-eg">Verbosity · tone · prose · markdown</div>
+        </div>
         <div class="block-card" style="--bc:#38bdf8">
           <div class="bc-name">Language</div>
           <div class="bc-eg">Output language</div>
+        </div>
+        <div class="block-card" style="--bc:#fb923c">
+          <div class="bc-name">Tools</div>
+          <div class="bc-eg">Callable functions · agent tools</div>
+        </div>
+        <div class="block-card" style="--bc:#22d3ee">
+          <div class="bc-name">Environment</div>
+          <div class="bc-eg">OS · paths · date · runtime</div>
+        </div>
+        <div class="block-card" style="--bc:#ef4444">
+          <div class="bc-name">Guardrails</div>
+          <div class="bc-eg">Hard limits · safety refusals</div>
         </div>
       </div>
     </div>
@@ -1295,8 +1311,8 @@ statistics. Write in English.</pre>
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-label">Block types</div>
-          <div class="stat-value">13</div>
-          <div class="stat-sub">role · audience · context · objective · goal · input · constraints · examples · chain of thought · output format · response style · document · language</div>
+          <div class="stat-value">16</div>
+          <div class="stat-sub">role · tools · audience · context · environment · objective · goal · input · constraints · guardrails · examples · chain of thought · output format · response style · document · language</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Templates</div>
