@@ -283,15 +283,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
 
                   {/* Right actions — always pinned */}
                   <span className="block-list-card-actions">
-                    {/* Collapse/expand: − or + */}
-                    <button
-                      className="block-list-card-action-btn block-list-card-toggle"
-                      onClick={e => { e.stopPropagation(); toggleCollapse(node.id) }}
-                      title={isCollapsed ? 'Expand' : 'Collapse'}
-                      aria-label={isCollapsed ? 'Expand' : 'Collapse'}
-                    >
-                      {isCollapsed ? '+' : '−'}
-                    </button>
                     {/* Ranking: up */}
                     <button
                       className="block-list-card-action-btn"
@@ -311,6 +302,15 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                       disabled={isLast}
                     >
                       <ChevronDown size={12} />
+                    </button>
+                    {/* Collapse/expand: − or + */}
+                    <button
+                      className="block-list-card-action-btn block-list-card-toggle"
+                      onClick={e => { e.stopPropagation(); toggleCollapse(node.id) }}
+                      title={isCollapsed ? 'Expand' : 'Collapse'}
+                      aria-label={isCollapsed ? 'Expand' : 'Collapse'}
+                    >
+                      {isCollapsed ? '+' : '−'}
                     </button>
                     {/* Duplicate */}
                     <button
