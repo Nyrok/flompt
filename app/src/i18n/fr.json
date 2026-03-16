@@ -31,7 +31,8 @@
     "paste": "Coller depuis le presse-papiers",
     "importFromPlatform": "Importer le prompt depuis la page",
     "queuePosition": "Position dans la file : {n}",
-    "queueProcessing": "Traitement en cours…"
+    "queueProcessing": "Traitement en cours…",
+    "auditPrompt": "Auditer le prompt"
   },
   "promptOutput": {
     "title": "Résultat",
