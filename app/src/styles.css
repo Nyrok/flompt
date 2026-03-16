@@ -1138,7 +1138,7 @@ body {
   );
 }
 .block-node[data-block-type="guardrails"] .block-header {
-  background: transparent;
+  background: var(--bg-3);
 }
 .block-node[data-block-type="guardrails"].selected {
   box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5);
@@ -1165,7 +1165,7 @@ body {
   background-size: 16px 16px;
 }
 .block-node[data-block-type="tools"] .block-header {
-  background: transparent;
+  background: var(--bg-3);
 }
 .block-node[data-block-type="tools"].selected {
   box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.45);
@@ -1191,7 +1191,7 @@ body {
   );
 }
 .block-node[data-block-type="environment"] .block-header {
-  background: transparent;
+  background: var(--bg-3);
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   letter-spacing: 0.01em;
 }
