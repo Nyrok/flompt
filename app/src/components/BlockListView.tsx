@@ -43,8 +43,10 @@ const BlockListView = () => {
   // ── Drag to reorder ───────────────────────────────────────────────────────
   const dragIdx  = useRef<number | null>(null)
   const overIdx  = useRef<number | null>(null)
+  const canDrag  = useRef(false)
 
   const handleDragStart = (e: React.DragEvent, idx: number) => {
+    if (!canDrag.current) { e.preventDefault(); return }
     dragIdx.current = idx
     e.dataTransfer.effectAllowed = 'move'
     // Transparent drag ghost
@@ -69,6 +71,7 @@ const BlockListView = () => {
   }
 
   const handleDragEnd = () => {
+    canDrag.current = false
     dragIdx.current = null
     overIdx.current = null
     // Sync visual order back to the store (no assembly impact — TYPE_PRIORITY governs that)
@@ -161,10 +164,11 @@ const BlockListView = () => {
                   tabIndex={0}
                   onKeyDown={e => e.key === 'Enter' && toggleCollapse(node.id)}
                 >
-                  {/* Drag handle */}
+                  {/* Drag handle — only this triggers drag */}
                   <span
                     className="block-list-drag-handle"
-                    onMouseDown={e => e.stopPropagation()}
+                    onMouseDown={e => { e.stopPropagation(); canDrag.current = true }}
+                    onMouseUp={() => { canDrag.current = false }}
                     onClick={e => e.stopPropagation()}
                     aria-hidden="true"
                   >
@@ -178,23 +182,25 @@ const BlockListView = () => {
                     {node.data.label}
                   </span>
 
-                  {/* Content preview when collapsed */}
+                  {/* Content preview when collapsed — takes remaining space */}
                   {isCollapsed && node.data.content && (
                     <span className="block-list-card-preview">{node.data.content}</span>
                   )}
 
-                  <span className="block-list-card-chevron">
-                    {isCollapsed ? <ChevronRight size={12} /> : <ChevronDown size={12} />}
+                  {/* Right actions — always pinned to the right */}
+                  <span className="block-list-card-actions">
+                    <span className="block-list-card-chevron">
+                      {isCollapsed ? <ChevronRight size={12} /> : <ChevronDown size={12} />}
+                    </span>
+                    <button
+                      className="block-list-card-delete"
+                      onClick={e => { e.stopPropagation(); removeNode(node.id) }}
+                      title="Remove block"
+                      aria-label="Remove block"
+                    >
+                      <X size={12} />
+                    </button>
                   </span>
-
-                  <button
-                    className="block-list-card-delete"
-                    onClick={e => { e.stopPropagation(); removeNode(node.id) }}
-                    title="Remove block"
-                    aria-label="Remove block"
-                  >
-                    <X size={12} />
-                  </button>
                 </div>
 
                 {!isCollapsed && (
