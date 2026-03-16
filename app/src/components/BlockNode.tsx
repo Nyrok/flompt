@@ -1,6 +1,6 @@
 import { memo, useState, useRef, useLayoutEffect } from 'react'
 import type { NodeProps } from 'reactflow'
-import { Copy, ChevronDown, ChevronRight, X } from 'lucide-react'
+import { Copy, ChevronDown, ChevronRight, X, Eye, EyeOff } from 'lucide-react'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockData, ResponseStyleOptions } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
@@ -32,8 +32,9 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
   const Icon = meta.icon
   const { t, locale } = useLocale()
   const tr = t.blocks[data.type]
-  const updateNodeContent = useFlowStore((s) => s.updateNodeContent)
-  const updateNodeData    = useFlowStore((s) => s.updateNodeData)
+  const updateNodeContent  = useFlowStore((s) => s.updateNodeContent)
+  const updateNodeData     = useFlowStore((s) => s.updateNodeData)
+  const toggleNodeHidden   = useFlowStore((s) => s.toggleNodeHidden)
   const removeNode = useFlowStore((s) => s.removeNode)
   const addNode = useFlowStore((s) => s.addNode)
   const onNodesChange = useFlowStore((s) => s.onNodesChange)
@@ -90,8 +91,8 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
     return (
       <div
         data-block-type="language"
-        style={{ '--block-color': meta.color } as React.CSSProperties}
-        className={`block-node block-node--language ${selected ? 'selected' : ''}`}
+        style={{ '--block-color': meta.color, opacity: data.hidden ? 0.35 : 1 } as React.CSSProperties}
+        className={`block-node block-node--language ${selected ? 'selected' : ''}${data.hidden ? ' block-node--hidden' : ''}`}
       >
           <div className="language-block-inner">
           <span className="block-icon">
@@ -114,6 +115,14 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
               </option>
             ))}
           </select>
+          <button
+            className="block-collapse"
+            onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
+            title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+            aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+          >
+            {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
+          </button>
           <button
             className="block-remove"
             onClick={(e) => { e.stopPropagation(); removeNode(id) }}
@@ -201,8 +210,8 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
     return (
       <div
         data-block-type="response_style"
-        style={{ '--block-color': meta.color } as React.CSSProperties}
-        className={`block-node block-node--response-style ${selected ? 'selected' : ''}`}
+        style={{ '--block-color': meta.color, opacity: data.hidden ? 0.35 : 1 } as React.CSSProperties}
+        className={`block-node block-node--response-style ${selected ? 'selected' : ''}${data.hidden ? ' block-node--hidden' : ''}`}
       >
         {/* Header — clickable to collapse */}
         <div
@@ -224,6 +233,14 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
               aria-label={t.block.duplicate}
             >
               <Copy size={11} aria-hidden="true" />
+            </button>
+            <button
+              className="block-collapse"
+              onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
+              title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+              aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+            >
+              {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
             </button>
             <button
               className="block-collapse"
@@ -289,8 +306,8 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
   return (
     <div
       data-block-type={data.type}
-      style={{ '--block-color': meta.color } as React.CSSProperties}
-      className={`block-node ${selected ? 'selected' : ''}`}
+      style={{ '--block-color': meta.color, opacity: data.hidden ? 0.35 : 1 } as React.CSSProperties}
+      className={`block-node ${selected ? 'selected' : ''}${data.hidden ? ' block-node--hidden' : ''}`}
     >
       <div
         className="block-header"
@@ -323,6 +340,14 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             aria-label={`${t.block.duplicate} ${displayLabel}`}
           >
             <Copy size={11} aria-hidden="true" />
+          </button>
+          <button
+            className="block-collapse"
+            onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
+            title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+            aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+          >
+            {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
           </button>
           <button
             className="block-collapse"

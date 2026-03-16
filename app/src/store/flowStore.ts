@@ -41,6 +41,7 @@ interface FlowState {
   onConnect: (connection: Connection) => void
   updateNodeContent: (id: string, content: string) => void
   updateNodeData: (id: string, patch: Partial<import('@/types/blocks').BlockData>) => void
+  toggleNodeHidden: (id: string) => void
   addNode: (node: FlomptNode) => void
   removeNode: (id: string) => void
   setLastDecomposedPrompt: (prompt: string) => void
@@ -130,6 +131,14 @@ export const useFlowStore = create<FlowState>()(
         set((state) => ({
           nodes: state.nodes.map((n) =>
             n.id === id ? { ...n, data: { ...n.data, ...patch } } : n
+          ),
+          compiledPrompt: null,
+        })),
+
+      toggleNodeHidden: (id) =>
+        set((state) => ({
+          nodes: state.nodes.map((n) =>
+            n.id === id ? { ...n, data: { ...n.data, hidden: !n.data.hidden } } : n
           ),
           compiledPrompt: null,
         })),

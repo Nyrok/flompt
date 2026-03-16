@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { X, ChevronDown, ChevronRight, Trash2, Undo2, Redo2, LayoutList, Network } from 'lucide-react'
+import { X, ChevronDown, ChevronRight, Trash2, Undo2, Redo2, LayoutList, Network, Eye, EyeOff, Copy } from 'lucide-react'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const BlockListView = ({ canvasView, onToggleView }: Props) => {
-  const { nodes, setNodes, removeNode, updateNodeContent, addNode, reset, undo, redo, past, future } = useFlowStore()
+  const { nodes, setNodes, removeNode, updateNodeContent, addNode, toggleNodeHidden, reset, undo, redo, past, future } = useFlowStore()
   const { t } = useLocale()
 
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set())
@@ -94,6 +94,16 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
     setNodes(order.map(id => nodes.find(n => n.id === id)).filter(Boolean) as FlomptNode[])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order])
+
+  // ── Duplicate block ───────────────────────────────────────────────────────
+  const handleDuplicate = (node: FlomptNode) => {
+    addNode({
+      ...node,
+      id: `${node.data.type}-${Date.now()}`,
+      position: { x: node.position.x + 40, y: node.position.y + 40 },
+      data: { ...node.data, hidden: false },
+    })
+  }
 
   // ── Add block ─────────────────────────────────────────────────────────────
   const handleAddBlock = (type: BlockType) => {
@@ -211,8 +221,8 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
             return (
               <div
                 key={node.id}
-                className={`block-list-card${isCollapsed ? ' block-list-card--collapsed' : ''}`}
-                style={{ borderLeftColor: meta.color }}
+                className={`block-list-card${isCollapsed ? ' block-list-card--collapsed' : ''}${node.data.hidden ? ' block-list-card--hidden' : ''}`}
+                style={{ borderLeftColor: meta.color, opacity: node.data.hidden ? 0.4 : 1 }}
               >
                 <div
                   className="block-list-card-header"
@@ -223,6 +233,16 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                   aria-expanded={!isCollapsed}
                   tabIndex={0}
                 >
+                  {/* Eye toggle — left anchor, where grip handle was */}
+                  <button
+                    className="block-list-card-eye"
+                    onClick={e => { e.stopPropagation(); toggleNodeHidden(node.id) }}
+                    title={node.data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+                    aria-label={node.data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+                  >
+                    {node.data.hidden ? <EyeOff size={12} /> : <Eye size={12} />}
+                  </button>
+
                   <span className="block-list-card-icon" style={{ color: meta.color, background: `${meta.color}1a` }}>
                     <Icon size={13} />
                   </span>
@@ -240,6 +260,14 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                     <span className="block-list-card-chevron">
                       {isCollapsed ? <ChevronRight size={12} /> : <ChevronDown size={12} />}
                     </span>
+                    <button
+                      className="block-list-card-action-btn"
+                      onClick={e => { e.stopPropagation(); handleDuplicate(node) }}
+                      title="Duplicate block"
+                      aria-label="Duplicate block"
+                    >
+                      <Copy size={12} />
+                    </button>
                     <button
                       className="block-list-card-delete"
                       onClick={e => { e.stopPropagation(); removeNode(node.id) }}

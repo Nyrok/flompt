@@ -326,7 +326,9 @@ function buildMarkdownRaw(ordered: FlomptNode[]): string {
  * The UI selector switches which format is displayed/copied/injected.
  */
 export function assemblePrompt(nodes: FlomptNode[], edges: FlomptEdge[]): CompiledPrompt {
-  const ordered = sortNodes(nodes, edges)
+  // Hidden blocks are excluded from the assembled prompt
+  const visibleNodes = nodes.filter(n => !n.data.hidden)
+  const ordered = sortNodes(visibleNodes, edges)
 
   const claudeRaw   = buildXmlRaw(ordered)
   const markdownRaw = buildMarkdownRaw(ordered)

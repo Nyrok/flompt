@@ -38,6 +38,8 @@ export interface BlockData {
   content: string
   description: string
   summary?: string
+  /** When true, block is excluded from assembled prompt */
+  hidden?: boolean
   /** Structured options for blocks with rich UI (e.g. response_style) */
   options?: Record<string, string | boolean>
 }
