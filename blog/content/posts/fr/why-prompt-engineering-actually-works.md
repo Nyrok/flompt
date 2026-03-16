@@ -66,7 +66,7 @@ Pourquoi ça marche si bien ? Parce que les exemples contournent l'ambiguïté e
 
 Un autre insight du guide : expliquer *pourquoi* vous voulez quelque chose surpasse constamment le simple fait d'énoncer *ce que* vous voulez.
 
-> « Fournir le contexte ou la motivation derrière vos instructions — par exemple expliquer à Claude pourquoi ce comportement est important — peut aider Claude à mieux comprendre vos objectifs et à fournir des réponses plus ciblées. »
+> « Fournir le contexte ou la motivation derrière vos instructions, par exemple expliquer à Claude pourquoi ce comportement est important, peut aider Claude à mieux comprendre vos objectifs et à fournir des réponses plus ciblées. »
 
 Comparez :
 - ❌ `"N'utilisez JAMAIS de points de suspension"`

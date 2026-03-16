@@ -66,7 +66,7 @@ Why does this work so well? Because examples bypass ambiguity entirely. Instead 
 
 Another insight from the guide: explaining *why* you want something consistently outperforms just stating *what* you want.
 
-> "Providing context or motivation behind your instructions — such as explaining to Claude why such behavior is important — can help Claude better understand your goals and deliver more targeted responses."
+> "Providing context or motivation behind your instructions, such as explaining to Claude why such behavior is important, can help Claude better understand your goals and deliver more targeted responses."
 
 Compare:
 - ❌ `"NEVER use ellipses"`
