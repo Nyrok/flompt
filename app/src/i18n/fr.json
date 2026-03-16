@@ -139,7 +139,7 @@
         "keys": [
           "Scroll"
         ],
-        "label": "Zoom in/out"
+        "label": "Zoom avant/arrière"
       },
       {
         "keys": [
@@ -367,7 +367,7 @@
       "description": "Règles et limites à respecter"
     },
     "guardrails": {
-      "label": "Guardrails",
+      "label": "Garde-fous",
       "description": "Limites strictes et refus de sécurité"
     },
     "examples": {

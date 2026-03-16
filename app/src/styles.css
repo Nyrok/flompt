@@ -2371,6 +2371,8 @@ body {
     overflow-y: visible;
   }
 
+  .btn-icon { min-width: 40px; min-height: 40px; }
+
   .compiled-output { max-height: 45vh; }
   .skeleton-block { width: 140px; height: 90px; }
 
