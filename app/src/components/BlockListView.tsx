@@ -267,6 +267,7 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
               <div
                 key={node.id}
                 className={`block-list-card${isCollapsed ? ' block-list-card--collapsed' : ''}${node.data.hidden ? ' block-list-card--hidden' : ''}`}
+                data-block-type={node.data.type}
                 style={{ '--block-color': meta.color, borderLeftColor: meta.color, opacity: node.data.hidden ? 0.4 : 1 } as React.CSSProperties}
               >
                 <div

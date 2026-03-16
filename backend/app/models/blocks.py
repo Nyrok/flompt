@@ -11,6 +11,7 @@ class BlockType(str, Enum):
     goal = "goal"
     input = "input"
     constraints = "constraints"
+    guardrails = "guardrails"
     examples = "examples"
     chain_of_thought = "chain_of_thought"
     output_format = "output_format"

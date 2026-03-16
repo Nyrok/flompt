@@ -4,6 +4,7 @@ import {
   Target,
   LogIn,
   ShieldAlert,
+  Lock,
   LogOut,
   Lightbulb,
   Languages,
@@ -26,6 +27,7 @@ export type BlockType =
   | 'input'
   | 'document'
   | 'constraints'
+  | 'guardrails'
   | 'examples'
   | 'chain_of_thought'
   | 'output_format'
@@ -109,6 +111,12 @@ export const BLOCK_META: Record<BlockType, { label: string; description: string;
     description: 'Rules and limits to respect',
     color: '#fb7185',   // rose-400 — close to Mermaid accent
     icon: ShieldAlert,
+  },
+  guardrails: {
+    label: 'Guardrails',
+    description: 'Hard limits and safety refusals',
+    color: '#ef4444',   // red-500 — hard stop, destructive
+    icon: Lock,
   },
   examples: {
     label: 'Examples',

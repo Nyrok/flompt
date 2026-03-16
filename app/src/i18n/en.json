@@ -357,6 +357,10 @@
       "label": "Constraints",
       "description": "Rules and limits to respect"
     },
+    "guardrails": {
+      "label": "Guardrails",
+      "description": "Hard limits and safety refusals"
+    },
     "examples": {
       "label": "Examples",
       "description": "Few-shot input/output pairs"

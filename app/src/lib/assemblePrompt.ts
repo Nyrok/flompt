@@ -14,11 +14,12 @@ const TYPE_PRIORITY: Record<BlockType, number> = {
   goal:            5,   // success criteria
   input:           6,   // data/variables
   constraints:     7,   // rules
-  examples:        8,   // few-shot
-  chain_of_thought: 9,  // reasoning instructions
-  output_format:   10,  // response format
-  response_style:  11,  // structured style directives
-  language:        12,  // language instruction — always last
+  guardrails:      8,   // hard limits / safety refusals
+  examples:        9,   // few-shot
+  chain_of_thought: 10, // reasoning instructions
+  output_format:   11,  // response format
+  response_style:  12,  // structured style directives
+  language:        13,  // language instruction — always last
 }
 
 // ─── Topological sort (Kahn's algorithm) ────────────────────────────────────
@@ -210,6 +211,7 @@ const MD_HEADING: Record<BlockType, string> = {
   goal:             'Goal',
   input:            'Input',
   constraints:      'Constraints',
+  guardrails:       'Guardrails',
   examples:         'Examples',
   chain_of_thought: 'Chain of Thought',
   output_format:    'Output Format',
