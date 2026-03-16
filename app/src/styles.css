@@ -1914,6 +1914,31 @@ body {
 .block-list-card-textarea:focus { background: var(--surface); }
 .block-list-card-textarea::placeholder { color: var(--text-dim); opacity: 0.6; }
 
+.block-list-card-body {
+  padding: 8px 12px 10px;
+  border-top: 1px solid var(--border);
+}
+
+.block-list-card-lang-select {
+  width: 100%;
+  padding: 6px 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+  outline: none;
+}
+.block-list-card-lang-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.block-list-card-body.rsp-body {
+  padding: 8px 12px 10px;
+}
+
 
 /* ── Canvas background override ──────────────────────────────────────────── */
 .react-flow__background { background: var(--bg) !important; }

@@ -1,12 +1,31 @@
 import { useState, useRef, useEffect } from 'react'
 import { X, Trash2, Undo2, Redo2, LayoutList, Network, Eye, EyeOff, Copy, Play, ChevronUp, ChevronDown } from 'lucide-react'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
-import type { BlockType } from '@/types/blocks'
+import type { BlockType, ResponseStyleOptions } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
 import { assemblePrompt } from '@/lib/assemblePrompt'
 import { STAR_EVENT } from '@/components/StarPopup'
+
+const LANGUAGES = [
+  { code: 'en', en: 'English',    fr: 'Anglais' },
+  { code: 'fr', en: 'French',     fr: 'Français' },
+  { code: 'es', en: 'Spanish',    fr: 'Espagnol' },
+  { code: 'de', en: 'German',     fr: 'Allemand' },
+  { code: 'it', en: 'Italian',    fr: 'Italien' },
+  { code: 'pt', en: 'Portuguese', fr: 'Portugais' },
+  { code: 'zh', en: 'Chinese',    fr: 'Chinois' },
+  { code: 'ja', en: 'Japanese',   fr: 'Japonais' },
+  { code: 'ko', en: 'Korean',     fr: 'Coréen' },
+  { code: 'ar', en: 'Arabic',     fr: 'Arabe' },
+  { code: 'ru', en: 'Russian',    fr: 'Russe' },
+  { code: 'nl', en: 'Dutch',      fr: 'Néerlandais' },
+  { code: 'pl', en: 'Polish',     fr: 'Polonais' },
+  { code: 'sv', en: 'Swedish',    fr: 'Suédois' },
+  { code: 'tr', en: 'Turkish',    fr: 'Turc' },
+  { code: 'hi', en: 'Hindi',      fr: 'Hindi' },
+]
 
 interface Props {
   canvasView: 'list' | 'canvas'
@@ -15,10 +34,10 @@ interface Props {
 
 const BlockListView = ({ canvasView, onToggleView }: Props) => {
   const {
-    nodes, removeNode, updateNodeContent, addNode, toggleNodeHidden,
+    nodes, removeNode, updateNodeContent, updateNodeData, addNode, toggleNodeHidden,
     reset, undo, redo, past, future, setCompiledPrompt, setActiveTab,
   } = useFlowStore()
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
 
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set())
   // Local visual order — purely UI, never written back to the store (avoids infinite loop)
@@ -333,7 +352,135 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                   </span>
                 </div>
 
-                {!isCollapsed && (
+                {!isCollapsed && node.data.type === 'language' && (() => {
+                  const matchLang = () => {
+                    const lower = node.data.content.toLowerCase().trim()
+                    return LANGUAGES.find(l =>
+                      l.en.toLowerCase() === lower || l.fr.toLowerCase() === lower || l.code === lower
+                    )?.code || ''
+                  }
+                  return (
+                    <div className="block-list-card-body" onClick={e => e.stopPropagation()}>
+                      <select
+                        className="block-list-card-lang-select"
+                        value={matchLang()}
+                        onChange={e => {
+                          const lang = LANGUAGES.find(l => l.code === e.target.value)
+                          if (lang) updateNodeContent(node.id, lang.en)
+                        }}
+                      >
+                        <option value="" disabled>—</option>
+                        {LANGUAGES.map(l => (
+                          <option key={l.code} value={l.code}>
+                            {locale === 'fr' ? l.fr : l.en}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )
+                })()}
+
+                {!isCollapsed && node.data.type === 'response_style' && (() => {
+                  const opts: ResponseStyleOptions = {
+                    ...DEFAULT_RESPONSE_STYLE,
+                    ...(node.data.options as Partial<ResponseStyleOptions> | undefined),
+                  }
+                  const rsTr = t.blocks.response_style as unknown as Record<string, string>
+                  const setOpt = <K extends keyof ResponseStyleOptions>(key: K, val: ResponseStyleOptions[K]) => {
+                    const next = { ...opts, [key]: val }
+                    const content = generateResponseStyleContent(next)
+                    updateNodeData(node.id, { options: next as Record<string, string | boolean>, content })
+                  }
+
+                  type PillGroup<K extends keyof ResponseStyleOptions> = {
+                    key: K
+                    label: string
+                    options: Array<{ value: ResponseStyleOptions[K]; label: string }>
+                  }
+                  const PILL_GROUPS: PillGroup<'verbosity' | 'tone' | 'prose' | 'markdown' | 'math'>[] = [
+                    {
+                      key: 'verbosity',
+                      label: rsTr.verbosity ?? 'Verbosity',
+                      options: [
+                        { value: 'concise',  label: rsTr.concise  ?? 'Concise' },
+                        { value: 'balanced', label: rsTr.balanced  ?? 'Balanced' },
+                        { value: 'detailed', label: rsTr.detailed  ?? 'Detailed' },
+                      ],
+                    },
+                    {
+                      key: 'tone',
+                      label: rsTr.tone ?? 'Tone',
+                      options: [
+                        { value: 'conversational', label: rsTr.conversational ?? 'Conversational' },
+                        { value: 'neutral',        label: rsTr.neutral        ?? 'Neutral' },
+                        { value: 'formal',         label: rsTr.formal         ?? 'Formal' },
+                      ],
+                    },
+                    {
+                      key: 'prose',
+                      label: rsTr.prose ?? 'Prose',
+                      options: [
+                        { value: 'flowing',    label: rsTr.flowing    ?? 'Prose' },
+                        { value: 'mixed',      label: rsTr.mixed      ?? 'Mixed' },
+                        { value: 'structured', label: rsTr.structured ?? 'Lists' },
+                      ],
+                    },
+                    {
+                      key: 'markdown',
+                      label: 'Markdown',
+                      options: [
+                        { value: 'none',     label: rsTr.mdNone     ?? 'None' },
+                        { value: 'minimal',  label: rsTr.mdMinimal  ?? 'Minimal' },
+                        { value: 'standard', label: rsTr.mdStandard ?? 'Standard' },
+                        { value: 'rich',     label: rsTr.mdRich     ?? 'Rich' },
+                      ],
+                    },
+                    {
+                      key: 'math',
+                      label: rsTr.math ?? 'Math',
+                      options: [
+                        { value: 'auto',  label: rsTr.mathAuto  ?? 'Auto' },
+                        { value: 'latex', label: 'LaTeX' },
+                        { value: 'plain', label: rsTr.mathPlain ?? 'Plain text' },
+                      ],
+                    },
+                  ]
+
+                  return (
+                    <div className="block-list-card-body rsp-body" onClick={e => e.stopPropagation()}>
+                      {PILL_GROUPS.map(({ key, label, options }) => (
+                        <div key={key} className="rsp-row">
+                          <span className="rsp-row-label">{label}</span>
+                          <div className="rsp-pills">
+                            {options.map(({ value, label: pLabel }) => (
+                              <button
+                                key={String(value)}
+                                className={`rsp-pill${opts[key] === value ? ' rsp-pill--active' : ''}`}
+                                onClick={e => { e.stopPropagation(); setOpt(key, value) }}
+                                aria-pressed={opts[key] === value}
+                              >
+                                {pLabel}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                      <label className="rsp-checkbox">
+                        <input
+                          type="checkbox"
+                          checked={opts.skipPreamble}
+                          onChange={e => { e.stopPropagation(); setOpt('skipPreamble', e.target.checked) }}
+                          onClick={e => e.stopPropagation()}
+                        />
+                        <span className="rsp-checkbox-label">
+                          {rsTr.skipPreamble ?? 'Skip preamble ("Here is…")'}
+                        </span>
+                      </label>
+                    </div>
+                  )
+                })()}
+
+                {!isCollapsed && node.data.type !== 'language' && node.data.type !== 'response_style' && (
                   <textarea
                     className="block-list-card-textarea"
                     value={node.data.content}
