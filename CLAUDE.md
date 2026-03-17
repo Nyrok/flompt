@@ -276,9 +276,12 @@ python backend/mcp_stdio.py
 - **Star popup** (`StarPopup.tsx`) : shown once (localStorage key `flompt-star-popup-v1`) after `STAR_EVENT = 'flompt:action-completed'` fires. Triggered by: compile, decompose, inject to AI (extension), FAB assembly (mobile). Rendered in ALL modes (web + extension).
 - **Canvas overlays** : `CanvasBlockBar` (left, vertically centered) + `canvas-ctrl-bar` (top-left: Clear → Undo → Redo)
 - **Extension** : `isExtension` flag from `src/lib/platform.ts`. After inject → dispatches STAR_EVENT. GitHub button replaces Share button everywhere (`PromptOutput.tsx`).
-- **List View** : second editing mode (toggle top-right). Horizontal toolbar (left: actions + assemble, centre: add-block pills, right: view switcher). Each block is a card with header, editable textarea, ↑/↓ reorder, copy (duplicate), and delete buttons.
+- **List View** : second editing mode (toggle top-right). Horizontal toolbar (left: actions + compile, centre: block-type pills via `CanvasBlockBar toolbar`, right: view switcher). Each block is a card with header, editable textarea, ↑/↓ reorder, copy (duplicate), and delete buttons. Block names use `t.blocks[type].label` (live i18n, not stored label). Supports drag & drop from sidebar.
 - **Hide / Show** : Eye/EyeOff button on every block in both views. A hidden block is excluded from the assembled prompt. Rendered at reduced opacity (0.4 in List View, 0.35 in Canvas View).
 - **Duplicate** : Copy button on each card in List View — inserts a clone immediately after the source block with `hidden: false`.
+- **Drag-over highlight** : dashed accent outline (`outline: 2px dashed var(--accent)`) on both FlowCanvas (`.flow-canvas--drag-over`) and BlockListView (`.block-list-view--drag-over`) when a sidebar block is dragged over. `onDragLeave` on canvas checks `relatedTarget` to avoid flicker on children.
+- **Decompose overlay** : `loading-overlay` (Sparkles + dots + queue status) appears in both canvas and list view when `isDecomposing === true`. Same JSX, same CSS class, driven by the same Zustand state.
+- **Tooltips** : `@radix-ui/react-tooltip` (Shadcn Tooltip core) wraps all icon-only buttons app-wide. `TooltipProvider` in `App.tsx`. Component at `components/ui/tooltip.tsx`. All `title=` attributes removed from tooltipped buttons; `aria-label` kept for screen readers. CSS class `.tooltip-content` in styles.css.
 
 ---
 
@@ -356,6 +359,21 @@ python backend/mcp_stdio.py
 - Block types exist in: `app/src/types/blocks.ts`, `assemblePrompt.ts`, `en.json`, `fr.json`, `backend/models/blocks.py`, `compiler.py`, `decomposer.py`, `ai_service.py`, `landing/index.html`, `docs/block-types.md`, `docs/claude-code.md`, `docs/how-it-works.md`, blog posts (EN + FR)
 - **When adding/removing a block** → update ALL of the above. Don't forget blog FR articles.
 - Landing block count stat must stay in sync with actual block count (currently **16**)
+
+### 11. CustomSelect
+- All native `<select>` replaced by `CustomSelect` (`components/CustomSelect.tsx`) styled like ProjectSelector
+- Trigger variants via `triggerClassName`: `csel-trigger--locale`, `csel-trigger--sm`, `csel-trigger--full`, `csel-trigger--lib`
+- `noReactFlow` prop adds `nodrag nopan` classes + `stopPropagation` on click (use inside React Flow nodes)
+- `dropUp` prop for upward dropdown (e.g. near bottom of screen)
+- CSS classes: `.csel`, `.csel-trigger`, `.csel-dropdown`, `.csel-option`, `.csel-option--active`, `.csel-chevron--open`
+
+### 12. SEO baseline
+- Blog: all pages have `og:image`, `twitter:card: summary_large_image`, explicit `twitter:images`
+- Blog root layout: `og:locale: "fr_FR"` as default fallback
+- Blog sitemap: uses real post dates (`post.date`) not `new Date()`
+- Blog robots.txt: references both `/blog/sitemap.xml` and `/sitemap.xml`
+- Landing privacy.html + terms.html: `og:image` + `twitter:card` added
+- App index.html: `twitter:description` + full hreflang set (10 locales + x-default)
 
 ### 10. Backend — known pitfalls
 - **`idb` package** must be installed in `app/` (`npm install idb`) — required by `src/lib/db.ts` (Context Memory + Version History). If missing, `tsc` fails and `npm run build` produces no `dist/`.
