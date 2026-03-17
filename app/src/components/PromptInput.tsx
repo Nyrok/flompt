@@ -21,7 +21,7 @@ const PromptInput = () => {
     setCompiledPrompt,
     nodes,
   } = useFlowStore()
-  const { setOpen: openAudit, setResult: setAuditResult, result: auditResult } = useAuditStore()
+  const { setOpen: openAudit, setResult: setAuditResult, result: auditResult, cachedKey: auditCachedKey, setCachedKey: setAuditCachedKey } = useAuditStore()
   const { t } = useLocale()
   const [error, setError] = useState<string | null>(null)
   const [platformName, setPlatformName] = useState<string | null>(null)
@@ -97,6 +97,8 @@ const PromptInput = () => {
       if (!isExtension) {
         const audit = computeAudit(result.nodes)
         setAuditResult(audit)
+        const key = result.nodes.map(n => n.data.type).sort().join(',')
+        setAuditCachedKey(key)
       }
 
     } catch (e) {
@@ -186,9 +188,11 @@ const PromptInput = () => {
         <button
           className={`btn btn-primary${auditSeen ? '' : ' btn-audit-pulse'}`}
           onClick={() => {
-            if (!auditResult) {
+            const currentKey = nodes.map(n => n.data.type).sort().join(',')
+            if (!auditResult || auditCachedKey !== currentKey) {
               const audit = computeAudit(nodes)
               setAuditResult(audit)
+              setAuditCachedKey(currentKey)
             }
             setAuditSeen(true)
             openAudit(true)
