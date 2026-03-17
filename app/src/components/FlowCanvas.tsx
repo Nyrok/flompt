@@ -68,13 +68,24 @@ const CanvasInner = () => {
   }, [activeTab, fitView])
 
   // Drag-and-drop from the sidebar
+  const [isDragOver, setIsDragOver] = useState(false)
+
   const onDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault()
     e.dataTransfer.dropEffect = 'move'
+    setIsDragOver(true)
+  }, [])
+
+  const onDragLeave = useCallback((e: React.DragEvent) => {
+    // Only clear if leaving the canvas wrapper entirely (not entering a child)
+    if (!wrapperRef.current?.contains(e.relatedTarget as Node)) {
+      setIsDragOver(false)
+    }
   }, [])
 
   const onDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault()
+    setIsDragOver(false)
     const type = e.dataTransfer.getData('blockType') as BlockType
     if (!type || !BLOCK_META[type]) return
     const bounds = wrapperRef.current?.getBoundingClientRect()
@@ -100,7 +111,13 @@ const CanvasInner = () => {
   }, [screenToFlowPosition, addNode, t.blocks])
 
   return (
-    <div className="flow-canvas" ref={wrapperRef} onDragOver={onDragOver} onDrop={onDrop}>
+    <div
+      className={`flow-canvas${isDragOver ? ' flow-canvas--drag-over' : ''}`}
+      ref={wrapperRef}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}
+      onDrop={onDrop}
+    >
       <ReactFlow
         nodes={nodes}
         edges={edges}
