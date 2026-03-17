@@ -226,7 +226,7 @@ const PromptOutput = () => {
               </Tooltip>
             </div>
             {!isExtension && (
-              <div className="output-ide-actions">
+              <div className="output-ide-actions" data-tour="ide-tools">
                 <Tooltip content={t.ide.outputButtons.debug} side="top">
                   <button className="btn btn-secondary export-btn" onClick={handleDebug} aria-label={t.ide.outputButtons.debug}>
                     <Bug size={13} aria-hidden="true" /> {t.ide.outputButtons.debug}
