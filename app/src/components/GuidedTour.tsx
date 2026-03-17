@@ -197,17 +197,21 @@ const GuidedTour = () => {
     }
   }, [cur, dismiss, locale, setNodes, setEdges, setLastDecomposedPrompt, t.tour.samplePrompt])
 
-  /* ── Click on spotlight element → advance ───────────────────────────────── */
-  useEffect(() => {
-    if (!active) return
-    // Don't auto-advance on large non-button containers
-    const noClick = ['.prompt-textarea', '.block-list-view', '.block-list']
-    if (noClick.includes(cur.target)) return
-    const el = document.querySelector(cur.target) as HTMLElement | null
-    if (!el) return
-    el.addEventListener('click', handleNext)
-    return () => el.removeEventListener('click', handleNext)
-  }, [step, active, cur.target, handleNext])
+  /* ── Click in spotlight zone → advance ──────────────────────────────────── */
+  // The backdrop (pointer-events: all, z-index 9990) catches every click.
+  // We check if the click lands inside the spotlight rect and call handleNext.
+  const noClickTargets = ['.prompt-textarea', '.block-list-view', '.block-list']
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (!rect || noClickTargets.includes(cur.target)) return
+    const { clientX, clientY } = e
+    const pad = 6
+    if (
+      clientX >= rect.left - pad && clientX <= rect.left + rect.width  + pad &&
+      clientY >= rect.top  - pad && clientY <= rect.top  + rect.height + pad
+    ) {
+      handleNext()
+    }
+  }
 
   /* ── Render ──────────────────────────────────────────────────────────────── */
   if (!active || !rect) return null
@@ -221,8 +225,8 @@ const GuidedTour = () => {
 
   return (
     <>
-      {/* Backdrop + spotlight — purely visual, hidden from AT */}
-      <div className="tour-backdrop" aria-hidden="true" />
+      {/* Backdrop — blocks clicks outside spotlight; forwards spotlight clicks via handleBackdropClick */}
+      <div className="tour-backdrop" aria-hidden="true" onClick={handleBackdropClick} />
       <div
         className="tour-spotlight"
         aria-hidden="true"
