@@ -6,6 +6,7 @@ import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from
 import type { BlockData, ResponseStyleOptions } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
+import { Tooltip } from '@/components/ui/tooltip'
 
 const LANGUAGES = [
   { code: 'en', en: 'English',    fr: 'Anglais' },
@@ -108,22 +109,26 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             triggerClassName="csel-trigger--sm"
             noReactFlow
           />
-          <button
-            className="block-collapse"
-            onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
-            title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
-            aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
-          >
-            {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
-          </button>
-          <button
-            className="block-remove"
-            onClick={(e) => { e.stopPropagation(); removeNode(id) }}
-            title={t.block.delete}
-            aria-label={t.block.delete}
-          >
-            <X size={11} aria-hidden="true" />
-          </button>
+          <Tooltip content={data.hidden ? 'Show in prompt' : 'Hide from prompt'} side="top">
+            <button
+              className="block-collapse"
+              onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
+              title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+              aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+            >
+              {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
+            </button>
+          </Tooltip>
+          <Tooltip content={t.block.delete} side="top">
+            <button
+              className="block-remove"
+              onClick={(e) => { e.stopPropagation(); removeNode(id) }}
+              title={t.block.delete}
+              aria-label={t.block.delete}
+            >
+              <X size={11} aria-hidden="true" />
+            </button>
+          </Tooltip>
         </div>
       </div>
     )
@@ -219,41 +224,49 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
           <span className="block-icon" aria-hidden="true"><Icon size={13} /></span>
           <span className="block-label">{tr?.label ?? 'Response Style'}</span>
           <div className="block-actions">
-            <button
-              className="block-collapse"
-              onClick={(e) => { e.stopPropagation(); handleDuplicate() }}
-              title={t.block.duplicate}
-              aria-label={t.block.duplicate}
-            >
-              <Copy size={11} aria-hidden="true" />
-            </button>
-            <button
-              className="block-collapse"
-              onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
-              title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
-              aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
-            >
-              {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
-            </button>
-            <button
-              className="block-collapse"
-              onClick={(e) => { e.stopPropagation(); setCollapsed(c => !c) }}
-              title={collapsed ? t.block.expand : t.block.collapse}
-              aria-label={collapsed ? t.block.expand : t.block.collapse}
-            >
-              {collapsed
-                ? <ChevronRight size={12} aria-hidden="true" />
-                : <ChevronDown size={12} aria-hidden="true" />
-              }
-            </button>
-            <button
-              className="block-remove"
-              onClick={(e) => { e.stopPropagation(); removeNode(id) }}
-              title={t.block.delete}
-              aria-label={t.block.delete}
-            >
-              <X size={11} aria-hidden="true" />
-            </button>
+            <Tooltip content={t.block.duplicate} side="top">
+              <button
+                className="block-collapse"
+                onClick={(e) => { e.stopPropagation(); handleDuplicate() }}
+                title={t.block.duplicate}
+                aria-label={t.block.duplicate}
+              >
+                <Copy size={11} aria-hidden="true" />
+              </button>
+            </Tooltip>
+            <Tooltip content={data.hidden ? 'Show in prompt' : 'Hide from prompt'} side="top">
+              <button
+                className="block-collapse"
+                onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
+                title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+                aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+              >
+                {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
+              </button>
+            </Tooltip>
+            <Tooltip content={collapsed ? t.block.expand : t.block.collapse} side="top">
+              <button
+                className="block-collapse"
+                onClick={(e) => { e.stopPropagation(); setCollapsed(c => !c) }}
+                title={collapsed ? t.block.expand : t.block.collapse}
+                aria-label={collapsed ? t.block.expand : t.block.collapse}
+              >
+                {collapsed
+                  ? <ChevronRight size={12} aria-hidden="true" />
+                  : <ChevronDown size={12} aria-hidden="true" />
+                }
+              </button>
+            </Tooltip>
+            <Tooltip content={t.block.delete} side="top">
+              <button
+                className="block-remove"
+                onClick={(e) => { e.stopPropagation(); removeNode(id) }}
+                title={t.block.delete}
+                aria-label={t.block.delete}
+              >
+                <X size={11} aria-hidden="true" />
+              </button>
+            </Tooltip>
           </div>
         </div>
 
@@ -326,42 +339,50 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
           )}
         </div>
         <div className="block-actions">
-          <button
-            className="block-collapse"
-            onClick={(e) => { e.stopPropagation(); handleDuplicate() }}
-            title={t.block.duplicate}
-            aria-label={`${t.block.duplicate} ${displayLabel}`}
-          >
-            <Copy size={11} aria-hidden="true" />
-          </button>
-          <button
-            className="block-collapse"
-            onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
-            title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
-            aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
-          >
-            {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
-          </button>
-          <button
-            className="block-collapse"
-            onClick={(e) => { e.stopPropagation(); setCollapsed((c) => !c) }}
-            title={collapsed ? t.block.expand : t.block.collapse}
-            aria-label={collapsed ? t.block.expand : t.block.collapse}
-            aria-expanded={!collapsed}
-          >
-            {collapsed
-              ? <ChevronRight size={12} aria-hidden="true" />
-              : <ChevronDown size={12} aria-hidden="true" />
-            }
-          </button>
-          <button
-            className="block-remove"
-            onClick={(e) => { e.stopPropagation(); removeNode(id) }}
-            title={t.block.delete}
-            aria-label={`${t.block.delete} ${displayLabel}`}
-          >
-            <X size={11} aria-hidden="true" />
-          </button>
+          <Tooltip content={t.block.duplicate} side="top">
+            <button
+              className="block-collapse"
+              onClick={(e) => { e.stopPropagation(); handleDuplicate() }}
+              title={t.block.duplicate}
+              aria-label={`${t.block.duplicate} ${displayLabel}`}
+            >
+              <Copy size={11} aria-hidden="true" />
+            </button>
+          </Tooltip>
+          <Tooltip content={data.hidden ? 'Show in prompt' : 'Hide from prompt'} side="top">
+            <button
+              className="block-collapse"
+              onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
+              title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+              aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+            >
+              {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
+            </button>
+          </Tooltip>
+          <Tooltip content={collapsed ? t.block.expand : t.block.collapse} side="top">
+            <button
+              className="block-collapse"
+              onClick={(e) => { e.stopPropagation(); setCollapsed((c) => !c) }}
+              title={collapsed ? t.block.expand : t.block.collapse}
+              aria-label={collapsed ? t.block.expand : t.block.collapse}
+              aria-expanded={!collapsed}
+            >
+              {collapsed
+                ? <ChevronRight size={12} aria-hidden="true" />
+                : <ChevronDown size={12} aria-hidden="true" />
+              }
+            </button>
+          </Tooltip>
+          <Tooltip content={t.block.delete} side="top">
+            <button
+              className="block-remove"
+              onClick={(e) => { e.stopPropagation(); removeNode(id) }}
+              title={t.block.delete}
+              aria-label={`${t.block.delete} ${displayLabel}`}
+            >
+              <X size={11} aria-hidden="true" />
+            </button>
+          </Tooltip>
         </div>
       </div>
 

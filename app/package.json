@@ -10,6 +10,7 @@
     "lint": "eslint src --ext ts,tsx"
   },
   "dependencies": {
+    "@radix-ui/react-tooltip": "^1.2.8",
     "axios": "^1.6.0",
     "clsx": "^2.1.0",
     "idb": "^8.0.3",

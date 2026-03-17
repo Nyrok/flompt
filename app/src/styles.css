@@ -4012,3 +4012,26 @@ body {
     border-radius: 8px;
   }
 }
+
+/* ── Tooltip (Radix / Shadcn-compatible) ─────────────────────────────────── */
+.tooltip-content {
+  z-index: 9999;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 5px 10px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #e8e8e8;
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3);
+  pointer-events: none;
+  letter-spacing: 0.01em;
+  animation: tooltip-in 0.1s ease;
+}
+@keyframes tooltip-in {
+  from { opacity: 0; transform: scale(0.95) translateY(2px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);   }
+}

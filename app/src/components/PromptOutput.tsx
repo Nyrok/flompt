@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react'
 import { Clipboard, ClipboardCheck, FileText, Braces, Sparkles, Play, Send, Github, Zap, Bug, Scissors, Star as StarIcon } from 'lucide-react'
+import { Tooltip } from '@/components/ui/tooltip'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import { analytics } from '@/lib/analytics'
@@ -160,15 +161,16 @@ const PromptOutput = () => {
       {/* Target platform selector — switches the display without recompiling */}
       <div className="format-selector" role="group" aria-label="Target AI platform">
         {FORMAT_OPTIONS.map(({ format, label, title }) => (
-          <button
-            key={format}
-            className={`format-btn${outputFormat === format ? ' format-btn-active' : ''}`}
-            onClick={() => setOutputFormat(format)}
-            title={title}
-            aria-pressed={outputFormat === format}
-          >
-            {label}
-          </button>
+          <Tooltip key={format} content={title} side="top">
+            <button
+              className={`format-btn${outputFormat === format ? ' format-btn-active' : ''}`}
+              onClick={() => setOutputFormat(format)}
+              title={title}
+              aria-pressed={outputFormat === format}
+            >
+              {label}
+            </button>
+          </Tooltip>
         ))}
       </div>
 
@@ -178,18 +180,20 @@ const PromptOutput = () => {
           <div className="export-actions">
             {/* Send to AI — only in the extension sidebar */}
             {isExtension && (
-              <button
-                className={`btn btn-primary export-inject${injected ? ' injected' : ''}`}
-                onClick={handleInjectToAI}
-                title={t.promptOutput.injectLabel}
-                aria-label={injected ? t.promptOutput.injectedLabel : t.promptOutput.injectLabel}
-                aria-live="polite"
-              >
-                {injected
-                  ? <><ClipboardCheck size={13} aria-hidden="true" /> {t.promptOutput.injected}</>
-                  : <><Send size={13} aria-hidden="true" /> {t.promptOutput.sendToAI}</>
-                }
-              </button>
+              <Tooltip content={t.promptOutput.injectLabel} side="top">
+                <button
+                  className={`btn btn-primary export-inject${injected ? ' injected' : ''}`}
+                  onClick={handleInjectToAI}
+                  title={t.promptOutput.injectLabel}
+                  aria-label={injected ? t.promptOutput.injectedLabel : t.promptOutput.injectLabel}
+                  aria-live="polite"
+                >
+                  {injected
+                    ? <><ClipboardCheck size={13} aria-hidden="true" /> {t.promptOutput.injected}</>
+                    : <><Send size={13} aria-hidden="true" /> {t.promptOutput.sendToAI}</>
+                  }
+                </button>
+              </Tooltip>
             )}
             <button
               className="btn btn-secondary export-copy"
@@ -203,34 +207,44 @@ const PromptOutput = () => {
               }
             </button>
             <div className="export-row2">
-              <button
-                className="btn btn-secondary export-btn"
-                onClick={handleExportTxt}
-                title={t.promptOutput.exportTxtLabel}
-                aria-label={t.promptOutput.exportTxtLabel}
-              >
-                <FileText size={13} aria-hidden="true" /> {t.promptOutput.exportTxt}
-              </button>
-              <button
-                className="btn btn-secondary export-btn"
-                onClick={handleExportJSON}
-                title={t.promptOutput.exportJsonLabel}
-                aria-label={t.promptOutput.exportJsonLabel}
-              >
-                <Braces size={13} aria-hidden="true" /> {t.promptOutput.exportJson}
-              </button>
+              <Tooltip content={t.promptOutput.exportTxtLabel} side="top">
+                <button
+                  className="btn btn-secondary export-btn"
+                  onClick={handleExportTxt}
+                  title={t.promptOutput.exportTxtLabel}
+                  aria-label={t.promptOutput.exportTxtLabel}
+                >
+                  <FileText size={13} aria-hidden="true" /> {t.promptOutput.exportTxt}
+                </button>
+              </Tooltip>
+              <Tooltip content={t.promptOutput.exportJsonLabel} side="top">
+                <button
+                  className="btn btn-secondary export-btn"
+                  onClick={handleExportJSON}
+                  title={t.promptOutput.exportJsonLabel}
+                  aria-label={t.promptOutput.exportJsonLabel}
+                >
+                  <Braces size={13} aria-hidden="true" /> {t.promptOutput.exportJson}
+                </button>
+              </Tooltip>
             </div>
             {!isExtension && (
               <div className="output-ide-actions">
-                <button className="btn btn-secondary export-btn" onClick={handleDebug} title={t.ide.outputButtons.debug}>
-                  <Bug size={13} /> {t.ide.outputButtons.debug}
-                </button>
-                <button className="btn btn-secondary export-btn" onClick={handleCompress} title={t.ide.outputButtons.compress}>
-                  <Scissors size={13} /> {t.ide.outputButtons.compress}
-                </button>
-                <button className="btn btn-secondary export-btn" onClick={handleCritic} title={t.ide.outputButtons.score}>
-                  <StarIcon size={13} /> {t.ide.outputButtons.score}
-                </button>
+                <Tooltip content={t.ide.outputButtons.debug} side="top">
+                  <button className="btn btn-secondary export-btn" onClick={handleDebug} title={t.ide.outputButtons.debug}>
+                    <Bug size={13} /> {t.ide.outputButtons.debug}
+                  </button>
+                </Tooltip>
+                <Tooltip content={t.ide.outputButtons.compress} side="top">
+                  <button className="btn btn-secondary export-btn" onClick={handleCompress} title={t.ide.outputButtons.compress}>
+                    <Scissors size={13} /> {t.ide.outputButtons.compress}
+                  </button>
+                </Tooltip>
+                <Tooltip content={t.ide.outputButtons.score} side="top">
+                  <button className="btn btn-secondary export-btn" onClick={handleCritic} title={t.ide.outputButtons.score}>
+                    <StarIcon size={13} /> {t.ide.outputButtons.score}
+                  </button>
+                </Tooltip>
               </div>
             )}
           </div>
