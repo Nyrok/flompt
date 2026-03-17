@@ -189,7 +189,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
 
   return (
     <div
-      ref={listRef}
       className={`block-list-view${isDragOver ? ' block-list-view--drag-over' : ''}`}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
@@ -314,7 +313,7 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
           </p>
         </div>
       ) : (
-        <div className="block-list-view-cards">
+        <div ref={listRef} className="block-list-view-cards">
           {orderedNodes.map((node, idx) => {
             const meta        = BLOCK_META[node.data.type]
             const Icon        = meta.icon
