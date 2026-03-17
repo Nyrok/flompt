@@ -21,6 +21,7 @@ export interface PromptVersion {
   label: string
   message: string
   prompt: string
+  output?: string
   nodes: FlomptNode[]
   edges: FlomptEdge[]
   tokenCount: number

@@ -37,6 +37,9 @@ export const useVersionStore = create<VersionState>((set, get) => ({
     const { nodes, edges, rawPrompt, compiledPrompt } = useFlowStore.getState()
     const existing = get().versions.filter(v => v.projectId === projectId)
     const versionNum = (existing[0]?.version ?? 0) + 1
+    const compiledOutput = compiledPrompt
+      ? (compiledPrompt.formats.claude ?? Object.values(compiledPrompt.formats)[0] ?? rawPrompt)
+      : rawPrompt
     const version: PromptVersion = {
       id: nanoid(),
       projectId,
@@ -44,6 +47,7 @@ export const useVersionStore = create<VersionState>((set, get) => ({
       label: message ?? `v${versionNum}`,
       message: message ?? '',
       prompt: rawPrompt,
+      output: compiledOutput,
       nodes: JSON.parse(JSON.stringify(nodes)),
       edges: JSON.parse(JSON.stringify(edges)),
       tokenCount: compiledPrompt?.tokenEstimate ?? 0,
@@ -66,7 +70,7 @@ export const useVersionStore = create<VersionState>((set, get) => ({
     const vA = versions.find(v => v.id === idA)
     const vB = versions.find(v => v.id === idB)
     if (!vA || !vB) return
-    const lines = computeLineDiff(vA.prompt, vB.prompt)
+    const lines = computeLineDiff(vA.output ?? vA.prompt, vB.output ?? vB.prompt)
     set({ diffView: { idA, idB, lines } })
   },
 
