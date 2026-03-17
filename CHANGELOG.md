@@ -10,6 +10,35 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.5.0] — 2026-03-17
+
+### Added
+- **Prompt Audit** — scans blocks for structural gaps (role, objective, examples…), scores prompt 0–100, one-click to add any missing block directly from the panel
+- **Prompt Score** — rates the compiled output across quality dimensions with a radar chart; results cached per compiled prompt to ensure consistency
+- **Onboarding tour** — two new steps: Audit and IDE tools; step order reworked (prompt → blocks → library → decompose → list-view → audit → project → compile → canvas-view → IDE tools); tooltip bottom-clamped so it never goes off-screen; clicking the spotlighted element advances the step
+- **Collision-free block positioning** — blocks added from sidebar, list view, canvas bar or audit panel never overlap existing blocks; uses real canvas dimensions
+- **Export dropdown** — `.txt` and `.json` export merged under a single "Export" button with a dropdown menu
+- **Extension popup** — now triggers after 3 compiles instead of a fixed timer post-onboarding
+- **Analytics** — session recording always-on for all visitors; 14 new product events (app_loaded, view_toggled, audit_opened, audit_block_added, score_opened, output_format_changed, library_opened, template_applied, version_panel_opened, version_saved, version_restored, version_diff_viewed, project_renamed)
+- **Landing page** — new "Built-in tools" section presenting Prompt Quality, Version History and Context Memory
+
+### Changed
+- **PromptOutput panel** restructured: Copy to Clipboard, Export dropdown, Analysis section divider (Score), Third party section divider (Make.com, GitHub)
+- **Audit cache** keyed by `rawPrompt` (input); **Score cache** keyed by compiled output — repeated checks with no changes always return the same result
+- **Version history diff** now compares compiled output instead of raw prompt input
+- **Debug and Compress** features hidden (temporarily disabled)
+- **Audit "Add" button** shows "Added" state with a checkmark after clicking
+- **List view** scrolls to bottom when a block is added
+- **Canvas camera** no longer repositions on drag-drop or manual block add
+- **FR copy label** → "Copier le prompt" · **PT** → "Copiar o prompt"
+
+### Fixed
+- Extension popup CSS transform glitch during open animation
+- Tour backdrop was intercepting pointer events — fixed click-through to spotlighted element
+- Tooltip off-screen on step 9 (bottom-clamped)
+
+---
+
 ## [1.4.0] — 2026-03-15
 
 ### Added
