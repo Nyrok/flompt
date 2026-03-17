@@ -3641,7 +3641,7 @@ body {
 .critic-list li { font-size: 12px; color: var(--text-dim); padding-left: 12px; position: relative; }
 .critic-list--strengths li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; }
 .critic-list--weaknesses li::before { content: '✗'; position: absolute; left: 0; color: #ef4444; }
-.radar-chart { display: block; }
+.radar-chart { display: block; width: 100%; }
 
 /* ─── Compressor Modal ──────────────────────────────────────────────────── */
 .compressor-overlay { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; }
