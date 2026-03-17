@@ -117,6 +117,7 @@ const PromptOutput = () => {
 
   const handleCritic = async () => {
     if (!currentRaw) return
+    analytics.scoreOpened()
     // Reuse cached result if prompt hasn't changed
     if (criticResult && criticCachedPrompt === currentRaw) {
       openCritic(true)
@@ -161,7 +162,7 @@ const PromptOutput = () => {
           <Tooltip key={format} content={title} side="top">
             <button
               className={`format-btn${outputFormat === format ? ' format-btn-active' : ''}`}
-              onClick={() => setOutputFormat(format)}
+              onClick={() => { setOutputFormat(format); analytics.outputFormatChanged(format) }}
               aria-label={title}
               aria-pressed={outputFormat === format}
             >

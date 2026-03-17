@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid'
 import { getDB, type PromptVersion } from '@/lib/db'
 import { useFlowStore } from '@/store/flowStore'
 import { computeLineDiff, type DiffLine } from '@/lib/diff'
+import { analytics } from '@/lib/analytics'
 
 interface VersionState {
   versions: PromptVersion[]
@@ -57,12 +58,14 @@ export const useVersionStore = create<VersionState>((set, get) => ({
     const db = await getDB()
     await db.put('versions', version)
     set(state => ({ versions: [version, ...state.versions] }))
+    analytics.versionSaved(versionNum)
   },
 
   rollback: (version) => {
     const store = useFlowStore.getState()
     store.setNodes(version.nodes)
     store.setEdges(version.edges)
+    analytics.versionRestored(version.version)
   },
 
   showDiff: (idA, idB) => {
@@ -72,6 +75,7 @@ export const useVersionStore = create<VersionState>((set, get) => ({
     if (!vA || !vB) return
     const lines = computeLineDiff(vA.output ?? vA.prompt, vB.output ?? vB.prompt)
     set({ diffView: { idA, idB, lines } })
+    analytics.versionDiffViewed()
   },
 
   closeDiff: () => set({ diffView: null }),

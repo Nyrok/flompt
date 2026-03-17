@@ -3,6 +3,7 @@ import { X, CheckCircle2, XCircle, Plus, ShieldCheck } from 'lucide-react'
 import { useAuditStore } from './useAuditStore'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
+import { analytics } from '@/lib/analytics'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType, FlomptNode } from '@/types/blocks'
 import { findFreePosition, getCanvasSize } from '@/lib/layoutNodes'
@@ -53,6 +54,7 @@ export default function AuditPanel() {
 
     addNode(node)
     setAdded(prev => new Set(prev).add(type))
+    analytics.auditBlockAdded(type)
   }
 
   return (

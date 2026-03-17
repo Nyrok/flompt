@@ -27,11 +27,12 @@ export const initAnalytics = () => {
     autocapture:       true,
     request_batching:  true,
 
-    // Session replay — mask prompt content (privacy)
+    // Session replay — always on, mask prompt content (privacy)
+    disable_session_recording: false,
     session_recording: {
-      maskAllInputs:      false,               // keep most inputs visible
-      maskInputOptions:   { textarea: true },  // mask prompt textarea only
-      recordCrossOriginIframes: false,
+      maskAllInputs:              false,               // keep most inputs visible
+      maskInputOptions:           { textarea: true },  // mask prompt textarea only
+      recordCrossOriginIframes:   false,
     },
 
     // Heatmaps
@@ -83,6 +84,10 @@ export const setSource = (source: 'web' | 'extension', aiPlatform?: string) => {
 // ── Typed event helpers ───────────────────────────────────────────────────────
 
 export const analytics = {
+  // App lifecycle
+  appLoaded: (props: { view_mode: string; locale: string; is_returning_user: boolean; source: string }) =>
+    track('app_loaded', props),
+
   // Tour
   tourStarted:    ()                                  => track('tour_started'),
   tourStep:       (step: number, title: string)       => track('tour_step',       { step, title }),
@@ -97,9 +102,32 @@ export const analytics = {
   promptCopied:       ()                              => track('prompt_copied'),
   promptExported:     (format: 'txt' | 'json')        => track('prompt_exported',     { format }),
 
+  // View
+  viewToggled: (to: 'list' | 'canvas')                => track('view_toggled',    { to }),
+
   // Blocks
   blockAdded:   (type: string)                        => track('block_added',     { type }),
   blockDeleted: (type: string)                        => track('block_deleted',   { type }),
+
+  // Audit
+  auditOpened:     ()                                 => track('audit_opened'),
+  auditBlockAdded: (type: string)                     => track('audit_block_added', { type }),
+
+  // Score / Critic
+  scoreOpened: ()                                     => track('score_opened'),
+
+  // Output
+  outputFormatChanged: (format: string)               => track('output_format_changed', { format }),
+
+  // Template library
+  libraryOpened:   ()                                 => track('library_opened'),
+  templateApplied: (id: string, category: string)    => track('template_applied', { template_id: id, category }),
+
+  // Version history
+  versionPanelOpened: ()                             => track('version_panel_opened'),
+  versionSaved:       (versionNum: number)           => track('version_saved',    { version_num: versionNum }),
+  versionRestored:    (versionNum: number)           => track('version_restored', { version_num: versionNum }),
+  versionDiffViewed:  ()                             => track('version_diff_viewed'),
 
   // Settings
   localeChanged: (locale: string)                     => track('locale_changed',  { locale }),
@@ -117,6 +145,7 @@ export const analytics = {
   projectCreated:  ()                     => track('project_created'),
   projectSwitched: (name: string)         => track('project_switched', { project_name: name }),
   projectDeleted:  ()                     => track('project_deleted'),
+  projectRenamed:  ()                     => track('project_renamed'),
 
   // Errors
   error: (context: string, message?: string)          => track('error', { context, message }),
