@@ -2227,14 +2227,14 @@ body {
 .canvas-block-bar--toolbar .canvas-block-btn { flex-shrink: 0; }
 
 .canvas-block-btn {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: none;
   border: 1px solid transparent;
-  border-radius: 7px;
+  border-radius: 6px;
   color: var(--block-color, var(--text-muted));
   cursor: pointer;
   transition: background 120ms, border-color 120ms;
