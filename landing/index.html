@@ -511,6 +511,32 @@
     .spec-item svg { color: var(--text-dim); flex-shrink: 0; }
     .spec-item strong { color: var(--text); font-weight: 500; }
 
+    /* ── PROMPT TOOLS ──────────────────────────────────── */
+    .tools-section { padding: 100px 0; }
+    .tools-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      margin-top: 56px;
+    }
+    .tool-card {
+      padding: 32px 28px; border-radius: 16px;
+      background: var(--card-bg); border: 1px solid var(--border-warm);
+      display: flex; flex-direction: column; gap: 18px;
+      transition: border-color 200ms, background 200ms;
+    }
+    .tool-card:hover { border-color: rgba(255,255,255,0.1); background: rgba(135,134,127,0.09); }
+    .tool-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .tool-title { font-size: 1.05rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+    .tool-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+    .tool-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .tool-pill {
+      font-size: 0.72rem; font-weight: 500; padding: 3px 10px;
+      border-radius: 20px; border: 1px solid; opacity: 0.85;
+    }
+    @media (max-width: 900px) { .tools-grid { grid-template-columns: 1fr; } }
+
     /* ── CTA ───────────────────────────────────────────── */
     .cta-final { padding: 100px 0; text-align: center; position: relative; }
     .cta-final::before {
@@ -1124,6 +1150,67 @@
   <span style="color:#8b7ffa">"sentAt"</span>:     <span style="color:#86efac">"2026-03-13T…"</span>
 }</pre>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROMPT TOOLS ──────────────────────────────── -->
+  <section class="tools-section">
+    <div class="container">
+      <div class="section-accent-line"></div>
+      <p class="section-label">Built-in tools</p>
+      <h2 class="section-title">Build better prompts, every time.</h2>
+      <p class="section-sub">Three tools that help you check, track, and reuse your work — all inside flompt.</p>
+
+      <div class="tools-grid">
+
+        <!-- Prompt Quality -->
+        <div class="tool-card">
+          <div class="tool-icon" style="background:rgba(255,53,112,0.08);border:1px solid rgba(255,53,112,0.18);color:var(--accent)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="tool-title">Prompt Quality</div>
+            <p class="tool-desc">Know if your prompt is ready before you send it.<br><br><strong style="color:var(--text)">Audit</strong> scans your blocks for gaps. Role missing? No examples? It tells you. Add what's missing in one click.<br><br><strong style="color:var(--text)">Score</strong> rates the compiled output from 0 to 100. See what is weak. Get tips to fix it fast.</p>
+            <div class="tool-pills" style="margin-top:14px">
+              <span class="tool-pill" style="color:var(--accent);border-color:rgba(255,53,112,0.25);background:rgba(255,53,112,0.06)">Audit</span>
+              <span class="tool-pill" style="color:var(--accent);border-color:rgba(255,53,112,0.25);background:rgba(255,53,112,0.06)">Score 0–100</span>
+              <span class="tool-pill" style="color:var(--accent);border-color:rgba(255,53,112,0.25);background:rgba(255,53,112,0.06)">One-click fix</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Version History -->
+        <div class="tool-card">
+          <div class="tool-icon" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.18);color:#38bdf8">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="tool-title">Version History</div>
+            <p class="tool-desc">Save your prompt at any point. Give it a label. Come back later and restore it in one click.<br><br>Pick two versions and compare them side by side. See every line that changed — added, removed, or moved.<br><br>No more lost work. No more "what did I change?"</p>
+            <div class="tool-pills" style="margin-top:14px">
+              <span class="tool-pill" style="color:#38bdf8;border-color:rgba(56,189,248,0.25);background:rgba(56,189,248,0.06)">Save</span>
+              <span class="tool-pill" style="color:#38bdf8;border-color:rgba(56,189,248,0.25);background:rgba(56,189,248,0.06)">Roll back</span>
+              <span class="tool-pill" style="color:#38bdf8;border-color:rgba(56,189,248,0.25);background:rgba(56,189,248,0.06)">Diff view</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Context Memory -->
+        <div class="tool-card">
+          <div class="tool-icon" style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.18);color:#34d399">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+          </div>
+          <div>
+            <div class="tool-title">Context Memory</div>
+            <p class="tool-desc">Store facts the AI should always know. Your stack, tone, rules, constraints — anything that applies to every prompt you write.<br><br>Add them once. They load into your workspace each time. No need to repeat yourself across projects.</p>
+            <div class="tool-pills" style="margin-top:14px">
+              <span class="tool-pill" style="color:#34d399;border-color:rgba(52,211,153,0.25);background:rgba(52,211,153,0.06)">Persistent context</span>
+              <span class="tool-pill" style="color:#34d399;border-color:rgba(52,211,153,0.25);background:rgba(52,211,153,0.06)">Per project</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
