@@ -1214,16 +1214,7 @@ body {
   box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5);
 }
 
-.block-list-card[data-block-type="guardrails"] {
-  border-left-style: dashed;
-  background-image: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 14px,
-    rgba(239, 68, 68, 0.025) 14px,
-    rgba(239, 68, 68, 0.025) 28px
-  );
-}
+
 
 /* ── Tools block — dot grid (blueprint / workbench) ──────────────────────── */
 .block-node[data-block-type="tools"] {
@@ -1241,14 +1232,7 @@ body {
   box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.45);
 }
 
-.block-list-card[data-block-type="tools"] {
-  background-image: radial-gradient(
-    circle,
-    rgba(251, 146, 60, 0.08) 1px,
-    transparent 1px
-  );
-  background-size: 16px 16px;
-}
+
 
 /* ── Environment block — horizontal scan lines (terminal) ─────────────────── */
 .block-node[data-block-type="environment"] {
@@ -1269,15 +1253,7 @@ body {
   box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.4);
 }
 
-.block-list-card[data-block-type="environment"] {
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 17px,
-    rgba(34, 211, 238, 0.025) 17px,
-    rgba(34, 211, 238, 0.025) 18px
-  );
-}
+
 
 /* ── Response Style block ─────────────────────────────────────────────────── */
 .block-node--response-style {
