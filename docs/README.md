@@ -1,6 +1,6 @@
 # Welcome to flompt
 
-**flompt** is a Visual AI Prompt Builder — a free, open-source tool that transforms how you craft prompts for AI models. Instead of writing monolithic blocks of text, flompt lets you decompose, visually edit, and assemble prompts into structured XML output — ready to inject into any LLM.
+**flompt** = Visual AI Prompt Builder. Decompose any prompt. Edit visually. Assemble as XML. Ready to inject. Free. Open-source.
 
 🔗 Live at: [https://flompt.dev](https://flompt.dev)
 
@@ -8,33 +8,31 @@
 
 ## What is flompt?
 
-The name comes from **flow + prompt**. It reflects the core idea: prompt engineering as a visual flow, not a wall of text.
-
-Think of it as **Figma for Prompts** — visual, structured, and modular.
+**flow + prompt = flompt**. Visual prompting. Structured. Modular.
 
 ## The three-step workflow
 
-1. **Decompose** — Paste any raw prompt. flompt's AI (Claude) automatically breaks it into semantic blocks.
-2. **Edit visually** — Drag, connect, and edit blocks on an interactive canvas powered by React Flow, or switch to List View for a linear card-based layout. Hide any block to exclude it from assembly without deleting it.
-3. **Assemble** — Generate a structured XML prompt from your visual flow — 100% local, instant, ready to inject into any LLM.
+1. **Decompose** — Paste any prompt. AI breaks it into blocks.
+2. **Edit** — Use Canvas or List View. Hide blocks to exclude them.
+3. **Assemble** — Generate XML. 100% local. Instant.
 
-> No sign-up required. Free forever. Self-hostable under MIT license.
+No sign-up. Free. MIT license. Self-hostable.
 
 ## Template Library
 
-**100+ ready-to-use prompt templates** across 10 categories — code, writing, marketing, productivity, design, education, sales, data, creative, personal. One click loads a complete structured canvas. No blank page.
+**100+ templates** across 10 categories. One click. No blank page.
 
 → [Template Library documentation](./template-library.md)
 
 ## List View
 
-Switch between **Canvas** and **List** view using the toggle in the top-right of the toolbar. List View displays all blocks as stacked cards — edit content inline, reorder with ↑/↓ buttons, duplicate blocks, and toggle visibility. Both views share the same block store and stay in sync.
+Switch between Canvas and List view. Edit inline. Reorder. Duplicate. Toggle visibility. Both views stay synced.
 
 → [List View documentation](./list-view.md)
 
 ## Projects
 
-Manage multiple independent workspaces. Each project saves its own canvas, prompt, and output to localStorage — switch between them instantly. Export and import projects as JSON files to share with teammates or back up your work.
+Manage multiple workspaces. Switch instantly. Export/import as JSON.
 
 → [Projects documentation](./projects.md)
 

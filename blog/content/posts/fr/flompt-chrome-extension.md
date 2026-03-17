@@ -8,32 +8,36 @@ color: "primary"
 
 ## Le problème du contexte
 
-Quand tu travailles avec une IA, tu as deux onglets ouverts. Celui de ton outil de prompting. Celui de ChatGPT ou Claude. Tu écris, tu copies, tu colles, tu reviens, tu ajustes, tu recopies.
+Tu travailles avec une IA. Deux onglets. Celui de ton outil. Celui de ChatGPT ou Claude.
 
-Ce va-et-vient est invisible dans les tutoriels mais constant dans la pratique. C'est du temps perdu, de la friction ajoutée, et une source d'erreurs : mauvaise version collée, contexte oublié, modification perdue.
+Écris. Copie. Colle. Reviens. Ajuste. Recopie.
 
-L'extension Flompt supprime ce problème. Elle est disponible sur Chrome et Firefox.
+Va-et-vient constant. Temps perdu. Friction partout. Erreurs : mauvaise version. Contexte oublié. Modification perdue.
+
+L'extension Flompt supprime ce problème. Chrome et Firefox.
 
 ## Ce que fait l'extension
 
-Une sidebar s'ouvre directement dans l'interface de ChatGPT, Claude ou Gemini. À droite de la page. Sans nouvel onglet. Tu construis ton prompt visuellement dans la sidebar, et d'un clic, il est injecté dans la zone de saisie de l'IA.
+Sidebar directe. ChatGPT. Claude. Gemini. À droite de la page. Pas de nouvel onglet.
 
-Pas de copier-coller. Pas de changement de contexte. Ton flow visuel et ta conversation IA au même endroit.
+Construis ton prompt dans la sidebar. Un clic : injecté dans la zone de saisie IA.
+
+Pas de copier-coller. Pas de changement de contexte. Flow visuel + conversation IA. Même endroit.
 
 ## Le format XML : pourquoi ça change tout
 
-Quand tu assembles tes blocs, Flompt génère un prompt en XML structuré :
+Assemblage = prompt XML structuré.
 
 ```xml
 <prompt>
   <role>
-    Tu es un expert en développement Python.
+    Tu es expert en développement Python.
   </role>
   <objective>
-    Révise le code suivant pour détecter les bugs et problèmes de performance.
+    Révise le code pour détecter bugs.
   </objective>
   <constraints>
-    Sois concis. Priorise les problèmes critiques. Une phrase par problème.
+    Concis. Priorise les critiques. Une phrase par bug.
   </constraints>
   <output_format>
     Liste numérotée.
@@ -41,39 +45,38 @@ Quand tu assembles tes blocs, Flompt génère un prompt en XML structuré :
 </prompt>
 ```
 
-Ce format n'est pas arbitraire. Les LLMs modernes (GPT-4, Claude, Gemini) sont entraînés sur des quantités massives de XML. Les balises agissent comme des **délimiteurs sémantiques explicites** : le modèle sait exactement où commence le rôle, où finit l'objectif, ce qui constitue une contrainte.
+Ce format n'est pas arbitraire. Les LLMs = entraînés sur massif XML. Les balises = délimiteurs sémantiques explicites. Le modèle sait où commence le rôle. Où finit l'objectif. Ce qu'est une contrainte.
 
-Résultat concret : moins d'ambiguïté, moins d'hallucinations sur la structure, meilleure isolation des sections. Anthropic recommande d'ailleurs l'usage de balises XML dans ses guidelines de prompt engineering.
+Résultat : moins d'ambiguïté. Moins d'hallucinations. Meilleure isolation. Anthropic recommande XML dans ses guidelines.
 
 ## L'assemblage est 100% local
 
-Aucun appel API à la compilation. Le prompt XML est généré directement dans ton navigateur, à partir de tes blocs. Instantané, hors-ligne capable, et tes données ne quittent jamais ta machine.
+Pas d'appel API. Le prompt XML = généré dans ton navigateur. À partir de tes blocs. Instantané. Hors-ligne capable. Tes données restent sur ta machine.
 
-L'ordre des blocs dans le prompt final suit la topologie du canvas : si tu as connecté tes blocs entre eux, Flompt respecte cet ordre (tri topologique). Sinon, il trie par position verticale : les blocs en haut du canvas arrivent en premier.
+L'ordre des blocs : suit la topologie du canvas. Blocs connectés = ordre respecté (tri topologique). Sinon : trie par position verticale. Haut du canvas = en premier.
 
 ## Compatible ChatGPT, Claude, Gemini
 
-L'extension détecte automatiquement la plateforme active et adapte l'injection. Le bouton Flompt s'intègre dans la barre d'outils native de chaque interface.
+L'extension détecte la plateforme active. Adapte l'injection. Le bouton Flompt s'intègre dans la barre d'outils native.
 
-Si pour une raison quelconque la barre d'outils est introuvable (mise à jour de l'interface, DOM modifié), un bouton flottant apparaît en bas à droite comme fallback.
+Si la barre d'outils n'est pas trouvée (mise à jour). Un bouton flottant apparaît en bas à droite. Fallback automatique.
 
 ## Comment l'installer
 
-Installe directement depuis le Chrome Web Store ou Firefox Add-ons. Un clic, aucun mode développeur requis :
+Chrome Web Store ou Firefox Add-ons. Un clic. Pas de mode développeur.
 
 → [**Ajouter à Chrome**](https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc)
-
 → [**Ajouter à Firefox**](https://addons.mozilla.org/addon/flompt-visual-prompt-builder/)
 
-Une fois installée, ouvre ChatGPT, Claude ou Gemini. Le bouton **✦ flompt** apparaît directement dans la barre d'outils de saisie.
+Ouvre ChatGPT, Claude, ou Gemini. Le bouton **✦ flompt** s'affiche dans la barre d'outils.
 
-Pas de compte requis. Pas de clé API. Gratuit et open-source sous licence MIT.
+Pas de compte. Pas d'API. Gratuit. MIT.
 
 ## Ce que ça change dans la pratique
 
-La friction entre "construire un bon prompt" et "l'utiliser" disparaît. Tu peux itérer rapidement : modifier un bloc, réassembler, injecter, tester la réponse, ajuster. Le tout sans quitter l'onglet.
+La friction disparaît. Construire un prompt. L'utiliser. Même endroit. Itère rapidement : modifie. Réassemble. Injecte. Teste. Ajuste. Pas de changement d'onglet.
 
-Et comme le flow est sauvegardé automatiquement entre les sessions, tu reprends exactement là où tu t'étais arrêté.
+Le flow se sauvegarde automatiquement. Reprends exactement là où tu t'étais arrêté.
 
 ---
 

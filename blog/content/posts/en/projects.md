@@ -8,45 +8,39 @@ color: "primary"
 
 ## The Problem with a Single Canvas
 
-Until today, flompt had one canvas. One prompt. One state.
+flompt had one canvas. Works for one prompt.
 
-That works fine when you have one thing to build. But most people using flompt aren't building one prompt, they're building workflows for different contexts, different clients, different use cases. A code review flow. A content pipeline. A customer support template for a specific product. An onboarding sequence.
+Most people build multiple: code review, content pipeline, support templates, onboarding.
 
-You had to either keep one monster canvas with everything on it, or clear the canvas and start over each time, losing whatever was there before. Neither option is great.
+You'd either keep one messy canvas or clear it and lose work.
 
-**Projects solves this.**
+Projects fix this.
 
 ## What Projects Are
 
-A **project** in flompt is a complete, isolated workspace. It stores:
+A project is an isolated workspace: canvas, compiled output, settings.
 
-- Your canvas (all blocks, positions, connections)
-- The compiled prompt output
-- The current format and language settings
+Independent. Switching projects replaces canvas state instantly.
 
-Every project is independent. Switching projects replaces the entire canvas state, no mixup, no bleed between workspaces.
-
-Projects are created, managed, and switched from a **pill selector in the header**, centered between the left and right panels. Click the selector, see all your projects, switch with one click. You can rename any project inline, delete the ones you no longer need, and create as many as your work requires.
+Manage from a pill selector in the header. Click to switch, rename, or delete.
 
 ## Auto-Save, Always
 
-You don't save manually. flompt saves for you.
+Auto-save on every change: add block, edit, move node.
 
-Every change to your canvas, adding a block, editing content, moving a node, triggers an auto-save, debounced at 1 second. By the time you pause typing, your work is already persisted. Close the tab, come back tomorrow: everything is exactly where you left it.
+Debounced at 1 second. Pause = saved. Close tab = work persists.
 
-The same applies when you switch projects. Your current state is committed before the switch happens. Nothing is lost mid-workflow.
+Same on project switch: current state commits before switching.
 
 ## The Default Project
 
-When you open flompt for the first time, a **Default project** is created automatically. It's translated in your interface language and it's protected, it cannot be deleted. You always have a fallback workspace, no matter what.
+A Default project is created automatically. Protected, can't be deleted.
 
-The Default project is also where any previous canvas state migrates from the pre-project era. If you were already using flompt before this update, your work is still there.
+If you used flompt before: your work migrates here.
 
 ## Import / Export: Portability Without a Cloud
 
-Projects can be exported and imported as plain JSON files.
-
-This is more powerful than it sounds. A few real scenarios:
+Export/import projects as JSON. Why it matters:
 
 **Backing up your work**: Export a project before a major restructure. If the new direction doesn't work, import the backup. Version control for your prompts, no Git required.
 
@@ -56,43 +50,41 @@ This is more powerful than it sounds. A few real scenarios:
 
 **Onboarding new collaborators**: Build a reference project with your team's standard prompt structures. Export it as a template. Every new team member imports it and starts from a consistent baseline.
 
-The JSON format is readable and stable. It's not an opaque blob, you can inspect it, diff it, and store it in a repository alongside your code if you want.
+JSON is readable. Inspect it, diff it, store in a repo.
 
 ## No Data Retention. Ever.
 
-flompt has always been local-first. Projects doesn't change that, it extends it.
+Always local-first. Everything in browser localStorage. No account. No server sees your data.
 
-Everything lives in your browser's `localStorage`. No account required. No server sees your prompts. No analytics on your content. Nothing is transmitted, stored, or processed on flompt's infrastructure.
+Prompts often have sensitive info. On flompt, it stays on your machine.
 
-This matters. Prompts often contain sensitive context, internal product details, customer information, proprietary processes, personal data. When you build a prompt in flompt, that content stays on your machine. The export JSON file stays wherever you put it. You're in full control.
-
-We don't have data retention policies because we don't have your data. That's intentional, and it's not changing.
+Export JSON stays where you put it. You control everything.
 
 ## A Concrete Use Case
 
-Here's how a small product team might actually use Projects:
+Example team setup:
 
-1. **"Weekly update"** project, a recurring prompt flow with blocks for team status, blockers, and next steps. Compiled every Monday, sent to Make.com, processed by Claude, pushed to Notion.
+1. "Weekly update" - status, blockers, next steps. Send to Make → Claude → Notion.
 
-2. **"Code review"** project, a detailed code analysis template with role, constraints, and output format blocks. Used by the team's tech lead before every PR merge.
+2. "Code review" - analysis template for PRs.
 
-3. **"Customer response"** project, a support response template built around the product's tone of voice. Exported and imported by each support rep.
+3. "Customer response" - support template. Export for reps.
 
-4. **"Competitor analysis"** project, a research prompt for quarterly strategy sessions. Shared as a JSON file across the leadership team.
+4. "Competitor analysis" - quarterly strategy. Share JSON with leadership.
 
-Four independent workspaces. Four different purposes. One tool, no cloud.
+Four workspaces. One tool. No cloud.
 
 ## What's Next
 
-Projects is the foundation for a larger vision: **flompt as a personal prompt operating system**.
+Foundation for a larger vision: flompt as a personal prompt OS.
 
-The pieces are coming together, a canvas to build structured prompts, a template library to start from, Make.com to automate what happens next, and now projects to organize everything.
+Pieces: canvas, templates, Make.com, projects.
 
-Next on the roadmap:
-- **Project tags and search**: find any project instantly when you have dozens
-- **Project-level settings**: default format, webhook URL, and language per project
-- **Shared project links**: opt-in, ephemeral sharing without a backend
-- **Prompt version history**: see how a prompt evolved within a project over time
+Roadmap:
+- Project tags and search
+- Project-level settings
+- Shared project links
+- Prompt version history
 
 If you have ideas, feedback, or want to contribute, the repository is open: [**github.com/Nyrok/flompt**](https://github.com/Nyrok/flompt).
 

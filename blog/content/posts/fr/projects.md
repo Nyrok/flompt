@@ -8,11 +8,11 @@ color: "primary"
 
 ## Le problème d'un canvas unique
 
-Jusqu'à aujourd'hui, flompt avait un seul canvas. Un seul prompt. Un seul état.
+Flompt avait un seul canvas. Un seul prompt. Un seul état.
 
-Ça suffit quand vous n'avez qu'une chose à construire. Mais la plupart des utilisateurs de flompt ne construisent pas un prompt, ils construisent des workflows pour des contextes différents, des clients différents, des cas d'usage différents. Un flow de code review. Un pipeline de contenu. Un template de support client pour un produit spécifique. Une séquence d'onboarding.
+Suffit pour une chose. Mais la plupart construisent des workflows différents. Clients différents. Cas d'usage différents. Code review. Pipeline contenu. Support client. Onboarding.
 
-Il fallait soit garder un canvas surchargé avec tout dedans, soit effacer le canvas à chaque fois en perdant ce qui s'y trouvait. Aucune des deux options n'était satisfaisante.
+Ou canvas surchargé. Ou effacer et perdre. Aucune option satisfaisante.
 
 **Projects change ça.**
 

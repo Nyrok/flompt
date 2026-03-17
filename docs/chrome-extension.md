@@ -1,6 +1,6 @@
 # Browser Extension
 
-The flompt Chrome extension embeds the full prompt builder as a sidebar directly inside ChatGPT, Claude, and Gemini. Build and inject structured prompts without leaving your AI chat.
+Builder sidebar in ChatGPT, Claude, Gemini. Build and inject. Stay in your chat.
 
 ---
 

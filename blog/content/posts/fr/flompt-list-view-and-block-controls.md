@@ -8,27 +8,27 @@ color: "primary"
 
 ## Le canvas est puissant. C'est aussi une surcharge.
 
-La vue canvas de Flompt te donne une vue spatiale de tes blocs de prompt. Tu vois comment les pièces s'articulent, tu peux les déplacer, les connecter visuellement. Pour les prompts complexes avec beaucoup de blocs et de dépendances, c'est vraiment utile.
+Canvas = vue spatiale de tes blocs. Vois comment les pièces s'articulent. Déplace-les. Connecte-les visuellement. Prompts complexes avec beaucoup de blocs = utile.
 
-Mais pour la plupart des prompts, la plupart du temps, tu n'as pas besoin de raisonnement spatial. Tu as besoin d'écrire, d'éditer et de compiler. Le canvas introduit des cibles de drag, des niveaux de zoom et un système de coordonnées qui complique ce qui devrait être simple.
+Mais la plupart des prompts : tu n'as pas besoin de spatial. Tu as besoin d'écrire. Éditer. Compiler. Le canvas = cibles drag, zoom, coordonnées. Complique ce qui est simple.
 
-La nouvelle vue liste enlève tout ça.
+La vue liste enlève tout ça.
 
-## Un défaut plus simple
+## Un interface plus simple
 
-La vue liste est maintenant l'interface par défaut à l'ouverture de Flompt. Les blocs apparaissent comme des cartes empilées dans une mise en page verticale propre. Tu peux développer ou réduire n'importe quelle carte. Tu peux éditer le contenu directement dans le textarea de la carte. Tu vois un aperçu du contenu quand la carte est réduite.
+Vue liste = interface par défaut quand tu ouvres Flompt. Les blocs = cartes empilées. Layout vertical. Développe ou réduis. Édite le contenu directement. Aperçu quand réduit.
 
-Pas de canvas, pas de coordonnées, pas de poignées de déplacement.
+Pas de canvas. Pas de coordonnées. Pas de drag.
 
 ## Une toolbar unifiée, tout ce dont tu as besoin
 
-Une toolbar unifiée est positionnée en haut de la vue liste avec trois sections.
+Toolbar unifiée en haut. Trois sections.
 
-À gauche : les actions de contrôle. Effacer tous les blocs, annuler, refaire, et un bouton compiler qui assemble ton prompt et t'emmène directement au panneau de sortie. Pas besoin de passer en vue canvas pour compiler.
+**Gauche :** Actions. Effacer. Annuler. Refaire. Compiler bouton = assemble + panneau sortie. Pas besoin du canvas pour compiler.
 
-Au centre : chaque type de bloc en bouton d'ajout en un clic. Role, Context, Objective, Constraints et plus encore. Un clic pour ajouter un bloc en bas de ta liste.
+**Centre :** Chaque type de bloc = bouton d'ajout. Role. Context. Objective. Constraints. Un clic = ajoute bloc en bas.
 
-À droite : le sélecteur de vue. Bascule entre la vue liste et la vue canvas à tout moment. Tes blocs sont les mêmes dans les deux vues. Modifier en vue liste se répercute immédiatement dans le canvas, et vice versa.
+**Droite :** Sélecteur de vue. Bascule entre liste et canvas. Tes blocs = mêmes partout. Modifier en liste = reflète dans canvas. Vice versa.
 
 ## Masquer des blocs sans les supprimer
 

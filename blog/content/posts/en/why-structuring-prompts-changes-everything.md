@@ -8,21 +8,21 @@ color: "primary"
 
 ## The raw prompt problem
 
-We've all done it: open ChatGPT, type a vague sentence, and hope the AI guesses what we want. Sometimes it works. Often, not really.
+You open ChatGPT. Type a vague sentence. Hope the AI guesses right.
 
-The problem isn't the AI. It's the input. A prompt is an **instruction**, and like any instruction, its clarity determines the quality of the result.
+The problem isn't the AI. It's your input. A prompt is an instruction. Clarity determines results.
 
 ## Structure as leverage
 
-Structuring a prompt means breaking it down into distinct components:
+Break your prompt into components:
 
 - **Role**: Who is the AI in this context?
-- **Context**: What background information is needed?
-- **Objective**: What do we concretely expect?
-- **Constraints**: What limits to respect (format, length, tone)?
-- **Examples**: What does a good result look like?
+- **Context**: What background info matters?
+- **Objective**: What do you expect?
+- **Constraints**: What limits apply (format, length, tone)?
+- **Examples**: What does good look like?
 
-Each block has a specific purpose. Together, they form a prompt that leaves no room for ambiguity.
+Each block is clear. No ambiguity.
 
 ## A concrete example
 
@@ -36,13 +36,13 @@ Each block has a specific purpose. Together, they form a prompt that leaves no r
 > **Constraints**: Direct but courteous tone, no marketing jargon, include a clear CTA.
 > **Tone example**: "Hi [First name], I noticed you're interested in..."
 
-The difference is striking. The second prompt gives an immediately usable result.
+The second prompt works immediately.
 
 ## Why visual helps
 
-Writing a structured prompt in raw text is possible, but it's like coding without an IDE. You can, but you lose efficiency.
+Writing raw text works but loses efficiency (like coding without an IDE).
 
-That's exactly the problem visual building solves: see each block, reposition it, modify it independently. You go from linear writing to **modular assembly**.
+Visual building solves this: see blocks, move them, edit independently. Go from linear to modular.
 
 ## Key takeaways
 

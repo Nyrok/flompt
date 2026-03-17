@@ -1,6 +1,6 @@
 # Template Library
 
-The Template Library gives you instant access to **100+ ready-to-use prompt flows** across 10 categories. One click loads a complete, structured canvas — no blank page, no setup.
+**100+ templates** across 10 categories. One click. No blank page.
 
 ---
 

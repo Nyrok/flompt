@@ -1,6 +1,6 @@
 # Privacy & Data Retention
 
-flompt is **local-first**. Your prompts, projects, and settings never leave your browser unless you explicitly export them or send them to an external service (Make.com, your AI platform).
+**Local-first**. Prompts stay in your browser. Unless you export or send to Make.com, Claude, etc.
 
 ---
 

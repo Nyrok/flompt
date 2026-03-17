@@ -1,6 +1,6 @@
 # Claude Code Integration (MCP)
 
-flompt exposes a native **MCP server** (Model Context Protocol) hosted on `flompt.dev`. Add it once to Claude Code — no install, no account, no API key.
+MCP server on `flompt.dev`. Add to Claude Code. No install. No account. No API key.
 
 ---
 

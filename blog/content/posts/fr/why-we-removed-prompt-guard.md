@@ -6,11 +6,11 @@ tags: ["transparence", "produit", "ux", "open source"]
 color: "primary"
 ---
 
-Quand on a lancé la fonctionnalité de décomposition de Flompt (tu colles un prompt, l'IA le découpe en blocs structurés), on a ajouté une couche de sécurité appelée Prompt Guard.
+On a lancé la décomposition de Flompt (tu colles un prompt, l'IA le découpe en blocs structurés). On a ajouté une couche de sécurité : Prompt Guard.
 
-L'idée était raisonnable : faire passer chaque prompt par Llama Guard 4 (via Groq) avant de l'envoyer au LLM. Détecter le contenu dangereux. Rejeter ce qui est flagué.
+L'idée = raisonnable. Passe chaque prompt par Llama Guard 4 (via Groq) avant le LLM. Détecte le contenu dangereux. Rejette ce qui est flagué.
 
-On l'a déployé. On a observé. Puis on l'a retiré entièrement.
+On l'a déployé. Observé. Puis retiré entièrement.
 
 Voilà pourquoi.
 
@@ -18,11 +18,11 @@ Voilà pourquoi.
 
 ## Ce que le Prompt Guard était censé faire
 
-Llama Guard est un modèle Meta entraîné sur une taxonomie de risques (S1–S13 : crimes violents, discours de haine, contenu sexuel, etc.). Donné un prompt, il retourne un verdict de sécurité : `safe` ou `unsafe`, avec la liste des catégories violées.
+Llama Guard = modèle Meta. Taxonomie de risques (S1–S13 : crimes violents, discours de haine, contenu sexuel, etc.). Donné un prompt, verdict de sécurité : `safe` ou `unsafe`. Liste des catégories violées.
 
-En théorie : propre. Avant que l'inférence réelle tourne, on filtre l'entrée. On bloque tout ce qui paraît suspect.
+En théorie = propre. Filtre l'entrée avant inférence. Bloque ce qui paraît suspect.
 
-En pratique : c'était le mauvais outil pour ce cas d'usage.
+En pratique = mauvais outil pour ce cas d'usage.
 
 ---
 

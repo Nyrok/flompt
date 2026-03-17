@@ -8,9 +8,9 @@ color: "primary"
 
 ## Une contribution qui change la donne
 
-Flompt vient de franchir un cap important, grâce à une pull request majeure du contributeur communautaire [**@Refaltor77**](https://github.com/Refaltor77) sur GitHub.
+Flompt a franchi un cap important. Grace à [**@Refaltor77**](https://github.com/Refaltor77) sur GitHub.
 
-Sa contribution apporte **plus de 100 templates de prompts prêts à l'emploi**, organisés en 10 catégories, avec un support complet de l'internationalisation et un nouveau sélecteur de langue de réponse. C'est le genre de contribution qui transforme l'outil : Flompt passe d'un simple constructeur de prompts à une plateforme complète de workflow IA.
+Sa contribution = **100+ templates de prompts prêts à l'emploi**. Organisés en 10 catégories. Support complet i18n. Nouveau sélecteur de langue de réponse. Flompt = de constructeur de prompts à plateforme complète de workflow IA.
 
 ## Ce que contient la bibliothèque de templates
 

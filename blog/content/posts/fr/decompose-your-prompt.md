@@ -6,44 +6,44 @@ tags: ["prompt engineering", "prompts visuels", "structure", "flompt"]
 color: "primary"
 ---
 
-Voici le problème avec la plupart des prompts : ce sont juste des murs de texte.
+La plupart des prompts = murs de texte.
 
-Tu écris ton prompt dans un éditeur de texte ou une interface de chat. C'est un bloc de phrases. Tu ne peux pas voir la structure. Tu ne peux pas dire ce qui manque. Tu ne peux pas visualiser comment les pièces s'assemblent.
+Tu écris. C'est un bloc de phrases. Pas de structure visible. Pas idée de ce qui manque. Pas de vue sur l'assemblage.
 
-Alors tu l'envoies à l'aveugle, tu espères que ça fonctionne, et tu itères jusqu'à ce que ça ne fonctionne pas. Ce n'est pas une stratégie. C'est du devinage.
+Envoies à l'aveugle. Espères. Itères jusqu'à ce ça marche. Pas une stratégie. Du devinage.
 
-Et si tu pouvais **voir** la structure de ton prompt avant l'exécution ?
+Et si tu pouvais **voir** la structure avant l'exécution ?
 
 ---
 
 ## Pourquoi la structure visuelle importe
 
-Quand tu écris du code, ton IDE ne te montre pas juste du texte. Il te montre :
-- Quelles fonctions sont appelées
-- Quels paramètres elles ont
-- Quelles variables sont définies
-- Comment elles sont connectées
+Quand tu écris du code, l'IDE te montre :
+- Les fonctions appelées
+- Les paramètres
+- Les variables
+- Les connexions
 
-La représentation visuelle t'aide à repérer les pièces manquantes avant de l'exécuter.
+La représentation visuelle = trouver les pièces manquantes avant exécution.
 
-Les prompts devraient fonctionner de la même façon.
+Les prompts devraient fonctionner pareil.
 
-Quand tu décomposes visuellement un prompt — en le brisant en blocs distincts (Rôle, Objectif, Contexte, Contraintes, Exemples, Format de sortie) — tu vois immédiatement :
-- **Ce qui est là** : Quels éléments tu as inclus
-- **Ce qui manque** : Quels blocs sont vides ou sous-développés
-- **Comment ils se connectent** : Quels éléments se référencent les uns aux autres
+Décompose visuellement : casse en blocs (Rôle, Objectif, Contexte, Contraintes, Exemples, Format). Tu vois immédiatement :
+- **Ce qui est là** : tes éléments inclus
+- **Ce qui manque** : tes blocs vides
+- **Les connexions** : qui se référence
 
-Tu passes de "voilà un tas de texte" à "voilà un système structuré."
+De "tas de texte" à "système structuré."
 
 ---
 
 ## Ce que la décomposition révèle
 
-Laisse-moi te montrer ce qui se passe quand tu décomposes visuellement un prompt brut.
+Voyons ce qui se passe quand tu décomposes un prompt brut.
 
 ### Exemple 1 : Un prompt faible
 
-**Prompt brut** (comme texte) :
+**Prompt brut** :
 ```
 Écris un email à un client expliquant pourquoi sa demande de feature ne peut pas être implémentée.
 ```
@@ -51,137 +51,133 @@ Laisse-moi te montrer ce qui se passe quand tu décomposes visuellement un promp
 **Quand décomposé**, tu vois :
 ```
 Rôle : [vide]
-Objectif : Écrire email expliquant le refus de feature ✓
+Objectif : Email expliquant le refus ✓
 Contexte : [vide]
 Contraintes : [vide]
 Exemples : [vide]
 Format de sortie : [vide]
 ```
 
-**Ce qui est immédiatement clair** : Tu manques 5 des 6 éléments structurels. Ce prompt produira une sortie générique parce que le modèle n'a aucun contexte sur qui écrit, quel ton utiliser, ou ce que le client valorise.
+**Clé** : Tu manques 5 des 6 éléments. Ce prompt sera générique. Le modèle n'a pas le contexte : qui écrit ? quel ton ? qu'est-ce que le client valorise ?
 
 ### Exemple 2 : Le même prompt, amélioré
 
 Maintenant décompose la meilleure version :
 
 ```
-Rôle : Tu es un responsable produit senior dans une entreprise SaaS B2B.
-       Tu es empathique mais direct. Tu comprends pourquoi les features sont rejetées
-       et comment l'expliquer aux clients.
+Rôle : Product manager senior en SaaS B2B.
+       Empathique mais direct. Tu sais expliquer pourquoi les features sont rejetées.
 
-Objectif : Écris un email à un client expliquant pourquoi on ne peut pas implémenter
-           sa demande de feature. L'objectif est de maintenir la relation
-           tout en étant honnête sur les priorités de notre roadmap.
+Objectif : Email au client expliquant pourquoi on ne peut pas implémenter sa demande.
+           Maintiens la relation. Sois honnête sur nos priorités.
 
-Contexte : Client a demandé : "Collaboration en temps réel dans l'éditeur web"
-           Notre décision : Rejetée. Raison : 18 mois d'effort d'ingénierie,
-           conflite avec la réécriture de l'architecture prévue pour Q3.
-           Le client : Tier Enterprise, haute valeur, mais pas un cas d'usage primaire pour eux.
+Contexte : Demande : "Collaboration en temps réel dans l'éditeur web"
+           Notre décision : Rejectée. Raison : 18 mois d'engineering.
+           Conflit avec réécriture architecture Q3.
+           Client : Tier Enterprise. Haute valeur. Mais pas cas d'usage primaire.
 
-Contraintes : - Reste sous 300 mots
+Contraintes : - Moins de 300 mots
               - Ton professionnel mais chaleureux
-              - Inclus une alternative qui adresse leur besoin sous-jacent
-              - Ne promets pas une reconsidération future (on a déjà décidé)
+              - Inclus une alternative pour leur besoin réel
+              - Pas de promesse d'autre examen (c'est décidé)
 
-Exemples : [Exemple d'un email client similaire que tu as envoyé le trimestre dernier qui
-           a bien fonctionné et maintenu la relation]
+Exemples : [Email similaire d'avant qui a bien marché]
 
-Format de sortie : Format email (To/From/Subject/Body).
-                   Ne pas inclure de signature.
+Format : Email (To/From/Subject/Body). Pas de signature.
 ```
 
-**Ce que tu vois maintenant** : Chaque élément structurel est rempli. Le modèle a une direction claire. La sortie sera spécifique, appropriée et authentique.
+**Ce que tu vois** : Chaque élément rempli. Direction claire pour le modèle. Sortie spécifique.
 
-La différence ? La version décomposée a les infos qui importent. Le modèle ne doit pas deviner.
+La différence = infos qui importent. Pas de devinage.
 
 ---
 
 ## Les trois niveaux de décomposition
 
-Il y a trois façons de visualiser la décomposition de prompts :
+Trois façons de visualiser la décomposition :
 
 ### Niveau 1 : Outline texte
-Juste énumère les éléments comme texte :
+Énumère les éléments :
 ```
 Rôle : ...
 Objectif : ...
 Contexte : ...
 ```
 
-**Bon pour** : Vérifications rapides, validation légère
-**Pas idéal pour** : Voir l'image complète, repérer les relations complexes
+**Bon pour** : Vérifications rapides
+**Pas idéal pour** : Vue complète, relations complexes
 
 ### Niveau 2 : Blocs structurés
-Visualise chaque élément comme un bloc distinct :
+Chaque élément comme un bloc :
 
 ```
 ┌──────────────┐
-│    RÔLE      │ Tu es un stratégiste produit
+│    RÔLE      │ Stratégiste produit
 ├──────────────┤
-│  OBJECTIF    │ Définis les priorités Q2
+│  OBJECTIF    │ Définis Q2 priorités
 ├──────────────┤
-│   CONTEXTE   │ Analyse de marché, capacité d'équipe
+│   CONTEXTE   │ Marché, équipe capacité
 ├──────────────┤
-│ CONTRAINTES  │ Neutre sur le budget, timeline 2 semaines
+│ CONTRAINTES  │ Budget neutre. 2 semaines.
 ├──────────────┤
-│   EXEMPLES   │ Décisions roadmap précédentes
+│   EXEMPLES   │ Décisions précédentes
 ├──────────────┤
-│ FORMAT SORTIE│ Liste à puces avec justification
+│ FORMAT SORTIE│ Liste + raisons
 └──────────────┘
 ```
 
-**Bon pour** : Comprendre la structure globale, présenter aux équipes
-**Pas idéal pour** : Édition interactive, feedback dynamique
+**Bon pour** : Structure globale, présenter aux équipes
+**Pas idéal pour** : Édition en temps réel
 
 ### Niveau 3 : Canvas visuel interactif
-Vois chaque élément comme un nœud dans un système visuel. Édite en temps réel. Obtiens du feedback immédiat sur la complétude.
+Chaque élément comme un nœud. Édite live. Feedback immédiat.
 
-**Bon pour** : Décomposition profonde, affinage itératif, comprendre les dépendances
-**Excellent pour** : Les équipes collaborant sur les prompts, auditer la qualité avant exécution
+**Bon pour** : Décomposition profonde, affinage itératif
+**Excellent pour** : Équipes collaborant, auditer avant exécution
 
 ---
 
 ## Comment décomposer un prompt toi-même
 
-Même sans outil, tu peux décomposer manuellement :
+Même sans outil, tu peux décomposer :
 
-### Étape 1 : Extrais le rôle
-Lis ton prompt. Quelle expertise le modèle doit adopter ?
+### Étape 1 : Rôle
+Quelle expertise le modèle doit adopter ?
 ```
-Rôle : [Quelle perspective ou background le modèle doit utiliser ?]
+Rôle : [Perspective/background]
 ```
 
-### Étape 2 : Extrais l'objectif
+### Étape 2 : Objectif
 Quelle est la tâche réelle ?
 ```
-Objectif : [Quel problème tu résous ? Sois spécifique.]
+Objectif : [Quel problème ? Sois spécifique.]
 ```
 
-### Étape 3 : Extrais le contexte
-Quelles infos de base le modèle a besoin ?
+### Étape 3 : Contexte
+Quelles infos de base ?
 ```
-Contexte : [Qu'est-ce que le modèle devrait savoir de la situation ?]
-```
-
-### Étape 4 : Extrais les contraintes
-Quelles sont les règles ou limites ?
-```
-Contraintes : [Quelles limites s'appliquent ? Longueur ? Ton ? Format ? Vitesse ?]
+Contexte : [Qu'est-ce que le modèle doit savoir ?]
 ```
 
-### Étape 5 : Extrais les exemples
+### Étape 4 : Contraintes
+Quelles limites ?
+```
+Contraintes : [Longueur ? Ton ? Format ? Vitesse ?]
+```
+
+### Étape 5 : Exemples
 À quoi ressemble la réussite ?
 ```
-Exemples : [Montre 1-2 paires entrée/sortie ou des exemples de ce que tu veux]
+Exemples : [Entrée/sortie ou exemples]
 ```
 
-### Étape 6 : Extrais le format de sortie
+### Étape 6 : Format de sortie
 Comment la réponse doit être structurée ?
 ```
-Format de sortie : [Spécifie exactement comment tu veux la réponse formatée]
+Format : [Exactement comment tu veux la réponse]
 ```
 
-Maintenant tu as un prompt décomposé. Tu peux voir :
+Maintenant tu as un prompt décomposé. Tu vois :
 - Quels éléments sont forts
 - Lesquels manquent
 - Quoi améliorer avant l'exécution
@@ -190,83 +186,83 @@ Maintenant tu as un prompt décomposé. Tu peux voir :
 
 ## Décomposition + audit = meilleurs prompts
 
-Une fois que tu as décomposé ton prompt, audite-le :
+Une fois décomposé, audite :
 
 **Vérifie chaque élément :**
-- ✓ **Rôle** : L'expertise est-elle claire et spécifique ?
-- ✓ **Objectif** : Le but est-il énoncé, pas vague ?
-- ✓ **Contexte** : Y a-t-il assez d'infos de base ?
-- ✓ **Contraintes** : Les limites sont-elles claires ?
-- ✓ **Exemples** : Les exemples montrent-ils ce que tu veux ?
-- ✓ **Format de sortie** : Le format est-il explicite ?
+- ✓ **Rôle** — expertise claire ?
+- ✓ **Objectif** — but énoncé ? Pas vague ?
+- ✓ **Contexte** — assez d'infos ?
+- ✓ **Contraintes** — limites claires ?
+- ✓ **Exemples** — montrent ce que tu veux ?
+- ✓ **Format** — format explicite ?
 
-**Note la force globale :**
-- 6/6 éléments forts = **Excellent prompt** (95%+ confiance)
-- 5/6 éléments forts = **Bon prompt** (80%+ confiance)
-- 4/6 éléments forts = **Prompt décent** (60%+ confiance)
-- 3/6 ou moins = **Prompt faible** (besoin d'itération)
+**Note la force :**
+- 6/6 = **Excellent** (95%+ confiance)
+- 5/6 = **Bon** (80%+ confiance)
+- 4/6 = **Décent** (60%+ confiance)
+- 3/6 ou moins = **Faible** (itère d'abord)
 
-**Si tu es sous 5/6 :** Ajoute les éléments manquants avant l'exécution. N'itère pas après l'échec.
+**Si moins de 5/6** : Ajoute les éléments manquants. Avant exécution. Pas après.
 
 ---
 
 ## Outils pour la décomposition visuelle
 
-Si tu veux visualiser ceci de manière interactive, [flompt](https://flompt.dev) décompose ton prompt en blocs visuels. Tu :
+[flompt](https://flompt.dev) décompose ton prompt en blocs visuels :
 
-1. Colles ton prompt brut
-2. Cliques sur décompose
-3. Vois chaque élément comme un bloc visuel (Rôle, Objectif, Contexte, Contraintes, Exemples, Format de sortie)
-4. Obtiens un score de qualité (0-100) basé sur la complétude
-5. Vois du feedback spécifique sur ce qui manque
-6. Édites les blocs directement
-7. Regardes le score se mettre à jour au fur et à mesure que tu améliores
-8. Compiles le prompt final quand il est prêt
+1. Colle ton prompt brut
+2. Clique : décompose
+3. Vois chaque élément comme un bloc
+4. Obtiens un score de qualité
+5. Vois le feedback sur ce qui manque
+6. Édite les blocs directement
+7. Vois le score s'améliorer
+8. Compile quand c'est prêt
 
-C'est comme avoir un processus de révision de prompt intégré.
+Processus de révision intégré.
 
-L'outil est open-source, auto-hébergeable, et fonctionne dans ton navigateur. Pas de compte requis. Tes prompts restent sur ta machine.
+Open-source. Auto-hébergeable. Dans ton navigateur. Pas de compte. Tes prompts restent locaux.
 
 ---
 
 ## Pourquoi c'est important pour les équipes
 
-Si tu travailles en équipe sur des produits IA, la décomposition devient encore plus importante.
+Travailles en équipe sur l'IA ? La décomposition = encore plus importante.
 
-Quand un développeur écrit un prompt, un responsable produit devrait pouvoir le réviser. Quand tu décomposes visuellement, c'est possible. Ils peuvent voir :
-- Ce prompt résout-il réellement le problème ?
-- Sommes-nous clairs sur nos contraintes ?
-- Avons-nous pensé aux cas limites ?
+Un développeur écrit. Un product manager révise. Décomposition visuelle = c'est possible. Ils voient :
+- Ce prompt résout le problème réel ?
+- Clairs sur les contraintes ?
+- Pensé aux cas limites ?
 
-La décomposition transforme les prompts de "voici un truc qui fonctionne plus ou moins" à "voici un système qu'on peut réviser et améliorer."
+La décomposition = de "un truc qui marche" à "un système révisable."
 
-C'est la différence entre écrire du code sans code review et avoir des standards.
+Entre code sans review. Code avec standards.
 
 ---
 
 ## Le workflow de décomposition
 
-Voici comment intégrer la décomposition dans ton développement de prompt :
+Intègre la décomposition dans ton développement :
 
-1. **Brainstorm le prompt brut** → Écris-le comme d'habitude
-2. **Décompose-le** → Casse-le en éléments structurels
-3. **Audite-le** → Vérifie chaque élément pour la force et la clarté
-4. **Remplis les lacunes** → Ajoute les éléments manquants ou renforce les faibles
+1. **Brainstorm brut** → Écris normalement
+2. **Décompose** → Casse en éléments structurels
+3. **Audite** → Vérifie chaque élément
+4. **Remplis les lacunes** → Ajoute. Renforce.
 5. **Ré-audite** → Revérifie le score
-6. **Exécute** → Envoie seulement quand tu es confiant dans la structure
-7. **Affine pour la prochaine fois** → Sauvegarde le prompt, continue à l'améliorer
+6. **Exécute** → Envoie si confiant
+7. **Affine** → Sauvegarde. Améliore.
 
-Ce processus prend 5 minutes de plus mais épargne 30+ minutes en itération.
+5 minutes de plus. Épargne 30+ minutes d'itération.
 
 ---
 
 ## Le résultat
 
-Tes prompts sont des systèmes. Ils ont besoin de structure. Et la structure est invisible jusqu'à ce que tu la décomposes.
+Tes prompts sont des systèmes. Ils ont besoin de structure. La structure est invisible jusqu'à ce que tu la décomposes.
 
-En brisant visuellement ton prompt en Rôle, Objectif, Contexte, Contraintes, Exemples et Format de sortie, tu vois immédiatement ce qui est fort et ce qui est faible.
+Casse visuellement ton prompt en Rôle, Objectif, Contexte, Contraintes, Exemples et Format. Tu vois immédiatement ce qui est fort et ce qui est faible.
 
-Puis tu le corriges avant l'exécution, pas après.
+Tu le corriges avant l'exécution, pas après.
 
 Plus d'itération à l'aveugle. Plus de devinage.
 
@@ -274,6 +270,6 @@ Juste des prompts qui fonctionnent.
 
 ---
 
-**Essaie de décomposer ton prochain prompt** — soit manuellement ou avec [flompt](https://flompt.dev). Vois comment la structure visuelle change ta qualité de sortie. Tu remarqueras la différence immédiatement.
+**Essaie de décomposer ton prochain prompt** — manuellement ou avec [flompt](https://flompt.dev). Vois comment la structure visuelle change ta qualité de sortie.
 
 [Explore flompt](https://flompt.dev) | [Voir sur GitHub](https://github.com/Nyrok/flompt)

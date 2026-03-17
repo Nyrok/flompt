@@ -8,43 +8,43 @@ color: "primary"
 
 ## Prompts Are Software. Treat Them That Way.
 
-When you write code, you have a full development environment. A linter catches errors before they run. A profiler shows you what's slow. A version control system tracks every change. You can diff, revert, and compare.
+When you write code, you have linters, profilers, version control.
 
-When you write a prompt, you had none of that. You wrote text, ran it, guessed why it failed, edited again.
+When you write a prompt, you have nothing. Write text, run it, guess, edit.
 
-Flompt 1.4.0 changes that. This release ships a full prompt IDE, built directly into the app, with seven tools that cover the complete development lifecycle of a prompt.
+Flompt 1.4.0 changes that. Seven IDE tools for the full prompt lifecycle.
 
 ## The Seven IDE Tools
 
 ### Debugger
 
-The debugger analyzes your assembled prompt and surfaces logical flaws, ambiguities, and structural issues. It rates the prompt with a score out of 100, identifies specific problems by category, and proposes a corrected version you can apply in one click.
+Analyzes your prompt for logical flaws, ambiguities, and issues. Rates it (0-100). Proposes fixes you can apply in one click.
 
-If your score is already 100 out of 100, the apply button disappears. There is nothing to fix.
+Score 100? Nothing to fix.
 
 ### Critic
 
-The critic rates your prompt across five dimensions: clarity, specificity, context richness, output definition, and constraint quality. The result is a radar chart showing exactly where your prompt is strong and where it needs work.
+Rates across five dimensions: clarity, specificity, context, output, constraints. Radar chart shows strengths and gaps.
 
-It does not just give you a score. It tells you why.
+It explains why.
 
 ### Compressor
 
-The compressor reduces token count while preserving the full intent of your prompt. Useful when you are working against context window limits, paying per token, or optimizing for speed. It shows the before and after token count so you know exactly what you saved.
+Reduces token count while keeping full intent. Useful for context limits, token costs, or speed. Shows before/after count.
 
 ### Cost Estimator
 
-A live token counter with real-time cost estimates per provider. As you build your blocks, the estimator shows you the approximate cost of running your prompt on Claude, GPT-4, and Gemini. No surprises at billing time.
+Live token counter. Real-time cost estimates per provider (Claude, GPT-4, Gemini). No billing surprises.
 
 ### System Prompt Generator
 
-Takes your assembled blocks and generates a ready-to-use system prompt formatted for direct injection into an AI assistant API. Useful when you are building products on top of LLMs and need a clean, deployable system prompt from your visual flow.
+Generates a system prompt ready for injection into an AI API. Useful for building LLM products.
 
 ### Context Memory
 
-Persistent memory blocks that survive across sessions. Store your company context, persona, tone guidelines, or any recurring information once, and reuse it in every project without rebuilding it from scratch.
+Persistent blocks across sessions. Store company context, personas, tone guidelines once. Reuse across projects.
 
-Context Memory uses IndexedDB under the hood so it persists beyond localStorage limits. Your memory blocks stay local and never leave your browser.
+Uses IndexedDB. Stays local, never leaves your browser.
 
 ### Version History
 
@@ -54,7 +54,7 @@ This is version control for prompts. No Git required, no external service, no ac
 
 ## Everything Is Local
 
-All seven tools run locally. The debugger, critic, and compressor use Groq's inference API at runtime, but nothing is stored or logged outside your browser session. The memory and version history live in your browser's IndexedDB. No cloud sync, no account, no data retention.
+All tools run locally. Debugger, critic, compressor use Groq, but nothing is logged outside your browser. Memory and history live in IndexedDB. No cloud sync, no account.
 
 ## Built with @Refaltor77
 
@@ -62,8 +62,8 @@ The entire IDE panel is a contribution from [**@Refaltor77**](https://github.com
 
 ## What Changes in Practice
 
-Before 1.4.0, Flompt was a builder: you assembled structured prompts visually and copied them out.
+Before 1.4.0: builder only.
 
-After 1.4.0, Flompt is a complete workflow: you build, debug, compress, analyze cost, iterate with version history, and ship. The whole loop happens in one place.
+After 1.4.0: complete workflow. Build, debug, compress, analyze cost, iterate, ship. All in one place.
 
 [**Try Flompt 1.4.0**](https://flompt.dev/app) | [**Star on GitHub**](https://github.com/Nyrok/flompt)

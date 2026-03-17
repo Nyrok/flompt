@@ -8,57 +8,56 @@ color: "primary"
 
 ## The Canvas Is Powerful. It Is Also Overhead.
 
-The canvas view in Flompt gives you a spatial overview of your prompt blocks. You can see how pieces relate, move them around, connect them visually. For complex prompts with many blocks and dependencies, it is genuinely useful.
+Canvas view is useful for complex prompts with many blocks.
 
-But for most prompts, most of the time, you do not need spatial reasoning. You need to write, edit, and compile. The canvas introduces drag targets, zoom levels, and a coordinate system that gets in the way of just getting it done.
+But most prompts don't need spatial reasoning. You just need to write, edit, compile. Canvas adds friction.
 
-The new list view removes all of that.
+List view removes it.
 
 ## A Cleaner Default
 
-The list view is now the default when you open Flompt. Blocks appear as stacked cards in a clean vertical layout. You can expand or collapse any card. You can edit content directly in the card's textarea. You can see a preview of the content when collapsed.
+List view is the default. Blocks are stacked cards. Expand, collapse, edit. Preview when collapsed.
 
-No canvas, no coordinates, no drag handles.
+No canvas. No coordinates. No drag handles.
 
 ## One Toolbar, Everything You Need
 
-A unified toolbar sits at the top of the list view with three sections.
+One toolbar with three sections.
 
-On the left: the control actions. Clear all blocks, undo, redo, and a compile button that assembles your prompt and takes you directly to the output panel. No need to switch to canvas view to compile.
+Left: Control actions (clear, undo, redo, compile).
 
-In the center: every block type as a one-click add button. Role, Context, Objective, Constraints, and more. Click once to add a block to the bottom of your list.
+Center: Block type buttons. Click to add.
 
-On the right: the view toggle. Switch between list view and canvas view at any time. Your blocks are the same in both views. Editing in list view is immediately reflected in canvas, and vice versa.
+Right: View toggle (list ↔ canvas). Changes sync instantly.
 
 ## Hide Blocks Without Deleting Them
 
-Every block now has a visibility toggle: an eye icon on the left side of the card (and in the canvas block header).
+Eye icon on each card toggles visibility.
 
-Click it to hide a block. Hidden blocks stay in your workspace but are excluded from the assembled prompt. The card drops to 40% opacity so you know it is there but inactive.
+Hidden blocks stay in workspace but are excluded from assembly. Card fades to 40% opacity.
 
-This is useful when you are experimenting. You can build a block, test the prompt without it, and restore it later without rewriting anything.
+Useful for testing without constraints or other blocks.
 
 ## Keyboard-First Reordering
 
-When a card is focused, four keyboard shortcuts control everything:
+Keyboard shortcuts (when focused):
+- `ArrowLeft` = move down
+- `ArrowRight` = move up
+- `-` = collapse
+- `+` = expand
 
-- `ArrowLeft` moves the block down one position
-- `ArrowRight` moves it up one position
-- `-` collapses the card
-- `+` expands it
-
-You can also use the chevron buttons on each card to move blocks up or down. The buttons disable automatically when a block is already at the top or bottom of the list.
+Or use chevron buttons. Disable at top/bottom.
 
 ## Duplicate Any Block
 
-A copy button on each card creates an exact duplicate of the block, appended to the list with a fresh ID. Useful when you want to create a variation of an existing block or use it as a starting point for a new one.
+Copy button duplicates the block with a fresh ID. Useful for variations.
 
 ## Two Views, One Dataset
 
-Switching between list and canvas view is instant. Both views read from and write to the same store. There is no sync, no conversion, no delay.
+Switch instantly between views. Both use the same data store. No sync, no conversion, no delay.
 
-If you build a prompt in list view and switch to canvas, every block is exactly where it should be. If you edit a block's content in canvas view and switch back to list, the change is already there.
+Build in list → switch to canvas → blocks are positioned. Edit in canvas → switch to list → changes are there.
 
-The views are two interfaces to the same data.
+Two interfaces, one data source.
 
 [**Try it now**](https://flompt.dev/app) | [**Star on GitHub**](https://github.com/Nyrok/flompt)
