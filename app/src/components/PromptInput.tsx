@@ -97,8 +97,7 @@ const PromptInput = () => {
       if (!isExtension) {
         const audit = computeAudit(result.nodes)
         setAuditResult(audit)
-        const key = result.nodes.map(n => n.data.type).sort().join(',')
-        setAuditCachedKey(key)
+        setAuditCachedKey(prompt)
       }
 
     } catch (e) {
@@ -188,11 +187,10 @@ const PromptInput = () => {
         <button
           className={`btn btn-primary${auditSeen ? '' : ' btn-audit-pulse'}`}
           onClick={() => {
-            const currentKey = nodes.map(n => n.data.type).sort().join(',')
-            if (!auditResult || auditCachedKey !== currentKey) {
+            if (!auditResult || auditCachedKey !== rawPrompt) {
               const audit = computeAudit(nodes)
               setAuditResult(audit)
-              setAuditCachedKey(currentKey)
+              setAuditCachedKey(rawPrompt)
             }
             setAuditSeen(true)
             openAudit(true)
