@@ -2761,7 +2761,6 @@ body {
   z-index: 9999;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   background: var(--bg-3);
   border: 1px solid var(--border-strong);
   border-radius: 18px;
@@ -2770,7 +2769,11 @@ body {
   width: calc(100vw - 48px);
   box-shadow: 0 32px 80px rgba(0,0,0,0.85);
   text-align: center;
-  animation: scale-in 0.18s ease;
+  animation: ext-popup-in 0.18s ease forwards;
+}
+@keyframes ext-popup-in {
+  from { transform: translate(-50%, -50%) scale(0.94); opacity: 0; }
+  to   { transform: translate(-50%, -50%) scale(1);    opacity: 1; }
 }
 .ext-popup__close {
   position: absolute;
