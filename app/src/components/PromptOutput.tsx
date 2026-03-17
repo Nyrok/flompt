@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
-import { Clipboard, ClipboardCheck, Sparkles, Play, Send, Github, Zap, Bug, Scissors, Star as StarIcon, Download, ChevronDown, FileText, Braces } from 'lucide-react'
+import { Clipboard, ClipboardCheck, Sparkles, Play, Send, Github, Zap, Star as StarIcon, Download, ChevronDown, FileText, Braces } from 'lucide-react'
 import { Tooltip } from '@/components/ui/tooltip'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -9,12 +9,8 @@ import { isExtension } from '@/lib/platform'
 import { useMakeStore } from '@/store/makeStore'
 import type { OutputFormat } from '@/types/blocks'
 import CostPopover from '@/features/cost-estimator/CostPopover'
-import { useDebuggerStore } from '@/features/debugger/useDebuggerStore'
-import { useCompressorStore } from '@/features/compressor/useCompressorStore'
 import { useCriticStore } from '@/features/critic/useCriticStore'
-import { debugPrompt, compressPrompt, critiquePrompt } from '@/services/api'
-import type { DebugResult } from '@/features/debugger/types'
-import type { CompressResult } from '@/features/compressor/types'
+import { critiquePrompt } from '@/services/api'
 import type { CriticResult } from '@/features/critic/types'
 
 // ─── Selection button config ─────────────────────────────────────────────────
@@ -109,40 +105,7 @@ const PromptOutput = () => {
     analytics.promptExported('json')
   }
 
-  const { setOpen: openDebugger, setLoading: setDebugLoading, setResult: setDebugResult, setError: setDebugError } = useDebuggerStore()
-  const { setOpen: openCompressor, setLoading: setCompressLoading, setResult: setCompressResult, setError: setCompressError, targetReduction } = useCompressorStore()
   const { setOpen: openCritic, setLoading: setCriticLoading, setResult: setCriticResult, setError: setCriticError } = useCriticStore()
-
-  const handleDebug = async () => {
-    if (!currentRaw) return
-    openDebugger(true)
-    setDebugLoading(true)
-    setDebugError(null)
-    try {
-      const result = await debugPrompt(currentRaw, locale)
-      setDebugResult(result as DebugResult)
-    } catch {
-      setDebugError('Debug failed. Please try again.')
-    } finally {
-      setDebugLoading(false)
-    }
-  }
-
-  const handleCompress = async () => {
-    if (!currentRaw) return
-    openCompressor(true)
-    setCompressLoading(true)
-    setCompressError(null)
-    try {
-      const result = await compressPrompt(currentRaw, targetReduction, locale)
-      setCompressResult(result as CompressResult)
-    } catch (e) {
-      console.error('[compress] error:', e)
-      setCompressError('Compression failed. Please try again.')
-    } finally {
-      setCompressLoading(false)
-    }
-  }
 
   const handleCritic = async () => {
     if (!currentRaw) return
@@ -268,20 +231,8 @@ const PromptOutput = () => {
                 <div className="output-section-divider" aria-hidden="true">
                   <span>{t.promptOutput.sectionAnalysis}</span>
                 </div>
-                <div className="output-analysis-row" data-tour="ide-tools">
-                  <Tooltip content={t.ide.outputButtons.debug} side="top">
-                    <button className="btn btn-secondary output-analysis-btn" onClick={handleDebug} aria-label={t.ide.outputButtons.debug}>
-                      <Bug size={13} aria-hidden="true" /> {t.ide.outputButtons.debug}
-                    </button>
-                  </Tooltip>
-                  <Tooltip content={t.ide.outputButtons.compress} side="top">
-                    <button className="btn btn-secondary output-analysis-btn" onClick={handleCompress} aria-label={t.ide.outputButtons.compress}>
-                      <Scissors size={13} aria-hidden="true" /> {t.ide.outputButtons.compress}
-                    </button>
-                  </Tooltip>
-                </div>
                 <Tooltip content={t.ide.outputButtons.score} side="top">
-                  <button className="btn btn-secondary export-btn" onClick={handleCritic} aria-label={t.ide.outputButtons.score} style={{ width: '100%' }}>
+                  <button className="btn btn-secondary export-btn" onClick={handleCritic} aria-label={t.ide.outputButtons.score} style={{ width: '100%' }} data-tour="ide-tools">
                     <StarIcon size={13} aria-hidden="true" /> {t.ide.outputButtons.score}
                   </button>
                 </Tooltip>

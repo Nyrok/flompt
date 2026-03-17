@@ -318,6 +318,7 @@
     "hint": "{n} wichtige Blöcke fehlen. Füge sie hinzu, um deinen Prompt zu verbessern.",
     "addBlock": "Hinzufügen",
     "perfect": "Alle wichtigen Blöcke sind vorhanden — solider Prompt.",
-    "blocksPresent": "wichtige Blöcke vorhanden"
+    "blocksPresent": "wichtige Blöcke vorhanden",
+    "addedBlock": "Hinzugefügt"
   }
 }

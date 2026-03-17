@@ -423,6 +423,7 @@
     "hint": "{n} blocs clés manquants. Ajoutez-les pour améliorer votre prompt.",
     "addBlock": "Ajouter",
     "perfect": "Tous les blocs clés sont présents — prompt solide.",
-    "blocksPresent": "blocs clés présents"
+    "blocksPresent": "blocs clés présents",
+    "addedBlock": "Ajouté"
   }
 }

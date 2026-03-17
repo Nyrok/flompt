@@ -318,6 +318,7 @@
     "hint": "Faltan {n} bloques clave. Añádelos para mejorar tu prompt.",
     "addBlock": "Añadir",
     "perfect": "Todos los bloques clave están presentes — prompt sólido.",
-    "blocksPresent": "bloques clave presentes"
+    "blocksPresent": "bloques clave presentes",
+    "addedBlock": "Añadido"
   }
 }

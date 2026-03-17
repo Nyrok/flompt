@@ -3903,6 +3903,13 @@ body {
   transition: opacity 0.12s, background 0.12s;
 }
 .audit-add-btn:hover { opacity: 0.8; background: currentColor; filter: contrast(0.15); }
+.audit-add-btn--added {
+  color: #22c55e !important;
+  border-color: #22c55e55 !important;
+  cursor: default;
+  opacity: 0.85;
+}
+.audit-add-btn--added:hover { background: transparent !important; filter: none !important; opacity: 0.85; }
 
 /* Summary / perfect */
 .audit-perfect {

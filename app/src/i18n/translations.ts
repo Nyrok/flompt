@@ -218,6 +218,7 @@ export interface Translations {
     title: string
     hint: string
     addBlock: string
+    addedBlock: string
     perfect: string
     blocksPresent: string
   }
