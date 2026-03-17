@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { X, Trash2, Undo2, Redo2, LayoutList, Network, Eye, EyeOff, Copy, Play, ChevronUp, ChevronDown } from 'lucide-react'
+import { X, Trash2, Undo2, Redo2, LayoutList, Network, Eye, EyeOff, Copy, Play, ChevronUp, ChevronDown, Sparkles } from 'lucide-react'
 import CustomSelect from '@/components/CustomSelect'
 import CanvasBlockBar from '@/components/CanvasBlockBar'
 import { Tooltip } from '@/components/ui/tooltip'
@@ -38,6 +38,7 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
   const {
     nodes, removeNode, updateNodeContent, updateNodeData, addNode, toggleNodeHidden,
     reset, undo, redo, past, future, setCompiledPrompt, setActiveTab,
+    isDecomposing, queueStatus,
   } = useFlowStore()
   const { t, locale } = useLocale()
 
@@ -142,6 +143,36 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
 
   return (
     <div className="block-list-view">
+
+      {/* ── Decomposing overlay ── */}
+      {isDecomposing && (
+        <div
+          className="loading-overlay"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          aria-label={t.promptInput.decomposing}
+        >
+          <div className="compile-loading-icon" aria-hidden="true">
+            <Sparkles size={32} className="compile-sparkle" />
+          </div>
+          <p className="compile-loading-text">{t.promptInput.decomposing}</p>
+          <div className="compile-loading-dots" aria-hidden="true">
+            <span className="compile-dot" style={{ animationDelay: '0s' }} />
+            <span className="compile-dot" style={{ animationDelay: '0.2s' }} />
+            <span className="compile-dot" style={{ animationDelay: '0.4s' }} />
+          </div>
+          {queueStatus && (
+            <div className={`queue-status${queueStatus.status === 'processing' ? ' queue-status--processing' : ''}`}>
+              <span className="queue-status__dot" aria-hidden="true" />
+              {queueStatus.status === 'processing' || queueStatus.position === 0
+                ? t.promptInput.queueProcessing
+                : t.promptInput.queuePosition(queueStatus.position)
+              }
+            </div>
+          )}
+        </div>
+      )}
 
       {/* ── Top toolbar: actions | blocks | view toggle ── */}
       <div className="block-list-toolbar">
