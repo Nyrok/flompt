@@ -100,8 +100,6 @@ body {
 :focus:not(:focus-visible) {
   outline: none;
 }
-/* Ensure [aria-hidden] elements are never focusable */
-[aria-hidden="true"] { pointer-events: none; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
