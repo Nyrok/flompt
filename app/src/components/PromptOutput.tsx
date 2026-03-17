@@ -165,7 +165,7 @@ const PromptOutput = () => {
             <button
               className={`format-btn${outputFormat === format ? ' format-btn-active' : ''}`}
               onClick={() => setOutputFormat(format)}
-              title={title}
+              aria-label={title}
               aria-pressed={outputFormat === format}
             >
               {label}
@@ -184,7 +184,6 @@ const PromptOutput = () => {
                 <button
                   className={`btn btn-primary export-inject${injected ? ' injected' : ''}`}
                   onClick={handleInjectToAI}
-                  title={t.promptOutput.injectLabel}
                   aria-label={injected ? t.promptOutput.injectedLabel : t.promptOutput.injectLabel}
                   aria-live="polite"
                 >
@@ -211,7 +210,6 @@ const PromptOutput = () => {
                 <button
                   className="btn btn-secondary export-btn"
                   onClick={handleExportTxt}
-                  title={t.promptOutput.exportTxtLabel}
                   aria-label={t.promptOutput.exportTxtLabel}
                 >
                   <FileText size={13} aria-hidden="true" /> {t.promptOutput.exportTxt}
@@ -221,7 +219,6 @@ const PromptOutput = () => {
                 <button
                   className="btn btn-secondary export-btn"
                   onClick={handleExportJSON}
-                  title={t.promptOutput.exportJsonLabel}
                   aria-label={t.promptOutput.exportJsonLabel}
                 >
                   <Braces size={13} aria-hidden="true" /> {t.promptOutput.exportJson}
@@ -231,17 +228,17 @@ const PromptOutput = () => {
             {!isExtension && (
               <div className="output-ide-actions">
                 <Tooltip content={t.ide.outputButtons.debug} side="top">
-                  <button className="btn btn-secondary export-btn" onClick={handleDebug} title={t.ide.outputButtons.debug}>
+                  <button className="btn btn-secondary export-btn" onClick={handleDebug} aria-label={t.ide.outputButtons.debug}>
                     <Bug size={13} /> {t.ide.outputButtons.debug}
                   </button>
                 </Tooltip>
                 <Tooltip content={t.ide.outputButtons.compress} side="top">
-                  <button className="btn btn-secondary export-btn" onClick={handleCompress} title={t.ide.outputButtons.compress}>
+                  <button className="btn btn-secondary export-btn" onClick={handleCompress} aria-label={t.ide.outputButtons.compress}>
                     <Scissors size={13} /> {t.ide.outputButtons.compress}
                   </button>
                 </Tooltip>
                 <Tooltip content={t.ide.outputButtons.score} side="top">
-                  <button className="btn btn-secondary export-btn" onClick={handleCritic} title={t.ide.outputButtons.score}>
+                  <button className="btn btn-secondary export-btn" onClick={handleCritic} aria-label={t.ide.outputButtons.score}>
                     <StarIcon size={13} /> {t.ide.outputButtons.score}
                   </button>
                 </Tooltip>

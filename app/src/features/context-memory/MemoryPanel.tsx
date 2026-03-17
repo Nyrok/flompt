@@ -119,17 +119,17 @@ export default function MemoryPanel() {
                 </div>
                 <div className="memory-item-actions">
                   <Tooltip content="Inject to canvas" side="top">
-                    <button className="ide-close-btn" style={{ width: 26, height: 26 }} title="Inject to canvas" onClick={() => inject(block)}>
+                    <button className="ide-close-btn" style={{ width: 26, height: 26 }} aria-label="Inject to canvas" onClick={() => inject(block)}>
                       <LogIn size={12} />
                     </button>
                   </Tooltip>
                   <Tooltip content={block.isFavorite ? 'Unfavorite' : 'Favorite'} side="top">
-                    <button className="ide-close-btn" style={{ width: 26, height: 26 }} title={block.isFavorite ? 'Unfavorite' : 'Favorite'} onClick={() => toggleFavorite(block.id)}>
+                    <button className="ide-close-btn" style={{ width: 26, height: 26 }} aria-label={block.isFavorite ? 'Unfavorite' : 'Favorite'} onClick={() => toggleFavorite(block.id)}>
                       <Star size={12} style={{ fill: block.isFavorite ? '#f59e0b' : 'none', color: '#f59e0b' }} />
                     </button>
                   </Tooltip>
                   <Tooltip content="Delete" side="top">
-                    <button className="ide-close-btn ide-close-btn--danger" style={{ width: 26, height: 26 }} title="Delete" onClick={() => remove(block.id)}>
+                    <button className="ide-close-btn ide-close-btn--danger" style={{ width: 26, height: 26 }} aria-label="Delete" onClick={() => remove(block.id)}>
                       <Trash2 size={12} />
                     </button>
                   </Tooltip>
