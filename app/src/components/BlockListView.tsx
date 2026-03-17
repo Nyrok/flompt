@@ -45,6 +45,16 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
   const { t, locale } = useLocale()
 
   const [isDragOver, setIsDragOver] = useState(false)
+  const listRef      = useRef<HTMLDivElement>(null)
+  const prevCountRef = useRef(nodes.length)
+
+  // Scroll to bottom when a block is added
+  useEffect(() => {
+    if (nodes.length > prevCountRef.current) {
+      listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' })
+    }
+    prevCountRef.current = nodes.length
+  }, [nodes.length])
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault()
@@ -179,6 +189,7 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
 
   return (
     <div
+      ref={listRef}
       className={`block-list-view${isDragOver ? ' block-list-view--drag-over' : ''}`}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
