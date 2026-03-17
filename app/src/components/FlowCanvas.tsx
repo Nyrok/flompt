@@ -42,13 +42,10 @@ const CanvasInner = () => {
     }
   }, [isDecomposing, nodes, setNodes, fitView])
 
-  // Auto-fit when nodes change (manual add/remove)
+  // Track node count (used by decompose effect above)
   useEffect(() => {
-    if (nodes.length > 0 && nodes.length !== prevNodeCount.current) {
-      setTimeout(() => fitView({ padding: 0.2, duration: 400 }), 50)
-    }
     prevNodeCount.current = nodes.length
-  }, [nodes.length, fitView])
+  }, [nodes.length])
 
   // Show chip on explicit block-added event (dispatched from CanvasBlockBar + onDrop)
   useEffect(() => {
