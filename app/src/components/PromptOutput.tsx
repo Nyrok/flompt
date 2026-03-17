@@ -105,16 +105,30 @@ const PromptOutput = () => {
     analytics.promptExported('json')
   }
 
-  const { setOpen: openCritic, setLoading: setCriticLoading, setResult: setCriticResult, setError: setCriticError } = useCriticStore()
+  const {
+    setOpen: openCritic,
+    setLoading: setCriticLoading,
+    setResult: setCriticResult,
+    setError: setCriticError,
+    result: criticResult,
+    cachedForPrompt: criticCachedPrompt,
+    setCachedForPrompt: setCriticCachedPrompt,
+  } = useCriticStore()
 
   const handleCritic = async () => {
     if (!currentRaw) return
+    // Reuse cached result if prompt hasn't changed
+    if (criticResult && criticCachedPrompt === currentRaw) {
+      openCritic(true)
+      return
+    }
     openCritic(true)
     setCriticLoading(true)
     setCriticError(null)
     try {
       const result = await critiquePrompt(currentRaw, locale)
       setCriticResult(result as CriticResult)
+      setCriticCachedPrompt(currentRaw)
     } catch {
       setCriticError('Evaluation failed. Please try again.')
     } finally {
