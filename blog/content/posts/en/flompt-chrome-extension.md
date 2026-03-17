@@ -8,17 +8,17 @@ color: "primary"
 
 ## The Context-Switching Problem
 
-When you work with AI, you have two tabs open. Your prompting tool. ChatGPT or Claude. You write, copy, paste, switch back, adjust, copy again.
+You work with two tabs open: your prompting tool and ChatGPT/Claude. Copy, paste, switch, adjust, copy again.
 
-This back-and-forth is invisible in tutorials but constant in practice. It's wasted time, added friction, and a source of errors: wrong version pasted, forgotten context, lost edits.
+This back-and-forth wastes time and causes errors.
 
-The Flompt browser extension removes this problem. It's available on Chrome and Firefox.
+The browser extension removes this. Chrome and Firefox.
 
 ## What the Extension Does
 
-A sidebar opens directly inside ChatGPT, Claude, or Gemini. On the right side of the page, no new tab needed. You build your prompt visually in the sidebar, and with one click it's injected into the AI's input field.
+Sidebar opens inside ChatGPT, Claude, or Gemini. Build visually in the sidebar. One click to inject into the chat.
 
-No copy-pasting. No context switching. Your visual flow and your AI conversation in the same window.
+No copy-pasting. No tab switching.
 
 ## XML Format: Why It Matters
 
@@ -41,15 +41,15 @@ When you assemble your blocks, Flompt generates a structured XML prompt:
 </prompt>
 ```
 
-This format isn't arbitrary. Modern LLMs (GPT-4, Claude, Gemini) are trained on massive amounts of XML. Tags act as **explicit semantic delimiters**: the model knows exactly where the role starts, where the objective ends, what constitutes a constraint.
+Format matters. Modern LLMs are trained on XML. Tags are semantic delimiters.
 
-The practical result: less ambiguity, fewer structural hallucinations, better section isolation. Anthropic explicitly recommends XML tags in their prompt engineering guidelines.
+Result: less ambiguity, fewer hallucinations, better isolation. Anthropic recommends it.
 
 ## Assembly Is 100% Local
 
-No API call at compile time. The XML prompt is generated directly in your browser from your blocks. Instant, offline-capable, and your data never leaves your machine.
+No API call at compile. XML is generated in your browser. Instant, offline, data stays local.
 
-Block order in the final prompt follows your canvas topology: if you've connected blocks together, Flompt respects that order (topological sort). Otherwise it sorts by vertical position: blocks at the top of the canvas come first.
+Block order follows canvas topology or vertical position: top blocks come first.
 
 ## Works with ChatGPT, Claude, and Gemini
 
@@ -71,9 +71,9 @@ No account needed. No API key. Free and open-source under MIT license.
 
 ## What Changes in Practice
 
-The friction between "building a good prompt" and "using it" disappears. You can iterate quickly: edit a block, reassemble, inject, test the response, adjust. All without leaving the tab.
+Friction disappears. Iterate quickly: edit, reassemble, inject, test, adjust. All in one tab.
 
-And since your flow is auto-saved between sessions, you pick up exactly where you left off.
+Auto-save means you pick up where you left off.
 
 ---
 

@@ -8,17 +8,17 @@ color: "primary"
 
 ## The Problem with Prompts in Agentic Workflows
 
-When you're building with Claude Code, the hard part isn't the code. It's the prompt that drives each task. Writing a solid system prompt, a precise task description, a well-scoped set of constraints. That's where most of the quality comes from.
+Building with Claude Code is hard because of the prompt, not the code. System prompts, task descriptions, constraints. That's where quality comes from.
 
-Until now, there was no structured way to do this inside an agentic workflow. You'd write the prompt in a text file, iterate manually, and hope it held up.
+Until now: no structured way to do this. You'd write text, iterate manually, and hope.
 
 flompt changes that.
 
 ## What MCP Makes Possible
 
-The Model Context Protocol (MCP) lets you expose custom tools to Claude Code. Any server that implements the protocol becomes a first-class tool in your agent's toolbox.
+MCP lets you expose custom tools to Claude Code. Any MCP server becomes a first-class tool.
 
-flompt now ships a hosted MCP server at `https://flompt.dev/mcp/`. Add it to your project and Claude Code gains three new tools:
+flompt ships an MCP server at `https://flompt.dev/mcp/`. Add it and Claude Code gains three tools:
 
 - **`decompose_prompt`**: takes any raw prompt and splits it into typed blocks (role, objective, constraints, output format…)
 - **`compile_prompt`**: takes a list of blocks and returns a Claude-optimized XML prompt
@@ -51,14 +51,14 @@ That's it. On the next session, `decompose_prompt`, `compile_prompt` and `list_b
 
 ## What This Looks Like in Practice
 
-Say you're building a Claude Code task that generates documentation. Instead of hardcoding a prompt string, your agent can:
+Building a documentation task? Your agent can:
 
-1. Call `list_block_types` to understand what's available
-2. Call `decompose_prompt` on an existing prompt to extract its structure
-3. Adjust the blocks programmatically (swap the objective, add a constraint)
-4. Call `compile_prompt` to produce the final optimized XML
+1. Call `list_block_types` to see what's available
+2. Call `decompose_prompt` to extract structure
+3. Adjust blocks (swap objective, add constraint)
+4. Call `compile_prompt` to produce XML
 
-The output is the same structured, Claude-optimized XML that the flompt web app produces: canonically ordered, properly tagged, instantly usable.
+Output: same Claude-optimized XML as the web app.
 
 ## Why XML Still Matters
 
@@ -81,13 +81,15 @@ The compile output looks like this:
 </prompt>
 ```
 
-Modern LLMs parse XML tags as semantic delimiters. The model knows exactly where the role ends, where the constraints start. Less ambiguity, better isolation between sections, more consistent outputs.
+LLMs treat XML tags as semantic markers. Model knows where role ends, constraints start.
 
-Anthropic's own prompt engineering guidelines recommend this format for Claude. Flompt just makes it automatic.
+Less ambiguity. Better isolation. Consistent output.
+
+Anthropic recommends it. flompt makes it automatic.
 
 ## Stateless by Design
 
-The MCP server is fully stateless. Each call to `decompose_prompt` or `compile_prompt` is independent: no session, no stored state, no side effects. Safe to call from any agent, any workflow, any number of times.
+Stateless server. Each call is independent. No session, no stored state. Safe to call anytime.
 
 ---
 

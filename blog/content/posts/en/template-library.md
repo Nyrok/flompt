@@ -8,9 +8,11 @@ color: "primary"
 
 ## A Milestone Contribution
 
-Flompt just got significantly more powerful, thanks to a major pull request from community contributor [**@Refaltor77**](https://github.com/Refaltor77) on GitHub.
+[**@Refaltor77**](https://github.com/Refaltor77) shipped 100+ ready-to-use templates across 10 categories.
 
-His contribution ships **over 100 ready-to-use prompt templates**, organized into 10 categories, with full internationalization support and a new response language selector. This is the kind of contribution that changes how people discover and use the tool, and it took Flompt from a builder to a complete prompt workflow platform.
+Full i18n support + response language selector.
+
+Changed flompt from builder to platform.
 
 ## What the Template Library Includes
 
@@ -27,30 +29,29 @@ The new **Library** tab in Flompt gives you instant access to structured prompts
 - **Creative**: storytelling, worldbuilding, character development
 - **Personal**: career advice, habit tracking, reflection prompts
 
-Each template loads directly into the canvas as a set of typed blocks, Role, Objective, Constraints, Output Format, ready to edit and compile into a structured XML prompt.
+Templates load as typed blocks (Role, Objective, Constraints, Format). Edit and compile.
 
 ## Response Language Selector
 
-@Refaltor77 also introduced a **response language selector** inside the library. Before loading a template, you can pick the language the AI should respond in. Flompt automatically appends a `<language>` block to the canvas. Useful when you work in a language that differs from the template's source language.
+Response language selector: pick the output language before loading. Flompt adds a `<language>` block.
 
 ## Auto-Import and AI Detection
 
-The contribution also includes **automatic prompt import**: when you open Flompt inside ChatGPT, Claude, or Gemini via the browser extension, it now detects and imports the active conversation prompt automatically. Fewer manual steps, faster iteration.
+Auto-import: extension detects and imports active conversation prompts. Fewer manual steps.
 
 ## Where the Project Is Headed
 
-Flompt launched as a personal tool for building structured AI prompts visually. It's now used by thousands of people across the web app and the browser extension. The template library marks an inflection point: **the community is starting to shape the content of the tool, not just report bugs**.
+flompt launched as a personal tool. Now thousands use it. Templates mark an inflection: **community shapes content.**
 
-The logical next step is a **free and open marketplace**: a place where anyone can publish, fork, and remix prompt templates. Imagine discovering a world-class code review prompt built by a senior engineer, or a lesson plan template designed by a teacher, one click away from your canvas.
+Next: open marketplace. Community publishes, forks, remixes templates.
 
-This marketplace will be:
+Roadmap:
+- Open (community-submitted)
+- Versioned (trackable, forkable)
+- Rated (by usage)
+- Integrated (in canvas)
 
-- **Open**: community-submitted, no paywalls
-- **Versioned**: templates tracked like code, forkable, improvable
-- **Rated**: upvoted by real usage, not editorial curation
-- **Integrated**: directly accessible from the Flompt canvas
-
-We're not there yet. But @Refaltor77's contribution is the foundation. A curated library today, an open marketplace tomorrow.
+Curated library now. Marketplace later.
 
 ## How to Use the Templates
 
@@ -65,7 +66,7 @@ That's it. From zero to a structured, optimized prompt in seconds.
 
 ## Thank You, @Refaltor77
 
-Open-source projects live and die by their contributors. @Refaltor77 shipped a large, well-scoped, production-ready pull request, templates, i18n across 8 languages, styles, and tooling, entirely on his own initiative. That's exactly the kind of energy that makes Flompt better for everyone.
+@Refaltor77 shipped templates, i18n, styles, tooling on his own. That's what makes flompt better.
 
 If you want to contribute, templates, code, translations, or ideas, the repository is open: [**github.com/Nyrok/flompt**](https://github.com/Nyrok/flompt).
 

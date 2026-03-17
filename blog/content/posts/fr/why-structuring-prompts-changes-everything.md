@@ -8,21 +8,21 @@ color: "primary"
 
 ## Le problème du prompt brut
 
-On a tous fait ça : ouvrir ChatGPT, taper une phrase vague et espérer que l'IA devine ce qu'on veut. Parfois ça marche. Souvent, pas vraiment.
+Tous : ouvre ChatGPT. Tape une phrase vague. Espère que l'IA devine. Parfois marche. Souvent pas.
 
-Le problème n'est pas l'IA. C'est l'input. Un prompt est une **instruction**, et comme toute instruction, sa clarté détermine la qualité du résultat.
+Le problème = pas l'IA. C'est l'input. Un prompt = une **instruction**. La clarté = la qualité du résultat.
 
 ## La structure comme levier
 
-Structurer un prompt, c'est le décomposer en composants distincts :
+Structurer = décompose en composants distincts :
 
-- **Rôle** : Qui est l'IA dans ce contexte ?
-- **Contexte** : Quelles informations de fond sont nécessaires ?
-- **Objectif** : Qu'est-ce qu'on attend concrètement ?
-- **Contraintes** : Quelles limites respecter (format, longueur, ton) ?
-- **Exemples** : À quoi ressemble un bon résultat ?
+- **Rôle** : Qui est l'IA ?
+- **Contexte** : Infos de fond ?
+- **Objectif** : Qu'est-ce qu'on attend ?
+- **Contraintes** : Format ? Longueur ? Ton ?
+- **Exemples** : À quoi ressemble le bon résultat ?
 
-Chaque bloc a un rôle précis. Ensemble, ils forment un prompt qui ne laisse pas de place à l'ambiguïté.
+Chaque bloc = un rôle. Ensemble = pas d'ambiguïté.
 
 ## Un exemple concret
 

@@ -6,74 +6,84 @@ tags: ["prompt engineering", "Claude", "bonnes pratiques", "prompts structurés"
 color: "primary"
 ---
 
-On y est tous passés : on tape quelque chose dans ChatGPT ou Claude, on obtient une réponse médiocre, et on se dit instinctivement que le modèle n'est pas assez intelligent. Mais si le modèle était brillant, et que le problème était en réalité votre prompt ?
+Mauvaise réponse ? Tu penses : "Claude n'est pas bon."
 
-C'est exactement l'insight central du [guide officiel de prompt engineering d'Anthropic](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) : l'écart entre une interaction IA frustrante et une interaction remarquablement utile n'est presque jamais le modèle. C'est la qualité de l'instruction.
+Faux. Ton prompt est faible.
+
+[Guide Anthropic](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) : l'écart vient du prompt, pas du modèle.
 
 ---
 
 ## Le modèle mental du "brillant nouvel employé"
 
-Le guide d'Anthropic ouvre sur une analogie qui recadre tout :
+Anthropic propose une analogie qui change tout :
 
-> « Pensez à Claude comme à un employé brillant mais nouveau, qui manque de contexte sur vos normes et flux de travail. Plus vous expliquez précisément ce que vous voulez, meilleur est le résultat. »
+> « Claude = employé brillant mais nouveau. Pas de contexte. Explique précisément ce que tu veux. Ça marche mieux. »
 
-C'est un changement de perspective puissant. Le modèle n'est pas stupide. Il est non informé. Il n'a aucune idée de ce que "bon" signifie dans votre contexte spécifique, de ce qu'attend votre audience, des contraintes dans lesquelles vous travaillez, ou du format dont vous avez réellement besoin. Chaque information implicite est une supposition qu'il doit faire.
+Claude n'est pas stupide. Il manque juste de contexte. Il ne sait pas ce que "bon" signifie pour toi. Ne sait pas ce que ton audience attend. Ne sait pas tes contraintes. Pas idée du format réel dont tu as besoin. Chaque information implicite = une supposition qu'il fait.
 
-La solution n'est pas un meilleur modèle. La solution, c'est un meilleur briefing.
+Meilleur modèle ? Non. Meilleur briefing ? Oui.
 
 ---
 
 ## Pourquoi la structure bat la longueur
 
-La plupart des gens, quand ils veulent de meilleurs résultats, écrivent *plus*. Plus de détails, plus de mots, plus de contexte entassé dans un seul paragraphe. Mais la longueur sans structure reste ambiguë.
+Les gens écrivent plus pour de meilleurs résultats. Plus de mots. Plus de contexte. Un seul bloc.
 
-Anthropic recommande les **balises XML** comme la méthode la plus fiable pour structurer les prompts :
+Mais longueur sans structure = ambiguïté toujours.
 
-> « Les balises XML aident Claude à analyser les prompts complexes sans ambiguïté, surtout quand le prompt mélange instructions, contexte, exemples et entrées variables. Encapsuler chaque type de contenu dans sa propre balise réduit les malinterprétations. »
+Anthropic : balises XML = meilleur méthode pour structurer.
 
-Quand vous écrivez :
+> « XML = analyse sans ambiguïté. Mélange = friction. Chaque type dans sa propre balise réduit les erreurs. »
 
+**Mauvais :**
 ```
 Tu es un expert. Écris-moi un résumé. Reste court. Voici le texte : [...]
 ```
 
-…vous mélangez rôle, instruction, contrainte et entrée dans un bloc indifférencié. Le modèle le parse, mais il y a de la friction. Comparez avec :
+Rôle + instruction + contrainte + entrée = bloc mélangé. Friction partout.
 
+**Bon :**
 ```xml
-<role>Analyste senior spécialisé en rapports financiers</role>
-<objective>Écrire un résumé exécutif du document ci-dessous</objective>
-<constraints>Maximum 150 mots. Pas de jargon. Langage simple.</constraints>
-<input>[votre document ici]</input>
+<role>Analyste senior en rapports financiers</role>
+<objective>Résumé exécutif du document ci-dessous</objective>
+<constraints>Max 150 mots. Pas de jargon. Simple.</constraints>
+<input>[ton document]</input>
 ```
 
-Même information. Clarté radicalement différente. La structure elle-même signale l'intention.
+Même information. Clarté totale. La structure signale l'intention.
 
 ---
 
 ## Les exemples : la technique à plus fort levier
 
-Parmi toutes les techniques du guide d'Anthropic, les exemples few-shot reçoivent la recommandation la plus forte :
+Few-shot examples = recommandation la plus forte dans le guide Anthropic.
 
-> « Les exemples sont l'un des moyens les plus fiables de guider le format, le ton et la structure des sorties de Claude. Quelques exemples bien conçus peuvent améliorer considérablement la précision et la cohérence. »
+> « Les exemples = moyens les plus fiables. Guident le format. Guident le ton. Guident la structure. Quelques exemples = précision + cohérence. »
 
-La recommandation officielle : 3 à 5 exemples, encapsulés dans des balises `<examples>`, couvrant des cas limites et des scénarios variés. Pas juste un exemple montrant le cas idéal, mais des exemples qui montrent à Claude où sont les bords.
+**Recommandation officielle :**
+- 3 à 5 exemples
+- Balises `<examples>`
+- Couvre les cas limites
+- Montre les bords à Claude
 
-Pourquoi ça marche si bien ? Parce que les exemples contournent l'ambiguïté entièrement. Au lieu de décrire ce que vous voulez, vous le montrez. Un modèle entraîné sur du langage est exceptionnellement bon pour reconnaître des patterns à partir de démonstrations concrètes.
+Pourquoi ça marche ? Les exemples contournent l'ambiguïté. Tu montres au lieu de décrire. Les modèles = excellents pour reconnaître les patterns. À partir de démonstrations concrètes.
 
 ---
 
 ## Le contexte n'est pas optionnel
 
-Un autre insight du guide : expliquer *pourquoi* vous voulez quelque chose surpasse constamment le simple fait d'énoncer *ce que* vous voulez.
+Un insight du guide : explique *pourquoi* tu veux quelque chose. Pas juste le *quoi*.
 
-> « Fournir le contexte ou la motivation derrière vos instructions, par exemple expliquer à Claude pourquoi ce comportement est important, peut aider Claude à mieux comprendre vos objectifs et à fournir des réponses plus ciblées. »
+> « Fournis le contexte. Fournis la motivation. Explique à Claude pourquoi c'est important. Claude comprend mieux. Réponses plus ciblées. »
 
-Comparez :
+**Mauvais :**
 - ❌ `"N'utilisez JAMAIS de points de suspension"`
-- ✅ `"Votre réponse sera lue à voix haute par un moteur text-to-speech, donc n'utilisez jamais de points de suspension car le moteur TTS ne saura pas comment les prononcer"`
 
-Le modèle est suffisamment intelligent pour généraliser à partir de l'explication. Quand il comprend le raisonnement, il l'applique correctement dans des cas limites que vous n'aviez pas anticipés. Le contexte rend les prompts robustes.
+**Bon :**
+- ✅ `"La réponse sera lue à voix haute par TTS. Le moteur ne saura pas prononcer les points de suspension."`
+
+Claude généralise à partir du contexte. Comprend le raisonnement. L'applique aux cas limites. Rend les prompts robustes.
 
 ---
 

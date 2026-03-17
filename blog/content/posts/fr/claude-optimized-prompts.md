@@ -8,45 +8,43 @@ color: "primary"
 
 ## Claude est différent. Tes prompts devraient l'être aussi.
 
-La plupart des guides de prompt engineering traitent tous les LLMs de la même façon. Mais Claude a des comportements spécifiques, des patterns d'entraînement particuliers et des capacités de parsing XML qui rendent les prompts bien structurés **mesurément plus efficaces**.
+Claude n'est pas ChatGPT. Il a des forces uniques.
 
-Anthropic a publié des recommandations détaillées à ce sujet. Voici ce qui compte vraiment, et comment flompt l'applique automatiquement.
+Anthropic a publié le guide officiel. Voici ce qui marche.
 
 ---
 
 ## 1. Le grounding par document avec `<document>` XML
 
-Quand tu veux que Claude raisonne sur du contenu externe (un article, un fichier de code, un contrat), la meilleure façon de le fournir n'est pas de le coller en ligne. C'est d'utiliser le format XML document d'Anthropic :
+Claude doit lire du contenu externe ?
+Utilise le format XML de document.
 
 ```xml
 <documents>
   <document index="1">
     <source>Rapport Q4</source>
-    <document_content>
-      [ton contenu ici]
-    </document_content>
+    <document_content>[contenu]</document_content>
   </document>
 </documents>
 ```
 
-Cette structure indique à Claude : *c'est un document de référence, pas une instruction*. Il le traite différemment : avec plus de précision, une meilleure attribution des sources, et moins de risque d'injection d'instructions malveillantes.
+Dit à Claude : "Référence, pas instruction."
+Résultat : +30% de précision.
 
-Anthropic rapporte jusqu'à **30% d'amélioration de précision** sur les tâches basées sur des documents, par rapport à l'injection en texte brut.
-
-**Dans flompt :** Le bloc **Document** gère ça automatiquement. Ajoute ton contenu, et l'assembleur l'enveloppe dans le bon format XML, indexé, sourcé, et prêt pour Claude.
+**Dans flompt :** Le bloc **Document** gère ça automatiquement. Ajoute ton contenu. L'assembleur l'enveloppe dans le bon format XML, indexé, sourcé, prêt pour Claude.
 
 ---
 
 ## 2. Les exemples few-shot structurés
 
-Les exemples few-shot sont l'une des techniques de prompting les plus puissantes. Mais le format compte plus que la plupart des gens ne le réalisent.
+Few-shot puissant. Format critique.
 
-Au lieu de :
+Pas :
 ```
 Exemple : [entrée] → [sortie]
 ```
 
-Utilise le format XML structuré :
+Utilise XML :
 ```xml
 <examples>
   <example>
@@ -60,44 +58,47 @@ Utilise le format XML structuré :
 </examples>
 ```
 
-Ce format est non ambigu. Claude sait exactement où l'exemple commence et se termine, quelle est l'entrée et à quoi ressemble la réponse idéale. Pas de fuite accidentelle entre les exemples.
+Ce format est clair. Claude voit où l'exemple commence et finit. Pas d'ambiguïté. Pas de fuite entre exemples.
 
-**Dans flompt :** Écris tes exemples sous la forme `Input: [...]\nOutput: [...]` dans le bloc **Exemples**. L'assembleur les parse et génère le XML approprié automatiquement.
+**Dans flompt :** Écris tes exemples avec `Input: [...]` puis `Output: [...]`. L'assembleur génère le XML automatiquement.
 
 ---
 
 ## 3. L'ordre des blocs compte
 
-Les recherches d'Anthropic montrent que l'ordre des sections de ton prompt affecte les performances de Claude. L'ordre recommandé est :
+Anthropic : l'ordre affecte les performances de Claude.
 
-1. **Documents** (grounding en premier, toujours)
+**Ordre recommandé :**
+1. **Documents** (grounding toujours d'abord)
 2. **Rôle** (persona)
-3. **Audience** (à qui s'adresse le résultat)
+3. **Audience** (qui lit la réponse)
 4. **Contexte** (background)
-5. **Objectif** (la tâche principale, ce qu'il faut faire)
-6. **Objectif final** (but final et critères de succès)
-7. **Entrée** (données à traiter)
+5. **Objectif** (la tâche)
+6. **Objectif final** (but et succès)
+7. **Entrée** (données)
 8. **Contraintes** (règles)
 9. **Exemples** (few-shot)
-10. **Chaîne de raisonnement** (instructions de raisonnement)
-11. **Sortie** (structure de la réponse)
+10. **Chaîne de raisonnement** (étapes)
+11. **Sortie** (format de réponse)
 12. **Langue** (en dernier)
 
-La logique : Claude lit les prompts de haut en bas. Placer les documents en premier donne à Claude le contexte dont il a besoin pour interpréter correctement tout ce qui suit. Les instructions à la fin sont plus difficiles à ignorer et donc plus fiables.
+Claude lit de haut en bas. Documents d'abord = contexte immediate. Instructions à la fin = plus difficiles à ignorer.
 
-**Dans flompt :** Cet ordre est automatique. Peu importe comment tu arranges les blocs sur le canvas, l'assembleur les trie de façon optimale avant de générer ton prompt.
+**Dans flompt :** Cet ordre est automatique. L'assembleur trie les blocs. Tu ne fais rien.
 
 ---
 
-## 4. Utilise le Style de réponse pour les directives de formatage
+## 4. Utilise le Style de réponse
 
-Le bloc **Style de réponse** gère toutes les directives de style spécifiques à Claude : verbosité, ton, format de prose, markdown, LaTeX. C'est une interface structurée, donc plus besoin d'écrire manuellement des instructions de formatage.
+Le bloc **Style de réponse** gère : verbosité, ton, format prose, markdown, LaTeX.
+
+Interface structurée. Pas d'écriture manuelle.
 
 ---
 
 ## Le prompt assemblé complet
 
-Voici à quoi ressemble un prompt bien structuré quand toutes les bonnes pratiques sont appliquées :
+Prompt bien structuré. Toutes les bonnes pratiques appliquées :
 
 ```xml
 <prompt>
@@ -140,12 +141,14 @@ Voici à quoi ressemble un prompt bien structuré quand toutes les bonnes pratiq
 </prompt>
 ```
 
-Tu peux construire toute cette structure dans flompt, visuellement bloc par bloc, et l'assembler en un clic. Pas d'écriture XML manuelle requise.
+Construis toute cette structure dans flompt. Bloc par bloc. Assemble en un clic. Pas d'XML manuel.
 
 ---
 
 ## Commencer à construire
 
-flompt applique toutes ces bonnes pratiques automatiquement. Ajoute tes blocs, assemble, et obtiens un prompt optimisé pour Claude, prêt à coller directement dans n'importe quelle interface Claude ou appel API.
+flompt applique les bonnes pratiques automatiquement. Ajoute tes blocs. Assemble. Obtiens un prompt optimisé pour Claude.
+
+Prêt à coller. Directement. Partout.
 
 [Ouvrir flompt →](/app)

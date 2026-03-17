@@ -8,23 +8,23 @@ color: "primary"
 
 ## Le problème des prompts dans les workflows agentiques
 
-Quand vous développez avec Claude Code, la partie difficile n'est pas le code. C'est le prompt qui pilote chaque tâche. Un bon system prompt, une description de tâche précise, un ensemble de contraintes bien délimitées. C'est là que se joue la qualité du résultat.
+Claude Code = code n'est pas difficile. Les prompts sont difficiles. Chaque tâche = un prompt qui pilote. Bon system prompt. Description précise. Contraintes bien délimitées. C'est là que se joue la qualité.
 
-Jusqu'ici, il n'existait pas de façon structurée de faire ça depuis un workflow agentique. On écrivait le prompt dans un fichier texte, on itérait manuellement, et on espérait que ça tienne.
+Jusqu'ici = pas de façon structurée de faire ça depuis un workflow agentique. Tu écrivais dans un fichier texte. Itérais manuellement. Espérais que ça tienne.
 
 flompt change ça.
 
 ## Ce que MCP rend possible
 
-Le Model Context Protocol (MCP) permet d'exposer des outils personnalisés à Claude Code. N'importe quel serveur qui implémente le protocole devient un outil de premier ordre dans la boîte à outils de l'agent.
+MCP = expose des outils personnalisés à Claude Code. N'importe quel serveur = outil de premier ordre dans la boîte à outils.
 
-flompt intègre désormais un serveur MCP hébergé sur `https://flompt.dev/mcp/`. Ajoutez-le à votre projet et Claude Code gagne trois nouveaux outils :
+flompt = serveur MCP hébergé sur `https://flompt.dev/mcp/`. Ajoute-le à ton projet. Claude Code gagne trois nouveaux outils :
 
-- **`decompose_prompt`**: prend n'importe quel prompt brut et le découpe en blocs typés (role, objective, constraints, output format…)
-- **`compile_prompt`**: prend une liste de blocs et retourne un prompt XML optimisé pour Claude
-- **`list_block_types`**: décrit les 12 types de blocs disponibles et l'ordre canonique recommandé
+- **`decompose_prompt`**: prend un prompt brut. Le découpe en blocs typés (role, objective, constraints, output format…).
+- **`compile_prompt`**: prend une liste de blocs. Retourne un prompt XML optimisé pour Claude.
+- **`list_block_types`**: décrit les 12 types de blocs. L'ordre canonique recommandé.
 
-Pas d'installation. Pas de clé API. Pas de compte. Le serveur est hébergé et prêt à l'emploi.
+Pas d'installation. Pas d'API. Pas de compte. Serveur hébergé. Prêt à l'emploi.
 
 ## Setup : une seule commande
 

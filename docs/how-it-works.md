@@ -6,18 +6,15 @@ flompt follows a three-step loop: **Decompose → Edit → Assemble**.
 
 ## Step 1: Decompose
 
-Paste any raw prompt into the input panel and click **Decompose into blocks**.
+Paste a prompt. Click **Decompose into blocks**.
 
-flompt sends your prompt to the backend (FastAPI), which uses Claude to analyze it and split it into semantic blocks. The decomposition runs **asynchronously** — you get a job ID immediately and flompt polls for the result in real time, showing you live queue position and status.
+flompt sends to backend. Claude analyzes. Splits into blocks. Async. Get job ID immediately. Real-time polling.
 
-Each block is:
-
-- Assigned a **type** from 16 possible categories
-- Given a **2-5 word AI-generated summary** for quick identification on the canvas
-- **Auto-positioned** with 180px vertical spacing
-- **Auto-connected** top-to-bottom to represent reading order
-
-A **Language block** is added automatically based on the detected language of your prompt.
+Each block:
+- Gets a **type** from 16 categories
+- Gets a **2-5 word summary** for ID
+- Auto-positioned. Auto-connected. Top-to-bottom.
+- **Language** block added automatically.
 
 ```
 User input: "You are a Python expert. Write a function that sorts a list of
@@ -29,7 +26,7 @@ dictionaries by a given key. Return only code, no explanations."
 → Language:    English
 ```
 
-> **No API key?** flompt falls back to a keyword-based heuristic decomposer — fully functional without any API configuration.
+> **No API key?** Falls back to keyword decomposer. Fully functional.
 
 ---
 

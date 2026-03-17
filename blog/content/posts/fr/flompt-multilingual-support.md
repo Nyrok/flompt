@@ -8,13 +8,13 @@ color: "primary"
 
 ## Pourquoi le multi-langue
 
-Le prompt engineering n'est pas une discipline uniquement anglophone. Les développeurs et praticiens de l'IA écrivent leurs prompts dans leur langue natale, utilisent des interfaces LLM locales, et cherchent des outils dans leur propre langue.
+Le prompt engineering = pas anglophone seulement. Les développeurs écrivent dans leur langue natale. Utilisent des interfaces LLM locales. Cherchent des outils en leur propre langue.
 
-Jusqu'ici, l'interface de Flompt n'était disponible qu'en anglais et en français. C'était un point de friction pour une part significative des utilisateurs. On corrige ça aujourd'hui.
+Flompt = anglais et français seulement. Friction pour beaucoup d'utilisateurs. On corrige ça.
 
 ## 10 langues, une seule interface
 
-Le sélecteur de langue en haut à droite propose désormais 10 options :
+Le sélecteur de langue en haut à droite = 10 options :
 
 | Code | Langue      |
 |------|-------------|

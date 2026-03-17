@@ -1,12 +1,12 @@
 # Block Types
 
-flompt organizes prompts into **13 semantic block types**, each representing a distinct aspect of a well-structured AI prompt. The assembler applies Anthropic's Claude best practices automatically — blocks are ordered, wrapped in the right XML, and formatted for maximum accuracy.
+flompt = 13 semantic block types. Each represents one aspect of structure. Assembler applies Claude best practices. Auto-ordered. Auto-formatted.
 
 ---
 
 ## Document
 
-Injects external reference content using Anthropic's XML grounding format. Claude is specifically trained to parse `<document>` tags, making it the most reliable way to provide source material.
+External reference content. Claude parses `<document>` tags reliably.
 
 **Assembled as:**
 ```xml
@@ -20,7 +20,7 @@ Injects external reference content using Anthropic's XML grounding format. Claud
 </documents>
 ```
 
-**When to use:** Whenever you want Claude to reason over a specific piece of text — an article, a code file, a dataset, a contract. Always placed first in the assembled prompt.
+**Use for:** Articles. Code. Datasets. Contracts. Always first.
 
 Color: green-light `#86efac`
 

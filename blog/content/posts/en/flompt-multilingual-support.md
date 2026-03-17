@@ -10,7 +10,7 @@ color: "primary"
 
 Prompt engineering isn't an English-only discipline. Developers and AI practitioners write prompts in their native language, use local LLM interfaces, and search for tools in their own tongue.
 
-Until now, Flompt's interface was only available in English and French. That was a friction point for a significant share of users. Today we're fixing that.
+Flompt only had English and French. That was friction for users. Today: 10 languages.
 
 ## 10 Languages, One Interface
 
@@ -33,23 +33,22 @@ Every string in the interface is translated: block labels, tab names, error mess
 
 ## How It Works
 
-The i18n system is entirely client-side. Each language is a JSON file containing all interface strings. The translation is applied at runtime by a React context, no server round-trip, no build-per-locale.
+All client-side. Each language is a JSON file. Applied at runtime, no server calls.
 
-Language is determined in this order:
+Language priority:
+1. URL path (`/app/es` = Spanish)
+2. localStorage (your last choice)
+3. Default (English)
 
-1. **URL path**: visiting `flompt.dev/app/es` loads Spanish immediately
-2. **localStorage**: your last explicit choice is remembered across sessions
-3. **Default**: English if nothing else applies
-
-Your choice is always persisted. If you switch to German, the next time you open the app it opens in German.
+Your choice persists.
 
 ## Each Language Gets Its Own URL
 
 This is the other half of the release, and it matters for discoverability.
 
-Before today, `flompt.dev/app` was the only URL for the app, and it only served English HTML. Crawlers from Google, Bing, and others only indexed the English version.
+Before: only `/app` served English HTML. Search crawlers only indexed English.
 
-Now every language has a dedicated static HTML page:
+Now: each language gets a dedicated page:
 
 - `flompt.dev/app` → English (default)
 - `flompt.dev/app/fr` → Français
@@ -62,15 +61,15 @@ Now every language has a dedicated static HTML page:
 - `flompt.dev/app/ar` → العربية
 - `flompt.dev/app/ru` → Русский
 
-Each page has the correct `lang` attribute, a localized `<title>` and `<meta description>`, a canonical URL, and a full set of `hreflang` alternate links pointing across all 10 locales.
+Each page has: correct lang, localized title/description, canonical URL, hreflang links.
 
-This is standard multilingual SEO practice, the same approach used by large platforms to surface the right version to users across different regions.
+Standard multilingual SEO.
 
 ## What Stays the Same
 
-The app logic is identical across all languages. Blocks, canvas behavior, prompt assembly, keyboard shortcuts, auto-save, nothing changes. Only the interface strings are translated.
+App logic is identical. Only interface strings translate.
 
-Prompts you write and blocks you create are always stored as-is. Switching your interface language doesn't alter your saved content.
+Prompts and blocks stay as-is. Language switch doesn't change your work.
 
 ---
 

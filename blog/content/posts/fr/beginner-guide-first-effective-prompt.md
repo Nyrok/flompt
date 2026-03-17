@@ -8,44 +8,42 @@ color: "primary"
 
 ## Vous n'avez pas besoin d'être expert
 
-Le prompt engineering a l'air intimidant vu de l'extérieur. Des termes techniques, des frameworks complexes, des exemples qui ressemblent à du code. Mais la réalité est plus simple : un bon prompt, c'est une bonne instruction.
+Pas intimidant. Un prompt = une bonne instruction.
 
-Ce guide va vous montrer comment passer de "ça marche parfois" à "ça marche à chaque fois" en 4 étapes.
+De "parfois" à "toujours" en 4 étapes.
 
 ## Étape 1 : Définir ce que vous voulez
 
-Ça paraît évident, mais c'est la cause n°1 des mauvais résultats. Avant d'écrire quoi que ce soit, répondez à ces questions :
+Première cause d'échecs. Réponds d'abord :
 
-- **Quel est le livrable ?** (un email, du code, une analyse, un résumé...)
-- **Pour qui ?** (vous, un client, une équipe technique...)
-- **Quel format ?** (paragraphes, liste, tableau, JSON...)
-- **Quelle longueur ?** (un tweet, un paragraphe, une page...)
+- Livrable ? (email, code, analyse, résumé)
+- Pour qui ? (client, équipe, toi)
+- Format ? (texte, liste, JSON)
+- Longueur ? (tweet, para, page)
 
-Si vous ne pouvez pas répondre clairement, l'IA non plus.
+Pas clair = IA confuse.
 
 ## Étape 2 : Donner du contexte
 
-L'IA n'a aucun contexte par défaut. Elle ne sait pas qui vous êtes, dans quelle situation vous êtes, ni pourquoi vous posez la question. Chaque information pertinente que vous ajoutez améliore le résultat.
+Pas de contexte = IA aveugle.
 
-**Avant :**
-> Aide-moi à écrire une présentation.
+Avant : "Aide-moi à écrire une présentation."
 
-**Après :**
-> Je prépare une présentation de 10 minutes pour des investisseurs. Mon produit est un SaaS de gestion de projet pour les PME. L'audience n'est pas technique. Je veux convaincre, pas expliquer les features.
+Après : "10 min pour investisseurs. SaaS PME. Audience non-tech. Convaincs, ne détaille pas."
 
-Le second prompt donne à l'IA tout ce dont elle a besoin pour être pertinente.
+Contexte = IA pertinente.
 
 ## Étape 3 : Être spécifique sur le format
 
-Les LLMs sont très sensibles aux instructions de format. Utilisez-les à votre avantage :
+Sois spécifique sur le format.
 
 ```
-Donne-moi 5 slogans pour une app de méditation.
-Format : un slogan par ligne, max 8 mots chacun.
-Ton : calme et inspirant, pas mystique.
+5 slogans app méditation.
+Un par ligne. Max 8 mots.
+Ton : calme, inspirant, pas mystique.
 ```
 
-C'est clair, c'est mesurable, c'est actionnable. L'IA sait exactement ce qu'elle doit produire.
+Clair = IA efficace.
 
 ## Étape 4 : Itérer
 

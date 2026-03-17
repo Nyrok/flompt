@@ -8,25 +8,25 @@ color: "primary"
 
 ## Un prompt, c'est du code. Traite-le comme tel.
 
-Quand tu écris du code, tu disposes d'un environnement de développement complet. Un linter détecte les erreurs avant l'exécution. Un profiler montre ce qui est lent. Un système de versioning trace chaque modification.
+Code = environnement développement complet. Un linter détecte les erreurs. Un profiler montre ce qui est lent. Versioning trace chaque modification.
 
-Quand tu écris un prompt, tu n'avais rien de tout ça. Tu écrivais du texte, tu l'envoyais, tu devinais pourquoi ça ne marchait pas, tu recommençais.
+Prompt = rien de tout ça. Tu écrivais. Envoyais. Devinais pourquoi ça marche pas. Recommençais.
 
-Flompt 1.4.0 change ça. Cette version embarque un IDE complet, directement dans l'application, avec sept outils qui couvrent l'intégralité du cycle de développement d'un prompt.
+Flompt 1.4.0 change ça. IDE complet dans l'app. Sept outils. Couvrent tout le cycle de développement du prompt.
 
 ## Les sept outils de l'IDE
 
 ### Débogueur
 
-Le débogueur analyse ton prompt assemblé et détecte les failles logiques, les ambiguïtés et les problèmes de structure. Il attribue un score sur 100, identifie les problèmes par catégorie et propose une version corrigée applicable en un clic.
+Analyse ton prompt assemblé. Détecte les failles logiques. Les ambiguïtés. Les problèmes de structure. Score sur 100. Identifie les problèmes. Propose une correction applicable en un clic.
 
-Si ton score est déjà de 100 sur 100, le bouton appliquer disparaît. Il n'y a rien à corriger.
+Score = 100 sur 100 ? Le bouton disparaît. Rien à corriger.
 
 ### Critique
 
-Le critique évalue ton prompt sur cinq dimensions : clarté, spécificité, richesse du contexte, définition de la sortie et qualité des contraintes. Le résultat est un graphique radar qui montre précisément où ton prompt est solide et où il doit progresser.
+Évalue ton prompt sur cinq dimensions : clarté, spécificité, contexte, sortie, contraintes. Graphique radar. Montre où c'est solide. Où progresser.
 
-Il ne donne pas juste un score. Il explique pourquoi.
+Pas juste un score. Explique pourquoi.
 
 ### Compresseur
 

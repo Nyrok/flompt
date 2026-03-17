@@ -1,6 +1,6 @@
 # Make.com Integration
 
-flompt can send your assembled prompt directly to a **Make.com webhook** with a single click — no copy-paste, no tab switching. Your prompt lands in a Make scenario as a structured JSON payload, ready to be routed into any AI module, database, or communication tool.
+Send assembled prompt to Make.com webhook. One click. No copy-paste. Structured JSON. Ready to route.
 
 ---
 

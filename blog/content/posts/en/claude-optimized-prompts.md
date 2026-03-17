@@ -8,15 +8,15 @@ color: "primary"
 
 ## Claude is different. Your prompts should be too.
 
-Most prompt engineering guides treat all LLMs the same. But Claude has specific behaviors, training patterns, and XML parsing capabilities that make well-structured prompts measurably more effective.
+Claude isn't like ChatGPT or Gemini. It has specific behaviors and strengths that make structured prompts much more effective.
 
-Anthropic has published detailed guidance on this. Here's what matters most, and how flompt applies it automatically.
+Anthropic released official guidance on this. Here's what works best.
 
 ---
 
 ## 1. Document grounding with `<document>` XML
 
-When you need Claude to reason over external content (an article, a code file, a contract), the best way to provide it isn't to paste it inline. It's to use Anthropic's document XML format:
+When Claude needs to read content (an article, code, a contract), don't paste it inline. Use Anthropic's document XML format:
 
 ```xml
 <documents>
@@ -29,9 +29,9 @@ When you need Claude to reason over external content (an article, a code file, a
 </documents>
 ```
 
-This structure tells Claude: *this is a reference document, not an instruction*. It processes it differently: more accurately, with better source attribution, and with less risk of instruction injection.
+This tells Claude: "This is a reference, not an instruction." Claude processes it more accurately and with fewer risks.
 
-Anthropic reports up to **30% accuracy improvements** on document-grounded tasks compared to plain-text injection.
+Anthropic reports up to **30% accuracy gains** versus plain-text.
 
 **In flompt:** The **Document** block handles this automatically. Add your content, and the assembler wraps it in the correct XML format, indexed, sourced, and ready for Claude.
 
@@ -39,7 +39,7 @@ Anthropic reports up to **30% accuracy improvements** on document-grounded tasks
 
 ## 2. Structured few-shot examples
 
-Few-shot examples are one of the most powerful prompting techniques. But the format matters more than most people realize.
+Few-shot examples are powerful. Format matters most.
 
 Instead of:
 ```
@@ -60,7 +60,7 @@ Use the structured XML format:
 </examples>
 ```
 
-This format is unambiguous. Claude knows exactly where the example starts and ends, what the input is, and what the ideal response looks like. No accidental bleed between examples.
+This format is clear. Claude knows where each example starts and ends. No mix-up.
 
 **In flompt:** Write your examples as `Input: [...]\nOutput: [...]` pairs in the **Examples** block. The assembler parses them and generates the proper XML automatically.
 
@@ -68,7 +68,7 @@ This format is unambiguous. Claude knows exactly where the example starts and en
 
 ## 3. Block ordering matters
 
-Anthropic's research shows that the order of your prompt sections affects Claude's performance. The recommended order is:
+Order matters. Anthropic's research shows the best order is:
 
 1. **Documents** (grounding first, always)
 2. **Role** (persona)
@@ -83,7 +83,7 @@ Anthropic's research shows that the order of your prompt sections affects Claude
 11. **Output format** (response structure)
 12. **Language** (last)
 
-The reasoning: Claude reads prompts top-to-bottom. Grounding documents first gives Claude the context it needs to correctly interpret everything that follows. Instructions at the end are harder to ignore and thus more reliably followed.
+Why: Claude reads top-to-bottom. Documents first ground context. Instructions at the end stick.
 
 **In flompt:** This ordering is automatic. No matter how you arrange blocks on the canvas, the assembler sorts them optimally before generating your prompt.
 

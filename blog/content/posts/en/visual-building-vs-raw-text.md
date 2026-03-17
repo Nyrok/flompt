@@ -8,9 +8,9 @@ color: "primary"
 
 ## Raw text has its limits
 
-Prompting as we know it today is fundamentally linear. You write a block of text, send it, and hope it's clear enough. It's the "notepad" version of AI interaction.
+Raw text is linear: write, send, hope it's clear. It works for simple cases.
 
-It works for simple cases. But as complexity grows (multi-step prompts, rich contexts, cross-constraints), raw text shows its cracks:
+But complexity breaks raw text:
 
 - **Hard to review**: A 500-word prompt is a wall of text
 - **Hard to iterate**: Modifying one component risks breaking the rest
@@ -28,7 +28,7 @@ Imagine an editor where every component of your prompt is a distinct block:
 | Test without constraints | Copy, manually delete | Toggle off the "Constraints" block |
 | Reuse a context | Copy-paste between windows | Drag a saved block |
 
-The difference isn't cosmetic. It's a **workflow** difference.
+It's a workflow difference.
 
 ## The development analogy
 
@@ -38,9 +38,9 @@ The history of software development follows a similar arc:
 2. **Syntax highlighting** → you start seeing structure
 3. **Full IDEs** → autocomplete, refactoring, visual debugging
 
-Prompting is at stage 1. Visual building is the jump to stage 3.
+Prompting is stage 1. Visual building is stage 3.
 
-It's not that text doesn't work. It's that visual building lets you work **faster**, with **fewer errors**, and in a more **iterative** way.
+Text works, but visual is faster, with fewer errors.
 
 ## Concrete benefits
 
@@ -58,12 +58,12 @@ Sharing a visual prompt means sharing a schematic. No need to explain "the conte
 
 ## What it doesn't replace
 
-Visual building doesn't eliminate the need to write well. The content of each block still needs to be precise and relevant. It's a tool, not a shortcut.
+Visual building doesn't replace good writing. Blocks still need precision. It's a tool, not a shortcut.
 
-What it does is remove the cognitive load of **structure management** so you can focus on **content**.
+It removes structure management burden so you focus on content.
 
 ## Conclusion
 
-Raw text will always remain an option, just like vim is still an option for coding. But for the majority of users, a tool that makes structure visible and manipulable represents a massive gain in productivity and quality.
+Raw text stays optional. But for most users, visual building is a massive gain in productivity and quality.
 
-The future of prompting is visual. The question isn't "if" but "when" it becomes the norm.
+The future is visual. The question isn't "if" but "when."

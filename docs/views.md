@@ -1,26 +1,21 @@
 # Views
 
-flompt offers two editing modes — **Canvas View** and **List View**. Both operate on the same underlying data: editing a block in one view is instantly reflected in the other. Switch at any time using the toggle in the toolbar.
+Two editing modes: **Canvas** and **List**. Same data. Sync instantly. Switch anytime.
 
 ---
 
 ## Canvas View
 
-The default mode. Blocks are displayed as draggable nodes on an infinite canvas powered by React Flow.
+Draggable nodes on infinite canvas.
 
-### Layout
+**Layout:**
+- Place blocks freely.
+- 20px snap-to-grid alignment.
+- Minimap (bottom-right) for overview.
 
-- Blocks can be placed and moved freely anywhere on the canvas.
-- A **20px snap-to-grid** keeps things aligned.
-- A **minimap** (bottom-right) gives an overview of large flows.
+**Add blocks:** Click type pill. Auto-spaced.
 
-### Adding blocks
-
-Click any block type pill in the **CanvasBlockBar** (left sidebar) to add a new block. It is placed automatically with 180px vertical spacing from the last node.
-
-### Editing content
-
-Click on any block to open an inline textarea. It auto-resizes as you type. Changes are saved to the store immediately.
+**Edit:** Click block. Inline textarea. Auto-resizes. Auto-saves.
 
 ### Connecting blocks
 

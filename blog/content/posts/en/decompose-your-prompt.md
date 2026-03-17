@@ -6,11 +6,9 @@ tags: ["prompt engineering", "visual prompts", "structure", "flompt"]
 color: "primary"
 ---
 
-Here's the problem with most prompts: they're just walls of text.
+Most prompts are just walls of text. You can't see structure. You can't tell what's missing. You send it blind and guess.
 
-You write your prompt in a text editor or chat interface. It's a block of sentences. You can't see the structure. You can't tell what's missing. You can't visualize how the pieces fit together.
-
-So you send it blind, hope it works, and iterate until it doesn't. That's not a strategy. That's guessing.
+That's not a strategy.
 
 What if you could **see** your prompt's structure before execution?
 
@@ -28,12 +26,14 @@ The visual representation helps you spot missing pieces before you run it.
 
 Prompts should work the same way.
 
-When you visually decompose a prompt — breaking it into distinct blocks (Role, Objective, Context, Constraints, Examples, Output Format) — you immediately see:
-- **What's there**: Which elements you've included
-- **What's missing**: Which blocks are empty or underdeveloped
-- **How they connect**: Which elements reference each other
+Decompose visually: break into blocks (Role, Objective, Context, Constraints, Examples, Output Format).
 
-You move from "here's a text dump" to "here's a structured system."
+You immediately see:
+- What's there
+- What's missing
+- How they connect
+
+Go from text dump to structured system.
 
 ---
 
@@ -58,7 +58,7 @@ Examples: [empty]
 Output Format: [empty]
 ```
 
-**What's immediately clear**: You're missing 5 out of 6 structural elements. This prompt will produce generic output because the model has no context about who's writing, what tone to use, or what the customer values.
+**Clear**: 5 missing elements. The model won't know who's writing, tone, or customer values. Generic output.
 
 ### Example 2: The Same Prompt, Improved
 
@@ -90,9 +90,9 @@ Output Format: Email format (To/From/Subject/Body).
                Do not include signature.
 ```
 
-**What you see now**: Every structural element is filled in. The model has clear direction. The output will be specific, appropriate, and authentic.
+**Now**: All elements filled. Model has clear direction. Output is specific and authentic.
 
-The difference? The decomposed version has the information that matters. The model isn't guessing anymore.
+The decomposed version gives context. Model stops guessing.
 
 ---
 
@@ -101,18 +101,10 @@ The difference? The decomposed version has the information that matters. The mod
 There are three ways to visualize prompt decomposition:
 
 ### Level 1: Text Outline
-Just list the elements as text:
-```
-Role: ...
-Objective: ...
-Context: ...
-```
-
-**Good for**: Quick checks, lightweight validation
-**Not great for**: Seeing the full picture, spotting complex relationships
+List elements as text. Good for quick checks. Not great for seeing the full picture.
 
 ### Level 2: Structured Blocks
-Visualize each element as a distinct block:
+Visualize as distinct blocks:
 
 ```
 ┌──────────────┐
@@ -130,14 +122,12 @@ Visualize each element as a distinct block:
 └──────────────┘
 ```
 
-**Good for**: Understanding overall structure, presenting to teams
-**Not great for**: Interactive editing, dynamic feedback
+Good for team presentations. Not great for interactive editing.
 
 ### Level 3: Interactive Visual Canvas
-See each element as a node in a visual system. Edit in real-time. Get immediate feedback on completeness.
+See blocks as nodes. Edit in real-time. Get instant feedback.
 
-**Good for**: Deep decomposition, iterative refinement, understanding dependencies
-**Great for**: Teams collaborating on prompts, auditing quality before execution
+Best for deep decomposition, iteration, and team collaboration.
 
 ---
 
@@ -200,32 +190,30 @@ Once you've decomposed your prompt, audit it:
 - ✓ **Examples**: Do the examples show what you want?
 - ✓ **Output Format**: Is the format explicit?
 
-**Rate the overall strength:**
-- 6/6 elements strong = **Excellent prompt** (95%+ confidence in output)
-- 5/6 elements strong = **Good prompt** (80%+ confidence)
-- 4/6 elements strong = **Decent prompt** (60%+ confidence)
-- 3/6 or fewer = **Weak prompt** (needs iteration)
+**Rate strength:**
+- 6/6 = Excellent (95%+ confident)
+- 5/6 = Good (80%+)
+- 4/6 = Decent (60%+)
+- 3/6 or fewer = Weak (fix first)
 
-**If you're under 5/6:** Add the missing elements before execution. Don't iterate after failure.
+Don't iterate after failure. Add missing elements first.
 
 ---
 
 ## Tools for Visual Decomposition
 
-If you want to visualize this interactively, [flompt](https://flompt.dev) decomposes your prompt into visual blocks. You:
+[flompt](https://flompt.dev) decomposes visually:
 
-1. Paste your raw prompt
+1. Paste raw prompt
 2. Click decompose
-3. See each element as a visual block (Role, Objective, Context, Constraints, Examples, Output Format)
-4. Get a quality score (0-100) based on completeness
-5. See specific feedback on what's missing
-6. Edit blocks directly
-7. Watch the score update as you improve
-8. Compile the final prompt when it's ready
+3. See elements as blocks
+4. Get quality score (0-100)
+5. See feedback
+6. Edit directly
+7. Watch score improve
+8. Compile when ready
 
-It's like having a prompt code review process built in.
-
-The tool is open-source, self-hostable, and works in your browser. No account needed. Your prompts stay on your machine.
+Open-source. No account. Your data stays local.
 
 ---
 
@@ -256,7 +244,7 @@ Here's how to integrate decomposition into your prompt development:
 6. **Execute** → Send only when you're confident in the structure
 7. **Refine for next time** → Save the prompt, keep improving it
 
-This process takes 5 extra minutes but saves 30+ minutes in iteration.
+5 extra minutes. Saves 30+ in iteration.
 
 ---
 

@@ -1,16 +1,16 @@
 # Projects
 
-Projects give you **multiple independent workspaces** inside flompt. Each project has its own canvas, compiled prompt, and output state. Switch between them instantly from the header — everything is saved automatically.
+Multiple independent workspaces. Each project: own canvas, prompt, output. Switch instantly. Auto-saved.
 
 ---
 
 ## Creating a Project
 
-Click the **project pill** in the center of the header. A dropdown lists all your projects.
+Click **project pill** in header. Lists all projects.
 
-- Click **New project** to create one
-- Projects are named on creation and can be renamed inline at any time
-- There is no limit on the number of projects
+- Click **New project** to create
+- Rename anytime
+- No limits
 
 ---
 
