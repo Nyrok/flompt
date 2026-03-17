@@ -38,7 +38,7 @@
     "title": "Resultado",
     "compile": "Montar prompt",
     "compiling": "Montando…",
-    "copy": "Copiar para a área de transferência",
+    "copy": "Copiar o prompt",
     "copied": "Copiado!",
     "placeholder": "Construa seu fluxograma\ndepois monte para gerar o prompt.",
     "errorCompile": "A montagem falhou. Por favor, tente novamente.",

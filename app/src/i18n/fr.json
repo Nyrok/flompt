@@ -38,7 +38,7 @@
     "title": "Résultat",
     "compile": "Assembler le prompt",
     "compiling": "Assemblage…",
-    "copy": "Copier dans le presse-papiers",
+    "copy": "Copier le prompt",
     "copied": "Copié !",
     "placeholder": "Construis ton flowchart\npuis assemble pour générer le prompt.",
     "errorCompile": "L'assemblage a échoué. Réessayez.",
