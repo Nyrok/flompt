@@ -111,7 +111,7 @@ const EXAMPLE_NODES_FR: FlomptNode[] = [
 
 const GuidedTour = () => {
   const { t, locale } = useLocale()
-  const { setRawPrompt, setNodes, setEdges } = useFlowStore()
+  const { setRawPrompt, setNodes, setEdges, setLastDecomposedPrompt } = useFlowStore()
 
   const [active, setActive] = useState(() =>
     typeof window !== 'undefined' &&
@@ -131,8 +131,10 @@ const GuidedTour = () => {
     { target: '.psel-pill',                  placement: 'bottom' as Placement,     title: t.tour.stepProjectTitle,   desc: t.tour.stepProjectDesc,   nextLabel: t.tour.next },
     { target: '[data-tour="decompose-btn"]', placement: 'right' as Placement,       title: t.tour.step2title,      desc: t.tour.step2desc,      nextLabel: t.tour.step2action, action: 'decompose' as const },
     { target: '.block-list-view',            placement: 'inside-top' as Placement,  title: t.tour.step3title,      desc: t.tour.step3desc,      nextLabel: t.tour.next },
-    { target: '.canvas-view-toggle',         placement: 'bottom' as Placement,      title: t.tour.stepViewTitle,   desc: t.tour.stepViewDesc,   nextLabel: t.tour.next },
-    { target: '[data-tour="compile-btn"]',   placement: 'left' as Placement,        title: t.tour.step4title,      desc: t.tour.step4desc,      nextLabel: t.tour.finish, action: 'finish' as const },
+    { target: '.canvas-view-toggle',           placement: 'bottom' as Placement,      title: t.tour.stepViewTitle,   desc: t.tour.stepViewDesc,   nextLabel: t.tour.next },
+    { target: '[data-tour="audit-btn"]',       placement: 'right' as Placement,       title: t.tour.stepAuditTitle,  desc: t.tour.stepAuditDesc,  nextLabel: t.tour.next },
+    { target: '[data-tour="compile-btn"]',     placement: 'left' as Placement,        title: t.tour.step4title,      desc: t.tour.step4desc,      nextLabel: t.tour.next,   action: 'compile' as const },
+    { target: '[data-tour="ide-tools"]',       placement: 'left' as Placement,        title: t.tour.stepIdeTitle,    desc: t.tour.stepIdeDesc,    nextLabel: t.tour.finish, action: 'finish' as const },
   ]
 
   const cur = steps[step]
@@ -182,11 +184,18 @@ const GuidedTour = () => {
         const h      = rect?.height ?? window.innerHeight
         setNodes(layoutNodes(raw, w, h))
         setEdges([])
+        setLastDecomposedPrompt(t.tour.samplePrompt)
         setActing(false)
         setStep(s => s + 1) // advance to canvas step
       }, 900)
     }
-  }, [cur, dismiss, locale, setNodes, setEdges])
+
+    if (cur.action === 'compile') {
+      const btn = document.querySelector('[data-tour="compile-btn"]') as HTMLButtonElement | null
+      btn?.click()
+      setStep(s => s + 1)
+    }
+  }, [cur, dismiss, locale, setNodes, setEdges, setLastDecomposedPrompt, t.tour.samplePrompt])
 
   /* ── Render ──────────────────────────────────────────────────────────────── */
   if (!active || !rect) return null

@@ -193,7 +193,7 @@ const PromptInput = () => {
             setAuditSeen(true)
             openAudit(true)
           }}
-          data-tour="decompose-btn"
+          data-tour="audit-btn"
           type="button"
         >
           <ShieldCheck size={14} aria-hidden="true" />

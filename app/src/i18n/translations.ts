@@ -137,8 +137,12 @@ export interface Translations {
     step3desc: string
     stepViewTitle: string
     stepViewDesc: string
+    stepAuditTitle: string
+    stepAuditDesc: string
     step4title: string
     step4desc: string
+    stepIdeTitle: string
+    stepIdeDesc: string
     stepOf: string
     next: string
     finish: string
