@@ -5,9 +5,10 @@ import { track } from '@/lib/analytics'
 import ChromeIcon from '@/components/ChromeIcon'
 import FirefoxIcon from '@/components/FirefoxIcon'
 
-const POPUP_KEY = 'flompt-ext-popup-v1'
-const POPUP_DELAY = 20_000 // 20s — after guided tour
-const EXT_URL = 'https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc'
+const POPUP_KEY        = 'flompt-ext-popup-v1'
+const COMPILE_KEY      = 'flompt-compile-count'
+const COMPILE_THRESHOLD = 3
+const EXT_URL     = 'https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc'
 const FIREFOX_URL = 'https://addons.mozilla.org/addon/flompt-visual-prompt-builder/'
 
 /** Dispatched by StarPopup just before it becomes visible */
@@ -18,19 +19,31 @@ const ExtensionPopup = () => {
   const [visible, setVisible] = useState(false)
   const closeRef = useRef<HTMLButtonElement>(null)
 
+  // ── Show after COMPILE_THRESHOLD compiles ─────────────────────────────────
   useEffect(() => {
     if (window.matchMedia('(max-width: 768px)').matches) return
+    try { if (localStorage.getItem(POPUP_KEY)) return } catch { return }
+
+    const onCompiled = (e: Event) => {
+      const count = (e as CustomEvent<{ count: number }>).detail?.count ?? 0
+      if (count >= COMPILE_THRESHOLD) {
+        try { if (localStorage.getItem(POPUP_KEY)) return } catch { return }
+        setVisible(true)
+      }
+    }
+
+    // Also check on mount in case threshold was already reached in a previous session
     try {
-      if (localStorage.getItem(POPUP_KEY)) return
-    } catch { return }
+      const existing = parseInt(localStorage.getItem(COMPILE_KEY) || '0')
+      if (existing >= COMPILE_THRESHOLD) {
+        // Show after a short delay so the UI is settled
+        const t = setTimeout(() => setVisible(true), 800)
+        return () => clearTimeout(t)
+      }
+    } catch { /* noop */ }
 
-    const timer = setTimeout(() => {
-      try {
-        if (!localStorage.getItem(POPUP_KEY)) setVisible(true)
-      } catch { /* noop */ }
-    }, POPUP_DELAY)
-
-    return () => clearTimeout(timer)
+    window.addEventListener('flompt:compiled', onCompiled)
+    return () => window.removeEventListener('flompt:compiled', onCompiled)
   }, [])
 
   useEffect(() => {

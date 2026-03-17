@@ -72,6 +72,12 @@ const PromptOutput = () => {
     const result = assemblePrompt(nodes, edges)
     setCompiledPrompt(result)
     analytics.compileCompleted(result.tokenEstimate)
+    // Track compile count for extension popup trigger
+    try {
+      const count = parseInt(localStorage.getItem('flompt-compile-count') || '0') + 1
+      localStorage.setItem('flompt-compile-count', String(count))
+      window.dispatchEvent(new CustomEvent('flompt:compiled', { detail: { count } }))
+    } catch { /* noop */ }
   }
 
   const handleCopy = () => {
