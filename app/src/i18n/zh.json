@@ -94,7 +94,7 @@
   "canvas": {
     "empty": "空画布",
     "emptyHint": "在左侧粘贴提示词并点击",
-    "emptyDecompose": "分解，或从侧边栏拖动一个块。"
+    "emptyDecompose": "或从侧边栏拖动一个块。"
   },
   "shortcuts": {
     "title": "键盘快捷键",

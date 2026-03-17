@@ -94,7 +94,7 @@
   "canvas": {
     "empty": "Canvas vide",
     "emptyHint": "Colle un prompt à gauche et clique sur ",
-    "emptyDecompose": "Décomposer, ou glisse un bloc depuis la sidebar."
+    "emptyDecompose": "ou glisse un bloc depuis la sidebar."
   },
   "shortcuts": {
     "title": "Raccourcis clavier",

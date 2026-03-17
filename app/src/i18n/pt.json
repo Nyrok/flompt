@@ -94,7 +94,7 @@
   "canvas": {
     "empty": "Canvas vazio",
     "emptyHint": "Cole um prompt à esquerda e clique em ",
-    "emptyDecompose": "Decompor, ou arraste um bloco da barra lateral."
+    "emptyDecompose": "ou arraste um bloco da barra lateral."
   },
   "shortcuts": {
     "title": "Atalhos de teclado",
