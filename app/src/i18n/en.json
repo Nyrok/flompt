@@ -422,6 +422,7 @@
     "title": "Prompt audit",
     "hint": "{n} key blocks are missing. Add them to improve your prompt.",
     "addBlock": "Add",
+    "addedBlock": "Added",
     "perfect": "All key blocks are present — solid prompt.",
     "blocksPresent": "key blocks present"
   }

@@ -318,6 +318,7 @@
     "hint": "{n} key blocks are missing. Add them to improve your prompt.",
     "addBlock": "Add",
     "perfect": "All key blocks are present — solid prompt.",
-    "blocksPresent": "key blocks present"
+    "blocksPresent": "key blocks present",
+    "addedBlock": "追加済み"
   }
 }

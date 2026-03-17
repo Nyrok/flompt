@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { X, CheckCircle2, XCircle, Plus, ShieldCheck } from 'lucide-react'
 import { useAuditStore } from './useAuditStore'
 import { useFlowStore } from '@/store/flowStore'
@@ -21,6 +22,7 @@ export default function AuditPanel() {
   const { isOpen, result, setOpen } = useAuditStore()
   const { addNode, nodes } = useFlowStore()
   const { t } = useLocale()
+  const [added, setAdded] = useState<Set<BlockType>>(new Set())
 
   if (!isOpen || !result) return null
 
@@ -48,6 +50,7 @@ export default function AuditPanel() {
     }
 
     addNode(node)
+    setAdded(prev => new Set(prev).add(type))
   }
 
   return (
@@ -110,13 +113,19 @@ export default function AuditPanel() {
                 </div>
                 {!check.present && (
                   <button
-                    className="audit-add-btn"
-                    style={{ borderColor: `${BLOCK_META[check.blockType].color}55`, color: BLOCK_META[check.blockType].color }}
+                    className={`audit-add-btn${added.has(check.blockType) ? ' audit-add-btn--added' : ''}`}
+                    style={added.has(check.blockType)
+                      ? undefined
+                      : { borderColor: `${BLOCK_META[check.blockType].color}55`, color: BLOCK_META[check.blockType].color }
+                    }
                     onClick={() => handleAddBlock(check.blockType)}
-                    title={`Add ${check.label} block`}
+                    disabled={added.has(check.blockType)}
+                    aria-label={`Add ${check.label} block`}
                   >
-                    <Plus size={11} />
-                    {t.audit.addBlock}
+                    {added.has(check.blockType)
+                      ? <><CheckCircle2 size={11} />{t.audit.addedBlock}</>
+                      : <><Plus size={11} />{t.audit.addBlock}</>
+                    }
                   </button>
                 )}
               </div>
