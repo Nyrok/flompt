@@ -744,11 +744,11 @@ body {
 }
 
 .block-pill {
-  padding: 7px 11px;
+  padding: 4px 8px;
   border-radius: var(--radius);
   background: var(--surface);
   border: 1px solid var(--border);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 500;
   cursor: pointer;
   text-align: left;
@@ -768,11 +768,11 @@ body {
 .block-pill-main {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 6px;
 }
 
 .block-pill-label {
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 500;
 }
 
@@ -781,7 +781,7 @@ body {
   font-weight: 400;
   color: var(--text-dim);
   line-height: 1.35;
-  padding-left: 31px;
+  padding-left: 24px;
   max-height: 0;
   overflow: hidden;
   opacity: 0;
@@ -796,12 +796,12 @@ body {
 }
 
 .block-pill-icon {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 22px; height: 22px;
-  border-radius: 6px;
+  width: 18px; height: 18px;
+  border-radius: 5px;
   background: var(--accent-bg);
   flex-shrink: 0;
 }
