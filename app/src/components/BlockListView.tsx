@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { X, Trash2, Undo2, Redo2, LayoutList, Network, Eye, EyeOff, Copy, Play, ChevronUp, ChevronDown } from 'lucide-react'
 import CustomSelect from '@/components/CustomSelect'
 import CanvasBlockBar from '@/components/CanvasBlockBar'
+import { Tooltip } from '@/components/ui/tooltip'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { ResponseStyleOptions } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
@@ -147,44 +148,52 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
 
         {/* Left: actions */}
         <div className="block-list-toolbar-left">
-          <button
-            className="canvas-ctrl-btn canvas-ctrl-btn--danger"
-            onClick={() => { if (confirm(t.header.resetConfirm)) reset() }}
-            title={t.header.reset}
-            aria-label={t.header.reset}
-            disabled={nodes.length === 0}
-          >
-            <Trash2 size={13} />
-          </button>
+          <Tooltip content={t.header.reset} side="top">
+            <button
+              className="canvas-ctrl-btn canvas-ctrl-btn--danger"
+              onClick={() => { if (confirm(t.header.resetConfirm)) reset() }}
+              title={t.header.reset}
+              aria-label={t.header.reset}
+              disabled={nodes.length === 0}
+            >
+              <Trash2 size={13} />
+            </button>
+          </Tooltip>
           <div className="canvas-ctrl-divider" aria-hidden="true" />
-          <button
-            className="canvas-ctrl-btn"
-            onClick={undo}
-            disabled={past.length === 0}
-            title={t.header.undo}
-            aria-label={t.header.undo}
-          >
-            <Undo2 size={13} />
-          </button>
-          <button
-            className="canvas-ctrl-btn"
-            onClick={redo}
-            disabled={future.length === 0}
-            title={t.header.redo}
-            aria-label={t.header.redo}
-          >
-            <Redo2 size={13} />
-          </button>
+          <Tooltip content={t.header.undo} side="top">
+            <button
+              className="canvas-ctrl-btn"
+              onClick={undo}
+              disabled={past.length === 0}
+              title={t.header.undo}
+              aria-label={t.header.undo}
+            >
+              <Undo2 size={13} />
+            </button>
+          </Tooltip>
+          <Tooltip content={t.header.redo} side="top">
+            <button
+              className="canvas-ctrl-btn"
+              onClick={redo}
+              disabled={future.length === 0}
+              title={t.header.redo}
+              aria-label={t.header.redo}
+            >
+              <Redo2 size={13} />
+            </button>
+          </Tooltip>
           <div className="canvas-ctrl-divider" aria-hidden="true" />
-          <button
-            className="canvas-ctrl-btn canvas-ctrl-btn--compile"
-            onClick={handleCompile}
-            disabled={nodes.length === 0}
-            title={t.promptOutput.compile}
-            aria-label={t.promptOutput.compile}
-          >
-            <Play size={13} />
-          </button>
+          <Tooltip content={t.promptOutput.compile} side="top">
+            <button
+              className="canvas-ctrl-btn canvas-ctrl-btn--compile"
+              onClick={handleCompile}
+              disabled={nodes.length === 0}
+              title={t.promptOutput.compile}
+              aria-label={t.promptOutput.compile}
+            >
+              <Play size={13} />
+            </button>
+          </Tooltip>
         </div>
 
         {/* Center: block type bar */}
@@ -193,22 +202,26 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
         {/* Right: view toggle */}
         <div className="block-list-toolbar-right">
           <div className="canvas-view-toggle" style={{ position: 'static', boxShadow: 'none' }}>
-            <button
-              className={`canvas-view-btn${canvasView === 'list' ? ' canvas-view-btn--active' : ''}`}
-              onClick={() => onToggleView('list')}
-              title="List view"
-              aria-label="List view"
-            >
-              <LayoutList size={13} />
-            </button>
-            <button
-              className={`canvas-view-btn${canvasView === 'canvas' ? ' canvas-view-btn--active' : ''}`}
-              onClick={() => onToggleView('canvas')}
-              title="Canvas view"
-              aria-label="Canvas view"
-            >
-              <Network size={13} />
-            </button>
+            <Tooltip content="List view" side="top">
+              <button
+                className={`canvas-view-btn${canvasView === 'list' ? ' canvas-view-btn--active' : ''}`}
+                onClick={() => onToggleView('list')}
+                title="List view"
+                aria-label="List view"
+              >
+                <LayoutList size={13} />
+              </button>
+            </Tooltip>
+            <Tooltip content="Canvas view" side="top">
+              <button
+                className={`canvas-view-btn${canvasView === 'canvas' ? ' canvas-view-btn--active' : ''}`}
+                onClick={() => onToggleView('canvas')}
+                title="Canvas view"
+                aria-label="Canvas view"
+              >
+                <Network size={13} />
+              </button>
+            </Tooltip>
           </div>
         </div>
       </div>
@@ -243,20 +256,22 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                   tabIndex={0}
                 >
                   {/* Eye toggle — left anchor */}
-                  <button
-                    className="block-list-card-eye"
-                    onClick={e => { e.stopPropagation(); toggleNodeHidden(node.id) }}
-                    title={node.data.hidden ? 'Show in prompt' : 'Hide from prompt'}
-                    aria-label={node.data.hidden ? 'Show in prompt' : 'Hide from prompt'}
-                  >
-                    {node.data.hidden ? <EyeOff size={12} /> : <Eye size={12} />}
-                  </button>
+                  <Tooltip content={node.data.hidden ? 'Show in prompt' : 'Hide from prompt'} side="top">
+                    <button
+                      className="block-list-card-eye"
+                      onClick={e => { e.stopPropagation(); toggleNodeHidden(node.id) }}
+                      title={node.data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+                      aria-label={node.data.hidden ? 'Show in prompt' : 'Hide from prompt'}
+                    >
+                      {node.data.hidden ? <EyeOff size={12} /> : <Eye size={12} />}
+                    </button>
+                  </Tooltip>
 
                   <span className="block-list-card-icon" style={{ color: meta.color, background: `${meta.color}1a` }}>
                     <Icon size={13} />
                   </span>
                   <span className="block-list-card-label" style={{ color: meta.color }}>
-                    {node.data.label}
+                    {(t.blocks[node.data.type as keyof typeof t.blocks] as { label: string } | undefined)?.label ?? node.data.label}
                   </span>
 
                   {/* Content preview when collapsed */}
@@ -267,52 +282,62 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                   {/* Right actions — always pinned */}
                   <span className="block-list-card-actions">
                     {/* Ranking: up */}
-                    <button
-                      className="block-list-card-action-btn"
-                      onClick={e => { e.stopPropagation(); moveBlock(node.id, idx, 'up') }}
-                      title="Move up"
-                      aria-label="Move up"
-                      disabled={isFirst}
-                    >
-                      <ChevronUp size={12} />
-                    </button>
+                    <Tooltip content="Move up" side="top">
+                      <button
+                        className="block-list-card-action-btn"
+                        onClick={e => { e.stopPropagation(); moveBlock(node.id, idx, 'up') }}
+                        title="Move up"
+                        aria-label="Move up"
+                        disabled={isFirst}
+                      >
+                        <ChevronUp size={12} />
+                      </button>
+                    </Tooltip>
                     {/* Ranking: down */}
-                    <button
-                      className="block-list-card-action-btn"
-                      onClick={e => { e.stopPropagation(); moveBlock(node.id, idx, 'down') }}
-                      title="Move down"
-                      aria-label="Move down"
-                      disabled={isLast}
-                    >
-                      <ChevronDown size={12} />
-                    </button>
+                    <Tooltip content="Move down" side="top">
+                      <button
+                        className="block-list-card-action-btn"
+                        onClick={e => { e.stopPropagation(); moveBlock(node.id, idx, 'down') }}
+                        title="Move down"
+                        aria-label="Move down"
+                        disabled={isLast}
+                      >
+                        <ChevronDown size={12} />
+                      </button>
+                    </Tooltip>
                     {/* Collapse/expand: − or + */}
-                    <button
-                      className="block-list-card-action-btn block-list-card-toggle"
-                      onClick={e => { e.stopPropagation(); toggleCollapse(node.id) }}
-                      title={isCollapsed ? 'Expand' : 'Collapse'}
-                      aria-label={isCollapsed ? 'Expand' : 'Collapse'}
-                    >
-                      {isCollapsed ? '+' : '−'}
-                    </button>
+                    <Tooltip content={isCollapsed ? 'Expand' : 'Collapse'} side="top">
+                      <button
+                        className="block-list-card-action-btn block-list-card-toggle"
+                        onClick={e => { e.stopPropagation(); toggleCollapse(node.id) }}
+                        title={isCollapsed ? 'Expand' : 'Collapse'}
+                        aria-label={isCollapsed ? 'Expand' : 'Collapse'}
+                      >
+                        {isCollapsed ? '+' : '−'}
+                      </button>
+                    </Tooltip>
                     {/* Duplicate */}
-                    <button
-                      className="block-list-card-action-btn"
-                      onClick={e => { e.stopPropagation(); handleDuplicate(node) }}
-                      title="Duplicate block"
-                      aria-label="Duplicate block"
-                    >
-                      <Copy size={12} />
-                    </button>
+                    <Tooltip content="Duplicate block" side="top">
+                      <button
+                        className="block-list-card-action-btn"
+                        onClick={e => { e.stopPropagation(); handleDuplicate(node) }}
+                        title="Duplicate block"
+                        aria-label="Duplicate block"
+                      >
+                        <Copy size={12} />
+                      </button>
+                    </Tooltip>
                     {/* Delete */}
-                    <button
-                      className="block-list-card-delete"
-                      onClick={e => { e.stopPropagation(); removeNode(node.id) }}
-                      title="Remove block"
-                      aria-label="Remove block"
-                    >
-                      <X size={12} />
-                    </button>
+                    <Tooltip content="Remove block" side="top">
+                      <button
+                        className="block-list-card-delete"
+                        onClick={e => { e.stopPropagation(); removeNode(node.id) }}
+                        title="Remove block"
+                        aria-label="Remove block"
+                      >
+                        <X size={12} />
+                      </button>
+                    </Tooltip>
                   </span>
                 </div>
 

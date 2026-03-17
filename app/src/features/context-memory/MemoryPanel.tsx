@@ -5,6 +5,7 @@ import { useMemoryStore } from './useMemoryStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import type { BlockType } from '@/types/blocks'
 import type { MemoryBlock } from '@/lib/db'
+import { Tooltip } from '@/components/ui/tooltip'
 
 const CATEGORIES = ['company', 'persona', 'style', 'tone', 'domain', 'custom'] as const
 const BLOCK_TYPES: BlockType[] = ['role', 'context', 'objective', 'constraints', 'audience', 'goal']
@@ -62,9 +63,11 @@ export default function MemoryPanel() {
             <button className="ide-action-btn" onClick={() => setShowCreate(s => !s)}>
               <Plus size={11} /> {tm.new}
             </button>
-            <button className="ide-close-btn" onClick={() => setOpen(false)} aria-label={t.ide.close}>
-              <X size={15} />
-            </button>
+            <Tooltip content={t.ide.close} side="bottom">
+              <button className="ide-close-btn" onClick={() => setOpen(false)} aria-label={t.ide.close}>
+                <X size={15} />
+              </button>
+            </Tooltip>
           </div>
         </div>
 
@@ -115,15 +118,21 @@ export default function MemoryPanel() {
                   <span className="memory-item-category">{block.category}</span>
                 </div>
                 <div className="memory-item-actions">
-                  <button className="ide-close-btn" style={{ width: 26, height: 26 }} title="Inject to canvas" onClick={() => inject(block)}>
-                    <LogIn size={12} />
-                  </button>
-                  <button className="ide-close-btn" style={{ width: 26, height: 26 }} title={block.isFavorite ? 'Unfavorite' : 'Favorite'} onClick={() => toggleFavorite(block.id)}>
-                    <Star size={12} style={{ fill: block.isFavorite ? '#f59e0b' : 'none', color: '#f59e0b' }} />
-                  </button>
-                  <button className="ide-close-btn ide-close-btn--danger" style={{ width: 26, height: 26 }} title="Delete" onClick={() => remove(block.id)}>
-                    <Trash2 size={12} />
-                  </button>
+                  <Tooltip content="Inject to canvas" side="top">
+                    <button className="ide-close-btn" style={{ width: 26, height: 26 }} title="Inject to canvas" onClick={() => inject(block)}>
+                      <LogIn size={12} />
+                    </button>
+                  </Tooltip>
+                  <Tooltip content={block.isFavorite ? 'Unfavorite' : 'Favorite'} side="top">
+                    <button className="ide-close-btn" style={{ width: 26, height: 26 }} title={block.isFavorite ? 'Unfavorite' : 'Favorite'} onClick={() => toggleFavorite(block.id)}>
+                      <Star size={12} style={{ fill: block.isFavorite ? '#f59e0b' : 'none', color: '#f59e0b' }} />
+                    </button>
+                  </Tooltip>
+                  <Tooltip content="Delete" side="top">
+                    <button className="ide-close-btn ide-close-btn--danger" style={{ width: 26, height: 26 }} title="Delete" onClick={() => remove(block.id)}>
+                      <Trash2 size={12} />
+                    </button>
+                  </Tooltip>
                 </div>
               </div>
               <p className="memory-item-preview">{block.content.slice(0, 120)}{block.content.length > 120 ? '…' : ''}</p>

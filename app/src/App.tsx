@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { PenLine, Network, Sparkles, Github, History, Brain, LayoutList, Play, ShieldCheck } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import { Tooltip, TooltipProvider } from '@/components/ui/tooltip'
 import { initAnalytics, setSource, analytics } from '@/lib/analytics'
 import FlowCanvas from '@/components/FlowCanvas'
 import BlockListView from '@/components/BlockListView'
@@ -126,6 +127,7 @@ const App = () => {
   }
 
   return (
+    <TooltipProvider delayDuration={400}>
     <div className="app">
       {/* Skip to main content — keyboard accessibility */}
       <a href="#main-content" className="skip-link">
@@ -141,12 +143,16 @@ const App = () => {
           <ProjectSelector />
 
           <div className="header-actions">
-            <button className="btn-icon" title="Version History" onClick={handleOpenVersions} aria-label="Version History">
-              <History size={14} />
-            </button>
-            <button className="btn-icon" title="Context Memory" onClick={() => openMemory(true)} aria-label="Context Memory">
-              <Brain size={14} />
-            </button>
+            <Tooltip content="Version History" side="bottom">
+              <button className="btn-icon" title="Version History" onClick={handleOpenVersions} aria-label="Version History">
+                <History size={14} />
+              </button>
+            </Tooltip>
+            <Tooltip content="Context Memory" side="bottom">
+              <button className="btn-icon" title="Context Memory" onClick={() => openMemory(true)} aria-label="Context Memory">
+                <Brain size={14} />
+              </button>
+            </Tooltip>
             <CustomSelect
               value={locale}
               onChange={v => handleLocaleChange(v as Locale)}
@@ -157,17 +163,19 @@ const App = () => {
             <span className="hide-mobile">
               <KeyboardShortcuts />
             </span>
-            <a
-              className="btn-icon btn-github"
-              href="https://github.com/Nyrok/flompt"
-              target="_blank"
-              rel="noopener noreferrer"
-              title={t.header.github}
-              aria-label={t.header.github}
-              onClick={() => analytics.githubClicked('header')}
-            >
-              <Github size={14} aria-hidden="true" />
-            </a>
+            <Tooltip content={t.header.github} side="bottom">
+              <a
+                className="btn-icon btn-github"
+                href="https://github.com/Nyrok/flompt"
+                target="_blank"
+                rel="noopener noreferrer"
+                title={t.header.github}
+                aria-label={t.header.github}
+                onClick={() => analytics.githubClicked('header')}
+              >
+                <Github size={14} aria-hidden="true" />
+              </a>
+            </Tooltip>
           </div>
         </header>
       )}
@@ -197,22 +205,26 @@ const App = () => {
           {canvasView === 'canvas' && (
             <>
               <div className="canvas-view-toggle">
-                <button
-                  className="canvas-view-btn"
-                  onClick={() => toggleView('list')}
-                  title="List view"
-                  aria-label="List view"
-                >
-                  <LayoutList size={13} />
-                </button>
-                <button
-                  className="canvas-view-btn canvas-view-btn--active"
-                  onClick={() => toggleView('canvas')}
-                  title="Canvas view"
-                  aria-label="Canvas view"
-                >
-                  <Network size={13} />
-                </button>
+                <Tooltip content="List view" side="bottom">
+                  <button
+                    className="canvas-view-btn"
+                    onClick={() => toggleView('list')}
+                    title="List view"
+                    aria-label="List view"
+                  >
+                    <LayoutList size={13} />
+                  </button>
+                </Tooltip>
+                <Tooltip content="Canvas view" side="bottom">
+                  <button
+                    className="canvas-view-btn canvas-view-btn--active"
+                    onClick={() => toggleView('canvas')}
+                    title="Canvas view"
+                    aria-label="Canvas view"
+                  >
+                    <Network size={13} />
+                  </button>
+                </Tooltip>
               </div>
             </>
           )}
@@ -312,6 +324,7 @@ const App = () => {
         </div>
       </nav>
     </div>
+    </TooltipProvider>
   )
 }
 

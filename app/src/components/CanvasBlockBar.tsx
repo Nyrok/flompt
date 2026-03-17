@@ -2,6 +2,7 @@ import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from
 import type { BlockType, FlomptNode } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
+import { Tooltip } from '@/components/ui/tooltip'
 
 const CanvasBlockBar = ({ mobileOnly = false, toolbar = false }: { mobileOnly?: boolean; toolbar?: boolean }) => {
   const addNode = useFlowStore(s => s.addNode)
@@ -41,18 +42,19 @@ const CanvasBlockBar = ({ mobileOnly = false, toolbar = false }: { mobileOnly?: 
         const meta = BLOCK_META[type]
         const Icon = meta.icon
         return (
-          <button
-            key={type}
-            className="canvas-block-btn"
-            style={{ '--block-color': meta.color } as React.CSSProperties}
-            title={t.blocks[type].label}
-            aria-label={t.blocks[type].label}
-            draggable
-            onDragStart={e => handleDragStart(e, type)}
-            onClick={() => handleClick(type)}
-          >
-            <Icon size={14} aria-hidden="true" />
-          </button>
+          <Tooltip key={type} content={t.blocks[type].label} side={toolbar ? 'top' : 'right'}>
+            <button
+              className="canvas-block-btn"
+              style={{ '--block-color': meta.color } as React.CSSProperties}
+              title={t.blocks[type].label}
+              aria-label={t.blocks[type].label}
+              draggable
+              onDragStart={e => handleDragStart(e, type)}
+              onClick={() => handleClick(type)}
+            >
+              <Icon size={14} aria-hidden="true" />
+            </button>
+          </Tooltip>
         )
       })}
     </div>
