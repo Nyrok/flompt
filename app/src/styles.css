@@ -1864,6 +1864,7 @@ body {
   flex-direction: column;
   overflow: hidden;
   gap: 8px;
+  position: relative;
 }
 
 /* ── List view top toolbar ────────────────────────────────────────────────── */
