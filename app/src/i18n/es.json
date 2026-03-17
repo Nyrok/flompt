@@ -38,7 +38,7 @@
     "title": "Resultado",
     "compile": "Ensamblar prompt",
     "compiling": "Ensamblando…",
-    "copy": "Copiar",
+    "copy": "Copiar al portapapeles",
     "copied": "¡Copiado!",
     "placeholder": "Construye tu diagrama\nluego ensambla para generar el prompt.",
     "errorCompile": "El ensamblaje ha fallado. Por favor, inténtalo de nuevo.",
@@ -52,7 +52,10 @@
     "sendToAI": "Enviar a IA",
     "injected": "¡Inyectado!",
     "injectLabel": "Enviar prompt al chat de IA",
-    "injectedLabel": "¡Prompt inyectado!"
+    "injectedLabel": "¡Prompt inyectado!",
+    "exportLabel": "Exportar",
+    "sectionAnalysis": "Análisis",
+    "sectionThirdParty": "Terceros"
   },
   "errors": {
     "overloaded": "La IA está sobrecargada en este momento. Por favor, espera un momento e inténtalo de nuevo.",

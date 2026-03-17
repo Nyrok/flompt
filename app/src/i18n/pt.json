@@ -38,7 +38,7 @@
     "title": "Resultado",
     "compile": "Montar prompt",
     "compiling": "Montando…",
-    "copy": "Copiar",
+    "copy": "Copiar para a área de transferência",
     "copied": "Copiado!",
     "placeholder": "Construa seu fluxograma\ndepois monte para gerar o prompt.",
     "errorCompile": "A montagem falhou. Por favor, tente novamente.",
@@ -52,7 +52,10 @@
     "sendToAI": "Enviar para IA",
     "injected": "Injetado!",
     "injectLabel": "Enviar prompt para o chat de IA",
-    "injectedLabel": "Prompt injetado!"
+    "injectedLabel": "Prompt injetado!",
+    "exportLabel": "Exportar",
+    "sectionAnalysis": "Análise",
+    "sectionThirdParty": "Terceiros"
   },
   "errors": {
     "overloaded": "A IA está sobrecarregada agora. Por favor, aguarde um momento e tente novamente.",

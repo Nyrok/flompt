@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect } from 'react'
-import { Clipboard, ClipboardCheck, FileText, Braces, Sparkles, Play, Send, Github, Zap, Bug, Scissors, Star as StarIcon } from 'lucide-react'
+import { useState, useCallback, useEffect, useRef } from 'react'
+import { Clipboard, ClipboardCheck, Sparkles, Play, Send, Github, Zap, Bug, Scissors, Star as StarIcon, Download, ChevronDown, FileText, Braces } from 'lucide-react'
 import { Tooltip } from '@/components/ui/tooltip'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -30,8 +30,10 @@ const PromptOutput = () => {
   const { nodes, edges, compiledPrompt, setCompiledPrompt, outputFormat, setOutputFormat } = useFlowStore()
   const { t, locale } = useLocale()
   const { setIsPanelOpen: openMakePanel } = useMakeStore()
-  const [copied,   setCopied]   = useState(false)
-  const [injected, setInjected] = useState(false)
+  const [copied,      setCopied]      = useState(false)
+  const [injected,    setInjected]    = useState(false)
+  const [exportOpen,  setExportOpen]  = useState(false)
+  const exportRef = useRef<HTMLDivElement>(null)
 
   // ── In extension mode: auto-select the format from the platform ───────────
   useEffect(() => {
@@ -46,6 +48,18 @@ const PromptOutput = () => {
     window.addEventListener('message', onMessage)
     return () => window.removeEventListener('message', onMessage)
   }, [setOutputFormat])
+
+  // ── Close export dropdown on outside click ────────────────────────────────
+  useEffect(() => {
+    if (!exportOpen) return
+    const handler = (e: MouseEvent) => {
+      if (exportRef.current && !exportRef.current.contains(e.target as Node)) {
+        setExportOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [exportOpen])
 
   // ── Text displayed for the selected platform ──────────────────────────────
   // Guard for legacy persisted compiledPrompt (pre-migration format without .formats)
@@ -178,6 +192,7 @@ const PromptOutput = () => {
         <>
           <pre className="compiled-output" aria-live="polite" aria-label={t.promptOutput.title}>{currentRaw}</pre>
           <div className="export-actions">
+
             {/* Send to AI — only in the extension sidebar */}
             {isExtension && (
               <Tooltip content={t.promptOutput.injectLabel} side="top">
@@ -194,6 +209,8 @@ const PromptOutput = () => {
                 </button>
               </Tooltip>
             )}
+
+            {/* Copy to Clipboard */}
             <button
               className="btn btn-secondary export-copy"
               onClick={handleCopy}
@@ -205,45 +222,91 @@ const PromptOutput = () => {
                 : <><Clipboard size={13} aria-hidden="true" /> {t.promptOutput.copy}</>
               }
             </button>
-            <div className="export-row2">
-              <Tooltip content={t.promptOutput.exportTxtLabel} side="top">
-                <button
-                  className="btn btn-secondary export-btn"
-                  onClick={handleExportTxt}
-                  aria-label={t.promptOutput.exportTxtLabel}
-                >
-                  <FileText size={13} aria-hidden="true" /> {t.promptOutput.exportTxt}
-                </button>
-              </Tooltip>
-              <Tooltip content={t.promptOutput.exportJsonLabel} side="top">
-                <button
-                  className="btn btn-secondary export-btn"
-                  onClick={handleExportJSON}
-                  aria-label={t.promptOutput.exportJsonLabel}
-                >
-                  <Braces size={13} aria-hidden="true" /> {t.promptOutput.exportJson}
-                </button>
-              </Tooltip>
+
+            {/* Export dropdown */}
+            <div className="export-dropdown" ref={exportRef}>
+              <button
+                className="btn btn-secondary export-dropdown-trigger"
+                onClick={() => setExportOpen(o => !o)}
+                aria-haspopup="true"
+                aria-expanded={exportOpen}
+                aria-label={t.promptOutput.exportLabel}
+              >
+                <Download size={13} aria-hidden="true" />
+                {t.promptOutput.exportLabel}
+                <ChevronDown size={11} className={`export-chevron${exportOpen ? ' open' : ''}`} aria-hidden="true" />
+              </button>
+              {exportOpen && (
+                <div className="export-dropdown-menu" role="menu">
+                  <button
+                    className="export-dropdown-item"
+                    role="menuitem"
+                    onClick={() => { handleExportTxt(); setExportOpen(false) }}
+                  >
+                    <FileText size={13} aria-hidden="true" /> {t.promptOutput.exportTxt}
+                  </button>
+                  <button
+                    className="export-dropdown-item"
+                    role="menuitem"
+                    onClick={() => { handleExportJSON(); setExportOpen(false) }}
+                  >
+                    <Braces size={13} aria-hidden="true" /> {t.promptOutput.exportJson}
+                  </button>
+                </div>
+              )}
             </div>
+
+            {/* ── Analysis section ──────────────────────────────────────── */}
             {!isExtension && (
-              <div className="output-ide-actions" data-tour="ide-tools">
-                <Tooltip content={t.ide.outputButtons.debug} side="top">
-                  <button className="btn btn-secondary export-btn" onClick={handleDebug} aria-label={t.ide.outputButtons.debug}>
-                    <Bug size={13} aria-hidden="true" /> {t.ide.outputButtons.debug}
-                  </button>
-                </Tooltip>
-                <Tooltip content={t.ide.outputButtons.compress} side="top">
-                  <button className="btn btn-secondary export-btn" onClick={handleCompress} aria-label={t.ide.outputButtons.compress}>
-                    <Scissors size={13} aria-hidden="true" /> {t.ide.outputButtons.compress}
-                  </button>
-                </Tooltip>
+              <>
+                <div className="output-section-divider" aria-hidden="true">
+                  <span>{t.promptOutput.sectionAnalysis}</span>
+                </div>
+                <div className="output-analysis-row" data-tour="ide-tools">
+                  <Tooltip content={t.ide.outputButtons.debug} side="top">
+                    <button className="btn btn-secondary output-analysis-btn" onClick={handleDebug} aria-label={t.ide.outputButtons.debug}>
+                      <Bug size={13} aria-hidden="true" /> {t.ide.outputButtons.debug}
+                    </button>
+                  </Tooltip>
+                  <Tooltip content={t.ide.outputButtons.compress} side="top">
+                    <button className="btn btn-secondary output-analysis-btn" onClick={handleCompress} aria-label={t.ide.outputButtons.compress}>
+                      <Scissors size={13} aria-hidden="true" /> {t.ide.outputButtons.compress}
+                    </button>
+                  </Tooltip>
+                </div>
                 <Tooltip content={t.ide.outputButtons.score} side="top">
-                  <button className="btn btn-secondary export-btn" onClick={handleCritic} aria-label={t.ide.outputButtons.score}>
+                  <button className="btn btn-secondary export-btn" onClick={handleCritic} aria-label={t.ide.outputButtons.score} style={{ width: '100%' }}>
                     <StarIcon size={13} aria-hidden="true" /> {t.ide.outputButtons.score}
                   </button>
                 </Tooltip>
-              </div>
+
+                {/* ── Third party section ──────────────────────────────── */}
+                <div className="output-section-divider" aria-hidden="true">
+                  <span>{t.promptOutput.sectionThirdParty}</span>
+                </div>
+                <button
+                  className="make-open-btn"
+                  onClick={() => {
+                    openMakePanel(true)
+                    analytics.makePanelOpened()
+                  }}
+                  aria-label={t.makeIntegration.openPanel}
+                >
+                  <Zap size={13} aria-hidden="true" /> {t.makeIntegration.openPanel}
+                </button>
+                <a
+                  className="btn btn-secondary btn-share"
+                  href="https://github.com/Nyrok/flompt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  onClick={() => analytics.githubClicked('prompt_output')}
+                >
+                  <Github size={13} aria-hidden="true" /> View on GitHub
+                </a>
+              </>
             )}
+
           </div>
         </>
       ) : (
@@ -266,30 +329,20 @@ const PromptOutput = () => {
         </button>
       )}
 
-      {/* Send to Make.com */}
-      {!isExtension && (
-        <button
-          className="make-open-btn"
-          onClick={() => {
-            openMakePanel(true)
-            analytics.makePanelOpened()
-          }}
-          aria-label={t.makeIntegration.openPanel}
+      {/* Extension: always show GitHub link */}
+      {isExtension && (
+        <a
+          className="btn btn-secondary btn-share"
+          href="https://github.com/Nyrok/flompt"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          onClick={() => analytics.githubClicked('prompt_output')}
         >
-          <Zap size={13} aria-hidden="true" /> {t.makeIntegration.openPanel}
-        </button>
+          <Github size={13} aria-hidden="true" /> View on GitHub
+        </a>
       )}
 
-      <a
-        className="btn btn-secondary btn-share"
-        href="https://github.com/Nyrok/flompt"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub"
-        onClick={() => analytics.githubClicked('prompt_output')}
-      >
-        <Github size={13} aria-hidden="true" /> View on GitHub
-      </a>
     </div>
   )
 }
