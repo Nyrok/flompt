@@ -217,6 +217,7 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
           role="button"
           tabIndex={0}
           aria-expanded={!collapsed}
+          aria-label={`${tr?.label ?? 'Response Style'} — ${collapsed ? t.block.expand : t.block.collapse}`}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setCollapsed(c => !c) } }}
         >
           <span className="block-icon" aria-hidden="true"><Icon size={13} /></span>
@@ -393,7 +394,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
               updateNodeContent(id, e.target.value)
             }}
             style={{ minHeight: '64px', height: 'auto' }}
-            aria-label={displayLabel}
           />
           <div className="block-footer">
             <span className="block-char-count">{(data.content ?? '').length} {t.block.chars}</span>

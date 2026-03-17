@@ -145,12 +145,12 @@ const App = () => {
           <div className="header-actions">
             <Tooltip content="Version History" side="bottom">
               <button className="btn-icon" onClick={handleOpenVersions} aria-label="Version History">
-                <History size={14} />
+                <History size={14} aria-hidden="true" />
               </button>
             </Tooltip>
             <Tooltip content="Context Memory" side="bottom">
               <button className="btn-icon" onClick={() => openMemory(true)} aria-label="Context Memory">
-                <Brain size={14} />
+                <Brain size={14} aria-hidden="true" />
               </button>
             </Tooltip>
             <CustomSelect
@@ -244,7 +244,7 @@ const App = () => {
 
       {/* Template library overlay */}
       {libraryOpen && (
-        <div className="library-overlay" role="dialog" aria-modal="true" aria-label="Template library">
+        <div className="library-overlay" role="dialog" aria-modal="true" aria-label="Template library" onKeyDown={(e) => { if (e.key === 'Escape') setLibraryOpen(false) }}>
           <div className="library-overlay-backdrop" onClick={() => setLibraryOpen(false)} />
           <div className="library-overlay-panel">
             <TemplateLibrary onClose={() => setLibraryOpen(false)} />
@@ -273,7 +273,6 @@ const App = () => {
             setCompiledPrompt(result)
             setActiveTab('output')
           }}
-          title={t.promptOutput.compile}
           aria-label={t.promptOutput.compile}
         >
           <Play size={24} aria-hidden="true" />
@@ -289,6 +288,7 @@ const App = () => {
             setActiveTab('input')
             openAudit(true)
           }}
+          aria-label={`Audit score ${auditResult.score}/100 — View results`}
         >
           <ShieldCheck size={13} aria-hidden="true" />
           <span>Score {auditResult.score}/100</span>

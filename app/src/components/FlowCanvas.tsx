@@ -112,6 +112,8 @@ const CanvasInner = () => {
 
   return (
     <div
+      role="region"
+      aria-label='Prompt canvas'
       className={`flow-canvas${isDragOver ? ' flow-canvas--drag-over' : ''}`}
       ref={wrapperRef}
       onDragOver={onDragOver}
@@ -142,11 +144,10 @@ const CanvasInner = () => {
 
       {/* Block type palette — left side, vertical */}
       {/* Canvas control bar — top-left, horizontal */}
-      <div className="canvas-ctrl-bar">
+      <div className="canvas-ctrl-bar" role="toolbar" aria-label='Canvas controls'>
         <button
           className="canvas-ctrl-btn canvas-ctrl-btn--danger"
           onClick={() => { if (confirm(t.header.resetConfirm)) reset() }}
-          title={t.header.reset}
           aria-label={t.header.reset}
           disabled={nodes.length === 0}
         >
@@ -157,7 +158,6 @@ const CanvasInner = () => {
           className="canvas-ctrl-btn"
           onClick={undo}
           disabled={past.length === 0}
-          title={t.header.undo}
           aria-label={t.header.undo}
         >
           <Undo2 size={13} aria-hidden="true" />
@@ -166,7 +166,6 @@ const CanvasInner = () => {
           className="canvas-ctrl-btn"
           onClick={redo}
           disabled={future.length === 0}
-          title={t.header.redo}
           aria-label={t.header.redo}
         >
           <Redo2 size={13} aria-hidden="true" />
@@ -224,6 +223,7 @@ const CanvasInner = () => {
           className="block-added-chip"
           style={{ '--chip-color': chip.color } as React.CSSProperties}
           onAnimationEnd={() => setChip(null)}
+          role="status"
           aria-live="polite"
           aria-atomic="true"
         >
