@@ -144,12 +144,12 @@ const App = () => {
 
           <div className="header-actions">
             <Tooltip content="Version History" side="bottom">
-              <button className="btn-icon" title="Version History" onClick={handleOpenVersions} aria-label="Version History">
+              <button className="btn-icon" onClick={handleOpenVersions} aria-label="Version History">
                 <History size={14} />
               </button>
             </Tooltip>
             <Tooltip content="Context Memory" side="bottom">
-              <button className="btn-icon" title="Context Memory" onClick={() => openMemory(true)} aria-label="Context Memory">
+              <button className="btn-icon" onClick={() => openMemory(true)} aria-label="Context Memory">
                 <Brain size={14} />
               </button>
             </Tooltip>
@@ -169,7 +169,6 @@ const App = () => {
                 href="https://github.com/Nyrok/flompt"
                 target="_blank"
                 rel="noopener noreferrer"
-                title={t.header.github}
                 aria-label={t.header.github}
                 onClick={() => analytics.githubClicked('header')}
               >
@@ -209,7 +208,6 @@ const App = () => {
                   <button
                     className="canvas-view-btn"
                     onClick={() => toggleView('list')}
-                    title="List view"
                     aria-label="List view"
                   >
                     <LayoutList size={13} />
@@ -219,7 +217,6 @@ const App = () => {
                   <button
                     className="canvas-view-btn canvas-view-btn--active"
                     onClick={() => toggleView('canvas')}
-                    title="Canvas view"
                     aria-label="Canvas view"
                   >
                     <Network size={13} />

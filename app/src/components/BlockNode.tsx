@@ -113,7 +113,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             <button
               className="block-collapse"
               onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
-              title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
               aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
             >
               {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
@@ -123,7 +122,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             <button
               className="block-remove"
               onClick={(e) => { e.stopPropagation(); removeNode(id) }}
-              title={t.block.delete}
               aria-label={t.block.delete}
             >
               <X size={11} aria-hidden="true" />
@@ -228,7 +226,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
               <button
                 className="block-collapse"
                 onClick={(e) => { e.stopPropagation(); handleDuplicate() }}
-                title={t.block.duplicate}
                 aria-label={t.block.duplicate}
               >
                 <Copy size={11} aria-hidden="true" />
@@ -238,7 +235,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
               <button
                 className="block-collapse"
                 onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
-                title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
                 aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
               >
                 {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
@@ -248,7 +244,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
               <button
                 className="block-collapse"
                 onClick={(e) => { e.stopPropagation(); setCollapsed(c => !c) }}
-                title={collapsed ? t.block.expand : t.block.collapse}
                 aria-label={collapsed ? t.block.expand : t.block.collapse}
               >
                 {collapsed
@@ -261,7 +256,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
               <button
                 className="block-remove"
                 onClick={(e) => { e.stopPropagation(); removeNode(id) }}
-                title={t.block.delete}
                 aria-label={t.block.delete}
               >
                 <X size={11} aria-hidden="true" />
@@ -343,7 +337,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             <button
               className="block-collapse"
               onClick={(e) => { e.stopPropagation(); handleDuplicate() }}
-              title={t.block.duplicate}
               aria-label={`${t.block.duplicate} ${displayLabel}`}
             >
               <Copy size={11} aria-hidden="true" />
@@ -353,7 +346,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             <button
               className="block-collapse"
               onClick={(e) => { e.stopPropagation(); toggleNodeHidden(id) }}
-              title={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
               aria-label={data.hidden ? 'Show in prompt' : 'Hide from prompt'}
             >
               {data.hidden ? <EyeOff size={11} aria-hidden="true" /> : <Eye size={11} aria-hidden="true" />}
@@ -363,7 +355,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             <button
               className="block-collapse"
               onClick={(e) => { e.stopPropagation(); setCollapsed((c) => !c) }}
-              title={collapsed ? t.block.expand : t.block.collapse}
               aria-label={collapsed ? t.block.expand : t.block.collapse}
               aria-expanded={!collapsed}
             >
@@ -377,7 +368,6 @@ const BlockNode = ({ id, data, selected }: NodeProps<BlockData>) => {
             <button
               className="block-remove"
               onClick={(e) => { e.stopPropagation(); removeNode(id) }}
-              title={t.block.delete}
               aria-label={`${t.block.delete} ${displayLabel}`}
             >
               <X size={11} aria-hidden="true" />

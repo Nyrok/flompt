@@ -223,7 +223,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
             <button
               className="canvas-ctrl-btn canvas-ctrl-btn--danger"
               onClick={() => { if (confirm(t.header.resetConfirm)) reset() }}
-              title={t.header.reset}
               aria-label={t.header.reset}
               disabled={nodes.length === 0}
             >
@@ -236,7 +235,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
               className="canvas-ctrl-btn"
               onClick={undo}
               disabled={past.length === 0}
-              title={t.header.undo}
               aria-label={t.header.undo}
             >
               <Undo2 size={13} />
@@ -247,7 +245,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
               className="canvas-ctrl-btn"
               onClick={redo}
               disabled={future.length === 0}
-              title={t.header.redo}
               aria-label={t.header.redo}
             >
               <Redo2 size={13} />
@@ -259,7 +256,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
               className="canvas-ctrl-btn canvas-ctrl-btn--compile"
               onClick={handleCompile}
               disabled={nodes.length === 0}
-              title={t.promptOutput.compile}
               aria-label={t.promptOutput.compile}
             >
               <Play size={13} />
@@ -277,7 +273,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
               <button
                 className={`canvas-view-btn${canvasView === 'list' ? ' canvas-view-btn--active' : ''}`}
                 onClick={() => onToggleView('list')}
-                title="List view"
                 aria-label="List view"
               >
                 <LayoutList size={13} />
@@ -287,7 +282,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
               <button
                 className={`canvas-view-btn${canvasView === 'canvas' ? ' canvas-view-btn--active' : ''}`}
                 onClick={() => onToggleView('canvas')}
-                title="Canvas view"
                 aria-label="Canvas view"
               >
                 <Network size={13} />
@@ -336,7 +330,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                     <button
                       className="block-list-card-eye"
                       onClick={e => { e.stopPropagation(); toggleNodeHidden(node.id) }}
-                      title={node.data.hidden ? 'Show in prompt' : 'Hide from prompt'}
                       aria-label={node.data.hidden ? 'Show in prompt' : 'Hide from prompt'}
                     >
                       {node.data.hidden ? <EyeOff size={12} /> : <Eye size={12} />}
@@ -362,7 +355,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                       <button
                         className="block-list-card-action-btn"
                         onClick={e => { e.stopPropagation(); moveBlock(node.id, idx, 'up') }}
-                        title="Move up"
                         aria-label="Move up"
                         disabled={isFirst}
                       >
@@ -374,7 +366,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                       <button
                         className="block-list-card-action-btn"
                         onClick={e => { e.stopPropagation(); moveBlock(node.id, idx, 'down') }}
-                        title="Move down"
                         aria-label="Move down"
                         disabled={isLast}
                       >
@@ -386,7 +377,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                       <button
                         className="block-list-card-action-btn block-list-card-toggle"
                         onClick={e => { e.stopPropagation(); toggleCollapse(node.id) }}
-                        title={isCollapsed ? 'Expand' : 'Collapse'}
                         aria-label={isCollapsed ? 'Expand' : 'Collapse'}
                       >
                         {isCollapsed ? '+' : '−'}
@@ -397,7 +387,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                       <button
                         className="block-list-card-action-btn"
                         onClick={e => { e.stopPropagation(); handleDuplicate(node) }}
-                        title="Duplicate block"
                         aria-label="Duplicate block"
                       >
                         <Copy size={12} />
@@ -408,7 +397,6 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
                       <button
                         className="block-list-card-delete"
                         onClick={e => { e.stopPropagation(); removeNode(node.id) }}
-                        title="Remove block"
                         aria-label="Remove block"
                       >
                         <X size={12} />

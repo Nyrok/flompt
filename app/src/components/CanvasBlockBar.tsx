@@ -46,7 +46,6 @@ const CanvasBlockBar = ({ mobileOnly = false, toolbar = false }: { mobileOnly?: 
             <button
               className="canvas-block-btn"
               style={{ '--block-color': meta.color } as React.CSSProperties}
-              title={t.blocks[type].label}
               aria-label={t.blocks[type].label}
               draggable
               onDragStart={e => handleDragStart(e, type)}
