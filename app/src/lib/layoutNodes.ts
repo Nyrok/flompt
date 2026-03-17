@@ -110,3 +110,51 @@ export function layoutNodes(
     return { ...node, position: { x: Math.round(x), y: Math.round(y) } }
   })
 }
+
+/** Reads current canvas dimensions from the DOM, with safe fallbacks. */
+export function getCanvasSize(): { w: number; h: number } {
+  const el = document.querySelector('.flow-canvas') ?? document.querySelector('.react-flow')
+  if (el) {
+    const r = el.getBoundingClientRect()
+    if (r.width > 0 && r.height > 0) return { w: r.width, h: r.height }
+  }
+  return { w: 900, h: 700 }
+}
+
+/**
+ * Finds a collision-free position for a single new node given existing nodes.
+ * Uses the same scatter + collision logic as layoutNodes.
+ */
+export function findFreePosition(
+  existingNodes: FlomptNode[],
+  newNode: FlomptNode,
+  canvasWidth  = 900,
+  canvasHeight = 700,
+): { x: number; y: number } {
+  const h = estimateHeight(newNode)
+  const spreadX = canvasWidth  + MARGIN
+  const spreadY = canvasHeight + MARGIN
+
+  type Rect = { x: number; y: number; w: number; h: number }
+  const placed: Rect[] = existingNodes.map(n => ({
+    x: n.position.x,
+    y: n.position.y,
+    w: BLOCK_W,
+    h: estimateHeight(n),
+  }))
+
+  for (let attempt = 0; attempt < MAX_TRIES; attempt++) {
+    const tx = 40 + Math.random() * spreadX
+    const ty = 40 + Math.random() * spreadY
+    if (!placed.some(p => overlaps(tx, ty, BLOCK_W, h, p.x, p.y, p.w, p.h))) {
+      return { x: Math.round(tx), y: Math.round(ty) }
+    }
+  }
+
+  // Fallback: stack below the lowest existing block
+  const maxBottom = placed.reduce((m, p) => Math.max(m, p.y + p.h), 40)
+  return {
+    x: Math.round(40 + Math.random() * Math.min(spreadX, 400)),
+    y: Math.round(maxBottom + V_PAD),
+  }
+}

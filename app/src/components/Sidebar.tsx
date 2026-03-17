@@ -5,6 +5,7 @@ import type { BlockType } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
+import { findFreePosition, getCanvasSize } from '@/lib/layoutNodes'
 
 const isMobile = () => window.matchMedia('(max-width: 768px)').matches
 
@@ -12,7 +13,6 @@ const Sidebar = ({ onOpenLibrary }: { onOpenLibrary?: () => void }) => {
   const addNode = useFlowStore((s) => s.addNode)
   const nodes   = useFlowStore((s) => s.nodes)
   const { t }   = useLocale()
-  const ROW_HEIGHT = 180
 
   // ── Scroll + top/bottom blur effects ─────────────────────────────────────
   const listRef        = useRef<HTMLDivElement>(null)
@@ -52,7 +52,6 @@ const Sidebar = ({ onOpenLibrary }: { onOpenLibrary?: () => void }) => {
   // ── Node creation ────────────────────────────────────────────────────────
   const createNode = (type: BlockType, position?: { x: number; y: number }): FlomptNode => {
     const tr  = t.blocks[type]
-    const idx = nodes.length
 
     // response_style: initialize options + content on creation
     const extraData = type === 'response_style'
@@ -62,11 +61,16 @@ const Sidebar = ({ onOpenLibrary }: { onOpenLibrary?: () => void }) => {
         }
       : { content: '' }
 
-    return {
+    const draft: FlomptNode = {
       id:       `${type}-${Date.now()}`,
       type:     'block',
-      position: position ?? { x: 60, y: 60 + idx * ROW_HEIGHT },
+      position: { x: 0, y: 0 },
       data:     { type, label: tr.label, description: tr.description, ...extraData },
+    }
+    const { w, h } = getCanvasSize()
+    return {
+      ...draft,
+      position: position ?? findFreePosition(nodes, draft, w, h),
     }
   }
 

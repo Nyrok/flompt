@@ -5,6 +5,7 @@ import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
 import type { BlockType, FlomptNode } from '@/types/blocks'
+import { findFreePosition, getCanvasSize } from '@/lib/layoutNodes'
 
 function scoreColor(score: number): string {
   if (score >= 80) return '#22c55e'
@@ -32,8 +33,7 @@ export default function AuditPanel() {
   const present = checks.filter(c => c.present)
 
   const handleAddBlock = (type: BlockType) => {
-    const tr  = t.blocks[type]
-    const idx = nodes.length
+    const tr = t.blocks[type]
 
     const extraData = type === 'response_style'
       ? {
@@ -42,12 +42,14 @@ export default function AuditPanel() {
         }
       : { content: '' }
 
-    const node: FlomptNode = {
+    const draft: FlomptNode = {
       id:       `${type}-${Date.now()}`,
       type:     'block',
-      position: { x: 60, y: 60 + idx * 220 },
+      position: { x: 0, y: 0 },
       data:     { type, label: tr.label, description: tr.description, ...extraData },
     }
+    const { w, h } = getCanvasSize()
+    const node: FlomptNode = { ...draft, position: findFreePosition(nodes, draft, w, h) }
 
     addNode(node)
     setAdded(prev => new Set(prev).add(type))
