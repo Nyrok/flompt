@@ -94,7 +94,7 @@
   "canvas": {
     "empty": "Empty canvas",
     "emptyHint": "Paste a prompt on the left and click ",
-    "emptyDecompose": "Decompose, or drag a block from the sidebar."
+    "emptyDecompose": "or drag a block from the sidebar."
   },
   "shortcuts": {
     "title": "Keyboard Shortcuts",

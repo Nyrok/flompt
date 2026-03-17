@@ -94,7 +94,7 @@
   "canvas": {
     "empty": "Leerer Canvas",
     "emptyHint": "Füge links einen Prompt ein und klicke auf ",
-    "emptyDecompose": "Zerlegen, oder ziehe einen Block aus der Seitenleiste."
+    "emptyDecompose": "oder ziehe einen Block aus der Seitenleiste."
   },
   "shortcuts": {
     "title": "Tastaturkürzel",

@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { X, Trash2, Undo2, Redo2, LayoutList, Network, Eye, EyeOff, Copy, Play, ChevronUp, ChevronDown, Sparkles } from 'lucide-react'
 import CustomSelect from '@/components/CustomSelect'
 import CanvasBlockBar from '@/components/CanvasBlockBar'
 import { Tooltip } from '@/components/ui/tooltip'
 import { BLOCK_META, DEFAULT_RESPONSE_STYLE, generateResponseStyleContent } from '@/types/blocks'
-import type { ResponseStyleOptions } from '@/types/blocks'
+import type { BlockType, ResponseStyleOptions } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
@@ -34,6 +34,8 @@ interface Props {
   onToggleView: (v: 'list' | 'canvas') => void
 }
 
+const ROW_HEIGHT = 120
+
 const BlockListView = ({ canvasView, onToggleView }: Props) => {
   const {
     nodes, removeNode, updateNodeContent, updateNodeData, addNode, toggleNodeHidden,
@@ -41,6 +43,39 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
     isDecomposing, queueStatus,
   } = useFlowStore()
   const { t, locale } = useLocale()
+
+  const [isDragOver, setIsDragOver] = useState(false)
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(false)
+    const type = e.dataTransfer.getData('blockType') as BlockType
+    if (!type || !BLOCK_META[type]) return
+    const tr = t.blocks[type]
+    const idx = nodes.length
+    const extraData = type === 'response_style'
+      ? { options: { ...DEFAULT_RESPONSE_STYLE } as Record<string, string | boolean>, content: generateResponseStyleContent(DEFAULT_RESPONSE_STYLE) }
+      : { content: '' }
+    const newNode: FlomptNode = {
+      id: `${type}-${Date.now()}`,
+      type: 'block',
+      position: { x: 60, y: 60 + idx * ROW_HEIGHT },
+      data: { type, label: tr.label, description: tr.description, ...extraData },
+    }
+    addNode(newNode)
+    window.dispatchEvent(new CustomEvent('flompt:block-added', { detail: { label: tr.label, color: BLOCK_META[type].color } }))
+  }, [nodes.length, addNode, t.blocks])
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    if (e.dataTransfer.types.includes('blocktype') || e.dataTransfer.types.some(t => t === 'blocktype' || t === 'text/plain')) {
+      e.preventDefault()
+      e.dataTransfer.dropEffect = 'copy'
+    } else {
+      e.preventDefault()
+      e.dataTransfer.dropEffect = 'copy'
+    }
+    setIsDragOver(true)
+  }, [])
 
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set())
   // Local visual order — purely UI, never written back to the store (avoids infinite loop)
@@ -142,7 +177,12 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
 
 
   return (
-    <div className="block-list-view">
+    <div
+      className={`block-list-view${isDragOver ? ' block-list-view--drag-over' : ''}`}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      onDragLeave={() => setIsDragOver(false)}
+    >
 
       {/* ── Decomposing overlay ── */}
       {isDecomposing && (
@@ -260,7 +300,12 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
       {/* ── Block cards ── */}
       {nodes.length === 0 ? (
         <div className="block-list-view-empty">
-          <p>{t.canvas.empty}</p>
+          <div className="canvas-empty-icon">⬡</div>
+          <p className="canvas-empty-title">{t.canvas.empty}</p>
+          <p className="canvas-empty-hint">
+            {t.canvas.emptyHint}<strong>{t.promptInput.decompose}</strong>,<br />
+            {t.canvas.emptyDecompose}
+          </p>
         </div>
       ) : (
         <div className="block-list-view-cards">

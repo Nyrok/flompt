@@ -1907,11 +1907,14 @@ body {
 .block-list-view-empty {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   color: var(--text-dim);
   font-size: 0.8rem;
   text-align: center;
+  pointer-events: none;
 }
 .block-list-view-cards {
   flex: 1;
@@ -4035,4 +4038,14 @@ body {
 @keyframes tooltip-in {
   from { opacity: 0; transform: scale(0.95) translateY(2px); }
   to   { opacity: 1; transform: scale(1)    translateY(0);   }
+}
+
+/* ── Block list view — drag-over state ──────────────────────────────────── */
+.block-list-view--drag-over {
+  outline: 2px dashed var(--accent);
+  outline-offset: -2px;
+  border-radius: 10px;
+}
+.block-list-view--drag-over .block-list-view-empty {
+  color: var(--text-muted);
 }

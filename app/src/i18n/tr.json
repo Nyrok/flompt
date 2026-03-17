@@ -94,7 +94,7 @@
   "canvas": {
     "empty": "Boş kanvas",
     "emptyHint": "Soldaki alana bir prompt yapıştırın ve ",
-    "emptyDecompose": "Ayır'a tıklayın veya kenar çubuğundan bir blok sürükleyin."
+    "emptyDecompose": "veya kenar çubuğundan bir blok sürükleyin."
   },
   "shortcuts": {
     "title": "Klavye Kısayolları",
