@@ -197,11 +197,23 @@ const GuidedTour = () => {
     }
   }, [cur, dismiss, locale, setNodes, setEdges, setLastDecomposedPrompt, t.tour.samplePrompt])
 
+  /* ── Click on spotlight element → advance ───────────────────────────────── */
+  useEffect(() => {
+    if (!active) return
+    // Don't auto-advance on large non-button containers
+    const noClick = ['.prompt-textarea', '.block-list-view', '.block-list']
+    if (noClick.includes(cur.target)) return
+    const el = document.querySelector(cur.target) as HTMLElement | null
+    if (!el) return
+    el.addEventListener('click', handleNext)
+    return () => el.removeEventListener('click', handleNext)
+  }, [step, active, cur.target, handleNext])
+
   /* ── Render ──────────────────────────────────────────────────────────────── */
   if (!active || !rect) return null
 
-  const raw   = calcTooltipPos(rect, cur.placement)
-  const ttTop  = Math.max(60, raw.top)
+  const raw    = calcTooltipPos(rect, cur.placement)
+  const ttTop  = Math.max(60, Math.min(window.innerHeight - TH - 16, raw.top))
   const ttLeft = Math.max(8, Math.min(window.innerWidth - TW - 8, raw.left))
   const isLast = step === steps.length - 1
 
