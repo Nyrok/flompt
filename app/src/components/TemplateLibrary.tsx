@@ -5,6 +5,7 @@ import { TEMPLATES, TEMPLATE_CATEGORIES, CATEGORY_COLORS, LOCALE_TO_LANG } from 
 import type { TemplateCategory } from '@/lib/templates'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
+import { analytics } from '@/lib/analytics'
 import type { FlomptNode } from '@/types/blocks'
 
 const TemplateLibrary = ({ onClose }: { onClose?: () => void }) => {
@@ -40,6 +41,7 @@ const TemplateLibrary = ({ onClose }: { onClose?: () => void }) => {
     setEdges([])
     setCompiledPrompt(null)
     setLoadedId(templateId)
+    analytics.templateApplied(templateId, tpl.category)
     setTimeout(() => {
       setActiveTab('canvas')
       setLoadedId(null)

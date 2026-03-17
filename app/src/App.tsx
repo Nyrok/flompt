@@ -59,11 +59,13 @@ const App = () => {
   const toggleView = (v: 'list' | 'canvas') => {
     setCanvasView(v)
     localStorage.setItem('flompt-canvas-view', v)
+    analytics.viewToggled(v)
   }
 
   const handleOpenVersions = () => {
     openVersions(true)
     if (currentProjectId) loadVersions(currentProjectId)
+    analytics.versionPanelOpened()
   }
 
   const handleApplyDebugFix = (fixedPrompt: string) => {
@@ -87,7 +89,15 @@ const App = () => {
   // Init PostHog after first render — non-blocking
   useEffect(() => {
     initAnalytics()
-    setSource(isExtension ? 'extension' : 'web')
+    const source = isExtension ? 'extension' : 'web'
+    setSource(source)
+    const isReturning = !!localStorage.getItem('flompt-compile-count')
+    analytics.appLoaded({
+      view_mode:         canvasView,
+      locale,
+      is_returning_user: isReturning,
+      source,
+    })
   }, [])
 
   // Auto-save current project when flowStore changes (debounced)
@@ -191,7 +201,7 @@ const App = () => {
         >
           <PromptInput />
           <div className="panel-divider" role="separator" />
-          <Sidebar onOpenLibrary={() => setLibraryOpen(true)} />
+          <Sidebar onOpenLibrary={() => { setLibraryOpen(true); analytics.libraryOpened() }} />
         </aside>
 
         <div

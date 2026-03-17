@@ -196,6 +196,7 @@ const PromptInput = () => {
             }
             setAuditSeen(true)
             openAudit(true)
+            analytics.auditOpened()
           }}
           data-tour="audit-btn"
           type="button"

@@ -70,6 +70,7 @@ const ProjectSelector = () => {
   const handleFinishRename = () => {
     if (renamingId && renameValue.trim()) {
       renameProject(renamingId, renameValue.trim())
+      analytics.projectRenamed()
     }
     setRenamingId(null)
   }
