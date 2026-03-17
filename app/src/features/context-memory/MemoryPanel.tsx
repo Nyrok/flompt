@@ -52,20 +52,20 @@ export default function MemoryPanel() {
 
   return (
     <>
-      <div className="debugger-backdrop" onClick={() => setOpen(false)} />
-      <aside className="memory-panel" role="dialog" aria-label={tm.title} aria-modal="true">
+      <div className="debugger-backdrop" onClick={() => setOpen(false)} aria-hidden="true" />
+      <aside className="memory-panel" role="dialog" aria-label={tm.title} aria-modal="true" onKeyDown={e => { if (e.key === 'Escape') setOpen(false) }}>
         <div className="debugger-header">
           <div className="debugger-brand">
-            <Brain size={15} />
+            <Brain size={15} aria-hidden="true" />
             <span className="debugger-title">{tm.title}</span>
           </div>
           <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-            <button className="ide-action-btn" onClick={() => setShowCreate(s => !s)}>
-              <Plus size={11} /> {tm.new}
+            <button className="ide-action-btn" onClick={() => setShowCreate(s => !s)} aria-label={tm.new}>
+              <Plus size={11} aria-hidden="true" /> {tm.new}
             </button>
             <Tooltip content={t.ide.close} side="bottom">
               <button className="ide-close-btn" onClick={() => setOpen(false)} aria-label={t.ide.close}>
-                <X size={15} />
+                <X size={15} aria-hidden="true" />
               </button>
             </Tooltip>
           </div>
@@ -73,7 +73,7 @@ export default function MemoryPanel() {
 
         {showCreate && (
           <div className="memory-create-form">
-            <input className="make-webhook-input" placeholder={tm.namePlaceholder} value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+            <input className="make-webhook-input" placeholder={tm.namePlaceholder} value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} aria-label={tm.namePlaceholder} />
             <div style={{ display: 'flex', gap: 6 }}>
               <CustomSelect
                 value={form.category}
@@ -90,8 +90,8 @@ export default function MemoryPanel() {
                 className="csel--flex"
               />
             </div>
-            <textarea className="make-webhook-input" style={{ minHeight: 80, resize: 'vertical', fontFamily: 'inherit' }} placeholder={tm.contentPlaceholder} value={form.content} onChange={e => setForm(f => ({ ...f, content: e.target.value }))} />
-            <input className="make-webhook-input" placeholder={tm.tagsPlaceholder} value={form.tags} onChange={e => setForm(f => ({ ...f, tags: e.target.value }))} />
+            <textarea className="make-webhook-input" style={{ minHeight: 80, resize: 'vertical', fontFamily: 'inherit' }} placeholder={tm.contentPlaceholder} value={form.content} onChange={e => setForm(f => ({ ...f, content: e.target.value }))} aria-label={tm.contentPlaceholder} />
+            <input className="make-webhook-input" placeholder={tm.tagsPlaceholder} value={form.tags} onChange={e => setForm(f => ({ ...f, tags: e.target.value }))} aria-label={tm.tagsPlaceholder} />
             <div style={{ display: 'flex', gap: 6 }}>
               <button className="debugger-apply-btn" style={{ flex: 1, margin: 0 }} onClick={handleCreate}>{tm.save}</button>
               <button className="ide-action-btn" style={{ flex: 1, justifyContent: 'center' }} onClick={() => { setShowCreate(false); setForm(emptyForm()) }}>{tm.cancel}</button>
@@ -100,8 +100,8 @@ export default function MemoryPanel() {
         )}
 
         <div className="memory-search">
-          <Search size={12} className="memory-search-icon" />
-          <input className="memory-search-input" placeholder={tm.searchPlaceholder} value={searchQuery} onChange={e => setSearch(e.target.value)} />
+          <Search size={12} className="memory-search-icon" aria-hidden="true" />
+          <input className="memory-search-input" placeholder={tm.searchPlaceholder} value={searchQuery} onChange={e => setSearch(e.target.value)} aria-label={tm.searchPlaceholder} />
         </div>
 
         <div className="memory-list">
@@ -120,17 +120,17 @@ export default function MemoryPanel() {
                 <div className="memory-item-actions">
                   <Tooltip content="Inject to canvas" side="top">
                     <button className="ide-close-btn" style={{ width: 26, height: 26 }} aria-label="Inject to canvas" onClick={() => inject(block)}>
-                      <LogIn size={12} />
+                      <LogIn size={12} aria-hidden="true" />
                     </button>
                   </Tooltip>
                   <Tooltip content={block.isFavorite ? 'Unfavorite' : 'Favorite'} side="top">
                     <button className="ide-close-btn" style={{ width: 26, height: 26 }} aria-label={block.isFavorite ? 'Unfavorite' : 'Favorite'} onClick={() => toggleFavorite(block.id)}>
-                      <Star size={12} style={{ fill: block.isFavorite ? '#f59e0b' : 'none', color: '#f59e0b' }} />
+                      <Star size={12} aria-hidden="true" style={{ fill: block.isFavorite ? '#f59e0b' : 'none', color: '#f59e0b' }} />
                     </button>
                   </Tooltip>
                   <Tooltip content="Delete" side="top">
                     <button className="ide-close-btn ide-close-btn--danger" style={{ width: 26, height: 26 }} aria-label="Delete" onClick={() => remove(block.id)}>
-                      <Trash2 size={12} />
+                      <Trash2 size={12} aria-hidden="true" />
                     </button>
                   </Tooltip>
                 </div>

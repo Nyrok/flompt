@@ -37,7 +37,7 @@ const CanvasBlockBar = ({ mobileOnly = false, toolbar = false }: { mobileOnly?: 
   }
 
   return (
-    <div className={`canvas-block-bar${mobileOnly ? ' canvas-block-bar--mobile-only' : ''}${toolbar ? ' canvas-block-bar--toolbar' : ''}`} aria-label="Block types">
+    <div className={`canvas-block-bar${mobileOnly ? ' canvas-block-bar--mobile-only' : ''}${toolbar ? ' canvas-block-bar--toolbar' : ''}`} role="toolbar" aria-label="Block types">
       {(Object.keys(BLOCK_META) as BlockType[]).map(type => {
         const meta = BLOCK_META[type]
         const Icon = meta.icon

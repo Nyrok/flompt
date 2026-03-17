@@ -88,7 +88,7 @@ const Sidebar = ({ onOpenLibrary }: { onOpenLibrary?: () => void }) => {
       <div className="sidebar-header">
         <h3 className="panel-title">{t.sidebar.title}</h3>
         {onOpenLibrary && (
-          <button className="sidebar-library-btn" onClick={onOpenLibrary} title="Templates" aria-label="Open template library">
+          <button className="sidebar-library-btn" onClick={onOpenLibrary} aria-label="Open template library">
             <BookOpen size={13} aria-hidden="true" />
             <span>Templates</span>
           </button>
@@ -123,13 +123,14 @@ const Sidebar = ({ onOpenLibrary }: { onOpenLibrary?: () => void }) => {
                 onClick={() => { if (!isMobile()) handleAddBlock(type) }}
                 draggable
                 onDragStart={(e) => handleDragStart(e, type)}
+                aria-label={`Add ${tr.label} block`}
               >
                 <span className="block-pill-main">
                   <span
                     className="block-pill-icon"
                     style={{ background: `${meta.color}1a` }}
                   >
-                    <Icon size={13} />
+                    <Icon size={13} aria-hidden="true" />
                   </span>
                   <span className="block-pill-label">{tr.label}</span>
                 </span>

@@ -141,7 +141,7 @@ const PromptInput = () => {
           onClick={handleImportFromPlatform}
           type="button"
         >
-          <Download size={13} />
+          <Download size={13} aria-hidden="true" />
           {platformName
             ? `Import from ${platformName}`
             : t.promptInput.importFromPlatform
@@ -168,7 +168,6 @@ const PromptInput = () => {
           <button
             className="btn-paste"
             onClick={handlePaste}
-            title={t.promptInput.paste}
             aria-label={t.promptInput.paste}
             type="button"
           >

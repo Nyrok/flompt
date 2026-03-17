@@ -93,12 +93,15 @@ body {
 /* Global focus-visible ring — keyboard nav only */
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
+  border-radius: 3px;
 }
 /* Remove default focus for mouse users */
 :focus:not(:focus-visible) {
   outline: none;
 }
+/* Ensure [aria-hidden] elements are never focusable */
+[aria-hidden="true"] { pointer-events: none; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
@@ -1453,7 +1456,7 @@ body {
 }
 
 /* ── Focus global ─────────────────────────────────────────────────────────── */
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* focus-visible handled globally above */
 .prompt-textarea:focus-visible { outline: none; }
 .block-content:focus-visible   { outline: none; }
 

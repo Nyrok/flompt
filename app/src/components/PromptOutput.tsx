@@ -176,7 +176,7 @@ const PromptOutput = () => {
 
       {currentRaw ? (
         <>
-          <pre className="compiled-output">{currentRaw}</pre>
+          <pre className="compiled-output" aria-live="polite" aria-label={t.promptOutput.title}>{currentRaw}</pre>
           <div className="export-actions">
             {/* Send to AI — only in the extension sidebar */}
             {isExtension && (
@@ -229,17 +229,17 @@ const PromptOutput = () => {
               <div className="output-ide-actions">
                 <Tooltip content={t.ide.outputButtons.debug} side="top">
                   <button className="btn btn-secondary export-btn" onClick={handleDebug} aria-label={t.ide.outputButtons.debug}>
-                    <Bug size={13} /> {t.ide.outputButtons.debug}
+                    <Bug size={13} aria-hidden="true" /> {t.ide.outputButtons.debug}
                   </button>
                 </Tooltip>
                 <Tooltip content={t.ide.outputButtons.compress} side="top">
                   <button className="btn btn-secondary export-btn" onClick={handleCompress} aria-label={t.ide.outputButtons.compress}>
-                    <Scissors size={13} /> {t.ide.outputButtons.compress}
+                    <Scissors size={13} aria-hidden="true" /> {t.ide.outputButtons.compress}
                   </button>
                 </Tooltip>
                 <Tooltip content={t.ide.outputButtons.score} side="top">
                   <button className="btn btn-secondary export-btn" onClick={handleCritic} aria-label={t.ide.outputButtons.score}>
-                    <StarIcon size={13} /> {t.ide.outputButtons.score}
+                    <StarIcon size={13} aria-hidden="true" /> {t.ide.outputButtons.score}
                   </button>
                 </Tooltip>
               </div>
@@ -261,7 +261,6 @@ const PromptOutput = () => {
           onClick={handleCompile}
           disabled={nodes.length === 0}
           data-tour="compile-btn"
-          aria-disabled={nodes.length === 0}
         >
           <Play size={14} aria-hidden="true" /> {t.promptOutput.compile}
         </button>
@@ -275,7 +274,7 @@ const PromptOutput = () => {
             openMakePanel(true)
             analytics.makePanelOpened()
           }}
-          title={t.makeIntegration.openPanel}
+          aria-label={t.makeIntegration.openPanel}
         >
           <Zap size={13} aria-hidden="true" /> {t.makeIntegration.openPanel}
         </button>
