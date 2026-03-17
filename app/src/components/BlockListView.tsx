@@ -8,6 +8,7 @@ import type { BlockType, ResponseStyleOptions } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import type { FlomptNode } from '@/types/blocks'
 import { useLocale } from '@/i18n/LocaleContext'
+import { findFreePosition, getCanvasSize } from '@/lib/layoutNodes'
 import { assemblePrompt } from '@/lib/assemblePrompt'
 
 const LANGUAGES = [
@@ -34,7 +35,6 @@ interface Props {
   onToggleView: (v: 'list' | 'canvas') => void
 }
 
-const ROW_HEIGHT = 120
 
 const BlockListView = ({ canvasView, onToggleView }: Props) => {
   const {
@@ -52,19 +52,20 @@ const BlockListView = ({ canvasView, onToggleView }: Props) => {
     const type = e.dataTransfer.getData('blockType') as BlockType
     if (!type || !BLOCK_META[type]) return
     const tr = t.blocks[type]
-    const idx = nodes.length
     const extraData = type === 'response_style'
       ? { options: { ...DEFAULT_RESPONSE_STYLE } as Record<string, string | boolean>, content: generateResponseStyleContent(DEFAULT_RESPONSE_STYLE) }
       : { content: '' }
-    const newNode: FlomptNode = {
+    const draft: FlomptNode = {
       id: `${type}-${Date.now()}`,
       type: 'block',
-      position: { x: 60, y: 60 + idx * ROW_HEIGHT },
+      position: { x: 0, y: 0 },
       data: { type, label: tr.label, description: tr.description, ...extraData },
     }
+    const { w, h } = getCanvasSize()
+    const newNode = { ...draft, position: findFreePosition(nodes, draft, w, h) }
     addNode(newNode)
     window.dispatchEvent(new CustomEvent('flompt:block-added', { detail: { label: tr.label, color: BLOCK_META[type].color } }))
-  }, [nodes.length, addNode, t.blocks])
+  }, [nodes, addNode, t.blocks])
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     if (e.dataTransfer.types.includes('blocktype') || e.dataTransfer.types.some(t => t === 'blocktype' || t === 'text/plain')) {

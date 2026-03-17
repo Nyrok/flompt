@@ -3,6 +3,7 @@ import type { BlockType, FlomptNode } from '@/types/blocks'
 import { useFlowStore } from '@/store/flowStore'
 import { useLocale } from '@/i18n/LocaleContext'
 import { Tooltip } from '@/components/ui/tooltip'
+import { findFreePosition, getCanvasSize } from '@/lib/layoutNodes'
 
 const CanvasBlockBar = ({ mobileOnly = false, toolbar = false }: { mobileOnly?: boolean; toolbar?: boolean }) => {
   const addNode = useFlowStore(s => s.addNode)
@@ -16,7 +17,6 @@ const CanvasBlockBar = ({ mobileOnly = false, toolbar = false }: { mobileOnly?: 
 
   const handleClick = (type: BlockType) => {
     const tr = t.blocks[type]
-    const idx = nodes.length
     const extraData = type === 'response_style'
       ? {
           options: { ...DEFAULT_RESPONSE_STYLE } as Record<string, string | boolean>,
@@ -24,12 +24,14 @@ const CanvasBlockBar = ({ mobileOnly = false, toolbar = false }: { mobileOnly?: 
         }
       : { content: '' }
 
-    const node: FlomptNode = {
+    const draft: FlomptNode = {
       id:       `${type}-${Date.now()}`,
       type:     'block',
-      position: { x: 60 + idx * 20, y: 60 + idx * 20 },
+      position: { x: 0, y: 0 },
       data:     { type, label: tr.label, description: tr.description, ...extraData },
     }
+    const { w, h } = getCanvasSize()
+    const node = { ...draft, position: findFreePosition(nodes, draft, w, h) }
     addNode(node)
     window.dispatchEvent(new CustomEvent('flompt:block-added', {
       detail: { label: tr.label, color: BLOCK_META[type].color },
