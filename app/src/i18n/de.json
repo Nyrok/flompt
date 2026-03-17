@@ -38,7 +38,7 @@
     "title": "Ergebnis",
     "compile": "Prompt zusammenstellen",
     "compiling": "Zusammenstellen…",
-    "copy": "Kopieren",
+    "copy": "In Zwischenablage kopieren",
     "copied": "Kopiert!",
     "placeholder": "Erstelle dein Flussdiagramm\nund stelle es dann zusammen, um den Prompt zu generieren.",
     "errorCompile": "Zusammenstellung fehlgeschlagen. Bitte versuche es erneut.",
@@ -52,7 +52,10 @@
     "sendToAI": "An KI senden",
     "injected": "Injiziert!",
     "injectLabel": "Prompt in KI-Chat-Eingabe senden",
-    "injectedLabel": "Prompt injiziert!"
+    "injectedLabel": "Prompt injiziert!",
+    "exportLabel": "Exportieren",
+    "sectionAnalysis": "Analyse",
+    "sectionThirdParty": "Drittanbieter"
   },
   "errors": {
     "overloaded": "Die KI ist gerade überlastet. Bitte warte einen Moment und versuche es erneut.",

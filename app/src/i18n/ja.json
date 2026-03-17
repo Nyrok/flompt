@@ -38,7 +38,7 @@
     "title": "結果",
     "compile": "プロンプトを組み立てる",
     "compiling": "組み立て中…",
-    "copy": "コピー",
+    "copy": "クリップボードにコピー",
     "copied": "コピーしました！",
     "placeholder": "フローチャートを作成し、\n組み立ててプロンプトを生成してください。",
     "errorCompile": "組み立てに失敗しました。もう一度お試しください。",
@@ -52,7 +52,10 @@
     "sendToAI": "AIに送信",
     "injected": "注入完了！",
     "injectLabel": "AIチャット入力にプロンプトを送信",
-    "injectedLabel": "プロンプトを注入しました！"
+    "injectedLabel": "プロンプトを注入しました！",
+    "exportLabel": "エクスポート",
+    "sectionAnalysis": "分析",
+    "sectionThirdParty": "サードパーティ"
   },
   "errors": {
     "overloaded": "AIは現在過負荷状態です。しばらく待ってから再試行してください。",

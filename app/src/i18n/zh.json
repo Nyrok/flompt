@@ -38,7 +38,7 @@
     "title": "结果",
     "compile": "组装提示词",
     "compiling": "组装中…",
-    "copy": "复制",
+    "copy": "复制到剪贴板",
     "copied": "已复制！",
     "placeholder": "构建您的流程图\n然后组装以生成提示词。",
     "errorCompile": "组装失败。请重试。",
@@ -52,7 +52,10 @@
     "sendToAI": "发送到 AI",
     "injected": "已注入！",
     "injectLabel": "将提示词发送到 AI 聊天输入框",
-    "injectedLabel": "提示词已注入！"
+    "injectedLabel": "提示词已注入！",
+    "exportLabel": "导出",
+    "sectionAnalysis": "分析",
+    "sectionThirdParty": "第三方"
   },
   "errors": {
     "overloaded": "AI 当前过载。请稍等片刻后重试。",

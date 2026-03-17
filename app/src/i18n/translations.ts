@@ -74,10 +74,13 @@ export interface Translations {
     copied: string
     placeholder: string
     errorCompile: string
+    exportLabel: string
     exportTxt: string
     exportJson: string
     exportTxtLabel: string
     exportJsonLabel: string
+    sectionAnalysis: string
+    sectionThirdParty: string
     share: string
     shareTitle: string
     shareText: string

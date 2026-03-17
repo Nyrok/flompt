@@ -1768,9 +1768,87 @@ body {
   margin-bottom: 6px;
 }
 .export-copy { width: 100%; margin-bottom: 0 !important; }
-.export-row2 { display: flex; gap: 5px; }
-.export-row2 .btn { flex: 1; margin-bottom: 0 !important; }
 .export-btn { font-size: 0.76rem !important; }
+
+/* ── Export dropdown ─────────────────────────────────────────────────────── */
+.export-dropdown { position: relative; width: 100%; }
+.export-dropdown-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0 !important;
+}
+.export-chevron {
+  margin-left: auto;
+  transition: transform 0.15s ease;
+  opacity: 0.7;
+}
+.export-chevron.open { transform: rotate(180deg); }
+.export-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 3px;
+  z-index: 200;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  animation: dropdown-in 0.1s ease;
+}
+@keyframes dropdown-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.export-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  padding: 7px 10px;
+  background: none;
+  border: none;
+  border-radius: 5px;
+  color: var(--text);
+  font-size: 0.78rem;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s;
+}
+.export-dropdown-item:hover { background: var(--surface-hover); }
+
+/* ── Output section divider ──────────────────────────────────────────────── */
+.output-section-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 1px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.output-section-divider::before,
+.output-section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Analysis row (Debug + Compress side by side) ────────────────────────── */
+.output-analysis-row {
+  display: flex;
+  gap: 5px;
+}
+.output-analysis-btn {
+  flex: 1;
+  font-size: 0.76rem !important;
+  margin-bottom: 0 !important;
+}
 
 /* ── Import prompt button — extension mode only ──────────────────────────── */
 .btn-import-platform {

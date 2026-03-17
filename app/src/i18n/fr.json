@@ -38,7 +38,7 @@
     "title": "Résultat",
     "compile": "Assembler le prompt",
     "compiling": "Assemblage…",
-    "copy": "Copier",
+    "copy": "Copier dans le presse-papiers",
     "copied": "Copié !",
     "placeholder": "Construis ton flowchart\npuis assemble pour générer le prompt.",
     "errorCompile": "L'assemblage a échoué. Réessayez.",
@@ -52,7 +52,10 @@
     "sendToAI": "Envoyer à l'IA",
     "injected": "Envoyé !",
     "injectLabel": "Envoyer le prompt dans le chat IA",
-    "injectedLabel": "Prompt envoyé !"
+    "injectedLabel": "Prompt envoyé !",
+    "exportLabel": "Exporter",
+    "sectionAnalysis": "Analyse",
+    "sectionThirdParty": "Tiers"
   },
   "errors": {
     "overloaded": "L'IA est surchargée. Patientez un instant et réessayez.",

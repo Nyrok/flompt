@@ -38,7 +38,7 @@
     "title": "Sonuç",
     "compile": "Prompt oluştur",
     "compiling": "Oluşturuluyor…",
-    "copy": "Kopyala",
+    "copy": "Panoya kopyala",
     "copied": "Kopyalandı!",
     "placeholder": "Akış şemanızı oluşturun\nsonra prompt oluşturmak için derleyin.",
     "errorCompile": "Derleme başarısız oldu. Lütfen tekrar deneyin.",
@@ -52,7 +52,10 @@
     "sendToAI": "AI'ya gönder",
     "injected": "Enjekte edildi!",
     "injectLabel": "Promptu AI sohbet girişine gönder",
-    "injectedLabel": "Prompt enjekte edildi!"
+    "injectedLabel": "Prompt enjekte edildi!",
+    "exportLabel": "Dışa aktar",
+    "sectionAnalysis": "Analiz",
+    "sectionThirdParty": "Üçüncü taraf"
   },
   "errors": {
     "overloaded": "AI şu anda aşırı yüklü. Lütfen bir süre bekleyip tekrar deneyin.",
