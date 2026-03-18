@@ -10,14 +10,10 @@ ZIP_FIREFOX := flompt-firefox.zip
 ZIP_SAFARI  := flompt-safari.zip
 
 # Shared files (manifest added separately per target)
-# To add a new integration: add its file to SHARED_FILES (and update manifests).
+# Integrations are inlined directly in content-script.js — no separate files needed.
 SHARED_FILES := background.js \
                 content-script.js \
                 content-script.css \
-                integrations/index.js \
-                integrations/chatgpt.js \
-                integrations/claude.js \
-                integrations/gemini.js \
                 icons/icon16.png \
                 icons/icon32.png \
                 icons/icon48.png \

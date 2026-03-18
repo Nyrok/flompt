@@ -1862,17 +1862,17 @@ body {
 .export-inject {
   width: 100%;
   margin-bottom: 0 !important;
-  background: #7c3aed !important;
-  border-color: #7c3aed !important;
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
   font-weight: 600 !important;
   animation: inject-pulse 2.5s ease-in-out infinite;
 }
-.export-inject:hover { background: #6d28d9 !important; border-color: #6d28d9 !important; }
+.export-inject:hover { background: var(--accent-light) !important; border-color: var(--accent-light) !important; }
 .export-inject.injected { background: #16a34a !important; border-color: #16a34a !important; animation: none; }
 
 @keyframes inject-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
-  50%       { box-shadow: 0 0 0 6px rgba(124, 58, 237, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  50%       { box-shadow: 0 0 0 6px rgba(255, 53, 112, 0); }
 }
 
 /* ── Tab bar (mobile nav) ─────────────────────────────────────────────────── */
