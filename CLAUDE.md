@@ -82,8 +82,12 @@ make icons        # regenerate PNG icons from icon.svg
 
 # Caddy
 cd /projects/flompt && ./caddy start --config Caddyfile
-./caddy reload --config /projects/flompt/Caddyfile
+./caddy reload --config /projects/flompt/Caddyfile  # may hang — use workaround below if so
 ./caddy stop
+
+# Caddy reload workaround (use if `caddy reload` hangs indefinitely)
+/projects/flompt/caddy adapt --config /projects/flompt/Caddyfile 2>/dev/null \
+  | curl -s -X POST "http://localhost:2019/load" -H "Content-Type: application/json" -d @-
 
 # Full redeploy (preferred — handles everything)
 bash /projects/flompt/deploy.sh
@@ -312,6 +316,7 @@ python backend/mcp_stdio.py
 - Use `handle_path` (not `handle` + `uri strip_prefix`) for sub-paths (/app, /blog)
 - `handle_path /app*` automatically strips the `/app` prefix from the path
 - **After every Caddy change**, test: landing `/`, app `/app`, blog `/blog/en`, health `/health`
+- **`caddy reload` CLI can hang** after adapting the config. If it does, use the API workaround: `caddy adapt --config Caddyfile 2>/dev/null | curl -s -X POST http://localhost:2019/load -H "Content-Type: application/json" -d @-`
 
 ### 3. Blog — Static Export
 - The blog uses `output: "export"` → generates static files in `out/`
