@@ -55,9 +55,9 @@
 
 ## 🎥 Demo
 
-**[→ Try it live at flompt.dev](https://flompt.dev)** — no account, no install needed.
+**[Try it live at flompt.dev](https://flompt.dev)**, free, no account needed.
 
-> Paste any prompt → AI decomposes it into blocks → drag & reorder → get a Claude-optimized XML prompt.
+> Paste any prompt. The AI breaks it into typed blocks. Drag, reorder, compile to Claude-optimized XML.
 
 ![flompt demo](https://flompt.dev/app/og-image.png)
 
@@ -65,15 +65,13 @@
 
 ## ✨ What is flompt?
 
-**flompt** is a visual prompt engineering tool that transforms how you write AI prompts.
+**flompt** is a visual prompt engineering tool.
 
 Instead of writing one long block of text, flompt lets you:
 
-1. **Decompose**: Paste any prompt and let AI break it into structured blocks
-2. **Edit visually**: Drag, connect, and reorder blocks in a flowchart editor
-3. **Recompile**: Generate a Claude-optimized, machine-ready prompt from your flow
-
-> Think of it as **Figma for prompts**: visual, structured, and built for Claude.
+1. Paste any prompt and let the AI break it into structured blocks
+2. Drag, connect, and reorder blocks in a flowchart editor
+3. Compile to a Claude-optimized, machine-ready XML prompt
 
 ---
 
@@ -106,17 +104,17 @@ Blocks are automatically ordered following Anthropic's recommended prompt struct
 
 ## 🚀 Try It Now
 
-**[→ flompt.dev](https://flompt.dev)** — No account needed. Free and open-source.
+**[flompt.dev](https://flompt.dev)**, free and open-source, no account needed.
 
 ---
 
 ## 🧩 Browser Extension
 
-Use flompt directly inside ChatGPT, Claude, and Gemini. Without leaving your tab.
+Use flompt directly inside ChatGPT, Claude, and Gemini without leaving your tab.
 
-- **✦ Enhance** button injected into the AI chat input
+- Injects an Enhance button into the AI chat input
 - Bidirectional sync between the sidebar and the chat
-- Works on ChatGPT · Claude · Gemini
+- Works on ChatGPT, Claude, and Gemini
 
 <p>
   <a href="https://chrome.google.com/webstore/detail/mbobfapnkflkbcflmedlejpladileboc">
@@ -133,11 +131,11 @@ Use flompt directly inside ChatGPT, Claude, and Gemini. Without leaving your tab
 
 flompt exposes its core capabilities as native tools inside **Claude Code** via the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
 
-Once configured, you can call `decompose_prompt`, `compile_prompt`, and `list_block_types` directly from any Claude Code conversation — no browser, no copy-paste.
+Once configured, you can call `decompose_prompt`, `compile_prompt`, and `list_block_types` directly from any Claude Code conversation, no browser, no copy-paste.
 
 ### Installation
 
-**Option 1 — CLI (recommended):**
+**Option 1: CLI (recommended)**
 
 ```bash
 claude mcp add --transport http --scope user flompt https://flompt.dev/mcp/
@@ -145,7 +143,7 @@ claude mcp add --transport http --scope user flompt https://flompt.dev/mcp/
 
 The `--scope user` flag makes flompt available in all your Claude Code projects.
 
-**Option 2 — `~/.claude.json`:**
+**Option 2: `~/.claude.json`**
 
 ```json
 {
@@ -229,7 +227,7 @@ Lists all 16 available block types with descriptions and the recommended canonic
 
 - Python 3.12+
 - Node.js 18+
-- An Anthropic or OpenAI API key *(optional — heuristic fallback works without one)*
+- An Anthropic or OpenAI API key (optional, heuristic fallback works without one)
 
 ### Setup
 
@@ -282,7 +280,7 @@ AI_PROVIDER=openai
 AI_MODEL=gpt-4o-mini
 ```
 
-**No API key?** No problem — flompt falls back to a heuristic decomposer (keyword-based) and structured XML compilation.
+Without an API key, flompt uses a keyword-based heuristic decomposer and still compiles structured XML.
 
 ---
 
@@ -323,7 +321,7 @@ python --version
 node --version
 
 # Caddy binary placed at /projects/flompt/caddy
-# (not committed to git — download from https://caddyserver.com/download)
+# (not committed to git, download from https://caddyserver.com/download)
 curl -o caddy "https://caddyserver.com/api/download?os=linux&arch=amd64"
 chmod +x caddy
 
@@ -402,7 +400,7 @@ Production processes are managed by **supervisord** (`supervisord.conf`):
 | `flompt-backend` | `uvicorn app.main:app --host 0.0.0.0 --port 8000` | 8000 | `/tmp/flompt-backend.log` |
 | `flompt-caddy` | `caddy run --config /projects/flompt/Caddyfile` | 443/80 | `/tmp/flompt-caddy.log` |
 
-Both programs have `autorestart=true` and `startretries=5` — they automatically restart on crash.
+Both programs have `autorestart=true` and `startretries=5`, they automatically restart on crash.
 
 **Start supervisord (first boot or after a full restart):**
 ```bash
@@ -482,7 +480,7 @@ supervisorctl -c /projects/flompt/supervisord.conf restart flompt-caddy
 /projects/flompt/caddy reload --config /projects/flompt/Caddyfile
 ```
 
-Caddy auto-manages TLS certificates via Let's Encrypt — no manual SSL setup needed.
+Caddy auto-manages TLS certificates via Let's Encrypt, no manual SSL setup needed.
 
 ---
 
@@ -532,7 +530,7 @@ supervisorctl -c supervisord.conf restart flompt-backend
 cd /projects/flompt
 git pull
 cd app && npm run build
-# No service restart needed — Caddy serves static files directly
+# No service restart needed, Caddy serves static files directly
 ```
 
 **After a blog change:**
@@ -578,34 +576,34 @@ cd /projects/flompt && ./deploy.sh
 | **Process Manager** | Supervisord + keepalive watchdog |
 | **Blog** | Next.js 15 (static export), Tailwind CSS |
 | **Extension** | Chrome & Firefox MV3 (content script + sidebar) |
-| **i18n** | 10 languages — EN FR ES DE PT JA TR ZH AR RU |
+| **i18n** | 10 languages: EN FR ES DE PT JA TR ZH AR RU |
 
 ---
 
 ## 🌍 Features
 
-- 🎨 **Visual flowchart editor**: Drag-and-drop blocks with React Flow
-- 📋 **List View**: Dual-view editor — switch between canvas and linear card list at any time
-- 👁️ **Hide/Show blocks**: Toggle any block's visibility; hidden blocks are excluded from the assembled prompt
-- 📑 **Duplicate block**: Clone any block in one click from the List View
-- 🤖 **AI-powered decomposition**: Paste a prompt, get structured blocks
-- ⚡ **Async job queue**: Non-blocking decomposition with live progress tracking
-- 🦾 **Claude-optimized output**: XML structured following Anthropic best practices
-- 🧩 **Browser extension**: Enhance button inside ChatGPT, Claude & Gemini (Chrome & Firefox)
-- 🤖 **Claude Code MCP**: Native tool integration via Model Context Protocol
-- 📱 **Responsive**: Full touch support, tap-to-connect
-- 🌙 **Dark theme**: Mermaid-inspired warm dark UI
-- 🌐 **10 languages**: EN, FR, ES, DE, PT, JA, TR, ZH, AR, RU — each with a dedicated indexed page for SEO
-- 💾 **Auto-save**: Local persistence with Zustand
-- ⌨️ **Keyboard shortcuts**: Power-user friendly
-- 📋 **Export**: Copy, download as TXT or JSON
-- 🔓 **Open-source**: MIT licensed, self-hostable
+- 🎨 Visual flowchart editor with drag-and-drop blocks (React Flow)
+- 📋 Dual-view editor: toggle between canvas and card list at any time
+- 👁️ Hide/show any block; hidden blocks are excluded from the assembled prompt
+- 📑 Duplicate any block in one click from the List View
+- 🤖 AI-powered decomposition: paste a prompt, get structured blocks
+- 🔄 Async job queue for non-blocking decomposition with live progress
+- 🦾 XML output structured following Anthropic best practices
+- 🧩 Browser extension for ChatGPT, Claude, and Gemini (Chrome + Firefox)
+- 🔌 Claude Code MCP: native tool integration via Model Context Protocol
+- 📱 Responsive with full touch support
+- 🌙 Dark theme
+- 🌐 10 languages: EN, FR, ES, DE, PT, JA, TR, ZH, AR, RU, each with a dedicated indexed page for SEO
+- 💾 Auto-save via local Zustand persistence
+- ⌨️ Keyboard shortcuts
+- 📋 Export as TXT or JSON
+- 🔓 MIT licensed, self-hostable
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome — bug reports, features, translations, and docs!
+Contributions are welcome: bug reports, features, translations, and docs!
 
 Read [`CONTRIBUTING.md`](CONTRIBUTING.md) to get started. The full changelog is in [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -613,7 +611,7 @@ Read [`CONTRIBUTING.md`](CONTRIBUTING.md) to get started. The full changelog is 
 
 ## 📄 License
 
-[MIT](LICENSE) — Built by [Nyrok](https://github.com/Nyrok)
+[MIT](LICENSE), built by [Nyrok](https://github.com/Nyrok)
 
 ---
 
@@ -623,7 +621,7 @@ Read [`CONTRIBUTING.md`](CONTRIBUTING.md) to get started. The full changelog is 
 -->
 
 <p align="center">
-  If flompt saves you time, a ⭐ on GitHub goes a long way — thank you!<br/>
+  If flompt saves you time, a ⭐ on GitHub helps a lot.<br/>
   <a href="https://github.com/Nyrok/flompt/stargazers">
     <img src="https://img.shields.io/github/stars/Nyrok/flompt?style=social" alt="GitHub Stars" />
   </a>
