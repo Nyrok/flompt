@@ -62,7 +62,7 @@ Curated library now. Marketplace later.
 5. Click **Use**: the template loads instantly into your canvas
 6. Edit any block, add your own, and compile
 
-That's it. From zero to a structured, optimized prompt in seconds.
+That's it. From zero to a ready-to-use structured prompt in seconds.
 
 ## Thank You, @Refaltor77
 

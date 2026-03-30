@@ -18,7 +18,7 @@ Let me explain what that means and how to fix it.
 
 ## The Architecture Problem, Not the Model Problem
 
-Here's what Anthropic's research shows: **structure matters more than model capability**.
+Anthropic's research is clear: **structure matters more than model capability**.
 
 Bad structure + powerful model = mediocre output.
 Good structure + weaker model = often better.

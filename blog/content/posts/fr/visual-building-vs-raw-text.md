@@ -1,7 +1,7 @@
 ---
 title: "Construction visuelle vs texte brut : le futur du prompting"
 date: "2026-02-15"
-excerpt: "Et si écrire des prompts en texte brut était aussi archaïque que coder en notepad ? Exploration d'un changement de paradigme."
+excerpt: "Et si écrire des prompts en texte brut était aussi archaïque que coder en notepad ? Une nouvelle façon de penser les prompts."
 tags: ["visual prompting", "flompt", "productivité"]
 color: "primary"
 ---

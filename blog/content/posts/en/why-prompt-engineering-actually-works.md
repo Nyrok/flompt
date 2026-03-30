@@ -1,7 +1,7 @@
 ---
 title: "Why prompt engineering actually works: lessons from Anthropic's official guide"
 date: "2026-02-25"
-excerpt: "Vague instructions get vague answers. Here's what Anthropic's own research says about writing prompts that actually work, and why structure is the single biggest lever."
+excerpt: "Vague instructions get vague answers. What Anthropic's own research says about writing prompts that work, and why structure matters most."
 tags: ["prompt engineering", "Claude", "best practices", "structured prompts"]
 color: "primary"
 ---
@@ -53,7 +53,7 @@ Same info. Much clearer. Structure signals intent.
 
 ---
 
-## Examples are the highest-leverage technique
+## Examples are the most effective technique
 
 Among all the techniques in Anthropic's guide, few-shot examples get the strongest endorsement:
 

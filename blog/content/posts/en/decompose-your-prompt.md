@@ -256,7 +256,7 @@ By visually breaking your prompt into Role, Objective, Context, Constraints, Exa
 
 Then you fix it before execution, not after.
 
-No more blind iteration. No more guessing.
+Less guessing, less blind iteration.
 
 Just prompts that work.
 

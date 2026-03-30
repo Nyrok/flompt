@@ -10,7 +10,7 @@ color: "primary"
 
 Claude isn't like ChatGPT or Gemini. It has specific behaviors and strengths that make structured prompts much more effective.
 
-Anthropic released official guidance on this. Here's what works best.
+Anthropic released official guidance on this. What works best, broken down.
 
 ---
 
@@ -97,7 +97,7 @@ The **Response Style** block handles all Claude-specific style directives: verbo
 
 ## The full assembled prompt
 
-Here's what a well-structured prompt looks like when all best practices are applied:
+A well-structured prompt with all best practices applied looks like this:
 
 ```xml
 <prompt>

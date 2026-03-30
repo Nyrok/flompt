@@ -264,7 +264,7 @@ Casse visuellement ton prompt en Rôle, Objectif, Contexte, Contraintes, Exemple
 
 Tu le corriges avant l'exécution, pas après.
 
-Plus d'itération à l'aveugle. Plus de devinage.
+Moins de devinage, moins d'itération à l'aveugle.
 
 Juste des prompts qui fonctionnent.
 

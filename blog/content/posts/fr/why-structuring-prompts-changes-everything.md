@@ -12,7 +12,7 @@ Tous : ouvre ChatGPT. Tape une phrase vague. Espère que l'IA devine. Parfois ma
 
 Le problème = pas l'IA. C'est l'input. Un prompt = une **instruction**. La clarté = la qualité du résultat.
 
-## La structure comme levier
+## Pourquoi la structure compte
 
 Structurer = décompose en composants distincts :
 

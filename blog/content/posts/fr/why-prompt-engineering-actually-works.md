@@ -1,7 +1,7 @@
 ---
 title: "Pourquoi le prompt engineering fonctionne vraiment : les leçons du guide officiel d'Anthropic"
 date: "2026-02-25"
-excerpt: "Des instructions vagues donnent des réponses vagues. Voici ce que la recherche d'Anthropic dit sur l'écriture de prompts efficaces, et pourquoi la structure est le levier le plus puissant."
+excerpt: "Des instructions vagues donnent des réponses vagues. Ce que la recherche d'Anthropic dit sur l'écriture de prompts efficaces, et pourquoi la structure est ce qui compte le plus."
 tags: ["prompt engineering", "Claude", "bonnes pratiques", "prompts structurés"]
 color: "primary"
 ---
@@ -55,7 +55,7 @@ Même information. Clarté totale. La structure signale l'intention.
 
 ---
 
-## Les exemples : la technique à plus fort levier
+## Les exemples : la technique la plus efficace
 
 Few-shot examples = recommandation la plus forte dans le guide Anthropic.
 
@@ -83,7 +83,7 @@ Un insight du guide : explique *pourquoi* tu veux quelque chose. Pas juste le *q
 **Bon :**
 - ✅ `"La réponse sera lue à voix haute par TTS. Le moteur ne saura pas prononcer les points de suspension."`
 
-Claude généralise à partir du contexte. Comprend le raisonnement. L'applique aux cas limites. Rend les prompts robustes.
+Claude généralise à partir du contexte. Comprend le raisonnement. L'applique aux cas limites. Rend les prompts fiables.
 
 ---
 

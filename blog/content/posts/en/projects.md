@@ -54,7 +54,7 @@ JSON is readable. Inspect it, diff it, store in a repo.
 
 ## No Data Retention. Ever.
 
-Always local-first. Everything in browser localStorage. No account. No server sees your data.
+Local-first. Everything in browser localStorage. No account, no server.
 
 Prompts often have sensitive info. On flompt, it stays on your machine.
 

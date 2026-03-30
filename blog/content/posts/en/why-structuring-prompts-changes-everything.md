@@ -12,7 +12,7 @@ You open ChatGPT. Type a vague sentence. Hope the AI guesses right.
 
 The problem isn't the AI. It's your input. A prompt is an instruction. Clarity determines results.
 
-## Structure as leverage
+## Why structure matters
 
 Break your prompt into components:
 

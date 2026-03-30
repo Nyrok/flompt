@@ -1,7 +1,7 @@
 ---
 title: "Visual building vs raw text: the future of prompting"
 date: "2026-02-15"
-excerpt: "What if writing prompts in raw text was as outdated as coding in notepad? Exploring a paradigm shift."
+excerpt: "What if writing prompts in raw text was as outdated as coding in notepad? A different way to think about it."
 tags: ["visual prompting", "flompt", "productivity"]
 color: "primary"
 ---
