@@ -16,10 +16,10 @@ This guide will show you how to go from "it sometimes works" to "it works every 
 
 It seems obvious, but it's the #1 cause of poor results. Before writing anything, answer these questions:
 
-- **What's the deliverable?** (an email, code, an analysis, a summary...)
-- **For whom?** (yourself, a client, a technical team...)
-- **What format?** (paragraphs, list, table, JSON...)
-- **What length?** (a tweet, a paragraph, a page...)
+- What's the deliverable? (an email, code, an analysis, a summary...)
+- For whom? (yourself, a client, a technical team...)
+- What format? (paragraphs, list, table, JSON...)
+- What length? (a tweet, a paragraph, a page...)
 
 If you can't answer clearly, neither can the AI.
 
@@ -45,11 +45,11 @@ Format: one slogan per line, max 8 words each.
 Tone: calm and inspiring, not mystical.
 ```
 
-It's clear, measurable, and actionable. The AI knows exactly what to produce.
+It's specific enough to act on. The AI knows exactly what to produce.
 
 ## Step 4: Iterate
 
-Your first prompt probably won't be perfect, and that's normal. Iteration is part of the process:
+Your first prompt probably won't be perfect. Iteration is part of the process:
 
 1. Send your prompt
 2. Read the response carefully
@@ -81,16 +81,16 @@ This template covers 80% of use cases. Adapt it to your needs.
 
 ## Common mistakes to avoid
 
-1. **Being too vague**: "Help me with my project" → The AI has nothing to work with
-2. **Being too long**: A 2000-word prompt drowns the essentials → Stay concise
-3. **Forgetting format**: Not specifying format = random output
-4. **Not iterating**: Giving up after a first disappointing result
+1. Being too vague: "Help me with my project" → The AI has nothing to work with
+2. Being too long: A 2000-word prompt drowns the essentials → Stay concise
+3. Forgetting format: Not specifying format = random output
+4. Not iterating: Giving up after a first disappointing result
 
 ## What's next
 
-Once you master these basics, you can explore advanced techniques:
+Once you're comfortable with these, check the advanced techniques:
 - **Few-shot learning** (providing examples)
 - **Chain-of-thought** (step-by-step reasoning)
 - **Role prompting** (assigning an expert role)
 
-But start with the 4 steps. They'll be enough for 80% of your AI interactions.
+These 4 steps cover 80% of your AI interactions.

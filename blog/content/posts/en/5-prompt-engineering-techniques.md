@@ -8,13 +8,13 @@ color: "primary"
 
 ## Beyond the basic prompt
 
-Prompt engineering isn't magic. It's a discipline. Just like programming, there are patterns that work and anti-patterns to avoid.
+Prompt engineering is a discipline, not intuition. Just like programming, there are patterns that work and anti-patterns to avoid.
 
 Here are 5 techniques you can apply immediately.
 
 ## 1. Role prompting
 
-Giving the AI a role radically changes its behavior. This isn't a gimmick. It activates specific response patterns in the model.
+Telling the model who it is activates specific response patterns in the model.
 
 ```
 You are a senior software architect with 15 years of experience
@@ -22,7 +22,7 @@ in distributed systems. You favor simplicity and you explain
 your technical choices.
 ```
 
-**Why it works**: The role constrains the space of possible responses and guides the style, vocabulary, and level of detail.
+Why: The role constrains the space of possible responses and guides the style, vocabulary, and level of detail.
 
 ## 2. Few-shot learning (guided examples)
 
@@ -37,11 +37,11 @@ Transform these titles into URL slugs:
 Now transform: "Why Prompt Engineering Matters"
 ```
 
-**Why it works**: Examples implicitly define the rules without ambiguity.
+Why: Examples implicitly define the rules without ambiguity.
 
 ## 3. Chain-of-thought reasoning
 
-Asking the AI to reason before answering significantly improves quality, especially for complex tasks.
+Asking the AI to reason before answering improves output quality, especially for complex tasks.
 
 ```
 Before answering, break down your reasoning into steps.
@@ -49,7 +49,7 @@ For each step, explain why you make that choice.
 Then give your final answer.
 ```
 
-**Why it works**: Forcing explicit reasoning reduces shortcuts and logical errors.
+Why: Forcing explicit reasoning reduces shortcuts and logical errors.
 
 ## 4. Negative constraints
 
@@ -63,7 +63,7 @@ Write a technical explanation.
 - Maximum 200 words
 ```
 
-**Why it works**: LLMs have default patterns (bullet lists, generic intros). Negative constraints break them.
+Why: LLMs have default patterns (bullet lists, generic intros). Negative constraints break them.
 
 ## 5. Feedback iteration
 
@@ -81,7 +81,7 @@ That's better, but:
 - Add a concrete example at the end
 ```
 
-**Why it works**: Each iteration refines the result. It's prompt debugging.
+Why: Each iteration refines the result. It's prompt debugging.
 
 ## Combining techniques
 
@@ -95,4 +95,4 @@ This is exactly the combination that visual prompt building makes intuitive. Eac
 
 ## Next step
 
-Take your last prompt that didn't deliver the expected result. Apply these 5 techniques one by one. You'll see the difference from the first iteration.
+Take your last prompt that didn't deliver the expected result. Apply these 5 techniques one by one. The difference shows up fast.

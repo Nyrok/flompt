@@ -8,9 +8,9 @@ color: "primary"
 
 ## Vous n'avez pas besoin d'être expert
 
-Pas intimidant. Un prompt = une bonne instruction.
+Un prompt, c'est juste une instruction claire.
 
-De "parfois" à "toujours" en 4 étapes.
+4 étapes pour des prompts qui fonctionnent à chaque fois.
 
 ## Étape 1 : Définir ce que vous voulez
 
@@ -21,17 +21,17 @@ Première cause d'échecs. Réponds d'abord :
 - Format ? (texte, liste, JSON)
 - Longueur ? (tweet, para, page)
 
-Pas clair = IA confuse.
+Un prompt flou donne une réponse floue.
 
 ## Étape 2 : Donner du contexte
 
-Pas de contexte = IA aveugle.
+Sans contexte, l'IA part de rien.
 
 Avant : "Aide-moi à écrire une présentation."
 
 Après : "10 min pour investisseurs. SaaS PME. Audience non-tech. Convaincs, ne détaille pas."
 
-Contexte = IA pertinente.
+Plus le contexte est précis, plus la réponse est pertinente.
 
 ## Étape 3 : Être spécifique sur le format
 
@@ -43,7 +43,7 @@ Un par ligne. Max 8 mots.
 Ton : calme, inspirant, pas mystique.
 ```
 
-Clair = IA efficace.
+Des instructions précises donnent des résultats précis.
 
 ## Étape 4 : Itérer
 
@@ -79,10 +79,10 @@ Ce template couvre 80% des cas d'usage. Adaptez-le à vos besoins.
 
 ## Les erreurs classiques à éviter
 
-1. **Être trop vague** : "Aide-moi avec mon projet" → L'IA n'a rien pour travailler
-2. **Être trop long** : Un prompt de 2000 mots noie l'essentiel → Restez concis
-3. **Oublier le format** : Ne pas spécifier le format = résultat aléatoire
-4. **Ne pas itérer** : Abandonner après un premier résultat décevant
+1. Être trop vague : "Aide-moi avec mon projet" → L'IA n'a rien pour travailler
+2. Être trop long : Un prompt de 2000 mots noie l'essentiel → Restez concis
+3. Oublier le format : Ne pas spécifier le format = résultat aléatoire
+4. Ne pas itérer : Abandonner après un premier résultat décevant
 
 ## La suite
 
@@ -91,4 +91,4 @@ Une fois que vous maîtrisez ces bases, vous pouvez explorer des techniques avan
 - Le **chain-of-thought** (raisonnement étape par étape)
 - Le **role prompting** (assigner un rôle expert)
 
-Mais commencez par les 4 étapes. Elles suffiront pour 80% de vos interactions avec l'IA.
+Ces 4 étapes couvrent 80% de vos interactions avec l'IA.

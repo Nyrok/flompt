@@ -8,13 +8,13 @@ color: "primary"
 
 ## Au-delà du prompt basique
 
-Pas de magie. Une discipline. Des patterns qui marchent. Évitez les anti-patterns.
+Le prompt engineering, c'est une discipline. Il y a des patterns qui marchent et des anti-patterns à éviter.
 
 5 techniques à appliquer maintenant.
 
 ## 1. Le cadrage par rôle (Role Prompting)
 
-Le rôle change tout. Active des patterns spécifiques.
+Donner un rôle au modèle active des patterns de réponse spécifiques.
 
 ```
 Tu es architecte logiciel senior (15 ans).
@@ -86,10 +86,8 @@ Combine tout :
 - Chain-of-thought
 - Contraintes
 
-Chaque bloc. Active. Modifie. Retire.
+Chaque technique devient un bloc que tu actives, modifies ou supprimes.
 
 ## Prochain pas
 
-Prends ton dernier prompt faible.
-Applique les 5 techniques.
-Différence immédiate.
+Prends ton dernier prompt qui n'a pas donné ce que tu voulais. Applique ces 5 techniques une par une. La différence se voit vite.
