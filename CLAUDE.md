@@ -342,6 +342,28 @@ python backend/mcp_stdio.py
 - Sounds like a dev typing fast, not a polished essay or an AI-generated blog post.
 - Applies everywhere: marketing copy, README, landing page, blog, commit messages, comments, docs.
 
+#### Anti-AI-slop rules (ref: tropes.fyi)
+These patterns are instant tells of AI-generated text. Never use them:
+- **No negative parallelism**: "It's not X, it's Y" / "Not X. Not Y. Just Z." / "Not because X, but because Y" / "No X. No Y. Just Z."
+- **No self-posed rhetorical questions**: "The result? Devastating." / "The X? A Y."
+- **No magic adverbs**: quietly, deeply, fundamentally, remarkably, arguably, importantly, interestingly, notably, dramatically, radically, significantly
+- **No AI vocabulary**: delve, utilize, leverage, robust, streamline, harness, tapestry, landscape, paradigm, synergy, ecosystem, actionable, optimization
+- **No "serves as" dodge**: use "is", not "serves as" / "stands as" / "marks" / "represents"
+- **No grandiose stakes inflation**: a prompt builder is not "defining the next era of computing" or "separating frustrating AI from remarkable AI"
+- **No false suspense**: "Here's the kicker" / "Here's the thing" / "Here's where it gets interesting" / "Here's what changed everything"
+- **No pedagogical voice**: "Let's break this down" / "Let's unpack this" / "Think of it as..." / "Once you master these basics..."
+- **No fractal summaries**: don't intro what you'll say, say it, then summarize what you said
+- **No signposted conclusions**: "In conclusion" / "To sum up" / "In summary"
+- **No invented concept labels**: "validation-first" / "battle-tested prompt flow" / made-up compound terms
+- **No "Despite its challenges..."**: don't acknowledge problems just to dismiss them immediately
+- **No bold-first bullets in prose**: only use bold-first in reference tables, not in marketing or blog content
+- **No false vulnerability**: no simulated self-awareness or polished "authenticity"
+- **No vague attributions**: "experts say" / "studies show" without specifics
+- **No one-point dilution**: say it once, well. Don't restate 6 ways across a page.
+- **No superficial analyses**: no tacked-on "-ing" phrases like "reflecting broader trends"
+- **No AI tricolons**: avoid the "structured, optimized, and ready to use" three-adjective AI cadence
+- **No false ranges**: "From X to Y" where X and Y aren't on a real spectrum
+
 ### 6. Understand intent before acting
 - **If the request is ambiguous about WHAT** (not how) → ask for clarification
 - **Rule** : if a change is destructive or structural (type swaps, architecture refactor), confirm intent
