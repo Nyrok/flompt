@@ -14,3 +14,9 @@ caddy
 
 # Uploaded files (never commit)
 _uploads/
+
+# Marketing files (local only, never commit)
+MARKETING-CAMPAIGN.md
+MARKETING.md
+reddit-posts.md
+marketing/
