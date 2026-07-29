@@ -1,3 +1,5 @@
+[![MCP Toplist](https://mcptoplist.com/badge/glama%2FNyrok%2Fflompt.svg)](https://mcptoplist.com/server/glama%2FNyrok%2Fflompt)
+
 <p align="center">
   <img src="app/public/favicon.svg" width="80" height="80" alt="flompt logo" />
 </p>
